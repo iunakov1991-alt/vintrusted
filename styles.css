@@ -121,6 +121,11 @@ body {
     display: flex;
     align-items: center;
     position: relative;
+    transform: scaleX(-1);
+}
+
+.hero > * {
+    transform: scaleX(-1);
 }
 
 .hero-content {
