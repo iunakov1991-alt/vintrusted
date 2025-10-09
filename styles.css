@@ -215,10 +215,10 @@ body {
 .search-form {
     display: flex;
     gap: 0;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.035);
     border-radius: 50px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     max-width: 900px;
     margin: 0 auto;
 }
