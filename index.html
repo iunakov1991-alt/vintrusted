@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIN REPORT - Полная история автомобиля за $1</title>
+    <meta name="description" content="Официальный NMVTIS провайдер. Полный отчет по VIN за $1. Безлимитные проверки за $2.95 на 7 дней.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="logo.svg" alt="VIN REPORT" class="logo-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Узнайте полную историю<br>
+                    <span class="gradient-text">любого автомобиля</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Получите детальный отчет с проверкой по базам данных США. Аварии, пробег, залоги и многое другое в одном отчете.
+                </p>
+
+                <!-- Search Form -->
+                <div class="search-container">
+                    <div class="search-tabs">
+                        <button class="tab-btn active" data-tab="vin">VIN</button>
+                        <button class="tab-btn" data-tab="plate">Номер</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="vin-tab">
+                        <form class="search-form">
+                            <input type="text" 
+                                   class="search-input" 
+                                   placeholder="Введите VIN номер"
+                                   maxlength="17"
+                                   id="vinInput">
+                            <button type="submit" class="btn btn-search">
+                                <span class="btn-text">Проверить</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="tab-content" id="plate-tab">
+                        <form class="search-form">
+                            <select class="search-select">
+                                <option>Выберите штат</option>
+                                <option>California</option>
+                                <option>Texas</option>
+                                <option>Florida</option>
+                                <option>New York</option>
+                            </select>
+                            <input type="text" 
+                                   class="search-input" 
+                                   placeholder="Введите номер">
+                            <button type="submit" class="btn btn-search">
+                                <span class="btn-text">Проверить</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Trust Badge -->
+                <div class="trust-badge">
+                    <div class="badge-item">
+                        <span class="badge-icon">⭐</span>
+                        <span class="badge-text">Trustpilot 4.8/5</span>
+                    </div>
+                    <div class="badge-item">
+                        <span class="badge-icon">🔒</span>
+                        <span class="badge-text">NMVTIS Approved</span>
+                    </div>
+                    <div class="badge-item">
+                        <span class="badge-icon">📊</span>
+                        <span class="badge-text" id="reportsToday">523+ отчётов сегодня</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img src="logo.svg" alt="VIN REPORT" class="footer-logo">
+                    <p>Премиальный сервис проверки истории автомобилей с мощными инструментами для частных лиц и компаний.</p>
+                    <div class="footer-contact">
+                        <p>📞 +1 800-764-0104</p>
+                        <p>📧 support@vinreport.com</p>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Инструменты</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">VIN Check</a></li>
+                        <li><a href="#">Поиск по номеру</a></li>
+                        <li><a href="#">VIN Decoder</a></li>
+                        <li><a href="#">Калькулятор лизинга</a></li>
+                        <li><a href="#">Калькулятор кредита</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Партнёрская программа</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Правовая информация</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Условия использования</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Доступность</a></li>
+                    </ul>
+                    <div class="footer-badge">
+                        <p><strong>NMVTIS Approved Provider</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 VIN REPORT. Все права защищены.</p>
+                <div class="footer-social">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

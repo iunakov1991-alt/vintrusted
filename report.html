@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отчет VIN - VIN TRUST</title>
+    <meta name="description" content="Полный отчет об автомобиле по VIN-номеру">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="report.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <img src="logo.svg" alt="VIN REPORT" class="logo-img">
+                    </a>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="index.html#features" class="nav-link">Возможности</a>
+                    <a href="index.html#pricing" class="nav-link">Цены</a>
+                    <a href="index.html#contact" class="nav-link">Контакты</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Report Section -->
+    <section class="report-section">
+        <div class="container">
+            <!-- Report Header -->
+            <div class="report-header">
+                <div class="report-title">
+                    <h1>Отчет об автомобиле</h1>
+                    <div class="vin-display">
+                        <span class="vin-label">VIN:</span>
+                        <span class="vin-number" id="vinNumber">1HGBH41JXMN109186</span>
+                        <button class="copy-vin-btn" onclick="copyVIN()">📋</button>
+                    </div>
+                </div>
+                <div class="report-actions">
+                    <button class="btn btn-secondary" onclick="printReport()">🖨️ Печать</button>
+                    <button class="btn btn-primary" onclick="downloadPDF()">📄 PDF</button>
+                </div>
+            </div>
+
+            <!-- Vehicle Overview -->
+            <div class="vehicle-overview">
+                <div class="vehicle-image">
+                    <div class="image-placeholder">
+                        <span class="placeholder-icon">🚗</span>
+                        <p>Фото автомобиля</p>
+                    </div>
+                </div>
+                <div class="vehicle-info">
+                    <h2 id="vehicleTitle">2021 Honda Civic</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Год выпуска:</span>
+                            <span class="info-value" id="vehicleYear">2021</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Двигатель:</span>
+                            <span class="info-value" id="vehicleEngine">1.5L 4-Cylinder</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Трансмиссия:</span>
+                            <span class="info-value" id="vehicleTransmission">CVT</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Пробег:</span>
+                            <span class="info-value" id="vehicleMileage">45,000 миль</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Рыночная стоимость:</span>
+                            <span class="info-value price" id="marketValue">$25,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Sections -->
+            <div class="report-content">
+                <!-- Accident History -->
+                <div class="report-section-card">
+                    <div class="section-header">
+                        <h3>🚨 История аварий</h3>
+                        <span class="status-badge clean" id="accidentStatus">Чистая история</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="accident-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Количество аварий:</span>
+                                <span class="summary-value" id="accidentCount">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Серьезные повреждения:</span>
+                                <span class="summary-value" id="seriousDamage">Нет</span>
+                            </div>
+                        </div>
+                        <div class="accident-details" id="accidentDetails">
+                            <p class="no-accidents">✅ Никаких аварий не зарегистрировано</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ownership History -->
+                <div class="report-section-card">
+                    <div class="section-header">
+                        <h3>👥 История владения</h3>
+                        <span class="status-badge good" id="ownershipStatus">Хорошая</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="ownership-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Количество владельцев:</span>
+                                <span class="summary-value" id="ownerCount">1</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Тип владения:</span>
+                                <span class="summary-value" id="ownershipType">Личное</span>
+                            </div>
+                        </div>
+                        <div class="ownership-timeline" id="ownershipTimeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2021 - настоящее время</div>
+                                <div class="timeline-info">
+                                    <strong>Первый владелец</strong>
+                                    <p>Личное использование, штат Калифорния</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Information -->
+                <div class="report-section-card">
+                    <div class="section-header">
+                        <h3>💰 Финансовая информация</h3>
+                        <span class="status-badge clean" id="financialStatus">Чистая</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="financial-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Залоги:</span>
+                                <span class="summary-value" id="liensStatus">Нет</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Лизинг:</span>
+                                <span class="summary-value" id="leaseStatus">Нет</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Страховые выплаты:</span>
+                                <span class="summary-value" id="insuranceClaims">Нет</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service History -->
+                <div class="report-section-card">
+                    <div class="section-header">
+                        <h3>🔧 История обслуживания</h3>
+                        <span class="status-badge good" id="serviceStatus">Хорошая</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="service-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Регулярное ТО:</span>
+                                <span class="summary-value" id="regularService">Да</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Гарантийные работы:</span>
+                                <span class="summary-value" id="warrantyWork">Нет</span>
+                            </div>
+                        </div>
+                        <div class="service-timeline" id="serviceTimeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2023-06-15</div>
+                                <div class="timeline-info">
+                                    <strong>Регулярное ТО</strong>
+                                    <p>Замена масла, проверка систем</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2022-12-10</div>
+                                <div class="timeline-info">
+                                    <strong>Регулярное ТО</strong>
+                                    <p>Замена масла, фильтров</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recalls -->
+                <div class="report-section-card">
+                    <div class="section-header">
+                        <h3>⚠️ Отзывы и кампании</h3>
+                        <span class="status-badge warning" id="recallStatus">1 отзыв</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="recall-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Активные отзывы:</span>
+                                <span class="summary-value" id="activeRecalls">1</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Исправленные:</span>
+                                <span class="summary-value" id="fixedRecalls">0</span>
+                            </div>
+                        </div>
+                        <div class="recall-details" id="recallDetails">
+                            <div class="recall-item">
+                                <div class="recall-title">Отзыв по тормозной системе</div>
+                                <div class="recall-date">2023-03-15</div>
+                                <div class="recall-description">
+                                    Возможная неисправность тормозных колодок. Требуется проверка в дилерском центре.
+                                </div>
+                                <div class="recall-status pending">Требует внимания</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Analysis -->
+                <div class="report-section-card">
+                    <div class="section-header">
+                        <h3>📊 Рыночный анализ</h3>
+                    </div>
+                    <div class="section-content">
+                        <div class="market-analysis">
+                            <div class="market-item">
+                                <span class="market-label">Текущая стоимость:</span>
+                                <span class="market-value">$25,000</span>
+                            </div>
+                            <div class="market-item">
+                                <span class="market-label">Средняя по рынку:</span>
+                                <span class="market-value">$24,500</span>
+                            </div>
+                            <div class="market-item">
+                                <span class="market-label">Тренд:</span>
+                                <span class="market-value positive">↗️ Растет</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Footer -->
+            <div class="report-footer">
+                <div class="footer-info">
+                    <p><strong>Дата отчета:</strong> <span id="reportDate"></span></p>
+                    <p><strong>Источник данных:</strong> Национальная база данных автомобилей США</p>
+                    <p><strong>Точность:</strong> 99.9%</p>
+                </div>
+                <div class="footer-actions">
+                    <button class="btn btn-primary" onclick="checkAnotherVIN()">Проверить другой VIN</button>
+                    <button class="btn btn-secondary" onclick="subscribe()">Подписаться за $49/месяц</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>VIN TRUST</h3>
+                    <p>Надежная проверка автомобилей по VIN-номеру в США</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>Email: support@vincheckusa.com</p>
+                    <p>Телефон: +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Правовая информация</h4>
+                    <a href="/privacy">Политика конфиденциальности</a>
+                    <a href="/terms">Условия использования</a>
+                    <a href="/refund">Возврат средств</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 VIN TRUST. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="report.js"></script>
+</body>
+</html>
