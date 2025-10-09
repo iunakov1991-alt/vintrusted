@@ -110,7 +110,8 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.75) 100%),
+                url('hero-background.jpg') center center / cover no-repeat;
     padding: 120px 0 100px;
     min-height: 700px;
     display: flex;
@@ -129,12 +130,13 @@ body {
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 25px;
-    color: #1a1a1a;
+    color: #ffffff;
     text-align: left;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -143,9 +145,10 @@ body {
 .hero-subtitle {
     font-size: 20px;
     line-height: 1.6;
-    color: #4b5563;
+    color: #e5e7eb;
     margin-bottom: 40px;
     text-align: left;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Search Container */
