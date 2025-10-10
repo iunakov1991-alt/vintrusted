@@ -42,6 +42,18 @@ body {
     color: #1a1a1a;
     position: relative;
     z-index: 1001;
+    animation: slideInFromRight 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .logo-img {
