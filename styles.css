@@ -40,11 +40,15 @@ body {
     align-items: center;
     text-decoration: none;
     color: #1a1a1a;
+    position: relative;
+    z-index: 1001;
 }
 
 .logo-img {
-    height: 80px;
+    height: 100px;
     width: auto;
+    margin-top: -20px;
+    margin-bottom: -20px;
 }
 
 .nav {
