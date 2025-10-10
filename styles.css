@@ -1065,6 +1065,14 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .header-content {
+        justify-content: center;
+    }
+    
+    .logo {
+        margin: 0 auto;
+    }
+    
     .nav,
     .header-actions {
         display: none;
