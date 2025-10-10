@@ -35,10 +35,24 @@ body {
     height: 80px;
 }
 
+.logo {
+    position: relative;
+    z-index: 1001;
+}
+
 .logo-img {
-    height: 65px;
+    height: 110px;
     width: auto;
     display: block;
+    position: relative;
+    top: 20px;
+    filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.4));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.08);
+    filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.5));
 }
 
 .nav {
