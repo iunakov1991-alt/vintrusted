@@ -535,7 +535,7 @@ body {
     align-items: center;
     gap: 8px;
     transition: all 0.3s;
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
     height: 100%;
     min-width: 140px;
     margin-left: 0;
@@ -544,7 +544,7 @@ body {
     right: 0;
     top: 0;
     overflow: hidden;
-    transform: translateY(-2px);
+    transform: none;
 }
 
 .search-btn::before {
@@ -560,8 +560,8 @@ body {
 
 .search-btn:hover {
     background: linear-gradient(135deg, #FFC700 0%, #FF9500 50%, #FF7F00 100%);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+    transform: none;
+    box-shadow: none;
 }
 
 /* VIN Input Validation */
