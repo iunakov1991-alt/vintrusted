@@ -358,15 +358,15 @@ body {
     border-radius: 50px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    max-width: 100%;
-    margin: 0;
+    max-width: 800px;
+    margin: 0 auto;
     width: 100%;
 }
 
 .search-input,
 .search-select {
     flex: 1;
-    min-width: 600px;
+    min-width: 300px;
     padding: 22px 30px;
     border: none;
     background: transparent;
@@ -400,8 +400,8 @@ body {
 .search-select {
     color: #ffffff;
     flex: 0 0 auto;
-    min-width: 300px;
-    width: 300px;
+    min-width: 180px;
+    width: 180px;
 }
 
 .search-select option {
@@ -421,7 +421,7 @@ body {
 
 button.btn,
 button.btn-search {
-    padding: 22px 60px !important;
+    padding: 22px 40px !important;
     background: #fbbf24 !important;
     color: #1a1a1a !important;
     border: none !important;
@@ -437,7 +437,7 @@ button.btn-search {
     white-space: nowrap !important;
     position: relative !important;
     overflow: hidden !important;
-    min-width: 200px !important;
+    min-width: 150px !important;
     visibility: visible !important;
     opacity: 1 !important;
     z-index: 10 !important;
