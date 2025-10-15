@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSearch();
     initPricingVinForm();
     initLogoScroll();
+    initInputFocus();
 });
 
 // Tab Switching
@@ -214,6 +215,55 @@ function initLogoScroll() {
                 top: 0,
                 behavior: 'smooth'
             });
+        });
+    }
+}
+
+// Input Focus Effects
+function initInputFocus() {
+    const vinInput = document.getElementById('vinInput');
+    const plateInput = document.querySelector('#plate-tab .search-input');
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    
+    // VIN input focus
+    if (vinInput) {
+        vinInput.addEventListener('focus', () => {
+            // Stop shimmer on non-active tabs
+            tabBtns.forEach(btn => {
+                if (!btn.classList.contains('active')) {
+                    btn.classList.add('no-shimmer');
+                }
+            });
+        });
+        
+        vinInput.addEventListener('blur', () => {
+            // Resume shimmer if no input
+            if (!vinInput.value.trim()) {
+                tabBtns.forEach(btn => {
+                    btn.classList.remove('no-shimmer');
+                });
+            }
+        });
+    }
+    
+    // Plate input focus
+    if (plateInput) {
+        plateInput.addEventListener('focus', () => {
+            // Stop shimmer on non-active tabs
+            tabBtns.forEach(btn => {
+                if (!btn.classList.contains('active')) {
+                    btn.classList.add('no-shimmer');
+                }
+            });
+        });
+        
+        plateInput.addEventListener('blur', () => {
+            // Resume shimmer if no input
+            if (!plateInput.value.trim()) {
+                tabBtns.forEach(btn => {
+                    btn.classList.remove('no-shimmer');
+                });
+            }
         });
     }
 }

@@ -267,6 +267,10 @@ body {
     animation-delay: 2s;
 }
 
+.tab-btn.no-shimmer::before {
+    animation: none;
+}
+
 @keyframes shimmer-tabs {
     0% {
         left: -100%;
@@ -318,6 +322,16 @@ body {
     font-weight: 500;
     color: #ffffff;
     transition: all 0.3s;
+    outline: none;
+}
+
+.search-input:focus,
+.search-select:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-right: 3px solid #fbbf24;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .search-input:last-of-type,
