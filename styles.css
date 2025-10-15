@@ -170,6 +170,7 @@ body {
     min-height: 700px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     position: relative;
     transform: scaleX(-1);
 }
