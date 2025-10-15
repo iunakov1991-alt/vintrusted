@@ -1,0 +1,1 @@
+Reduce site shift from 100px to 50px for better centering: Wed Oct 15 15:25:26 PDT 2025
