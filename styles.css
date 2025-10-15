@@ -243,6 +243,40 @@ body {
     cursor: pointer;
     transition: all 0.3s;
     color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: shimmer-tabs 4s infinite;
+    z-index: 1;
+}
+
+.tab-btn:nth-child(1)::before {
+    animation-delay: 0s;
+}
+
+.tab-btn:nth-child(2)::before {
+    animation-delay: 2s;
+}
+
+@keyframes shimmer-tabs {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
 }
 
 .tab-btn.active {
