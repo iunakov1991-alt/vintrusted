@@ -523,7 +523,14 @@ body {
 }
 
 .search-btn {
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    --gold-start: #FFD700;
+    --gold-mid: #FFA500;
+    --gold-end: #FF8C00;
+    --blue-start: #3B82F6;
+    --blue-mid: #1E40AF;
+    --blue-end: #1E3A8A;
+    
+    background: linear-gradient(135deg, var(--gold-start) 0%, var(--gold-mid) 50%, var(--gold-end) 100%);
     border: none;
     border-radius: 0 28px 28px 0;
     padding: 0 28px;
@@ -534,7 +541,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: background 4s ease, color 0.3s ease;
+    transition: --gold-start 8s ease-in-out, --gold-mid 8s ease-in-out, --gold-end 8s ease-in-out, color 0.3s ease;
     box-shadow: none;
     height: 100%;
     min-width: 140px;
@@ -559,7 +566,9 @@ body {
 }
 
 .search-btn:hover {
-    background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 50%, #1E3A8A 100%);
+    --gold-start: #3B82F6;
+    --gold-mid: #1E40AF;
+    --gold-end: #1E3A8A;
     color: #ffffff;
     transform: none;
     box-shadow: none;
