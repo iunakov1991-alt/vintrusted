@@ -559,7 +559,8 @@ body {
 }
 
 .search-btn:hover {
-    background: linear-gradient(135deg, #FFC700 0%, #FF9500 50%, #FF7F00 100%);
+    background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 50%, #1E3A8A 100%);
+    color: #ffffff;
     transform: none;
     box-shadow: none;
 }
