@@ -1,0 +1,1 @@
+Fix horizontal scroll by making search form responsive instead of fixed 600px width: Wed Oct 15 15:32:26 PDT 2025
