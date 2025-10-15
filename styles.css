@@ -421,8 +421,10 @@ body {
     background: rgba(255, 255, 255, 0.08);
 }
 
-button.btn,
-button.btn-search {
+/* Force button visibility */
+button[type="submit"],
+.btn,
+.btn-search {
     padding: 20px 35px !important;
     background: #fbbf24 !important;
     color: #1a1a1a !important;
@@ -438,13 +440,15 @@ button.btn-search {
     flex-shrink: 0 !important;
     white-space: nowrap !important;
     position: relative !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     min-width: 140px !important;
     visibility: visible !important;
     opacity: 1 !important;
-    z-index: 10 !important;
+    z-index: 999 !important;
     width: auto !important;
     height: auto !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
 }
 
 .btn::before,
@@ -466,9 +470,12 @@ button.btn-search {
 }
 
 .btn-text {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1a1a1a;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .btn-icon {
