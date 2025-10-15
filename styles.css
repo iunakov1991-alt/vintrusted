@@ -160,7 +160,7 @@ body {
 /* Hero Section */
 .hero {
     background-color: #1a1a1a;
-    background-image: linear-gradient(270deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 138, 0.6) 50%, rgba(30, 58, 138, 0.3) 100%),
+    background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
                       url('hero-background.jpg');
     background-position: center center;
     background-size: cover;
