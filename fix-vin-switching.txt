@@ -1,0 +1,1 @@
+Fix VIN mode switching with debug info: Wed Oct 15 03:30:08 PDT 2025

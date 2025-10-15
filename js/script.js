@@ -35,10 +35,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const modeContents = document.querySelectorAll('.mode-content');
     const vinInput = document.querySelector('.vin-input');
     
+    console.log('Mode buttons found:', modeButtons.length);
+    console.log('Mode contents found:', modeContents.length);
+    
     // Mode switching
     modeButtons.forEach(button => {
         button.addEventListener('click', function() {
             const targetMode = this.getAttribute('data-mode');
+            console.log('Clicked mode:', targetMode);
             
             // Remove active class from all buttons and contents
             modeButtons.forEach(btn => btn.classList.remove('active'));
@@ -46,7 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Add active class to clicked button and corresponding content
             this.classList.add('active');
-            document.getElementById(targetMode + '-mode').classList.add('active');
+            const targetElement = document.getElementById(targetMode + '-mode');
+            console.log('Target element:', targetElement);
+            if (targetElement) {
+                targetElement.classList.add('active');
+            }
         });
     });
     
@@ -68,3 +76,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+const spollerButtons = document.querySelectorAll("[data-spoller] .spollers-faq__button");
