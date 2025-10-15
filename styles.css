@@ -354,6 +354,8 @@ body {
 .search-form-container {
     margin: 40px auto;
     max-width: 780px;
+    display: flex;
+    justify-content: center;
 }
 
 .search-form {
