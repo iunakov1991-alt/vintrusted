@@ -366,7 +366,7 @@ body {
 .search-input,
 .search-select {
     flex: 1;
-    min-width: 400px;
+    min-width: 600px;
     padding: 22px 30px;
     border: none;
     background: transparent;
@@ -400,8 +400,8 @@ body {
 .search-select {
     color: #ffffff;
     flex: 0 0 auto;
-    min-width: 250px;
-    width: 250px;
+    min-width: 300px;
+    width: 300px;
 }
 
 .search-select option {
