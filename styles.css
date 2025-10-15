@@ -588,23 +588,6 @@ body {
     }
 }
 
-@keyframes typing-width {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-
-@keyframes blink-caret {
-    from, to {
-        border-color: transparent;
-    }
-    50% {
-        border-color: #1a1a1a;
-    }
-}
 
 .search-btn:hover {
     --gold-start: #3B82F6;
@@ -2241,14 +2224,6 @@ button[type="submit"],
     margin-top: -40px;
     margin-left: 10%;
     line-height: 1.2;
-    overflow: hidden;
-    border-right: 3px solid #1a1a1a;
-    animation: typing-width 5s steps(50, end), blink-caret 0.75s step-end infinite;
-    animation-delay: 0.5s;
-    animation-fill-mode: both;
-    width: 0;
-    white-space: nowrap;
-    position: relative;
 }
 
 .second-screen-description {
