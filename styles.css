@@ -456,6 +456,12 @@ body {
     background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%);
 }
 
+.btn-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
 .btn-icon {
     font-size: 20px;
     transition: transform 0.3s;
