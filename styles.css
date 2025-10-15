@@ -588,12 +588,15 @@ body {
     }
 }
 
-@keyframes typing-reveal {
+@keyframes typing-sequential {
     0% {
-        clip-path: inset(0 100% 0 0);
+        clip-path: inset(0 100% 100% 0);
+    }
+    50% {
+        clip-path: inset(0 100% 0% 0);
     }
     100% {
-        clip-path: inset(0 0% 0 0);
+        clip-path: inset(0 0% 0% 0);
     }
 }
 
@@ -2243,7 +2246,7 @@ button[type="submit"],
     line-height: 1.2;
     overflow: hidden;
     border-right: 3px solid #1a1a1a;
-    animation: typing-reveal 4s steps(50, end), blink-caret 0.75s step-end infinite;
+    animation: typing-sequential 6s steps(60, end), blink-caret 0.75s step-end infinite;
     animation-delay: 0.5s;
     animation-fill-mode: both;
     width: auto;
