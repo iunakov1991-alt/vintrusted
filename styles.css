@@ -160,7 +160,7 @@ body {
 /* Hero Section */
 .hero {
     background-color: #1a1a1a;
-    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.75) 100%),
+    background-image: linear-gradient(90deg, rgba(30, 58, 138, 0.8) 0%, rgba(30, 58, 138, 0.4) 50%, rgba(0, 0, 0, 0.3) 100%),
                       url('hero-background.jpg');
     background-position: center center;
     background-size: cover;
@@ -182,6 +182,7 @@ body {
     max-width: 650px;
     position: relative;
     z-index: 2;
+    text-align: left;
 }
 
 .hero-title {
@@ -266,7 +267,7 @@ body {
     margin-bottom: 40px;
     min-height: 240px;
     max-width: 1000px;
-    margin-left: auto;
+    margin-left: 0;
     margin-right: auto;
 }
 
@@ -274,7 +275,7 @@ body {
     display: flex;
     gap: 10px;
     margin-bottom: 25px;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .tab-btn {
