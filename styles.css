@@ -403,7 +403,7 @@ body {
 }
 
 .search-form {
-    background: #3C3C3C;
+    background: #F5F5DC;
     border-radius: 28px;
     overflow: hidden;
     width: 600px;
@@ -434,21 +434,27 @@ body {
     flex: 1;
     background: transparent;
     border: none;
-    color: #ffffff;
+    color: #2C2C2C;
     font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
     padding: 0;
     outline: none;
 }
 
 .vin-input::placeholder {
-    color: #A0A0A0;
+    color: #666666;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .state-select {
     background: transparent;
     border: none;
-    color: #ffffff;
+    color: #2C2C2C;
     font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
     padding: 0;
     outline: none;
     cursor: pointer;
@@ -456,22 +462,28 @@ body {
 }
 
 .state-select option {
-    background: #3C3C3C;
-    color: #ffffff;
+    background: #F5F5DC;
+    color: #2C2C2C;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .plate-input {
     flex: 1;
     background: transparent;
     border: none;
-    color: #ffffff;
+    color: #2C2C2C;
     font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
     padding: 0;
     outline: none;
 }
 
 .plate-input::placeholder {
-    color: #A0A0A0;
+    color: #666666;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .search-btn {
