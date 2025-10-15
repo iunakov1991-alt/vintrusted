@@ -161,7 +161,7 @@ body {
 /* Hero Section */
 .hero {
     background-color: #1a1a1a;
-    background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
                       url('hero-background.jpg');
     background-position: center center;
     background-size: cover;
@@ -175,27 +175,6 @@ body {
     position: relative;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
-                      url('hero-background.jpg');
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    transform: scaleX(-1);
-    z-index: 1;
-}
-
-.hero > * {
-    transform: none;
-}
-
 .hero-content {
     max-width: 100%;
     position: relative;
@@ -203,6 +182,7 @@ body {
     text-align: left;
     margin: 0;
     padding: 0 40px;
+    width: 100%;
 }
 
 .hero-title {
