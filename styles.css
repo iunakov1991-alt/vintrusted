@@ -358,7 +358,160 @@ body {
 
 
 
-/* Force button visibility */
+/* Search Form Styles */
+.search-form-container {
+    margin-top: 40px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 0;
+    margin-bottom: 15px;
+    width: 600px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px 25px 0 0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-btn:first-child {
+    border-radius: 25px 0 0 0;
+}
+
+.mode-btn:last-child {
+    border-radius: 0 25px 0 0;
+}
+
+.mode-btn.active {
+    background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+    border-color: #3B82F6;
+    color: #1a1a1a;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.mode-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.search-form {
+    background: #3C3C3C;
+    border-radius: 0 0 28px 28px;
+    overflow: hidden;
+    width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: -1px;
+}
+
+.form-content {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+}
+
+.mode-content {
+    display: none;
+    flex: 1;
+    gap: 15px;
+    align-items: center;
+}
+
+.mode-content.active {
+    display: flex;
+}
+
+.vin-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0;
+    outline: none;
+}
+
+.vin-input::placeholder {
+    color: #A0A0A0;
+}
+
+.state-select {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.state-select option {
+    background: #3C3C3C;
+    color: #ffffff;
+}
+
+.plate-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 0;
+    outline: none;
+}
+
+.plate-input::placeholder {
+    color: #A0A0A0;
+}
+
+.search-btn {
+    background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+    border: none;
+    border-radius: 20px;
+    padding: 12px 24px;
+    color: #1a1a1a;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    margin-left: 15px;
+}
+
+.search-btn:hover {
+    background: linear-gradient(90deg, #FFC700 0%, #FF9500 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+/* VIN Input Validation */
+.vin-input:invalid {
+    color: #ff6b6b;
+}
+
+.vin-input:valid {
+    color: #51cf66;
+}
+
 button[type="submit"],
 .btn,
 .btn-search {
@@ -1654,6 +1807,37 @@ button[type="submit"],
     .hero-title {
         font-size: 32px;
         text-align: center;
+    }
+    
+    .search-form-container {
+        width: 100%;
+        max-width: 400px;
+        margin-top: 30px;
+    }
+    
+    .mode-buttons {
+        width: 100%;
+    }
+    
+    .search-form {
+        width: 100%;
+    }
+    
+    .form-content {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .mode-content {
+        width: 100%;
+    }
+    
+    .search-btn {
+        width: 100%;
+        margin-left: 0;
+        justify-content: center;
     }
     
     

@@ -28,3 +28,43 @@ spollerButtons.forEach((button) => {
     }
   });
 });
+
+// Form mode switching functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    const modeContents = document.querySelectorAll('.mode-content');
+    const vinInput = document.querySelector('.vin-input');
+    
+    // Mode switching
+    modeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetMode = this.getAttribute('data-mode');
+            
+            // Remove active class from all buttons and contents
+            modeButtons.forEach(btn => btn.classList.remove('active'));
+            modeContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            this.classList.add('active');
+            document.getElementById(targetMode + '-mode').classList.add('active');
+        });
+    });
+    
+    // VIN validation
+    if (vinInput) {
+        vinInput.addEventListener('input', function() {
+            const value = this.value;
+            const vinPattern = /^[A-HJ-NPR-Z0-9]{17}$/i;
+            
+            if (value.length === 17) {
+                if (vinPattern.test(value)) {
+                    this.style.color = '#51cf66';
+                } else {
+                    this.style.color = '#ff6b6b';
+                }
+            } else {
+                this.style.color = '#ffffff';
+            }
+        });
+    }
+});
