@@ -2007,7 +2007,7 @@ button[type="submit"],
 .damaged-car-image {
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f0f0f0"/><rect x="50" y="100" width="300" height="120" rx="20" fill="%23ffffff" stroke="%23ddd" stroke-width="2"/><circle cx="100" cy="220" r="25" fill="%23ccc"/><circle cx="300" cy="220" r="25" fill="%23ccc"/><rect x="60" y="120" width="80" height="40" rx="5" fill="%23ff6b6b"/><rect x="150" y="120" width="100" height="40" rx="5" fill="%23ffffff"/><rect x="260" y="120" width="80" height="40" rx="5" fill="%23ffffff"/></svg>') center/cover;
+    background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
     position: relative;
 }
 
