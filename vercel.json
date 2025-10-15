@@ -18,14 +18,9 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=79200, must-revalidate"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     }
-  ],
-  "functions": {
-    "app/api/disable-deploy.js": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  ]
 }
