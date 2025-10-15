@@ -361,7 +361,6 @@ body {
     background: #3C3C3C;
     border-radius: 30px;
     overflow: hidden;
-    border: 1px solid #A0A0A0;
     height: 60px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -404,7 +403,7 @@ body {
 
 .form-right {
     flex: 0 0 auto;
-    background: linear-gradient(90deg, #F0C040 0%, #FDF5E6 100%);
+    background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -413,21 +412,23 @@ body {
     cursor: pointer;
     transition: all 0.3s;
     min-width: 140px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
 .form-right:hover {
-    background: linear-gradient(90deg, #E6B030 0%, #F5E6C6 100%);
-    transform: translateY(-1px);
+    background: linear-gradient(90deg, #FFC700 0%, #FF9500 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
 .button-text {
-    color: #606060;
+    color: #1a1a1a;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .button-arrow {
-    color: #606060;
+    color: #1a1a1a;
     font-size: 14px;
     font-weight: bold;
 }
