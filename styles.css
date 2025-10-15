@@ -588,12 +588,12 @@ body {
     }
 }
 
-@keyframes typing-two-lines {
+@keyframes typing-reveal {
     0% {
-        mask-position: 100% 0;
+        clip-path: inset(0 100% 0 0);
     }
     100% {
-        mask-position: 0% 0;
+        clip-path: inset(0 0% 0 0);
     }
 }
 
@@ -2243,14 +2243,11 @@ button[type="submit"],
     line-height: 1.2;
     overflow: hidden;
     border-right: 3px solid #1a1a1a;
-    animation: typing-two-lines 5s steps(60, end), blink-caret 0.75s step-end infinite;
+    animation: typing-reveal 4s steps(50, end), blink-caret 0.75s step-end infinite;
     animation-delay: 0.5s;
     animation-fill-mode: both;
     width: auto;
     position: relative;
-    mask: linear-gradient(90deg, black 0%, black 0%, transparent 0%);
-    mask-size: 200% 100%;
-    mask-position: 100% 0;
 }
 
 .second-screen-description {

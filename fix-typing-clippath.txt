@@ -1,0 +1,1 @@
+Fix typing animation using clip-path instead of mask for better compatibility: Wed Oct 15 16:52:00 PDT 2025
