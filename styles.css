@@ -161,7 +161,7 @@ body {
 /* New Clean Hero Section */
 .hero-section {
     background-color: #1a1a1a;
-    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(15, 23, 42, 0.88) 30%, rgba(30, 58, 138, 0.5) 100%),
                       url('hero-background.jpg');
     background-position: center center;
     background-size: cover;
@@ -1840,7 +1840,7 @@ button[type="submit"],
     
     .hero {
         background-color: #1a1a1a;
-        background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.75) 100%),
+        background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.85) 100%),
                           url('hero-background.jpg');
         background-attachment: scroll;
         padding: 80px 0 60px;
