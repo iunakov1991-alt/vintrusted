@@ -361,18 +361,19 @@ body {
     max-width: 100%;
     margin: 0;
     width: 100%;
+    min-height: 80px;
 }
 
 .search-input,
 .search-select {
     flex: 1;
-    min-width: 300px;
-    padding: 25px 35px;
+    min-width: 400px;
+    padding: 30px 40px;
     border: none;
     background: transparent;
     border-right: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 0;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 500;
     color: #ffffff;
     transition: all 0.3s;
@@ -400,8 +401,8 @@ body {
 .search-select {
     color: #ffffff;
     flex: 0 0 auto;
-    min-width: 250px;
-    width: 250px;
+    min-width: 300px;
+    width: 300px;
 }
 
 .search-select option {
@@ -420,13 +421,13 @@ body {
 }
 
 .btn-search {
-    padding: 25px 45px;
+    padding: 30px 50px;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
     color: #1a1a1a;
     border: none;
     border-radius: 0;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -436,7 +437,7 @@ body {
     white-space: nowrap;
     position: relative;
     overflow: hidden;
-    min-width: 180px;
+    min-width: 200px;
 }
 
 .btn-search::before {
