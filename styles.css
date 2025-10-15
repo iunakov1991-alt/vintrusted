@@ -175,6 +175,9 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .main-title {
@@ -363,6 +366,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-left: 0;
 }
 
 .form-tabs {
@@ -387,6 +391,7 @@ body {
     border-bottom: none;
     position: relative;
     overflow: hidden;
+    z-index: 2;
 }
 
 .tab-btn:first-child {
@@ -402,6 +407,7 @@ body {
     border-color: #3B82F6;
     color: #1a1a1a;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    z-index: 3;
 }
 
 .tab-btn:hover:not(.active) {
@@ -449,6 +455,8 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
+    margin-top: -1px;
+    z-index: 1;
 }
 
 .form-left {
@@ -501,6 +509,8 @@ body {
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
     position: relative;
     overflow: hidden;
+    height: 100%;
+    border-radius: 0 0 28px 0;
 }
 
 .form-right:hover {
