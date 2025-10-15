@@ -173,11 +173,10 @@ body {
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    transform: scaleX(-1);
 }
 
 .hero > * {
-    transform: scaleX(-1);
+    transform: none;
 }
 
 .hero-content {
