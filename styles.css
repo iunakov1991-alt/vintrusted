@@ -383,7 +383,7 @@ body {
 .mode-buttons {
     display: flex;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     width: auto;
     justify-content: flex-start;
 }
