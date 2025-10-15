@@ -1,0 +1,1 @@
+Move search button to absolute right edge of field: Wed Oct 15 03:27:13 PDT 2025
