@@ -29,75 +29,51 @@ spollerButtons.forEach((button) => {
   });
 });
 
-// Simple test function
-function testModeSwitching() {
-    console.log('Testing mode switching...');
-    const vinMode = document.getElementById('vin-mode');
-    const plateMode = document.getElementById('plate-mode');
+// Form mode switching functionality - Simple and reliable version
+function initFormSwitching() {
+    console.log('Initializing form switching...');
+    
     const vinBtn = document.querySelector('[data-mode="vin"]');
     const plateBtn = document.querySelector('[data-mode="plate"]');
+    const vinMode = document.getElementById('vin-mode');
+    const plateMode = document.getElementById('plate-mode');
     
-    console.log('VIN mode element:', vinMode);
-    console.log('Plate mode element:', plateMode);
-    console.log('VIN button:', vinBtn);
-    console.log('Plate button:', plateBtn);
-    
-    if (vinMode && plateMode && vinBtn && plateBtn) {
-        console.log('All elements found, switching should work');
-    } else {
-        console.error('Some elements not found');
-    }
-}
-
-// Form mode switching functionality
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing form mode switching...');
-    
-    // Run test
-    setTimeout(testModeSwitching, 100);
-    
-    const modeButtons = document.querySelectorAll('.mode-btn');
-    const modeContents = document.querySelectorAll('.mode-content');
-    const vinInput = document.querySelector('.vin-input');
-    
-    console.log('Mode buttons found:', modeButtons.length);
-    console.log('Mode contents found:', modeContents.length);
-    console.log('VIN input found:', vinInput);
-    
-    // Mode switching
-    modeButtons.forEach((button, index) => {
-        console.log(`Button ${index}:`, button, 'data-mode:', button.getAttribute('data-mode'));
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetMode = this.getAttribute('data-mode');
-            console.log('Clicked mode:', targetMode);
-            
-            // Remove active class from all buttons and contents
-            modeButtons.forEach(btn => {
-                btn.classList.remove('active');
-                console.log('Removed active from button:', btn);
-            });
-            modeContents.forEach(content => {
-                content.classList.remove('active');
-                console.log('Removed active from content:', content);
-            });
-            
-            // Add active class to clicked button and corresponding content
-            this.classList.add('active');
-            console.log('Added active to button:', this);
-            
-            const targetElement = document.getElementById(targetMode + '-mode');
-            console.log('Target element for', targetMode + '-mode:', targetElement);
-            if (targetElement) {
-                targetElement.classList.add('active');
-                console.log('Added active to content:', targetElement);
-            } else {
-                console.error('Target element not found:', targetMode + '-mode');
-            }
-        });
+    console.log('Elements found:', {
+        vinBtn: !!vinBtn,
+        plateBtn: !!plateBtn,
+        vinMode: !!vinMode,
+        plateMode: !!plateMode
     });
     
+    if (!vinBtn || !plateBtn || !vinMode || !plateMode) {
+        console.error('Required elements not found');
+        return;
+    }
+    
+    // VIN button click handler
+    vinBtn.addEventListener('click', function() {
+        console.log('VIN button clicked');
+        vinBtn.classList.add('active');
+        plateBtn.classList.remove('active');
+        vinMode.classList.add('active');
+        plateMode.classList.remove('active');
+        console.log('Switched to VIN mode');
+    });
+    
+    // Plate button click handler
+    plateBtn.addEventListener('click', function() {
+        console.log('Plate button clicked');
+        plateBtn.classList.add('active');
+        vinBtn.classList.remove('active');
+        plateMode.classList.add('active');
+        vinMode.classList.remove('active');
+        console.log('Switched to Plate mode');
+    });
+    
+    console.log('Form switching initialized successfully');
+    
     // VIN validation
+    const vinInput = document.querySelector('.vin-input');
     if (vinInput) {
         vinInput.addEventListener('input', function() {
             const value = this.value;
@@ -114,6 +90,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFormSwitching);
+} else {
+    initFormSwitching();
+}
+
+// Also try after a short delay as backup
+setTimeout(initFormSwitching, 1000);
 
 const spollerButtons = document.querySelectorAll("[data-spoller] .spollers-faq__button");
