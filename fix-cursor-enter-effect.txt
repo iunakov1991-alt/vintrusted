@@ -1,0 +1,1 @@
+Fix cursor blinking to stop after each line and add Enter effect between lines: Wed Oct 15 16:58:21 PDT 2025

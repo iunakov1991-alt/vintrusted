@@ -594,12 +594,21 @@ body {
     }
 }
 
-@keyframes blink-caret {
-    from, to {
+@keyframes blink-caret-line-1 {
+    0%, 2.5s {
+        border-color: #1a1a1a;
+    }
+    2.6s, 100% {
         border-color: transparent;
     }
-    50% {
+}
+
+@keyframes blink-caret-line-2 {
+    0%, 2.5s {
         border-color: #1a1a1a;
+    }
+    2.6s, 100% {
+        border-color: transparent;
     }
 }
 
@@ -2247,7 +2256,7 @@ button[type="submit"],
     border-right: 3px solid #1a1a1a;
     white-space: nowrap;
     width: 0;
-    animation: typing-line-1 2.5s steps(25, end), blink-caret 0.75s step-end infinite;
+    animation: typing-line-1 2.5s steps(25, end), blink-caret-line-1 0.75s step-end infinite;
     animation-delay: 0.5s;
     animation-fill-mode: both;
 }
@@ -2258,8 +2267,8 @@ button[type="submit"],
     border-right: 3px solid #1a1a1a;
     white-space: nowrap;
     width: 0;
-    animation: typing-line-2 2.5s steps(25, end), blink-caret 0.75s step-end infinite;
-    animation-delay: 3.5s;
+    animation: typing-line-2 2.5s steps(25, end), blink-caret-line-2 0.75s step-end infinite;
+    animation-delay: 4s;
     animation-fill-mode: both;
 }
 
