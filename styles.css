@@ -524,7 +524,7 @@ body {
 
 .search-btn {
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
-    border: 2px solid #FFD700;
+    border: none;
     border-radius: 0 28px 28px 0;
     padding: 0 28px;
     color: #1a1a1a;
