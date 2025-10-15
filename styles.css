@@ -2137,3 +2137,61 @@ button[type="submit"],
     flex: 1;
     margin-left: 12px;
 }
+
+/* Additional responsive styles for better mobile adaptation */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .main-title {
+        font-size: 42px;
+    }
+    
+    .search-form-container {
+        width: 100%;
+        max-width: 500px;
+    }
+    
+    .search-form {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .subtitle {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+    
+    .search-form-container {
+        margin-top: 20px;
+    }
+    
+    .form-content {
+        padding-right: 80px;
+        height: 45px;
+    }
+    
+    .search-btn {
+        min-width: 80px;
+        font-size: 11px;
+        padding: 0 12px;
+    }
+    
+    .vin-input, .plate-input, .state-select {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+    
+    .mode-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+}
