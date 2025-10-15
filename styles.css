@@ -377,18 +377,18 @@ body {
 
 .mode-btn {
     flex: none;
-    padding: 8px 16px;
+    padding: 12px 20px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     color: #ffffff;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
-    min-width: 80px;
+    min-width: 90px;
 }
 
 .mode-btn.active {
@@ -413,8 +413,8 @@ body {
 .form-content {
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    height: 60px;
+    padding: 0 25px;
+    height: 70px;
 }
 
 .mode-content {
@@ -433,7 +433,7 @@ body {
     background: transparent;
     border: none;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 16px;
     padding: 0;
     outline: none;
 }
@@ -446,11 +446,11 @@ body {
     background: transparent;
     border: none;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 16px;
     padding: 0;
     outline: none;
     cursor: pointer;
-    min-width: 120px;
+    min-width: 130px;
 }
 
 .state-select option {
@@ -463,7 +463,7 @@ body {
     background: transparent;
     border: none;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 16px;
     padding: 0;
     outline: none;
 }
@@ -476,9 +476,9 @@ body {
     background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
     border: none;
     border-radius: 20px;
-    padding: 12px 24px;
+    padding: 14px 28px;
     color: #1a1a1a;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
     display: flex;
