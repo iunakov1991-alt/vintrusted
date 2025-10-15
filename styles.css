@@ -352,10 +352,10 @@ body {
 }
 
 .search-form-container {
-    margin: 60px auto 40px;
+    margin: 60px 0 40px 0;
     max-width: 780px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
     z-index: 3;
 }
