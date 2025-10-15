@@ -428,75 +428,7 @@ body {
 }
 
 
-.search-form {
-    display: flex;
-    gap: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    max-width: 1000px;
-    margin: 0 auto;
-    width: 100%;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.search-input,
-.search-select {
-    flex: 1;
-    min-width: 1000px;
-    padding: 20px 25px;
-    border: none;
-    background: transparent;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: #ffffff;
-    transition: all 0.3s;
-    outline: none;
-}
-
-.search-input:focus,
-.search-select:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.08);
-    border-right: 3px solid #fbbf24;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.search-input:last-of-type,
-.search-select:last-of-type {
-    border-right: none;
-}
-
-.search-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.search-select {
-    color: #ffffff;
-    flex: 0 0 auto;
-    min-width: 250px;
-    width: 250px;
-}
-
-.search-select option {
-    background: #1a1a1a;
-    color: #ffffff;
-}
-
-#plate-tab .search-input {
-    flex: 1;
-}
-
-.search-input:focus,
-.search-select:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.08);
-}
+/* Legacy search-form styles removed to prevent overrides of the new hero form */
 
 /* Force button visibility */
 button[type="submit"],
