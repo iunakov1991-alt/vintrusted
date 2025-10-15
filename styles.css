@@ -1337,17 +1337,13 @@ button[type="submit"],
 
 .why-choose-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
     align-items: start;
 }
 
 .why-choose-left {
     padding-right: 0;
-}
-
-.why-choose-center {
-    padding: 0;
 }
 
 .why-choose-right {
