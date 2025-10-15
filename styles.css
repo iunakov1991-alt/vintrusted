@@ -206,7 +206,7 @@ body {
 .hero-features {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 8px;
     margin-bottom: 40px;
     justify-content: center;
 }
@@ -214,32 +214,32 @@ body {
 .feature-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    border-radius: 25px;
-    padding: 10px 16px;
+    gap: 6px;
+    border-radius: 20px;
+    padding: 6px 12px;
     transition: all 0.3s;
 }
 
 .feature-item:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .feature-icon {
-    font-size: 18px;
+    font-size: 14px;
     filter: brightness(1.2);
 }
 
 .feature-text {
     color: #ffffff;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 12px;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .feature-item.highlight .feature-text {
     color: #fbbf24;
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 13px;
 }
 
 /* Search Container */
