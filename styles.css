@@ -16,7 +16,6 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    margin-left: 25%;
     padding: 0 20px;
 }
 
@@ -1338,23 +1337,10 @@ button[type="submit"],
 }
 
 .why-choose-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-@media (max-width: 768px) {
-    .why-choose-content {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .why-choose-content img {
-        width: 80% !important;
-        max-width: 300px;
-    }
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
 }
 
 .why-choose-left {
