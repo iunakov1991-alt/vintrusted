@@ -453,6 +453,49 @@
       </div>
     </footer>
 
+    <script>
+    // Inline form switching - guaranteed to work
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, setting up form switching...');
+        
+        const vinBtn = document.querySelector('[data-mode="vin"]');
+        const plateBtn = document.querySelector('[data-mode="plate"]');
+        const vinMode = document.getElementById('vin-mode');
+        const plateMode = document.getElementById('plate-mode');
+        
+        console.log('Found elements:', {
+            vinBtn: vinBtn,
+            plateBtn: plateBtn,
+            vinMode: vinMode,
+            plateMode: plateMode
+        });
+        
+        if (vinBtn && plateBtn && vinMode && plateMode) {
+            console.log('All elements found, adding event listeners...');
+            
+            vinBtn.onclick = function() {
+                console.log('VIN clicked');
+                vinBtn.classList.add('active');
+                plateBtn.classList.remove('active');
+                vinMode.classList.add('active');
+                plateMode.classList.remove('active');
+            };
+            
+            plateBtn.onclick = function() {
+                console.log('Plate clicked');
+                plateBtn.classList.add('active');
+                vinBtn.classList.remove('active');
+                plateMode.classList.add('active');
+                vinMode.classList.remove('active');
+            };
+            
+            console.log('Event listeners added successfully');
+        } else {
+            console.error('Some elements not found!');
+        }
+    });
+    </script>
+    
     <script src="script.js"></script>
 </body>
 </html>
