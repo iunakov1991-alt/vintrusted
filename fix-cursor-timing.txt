@@ -1,0 +1,1 @@
+Fix cursor to disappear immediately after each line finishes typing: Wed Oct 15 16:59:46 PDT 2025

@@ -595,19 +595,19 @@ body {
 }
 
 @keyframes blink-caret-line-1 {
-    0%, 2.5s {
+    0%, 2.4s {
         border-color: #1a1a1a;
     }
-    2.6s, 100% {
+    2.5s, 100% {
         border-color: transparent;
     }
 }
 
 @keyframes blink-caret-line-2 {
-    0%, 2.5s {
+    0%, 2.4s {
         border-color: #1a1a1a;
     }
-    2.6s, 100% {
+    2.5s, 100% {
         border-color: transparent;
     }
 }
