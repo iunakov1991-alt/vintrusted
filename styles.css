@@ -419,6 +419,7 @@ body {
     background: rgba(255, 255, 255, 0.08);
 }
 
+.btn,
 .btn-search {
     padding: 22px 60px;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
@@ -439,6 +440,7 @@ body {
     min-width: 200px;
 }
 
+.btn::before,
 .btn-search::before {
     content: '';
     position: absolute;
@@ -451,6 +453,7 @@ body {
     z-index: 1;
 }
 
+.btn:hover,
 .btn-search:hover {
     background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%);
 }
