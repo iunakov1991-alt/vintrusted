@@ -588,6 +588,24 @@ body {
     }
 }
 
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #1a1a1a;
+    }
+}
+
 .search-btn:hover {
     --gold-start: #3B82F6;
     --gold-mid: #1E40AF;
@@ -2223,6 +2241,12 @@ button[type="submit"],
     margin-top: -40px;
     margin-left: 10%;
     line-height: 1.2;
+    overflow: hidden;
+    border-right: 3px solid #1a1a1a;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
 }
 
 .second-screen-description {
