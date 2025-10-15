@@ -1,0 +1,1 @@
+Fix typing animation to use max-width instead of width to preserve container sizes: Wed Oct 15 16:49:43 PDT 2025

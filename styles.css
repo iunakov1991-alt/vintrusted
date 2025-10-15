@@ -588,12 +588,12 @@ body {
     }
 }
 
-@keyframes typing {
+@keyframes typing-text {
     from {
-        width: 0;
+        max-width: 0;
     }
     to {
-        width: 100%;
+        max-width: 100%;
     }
 }
 
@@ -2244,9 +2244,10 @@ button[type="submit"],
     overflow: hidden;
     border-right: 3px solid #1a1a1a;
     white-space: nowrap;
-    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    animation: typing-text 3s steps(40, end), blink-caret 0.75s step-end infinite;
     animation-delay: 0.5s;
     animation-fill-mode: both;
+    width: auto;
 }
 
 .second-screen-description {
