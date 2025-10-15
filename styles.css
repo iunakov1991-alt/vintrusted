@@ -588,15 +588,12 @@ body {
     }
 }
 
-@keyframes typing-sequential {
+@keyframes typing-width {
     0% {
-        clip-path: inset(0 100% 100% 0);
-    }
-    50% {
-        clip-path: inset(0 100% 0% 0);
+        width: 0;
     }
     100% {
-        clip-path: inset(0 0% 0% 0);
+        width: 100%;
     }
 }
 
@@ -2246,10 +2243,11 @@ button[type="submit"],
     line-height: 1.2;
     overflow: hidden;
     border-right: 3px solid #1a1a1a;
-    animation: typing-sequential 6s steps(60, end), blink-caret 0.75s step-end infinite;
+    animation: typing-width 5s steps(50, end), blink-caret 0.75s step-end infinite;
     animation-delay: 0.5s;
     animation-fill-mode: both;
-    width: auto;
+    width: 0;
+    white-space: nowrap;
     position: relative;
 }
 
