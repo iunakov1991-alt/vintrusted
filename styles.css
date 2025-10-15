@@ -576,15 +576,30 @@ body {
     z-index: 1;
 }
 
-@keyframes shimmer-right {
+@keyframes typing-line-1 {
     0% {
-        right: -100%;
-    }
-    20% {
-        right: 100%;
+        width: 0;
     }
     100% {
-        right: 100%;
+        width: 100%;
+    }
+}
+
+@keyframes typing-line-2 {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #1a1a1a;
     }
 }
 
@@ -2224,6 +2239,28 @@ button[type="submit"],
     margin-top: -40px;
     margin-left: 10%;
     line-height: 1.2;
+}
+
+.title-line-1 {
+    display: block;
+    overflow: hidden;
+    border-right: 3px solid #1a1a1a;
+    white-space: nowrap;
+    width: 0;
+    animation: typing-line-1 2.5s steps(25, end), blink-caret 0.75s step-end infinite;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+}
+
+.title-line-2 {
+    display: block;
+    overflow: hidden;
+    border-right: 3px solid #1a1a1a;
+    white-space: nowrap;
+    width: 0;
+    animation: typing-line-2 2.5s steps(25, end), blink-caret 0.75s step-end infinite;
+    animation-delay: 3.5s;
+    animation-fill-mode: both;
 }
 
 .second-screen-description {
