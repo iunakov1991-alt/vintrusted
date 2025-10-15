@@ -2201,6 +2201,27 @@ button[type="submit"],
     }
 }
 
+/* Second screen left side styling */
+.second-screen-left {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+    padding: 60px 40px;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.second-screen-left .second-screen-title {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.second-screen-left .second-screen-description {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 /* Second Screen Styles */
 .second-screen {
     padding: 80px 0;
