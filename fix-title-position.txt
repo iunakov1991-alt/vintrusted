@@ -1,0 +1,1 @@
+Fix title positioning by changing align-items to start and increasing negative margin: Wed Oct 15 16:42:42 PDT 2025

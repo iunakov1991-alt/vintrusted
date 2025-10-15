@@ -2212,7 +2212,7 @@ button[type="submit"],
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
-    align-items: center;
+    align-items: start;
 }
 
 .second-screen-title {
@@ -2220,7 +2220,7 @@ button[type="submit"],
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 20px;
-    margin-top: -40px;
+    margin-top: -80px;
     line-height: 1.2;
 }
 
