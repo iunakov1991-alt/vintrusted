@@ -181,12 +181,12 @@ body {
 }
 
 .hero-content {
-    max-width: 50%;
+    max-width: 100%;
     position: relative;
     z-index: 2;
-    text-align: left;
-    margin-left: 0;
-    padding-left: 40px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 40px;
 }
 
 .hero-title {
@@ -195,7 +195,7 @@ body {
     line-height: 1.1;
     margin-bottom: 25px;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 

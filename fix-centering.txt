@@ -1,0 +1,1 @@
+Fix hero content centering: Wed Oct 15 01:28:50 PDT 2025
