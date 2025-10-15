@@ -369,19 +369,19 @@ body {
 
 .mode-buttons {
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 8px;
+    margin-bottom: 12px;
     width: 600px;
 }
 
 .mode-btn {
     flex: 1;
-    padding: 12px 20px;
+    padding: 8px 16px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
+    border-radius: 20px;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
