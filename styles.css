@@ -1193,6 +1193,18 @@ body {
     border: 1px solid #e5e7eb;
     max-width: 350px;
     margin: 0 auto;
+    animation: reportSlideIn 1.5s ease-out;
+}
+
+@keyframes reportSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(100px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
 }
 
 .car-image img {
@@ -1201,6 +1213,18 @@ body {
     object-fit: cover;
     border-radius: 15px;
     margin-bottom: 20px;
+    animation: carImageZoom 2s ease-out 0.2s both;
+}
+
+@keyframes carImageZoom {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .car-info h4 {
@@ -1230,6 +1254,18 @@ body {
 
 .issue-section {
     margin-top: 25px;
+    animation: issueSectionSlideIn 1.8s ease-out 0.3s both;
+}
+
+@keyframes issueSectionSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .issue-item {
@@ -1286,6 +1322,18 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin-top: 30px;
+    animation: summaryCardsFadeIn 2s ease-out 0.5s both;
+}
+
+@keyframes summaryCardsFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .summary-card {
