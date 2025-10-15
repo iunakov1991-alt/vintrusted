@@ -2204,7 +2204,7 @@ button[type="submit"],
 /* Second screen left side styling */
 .second-screen-left {
     background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
-    padding: 60px 40px;
+    padding: 0;
     color: white;
     display: flex;
     flex-direction: column;
