@@ -366,13 +366,13 @@ body {
 .search-input,
 .search-select {
     flex: 1;
-    min-width: 200px;
-    padding: 22px 30px;
+    min-width: 300px;
+    padding: 25px 35px;
     border: none;
     background: transparent;
     border-right: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 0;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     color: #ffffff;
     transition: all 0.3s;
@@ -400,8 +400,8 @@ body {
 .search-select {
     color: #ffffff;
     flex: 0 0 auto;
-    min-width: 200px;
-    width: 200px;
+    min-width: 250px;
+    width: 250px;
 }
 
 .search-select option {
@@ -420,13 +420,13 @@ body {
 }
 
 .btn-search {
-    padding: 22px 40px;
+    padding: 25px 45px;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
     color: #1a1a1a;
     border: none;
     border-radius: 0;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -436,7 +436,7 @@ body {
     white-space: nowrap;
     position: relative;
     overflow: hidden;
-    min-width: 150px;
+    min-width: 180px;
 }
 
 .btn-search::before {
