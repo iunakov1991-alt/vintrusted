@@ -2200,3 +2200,58 @@ button[type="submit"],
         font-size: 11px;
     }
 }
+
+/* Second Screen Styles */
+.second-screen {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.second-screen-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.second-screen-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.second-screen-description {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.second-screen-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive for second screen */
+@media (max-width: 768px) {
+    .second-screen {
+        padding: 60px 0;
+    }
+    
+    .second-screen-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .second-screen-title {
+        font-size: 28px;
+    }
+    
+    .second-screen-description {
+        font-size: 16px;
+    }
+}
