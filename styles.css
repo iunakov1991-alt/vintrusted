@@ -590,10 +590,10 @@ body {
 
 @keyframes typing-text {
     from {
-        max-width: 0;
+        max-height: 0;
     }
     to {
-        max-width: 100%;
+        max-height: 100px;
     }
 }
 
@@ -2243,7 +2243,6 @@ button[type="submit"],
     line-height: 1.2;
     overflow: hidden;
     border-right: 3px solid #1a1a1a;
-    white-space: nowrap;
     animation: typing-text 3s steps(40, end), blink-caret 0.75s step-end infinite;
     animation-delay: 0.5s;
     animation-fill-mode: both;
