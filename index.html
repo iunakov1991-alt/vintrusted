@@ -337,30 +337,87 @@
                 <div class="why-choose-right">
                     <div class="report-demo">
                         <div class="report-card">
-                            <div class="car-image">
-                                <img src="https://via.placeholder.com/300x200/cccccc/666666?text=2005+TOYOTA+COROLLA" alt="Toyota Corolla">
-                            </div>
-                            <div class="car-info">
-                                <h4>2005 TOYOTA COROLLA</h4>
-                                <button class="btn-view-report">ПОСМОТРЕТЬ ОТЧЕТ >></button>
+                            <div class="report-header">
+                                <div class="car-image">
+                                    <img src="https://via.placeholder.com/300x180/2c3e50/ffffff?text=2018+TOYOTA+COROLLA" alt="2018 Toyota Corolla">
+                                </div>
+                                <div class="car-info">
+                                    <h4>2018 TOYOTA COROLLA</h4>
+                                    <div class="car-details">
+                                        <span class="car-year">2018</span>
+                                        <span class="car-make">Toyota</span>
+                                        <span class="car-model">Corolla LE</span>
+                                    </div>
+                                    <div class="vin-info">
+                                        <span class="vin-label">VIN:</span>
+                                        <span class="vin-number">1HGBH41JXMN109186</span>
+                                    </div>
+                                </div>
                             </div>
                             
-                            <div class="issue-section">
-                                <div class="issue-item">
-                                    <span class="issue-icon">💥</span>
-                                    <span class="issue-text">Столкновение</span>
+                            <div class="report-status">
+                                <div class="status-badge warning">
+                                    <span class="status-icon">⚠️</span>
+                                    <span class="status-text">Обнаружены проблемы</span>
+                                </div>
+                            </div>
+                            
+                            <div class="issues-section">
+                                <h5 class="issues-title">Обнаруженные проблемы:</h5>
+                                
+                                <div class="issue-item critical">
+                                    <div class="issue-header">
+                                        <span class="issue-icon">💥</span>
+                                        <span class="issue-title">Столкновение</span>
+                                        <span class="issue-severity">КРИТИЧНО</span>
+                                    </div>
                                     <div class="issue-details">
-                                        <span class="records-found">Найдены записи</span>
-                                        <button class="btn-view-issues">Посмотреть проблемы</button>
+                                        <p>Зарегистрировано столкновение с повреждением передней части</p>
+                                        <div class="issue-date">Дата: 15.03.2020</div>
+                                        <div class="issue-damage">Ущерб: $8,500</div>
                                     </div>
                                 </div>
                                 
-                                <div class="issue-item">
-                                    <span class="issue-icon">📊</span>
-                                    <span class="issue-text">Пробег неактуален</span>
+                                <div class="issue-item warning">
+                                    <div class="issue-header">
+                                        <span class="issue-icon">📊</span>
+                                        <span class="issue-title">Пробег неактуален</span>
+                                        <span class="issue-severity">ПРЕДУПРЕЖДЕНИЕ</span>
+                                    </div>
                                     <div class="issue-details">
-                                        <span class="records-found">Найдены записи</span>
-                                        <button class="btn-view-issues">Посмотреть проблемы</button>
+                                        <p>Возможное скручивание одометра</p>
+                                        <div class="issue-date">Последняя проверка: 10.01.2021</div>
+                                        <div class="issue-mileage">Заявленный пробег: 45,000 миль</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="issue-item info">
+                                    <div class="issue-header">
+                                        <span class="issue-icon">🔧</span>
+                                        <span class="issue-title">Отзыв производителя</span>
+                                        <span class="issue-severity">ИНФОРМАЦИЯ</span>
+                                    </div>
+                                    <div class="issue-details">
+                                        <p>Незавершенный отзыв по системе безопасности</p>
+                                        <div class="issue-date">Отзыв от: 12.08.2019</div>
+                                        <div class="issue-recall">Номер отзыва: 19V-123</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="report-summary">
+                                <div class="summary-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-number">3</span>
+                                        <span class="stat-label">Проблемы</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">2</span>
+                                        <span class="stat-label">Владельца</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">45K</span>
+                                        <span class="stat-label">Миль</span>
                                     </div>
                                 </div>
                             </div>

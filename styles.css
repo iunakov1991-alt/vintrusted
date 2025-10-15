@@ -1188,12 +1188,13 @@ body {
 .report-card {
     background: #ffffff;
     border-radius: 25px;
-    padding: 25px;
+    padding: 0;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     border: 1px solid #e5e7eb;
-    max-width: 350px;
+    max-width: 400px;
     margin: 0 auto;
     animation: reportSlideIn 1.5s ease-out;
+    overflow: hidden;
 }
 
 @keyframes reportSlideIn {
@@ -1207,12 +1208,17 @@ body {
     }
 }
 
+/* Report Header */
+.report-header {
+    padding: 20px 20px 0;
+}
+
 .car-image img {
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
-    border-radius: 15px;
-    margin-bottom: 20px;
+    border-radius: 15px 15px 0 0;
+    margin-bottom: 15px;
     animation: carImageZoom 2s ease-out 0.2s both;
 }
 
@@ -1228,10 +1234,184 @@ body {
 }
 
 .car-info h4 {
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.car-details {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.car-year, .car-make, .car-model {
+    background: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.vin-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.vin-label {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.vin-number {
+    font-family: monospace;
+    background: #f9fafb;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* Report Status */
+.report-status {
+    padding: 15px 20px;
+    background: #fef3c7;
+    border-top: 1px solid #fde68a;
+    border-bottom: 1px solid #fde68a;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status-badge.warning {
+    color: #92400e;
+}
+
+.status-icon {
+    font-size: 16px;
+}
+
+/* Issues Section */
+.issues-section {
+    padding: 20px;
+}
+
+.issues-title {
+    font-size: 16px;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 15px;
+}
+
+.issue-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    border-left: 4px solid;
+}
+
+.issue-item.critical {
+    background: #fef2f2;
+    border-left-color: #dc2626;
+}
+
+.issue-item.warning {
+    background: #fffbeb;
+    border-left-color: #f59e0b;
+}
+
+.issue-item.info {
+    background: #eff6ff;
+    border-left-color: #3b82f6;
+}
+
+.issue-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.issue-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #1a1a1a;
+    flex: 1;
+}
+
+.issue-severity {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.issue-item.critical .issue-severity {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.issue-item.warning .issue-severity {
+    background: #f59e0b;
+    color: #ffffff;
+}
+
+.issue-item.info .issue-severity {
+    background: #3b82f6;
+    color: #ffffff;
+}
+
+.issue-details p {
+    font-size: 13px;
+    color: #4b5563;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.issue-date, .issue-damage, .issue-mileage, .issue-recall {
+    font-size: 11px;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+/* Report Summary */
+.report-summary {
+    padding: 20px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+}
+
+.summary-stats {
+    display: flex;
+    justify-content: space-around;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
 }
 
 .btn-view-report {
