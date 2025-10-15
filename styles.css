@@ -434,29 +434,6 @@ body {
     position: relative;
 }
 
-.search-form::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer-right 3s infinite;
-}
-
-@keyframes shimmer-right {
-    0% {
-        right: -100%;
-    }
-    20% {
-        right: 100%;
-    }
-    100% {
-        right: 100%;
-    }
-}
-
 .form-content {
     display: flex;
     align-items: center;
@@ -553,6 +530,18 @@ body {
     position: absolute;
     right: 0;
     top: 0;
+    overflow: hidden;
+}
+
+.search-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer-right 3s infinite;
 }
 
 .search-btn:hover {
