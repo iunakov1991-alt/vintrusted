@@ -1,1 +1,1 @@
-Move title back to left side of second screen: Wed Oct 15 16:41:02 PDT 2025
+Move title left by 10% for better positioning: Wed Oct 15 16:47:34 PDT 2025
