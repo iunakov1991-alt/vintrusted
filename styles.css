@@ -2691,9 +2691,6 @@ button[type="submit"],
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: flex;
-    align-items: center;
-    gap: 8px;
     padding: 8px 12px;
     border-bottom: 1px solid #e9ecef;
 }
@@ -2704,10 +2701,8 @@ button[type="submit"],
 
 .feature-cell .feature-icon {
     font-size: 1rem;
-    flex-shrink: 0;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 8px;
+    margin-right: 6px;
+    vertical-align: baseline;
 }
 
 .vin-trust-cell {
