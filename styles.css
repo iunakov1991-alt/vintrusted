@@ -2956,6 +2956,7 @@ button[type="submit"],
     padding: 0 25px 0 25px;
     height: 70px;
     padding-right: 150px;
+    min-height: 70px;
 }
 
 .comparison-right .mode-content {
@@ -2981,6 +2982,8 @@ button[type="submit"],
     padding: 0;
     outline: none;
     text-transform: uppercase;
+    pointer-events: auto;
+    cursor: text;
 }
 
 .comparison-right .vin-input::placeholder {
@@ -3000,6 +3003,8 @@ button[type="submit"],
     padding: 0;
     outline: none;
     text-transform: uppercase;
+    pointer-events: auto;
+    cursor: text;
 }
 
 .comparison-right .plate-input::placeholder {
@@ -3018,6 +3023,8 @@ button[type="submit"],
     font-style: italic;
     padding: 0;
     outline: none;
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 .comparison-right .state-select option {
