@@ -2691,20 +2691,17 @@ button[type="submit"],
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 8px 12px 8px 4px;
+    padding: 8px 12px;
     border-bottom: 1px solid #e9ecef;
-    position: relative;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .feature-cell::before {
     content: "📋";
-    position: absolute;
-    left: 4px;
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 1rem;
-    line-height: 1;
+    flex-shrink: 0;
 }
 
 .feature-cell.vehicle-history::before {
