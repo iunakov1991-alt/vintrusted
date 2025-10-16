@@ -595,19 +595,25 @@ body {
 }
 
 @keyframes cursor-line-1 {
-    0%, 2.4s {
+    0% {
+        border-color: transparent;
+    }
+    0.1%, 99.9% {
         border-color: #1a1a1a;
     }
-    2.5s, 100% {
+    100% {
         border-color: transparent;
     }
 }
 
 @keyframes cursor-line-2 {
-    0%, 2.4s {
+    0% {
+        border-color: transparent;
+    }
+    0.1%, 99.9% {
         border-color: #1a1a1a;
     }
-    2.5s, 100% {
+    100% {
         border-color: transparent;
     }
 }
@@ -2253,10 +2259,10 @@ button[type="submit"],
 .title-line-1 {
     display: block;
     overflow: hidden;
-    border-right: 3px solid #1a1a1a;
+    border-right: 3px solid transparent;
     white-space: nowrap;
     width: 0;
-    animation: typing-line-1 2.5s steps(25, end), cursor-line-1 0.1s steps(1, end);
+    animation: typing-line-1 2.5s steps(25, end), cursor-line-1 2.5s steps(25, end);
     animation-delay: 0.5s;
     animation-fill-mode: both;
 }
@@ -2264,10 +2270,10 @@ button[type="submit"],
 .title-line-2 {
     display: block;
     overflow: hidden;
-    border-right: 3px solid #1a1a1a;
+    border-right: 3px solid transparent;
     white-space: nowrap;
     width: 0;
-    animation: typing-line-2 2.5s steps(25, end), cursor-line-2 0.1s steps(1, end);
+    animation: typing-line-2 2.5s steps(25, end), cursor-line-2 2.5s steps(25, end);
     animation-delay: 4s;
     animation-fill-mode: both;
 }

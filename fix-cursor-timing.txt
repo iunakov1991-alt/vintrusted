@@ -1,1 +1,1 @@
-Fix cursor to disappear immediately after each line finishes typing: Wed Oct 15 16:59:46 PDT 2025
+Fix cursor to appear only during typing and disappear immediately after completion: Wed Oct 15 17:03:54 PDT 2025
