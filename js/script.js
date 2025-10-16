@@ -85,9 +85,22 @@ function initFormSwitching() {
         return;
     }
     
+    // Function to clear all form fields
+    function clearAllFields() {
+        const vinInput = document.querySelector('.vin-input');
+        const plateInput = document.querySelector('.plate-input');
+        const stateSelect = document.querySelector('.state-select');
+        
+        if (vinInput) vinInput.value = '';
+        if (plateInput) plateInput.value = '';
+        if (stateSelect) stateSelect.value = '';
+        console.log('All fields cleared');
+    }
+    
     // VIN button click handler
     vinBtn.addEventListener('click', function() {
         console.log('VIN button clicked');
+        clearAllFields(); // Clear all fields when switching to VIN mode
         vinBtn.classList.add('active');
         plateBtn.classList.remove('active');
         vinMode.classList.add('active');
@@ -98,6 +111,7 @@ function initFormSwitching() {
     // Plate button click handler
     plateBtn.addEventListener('click', function() {
         console.log('Plate button clicked');
+        clearAllFields(); // Clear all fields when switching to Plate mode
         plateBtn.classList.add('active');
         vinBtn.classList.remove('active');
         plateMode.classList.add('active');
