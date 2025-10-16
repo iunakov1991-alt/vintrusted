@@ -15,6 +15,11 @@ body {
     line-height: 1.6;
     color: #1a1a1a;
     background: #ffffff;
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .container {
