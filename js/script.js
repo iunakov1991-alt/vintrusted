@@ -91,9 +91,16 @@ function initFormSwitching() {
         const plateInput = document.querySelector('.plate-input');
         const stateSelect = document.querySelector('.state-select');
         
-        if (vinInput) vinInput.value = '';
-        if (plateInput) plateInput.value = '';
-        if (stateSelect) stateSelect.value = '';
+        if (vinInput) {
+            vinInput.value = '';
+            vinInput.focus();
+        }
+        if (plateInput) {
+            plateInput.value = '';
+        }
+        if (stateSelect) {
+            stateSelect.value = '';
+        }
         console.log('All fields cleared');
     }
     
@@ -116,6 +123,15 @@ function initFormSwitching() {
         vinBtn.classList.remove('active');
         plateMode.classList.add('active');
         vinMode.classList.remove('active');
+        
+        // Focus on license plate input after switching
+        setTimeout(function() {
+            const plateInput = document.querySelector('.plate-input');
+            if (plateInput) {
+                plateInput.focus();
+            }
+        }, 100);
+        
         console.log('Switched to Plate mode');
     });
     
@@ -154,13 +170,21 @@ if (document.readyState === 'loading') {
 
 // Also try after a short delay as backup
 setTimeout(function() {
+    console.log('Trying initialization after 1 second...');
     initFormSwitching();
     initInputFormatting();
 }, 1000);
 
 setTimeout(function() {
+    console.log('Trying initialization after 2 seconds...');
     initFormSwitching();
     initInputFormatting();
 }, 2000);
+
+setTimeout(function() {
+    console.log('Trying initialization after 3 seconds...');
+    initFormSwitching();
+    initInputFormatting();
+}, 3000);
 
 const spollerButtons = document.querySelectorAll("[data-spoller] .spollers-faq__button");
