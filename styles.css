@@ -2656,13 +2656,13 @@ button[type="submit"],
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .comparison-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
+    gap: 6px;
 }
 
 .comparison-row.header-row {
@@ -2968,11 +2968,11 @@ button[type="submit"],
     
     .comparison-table {
         padding: 8px;
-        gap: 6px;
+        gap: 4px;
     }
     
     .comparison-row {
-        gap: 6px;
+        gap: 4px;
     }
     
     .comparison-right {
