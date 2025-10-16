@@ -2048,6 +2048,22 @@ button[type="submit"],
     border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
+.review-stars {
+    order: 1;
+}
+
+.review-author {
+    order: 2;
+    border-top: none;
+    padding-top: 0;
+    margin-bottom: 10px;
+}
+
+.review-text {
+    order: 3;
+    flex-grow: 1;
+}
+
 .review-content:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -2056,7 +2072,8 @@ button[type="submit"],
 .review-stars {
     display: flex;
     gap: 3px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    order: 1;
 }
 
 .review-stars .star {
@@ -2072,13 +2089,16 @@ button[type="submit"],
     line-height: 1.5;
     color: #333;
     font-style: italic;
-    margin-bottom: 15px;
+    margin-bottom: 0;
     flex-grow: 1;
+    order: 3;
 }
 
 .review-author {
-    border-top: 1px solid #eee;
-    padding-top: 15px;
+    border-top: none;
+    padding-top: 0;
+    margin-bottom: 15px;
+    order: 2;
 }
 
 .author-name {
