@@ -187,4 +187,106 @@ setTimeout(function() {
     initInputFormatting();
 }, 3000);
 
+// Reviews Carousel Functionality
+function initReviewsCarousel() {
+    console.log('Initializing reviews carousel...');
+    
+    const track = document.querySelector('.reviews-track');
+    const cards = document.querySelectorAll('.review-card');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    
+    if (!track || !cards.length || !dots.length) {
+        console.error('Reviews carousel elements not found');
+        return;
+    }
+    
+    let currentIndex = 0;
+    const totalCards = cards.length;
+    let autoSlideInterval;
+    
+    function updateCarousel() {
+        const translateX = -currentIndex * 20; // 20% per card
+        track.style.transform = `translateX(${translateX}%)`;
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+        
+        console.log(`Carousel moved to card ${currentIndex + 1}`);
+    }
+    
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalCards;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        updateCarousel();
+    }
+    
+    function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+    }
+    
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+    }
+    
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', function() {
+        stopAutoSlide();
+        nextSlide();
+        startAutoSlide();
+    });
+    
+    prevBtn.addEventListener('click', function() {
+        stopAutoSlide();
+        prevSlide();
+        startAutoSlide();
+    });
+    
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            stopAutoSlide();
+            goToSlide(index);
+            startAutoSlide();
+        });
+    });
+    
+    // Pause auto-slide on hover
+    const carousel = document.querySelector('.reviews-carousel');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', stopAutoSlide);
+        carousel.addEventListener('mouseleave', startAutoSlide);
+    }
+    
+    // Start auto-slide
+    startAutoSlide();
+    
+    console.log('Reviews carousel initialized successfully');
+}
+
+// Initialize carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initReviewsCarousel();
+});
+
+// Also try after delays as backup
+setTimeout(function() {
+    initReviewsCarousel();
+}, 1000);
+
+setTimeout(function() {
+    initReviewsCarousel();
+}, 2000);
+
 const spollerButtons = document.querySelectorAll("[data-spoller] .spollers-faq__button");
