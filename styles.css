@@ -2903,8 +2903,16 @@ button[type="submit"],
 .comparison-right .search-form-container {
     margin-top: 0;
     flex-shrink: 0;
-    min-height: 150px;
-    height: 150px;
+}
+
+.comparison-right .form-content {
+    min-height: 80px;
+    height: 80px;
+}
+
+.comparison-right .mode-content {
+    min-height: 50px;
+    height: 50px;
 }
 
 /* Fix for form in right column - ensure proper focus */
@@ -2914,6 +2922,8 @@ button[type="submit"],
     border: 2px solid #e5e7eb !important;
     padding: 12px 16px !important;
     border-radius: 8px !important;
+    pointer-events: auto !important;
+    cursor: text !important;
 }
 
 .comparison-right .vin-input:focus,
