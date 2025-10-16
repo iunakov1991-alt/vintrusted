@@ -2307,6 +2307,23 @@ button[type="submit"],
     margin-bottom: 15px;
 }
 
+.subpoint-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.subpoint-logo {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.subpoint-text {
+    flex: 1;
+}
+
 .subpoint h3 {
     font-size: 18px;
     font-weight: 600;
