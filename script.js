@@ -27,6 +27,18 @@ function initTabs() {
             // Add active class to clicked
             btn.classList.add('active');
             document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Add blinking effect to state select when switching to plate tab
+            if (tabName === 'plate') {
+                const stateSelect = document.querySelector(`#${tabName}-tab .state-select`);
+                if (stateSelect) {
+                    stateSelect.classList.add('blinking');
+                    // Stop blinking after 10 seconds
+                    setTimeout(() => {
+                        stateSelect.classList.remove('blinking');
+                    }, 10000);
+                }
+            }
         });
     });
 }
@@ -308,6 +320,18 @@ function initFormModeSwitching() {
                         setTimeout(() => {
                             vinInput.focus();
                         }, 100);
+                    }
+                }
+                
+                // Add blinking effect to state select when switching to plate mode
+                if (mode === 'plate') {
+                    const stateSelect = selectedModeContent.querySelector('.state-select');
+                    if (stateSelect) {
+                        stateSelect.classList.add('blinking');
+                        // Stop blinking after 10 seconds
+                        setTimeout(() => {
+                            stateSelect.classList.remove('blinking');
+                        }, 10000);
                     }
                 }
             }

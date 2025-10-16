@@ -1,0 +1,1 @@
+Add blinking effect to state select fields in all forms when switching to License Plate mode: Thu Oct 16 16:57:14 PDT 2025

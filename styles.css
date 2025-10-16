@@ -2976,6 +2976,17 @@ button[type="submit"],
     height: 50px;
 }
 
+/* Blinking animation for state select */
+@keyframes stateSelectBlink {
+    0% { color: #3B82F6; }
+    50% { color: #EF4444; }
+    100% { color: #3B82F6; }
+}
+
+.state-select.blinking {
+    animation: stateSelectBlink 2s ease-in-out infinite;
+}
+
 /* Copy original form styles from first screen */
 .comparison-right .vin-input {
     flex: 1;
