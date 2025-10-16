@@ -594,24 +594,6 @@ body {
     }
 }
 
-@keyframes blink-caret-line-1 {
-    0%, 2.4s {
-        border-color: #1a1a1a;
-    }
-    2.5s, 100% {
-        border-color: transparent;
-    }
-}
-
-@keyframes blink-caret-line-2 {
-    0%, 2.4s {
-        border-color: #1a1a1a;
-    }
-    2.5s, 100% {
-        border-color: transparent;
-    }
-}
-
 
 .search-btn:hover {
     --gold-start: #3B82F6;
@@ -2253,10 +2235,9 @@ button[type="submit"],
 .title-line-1 {
     display: block;
     overflow: hidden;
-    border-right: 3px solid #1a1a1a;
     white-space: nowrap;
     width: 0;
-    animation: typing-line-1 2.5s steps(25, end), blink-caret-line-1 0.75s step-end infinite;
+    animation: typing-line-1 2.5s steps(25, end);
     animation-delay: 0.5s;
     animation-fill-mode: both;
 }
@@ -2264,10 +2245,9 @@ button[type="submit"],
 .title-line-2 {
     display: block;
     overflow: hidden;
-    border-right: 3px solid #1a1a1a;
     white-space: nowrap;
     width: 0;
-    animation: typing-line-2 2.5s steps(25, end), blink-caret-line-2 0.75s step-end infinite;
+    animation: typing-line-2 2.5s steps(25, end);
     animation-delay: 4s;
     animation-fill-mode: both;
 }
