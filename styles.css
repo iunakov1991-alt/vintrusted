@@ -2771,7 +2771,7 @@ button[type="submit"],
 .feature-cell {
     font-weight: 600;
     color: #333;
-    background: #e9ecef;
+    background: rgba(233, 236, 239, 0.1);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
