@@ -2861,6 +2861,11 @@ button[type="submit"],
     flex-direction: column;
 }
 
+.comparison-right .search-btn {
+    height: 40px !important;
+    box-sizing: border-box !important;
+}
+
 .black-panel {
     background: #1a1a1a;
     border-radius: 15px;
@@ -2871,6 +2876,7 @@ button[type="submit"],
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    min-height: 600px;
 }
 
 .panel-header {
@@ -2906,28 +2912,37 @@ button[type="submit"],
 }
 
 .comparison-right .form-content {
-    min-height: 80px;
-    height: 80px;
+    height: 100px;
 }
 
 .comparison-right .mode-content {
-    min-height: 50px;
-    height: 50px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.comparison-right .mode-content.active {
+    display: flex;
+    align-items: center;
 }
 
 /* Fix for form in right column - ensure proper focus */
 .comparison-right .vin-input,
-.comparison-right .plate-input {
+.comparison-right .plate-input,
+.comparison-right .state-select {
     background: white !important;
     border: 2px solid #e5e7eb !important;
     padding: 12px 16px !important;
     border-radius: 8px !important;
     pointer-events: auto !important;
     cursor: text !important;
+    height: 40px !important;
+    box-sizing: border-box !important;
 }
 
 .comparison-right .vin-input:focus,
-.comparison-right .plate-input:focus {
+.comparison-right .plate-input:focus,
+.comparison-right .state-select:focus {
     outline: none !important;
     border-color: #FF8C00 !important;
     box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1) !important;
