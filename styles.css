@@ -2664,12 +2664,12 @@ button[type="submit"],
 }
 
 .comparison-table {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    border: 1px solid #e5e5e5;
-    padding: 10px;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    border: none;
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -2708,7 +2708,7 @@ button[type="submit"],
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 8px 12px;
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: flex-start;
