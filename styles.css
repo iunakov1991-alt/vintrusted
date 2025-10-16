@@ -2870,11 +2870,11 @@ button[type="submit"],
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .panel-header {
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .panel-title {
@@ -2896,7 +2896,7 @@ button[type="submit"],
     font-size: 0.99rem;
     color: #ccc;
     line-height: 1.4;
-    margin-bottom: 50px;
+    margin-bottom: 0;
     letter-spacing: 0.1em;
 }
 
