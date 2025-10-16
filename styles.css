@@ -2300,23 +2300,24 @@ button[type="submit"],
     animation: fade-in-subpoints 0.5s ease-in-out;
     animation-delay: 7s;
     animation-fill-mode: both;
+    margin-left: 10%;
 }
 
 .subpoint {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .subpoint h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #1a1a1a;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .subpoint p {
-    font-size: 16px;
+    font-size: 14px;
     color: #666;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
 }
 
