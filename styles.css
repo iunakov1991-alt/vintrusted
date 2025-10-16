@@ -2614,7 +2614,7 @@ button[type="submit"],
 /* Comparison Section - Super Compact with Proper Spacing */
 .comparison-section {
     background: #ffffff;
-    padding: 30px 20px;
+    padding: 30% 30% 30px 30%;
     position: relative;
 }
 
@@ -2935,7 +2935,7 @@ button[type="submit"],
 
 @media (max-width: 768px) {
     .comparison-section {
-        padding: 25px 20px;
+        padding: 20% 20% 25px 20%;
     }
     
     .comparison-content {
