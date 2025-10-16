@@ -2639,7 +2639,7 @@ button[type="submit"],
 .comparison-title {
     font-size: 2rem;
     font-weight: 800;
-    color: #1a1a1a;
+    color: #ffffff;
     margin-bottom: 30px;
     line-height: 1.2;
 }
@@ -2658,7 +2658,7 @@ button[type="submit"],
 
 .comparison-subtitle {
     font-size: 1rem;
-    color: #666;
+    color: #ffffff;
     font-weight: 500;
     margin-bottom: 20px;
 }
