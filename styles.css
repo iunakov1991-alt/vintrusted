@@ -2697,15 +2697,33 @@ button[type="submit"],
 }
 
 .feature-cell::before {
-    content: "•";
+    content: "📋";
     position: absolute;
     left: 8px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 1rem;
-    font-weight: bold;
-    color: #10b981;
     line-height: 1;
+}
+
+.feature-cell.vehicle-history::before {
+    content: "📋";
+}
+
+.feature-cell.unlimited-reports::before {
+    content: "🔍";
+}
+
+.feature-cell.free-tools::before {
+    content: "🔧";
+}
+
+.feature-cell.phone-support::before {
+    content: "📞";
+}
+
+.feature-cell.price::before {
+    content: "💰";
 }
 
 .feature-cell:last-child {
