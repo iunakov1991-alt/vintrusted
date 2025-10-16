@@ -2611,7 +2611,7 @@ button[type="submit"],
 /* Comparison Section - Compact Modern Design */
 .comparison-section {
     background: #ffffff;
-    padding: 60px 20px;
+    padding: 60px 45px;
     position: relative;
 }
 
@@ -2936,7 +2936,7 @@ button[type="submit"],
 
 @media (max-width: 768px) {
     .comparison-section {
-        padding: 50px 20px;
+        padding: 50px 45px;
     }
     
     .comparison-content {
