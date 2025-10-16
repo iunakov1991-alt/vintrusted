@@ -291,6 +291,16 @@ function initFormModeSwitching() {
             const selectedModeContent = document.getElementById(`${mode}-mode`);
             if (selectedModeContent) {
                 selectedModeContent.classList.add('active');
+                
+                // Auto-focus VIN input when switching to VIN mode
+                if (mode === 'vin') {
+                    const vinInput = selectedModeContent.querySelector('.vin-input');
+                    if (vinInput) {
+                        setTimeout(() => {
+                            vinInput.focus();
+                        }, 100);
+                    }
+                }
             }
         });
     });

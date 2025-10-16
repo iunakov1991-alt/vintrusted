@@ -1,0 +1,1 @@
+Add auto-focus to VIN input when switching to VIN mode: Thu Oct 16 16:51:39 PDT 2025
