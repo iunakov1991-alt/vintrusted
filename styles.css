@@ -587,6 +587,15 @@ body {
     }
 }
 
+@keyframes typing-line-1 {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
 @keyframes typing-line-2 {
     0% {
         width: 0;
