@@ -2655,12 +2655,14 @@ button[type="submit"],
     margin-bottom: 10px;
 }
 
-.column-header {
-    font-weight: 600;
-    color: #333;
-    text-align: center;
-    padding: 8px 12px;
-    font-size: 0.9rem;
+.column-header.vin-trust-header {
+    color: #22c55e;
+    font-weight: 700;
+}
+
+.column-header.carfax-header {
+    color: #dc2627;
+    font-weight: 700;
 }
 
 .comparison-table {
