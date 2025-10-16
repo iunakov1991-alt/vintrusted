@@ -576,12 +576,14 @@ body {
     z-index: 1;
 }
 
-@keyframes typing-line-1 {
+@keyframes fade-in-subpoints {
     0% {
-        width: 0;
+        opacity: 0;
+        transform: translateY(20px);
     }
     100% {
-        width: 100%;
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -2282,6 +2284,31 @@ button[type="submit"],
     font-size: 18px;
     color: #666;
     line-height: 1.6;
+}
+
+.subpoints {
+    opacity: 0;
+    animation: fade-in-subpoints 0.5s ease-in-out;
+    animation-delay: 7s;
+    animation-fill-mode: both;
+}
+
+.subpoint {
+    margin-bottom: 25px;
+}
+
+.subpoint h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.subpoint p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
 }
 
 .second-screen-image {
