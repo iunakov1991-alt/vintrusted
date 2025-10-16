@@ -2694,17 +2694,19 @@ button[type="submit"],
     display: flex;
     align-items: center;
     gap: 8px;
-    border-radius: 8px;
     padding: 8px 12px;
-    border: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.feature-cell:last-child {
+    border-bottom: none;
 }
 
 .feature-cell .feature-icon {
-    font-size: 1.2rem;
-    color: #22c55e;
+    font-size: 1rem;
     flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
