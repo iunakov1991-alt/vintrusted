@@ -2645,6 +2645,22 @@ button[type="submit"],
     font-size: 1rem;
     color: #666;
     font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.column-headers {
+    display: grid;
+    grid-template-columns: 1fr 0.6fr 0.6fr;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.column-header {
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 0.9rem;
 }
 
 .comparison-table {
