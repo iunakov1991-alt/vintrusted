@@ -15,7 +15,9 @@ body {
     line-height: 1.6;
     color: #1a1a1a;
     background: #ffffff;
-    background-image: url('images/485432f2a3d057e9c4ec868f9ec2f27d.jpg');
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('images/485432f2a3d057e9c4ec868f9ec2f27d.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
