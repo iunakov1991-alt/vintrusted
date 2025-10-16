@@ -2723,7 +2723,7 @@ button[type="submit"],
 }
 
 .feature-cell.price::before {
-    content: "💰";
+    content: "$";
 }
 
 .feature-cell:last-child {
