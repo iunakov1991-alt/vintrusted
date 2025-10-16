@@ -382,5 +382,101 @@
     </script>
     
     <script src="script.js"></script>
+    
+    <!-- Inline form switching script for guaranteed execution -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Inline script: DOM loaded');
+        
+        function initFormSwitchingInline() {
+            console.log('Inline script: Initializing form switching...');
+            
+            const vinBtn = document.querySelector('[data-mode="vin"]');
+            const plateBtn = document.querySelector('[data-mode="plate"]');
+            const vinMode = document.getElementById('vin-mode');
+            const plateMode = document.getElementById('plate-mode');
+            
+            console.log('Inline script: Elements found:', {
+                vinBtn: !!vinBtn,
+                plateBtn: !!plateBtn,
+                vinMode: !!vinMode,
+                plateMode: !!plateMode
+            });
+            
+            if (!vinBtn || !plateBtn || !vinMode || !plateMode) {
+                console.error('Inline script: Required elements not found');
+                return;
+            }
+            
+            // Function to clear all form fields and focus on active input
+            function clearAllFieldsInline(focusField) {
+                const vinInput = document.querySelector('.vin-input');
+                const plateInput = document.querySelector('.plate-input');
+                const stateSelect = document.querySelector('.state-select');
+                
+                if (vinInput) {
+                    vinInput.value = '';
+                }
+                if (plateInput) {
+                    plateInput.value = '';
+                }
+                if (stateSelect) {
+                    stateSelect.value = '';
+                }
+                
+                // Focus on the specified field after clearing
+                if (focusField) {
+                    setTimeout(function() {
+                        focusField.focus();
+                        console.log('Inline script: Focused on field');
+                    }, 50);
+                }
+                
+                console.log('Inline script: All fields cleared');
+            }
+            
+            // VIN button click handler
+            vinBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Inline script: VIN button clicked');
+                const vinInput = document.querySelector('.vin-input');
+                clearAllFieldsInline(vinInput);
+                vinBtn.classList.add('active');
+                plateBtn.classList.remove('active');
+                vinMode.classList.add('active');
+                plateMode.classList.remove('active');
+                console.log('Inline script: Switched to VIN mode');
+            });
+            
+            // Plate button click handler
+            plateBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Inline script: Plate button clicked');
+                const plateInput = document.querySelector('.plate-input');
+                clearAllFieldsInline(plateInput);
+                plateBtn.classList.add('active');
+                vinBtn.classList.remove('active');
+                plateMode.classList.add('active');
+                vinMode.classList.remove('active');
+                console.log('Inline script: Switched to Plate mode');
+            });
+            
+            console.log('Inline script: Form switching initialized successfully');
+        }
+        
+        // Try multiple times to ensure initialization
+        initFormSwitchingInline();
+        
+        setTimeout(function() {
+            console.log('Inline script: Trying again after 500ms...');
+            initFormSwitchingInline();
+        }, 500);
+        
+        setTimeout(function() {
+            console.log('Inline script: Trying again after 1s...');
+            initFormSwitchingInline();
+        }, 1000);
+    });
+    </script>
 </body>
 </html>
