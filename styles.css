@@ -16,7 +16,7 @@ body {
     color: #1a1a1a;
     background: #ffffff;
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
         url('images/485432f2a3d057e9c4ec868f9ec2f27d.jpg');
     background-size: cover;
     background-position: center center;
@@ -2639,7 +2639,7 @@ button[type="submit"],
 .comparison-title {
     font-size: 2rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #ffffff !important;
     margin-bottom: 30px;
     line-height: 1.2;
 }
@@ -2658,7 +2658,7 @@ button[type="submit"],
 
 .comparison-subtitle {
     font-size: 1rem;
-    color: #ffffff;
+    color: #ffffff !important;
     font-weight: 500;
     margin-bottom: 20px;
 }
