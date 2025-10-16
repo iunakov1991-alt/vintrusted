@@ -2703,7 +2703,9 @@ button[type="submit"],
 }
 
 .feature-cell .feature-icon {
-    font-size: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #10b981;
     flex-shrink: 0;
 }
 
