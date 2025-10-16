@@ -2687,17 +2687,27 @@ button[type="submit"],
 .feature-cell {
     font-weight: 600;
     color: #333;
-    background: #e9ecef;
+    background: #f8f9fa;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    border: 1px solid #e9ecef;
 }
 
 .feature-cell .feature-icon {
-    font-size: 0.9rem;
-    margin-right: 4px;
-    vertical-align: middle;
-    display: inline-block;
+    font-size: 1.2rem;
+    color: #22c55e;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .vin-trust-cell {
