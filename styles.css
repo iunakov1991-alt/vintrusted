@@ -2624,6 +2624,11 @@ button[type="submit"],
     margin: 0 auto;
 }
 
+.comparison-full-header {
+    grid-column: 1;
+    margin-bottom: 30px;
+}
+
 /* Left Column: Comparison Table */
 .comparison-left {
     background: transparent;
