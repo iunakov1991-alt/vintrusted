@@ -2627,6 +2627,7 @@ button[type="submit"],
 
 .comparison-left {
     background: white;
+    padding-left: 20px;
 }
 
 .comparison-header {
@@ -2928,8 +2929,8 @@ button[type="submit"],
         gap: 20px;
     }
     
-    .comparison-right {
-        order: -1;
+    .comparison-left {
+        padding-left: 20px;
     }
 }
 
