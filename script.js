@@ -297,7 +297,7 @@ function initFormModeSwitching() {
             formModeContent.forEach(content => content.classList.remove('active'));
             
             // Show selected mode content
-            const selectedModeContent = document.getElementById(`${mode}-mode`);
+            const selectedModeContent = document.getElementById(`comparison-${mode}-mode`);
             if (selectedModeContent && selectedModeContent.closest('.comparison-right')) {
                 selectedModeContent.classList.add('active');
                 
