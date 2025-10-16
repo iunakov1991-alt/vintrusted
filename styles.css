@@ -1917,8 +1917,8 @@ button[type="submit"],
 /* Responsive */
 /* Reviews Section */
 .reviews-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 100px 0;
+    background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 50%, #1d4ed8 100%);
+    padding: 80px 0;
     position: relative;
     overflow: hidden;
 }
@@ -1944,17 +1944,14 @@ button[type="submit"],
 .reviews-title {
     font-size: 3rem;
     font-weight: 800;
-    color: #1a1a1a;
+    color: #ffffff;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .reviews-subtitle {
     font-size: 1.2rem;
-    color: #666;
+    color: #e0e7ff;
     margin-bottom: 30px;
     font-weight: 500;
 }
@@ -1998,36 +1995,39 @@ button[type="submit"],
 .rating-text {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #333;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .reviews-carousel {
     position: relative;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     overflow: hidden;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
 .reviews-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    width: 500%;
+    width: 100%;
+    gap: 20px;
 }
 
 .review-card {
     width: 20%;
-    padding: 0 20px;
+    padding: 0 10px;
     box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 .review-content {
     background: white;
-    padding: 40px 30px;
+    padding: 25px 20px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    height: 280px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -2052,28 +2052,28 @@ button[type="submit"],
 }
 
 .review-text {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 0.95rem;
+    line-height: 1.5;
     color: #333;
     font-style: italic;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     flex-grow: 1;
 }
 
 .review-author {
     border-top: 1px solid #eee;
-    padding-top: 20px;
+    padding-top: 15px;
 }
 
 .author-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #1a1a1a;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .author-location {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
     font-weight: 500;
 }
@@ -2168,14 +2168,17 @@ button[type="submit"],
         font-size: 1.5rem;
     }
     
+    .reviews-track {
+        gap: 15px;
+    }
+    
     .review-content {
-        padding: 25px 20px;
-        height: auto;
-        min-height: 250px;
+        padding: 20px 15px;
+        height: 180px;
     }
     
     .review-text {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     
     .carousel-btn {

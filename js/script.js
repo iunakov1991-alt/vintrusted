@@ -207,7 +207,8 @@ function initReviewsCarousel() {
     let autoSlideInterval;
     
     function updateCarousel() {
-        const translateX = -currentIndex * 20; // 20% per card
+        // Since all cards are visible, we'll cycle through them by moving the track
+        const translateX = -currentIndex * (100 / totalCards); // Move by card width
         track.style.transform = `translateX(${translateX}%)`;
         
         // Update dots
@@ -234,7 +235,7 @@ function initReviewsCarousel() {
     }
     
     function startAutoSlide() {
-        autoSlideInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+        autoSlideInterval = setInterval(nextSlide, 2500); // Change slide every 2.5 seconds
     }
     
     function stopAutoSlide() {
