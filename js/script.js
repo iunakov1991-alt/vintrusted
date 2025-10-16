@@ -31,17 +31,34 @@ spollerButtons.forEach((button) => {
 
 // Auto-uppercase and color input functionality
 function initInputFormatting() {
+    console.log('Initializing input formatting...');
+    
     const vinInput = document.querySelector('.vin-input');
     const plateInput = document.querySelector('.plate-input');
     
+    console.log('Input elements found:', {
+        vinInput: !!vinInput,
+        plateInput: !!plateInput
+    });
+    
     if (vinInput) {
         vinInput.addEventListener('input', function(e) {
+            console.log('VIN input event:', e.target.value);
+            e.target.value = e.target.value.toUpperCase();
+        });
+        
+        vinInput.addEventListener('keyup', function(e) {
             e.target.value = e.target.value.toUpperCase();
         });
     }
     
     if (plateInput) {
         plateInput.addEventListener('input', function(e) {
+            console.log('Plate input event:', e.target.value);
+            e.target.value = e.target.value.toUpperCase();
+        });
+        
+        plateInput.addEventListener('keyup', function(e) {
             e.target.value = e.target.value.toUpperCase();
         });
     }
@@ -122,6 +139,14 @@ if (document.readyState === 'loading') {
 }
 
 // Also try after a short delay as backup
-setTimeout(initFormSwitching, 1000);
+setTimeout(function() {
+    initFormSwitching();
+    initInputFormatting();
+}, 1000);
+
+setTimeout(function() {
+    initFormSwitching();
+    initInputFormatting();
+}, 2000);
 
 const spollerButtons = document.querySelectorAll("[data-spoller] .spollers-faq__button");

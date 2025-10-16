@@ -497,7 +497,7 @@ body {
 .state-select {
     background: transparent;
     border: none;
-    color: #2C2C2C;
+    color: #228B22;
     font-size: 16px;
     font-weight: bold;
     font-style: italic;
@@ -509,7 +509,7 @@ body {
 
 .state-select option {
     background: #F5F5DC;
-    color: #2C2C2C;
+    color: #228B22;
     font-weight: bold;
     font-style: italic;
 }
