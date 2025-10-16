@@ -2626,7 +2626,7 @@ button[type="submit"],
 
 /* Left Column: Comparison Table */
 .comparison-left {
-    background: white;
+    background: transparent;
 }
 
 .comparison-header {
