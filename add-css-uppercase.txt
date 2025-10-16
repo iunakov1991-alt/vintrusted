@@ -1,0 +1,1 @@
+Add CSS text-transform uppercase and inline styles for reliable auto-caps: Wed Oct 15 17:32:47 PDT 2025

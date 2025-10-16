@@ -486,6 +486,7 @@ body {
     font-style: italic;
     padding: 0;
     outline: none;
+    text-transform: uppercase;
 }
 
 .vin-input::placeholder {
@@ -524,6 +525,7 @@ body {
     font-style: italic;
     padding: 0;
     outline: none;
+    text-transform: uppercase;
 }
 
 .plate-input::placeholder {
