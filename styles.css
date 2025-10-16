@@ -2939,6 +2939,8 @@ button[type="submit"],
 .comparison-right .search-form-container {
     margin-top: 0;
     flex-shrink: 0;
+    width: 100%;
+    min-width: 400px;
 }
 
 .comparison-right .search-form {
@@ -2964,10 +2966,14 @@ button[type="submit"],
     flex: 1;
     gap: 15px;
     align-items: center;
+    min-height: 50px;
+    height: 50px;
 }
 
 .comparison-right .mode-content.active {
     display: flex;
+    min-height: 50px;
+    height: 50px;
 }
 
 /* Copy original form styles from first screen */
@@ -2984,6 +2990,8 @@ button[type="submit"],
     text-transform: uppercase;
     pointer-events: auto;
     cursor: text;
+    min-width: 200px;
+    width: 200px;
 }
 
 .comparison-right .vin-input::placeholder {
@@ -3005,6 +3013,8 @@ button[type="submit"],
     text-transform: uppercase;
     pointer-events: auto;
     cursor: text;
+    min-width: 150px;
+    width: 150px;
 }
 
 .comparison-right .plate-input::placeholder {
@@ -3025,6 +3035,8 @@ button[type="submit"],
     outline: none;
     pointer-events: auto;
     cursor: pointer;
+    min-width: 120px;
+    width: 120px;
 }
 
 .comparison-right .state-select option {

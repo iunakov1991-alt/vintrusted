@@ -1,0 +1,1 @@
+Fix VIN field size and cursor - make fixed size for both modes: Thu Oct 16 16:48:53 PDT 2025
