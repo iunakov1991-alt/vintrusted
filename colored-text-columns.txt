@@ -1,0 +1,1 @@
+Make VIN TRUST and Carfax columns just colored text without cell backgrounds: Thu Oct 16 04:34:17 PDT 2025
