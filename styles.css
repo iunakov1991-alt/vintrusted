@@ -2611,66 +2611,48 @@ button[type="submit"],
 }
 
 
-/* Comparison Section */
+/* Comparison Section - Compact Layout */
 .comparison-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 100px 0;
+    background: #ffffff;
+    padding: 80px 0;
     position: relative;
-    overflow: hidden;
 }
 
-.comparison-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23e0e0e0" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-    opacity: 0.3;
-    z-index: 1;
+.comparison-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.comparison-left {
+    background: white;
 }
 
 .comparison-header {
-    text-align: center;
-    margin-bottom: 60px;
-    position: relative;
-    z-index: 2;
+    margin-bottom: 30px;
 }
 
 .comparison-title {
-    font-size: 3rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.comparison-subtitle {
-    font-size: 1.2rem;
-    color: #666;
-    font-weight: 500;
-    max-width: 600px;
-    margin: 0 auto;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.5;
+    margin: 0;
 }
 
 .comparison-table {
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    margin-bottom: 60px;
-    position: relative;
-    z-index: 2;
+    border: 1px solid #e5e5e5;
 }
 
 .comparison-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .comparison-row:last-child {
@@ -2678,251 +2660,315 @@ button[type="submit"],
 }
 
 .comparison-row.header-row {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-    color: white;
+    background: #f8f9fa;
     font-weight: 700;
+    color: #333;
 }
 
 .comparison-cell {
-    padding: 25px 30px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.1rem;
-}
-
-.feature-cell {
-    font-weight: 600;
-    color: #333;
-    background: #f8f9fa;
-    border-right: 1px solid #eee;
-}
-
-.vin-trust-cell {
-    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-    border-right: 1px solid #eee;
-}
-
-.carfax-cell {
-    background: #fff;
-}
-
-.service-logo {
+    padding: 20px 25px;
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 1rem;
 }
 
-.logo-img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-
-.service-name {
-    font-weight: 700;
-    font-size: 1.2rem;
-}
-
-.price-highlight {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #22c55e;
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.price-regular {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #ef4444;
-}
-
-.price-note {
-    font-size: 0.9rem;
-    color: #666;
+.feature-cell {
     font-weight: 500;
+    color: #333;
+    background: white;
+    border-right: 1px solid #f0f0f0;
+}
+
+.vin-trust-cell {
+    background: #f0f8ff;
+    border-right: 1px solid #f0f0f0;
+}
+
+.carfax-cell {
+    background: #fff5f5;
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+    margin-right: 8px;
 }
 
 .check-mark {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #22c55e;
     font-weight: 800;
 }
 
 .cross-mark {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #ef4444;
     font-weight: 800;
 }
 
-.feature-text {
-    font-weight: 500;
-    color: #333;
+.price-highlight {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #22c55e;
 }
 
-.comparison-summary {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    position: relative;
-    z-index: 2;
+.price-regular {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ef4444;
 }
 
-.summary-card {
-    background: white;
+/* Right Column: Search Form */
+.comparison-right {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
     border-radius: 20px;
     padding: 40px 30px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-.vin-trust-summary {
-    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
-    border: 3px solid #3b82f6;
+.search-promo {
+    position: relative;
+    z-index: 2;
 }
 
-.carfax-summary {
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-    border: 3px solid #ef4444;
-}
-
-.summary-card h3 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    color: #1a1a1a;
-}
-
-.summary-price {
+.promo-title {
     font-size: 3rem;
     font-weight: 900;
-    margin-bottom: 10px;
-}
-
-.vin-trust-summary .summary-price {
-    color: #22c55e;
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.carfax-summary .summary-price {
-    color: #ef4444;
-}
-
-.summary-period {
-    font-size: 1.1rem;
-    color: #666;
+    color: #ffd700;
+    text-align: center;
     margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.feature-item .feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.feature-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+}
+
+.search-form-compact {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.search-mode {
+    margin-bottom: 20px;
+}
+
+.mode-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.mode-options {
+    display: flex;
+    gap: 20px;
+}
+
+.mode-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.mode-option input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.mode-option input[type="radio"]:checked + .radio-custom {
+    border-color: #ffd700;
+    background: #ffd700;
+}
+
+.mode-option input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+}
+
+.mode-text {
+    font-size: 1rem;
     font-weight: 500;
+    color: #333;
 }
 
-.summary-features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 30px 0;
+.search-input-group {
+    display: flex;
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #e9ecef;
+    transition: border-color 0.3s ease;
 }
 
-.summary-features li {
-    padding: 8px 0;
+.search-input-group:focus-within {
+    border-color: #ffd700;
+}
+
+.search-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    background: transparent;
     font-size: 1rem;
     color: #333;
-    font-weight: 500;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.search-button {
+    background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+    border: none;
+    padding: 15px 25px;
+    color: #333;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+    transform: translateY(-2px);
+}
+
+.search-icon {
+    font-size: 1.1rem;
+}
+
+.promo-image {
+    text-align: center;
+}
+
+.accident-image {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
     position: relative;
-    padding-left: 25px;
+    overflow: hidden;
 }
 
-.summary-features li::before {
-    content: '✓';
+.accident-image::before {
+    content: '🚗';
     position: absolute;
-    left: 0;
-    color: #22c55e;
-    font-weight: 800;
+    top: 20px;
+    left: 30px;
+    font-size: 3rem;
+    opacity: 0.8;
 }
 
-.carfax-summary .summary-features li::before {
-    content: '✗';
-    color: #ef4444;
+.accident-image::after {
+    content: '💥';
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 3rem;
+    opacity: 0.8;
 }
 
-.savings-badge {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 1rem;
-    display: inline-block;
-    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+/* Responsive Design for Compact Comparison */
+@media (max-width: 1024px) {
+    .comparison-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .comparison-right {
+        order: -1;
+    }
 }
 
-.expensive-badge {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 1rem;
-    display: inline-block;
-    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-}
-
-/* Responsive Design for Comparison */
 @media (max-width: 768px) {
     .comparison-section {
         padding: 60px 0;
     }
     
+    .comparison-content {
+        gap: 30px;
+    }
+    
     .comparison-title {
-        font-size: 2rem;
-    }
-    
-    .comparison-subtitle {
-        font-size: 1rem;
-    }
-    
-    .comparison-table {
-        margin-bottom: 40px;
-    }
-    
-    .comparison-row {
-        grid-template-columns: 1fr;
-        gap: 0;
+        font-size: 1.2rem;
     }
     
     .comparison-cell {
         padding: 15px 20px;
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     
-    .feature-cell {
-        border-right: none;
-        border-bottom: 1px solid #eee;
-        font-weight: 700;
-        background: #f0f0f0;
-    }
-    
-    .vin-trust-cell,
-    .carfax-cell {
-        border-right: none;
-    }
-    
-    .comparison-summary {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .summary-card {
+    .comparison-right {
         padding: 30px 20px;
     }
     
-    .summary-price {
+    .promo-title {
         font-size: 2.5rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .search-form-compact {
+        padding: 20px;
+    }
+    
+    .mode-options {
+        gap: 15px;
     }
 }
