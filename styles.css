@@ -2693,6 +2693,14 @@ button[type="submit"],
     color: #22c55e;
 }
 
+.cell-label {
+    font-weight: 700;
+    color: #333;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
 .column-header.vin-trust-header {
     /* Color handled by .header-text */
 }
