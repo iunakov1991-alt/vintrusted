@@ -2882,6 +2882,7 @@ button[type="submit"],
     font-size: 0.9rem;
     color: #ccc;
     line-height: 1.4;
+    margin-bottom: 20px;
 }
 
 .comparison-right .search-form-container {
