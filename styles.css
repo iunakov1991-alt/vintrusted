@@ -2689,6 +2689,9 @@ button[type="submit"],
     color: #333;
     background: #f8f9fa;
     border: 1px solid #e9ecef;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .vin-trust-cell {
