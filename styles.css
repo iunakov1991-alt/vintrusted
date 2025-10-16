@@ -2666,11 +2666,11 @@ button[type="submit"],
 }
 
 .comparison-row.header-row {
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    background: transparent;
     color: #333;
-    font-weight: 800;
-    border-radius: 8px;
-    padding: 6px;
+    font-weight: 600;
+    border-radius: 0;
+    padding: 0;
 }
 
 .comparison-cell {
