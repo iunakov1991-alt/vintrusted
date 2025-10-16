@@ -2705,13 +2705,13 @@ button[type="submit"],
 
 .check-mark {
     font-size: 1.2rem;
-    color: #ffffff;
+    color: #10b981;
     font-weight: 800;
 }
 
 .cross-mark {
     font-size: 1.2rem;
-    color: #ffffff;
+    color: #ef4444;
     font-weight: 800;
 }
 
