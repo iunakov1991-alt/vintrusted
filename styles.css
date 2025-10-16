@@ -850,7 +850,7 @@ button[type="submit"],
 }
 
 .comparison-header {
-    background: #f8fafc;
+    background: transparent;
     font-weight: 700;
 }
 
