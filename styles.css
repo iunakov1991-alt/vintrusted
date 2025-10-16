@@ -2669,7 +2669,7 @@ button[type="submit"],
     background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
     color: #333;
     font-weight: 800;
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 6px;
 }
 
@@ -2679,7 +2679,7 @@ button[type="submit"],
     align-items: center;
     gap: 6px;
     font-size: 0.8rem;
-    border-radius: 15px;
+    border-radius: 8px;
     margin: 0;
     min-height: 32px;
 }
