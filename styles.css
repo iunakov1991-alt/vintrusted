@@ -2851,6 +2851,38 @@ button[type="submit"],
     box-shadow: none;
 }
 
+.black-panel {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 30px 25px;
+    color: white;
+    text-align: center;
+}
+
+.panel-header {
+    margin-bottom: 20px;
+}
+
+.panel-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.panel-price {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.panel-features {
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.4;
+}
+
 .form-panel {
     position: relative;
     z-index: 2;
