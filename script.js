@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPricingVinForm();
     initLogoScroll();
     initInputFocus();
+    initFormModeSwitching();
 });
 
 // Tab Switching
@@ -266,4 +267,31 @@ function initInputFocus() {
             }
         });
     }
+}
+
+// Form Mode Switching
+function initFormModeSwitching() {
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    
+    modeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const mode = button.getAttribute('data-mode');
+            
+            // Remove active class from all buttons
+            modeButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Hide all mode content
+            const allModeContent = document.querySelectorAll('.mode-content');
+            allModeContent.forEach(content => content.classList.remove('active'));
+            
+            // Show selected mode content
+            const selectedModeContent = document.getElementById(`${mode}-mode`);
+            if (selectedModeContent) {
+                selectedModeContent.classList.add('active');
+            }
+        });
+    });
 }
