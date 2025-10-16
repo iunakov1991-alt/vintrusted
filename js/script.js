@@ -85,8 +85,8 @@ function initFormSwitching() {
         return;
     }
     
-    // Function to clear all form fields
-    function clearAllFields() {
+    // Function to clear all form fields and focus on active input
+    function clearAllFields(focusField) {
         const vinInput = document.querySelector('.vin-input');
         const plateInput = document.querySelector('.plate-input');
         const stateSelect = document.querySelector('.state-select');
@@ -100,13 +100,22 @@ function initFormSwitching() {
         if (stateSelect) {
             stateSelect.value = '';
         }
+        
+        // Focus on the specified field after clearing
+        if (focusField) {
+            setTimeout(function() {
+                focusField.focus();
+            }, 50);
+        }
+        
         console.log('All fields cleared');
     }
     
     // VIN button click handler
     vinBtn.addEventListener('click', function() {
         console.log('VIN button clicked');
-        clearAllFields(); // Clear all fields when switching to VIN mode
+        const vinInput = document.querySelector('.vin-input');
+        clearAllFields(vinInput); // Clear all fields and focus on VIN input
         vinBtn.classList.add('active');
         plateBtn.classList.remove('active');
         vinMode.classList.add('active');
@@ -117,7 +126,8 @@ function initFormSwitching() {
     // Plate button click handler
     plateBtn.addEventListener('click', function() {
         console.log('Plate button clicked');
-        clearAllFields(); // Clear all fields when switching to Plate mode
+        const plateInput = document.querySelector('.plate-input');
+        clearAllFields(plateInput); // Clear all fields and focus on Plate input
         plateBtn.classList.add('active');
         vinBtn.classList.remove('active');
         plateMode.classList.add('active');
