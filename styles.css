@@ -2691,23 +2691,27 @@ button[type="submit"],
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 8px 12px;
+    padding: 8px 12px 8px 24px;
     border-bottom: 1px solid #e9ecef;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    position: relative;
+}
+
+.feature-cell::before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    font-weight: bold;
+    color: #10b981;
+    line-height: 1;
 }
 
 .feature-cell:last-child {
     border-bottom: none;
 }
 
-.feature-cell .feature-icon {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #10b981;
-    flex-shrink: 0;
-}
 
 .vin-trust-cell {
     background: linear-gradient(135deg, rgba(34, 197, 94, 0.5) 0%, rgba(22, 163, 74, 0.5) 100%);
