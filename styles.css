@@ -2693,6 +2693,9 @@ button[type="submit"],
     text-overflow: ellipsis;
     padding: 8px 12px;
     border-bottom: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .feature-cell:last-child {
@@ -2700,10 +2703,8 @@ button[type="submit"],
 }
 
 .feature-cell .feature-icon {
-    font-size: 1rem;
-    margin-right: 6px;
-    vertical-align: middle;
-    line-height: 1;
+    font-size: 0.8rem;
+    flex-shrink: 0;
 }
 
 .vin-trust-cell {
