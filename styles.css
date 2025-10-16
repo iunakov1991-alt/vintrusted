@@ -2883,6 +2883,7 @@ button[type="submit"],
     color: #ccc;
     line-height: 1.4;
     margin-bottom: 50px;
+    letter-spacing: 0.1em;
 }
 
 .comparison-right .search-form-container {
