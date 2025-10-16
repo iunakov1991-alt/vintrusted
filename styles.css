@@ -2696,6 +2696,8 @@ button[type="submit"],
 .feature-cell .feature-icon {
     font-size: 0.8rem;
     margin-right: 4px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .vin-trust-cell {
