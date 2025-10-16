@@ -2624,14 +2624,17 @@ button[type="submit"],
     margin: 0 auto;
 }
 
-.comparison-full-header {
-    grid-column: 1;
-    margin-bottom: 30px;
-}
-
-/* Left Column: Comparison Table */
+/* Left Column: Header + Table */
 .comparison-left {
     background: transparent;
+}
+
+.comparison-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+    line-height: 1.2;
 }
 
 .comparison-header {
