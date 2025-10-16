@@ -2670,17 +2670,18 @@ button[type="submit"],
     color: #333;
     font-weight: 800;
     border-radius: 15px;
-    padding: 8px;
+    padding: 6px;
 }
 
 .comparison-cell {
-    padding: 10px 14px;
+    padding: 6px 14px;
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 0.8rem;
     border-radius: 15px;
     margin: 0;
+    min-height: 32px;
 }
 
 .feature-cell {
@@ -2957,8 +2958,9 @@ button[type="submit"],
     }
     
     .comparison-cell {
-        padding: 8px 12px;
+        padding: 4px 12px;
         font-size: 0.75rem;
+        min-height: 28px;
     }
     
     .comparison-table {
