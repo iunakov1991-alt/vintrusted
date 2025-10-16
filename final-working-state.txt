@@ -1,0 +1,1 @@
+Final working state - VIN field fixed size and cursor working: Thu Oct 16 16:49:39 PDT 2025
