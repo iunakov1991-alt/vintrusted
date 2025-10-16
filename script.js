@@ -274,22 +274,31 @@ function initFormModeSwitching() {
     const modeButtons = document.querySelectorAll('.mode-btn');
     
     modeButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
             const mode = button.getAttribute('data-mode');
             
-            // Remove active class from all buttons
-            modeButtons.forEach(btn => btn.classList.remove('active'));
+            // Only work with buttons in comparison section
+            if (!button.closest('.comparison-right')) {
+                return;
+            }
+            
+            // Remove active class from all buttons in this form
+            const formButtons = button.closest('.search-form-container').querySelectorAll('.mode-btn');
+            formButtons.forEach(btn => btn.classList.remove('active'));
             
             // Add active class to clicked button
             button.classList.add('active');
             
-            // Hide all mode content
-            const allModeContent = document.querySelectorAll('.mode-content');
-            allModeContent.forEach(content => content.classList.remove('active'));
+            // Hide all mode content in this form
+            const formModeContent = button.closest('.search-form-container').querySelectorAll('.mode-content');
+            formModeContent.forEach(content => content.classList.remove('active'));
             
             // Show selected mode content
             const selectedModeContent = document.getElementById(`${mode}-mode`);
-            if (selectedModeContent) {
+            if (selectedModeContent && selectedModeContent.closest('.comparison-right')) {
                 selectedModeContent.classList.add('active');
                 
                 // Auto-focus VIN input when switching to VIN mode
