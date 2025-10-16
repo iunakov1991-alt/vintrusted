@@ -204,28 +204,29 @@ function initReviewsCarousel() {
     
     let currentIndex = 0;
     const totalCards = cards.length;
+    const totalSets = Math.ceil(totalCards / 5); // 8 sets of 5 cards each
     let autoSlideInterval;
     
     function updateCarousel() {
-        // Since all cards are visible, we'll cycle through them by moving the track
-        const translateX = -currentIndex * (100 / totalCards); // Move by card width
+        // Move the track to show the current set of 5 cards
+        const translateX = -currentIndex * 20; // Move by 20% per set of 5 cards
         track.style.transform = `translateX(${translateX}%)`;
         
-        // Update dots
+        // Update dots (only show dots for visible sets)
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === currentIndex);
         });
         
-        console.log(`Carousel moved to card ${currentIndex + 1}`);
+        console.log(`Carousel moved to set ${currentIndex + 1}`);
     }
     
     function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalCards;
+        currentIndex = (currentIndex + 1) % totalSets;
         updateCarousel();
     }
     
     function prevSlide() {
-        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+        currentIndex = (currentIndex - 1 + totalSets) % totalSets;
         updateCarousel();
     }
     

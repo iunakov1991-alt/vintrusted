@@ -1970,7 +1970,10 @@ button[type="submit"],
 
 .star {
     font-size: 2rem;
-    color: #FFD700;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
     animation: star-glow 2s ease-in-out infinite alternate;
 }
@@ -2048,7 +2051,10 @@ button[type="submit"],
 
 .review-stars .star {
     font-size: 1.2rem;
-    color: #FFD700;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .review-text {
