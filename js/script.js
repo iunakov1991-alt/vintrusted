@@ -29,6 +29,24 @@ spollerButtons.forEach((button) => {
   });
 });
 
+// Auto-uppercase and color input functionality
+function initInputFormatting() {
+    const vinInput = document.querySelector('.vin-input');
+    const plateInput = document.querySelector('.plate-input');
+    
+    if (vinInput) {
+        vinInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+    }
+    
+    if (plateInput) {
+        plateInput.addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+    }
+}
+
 // Form mode switching functionality - Simple and reliable version
 function initFormSwitching() {
     console.log('Initializing form switching...');
@@ -94,9 +112,13 @@ function initFormSwitching() {
 
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFormSwitching);
+    document.addEventListener('DOMContentLoaded', function() {
+        initFormSwitching();
+        initInputFormatting();
+    });
 } else {
     initFormSwitching();
+    initInputFormatting();
 }
 
 // Also try after a short delay as backup

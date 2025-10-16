@@ -1,0 +1,1 @@
+Add auto-uppercase and forest green color for VIN and license plate inputs: Wed Oct 15 17:30:04 PDT 2025
