@@ -2015,14 +2015,15 @@ button[type="submit"],
     display: flex;
     width: 200%;
     gap: 20px;
-    animation: scroll-reviews 60s linear infinite;
+    animation: scroll-reviews 30s linear infinite;
 }
 
-.review-card {
-    width: 2.5%;
-    padding: 0 10px;
-    box-sizing: border-box;
-    flex-shrink: 0;
+.review-card:nth-child(n+6):nth-child(-n+10) {
+    display: flex;
+}
+
+.review-card:nth-child(n+11) {
+    display: none;
 }
 
 @keyframes scroll-reviews {
