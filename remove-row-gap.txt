@@ -1,0 +1,1 @@
+Remove gap between rows to eliminate black lines under cells: Thu Oct 16 04:31:23 PDT 2025
