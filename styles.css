@@ -2693,12 +2693,19 @@ button[type="submit"],
     color: #22c55e;
 }
 
-.cell-label {
+.table-labels {
+    display: grid;
+    grid-template-columns: 1fr 0.6fr 0.6fr;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.table-label {
     font-weight: 700;
     color: #333;
     font-size: 0.9rem;
-    margin-bottom: 4px;
     text-align: center;
+    padding: 4px 0;
 }
 
 .column-header.vin-trust-header {
