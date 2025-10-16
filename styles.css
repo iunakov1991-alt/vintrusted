@@ -2672,13 +2672,13 @@ button[type="submit"],
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0;
 }
 
 .comparison-row {
     display: grid;
     grid-template-columns: 1fr 0.6fr 0.6fr;
-    gap: 6px;
+    gap: 0;
 }
 
 .comparison-row.header-row {
