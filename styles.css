@@ -832,11 +832,6 @@ button[type="submit"],
     font-weight: 600;
 }
 
-/* Comparison Section */
-.comparison {
-    padding: 100px 0;
-    background: #ffffff;
-}
 
 .comparison-table {
     max-width: 800px;
@@ -2611,12 +2606,6 @@ button[type="submit"],
 }
 
 
-/* Comparison Section - Super Compact with Proper Spacing */
-.comparison-section {
-    background: #ffffff;
-    padding: 30% 30% 30px 30%;
-    position: relative;
-}
 
 .comparison-content {
     display: grid;
@@ -2921,17 +2910,6 @@ button[type="submit"],
     opacity: 0.8;
 }
 
-/* Responsive Design for Super Compact Comparison */
-@media (max-width: 1024px) {
-    .comparison-content {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .comparison-right {
-        order: -1;
-    }
-}
 
 @media (max-width: 768px) {
     .comparison-section {
