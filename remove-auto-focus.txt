@@ -1,0 +1,1 @@
+Remove auto-focus and keep only field clearing when switching modes: Wed Oct 15 17:44:04 PDT 2025

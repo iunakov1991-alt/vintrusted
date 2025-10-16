@@ -93,7 +93,6 @@ function initFormSwitching() {
         
         if (vinInput) {
             vinInput.value = '';
-            vinInput.focus();
         }
         if (plateInput) {
             plateInput.value = '';
@@ -123,15 +122,6 @@ function initFormSwitching() {
         vinBtn.classList.remove('active');
         plateMode.classList.add('active');
         vinMode.classList.remove('active');
-        
-        // Focus on license plate input after switching
-        setTimeout(function() {
-            const plateInput = document.querySelector('.plate-input');
-            if (plateInput) {
-                plateInput.focus();
-            }
-        }, 100);
-        
         console.log('Switched to Plate mode');
     });
     
