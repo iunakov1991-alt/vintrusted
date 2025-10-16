@@ -2691,7 +2691,7 @@ button[type="submit"],
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 8px 12px 8px 12px;
+    padding: 8px 12px 8px 8px;
     border-bottom: 1px solid #e9ecef;
     position: relative;
     text-align: left;
@@ -2700,7 +2700,7 @@ button[type="submit"],
 .feature-cell::before {
     content: "📋";
     position: absolute;
-    left: 8px;
+    left: 4px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 1rem;
