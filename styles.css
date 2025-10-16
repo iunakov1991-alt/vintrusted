@@ -2691,9 +2691,10 @@ button[type="submit"],
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 8px 12px 8px 24px;
+    padding: 8px 12px 8px 20px;
     border-bottom: 1px solid #e9ecef;
     position: relative;
+    text-align: left;
 }
 
 .feature-cell::before {
