@@ -643,11 +643,11 @@ body {
 
 /* VIN Input Validation */
 .vin-input:invalid {
-    color: #ff6b6b;
+    color: #36454F !important;
 }
 
 .vin-input:valid {
-    color: #51cf66;
+    color: #36454F !important;
 }
 
 button[type="submit"],
