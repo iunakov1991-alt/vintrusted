@@ -2883,6 +2883,115 @@ button[type="submit"],
     line-height: 1.4;
 }
 
+.comparison-right .search-form-container {
+    margin-top: 25px;
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-right .mode-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.comparison-right .mode-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.comparison-right .mode-btn.active {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    border-color: #FF8C00;
+    color: white;
+}
+
+.comparison-right .mode-btn:hover:not(.active) {
+    border-color: #d1d5db;
+    background: #f9fafb;
+}
+
+.comparison-right .search-form {
+    position: relative;
+}
+
+.comparison-right .form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comparison-right .mode-content {
+    display: none;
+}
+
+.comparison-right .mode-content.active {
+    display: flex;
+    gap: 12px;
+}
+
+.comparison-right .vin-input,
+.comparison-right .state-select,
+.comparison-right .plate-input {
+    flex: 1;
+    padding: 15px 18px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.comparison-right .vin-input:focus,
+.comparison-right .state-select:focus,
+.comparison-right .plate-input:focus {
+    outline: none;
+    border-color: #FF8C00;
+    box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+}
+
+.comparison-right .vin-input::placeholder,
+.comparison-right .plate-input::placeholder {
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+.comparison-right .state-select option {
+    padding: 10px;
+    background: white;
+}
+
+.comparison-right .search-btn {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+}
+
+.comparison-right .search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+}
+
 .form-panel {
     position: relative;
     z-index: 2;
