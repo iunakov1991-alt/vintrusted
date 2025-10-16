@@ -1,0 +1,1 @@
+Fix reviews carousel functionality with proper CSS and inline JavaScript: Wed Oct 15 17:59:16 PDT 2025

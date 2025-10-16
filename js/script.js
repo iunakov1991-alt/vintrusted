@@ -209,7 +209,7 @@ function initReviewsCarousel() {
     
     function updateCarousel() {
         // Move the track to show the current set of 5 cards
-        const translateX = -currentIndex * 20; // Move by 20% per set of 5 cards
+        const translateX = -currentIndex * 12.5; // Move by 12.5% per set (100% / 8 sets)
         track.style.transform = `translateX(${translateX}%)`;
         
         // Update dots (only show dots for visible sets)
@@ -217,7 +217,7 @@ function initReviewsCarousel() {
             dot.classList.toggle('active', index === currentIndex);
         });
         
-        console.log(`Carousel moved to set ${currentIndex + 1}`);
+        console.log(`Carousel moved to set ${currentIndex + 1} of ${totalSets}`);
     }
     
     function nextSlide() {
