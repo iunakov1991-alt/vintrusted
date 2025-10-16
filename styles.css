@@ -2721,8 +2721,8 @@ button[type="submit"],
     content: "📞";
 }
 
-.feature-cell.price::before {
-    content: "$";
+.feature-cell.header-feature::before {
+    content: none;
 }
 
 .feature-cell:last-child {
