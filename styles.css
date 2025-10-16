@@ -2610,7 +2610,7 @@ button[type="submit"],
 
 /* Comparison Section - Compact Modern Design */
 .comparison-section {
-    background: #ffffff;
+    background: transparent;
     padding: 60px 45px;
     position: relative;
 }
