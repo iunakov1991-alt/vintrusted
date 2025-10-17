@@ -2987,6 +2987,12 @@ button[type="submit"],
     animation: stateSelectBlink 2s ease-in-out infinite;
 }
 
+/* Highlight most populous states in blue */
+.state-select option.populous-state {
+    color: #3B82F6;
+    font-weight: 600;
+}
+
 /* Copy original form styles from first screen */
 .comparison-right .vin-input {
     flex: 1;
