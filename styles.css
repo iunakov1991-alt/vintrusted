@@ -103,6 +103,7 @@ body {
     z-index: 1001;
     animation: slideInFromRight 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     margin-left: 40px;
+    transform: translateY(20%);
 }
 
 @keyframes slideInFromRight {
@@ -117,7 +118,7 @@ body {
 }
 
 .logo-img {
-    height: 120px;
+    height: 150px;
     width: auto;
 }
 
