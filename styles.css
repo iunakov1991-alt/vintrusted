@@ -2550,6 +2550,7 @@ button[type="submit"],
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: start;
+    margin-top: 60px;
 }
 
 .second-screen-title {
