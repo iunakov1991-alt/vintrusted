@@ -11,41 +11,41 @@ html, body {
 }
 
 * {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Ensure Poppins is applied to all text elements */
+/* Ensure Manrope is applied to all text elements */
 h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, option, label, li, td, th {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Force Poppins on all sections */
+/* Force Manrope on all sections */
 .hero-section, .features-section, .pricing-section, .comparison-section, .reviews-section, .faq-section, .footer {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Force Poppins on all specific elements */
+/* Force Manrope on all specific elements */
 .main-title, .hero-subtitle, .feature-title, .feature-description, .pricing-title, .comparison-title, .comparison-subtitle, .review-text, .faq-question, .faq-answer {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Force Poppins on all form elements */
+/* Force Manrope on all form elements */
 .vin-input, .plate-input, .state-select, .search-btn, .mode-btn, .tab-btn, .pricing-btn {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Force Poppins on all table elements */
+/* Force Manrope on all table elements */
 .comparison-table, .comparison-cell, .feature-cell, .vin-trust-cell, .carfax-cell, .check-mark, .cross-mark {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Force Poppins on all panel elements */
+/* Force Manrope on all panel elements */
 .black-panel, .panel-title, .panel-price, .panel-features {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 body {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
     color: #1a1a1a;
     background: #ffffff;
