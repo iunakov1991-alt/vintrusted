@@ -237,7 +237,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    transform: scaleX(-1) translateX(20%);
+    transform: scaleX(-1) translateX(-10%);
 }
 
 .main-title {
