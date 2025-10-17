@@ -3186,7 +3186,7 @@ button[type="submit"],
     margin-top: 0;
     flex-shrink: 0;
     width: 100%;
-    min-width: 400px;
+    min-width: 600px;
 }
 
 .comparison-right .search-form {
@@ -3253,8 +3253,8 @@ button[type="submit"],
     text-transform: uppercase;
     pointer-events: auto;
     cursor: text;
-    min-width: 200px;
-    width: 200px;
+    min-width: 300px;
+    width: 300px;
 }
 
 .comparison-right .vin-input::placeholder {
@@ -3276,8 +3276,8 @@ button[type="submit"],
     text-transform: uppercase;
     pointer-events: auto;
     cursor: text;
-    min-width: 150px;
-    width: 150px;
+    min-width: 250px;
+    width: 250px;
 }
 
 .comparison-right .plate-input::placeholder {
@@ -3298,8 +3298,8 @@ button[type="submit"],
     outline: none;
     pointer-events: auto;
     cursor: pointer;
-    min-width: 120px;
-    width: 120px;
+    min-width: 180px;
+    width: 180px;
 }
 
 .comparison-right .state-select option {
