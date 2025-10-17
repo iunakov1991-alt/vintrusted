@@ -2944,6 +2944,12 @@ button[type="submit"],
     color: #ffffff !important;
 }
 
+/* Small checkmark in search buttons */
+.search-btn span:last-child {
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .black-panel {
     background: #1a1a1a;
     border-radius: 15px;
