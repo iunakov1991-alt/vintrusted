@@ -2785,23 +2785,23 @@ button[type="submit"],
 
 /* New Dark Theme Comparison Table */
 .comparison-table-container {
-    max-width: 90%;
+    max-width: 30%;
     margin: 0 auto;
 }
 
 .comparison-table {
     background: rgba(30, 35, 45, 0.8);
-    border-radius: 20px;
-    padding: 25px;
+    border-radius: 7px;
+    padding: 8px;
     box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 7px 13px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(255, 255, 255, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 4px;
     position: relative;
     overflow: hidden;
 }
@@ -2822,16 +2822,16 @@ button[type="submit"],
 .comparison-header {
     display: grid;
     grid-template-columns: 1fr 0.6fr 0.6fr;
-    gap: 12px;
-    margin-bottom: 8px;
+    gap: 4px;
+    margin-bottom: 3px;
 }
 
 .feature-header {
     color: #e2e8f0;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 5px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.2px;
     opacity: 0.8;
 }
 
@@ -2839,12 +2839,12 @@ button[type="submit"],
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 3px;
 }
 
 .brand-text {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 5px;
 }
 
 .vin-trust-header .brand-text {
@@ -2856,14 +2856,14 @@ button[type="submit"],
 }
 
 .brand-logo {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 5px;
     color: white;
 }
 
@@ -2874,17 +2874,17 @@ button[type="submit"],
 .comparison-row {
     display: grid;
     grid-template-columns: 1fr 0.6fr 0.6fr;
-    gap: 12px;
+    gap: 4px;
     align-items: center;
 }
 
 .feature-cell {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 50%;
-    padding: 16px 20px;
+    padding: 5px 7px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 4px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
     aspect-ratio: 1;
@@ -2897,25 +2897,25 @@ button[type="submit"],
 }
 
 .feature-icon {
-    font-size: 20px;
-    width: 24px;
-    height: 24px;
+    font-size: 7px;
+    width: 8px;
+    height: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 0 8px rgba(0, 255, 200, 0.4));
+    filter: drop-shadow(0 0 3px rgba(0, 255, 200, 0.4));
 }
 
 .feature-cell span {
     color: #e2e8f0;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 5px;
 }
 
 .vin-trust-cell, .carfax-cell {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 50%;
-    padding: 16px 20px;
+    padding: 5px 7px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2947,16 +2947,16 @@ button[type="submit"],
 
 .check-mark {
     color: #00ffc8;
-    font-size: 20px;
+    font-size: 7px;
     font-weight: 700;
-    text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
+    text-shadow: 0 0 3px rgba(0, 255, 200, 0.5);
 }
 
 .cross-mark {
     color: #ff6432;
-    font-size: 20px;
+    font-size: 7px;
     font-weight: 700;
-    text-shadow: 0 0 10px rgba(255, 100, 50, 0.5);
+    text-shadow: 0 0 3px rgba(255, 100, 50, 0.5);
 }
 
 .pricing-row .feature-cell {
@@ -2970,7 +2970,7 @@ button[type="submit"],
 
 .pricing-cell {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 5px;
 }
 
 .pricing-cell .price-text {
@@ -2981,12 +2981,12 @@ button[type="submit"],
 
 .vin-trust-cell.pricing-cell .price-text {
     color: #00ffc8;
-    text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
+    text-shadow: 0 0 3px rgba(0, 255, 200, 0.5);
 }
 
 .carfax-cell.pricing-cell .price-text {
     color: #ff6432;
-    text-shadow: 0 0 10px rgba(255, 100, 50, 0.5);
+    text-shadow: 0 0 3px rgba(255, 100, 50, 0.5);
 }
 
 .comparison-row.header-row {
