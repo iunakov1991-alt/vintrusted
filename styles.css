@@ -14,8 +14,8 @@ html, body {
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Ensure Manrope is applied to all text elements */
-h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, option, label, li, td, th {
+/* Ensure Manrope is applied to all text elements (except headings) */
+p, span, div, a, button, input, textarea, select, option, label, li, td, th {
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
@@ -24,8 +24,8 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, option
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Force Manrope on all specific elements */
-.main-title, .hero-subtitle, .feature-title, .feature-description, .pricing-title, .comparison-title, .comparison-subtitle, .review-text, .faq-question, .faq-answer {
+/* Force Manrope on all specific text elements (not headings) */
+.feature-description, .comparison-subtitle, .review-text, .faq-question, .faq-answer, .panel-features {
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
@@ -39,9 +39,19 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, button, input, textarea, select, option
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-/* Force Manrope on all panel elements */
-.black-panel, .panel-title, .panel-price, .panel-features {
+/* Force Manrope on all panel elements (except headings) */
+.black-panel, .panel-features {
     font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* DM Sans for all headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* DM Sans for specific heading elements */
+.main-title, .hero-subtitle, .feature-title, .pricing-title, .comparison-title, .panel-title, .panel-price {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 body {
