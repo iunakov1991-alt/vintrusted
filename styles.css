@@ -2637,6 +2637,7 @@ button[type="submit"],
     height: auto;
     border-radius: 12px;
     margin-top: -80px;
+    margin-left: 5%;
 }
 
 /* Responsive for second screen */
