@@ -2880,13 +2880,15 @@ button[type="submit"],
 
 .feature-cell {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    border-radius: 50%;
     padding: 16px 20px;
     display: flex;
     align-items: center;
     gap: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
+    aspect-ratio: 1;
+    justify-content: center;
 }
 
 .feature-cell:hover {
@@ -2912,7 +2914,7 @@ button[type="submit"],
 
 .vin-trust-cell, .carfax-cell {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    border-radius: 50%;
     padding: 16px 20px;
     display: flex;
     align-items: center;
@@ -2920,6 +2922,7 @@ button[type="submit"],
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
     position: relative;
+    aspect-ratio: 1;
 }
 
 .vin-trust-cell {
@@ -2960,6 +2963,9 @@ button[type="submit"],
     background: rgba(255, 255, 255, 0.08);
     font-weight: 600;
     color: #e2e8f0;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    justify-content: center;
 }
 
 .pricing-cell {
