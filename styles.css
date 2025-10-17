@@ -2793,6 +2793,8 @@ button[type="submit"],
     display: flex;
     flex-direction: column;
     gap: 6px;
+    max-width: 90%;
+    margin: 0 auto;
 }
 
 .comparison-row {
