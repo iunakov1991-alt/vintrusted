@@ -6030,8 +6030,8 @@ button[type="submit"],
 }
 
 .content-image img {
-    width: 120%;
-    height: 120%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
     border-radius: 6px;
 }
