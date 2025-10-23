@@ -441,8 +441,12 @@
                 </div>
 
                 <div class="results-right">
-                    <!-- Action Card -->
+                    <!-- Dynamic Action Card -->
                     <div class="action-card">
+                        <div class="action-header">
+                            <h3 class="action-title" id="actionTitle">Odometer History</h3>
+                            <p class="action-subtitle" id="actionSubtitle">Track vehicle mileage over time with detailed odometer readings and usage patterns.</p>
+                        </div>
                         <div class="action-icon">
                             <div class="icon-circle">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -450,16 +454,14 @@
                                 </svg>
                             </div>
                         </div>
-                        <h3 class="action-title">Theft Vehicle Check</h3>
-                        <p class="action-subtitle">Has the car been registered as a stolen vehicle?</p>
                         <button class="action-btn">
-                            <span>Check Your Car</span>
+                            <span>Get Full Report</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
                             </svg>
                         </button>
                     </div>
-            </div>
+                </div>
           </div>
         </div>
       </section>
@@ -2223,10 +2225,47 @@
                 if (targetContent) {
                     targetContent.classList.add('active');
                 }
+                
+                // Update action card content based on active tab
+                updateActionCard(targetTab);
             });
         });
         
         console.log('Results tabs initialized successfully');
+    }
+    
+    // Update Action Card content based on active tab
+    function updateActionCard(tabName) {
+        const actionTitle = document.getElementById('actionTitle');
+        const actionSubtitle = document.getElementById('actionSubtitle');
+        
+        const tabContent = {
+            'odometer': {
+                title: 'Odometer History',
+                subtitle: 'Track vehicle mileage over time with detailed odometer readings and usage patterns.'
+            },
+            'ownership': {
+                title: 'Ownership History',
+                subtitle: 'View complete ownership timeline with registration dates, locations, and ownership transfers.'
+            },
+            'damage': {
+                title: 'Damage Check',
+                subtitle: 'Comprehensive damage history including accidents, repairs, and insurance claims.'
+            },
+            'technical': {
+                title: 'Vehicle Specifications',
+                subtitle: 'Detailed technical data including engine specs, dimensions, and manufacturer information.'
+            },
+            'sales': {
+                title: 'Sale Records',
+                subtitle: 'Historical sales listings with pricing data and market value analysis.'
+            }
+        };
+        
+        if (tabContent[tabName] && actionTitle && actionSubtitle) {
+            actionTitle.textContent = tabContent[tabName].title;
+            actionSubtitle.textContent = tabContent[tabName].subtitle;
+        }
     }
     </script>
     
