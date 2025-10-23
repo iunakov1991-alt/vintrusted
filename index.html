@@ -390,11 +390,11 @@
             <!-- Navigation Tabs -->
             <div class="results-nav">
                 <div class="nav-tabs">
-                    <button class="nav-tab active" data-tab="accidents">Odometer History</button>
+                    <button class="nav-tab active" data-tab="odometer">Odometer History</button>
                     <button class="nav-tab" data-tab="ownership">Ownership History</button>
                     <button class="nav-tab" data-tab="damage">Damage Check</button>
                     <button class="nav-tab" data-tab="technical">Vehicle Specifications</button>
-                    <button class="nav-tab" data-tab="theft">Sale Records</button>
+                    <button class="nav-tab" data-tab="sales">Sale Records</button>
                 </div>
                 </div>
 
@@ -404,16 +404,16 @@
                     <!-- Interactive Content Display -->
                     <div class="content-display">
                         <!-- Odometer History Content -->
-                        <div class="content-item active" data-tab="accidents">
+                        <div class="content-item active" data-tab="odometer">
                             <div class="content-header">
                                 <div class="content-icon">📊</div>
                                 <h3 class="content-title">Odometer History</h3>
                                 <p class="content-subtitle">This section lists all events in vehicle history on timeline.</p>
-              </div>
+                            </div>
                             <div class="content-image">
                                 <img src="images/results/odometer-history.svg" alt="Odometer History Chart" />
                             </div>
-                  </div>
+                        </div>
 
                         <!-- Ownership History Content -->
                         <div class="content-item" data-tab="ownership">
@@ -421,11 +421,11 @@
                                 <div class="content-icon">👥</div>
                                 <h3 class="content-title">Ownership History</h3>
                                 <p class="content-subtitle">This section lists title records with calculations of usage and mileage for each registration.</p>
-                </div>
+                            </div>
                             <div class="content-image">
                                 <img src="images/results/ownership-history.svg" alt="Ownership History" />
                             </div>
-            </div>
+                        </div>
 
                         <!-- Damage Check Content -->
                         <div class="content-item" data-tab="damage">
@@ -452,7 +452,7 @@
                         </div>
 
                         <!-- Sale Records Content -->
-                        <div class="content-item" data-tab="theft">
+                        <div class="content-item" data-tab="sales">
                             <div class="content-header">
                                 <div class="content-icon">💰</div>
                                 <h3 class="content-title">Sale Records</h3>
@@ -2214,17 +2214,23 @@
     
     // Initialize Results Screen Tabs
     function initializeResultsTabs() {
+        console.log('Initializing results tabs...');
         const navTabs = document.querySelectorAll('.nav-tab');
         const contentItems = document.querySelectorAll('.content-item');
+        
+        console.log('Found nav tabs:', navTabs.length);
+        console.log('Found content items:', contentItems.length);
         
         if (navTabs.length === 0 || contentItems.length === 0) {
             console.log('Results tabs not found, skipping initialization');
             return;
         }
         
-        navTabs.forEach(tab => {
+        navTabs.forEach((tab, index) => {
+            console.log(`Tab ${index}:`, tab.textContent, 'data-tab:', tab.getAttribute('data-tab'));
             tab.addEventListener('click', function() {
                 const targetTab = this.getAttribute('data-tab');
+                console.log('Clicked tab:', targetTab);
                 
                 // Remove active class from all tabs
                 navTabs.forEach(t => t.classList.remove('active'));
@@ -2238,6 +2244,7 @@
                 
                 // Show target content item
                 const targetContent = document.querySelector(`.content-item[data-tab="${targetTab}"]`);
+                console.log('Target content found:', !!targetContent);
                 if (targetContent) {
                     targetContent.classList.add('active');
                 }
