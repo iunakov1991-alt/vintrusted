@@ -411,8 +411,8 @@
                                 <p class="content-subtitle">This section lists all events in vehicle history on timeline.</p>
               </div>
                             <div class="content-image">
-                                <img src="images/results/odometer-history.png" alt="Odometer History Chart" />
-            </div>
+                                <img src="images/results/odometer-history.svg" alt="Odometer History Chart" />
+                            </div>
                   </div>
 
                         <!-- Ownership History Content -->
@@ -423,8 +423,8 @@
                                 <p class="content-subtitle">This section lists title records with calculations of usage and mileage for each registration.</p>
                 </div>
                             <div class="content-image">
-                                <img src="images/results/ownership-history.png" alt="Ownership History" />
-              </div>
+                                <img src="images/results/ownership-history.svg" alt="Ownership History" />
+                            </div>
             </div>
 
                         <!-- Damage Check Content -->
@@ -433,11 +433,11 @@
                                 <div class="content-icon">🔧</div>
                                 <h3 class="content-title">Damage Check</h3>
                                 <p class="content-subtitle">This section lists all damage events and repairs in vehicle history.</p>
-                  </div>
+                            </div>
                             <div class="content-image">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjhGOUZBIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiMzMzMiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkRhbWFnZSBDaGVjazwvdGV4dD4KPC9zdmc+" alt="Damage Check" />
-                </div>
-              </div>
+                                <img src="images/results/damage-check.svg" alt="Damage Check" />
+                            </div>
+                        </div>
 
                         <!-- Technical Data Content -->
                         <div class="content-item" data-tab="technical">
@@ -447,7 +447,7 @@
                                 <p class="content-subtitle">This section lists basic vehicle details encoded by the VIN.</p>
                             </div>
                             <div class="content-image">
-                                <img src="images/results/vehicle-specifications.png" alt="Vehicle Specifications" />
+                                <img src="images/results/vehicle-specifications.svg" alt="Vehicle Specifications" />
                             </div>
                         </div>
 
@@ -459,7 +459,7 @@
                                 <p class="content-subtitle">This section lists historical sale listings from independent sources.</p>
                             </div>
                             <div class="content-image">
-                                <img src="images/results/sale-records.png" alt="Sale Records" />
+                                <img src="images/results/sale-records.svg" alt="Sale Records" />
                             </div>
                         </div>
                     </div>
@@ -2217,6 +2217,11 @@
         const navTabs = document.querySelectorAll('.nav-tab');
         const contentItems = document.querySelectorAll('.content-item');
         
+        if (navTabs.length === 0 || contentItems.length === 0) {
+            console.log('Results tabs not found, skipping initialization');
+            return;
+        }
+        
         navTabs.forEach(tab => {
             tab.addEventListener('click', function() {
                 const targetTab = this.getAttribute('data-tab');
@@ -2239,7 +2244,7 @@
             });
         });
         
-        console.log('Results tabs initialized');
+        console.log('Results tabs initialized successfully');
     }
     </script>
     
