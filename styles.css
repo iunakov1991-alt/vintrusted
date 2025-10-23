@@ -6240,6 +6240,10 @@ button[type="submit"],
 
 .action-header {
     margin-bottom: 25px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .action-title {
@@ -6247,6 +6251,7 @@ button[type="submit"],
     font-weight: 700;
     color: #2c3e50;
     margin-bottom: 10px;
+    min-height: 1.4rem;
 }
 
 .action-subtitle {
@@ -6254,6 +6259,7 @@ button[type="submit"],
     color: #495057;
     margin-bottom: 0;
     line-height: 1.5;
+    min-height: 3rem;
 }
 
 .action-btn {
