@@ -1,0 +1,1 @@
+Add comprehensive debugging for mode switching: Wed Oct 15 03:31:44 PDT 2025

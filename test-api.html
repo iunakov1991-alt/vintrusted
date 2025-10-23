@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketCheck API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MarketCheck API Test</h1>
+    
+    <div class="test-section">
+        <h2>VIN Decode Test</h2>
+        <input type="text" id="vinInput" placeholder="Enter VIN (e.g., JTHBW1GG6F2076804)" value="JTHBW1GG6F2076804">
+        <button onclick="testVinDecode()">Test VIN Decode</button>
+        <div id="vinResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>VIN History Test</h2>
+        <input type="text" id="historyVinInput" placeholder="Enter VIN for history" value="JTHBW1GG6F2076804">
+        <button onclick="testVinHistory()">Test VIN History</button>
+        <div id="historyResult" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Plate Search Test</h2>
+        <input type="text" id="plateInput" placeholder="Enter plate (e.g., CA-ABC123)" value="CA-ABC123">
+        <button onclick="testPlateSearch()">Test Plate Search</button>
+        <div id="plateResult" class="result"></div>
+    </div>
+
+    <script>
+        // MarketCheck API Configuration
+        const MARKETCHECK_API_KEY = 'w2MYvaZha9xCvG2VTGlphAE84f9oC3Kj';
+        const MARKETCHECK_API_SECRET = '37zDJBEBNCiJRvY0';
+        
+        const MARKETCHECK_ENDPOINTS = {
+            VIN_DECODE: 'https://api.marketcheck.com/v2/decode/car/epi/{vin}/specs',
+            VIN_HISTORY: 'https://api.marketcheck.com/v2/history/car/{vin}',
+            PLATE_SEARCH: 'https://api.marketcheck.com/v2/search/car/active'
+        };
+        
+        async function testVinDecode() {
+            const vin = document.getElementById('vinInput').value;
+            const resultDiv = document.getElementById('vinResult');
+            
+            if (!vin) {
+                resultDiv.textContent = 'Please enter a VIN';
+                return;
+            }
+            
+            resultDiv.textContent = 'Testing VIN decode...';
+            
+            try {
+                const apiUrl = MARKETCHECK_ENDPOINTS.VIN_DECODE.replace('{vin}', vin);
+                console.log('Testing VIN decode URL:', apiUrl);
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'api_key': MARKETCHECK_API_KEY,
+                        'api_secret': MARKETCHECK_API_SECRET
+                    }
+                });
+                
+                console.log('Response status:', response.status);
+                console.log('Response headers:', [...response.headers.entries()]);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    resultDiv.textContent = `Error ${response.status}: ${errorText}`;
+                    return;
+                }
+                
+                const data = await response.json();
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+                console.log('VIN decode result:', data);
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                console.error('VIN decode error:', error);
+            }
+        }
+        
+        async function testVinHistory() {
+            const vin = document.getElementById('historyVinInput').value;
+            const resultDiv = document.getElementById('historyResult');
+            
+            if (!vin) {
+                resultDiv.textContent = 'Please enter a VIN';
+                return;
+            }
+            
+            resultDiv.textContent = 'Testing VIN history...';
+            
+            try {
+                const apiUrl = MARKETCHECK_ENDPOINTS.VIN_HISTORY.replace('{vin}', vin);
+                console.log('Testing VIN history URL:', apiUrl);
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'api_key': MARKETCHECK_API_KEY,
+                        'api_secret': MARKETCHECK_API_SECRET
+                    }
+                });
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    resultDiv.textContent = `Error ${response.status}: ${errorText}`;
+                    return;
+                }
+                
+                const data = await response.json();
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+                console.log('VIN history result:', data);
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                console.error('VIN history error:', error);
+            }
+        }
+        
+        async function testPlateSearch() {
+            const plate = document.getElementById('plateInput').value;
+            const resultDiv = document.getElementById('plateResult');
+            
+            if (!plate) {
+                resultDiv.textContent = 'Please enter a plate';
+                return;
+            }
+            
+            resultDiv.textContent = 'Testing plate search...';
+            
+            try {
+                const [state, plateNumber] = plate.split('-');
+                const apiUrl = `${MARKETCHECK_ENDPOINTS.PLATE_SEARCH}?state=${state}&car_type=used&api_key=${MARKETCHECK_API_KEY}`;
+                console.log('Testing plate search URL:', apiUrl);
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'api_secret': MARKETCHECK_API_SECRET
+                    }
+                });
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    resultDiv.textContent = `Error ${response.status}: ${errorText}`;
+                    return;
+                }
+                
+                const data = await response.json();
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+                console.log('Plate search result:', data);
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                console.error('Plate search error:', error);
+            }
+        }
+        
+        // Auto-test on page load
+        window.addEventListener('load', function() {
+            console.log('MarketCheck API Test Page Loaded');
+            console.log('API Key:', MARKETCHECK_API_KEY);
+            console.log('API Secret:', MARKETCHECK_API_SECRET);
+        });
+    </script>
+</body>
+</html>
