@@ -5920,7 +5920,7 @@ button[type="submit"],
 }
 
 .results-header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 30px;
 }
 
@@ -5936,8 +5936,8 @@ button[type="submit"],
     font-size: 1.1rem;
     color: #6c757d;
     line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
 }
 
 .nav-tabs {
