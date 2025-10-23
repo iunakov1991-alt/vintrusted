@@ -384,6 +384,114 @@
         </div>
       </section>
 
+    <!-- Results Screen -->
+    <section class="results-screen">
+        <div class="container">
+            <!-- Navigation Tabs -->
+            <div class="results-nav">
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="accidents">Accident History</button>
+                    <button class="nav-tab" data-tab="ownership">Ownership History</button>
+                    <button class="nav-tab" data-tab="damage">Damage Check</button>
+                    <button class="nav-tab" data-tab="technical">Technical Data</button>
+                    <button class="nav-tab" data-tab="theft">Theft Check</button>
+                </div>
+            </div>
+
+            <!-- Results Content -->
+            <div class="results-content">
+                <div class="results-left">
+                    <!-- Safety Recalls Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Complete Safety Recalls</h3>
+                            <div class="card-status success">
+                                <span class="status-text">No problems reported</span>
+                                <div class="status-icon">✅</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="status-item">
+                                <span class="check-icon">✅</span>
+                                <span class="check-text">No problems found</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Theft Check Card -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Stolen Vehicle Check</h3>
+                            <div class="card-status warning">
+                                <span class="status-text">2 records found / 1 problem reported</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="records-table">
+                                <div class="table-header">
+                                    <div class="col-date">DATE</div>
+                                    <div class="col-country">COUNTRY</div>
+                                    <div class="col-provider">PROVIDER</div>
+                                    <div class="col-records">RECORDS</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="col-date">07/14/2023</div>
+                                    <div class="col-country">
+                                        <span class="flag">🇺🇸</span>
+                                        <span>United States</span>
+                                    </div>
+                                    <div class="col-provider">Police stolen database</div>
+                                    <div class="col-records">
+                                        <span class="warning-icon">⚠️</span>
+                                        <span class="warning-text">Reported!</span>
+                                        <span class="warning-text">Stolen Vehicle</span>
+                                    </div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="col-date">07/14/2023</div>
+                                    <div class="col-country">
+                                        <span class="flag">🇪🇸</span>
+                                        <span>Spain</span>
+                                    </div>
+                                    <div class="col-provider">Police stolen database</div>
+                                    <div class="col-records">
+                                        <span class="success-icon">✅</span>
+                                        <span class="success-text">No problems found</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <span class="confirmed-text">CONFIRMED DATA</span>
+                                <a href="#" class="check-link">CHECK NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-right">
+                    <!-- Action Card -->
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <div class="icon-circle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="action-title">Theft Vehicle Check</h3>
+                        <p class="action-subtitle">Has the car been registered as a stolen vehicle?</p>
+                        <button class="action-btn">
+                            <span>Check Your Car</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Reviews Section -->
     <section class="reviews-section">
         <div class="container">
