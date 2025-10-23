@@ -5975,7 +5975,7 @@ button[type="submit"],
     padding: 25px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border: 1px solid #e9ecef;
-    min-height: 700px;
+    min-height: 800px;
     position: relative;
 }
 
@@ -6313,7 +6313,7 @@ button[type="submit"],
     
     .content-display {
         padding: 20px;
-        min-height: 600px;
+        min-height: 700px;
     }
     
     .content-header {
@@ -6378,7 +6378,7 @@ button[type="submit"],
     
     .content-display {
         padding: 15px;
-        min-height: 500px;
+        min-height: 600px;
     }
     
     .content-title {
