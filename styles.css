@@ -3316,6 +3316,8 @@ button[type="submit"],
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     max-width: 800px;
     width: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 .progress-wrapper {
@@ -3323,6 +3325,8 @@ button[type="submit"],
     align-items: center;
     gap: 15px;
     width: 100%;
+    position: relative;
+    z-index: 10;
 }
 
 .search-icon {
@@ -3334,7 +3338,7 @@ button[type="submit"],
 .progress-bar {
     flex: 1;
     height: 25px;
-    background: #e9ecef;
+    background: white;
     border-radius: 15px;
     overflow: hidden;
     position: relative;
@@ -3347,6 +3351,8 @@ button[type="submit"],
     border-radius: 15px;
     transition: width 0.3s ease;
     box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+    position: relative;
+    z-index: 5;
 }
 
 .progress-text {
@@ -3434,7 +3440,7 @@ button[type="submit"],
     order: 4;
     justify-content: flex-start;
     position: relative;
-    animation: infiniteScroll 20s linear infinite;
+    animation: infiniteScrollReverse 20s linear infinite;
 }
 
 .loading-page .categories-grid::before {
@@ -3449,7 +3455,7 @@ button[type="submit"],
     z-index: 2;
 }
 
-@keyframes infiniteScroll {
+@keyframes infiniteScrollReverse {
     0% {
         transform: translateX(0);
     }
@@ -3498,49 +3504,13 @@ button[type="submit"],
     transition: all 0.3s ease;
 }
 
-/* Эффект увеличения для центральных элементов */
+/* Убираем анимацию увеличения */
 .loading-page .category-item:nth-child(1) img,
 .loading-page .category-item:nth-child(2) img,
 .loading-page .category-item:nth-child(3) img,
 .loading-page .category-item:nth-child(4) img,
 .loading-page .category-item:nth-child(5) img {
-    animation: centerScale 20s linear infinite;
-}
-
-@keyframes centerScale {
-    0% {
-        transform: scale(1);
-    }
-    10% {
-        transform: scale(1.2);
-    }
-    20% {
-        transform: scale(1);
-    }
-    30% {
-        transform: scale(1.2);
-    }
-    40% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    60% {
-        transform: scale(1);
-    }
-    70% {
-        transform: scale(1.2);
-    }
-    80% {
-        transform: scale(1);
-    }
-    90% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
+    animation: none;
 }
 
 .loading-page .category-item.completed {
