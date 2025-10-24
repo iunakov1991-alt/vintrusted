@@ -1,17 +1,23 @@
+// Проверка и запуск Stripe API
+require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
 const Stripe = require('stripe');
+const cors = require('cors');
 
 const app = express();
-const stripe = new Stripe('sk_test_YOUR_SECRET_KEY_HERE', { apiVersion: '2024-06-20' });
-const PORT = 3000;
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
 
 // Middleware
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Stripe config endpoint
 app.get('/stripe-config', (req, res) => {
-  res.json({ publishableKey: 'pk_test_YOUR_PUBLISHABLE_KEY_HERE' });
+  res.json({ publishableKey: process.env.STRIPE_PUBLISHABLE_KEY });
 });
 
 // SetupIntent endpoint
@@ -19,8 +25,19 @@ app.post('/create-setup-intent', async (req, res) => {
   try {
     const setupIntent = await stripe.setupIntents.create({ usage: 'off_session' });
     res.json({ client_secret: setupIntent.client_secret });
-  } catch (e) {
-    res.status(400).json({ error: e.message });
+  } catch (err) {
+    console.error('SetupIntent Error:', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Test Stripe connection
+app.get('/api/test-stripe', async (req, res) => {
+  try {
+    const balance = await stripe.balance.retrieve();
+    res.json({ success: true, message: 'Stripe connected successfully', balance });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
   }
 });
 
@@ -77,7 +94,7 @@ app.post('/checkout-trial-then-two-charges', async (req, res) => {
           default_payment_method: paymentMethodId,
           collection_method: 'charge_automatically',
           proration_behavior: 'none',
-          items: [{ price: 'price_YOUR_PRICE_ID_HERE', quantity: 1 }],
+          items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
         },
         {
           start_date: t30,
@@ -85,7 +102,7 @@ app.post('/checkout-trial-then-two-charges', async (req, res) => {
           default_payment_method: paymentMethodId,
           collection_method: 'charge_automatically',
           proration_behavior: 'none',
-          items: [{ price: 'price_YOUR_PRICE_ID_HERE', quantity: 1 }],
+          items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
         },
       ],
       metadata: { plan_shape: '3-now, 49@day10, 49@day30' },
@@ -104,6 +121,8 @@ app.post('/checkout-trial-then-two-charges', async (req, res) => {
 // Health check
 app.get('/health', (req, res) => res.json({ ok: true }));
 
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Stripe configured with key: ${process.env.STRIPE_SECRET_KEY.substring(0, 20)}...`);
 });

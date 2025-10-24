@@ -21,9 +21,11 @@
     "content-type": "^1.0.5",
     "cookie": "^0.7.1",
     "cookie-signature": "^1.0.6",
+    "cors": "^2.8.5",
     "debug": "^2.6.9",
     "depd": "^2.0.0",
     "destroy": "^1.2.0",
+    "dotenv": "^17.2.3",
     "dunder-proto": "^1.0.1",
     "ee-first": "^1.1.1",
     "encodeurl": "^2.0.0",
@@ -89,6 +91,7 @@
     "side-channel-weakmap": "^1.0.2",
     "simple-update-notifier": "^1.1.0",
     "statuses": "^2.0.1",
+    "stripe": "^19.1.0",
     "supports-color": "^5.5.0",
     "to-regex-range": "^5.0.1",
     "toidentifier": "^1.0.1",
@@ -100,7 +103,6 @@
     "utils-merge": "^1.0.1",
     "vary": "^1.1.2"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
