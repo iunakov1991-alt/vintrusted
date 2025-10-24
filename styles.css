@@ -3328,13 +3328,14 @@ button[type="submit"],
 /* Плывущие изображения */
 .floating-img {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 1.2cm;
+    height: 1.2cm;
     opacity: 0.7;
     object-fit: contain;
     border-radius: 6px;
     left: 0;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* Анимации для каждого изображения */
@@ -3358,30 +3359,30 @@ button[type="submit"],
     animation: float5 11s linear infinite;
 }
 
-/* Ключевые кадры анимации - горизонтальное движение справа налево */
+/* Ключевые кадры анимации - горизонтальное движение справа налево по одной линии */
 @keyframes float1 {
-    0% { transform: translateX(800px) translateY(20px); }
-    100% { transform: translateX(-50px) translateY(20px); }
+    0% { transform: translateX(800px) translateY(-50%); }
+    100% { transform: translateX(-50px) translateY(-50%); }
 }
 
 @keyframes float2 {
-    0% { transform: translateX(800px) translateY(30px); }
-    100% { transform: translateX(-50px) translateY(30px); }
+    0% { transform: translateX(800px) translateY(-50%); }
+    100% { transform: translateX(-50px) translateY(-50%); }
 }
 
 @keyframes float3 {
-    0% { transform: translateX(800px) translateY(15px); }
-    100% { transform: translateX(-50px) translateY(15px); }
+    0% { transform: translateX(800px) translateY(-50%); }
+    100% { transform: translateX(-50px) translateY(-50%); }
 }
 
 @keyframes float4 {
-    0% { transform: translateX(800px) translateY(25px); }
-    100% { transform: translateX(-50px) translateY(25px); }
+    0% { transform: translateX(800px) translateY(-50%); }
+    100% { transform: translateX(-50px) translateY(-50%); }
 }
 
 @keyframes float5 {
-    0% { transform: translateX(800px) translateY(35px); }
-    100% { transform: translateX(-50px) translateY(35px); }
+    0% { transform: translateX(800px) translateY(-50%); }
+    100% { transform: translateX(-50px) translateY(-50%); }
 }
 
 /* Центрированный статус-бар с лупой слева */
