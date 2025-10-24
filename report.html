@@ -1,302 +1,599 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Отчет VIN - VIN TRUST</title>
-    <meta name="description" content="Полный отчет об автомобиле по VIN-номеру">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
+    <title>Vehicle Report - VIN Trust</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="report.css">
+    <style>
+        /* Report Page Specific Styles */
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            min-height: 100vh;
+        }
+
+        .report-left {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .report-right {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .report-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .vin-display {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .report-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .report-data {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .data-value {
+            color: #2c3e50;
+            text-align: right;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-clean {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Payment Form Styles */
+        .payment-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .payment-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .price-display {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .price-period {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+
+        .stripe-form {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .payment-button {
+            width: 100%;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-button:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            transform: translateY(-2px);
+        }
+
+        .payment-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .payment-features {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        .feature-icon {
+            color: #28a745;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .report-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .report-right {
+                position: static;
+            }
+
+            .report-title {
+                font-size: 1.5rem;
+            }
+
+            .price-amount {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading States */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <a href="index.html">
-                        <img src="logo.svg" alt="VIN REPORT" class="logo-img">
-                    </a>
-                </div>
-                <div class="nav-menu">
-                    <a href="index.html" class="nav-link">Главная</a>
-                    <a href="index.html#features" class="nav-link">Возможности</a>
-                    <a href="index.html#pricing" class="nav-link">Цены</a>
-                    <a href="index.html#contact" class="nav-link">Контакты</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Report Section -->
-    <section class="report-section">
-        <div class="container">
-            <!-- Report Header -->
+    <div class="report-container">
+        <!-- Left Column: Report Data -->
+        <div class="report-left">
             <div class="report-header">
-                <div class="report-title">
-                    <h1>Отчет об автомобиле</h1>
-                    <div class="vin-display">
-                        <span class="vin-label">VIN:</span>
-                        <span class="vin-number" id="vinNumber">1HGBH41JXMN109186</span>
-                        <button class="copy-vin-btn" onclick="copyVIN()">📋</button>
-                    </div>
-                </div>
-                <div class="report-actions">
-                    <button class="btn btn-secondary" onclick="printReport()">🖨️ Печать</button>
-                    <button class="btn btn-primary" onclick="downloadPDF()">📄 PDF</button>
-                </div>
+                <h1 class="report-title">Vehicle History Report</h1>
+                <div class="vin-display" id="vinDisplay">Loading...</div>
             </div>
 
-            <!-- Vehicle Overview -->
-            <div class="vehicle-overview">
-                <div class="vehicle-image">
-                    <div class="image-placeholder">
-                        <span class="placeholder-icon">🚗</span>
-                        <p>Фото автомобиля</p>
+            <!-- Basic Information -->
+            <div class="report-section">
+                <h2 class="section-title">Basic Information</h2>
+                <div class="report-data" id="basicInfo">
+                    <div class="data-row">
+                        <span class="data-label">Year:</span>
+                        <span class="data-value" id="year">-</span>
                     </div>
-                </div>
-                <div class="vehicle-info">
-                    <h2 id="vehicleTitle">2021 Honda Civic</h2>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Год выпуска:</span>
-                            <span class="info-value" id="vehicleYear">2021</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Двигатель:</span>
-                            <span class="info-value" id="vehicleEngine">1.5L 4-Cylinder</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Трансмиссия:</span>
-                            <span class="info-value" id="vehicleTransmission">CVT</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Пробег:</span>
-                            <span class="info-value" id="vehicleMileage">45,000 миль</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Рыночная стоимость:</span>
-                            <span class="info-value price" id="marketValue">$25,000</span>
-                        </div>
+                    <div class="data-row">
+                        <span class="data-label">Make:</span>
+                        <span class="data-value" id="make">-</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Model:</span>
+                        <span class="data-value" id="model">-</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Engine:</span>
+                        <span class="data-value" id="engine">-</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Transmission:</span>
+                        <span class="data-value" id="transmission">-</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Report Sections -->
-            <div class="report-content">
-                <!-- Accident History -->
-                <div class="report-section-card">
-                    <div class="section-header">
-                        <h3>🚨 История аварий</h3>
-                        <span class="status-badge clean" id="accidentStatus">Чистая история</span>
+            <!-- Safety Information -->
+            <div class="report-section">
+                <h2 class="section-title">Safety Information</h2>
+                <div class="report-data" id="safetyInfo">
+                    <div class="data-row">
+                        <span class="data-label">Recalls:</span>
+                        <span class="data-value">
+                            <span class="status-badge status-clean" id="recallsStatus">No Recalls</span>
+                        </span>
                     </div>
-                    <div class="section-content">
-                        <div class="accident-summary">
-                            <div class="summary-item">
-                                <span class="summary-label">Количество аварий:</span>
-                                <span class="summary-value" id="accidentCount">0</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Серьезные повреждения:</span>
-                                <span class="summary-value" id="seriousDamage">Нет</span>
-                            </div>
-                        </div>
-                        <div class="accident-details" id="accidentDetails">
-                            <p class="no-accidents">✅ Никаких аварий не зарегистрировано</p>
-                        </div>
+                    <div class="data-row">
+                        <span class="data-label">Airbag Status:</span>
+                        <span class="data-value" id="airbagStatus">-</span>
                     </div>
-                </div>
-
-                <!-- Ownership History -->
-                <div class="report-section-card">
-                    <div class="section-header">
-                        <h3>👥 История владения</h3>
-                        <span class="status-badge good" id="ownershipStatus">Хорошая</span>
-                    </div>
-                    <div class="section-content">
-                        <div class="ownership-summary">
-                            <div class="summary-item">
-                                <span class="summary-label">Количество владельцев:</span>
-                                <span class="summary-value" id="ownerCount">1</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Тип владения:</span>
-                                <span class="summary-value" id="ownershipType">Личное</span>
-                            </div>
-                        </div>
-                        <div class="ownership-timeline" id="ownershipTimeline">
-                            <div class="timeline-item">
-                                <div class="timeline-date">2021 - настоящее время</div>
-                                <div class="timeline-info">
-                                    <strong>Первый владелец</strong>
-                                    <p>Личное использование, штат Калифорния</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Financial Information -->
-                <div class="report-section-card">
-                    <div class="section-header">
-                        <h3>💰 Финансовая информация</h3>
-                        <span class="status-badge clean" id="financialStatus">Чистая</span>
-                    </div>
-                    <div class="section-content">
-                        <div class="financial-summary">
-                            <div class="summary-item">
-                                <span class="summary-label">Залоги:</span>
-                                <span class="summary-value" id="liensStatus">Нет</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Лизинг:</span>
-                                <span class="summary-value" id="leaseStatus">Нет</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Страховые выплаты:</span>
-                                <span class="summary-value" id="insuranceClaims">Нет</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service History -->
-                <div class="report-section-card">
-                    <div class="section-header">
-                        <h3>🔧 История обслуживания</h3>
-                        <span class="status-badge good" id="serviceStatus">Хорошая</span>
-                    </div>
-                    <div class="section-content">
-                        <div class="service-summary">
-                            <div class="summary-item">
-                                <span class="summary-label">Регулярное ТО:</span>
-                                <span class="summary-value" id="regularService">Да</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Гарантийные работы:</span>
-                                <span class="summary-value" id="warrantyWork">Нет</span>
-                            </div>
-                        </div>
-                        <div class="service-timeline" id="serviceTimeline">
-                            <div class="timeline-item">
-                                <div class="timeline-date">2023-06-15</div>
-                                <div class="timeline-info">
-                                    <strong>Регулярное ТО</strong>
-                                    <p>Замена масла, проверка систем</p>
-                                </div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-date">2022-12-10</div>
-                                <div class="timeline-info">
-                                    <strong>Регулярное ТО</strong>
-                                    <p>Замена масла, фильтров</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recalls -->
-                <div class="report-section-card">
-                    <div class="section-header">
-                        <h3>⚠️ Отзывы и кампании</h3>
-                        <span class="status-badge warning" id="recallStatus">1 отзыв</span>
-                    </div>
-                    <div class="section-content">
-                        <div class="recall-summary">
-                            <div class="summary-item">
-                                <span class="summary-label">Активные отзывы:</span>
-                                <span class="summary-value" id="activeRecalls">1</span>
-                            </div>
-                            <div class="summary-item">
-                                <span class="summary-label">Исправленные:</span>
-                                <span class="summary-value" id="fixedRecalls">0</span>
-                            </div>
-                        </div>
-                        <div class="recall-details" id="recallDetails">
-                            <div class="recall-item">
-                                <div class="recall-title">Отзыв по тормозной системе</div>
-                                <div class="recall-date">2023-03-15</div>
-                                <div class="recall-description">
-                                    Возможная неисправность тормозных колодок. Требуется проверка в дилерском центре.
-                                </div>
-                                <div class="recall-status pending">Требует внимания</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Market Analysis -->
-                <div class="report-section-card">
-                    <div class="section-header">
-                        <h3>📊 Рыночный анализ</h3>
-                    </div>
-                    <div class="section-content">
-                        <div class="market-analysis">
-                            <div class="market-item">
-                                <span class="market-label">Текущая стоимость:</span>
-                                <span class="market-value">$25,000</span>
-                            </div>
-                            <div class="market-item">
-                                <span class="market-label">Средняя по рынку:</span>
-                                <span class="market-value">$24,500</span>
-                            </div>
-                            <div class="market-item">
-                                <span class="market-label">Тренд:</span>
-                                <span class="market-value positive">↗️ Растет</span>
-                            </div>
-                        </div>
+                    <div class="data-row">
+                        <span class="data-label">Safety Rating:</span>
+                        <span class="data-value" id="safetyRating">-</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Report Footer -->
-            <div class="report-footer">
-                <div class="footer-info">
-                    <p><strong>Дата отчета:</strong> <span id="reportDate"></span></p>
-                    <p><strong>Источник данных:</strong> Национальная база данных автомобилей США</p>
-                    <p><strong>Точность:</strong> 99.9%</p>
+            <!-- History Information -->
+            <div class="report-section">
+                <h2 class="section-title">Vehicle History</h2>
+                <div class="report-data" id="historyInfo">
+                    <div class="data-row">
+                        <span class="data-label">Accidents:</span>
+                        <span class="data-value">
+                            <span class="status-badge status-clean" id="accidentsStatus">No Accidents</span>
+                        </span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Owners:</span>
+                        <span class="data-value" id="ownersCount">-</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Service Records:</span>
+                        <span class="data-value" id="serviceRecords">-</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Title Status:</span>
+                        <span class="data-value">
+                            <span class="status-badge status-clean" id="titleStatus">Clean</span>
+                        </span>
+                    </div>
                 </div>
-                <div class="footer-actions">
-                    <button class="btn btn-primary" onclick="checkAnotherVIN()">Проверить другой VIN</button>
-                    <button class="btn btn-secondary" onclick="subscribe()">Подписаться за $49/месяц</button>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="report-section">
+                <h2 class="section-title">Additional Information</h2>
+                <div class="report-data" id="additionalInfo">
+                    <div class="data-row">
+                        <span class="data-label">Mileage:</span>
+                        <span class="data-value" id="mileage">-</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Fuel Type:</span>
+                        <span class="data-value" id="fuelType">-</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Body Style:</span>
+                        <span class="data-value" id="bodyStyle">-</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Drive Type:</span>
+                        <span class="data-value" id="driveType">-</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>VIN TRUST</h3>
-                    <p>Надежная проверка автомобилей по VIN-номеру в США</p>
+        <!-- Right Column: Payment Form -->
+        <div class="report-right">
+            <div class="payment-form">
+                <h2 class="payment-title">Get Full Report</h2>
+                
+                <div class="price-display">
+                    <div class="price-amount">$29.99</div>
+                    <div class="price-period">One-time payment</div>
                 </div>
-                <div class="footer-section">
-                    <h4>Контакты</h4>
-                    <p>Email: support@vincheckusa.com</p>
-                    <p>Телефон: +1 (555) 123-4567</p>
+
+                <form class="stripe-form" id="paymentForm">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" class="form-input" placeholder="1234 5678 9012 3456" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label class="form-label" for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" class="form-input" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cvv">CVV</label>
+                            <input type="text" id="cvv" class="form-input" placeholder="123" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="name">Cardholder Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="John Doe" required>
+                    </div>
+
+                    <button type="submit" class="payment-button" id="paymentButton">
+                        Complete Purchase
+                    </button>
+                </form>
+
+                <div class="payment-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Complete vehicle history</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Accident & damage reports</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Service & maintenance records</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Title & ownership history</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Recall information</span>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Правовая информация</h4>
-                    <a href="/privacy">Политика конфиденциальности</a>
-                    <a href="/terms">Условия использования</a>
-                    <a href="/refund">Возврат средств</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 VIN TRUST. Все права защищены.</p>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- Scripts -->
-    <script src="report.js"></script>
+    <script>
+        // Get VIN from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const vin = urlParams.get('vin');
+        
+        if (vin) {
+            document.getElementById('vinDisplay').textContent = vin;
+            loadReportData(vin);
+        } else {
+            document.getElementById('vinDisplay').textContent = 'No VIN provided';
+        }
+
+        // Load report data from VinAudit API
+        async function loadReportData(vin) {
+            try {
+                // Show loading state
+                document.querySelector('.report-left').classList.add('loading');
+                
+                // Simulate API call (replace with actual VinAudit API)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Mock data - replace with actual VinAudit API response
+                const mockData = {
+                    year: '2015',
+                    make: 'Toyota',
+                    model: 'Camry',
+                    engine: '2.5L 4-Cylinder',
+                    transmission: 'Automatic',
+                    recalls: 0,
+                    airbagStatus: 'Active',
+                    safetyRating: '5 Stars',
+                    accidents: 0,
+                    ownersCount: '2',
+                    serviceRecords: '12',
+                    titleStatus: 'Clean',
+                    mileage: '85,432',
+                    fuelType: 'Gasoline',
+                    bodyStyle: 'Sedan',
+                    driveType: 'Front Wheel Drive'
+                };
+                
+                // Populate the report
+                populateReport(mockData);
+                
+            } catch (error) {
+                console.error('Error loading report:', error);
+                showError('Failed to load report data');
+            } finally {
+                document.querySelector('.report-left').classList.remove('loading');
+            }
+        }
+
+        // Populate report with data
+        function populateReport(data) {
+            document.getElementById('year').textContent = data.year;
+            document.getElementById('make').textContent = data.make;
+            document.getElementById('model').textContent = data.model;
+            document.getElementById('engine').textContent = data.engine;
+            document.getElementById('transmission').textContent = data.transmission;
+            
+            document.getElementById('airbagStatus').textContent = data.airbagStatus;
+            document.getElementById('safetyRating').textContent = data.safetyRating;
+            
+            document.getElementById('ownersCount').textContent = data.ownersCount;
+            document.getElementById('serviceRecords').textContent = data.serviceRecords;
+            
+            document.getElementById('mileage').textContent = data.mileage;
+            document.getElementById('fuelType').textContent = data.fuelType;
+            document.getElementById('bodyStyle').textContent = data.bodyStyle;
+            document.getElementById('driveType').textContent = data.driveType;
+            
+            // Update status badges
+            if (data.recalls > 0) {
+                document.getElementById('recallsStatus').textContent = `${data.recalls} Recalls`;
+                document.getElementById('recallsStatus').className = 'status-badge status-warning';
+            }
+            
+            if (data.accidents > 0) {
+                document.getElementById('accidentsStatus').textContent = `${data.accidents} Accidents`;
+                document.getElementById('accidentsStatus').className = 'status-badge status-danger';
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = `
+                background: #f8d7da;
+                color: #721c24;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 20px 0;
+                text-align: center;
+            `;
+            errorDiv.textContent = message;
+            document.querySelector('.report-left').insertBefore(errorDiv, document.querySelector('.report-section'));
+        }
+
+        // Handle payment form submission
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const paymentButton = document.getElementById('paymentButton');
+            paymentButton.disabled = true;
+            paymentButton.textContent = 'Processing...';
+            
+            try {
+                // Simulate payment processing
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                // Show success message
+                alert('Payment successful! Your full report will be sent to your email.');
+                
+                // Redirect to success page or show full report
+                window.location.href = `success.html?vin=${vin}`;
+                
+            } catch (error) {
+                console.error('Payment error:', error);
+                alert('Payment failed. Please try again.');
+            } finally {
+                paymentButton.disabled = false;
+                paymentButton.textContent = 'Complete Purchase';
+            }
+        });
+
+        // Format card number input
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            if (formattedValue.length > 19) formattedValue = formattedValue.substr(0, 19);
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date input
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Format CVV input
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+    </script>
 </body>
 </html>

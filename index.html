@@ -1851,8 +1851,14 @@
             
             // Wait for progress bar to reach 100% before showing main page
             setTimeout(() => {
-                console.log('Progress bar reached 100%, showing main page');
-                showPage('main');
+                console.log('Progress bar reached 100%, redirecting to report page');
+                // Redirect to report page with VIN parameter
+                if (currentVin) {
+                    window.location.href = `report.html?vin=${currentVin}`;
+                } else {
+                    // Fallback to main page if no VIN
+                    showPage('main');
+                }
             }, 12000); // 12 seconds
         }
     }

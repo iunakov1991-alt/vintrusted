@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - VIN Trust</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .success-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .success-message {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .vin-display {
+            font-size: 1.1rem;
+            color: #495057;
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .download-button {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .download-button:hover {
+            background: linear-gradient(135deg, #20c997, #17a2b8);
+            transform: translateY(-2px);
+        }
+
+        .back-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .back-button:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .email-notice {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .email-notice h3 {
+            margin-top: 0;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">✓</div>
+        <h1 class="success-title">Payment Successful!</h1>
+        <p class="success-message">
+            Thank you for your purchase. Your vehicle history report has been generated and will be sent to your email address.
+        </p>
+        
+        <div class="vin-display" id="vinDisplay">Loading...</div>
+        
+        <div>
+            <button class="download-button" onclick="downloadReport()">Download Report (PDF)</button>
+            <button class="download-button" onclick="viewOnline()">View Online</button>
+            <button class="back-button" onclick="goHome()">Back to Home</button>
+        </div>
+        
+        <div class="email-notice">
+            <h3>📧 Email Delivery</h3>
+            <p>Your complete vehicle history report has been sent to your email address. Please check your inbox and spam folder.</p>
+            <p><strong>Report includes:</strong></p>
+            <ul>
+                <li>Complete accident history</li>
+                <li>Service and maintenance records</li>
+                <li>Title and ownership history</li>
+                <li>Recall information</li>
+                <li>Mileage verification</li>
+                <li>Lemon law information</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Get VIN from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const vin = urlParams.get('vin');
+        
+        if (vin) {
+            document.getElementById('vinDisplay').textContent = `VIN: ${vin}`;
+        } else {
+            document.getElementById('vinDisplay').textContent = 'VIN: Not provided';
+        }
+
+        function downloadReport() {
+            // Simulate PDF download
+            alert('Downloading PDF report...');
+            // In real implementation, this would trigger actual PDF download
+        }
+
+        function viewOnline() {
+            // Redirect to online report viewer
+            window.location.href = `viewer.html?vin=${vin}`;
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
