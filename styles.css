@@ -3315,15 +3315,6 @@ button[type="submit"],
     overflow: hidden;
 }
 
-/* Сетка изображений */
-.image-grid {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 0.1cm;
-}
 
 /* Изображения в поле */
 .field-image {
