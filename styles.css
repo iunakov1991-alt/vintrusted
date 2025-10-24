@@ -3405,17 +3405,7 @@ button[type="submit"],
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, 
-        rgba(0, 0, 0, 1) 0%, 
-        rgba(0, 0, 0, 0.95) 2%,
-        rgba(0, 0, 0, 0.8) 5%,
-        rgba(0, 0, 0, 0.4) 10%,
-        transparent 20%, 
-        transparent 80%, 
-        rgba(0, 0, 0, 0.4) 90%,
-        rgba(0, 0, 0, 0.8) 95%,
-        rgba(0, 0, 0, 0.95) 98%,
-        rgba(0, 0, 0, 1) 100%);
+    background: transparent;
     pointer-events: none;
     z-index: 2;
 }
