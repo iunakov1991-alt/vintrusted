@@ -619,12 +619,8 @@
                     <div class="price-period">Trial for 10 days, then $49/month</div>
                 </div>
 
-                <!-- Stripe Payment Element -->
-                <div id="payment-element">
-                    <!-- Stripe Elements will create form elements here -->
-                </div>
-
-                <div id="payment-message" class="payment-message"></div>
+                <!-- Stripe Payment Widget -->
+                <div id="vin-pay"></div>
 
                 <div class="payment-features">
                     <div class="feature-item">
@@ -884,112 +880,6 @@
             addModeSwitchListeners();
         }
 
-        // Initialize Stripe Payment Element
-        let stripe, elements, paymentElement;
-        
-        async function initializeStripe() {
-            try {
-                // Get Stripe configuration
-                const configResponse = await fetch('/api/stripe-config');
-                const config = await configResponse.json();
-                
-                // Create payment intent
-                const paymentIntentResponse = await fetch('/api/create-payment-intent', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        amount: 300, // $3.00 in cents
-                        currency: 'usd'
-                    })
-                });
-                
-                const { clientSecret } = await paymentIntentResponse.json();
-                
-                // Initialize Stripe
-                stripe = Stripe(config.publishableKey);
-                
-                // Create payment element
-                elements = stripe.elements({
-                    clientSecret,
-                    appearance: {
-                        theme: 'stripe',
-                        variables: {
-                            colorPrimary: '#007bff',
-                            colorBackground: '#ffffff',
-                            colorText: '#30313d',
-                            colorDanger: '#df1b41',
-                            fontFamily: 'system-ui, sans-serif',
-                            spacingUnit: '4px',
-                            borderRadius: '8px',
-                        }
-                    }
-                });
-                
-                paymentElement = elements.create('payment');
-                paymentElement.mount('#payment-element');
-                
-                // Handle form submission
-                const form = document.createElement('form');
-                form.addEventListener('submit', handleSubmit);
-                
-                // Add submit button
-                const submitButton = document.createElement('button');
-                submitButton.textContent = 'Complete Purchase - $3.00';
-                submitButton.className = 'payment-button';
-                submitButton.id = 'submit-button';
-                form.appendChild(submitButton);
-                
-                // Insert form after payment element
-                const paymentElementDiv = document.getElementById('payment-element');
-                paymentElementDiv.parentNode.insertBefore(form, paymentElementDiv.nextSibling);
-                
-            } catch (error) {
-                console.error('Error initializing Stripe:', error);
-                showMessage('Error loading payment form. Please refresh the page.', 'error');
-            }
-        }
-        
-        async function handleSubmit(event) {
-            event.preventDefault();
-            
-            const submitButton = document.getElementById('submit-button');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Processing...';
-            
-            try {
-                const {error} = await stripe.confirmPayment({
-                    elements,
-                    confirmParams: {
-                        return_url: `${window.location.origin}/success.html?vin=${vin}`,
-                    },
-                });
-                
-                if (error) {
-                    showMessage(error.message, 'error');
-                }
-                
-            } catch (err) {
-                console.error('Payment error:', err);
-                showMessage('Payment failed. Please try again.', 'error');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Complete Purchase - $3.00';
-            }
-        }
-        
-        function showMessage(message, type) {
-            const messageDiv = document.getElementById('payment-message');
-            messageDiv.textContent = message;
-            messageDiv.className = `payment-message ${type}`;
-        }
-        
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeStripe();
-        });
-
         // Retry search functions
         function retrySearch(mode) {
             if (mode === 'vin') {
@@ -1049,14 +939,6 @@
     <!-- Stripe Payment Widget -->
     <script src="https://js.stripe.com/v3/"></script>
     <script src="/public/vin-stripe.js"></script>
-    <div id="vin-pay"></div>
-    <script>
-        // Initialize Stripe widget when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            if (window.VIN && window.VIN.mount) {
-                VIN.mount('#vin-pay', { apiBase: '/api' });
-            }
-        });
-    </script>
+    <script>VIN.mount('#vin-pay');</script>
 </body>
 </html>
