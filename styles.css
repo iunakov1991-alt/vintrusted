@@ -3330,7 +3330,7 @@ button[type="submit"],
     background: #FFD700;
     border-radius: 25px;
     z-index: 10;
-    animation: progressBarMove 5s linear forwards;
+    animation: progressBarMove 15s linear forwards;
 }
 
 @keyframes progressBarMove {
