@@ -988,5 +988,18 @@
             });
         }
     </script>
+
+    <!-- Stripe Payment Widget -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/api/vin-stripe.js"></script>
+    <div id="vin-pay"></div>
+    <script>
+        // Initialize Stripe widget when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.VIN && window.VIN.mount) {
+                VIN.mount('#vin-pay', { apiBase: '/api' });
+            }
+        });
+    </script>
 </body>
 </html>
