@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VIN Unlimited — Оплата</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 40px; }
+    #card-element { border:1px solid #ddd; padding:12px; border-radius:8px; }
+    button { padding: 10px 16px; border-radius: 8px; border: 0; background: #111; color:#fff; }
+    button[disabled] { opacity:.6; cursor:not-allowed; }
+    .row { margin: 12px 0; }
+    .note { color:#666; font-size: 12px; }
+    #msg { margin-top: 10px; color:#b00020; }
+  </style>
+</head>
+<body>
+  <h1>Оплата триала</h1>
+  <p class="note">$3 сейчас. Автосписания $49 на 10-й день и $49 на 30-й день. Отмена в любой момент.</p>
+
+  <form id="payment-form">
+    <div class="row">
+      <input id="email" type="email" placeholder="Email для чека/уведомлений" required style="padding:10px;width:320px;border:1px solid #ddd;border-radius:8px;" />
+    </div>
+    
+    <div id="card-element" class="row">
+    </div>
+    
+    <label class="row">
+      <input type="checkbox" id="consent" required>
+      Соглашаюсь на авто-списание $49 дважды (~$1.60/день) после триала. Отмена в любой момент.
+    </label>
+    
+    <button id="pay-btn" type="submit">Оплатить $3 за 10 дней триал</button>
+    <div id="msg"></div>
+  </form>
+
+  <script>
+    let stripe, elements, card, setupClientSecret;
+
+    (async function init() {
+      const cfg = await fetch('/stripe-config').then(r=>r.json());
+      stripe = Stripe(cfg.publishableKey);
+      elements = stripe.elements();
+      card = elements.create('card');
+      card.mount('#card-element');
+      const si = await fetch('/create-setup-intent', { method:'POST' }).then(r=>r.json());
+      setupClientSecret = si.client_secret;
+    })();
+
+    const form = document.getElementById('payment-form');
+    const btn = document.getElementById('pay-btn');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.textContent = '';
+      if (!document.getElementById('consent').checked) { msg.textContent='Согласие обязательно'; return; }
+      btn.disabled = true;
+
+      try {
+        const email = document.getElementById('email').value;
+        const { setupIntent, error: siErr } = await stripe.confirmCardSetup(setupClientSecret, { payment_method: { card } });
+        if (siErr) throw siErr;
+
+        const res = await fetch('/checkout-trial-then-two-charges', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ setup_intent_id: setupIntent.id, consent: true, email })
+        }).then(r=>r.json());
+
+        if (res.error) throw new Error(res.error);
+        if (res.next_action && res.client_secret) {
+          const piRes = await stripe.confirmCardPayment(res.client_secret);
+          if (piRes.error) throw piRes.error;
+          window.location.href = res.success_url || '/success.html';
+          return;
+        }
+        window.location.href = res.success_url || '/success.html';
+      } catch (err) {
+        console.error(err);
+        msg.textContent = err.message || 'Ошибка оплаты';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
