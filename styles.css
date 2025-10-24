@@ -3459,13 +3459,13 @@ button[type="submit"],
 }
 
 .loading-page .category-item.completed {
-    border-color: #FFD700; /* Changed from green to yellow */
-    background: rgba(255, 215, 0, 0.1);
+    border-color: transparent;
+    background: transparent;
 }
 
 .loading-page .category-item.loading {
-    border-color: #FFD700; /* Changed from yellow warning to yellow */
-    background: rgba(255, 215, 0, 0.05);
+    border-color: transparent;
+    background: transparent;
 }
 
 .status-icon {
