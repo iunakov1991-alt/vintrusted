@@ -1854,13 +1854,13 @@
             progressBar.style.animation = 'none';
             progressBar.offsetHeight; // Trigger reflow
             progressBar.style.animation = 'progressBarMove 15s linear forwards';
+            
+            // Wait for progress bar to reach 100% before showing main page
+            setTimeout(() => {
+                console.log('Progress bar reached 100%, showing main page');
+                showPage('main');
+            }, 15000); // 100% of 15s = 15s
         }
-        
-        // Simulate loading process
-        setTimeout(() => {
-            console.log('Loading complete, showing main page');
-            showPage('main');
-        }, 5000); // 5 seconds loading
     }
     
     // Mode switching handler - simplified version
