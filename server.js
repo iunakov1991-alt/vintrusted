@@ -85,16 +85,29 @@ app.post('/checkout-trial-then-two-charges', async (req, res) => {
       return res.json({ next_action: true, client_secret: trialPi.client_secret, return_url: returnUrl });
     }
 
+    // План: начать через 10 дней, затем две последовательные фазы по 1 биллу ($49 каждая)
     const now = Math.floor(Date.now() / 1000);
-    const t10 = now + 10 * 24 * 60 * 60;
-    const t30 = now + 30 * 24 * 60 * 60;
+    const t10 = now + 10 * 24 * 60 * 60; // старт всего расписания
 
     const schedule = await stripe.subscriptionSchedules.create({
       customer: customer.id,
+      start_date: t10,            // ВАЖНО: дата старта на уровне расписания
       end_behavior: 'cancel',
       phases: [
-        { start_date: t10, iterations: 1, default_payment_method: pm, collection_method: 'charge_automatically', proration_behavior: 'none', items: [{ price: process.env.PRICE_49_RECURRING }] },
-        { start_date: t30, iterations: 1, default_payment_method: pm, collection_method: 'charge_automatically', proration_behavior: 'none', items: [{ price: process.env.PRICE_49_RECURRING }] }
+        {
+          iterations: 1,         // первый инвойс через ~30 дней от старта фазы (по цене)
+          default_payment_method: pm,
+          collection_method: 'charge_automatically',
+          proration_behavior: 'none',
+          items: [{ price: process.env.PRICE_49_RECURRING }]
+        },
+        {
+          iterations: 1,         // второй инвойс сразу после окончания первой фазы
+          default_payment_method: pm,
+          collection_method: 'charge_automatically',
+          proration_behavior: 'none',
+          items: [{ price: process.env.PRICE_49_RECURRING }]
+        }
       ]
     });
 
