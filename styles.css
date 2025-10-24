@@ -3363,17 +3363,40 @@ button[type="submit"],
     transition: all 0.5s ease;
 }
 
-/* Желтый прогресс-бар */
+/* Желтый прогресс-бар с текстом */
 .progress-bar-overlay {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 0%;
-    background: #FFD700;
+    background: linear-gradient(90deg, #FFD700, #FFA500);
     border-radius: 25px;
     z-index: 10;
     animation: progressBarMove 12s linear forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.progress-text {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    animation: textPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes textPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
 }
 
 @keyframes progressBarMove {
