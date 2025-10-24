@@ -3315,47 +3315,6 @@ button[type="submit"],
     overflow: hidden;
 }
 
-/* Контейнер для плывущих изображений */
-.floating-images {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* Плывущие изображения */
-.floating-img {
-    position: absolute;
-    width: 1.48cm;
-    height: 1.48cm;
-    opacity: 0.8;
-    object-fit: contain;
-    border-radius: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-    animation: simpleMove 12s linear infinite;
-}
-
-/* Простая анимация движения справа налево - медленнее */
-@keyframes simpleMove {
-    0% { 
-        left: 120%;
-        transform: translateY(-50%);
-    }
-    100% { 
-        left: -60%;
-        transform: translateY(-50%);
-    }
-}
-
-/* Задержки для каждого изображения, чтобы они ехали друг за другом */
-.floating-img:nth-child(1) { animation-delay: 0s; }
-.floating-img:nth-child(2) { animation-delay: 2s; }
-.floating-img:nth-child(3) { animation-delay: 4s; }
-.floating-img:nth-child(4) { animation-delay: 6s; }
-.floating-img:nth-child(5) { animation-delay: 8s; }
 
 /* Центрированный статус-бар с лупой слева */
 .progress-container {
