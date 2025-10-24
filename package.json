@@ -89,7 +89,6 @@
     "side-channel-weakmap": "^1.0.2",
     "simple-update-notifier": "^1.1.0",
     "statuses": "^2.0.1",
-    "stripe": "^12.18.0",
     "supports-color": "^5.5.0",
     "to-regex-range": "^5.0.1",
     "toidentifier": "^1.0.1",
