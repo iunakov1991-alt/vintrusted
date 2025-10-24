@@ -3333,8 +3333,6 @@ button[type="submit"],
     opacity: 0.8;
     object-fit: contain;
     border-radius: 6px;
-    left: auto;
-    right: 0;
     top: 50%;
     transform: translateY(-50%);
     animation: simpleMove 12s linear infinite;
@@ -3342,8 +3340,14 @@ button[type="submit"],
 
 /* Простая анимация движения справа налево - медленнее */
 @keyframes simpleMove {
-    0% { transform: translateX(200px) translateY(-50%); }
-    100% { transform: translateX(-1200px) translateY(-50%); }
+    0% { 
+        left: 100%;
+        transform: translateY(-50%);
+    }
+    100% { 
+        left: -50%;
+        transform: translateY(-50%);
+    }
 }
 
 /* Задержки для каждого изображения, чтобы они ехали друг за другом */
