@@ -3350,7 +3350,7 @@ button[type="submit"],
     height: 100%;
     background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
     border-radius: 40px;
-    transition: width 0.3s ease;
+    width: 0%;
     box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
     position: relative;
     z-index: 5;
@@ -3436,12 +3436,12 @@ button[type="submit"],
 .loading-page .categories-grid {
     display: flex;
     gap: 20px;
-    width: 200%;
+    width: 100%;
     padding: 0;
     order: 4;
-    justify-content: flex-start;
+    justify-content: center;
     position: relative;
-    animation: infiniteScrollReverse 20s linear infinite;
+    animation: none;
     height: 100%;
     align-items: center;
 }
