@@ -3371,19 +3371,19 @@ button[type="submit"],
     }
 }
 
-/* Задержки для каждого изображения, чтобы они ехали друг за другом с промежутком 2 секунды */
+/* Задержки для каждого изображения, чтобы они ехали друг за другом с промежутком 3 секунды */
 .field-image:nth-child(1) { animation-delay: 0s; }
-.field-image:nth-child(2) { animation-delay: 2s; }
-.field-image:nth-child(3) { animation-delay: 4s; }
-.field-image:nth-child(4) { animation-delay: 6s; }
-.field-image:nth-child(5) { animation-delay: 8s; }
-.field-image:nth-child(6) { animation-delay: 10s; }
-.field-image:nth-child(7) { animation-delay: 12s; }
-.field-image:nth-child(8) { animation-delay: 14s; }
-.field-image:nth-child(9) { animation-delay: 16s; }
-.field-image:nth-child(10) { animation-delay: 18s; }
-.field-image:nth-child(11) { animation-delay: 20s; }
-.field-image:nth-child(12) { animation-delay: 22s; }
+.field-image:nth-child(2) { animation-delay: 3s; }
+.field-image:nth-child(3) { animation-delay: 6s; }
+.field-image:nth-child(4) { animation-delay: 9s; }
+.field-image:nth-child(5) { animation-delay: 12s; }
+.field-image:nth-child(6) { animation-delay: 15s; }
+.field-image:nth-child(7) { animation-delay: 18s; }
+.field-image:nth-child(8) { animation-delay: 21s; }
+.field-image:nth-child(9) { animation-delay: 24s; }
+.field-image:nth-child(10) { animation-delay: 27s; }
+.field-image:nth-child(11) { animation-delay: 30s; }
+.field-image:nth-child(12) { animation-delay: 33s; }
 
 
 /* Центрированный статус-бар с лупой слева */
