@@ -3315,6 +3315,11 @@ button[type="submit"],
     overflow: hidden;
 }
 
+/* Принудительно скрыть любые статичные элементы */
+.loading-field > *:not(.field-image) {
+    display: none !important;
+}
+
 
 /* Изображения в поле */
 .field-image {
