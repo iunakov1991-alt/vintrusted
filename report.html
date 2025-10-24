@@ -500,6 +500,9 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/css/stripe-fixes.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script defer src="/vin-stripe.js"></script>
 </head>
 <body>
     <div class="report-container">
@@ -619,8 +622,9 @@
                     <div class="price-period">Trial for 10 days, then $49/month</div>
                 </div>
 
-                <!-- Stripe Payment Widget -->
-                <div id="vin-pay"></div>
+                <!-- PAYMENT_CONTAINER_START -->
+                <div id="vin-pay" data-fill-vin-target="#vinInput"></div>
+                <!-- PAYMENT_CONTAINER_END -->
 
                 <div class="payment-features">
                     <div class="feature-item">
@@ -934,11 +938,13 @@
                 });
             });
         }
+        
+        // Initialize Stripe widget when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.VIN && window.VIN.mount) {
+                VIN.mount('#vin-pay');
+            }
+        });
     </script>
-
-    <!-- Stripe Payment Widget -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="/public/vin-stripe.js"></script>
-    <script>VIN.mount('#vin-pay');</script>
 </body>
 </html>
