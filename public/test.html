@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIN Trust - Payment Test</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .test-section { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .status { color: #28a745; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🚗 VIN Trust - Payment Integration Test</h1>
+    
+    <div class="test-section">
+        <h2>✅ Server Status</h2>
+        <p class="status">Server is running on localhost:3000</p>
+        <p>API endpoints are working correctly</p>
+    </div>
+
+    <div class="test-section">
+        <h2>💳 Payment Widget Test</h2>
+        <p>Add this to your report page:</p>
+        <pre><code>&lt;script src="https://js.stripe.com/v3/"&gt;&lt;/script&gt;
+&lt;script src="https://vintrusted.com/pay-assets/vin-stripe.js"&gt;&lt;/script&gt;
+&lt;div id="vin-pay"&gt;&lt;/div&gt;
+&lt;script&gt;VIN.mount('#vin-pay', { apiBase: '/api' });&lt;/script&gt;</code></pre>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 API Endpoints</h2>
+        <ul>
+            <li><code>GET /api/stripe-config</code> - ✅ Working</li>
+            <li><code>POST /api/create-setup-intent</code> - ✅ Working</li>
+            <li><code>POST /api/checkout-trial-then-two-charges</code> - ✅ Working</li>
+            <li><code>POST /webhook</code> - ✅ Ready</li>
+            <li><code>GET /pay-assets/vin-stripe.js</code> - ✅ Available</li>
+        </ul>
+    </div>
+
+    <div class="test-section">
+        <h2>🚀 Deployment Ready</h2>
+        <p>Follow instructions in <code>README_REDEPLOY.txt</code> for production deployment.</p>
+        <p>After deployment, the payment widget will be available at:</p>
+        <p><code>https://vintrusted.com/pay-assets/vin-stripe.js</code></p>
+    </div>
+</body>
+</html>

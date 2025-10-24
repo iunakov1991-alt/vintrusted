@@ -55,6 +55,11 @@ app.use(cors());
 // Отдаём только ассеты виджета по отдельному префиксу, НО НЕ корневую страницу
 app.use('/pay-assets', express.static(path.join(__dirname, 'public')));
 
+// Тестовая страница для проверки интеграции
+app.get('/test', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'test.html'));
+});
+
 // Конфиг для фронта
 app.get('/api/stripe-config', (req, res) => {
   res.json({
