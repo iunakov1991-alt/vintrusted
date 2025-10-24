@@ -227,6 +227,9 @@
       ]
     }
     </script>
+    
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <!-- Main Page -->
@@ -1055,9 +1058,24 @@
     </div>
 
     <script>
-    // Simple and reliable page state management
-    let currentPage = 'main'; // 'main', 'loading'
-    let currentVin = '';
+        // Stripe Configuration
+        const STRIPE_CONFIG = {
+            PUBLISHABLE_KEY: 'pk_live_YOUR_PUBLISHABLE_KEY_HERE',
+            SECRET_KEY: 'sk_live_YOUR_SECRET_KEY_HERE',
+            PRICE_TRIAL: 'price_1SLgSWIyzEAMYCDXa8g7uV6W', // $3 за 10 дней триал
+            PRICE_MONTHLY: 'price_1SLJ2AIyzEAMYCDX2OkNtk20', // $49 месячная подписка
+            CURRENCY: 'usd',
+            TRIAL_DAYS: 10,
+            SUCCESS_URL: window.location.origin + '/success',
+            CANCEL_URL: window.location.origin + '/cancel'
+        };
+
+        // Initialize Stripe
+        const stripe = Stripe(STRIPE_CONFIG.PUBLISHABLE_KEY);
+
+        // Simple and reliable page state management
+        let currentPage = 'main'; // 'main', 'loading'
+        let currentVin = '';
     
     
     
@@ -2064,6 +2082,54 @@
     
     
     
+    // Stripe Checkout Session creation
+    async function createStripeCheckoutSession() {
+        try {
+            const response = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    priceId: STRIPE_CONFIG.PRICE_TRIAL,
+                    successUrl: STRIPE_CONFIG.SUCCESS_URL,
+                    cancelUrl: STRIPE_CONFIG.CANCEL_URL,
+                    vin: currentVin
+                })
+            });
+
+            const session = await response.json();
+            
+            if (session.error) {
+                console.error('Stripe error:', session.error);
+                alert('Ошибка создания платежа: ' + session.error.message);
+                return;
+            }
+
+            // Redirect to Stripe Checkout
+            const { error } = await stripe.redirectToCheckout({
+                sessionId: session.id
+            });
+
+            if (error) {
+                console.error('Stripe redirect error:', error);
+                alert('Ошибка перенаправления: ' + error.message);
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            alert('Ошибка сети. Попробуйте еще раз.');
+        }
+    }
+
+    // Process payment function
+    window.processPayment = function() {
+        if (!currentVin) {
+            alert('Пожалуйста, введите VIN номер');
+            return;
+        }
+        createStripeCheckoutSession();
+    };
+
     console.log('Page state management initialized - v3.1 - INTERACTIVE RESULTS SCREEN');
     
     // Initialize Results Screen Tabs
