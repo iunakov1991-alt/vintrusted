@@ -3320,16 +3320,16 @@ button[type="submit"],
     padding: 0.2cm;
 }
 
-/* Изображения в поле - возвращаем исходный размер */
+/* Изображения в поле - размер чуть меньше поля */
 .field-image {
-    width: 4.16cm; /* Возвращаем исходный размер */
-    height: 4.16cm; /* Возвращаем исходный размер */
+    width: 1.2cm; /* Чуть меньше поля высотой 1.5cm */
+    height: 1.2cm; /* Чуть меньше поля высотой 1.5cm */
     object-fit: contain;
     border-radius: 8px;
     opacity: 0.8;
     transition: all 0.3s ease;
     flex: 0 0 auto;
-    margin: 0.1cm;
+    margin: 0.05cm;
 }
 
 .field-image:hover {
