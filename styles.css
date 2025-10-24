@@ -3345,12 +3345,10 @@ button[type="submit"],
 /* Анимация движения справа налево */
 @keyframes moveRightToLeft {
     0% { 
-        left: 150%;
-        transform: translateY(-50%);
+        transform: translateX(150%) translateY(-50%);
     }
     100% { 
-        left: -100%;
-        transform: translateY(-50%);
+        transform: translateX(-100%) translateY(-50%);
     }
 }
 
