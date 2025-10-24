@@ -3342,7 +3342,7 @@ button[type="submit"],
 
 /* Простая анимация движения справа налево - медленнее */
 @keyframes simpleMove {
-    0% { transform: translateX(0px) translateY(-50%); }
+    0% { transform: translateX(200px) translateY(-50%); }
     100% { transform: translateX(-1200px) translateY(-50%); }
 }
 
