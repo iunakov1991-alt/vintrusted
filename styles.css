@@ -3341,8 +3341,8 @@ button[type="submit"],
 
 /* Простая анимация движения справа налево - медленнее */
 @keyframes simpleMove {
-    0% { transform: translateX(900px) translateY(-50%); }
-    100% { transform: translateX(-100px) translateY(-50%); }
+    0% { transform: translateX(1000px) translateY(-50%); }
+    100% { transform: translateX(-200px) translateY(-50%); }
 }
 
 /* Задержки для каждого изображения, чтобы они ехали друг за другом */
