@@ -3328,22 +3328,29 @@ button[type="submit"],
 /* Плывущие изображения */
 .floating-img {
     position: absolute;
-    width: 1.4cm;
-    height: 1.4cm;
+    width: 1.45cm;
+    height: 1.45cm;
     opacity: 0.7;
     object-fit: contain;
     border-radius: 6px;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    animation: simpleMove 6s linear infinite;
+    animation: simpleMove 12s linear infinite;
 }
 
-/* Простая анимация движения справа налево */
+/* Простая анимация движения справа налево - медленнее */
 @keyframes simpleMove {
     0% { transform: translateX(800px) translateY(-50%); }
     100% { transform: translateX(-50px) translateY(-50%); }
 }
+
+/* Задержки для каждого изображения, чтобы они ехали друг за другом */
+.floating-img:nth-child(1) { animation-delay: 0s; }
+.floating-img:nth-child(2) { animation-delay: 2s; }
+.floating-img:nth-child(3) { animation-delay: 4s; }
+.floating-img:nth-child(4) { animation-delay: 6s; }
+.floating-img:nth-child(5) { animation-delay: 8s; }
 
 /* Центрированный статус-бар с лупой слева */
 .progress-container {
