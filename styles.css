@@ -3334,7 +3334,6 @@ button[type="submit"],
     border-radius: 8px;
     opacity: 0.8;
     top: 50%;
-    left: 150%;
     transform: translateY(-50%);
     animation: moveRightToLeft 15s linear infinite;
 }
