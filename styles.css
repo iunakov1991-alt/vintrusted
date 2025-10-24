@@ -3327,8 +3327,8 @@ button[type="submit"],
 
 /* Изображения в поле */
 .field-image {
-    width: 5.2cm;
-    height: 5.2cm;
+    width: 4.16cm;
+    height: 4.16cm;
     object-fit: contain;
     border-radius: 8px;
     opacity: 0.8;
