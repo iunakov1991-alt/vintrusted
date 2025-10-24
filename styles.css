@@ -3438,13 +3438,13 @@ button[type="submit"],
 .loading-page .category-item {
     background: transparent;
     border-radius: 12px;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     border: none;
     transition: all 0.3s ease;
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -3452,10 +3452,56 @@ button[type="submit"],
 }
 
 .loading-page .category-item img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 120%;
+    max-height: 120%;
     object-fit: contain;
     border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Эффект увеличения для центральных элементов */
+.loading-page .category-item:nth-child(1) img,
+.loading-page .category-item:nth-child(2) img,
+.loading-page .category-item:nth-child(3) img,
+.loading-page .category-item:nth-child(4) img,
+.loading-page .category-item:nth-child(5) img {
+    animation: centerScale 20s linear infinite;
+}
+
+@keyframes centerScale {
+    0% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(1.2);
+    }
+    20% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.2);
+    }
+    40% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    60% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    80% {
+        transform: scale(1);
+    }
+    90% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .loading-page .category-item.completed {
@@ -4734,9 +4780,9 @@ button[type="submit"],
     }
     
     .loading-page .category-item {
-        padding: 15px;
-        width: 100px;
-        height: 100px;
+        padding: 8px;
+        width: 120px;
+        height: 120px;
     }
     
     .loading-page .category-icon {
@@ -4771,9 +4817,9 @@ button[type="submit"],
     }
     
     .loading-page .category-item {
-        padding: 12px;
-        width: 80px;
-        height: 80px;
+        padding: 6px;
+        width: 100px;
+        height: 100px;
     }
     
     .loading-page .category-icon {
