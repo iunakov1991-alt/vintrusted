@@ -206,6 +206,31 @@
             transform: none;
         }
 
+        /* Stripe Payment Element Styles */
+        #payment-element {
+            margin-bottom: 20px;
+        }
+
+        .payment-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .payment-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .payment-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
         .payment-features {
             margin-top: 20px;
             padding-top: 20px;
@@ -590,41 +615,16 @@
                 <h2 class="payment-title">Get Full Report</h2>
                 
                 <div class="price-display">
-                    <div class="price-amount">$29.99</div>
-                    <div class="price-period">One-time payment</div>
+                    <div class="price-amount">$3.00</div>
+                    <div class="price-period">Trial for 10 days, then $49/month</div>
                 </div>
 
-                <form class="stripe-form" id="paymentForm">
-                    <div class="form-group">
-                        <label class="form-label" for="email">Email Address</label>
-                        <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
-                    </div>
+                <!-- Stripe Payment Element -->
+                <div id="payment-element">
+                    <!-- Stripe Elements will create form elements here -->
+                </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="cardNumber">Card Number</label>
-                        <input type="text" id="cardNumber" class="form-input" placeholder="1234 5678 9012 3456" required>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <div class="form-group">
-                            <label class="form-label" for="expiry">Expiry Date</label>
-                            <input type="text" id="expiry" class="form-input" placeholder="MM/YY" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="cvv">CVV</label>
-                            <input type="text" id="cvv" class="form-input" placeholder="123" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="name">Cardholder Name</label>
-                        <input type="text" id="name" class="form-input" placeholder="John Doe" required>
-                    </div>
-
-                    <button type="submit" class="payment-button" id="paymentButton">
-                        Complete Purchase
-                    </button>
-                </form>
+                <div id="payment-message" class="payment-message"></div>
 
                 <div class="payment-features">
                     <div class="feature-item">
@@ -884,53 +884,110 @@
             addModeSwitchListeners();
         }
 
-        // Handle payment form submission
-        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const paymentButton = document.getElementById('paymentButton');
-            paymentButton.disabled = true;
-            paymentButton.textContent = 'Processing...';
-            
+        // Initialize Stripe Payment Element
+        let stripe, elements, paymentElement;
+        
+        async function initializeStripe() {
             try {
-                // Simulate payment processing
-                await new Promise(resolve => setTimeout(resolve, 3000));
+                // Get Stripe configuration
+                const configResponse = await fetch('/api/stripe-config');
+                const config = await configResponse.json();
                 
-                // Show success message
-                alert('Payment successful! Your full report will be sent to your email.');
+                // Create payment intent
+                const paymentIntentResponse = await fetch('/api/create-payment-intent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        amount: 300, // $3.00 in cents
+                        currency: 'usd'
+                    })
+                });
                 
-                // Redirect to success page or show full report
-                window.location.href = `success.html?vin=${vin}`;
+                const { clientSecret } = await paymentIntentResponse.json();
+                
+                // Initialize Stripe
+                stripe = Stripe(config.publishableKey);
+                
+                // Create payment element
+                elements = stripe.elements({
+                    clientSecret,
+                    appearance: {
+                        theme: 'stripe',
+                        variables: {
+                            colorPrimary: '#007bff',
+                            colorBackground: '#ffffff',
+                            colorText: '#30313d',
+                            colorDanger: '#df1b41',
+                            fontFamily: 'system-ui, sans-serif',
+                            spacingUnit: '4px',
+                            borderRadius: '8px',
+                        }
+                    }
+                });
+                
+                paymentElement = elements.create('payment');
+                paymentElement.mount('#payment-element');
+                
+                // Handle form submission
+                const form = document.createElement('form');
+                form.addEventListener('submit', handleSubmit);
+                
+                // Add submit button
+                const submitButton = document.createElement('button');
+                submitButton.textContent = 'Complete Purchase - $3.00';
+                submitButton.className = 'payment-button';
+                submitButton.id = 'submit-button';
+                form.appendChild(submitButton);
+                
+                // Insert form after payment element
+                const paymentElementDiv = document.getElementById('payment-element');
+                paymentElementDiv.parentNode.insertBefore(form, paymentElementDiv.nextSibling);
                 
             } catch (error) {
-                console.error('Payment error:', error);
-                alert('Payment failed. Please try again.');
+                console.error('Error initializing Stripe:', error);
+                showMessage('Error loading payment form. Please refresh the page.', 'error');
+            }
+        }
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            
+            const submitButton = document.getElementById('submit-button');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Processing...';
+            
+            try {
+                const {error} = await stripe.confirmPayment({
+                    elements,
+                    confirmParams: {
+                        return_url: `${window.location.origin}/success.html?vin=${vin}`,
+                    },
+                });
+                
+                if (error) {
+                    showMessage(error.message, 'error');
+                }
+                
+            } catch (err) {
+                console.error('Payment error:', err);
+                showMessage('Payment failed. Please try again.', 'error');
             } finally {
-                paymentButton.disabled = false;
-                paymentButton.textContent = 'Complete Purchase';
+                submitButton.disabled = false;
+                submitButton.textContent = 'Complete Purchase - $3.00';
             }
-        });
-
-        // Format card number input
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
-            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
-            if (formattedValue.length > 19) formattedValue = formattedValue.substr(0, 19);
-            e.target.value = formattedValue;
-        });
-
-        // Format expiry date input
-        document.getElementById('expiry').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            e.target.value = value;
-        });
-
-        // Format CVV input
-        document.getElementById('cvv').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        }
+        
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('payment-message');
+            messageDiv.textContent = message;
+            messageDiv.className = `payment-message ${type}`;
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStripe();
         });
 
         // Retry search functions
