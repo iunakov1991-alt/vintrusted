@@ -1046,18 +1046,6 @@
                     <h1 class="loading-title">Searching Vehicle Records for VIN <span id="vinNumber">Loading...</span></h1>
                     <div class="loading-field">
                         <div class="progress-bar-overlay"></div>
-                        <img src="images/11.png?v=20250116" alt="Image 11" class="field-image">
-                        <img src="images/12.png?v=20250116" alt="Image 12" class="field-image">
-                        <img src="images/13.png?v=20250116" alt="Image 13" class="field-image">
-                        <img src="images/14.png?v=20250116" alt="Image 14" class="field-image">
-                        <img src="images/15.png?v=20250116" alt="Image 15" class="field-image">
-                        <img src="images/16.png?v=20250116" alt="Image 16" class="field-image">
-                        <img src="images/17.png?v=20250116" alt="Image 17" class="field-image">
-                        <img src="images/18.png?v=20250116" alt="Image 18" class="field-image">
-                        <img src="images/19.png?v=20250116" alt="Image 19" class="field-image">
-                        <img src="images/110.png?v=20250116" alt="Image 110" class="field-image">
-                        <img src="images/111.png?v=20250116" alt="Image 111" class="field-image">
-                        <img src="images/112.png?v=20250116" alt="Image 112" class="field-image">
                     </div>
                 </div>
             </div>
@@ -1838,23 +1826,12 @@
     function startLoadingAnimations() {
         console.log('Starting loading animations...');
         
-        // Get all field images
-        const fieldImages = document.querySelectorAll('.field-image');
+        // Start progress bar animation
         const progressBar = document.querySelector('.progress-bar-overlay');
-        
         if (progressBar) {
-            // Start progress bar animation
             progressBar.style.animation = 'none';
             progressBar.offsetHeight; // Trigger reflow
             progressBar.style.animation = 'progressBarMove 12s linear forwards';
-            
-            // Add scale-up animation to each image 1 second before it gets covered
-            fieldImages.forEach((img, index) => {
-                const delay = (index * 1) + 0.5; // 0.5s, 1.5s, 2.5s, etc.
-                setTimeout(() => {
-                    img.classList.add('scale-up');
-                }, delay * 1000);
-            });
             
             // Wait for progress bar to reach 100% before showing main page
             setTimeout(() => {
