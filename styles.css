@@ -3341,11 +3341,11 @@ button[type="submit"],
 /* Простая анимация движения справа налево - медленнее */
 @keyframes simpleMove {
     0% { 
-        left: 100%;
+        left: 120%;
         transform: translateY(-50%);
     }
     100% { 
-        left: -50%;
+        left: -60%;
         transform: translateY(-50%);
     }
 }
