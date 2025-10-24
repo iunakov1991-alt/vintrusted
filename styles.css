@@ -3316,8 +3316,30 @@ button[type="submit"],
 }
 
 /* Принудительно скрыть любые статичные элементы */
-.loading-field > *:not(.field-image) {
+.loading-field > *:not(.field-image):not(.progress-bar-overlay) {
     display: none !important;
+}
+
+/* Желтый прогресс-бар */
+.progress-bar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: #FFD700;
+    border-radius: 25px;
+    z-index: 10;
+    animation: progressBarMove 5s linear forwards;
+}
+
+@keyframes progressBarMove {
+    0% { 
+        width: 0%;
+    }
+    100% { 
+        width: 100%;
+    }
 }
 
 
