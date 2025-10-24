@@ -3327,17 +3327,46 @@ button[type="submit"],
 
 /* Изображения в поле */
 .field-image {
+    position: absolute;
     width: 1.2cm;
     height: 1.2cm;
     object-fit: contain;
     border-radius: 8px;
     opacity: 0.8;
-    transition: opacity 0.3s ease;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: moveRightToLeft 15s linear infinite;
 }
 
 .field-image:hover {
     opacity: 1;
 }
+
+/* Анимация движения справа налево */
+@keyframes moveRightToLeft {
+    0% { 
+        left: 100%;
+        transform: translateY(-50%);
+    }
+    100% { 
+        left: -20%;
+        transform: translateY(-50%);
+    }
+}
+
+/* Задержки для каждого изображения, чтобы они ехали друг за другом */
+.field-image:nth-child(1) { animation-delay: 0s; }
+.field-image:nth-child(2) { animation-delay: 1.25s; }
+.field-image:nth-child(3) { animation-delay: 2.5s; }
+.field-image:nth-child(4) { animation-delay: 3.75s; }
+.field-image:nth-child(5) { animation-delay: 5s; }
+.field-image:nth-child(6) { animation-delay: 6.25s; }
+.field-image:nth-child(7) { animation-delay: 7.5s; }
+.field-image:nth-child(8) { animation-delay: 8.75s; }
+.field-image:nth-child(9) { animation-delay: 10s; }
+.field-image:nth-child(10) { animation-delay: 11.25s; }
+.field-image:nth-child(11) { animation-delay: 12.5s; }
+.field-image:nth-child(12) { animation-delay: 13.75s; }
 
 
 /* Центрированный статус-бар с лупой слева */
