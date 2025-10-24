@@ -392,7 +392,7 @@
                 <div class="results-header">
                     <h2 class="results-title">Check a Car's True Story Before You Buy</h2>
                     <p class="results-subtitle">Get a verified vehicle history report with detailed accident, mileage, and ownership records — powered by ViNtrust data.</p>
-                </div>
+                  </div>
                 <div class="nav-tabs">
                     <button class="nav-tab active" data-tab="odometer">Odometer History</button>
                     <button class="nav-tab" data-tab="ownership">Ownership History</button>
@@ -400,7 +400,7 @@
                     <button class="nav-tab" data-tab="technical">Vehicle Specifications</button>
                     <button class="nav-tab" data-tab="sales">Sale Records</button>
                 </div>
-            </div>
+              </div>
 
             <!-- Results Content -->
             <div class="results-content">
@@ -411,28 +411,28 @@
                         <div class="content-item active" data-tab="odometer">
                             <div class="content-image">
                                 <img src="images/results/odometer-history.png" alt="Odometer History Chart" />
-                            </div>
-                        </div>
+            </div>
+                  </div>
 
                         <!-- Ownership History Content -->
                         <div class="content-item" data-tab="ownership">
                             <div class="content-image">
                                 <img src="images/results/ownership-history.png" alt="Ownership History" />
-                            </div>
-                        </div>
+                </div>
+              </div>
 
                         <!-- Damage Check Content -->
                         <div class="content-item" data-tab="damage">
                             <div class="content-image">
                                 <img src="images/results/damage-check.png" alt="Damage Check" />
-                            </div>
-                        </div>
+            </div>
+                  </div>
 
                         <!-- Technical Data Content -->
                         <div class="content-item" data-tab="technical">
                             <div class="content-image">
                                 <img src="images/results/vehicle-specifications.png" alt="Vehicle Specifications" />
-                            </div>
+                </div>
                         </div>
 
                         <!-- Sale Records Content -->
@@ -464,8 +464,8 @@
                                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
                             </svg>
                         </button>
-                    </div>
-                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1035,7 +1035,6 @@
                     <div class="header-content">
                         <a href="#" class="logo">
                             <img src="logo-vin-trust.png" alt="VIN TRUST" class="logo-img">
-                            <span class="logo-text">VIN TRUST</span>
                         </a>
   </div>
   </div>
@@ -1044,7 +1043,7 @@
             <!-- Loading Content -->
             <div class="loading-content">
                 <div class="loading-header">
-                    <h1 class="loading-title">Searching Vehicle Records for Plate Number <span id="plateNumber">9JMD134</span></h1>
+                    <h1 class="loading-title">Searching Vehicle Records for VIN <span id="vinNumber">Loading...</span></h1>
                     <div class="progress-container">
                         <div class="search-icon">🔍</div>
                         <div class="progress-wrapper">
@@ -1219,6 +1218,11 @@
                 currentPage = 'loading';
                 currentVin = vin;
                 updateURL('loading', vin);
+                // Update VIN display on loading page
+                const vinNumber = document.getElementById('vinNumber');
+                if (vinNumber && vin) {
+                    vinNumber.textContent = vin;
+                }
                 // Start loading animations
                 startLoadingAnimations();
                 break;
@@ -1249,6 +1253,12 @@
                 vehicleVin.textContent = `VIN: ${vin}`;
             }
             console.log('Display updated to:', vin);
+        }
+        
+        // Update VIN on loading page
+        const vinNumber = document.getElementById('vinNumber');
+        if (vinNumber && vin) {
+            vinNumber.textContent = vin;
         }
         
         // Check if it's a VIN or License Plate
