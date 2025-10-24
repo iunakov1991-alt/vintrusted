@@ -1837,46 +1837,20 @@
     function startLoadingAnimations() {
         console.log('Starting loading animations...');
         
-        // Progress bar animation
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
+        // Force restart animations for all field images
+        const fieldImages = document.querySelectorAll('.field-image');
+        fieldImages.forEach((img, index) => {
+            img.style.animation = 'none';
+            img.offsetHeight; // Trigger reflow
+            img.style.animation = `moveRightToLeft 15s linear infinite`;
+            img.style.animationDelay = `${index * 1.25}s`;
+        });
         
-        let progress = 0;
-        const progressInterval = setInterval(() => {
-            progress += Math.random() * 5;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(progressInterval);
-                
-                // After progress completes, show results page
-                setTimeout(() => {
-                    console.log('Loading complete, showing results page');
-                    showPage('main');
-                }, 1000);
-            }
-            
-            if (progressFill) {
-                progressFill.style.width = progress + '%';
-            }
-            if (progressText) {
-                progressText.textContent = Math.round(progress) + '%';
-            }
-        }, 100);
-        
-        // Category animation
-        const categories = document.querySelectorAll('.category-item');
-        let categoryIndex = 0;
-        
-        const categoryInterval = setInterval(() => {
-            if (categoryIndex < categories.length) {
-                const category = categories[categoryIndex];
-                category.classList.remove('loading');
-                category.classList.add('completed');
-                categoryIndex++;
-            } else {
-                clearInterval(categoryInterval);
-            }
-        }, 500);
+        // Simulate loading process
+        setTimeout(() => {
+            console.log('Loading complete, showing main page');
+            showPage('main');
+        }, 5000); // 5 seconds loading
     }
     
     // Mode switching handler - simplified version
