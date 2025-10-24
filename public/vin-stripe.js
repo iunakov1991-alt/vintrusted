@@ -2,7 +2,12 @@
   async function cfg(){ return (await fetch('/api/stripe-config')).json(); }
   function el(html){ const d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstChild; }
   function getParam(name){ const v=new URLSearchParams(location.search).get(name)||''; return v.trim(); }
-  function sanitizeVIN(v){ v=v.toUpperCase().replace(/[^A-Z0-9]/g,''); if(!/^[A-HJ-NPR-Z0-9]{17}$/.test(v)) return ''; return v; }
+  function sanitizeVIN(v){ 
+    if (!v) return ''; 
+    v = v.toString().toUpperCase().replace(/[^A-Z0-9]/g,''); 
+    if(!/^[A-HJ-NPR-Z0-9]{17}$/.test(v)) return ''; 
+    return v; 
+  }
 
   async function mount(selector){
     const root = typeof selector==='string'? document.querySelector(selector): selector; if(!root) throw new Error('VIN: container not found');

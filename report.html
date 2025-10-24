@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com;">
     <title>Vehicle Report - VIN Trust</title>
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -655,8 +656,18 @@
     <script>
         // Get VIN or Plate from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const vin = urlParams.get('vin');
+        const rawVin = urlParams.get('vin');
         const plate = urlParams.get('plate');
+        
+        // Sanitize VIN to prevent XSS
+        function sanitizeVIN(v) {
+            if (!v) return '';
+            v = v.toString().toUpperCase().replace(/[^A-Z0-9]/g, '');
+            if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(v)) return '';
+            return v;
+        }
+        
+        const vin = sanitizeVIN(rawVin);
         
         if (vin) {
             document.getElementById('vinDisplay').textContent = vin;
@@ -887,12 +898,13 @@
         // Retry search functions
         function retrySearch(mode) {
             if (mode === 'vin') {
-                const vin = document.getElementById('retryVin').value.trim();
+                const rawVin = document.getElementById('retryVin').value.trim();
+                const vin = sanitizeVIN(rawVin);
                 if (!vin) {
-                    alert('Please enter a VIN code');
+                    alert('Please enter a valid 17-character VIN code');
                     return;
                 }
-                window.location.href = `report.html?vin=${vin}`;
+                window.location.href = `report.html?vin=${encodeURIComponent(vin)}`;
             } else if (mode === 'plate') {
                 const state = document.getElementById('retryState').value;
                 const plate = document.getElementById('retryPlate').value.trim();
@@ -900,7 +912,7 @@
                     alert('Please select state and enter license plate');
                     return;
                 }
-                window.location.href = `report.html?plate=${state}-${plate}`;
+                window.location.href = `report.html?plate=${encodeURIComponent(state)}-${encodeURIComponent(plate)}`;
             }
         }
 
