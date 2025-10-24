@@ -1844,7 +1844,7 @@
             img.style.animation = 'none';
             img.style.left = '100%'; // Начальная позиция за правым краем
             img.offsetHeight; // Trigger reflow
-            img.style.animation = `moveRightToLeft 15s linear infinite`;
+            img.style.animation = `moveRightToLeft 30s linear infinite`;
             img.style.animationDelay = `${index * 2}s`; // Промежуток 2s между изображениями
         });
         
@@ -1853,13 +1853,13 @@
         if (progressBar) {
             progressBar.style.animation = 'none';
             progressBar.offsetHeight; // Trigger reflow
-            progressBar.style.animation = 'progressBarMove 15s linear forwards';
+            progressBar.style.animation = 'progressBarMove 30s linear forwards';
             
             // Wait for progress bar to reach 100% before showing main page
             setTimeout(() => {
                 console.log('Progress bar reached 100%, showing main page');
                 showPage('main');
-            }, 15000); // 100% of 15s = 15s
+            }, 30000); // 100% of 30s = 30s
         }
     }
     
