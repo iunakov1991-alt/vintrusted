@@ -3328,8 +3328,8 @@ button[type="submit"],
 /* Изображения в поле */
 .field-image {
     position: absolute;
-    width: 1.2cm;
-    height: 1.2cm;
+    width: 4.16cm;
+    height: 4.16cm;
     object-fit: contain;
     border-radius: 8px;
     opacity: 0.8;
@@ -3345,11 +3345,11 @@ button[type="submit"],
 /* Анимация движения справа налево */
 @keyframes moveRightToLeft {
     0% { 
-        left: 100%;
+        left: 120%;
         transform: translateY(-50%);
     }
     100% { 
-        left: -20%;
+        left: -60%;
         transform: translateY(-50%);
     }
 }
