@@ -1,9 +1,11 @@
 {
   "functions": {
-    "api/webhook.js": { "runtime": "nodejs18.x", "memory": 128, "maxDuration": 10 },
-    "api/*.js": { "runtime": "nodejs18.x" }
+    "api/*.js": {
+      "runtime": "nodejs18.x"
+    }
   },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" }
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
