@@ -1841,6 +1841,7 @@
         const fieldImages = document.querySelectorAll('.field-image');
         fieldImages.forEach((img, index) => {
             img.style.animation = 'none';
+            img.style.left = '100%'; // Начальная позиция за правым краем
             img.offsetHeight; // Trigger reflow
             img.style.animation = `moveRightToLeft 15s linear infinite`;
             img.style.animationDelay = `${index * 1.25}s`;

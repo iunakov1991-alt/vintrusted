@@ -3332,6 +3332,7 @@ button[type="submit"],
     top: 50%;
     transform: translateY(-50%);
     animation: moveRightToLeft 15s linear infinite;
+    left: 100%; /* Начинаем за правым краем поля */
 }
 
 .field-image:hover {
@@ -3341,10 +3342,10 @@ button[type="submit"],
 /* Анимация движения справа налево */
 @keyframes moveRightToLeft {
     0% { 
-        transform: translateX(100%) translateY(-50%);
+        left: 100%;
     }
     100% { 
-        transform: translateX(-100%) translateY(-50%);
+        left: -100%;
     }
 }
 
