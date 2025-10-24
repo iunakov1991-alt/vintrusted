@@ -1,5 +1,1 @@
-node_modules
-.env
-.DS_Store
-*.log
-
+# Оставляем пустым, чтобы НЕ выкидывать /api и vercel.json
