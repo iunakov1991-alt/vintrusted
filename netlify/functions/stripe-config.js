@@ -1,11 +1,27 @@
-export default async function handler(req, res) {
+exports.handler = async (event, context) => {
   try {
     // Временное решение для тестирования
-    res.status(200).json({ 
-      publishableKey: 'pk_test_placeholder', 
-      returnUrl: 'https://vintrusted.com/payment-success' 
-    });
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+      },
+      body: JSON.stringify({ 
+        publishableKey: 'pk_test_placeholder', 
+        returnUrl: 'https://vintrusted.com/payment-success' 
+      })
+    };
   } catch (e) {
-    res.status(500).json({ error: e.message });
+    return {
+      statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ error: e.message })
+    };
   }
-}
+};

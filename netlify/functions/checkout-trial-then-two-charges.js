@@ -1,15 +1,45 @@
-import Stripe from 'stripe';
+const Stripe = require('stripe');
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_20D указывает на price с interval=day, interval_count=20
-export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+exports.handler = async (event, context) => {
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ error: 'Method not allowed' })
+    };
+  }
+
   try {
-    const { setup_intent_id, email } = req.body || {};
-    if (!setup_intent_id) throw new Error('setup_intent_id is required');
+    const body = JSON.parse(event.body);
+    const { setup_intent_id, email } = body || {};
+    
+    if (!setup_intent_id) {
+      return {
+        statusCode: 400,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ error: 'setup_intent_id is required' })
+      };
+    }
 
     const si = await stripe.setupIntents.retrieve(setup_intent_id);
-    if (!si || !si.payment_method) throw new Error('SetupIntent has no payment_method');
+    if (!si || !si.payment_method) {
+      return {
+        statusCode: 400,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ error: 'SetupIntent has no payment_method' })
+      };
+    }
 
     // 1) Customer с привязанным PM
     const customer = await stripe.customers.create({
@@ -48,15 +78,31 @@ export default async function handler(req, res) {
     });
 
     // Если $3 потребовал доп. действия (редко), вернём клиентский secret для confirmCardPayment
-    const payload = { success: true, success_url: process.env.RETURN_URL };
+    const payload = { success: true, success_url: process.env.RETURN_URL || 'https://vintrusted.com/payment-success' };
     if (pi.status === 'requires_action' || pi.status === 'requires_confirmation') {
       payload.next_action = true;
       payload.client_secret = pi.client_secret;
     }
 
-    res.status(200).json(payload);
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+      },
+      body: JSON.stringify(payload)
+    };
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: e.message });
+    return {
+      statusCode: 400,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ error: e.message })
+    };
   }
-}
+};
