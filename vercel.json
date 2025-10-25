@@ -5,6 +5,8 @@
     { "src": "public/**", "use": "@vercel/static" },
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "report.html", "use": "@vercel/static" },
+    { "src": "payment-success.html", "use": "@vercel/static" },
+    { "src": "payment-cancel.html", "use": "@vercel/static" },
     { "src": "css/**", "use": "@vercel/static" },
     { "src": "images/**", "use": "@vercel/static" },
     { "src": "js/**", "use": "@vercel/static" }
