@@ -1,7 +1,6 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" },
     { "src": "stripe-config.js", "use": "@vercel/node" },
     { "src": "create-setup-intent.js", "use": "@vercel/node" },
     { "src": "checkout-trial-then-two-charges.js", "use": "@vercel/node" },
@@ -13,7 +12,6 @@
     { "src": "js/**", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/api/stripe-config", "dest": "/stripe-config.js" },
     { "src": "/api/create-setup-intent", "dest": "/create-setup-intent.js" },
     { "src": "/api/checkout-trial-then-two-charges", "dest": "/checkout-trial-then-two-charges.js" },
