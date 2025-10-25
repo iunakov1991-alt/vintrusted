@@ -1,6 +1,20 @@
 exports.handler = async (event, context) => {
   try {
-    // Временное решение для тестирования
+    // Используем переменные окружения
+    const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+    const returnUrl = process.env.RETURN_URL || 'https://vintrusted.com/payment-success';
+    
+    if (!publishableKey) {
+      return {
+        statusCode: 500,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ error: 'STRIPE_PUBLISHABLE_KEY not configured' })
+      };
+    }
+    
     return {
       statusCode: 200,
       headers: {
@@ -10,8 +24,8 @@ exports.handler = async (event, context) => {
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
       },
       body: JSON.stringify({ 
-        publishableKey: 'pk_test_placeholder', 
-        returnUrl: 'https://vintrusted.com/payment-success' 
+        publishableKey: publishableKey, 
+        returnUrl: returnUrl 
       })
     };
   } catch (e) {

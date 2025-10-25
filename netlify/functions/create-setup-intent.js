@@ -1,3 +1,5 @@
+const Stripe = require('stripe');
+
 exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return {
@@ -11,12 +13,25 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    // Временное решение для тестирования - возвращаем mock данные
-    const mockSetupIntent = {
-      id: 'seti_test_' + Math.random().toString(36).substr(2, 9),
-      client_secret: 'seti_test_' + Math.random().toString(36).substr(2, 9) + '_secret_' + Math.random().toString(36).substr(2, 9),
-      status: 'requires_payment_method'
-    };
+    // Используем переменные окружения
+    const stripeKey = process.env.STRIPE_SECRET_KEY;
+    if (!stripeKey) {
+      return {
+        statusCode: 500,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ error: 'STRIPE_SECRET_KEY not configured' })
+      };
+    }
+    
+    const stripe = new Stripe(stripeKey);
+    
+    // Создаём SetupIntent для Payment Element
+    const setupIntent = await stripe.setupIntents.create({
+      usage: 'off_session'
+    });
     
     return {
       statusCode: 200,
@@ -27,8 +42,8 @@ exports.handler = async (event, context) => {
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
       },
       body: JSON.stringify({ 
-        client_secret: mockSetupIntent.client_secret, 
-        id: mockSetupIntent.id 
+        client_secret: setupIntent.client_secret, 
+        id: setupIntent.id 
       })
     };
   } catch (e) {
