@@ -1,5 +1,5 @@
-/* Контейнер Stripe и порядок слоёв */
-#vin-pay{position:relative;z-index:2;max-width:480px;margin:24px auto;padding:16px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+#vin-pay{position:relative;z-index:2;max-width:560px;margin:24px auto;padding:18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 6px 22px rgba(0,0,0,.06)}
 .header,.hero,.banner{position:relative;z-index:1}
-/* на всякий случай визуал контейнера */
 #vin-payment-element{min-height:64px}
+#vin-pay iframe{opacity:1 !important}
+#vin-log{white-space:pre-wrap}
