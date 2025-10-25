@@ -9,6 +9,7 @@
     { "src": "*.html", "use": "@vercel/static" },
     { "src": "styles.css", "use": "@vercel/static" },
     { "src": "script.js", "use": "@vercel/static" },
+    { "src": "logo-vin-trust.png", "use": "@vercel/static" },
     { "src": "css/**", "use": "@vercel/static" },
     { "src": "images/**", "use": "@vercel/static" },
     { "src": "js/**", "use": "@vercel/static" }
@@ -18,7 +19,6 @@
     { "src": "/api/create-setup-intent", "dest": "/create-setup-intent.js" },
     { "src": "/api/checkout-trial-then-two-charges", "dest": "/checkout-trial-then-two-charges.js" },
     { "src": "/test-api", "dest": "/test-api.js" },
-    { "src": "/logo-vin-trust.png", "dest": "/images/logo-vin-trust.png" },
     { "src": "/public/(.*)", "dest": "/public/$1" },
     { "src": "/css/(.*)", "dest": "/css/$1" },
     { "src": "/images/(.*)", "dest": "/images/$1" },
