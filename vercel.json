@@ -7,6 +7,8 @@
     { "src": "test-api.js", "use": "@vercel/node" },
     { "src": "public/**", "use": "@vercel/static" },
     { "src": "*.html", "use": "@vercel/static" },
+    { "src": "styles.css", "use": "@vercel/static" },
+    { "src": "script.js", "use": "@vercel/static" },
     { "src": "css/**", "use": "@vercel/static" },
     { "src": "images/**", "use": "@vercel/static" },
     { "src": "js/**", "use": "@vercel/static" }
@@ -20,6 +22,8 @@
     { "src": "/css/(.*)", "dest": "/css/$1" },
     { "src": "/images/(.*)", "dest": "/images/$1" },
     { "src": "/js/(.*)", "dest": "/js/$1" },
+    { "src": "/styles.css", "dest": "/styles.css" },
+    { "src": "/script.js", "dest": "/script.js" },
     { "src": "/payment-success", "dest": "/payment-success.html" },
     { "src": "/payment-cancel", "dest": "/payment-cancel.html" },
     { "src": "/(.*)", "dest": "/index.html" }
