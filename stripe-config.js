@@ -1,11 +1,10 @@
-import Stripe from 'stripe';
-
 export default async function handler(req, res) {
   try {
-    if (!process.env.STRIPE_PUBLISHABLE_KEY) throw new Error('Missing STRIPE_PUBLISHABLE_KEY');
-    const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
-    const returnUrl = process.env.RETURN_URL || 'https://vintrusted.com/payment-success';
-    res.status(200).json({ publishableKey, returnUrl });
+    // Временное решение для тестирования
+    res.status(200).json({ 
+      publishableKey: 'pk_test_placeholder', 
+      returnUrl: 'https://vintrusted.com/payment-success' 
+    });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
