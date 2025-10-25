@@ -122,135 +122,6 @@
             color: #721c24;
         }
 
-        /* Payment Form Styles */
-        .payment-form {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 12px;
-            border: 2px solid #e9ecef;
-        }
-
-        .payment-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .price-display {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .price-amount {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #28a745;
-        }
-
-        .price-period {
-            color: #6c757d;
-            font-size: 1rem;
-        }
-
-        .stripe-form {
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 8px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-
-        .payment-button {
-            width: 100%;
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .payment-button:hover {
-            background: linear-gradient(135deg, #0056b3, #004085);
-            transform: translateY(-2px);
-        }
-
-        .payment-button:disabled {
-            background: #6c757d;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Stripe Payment Element Styles */
-        #payment-element {
-            margin-bottom: 20px;
-        }
-
-        .payment-message {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .payment-message.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .payment-message.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .payment-features {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            color: #495057;
-        }
-
-        .feature-icon {
-            color: #28a745;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .report-container {
@@ -501,9 +372,6 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="/css/stripe-fixes.css" />
-    <script src="https://js.stripe.com/v3/"></script>
-    <script defer src="/public/vin-stripe.js"></script>
 </head>
 <body>
     <div class="report-container">
@@ -613,42 +481,11 @@
             </div>
         </div>
 
-        <!-- Right Column: Payment Form -->
+        <!-- Right Column: Empty for now -->
         <div class="report-right">
-            <div class="payment-form">
-                <h2 class="payment-title">Get Full Report</h2>
-                
-                <div class="price-display">
-                    <div class="price-amount">$3.00</div>
-                    <div class="price-period">Trial for 10 days, then $49/month</div>
-                </div>
-
-                <!-- PAYMENT_CONTAINER_START -->
-                <div id="vin-pay" data-fill-vin-target="#vinInput"></div>
-                <!-- PAYMENT_CONTAINER_END -->
-
-                <div class="payment-features">
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Complete vehicle history</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Accident & damage reports</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Service & maintenance records</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Title & ownership history</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">✓</span>
-                        <span>Recall information</span>
-                    </div>
-                </div>
+            <div class="report-header">
+                <h2 class="report-title">Additional Information</h2>
+                <p>This section will be updated with payment integration.</p>
             </div>
         </div>
     </div>
@@ -950,13 +787,6 @@
                 });
             });
         }
-        
-        // Initialize Stripe widget when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            if (window.VIN && window.VIN.mount) {
-                VIN.mount('#vin-pay');
-            }
-        });
     </script>
 </body>
 </html>
