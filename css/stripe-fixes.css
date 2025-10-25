@@ -1,8 +1,5 @@
-/* --- Stripe виджет и слойность --- */
-#vin-pay{max-width:420px;margin:24px auto;padding:16px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
-.stripe-card{margin:12px 0}
-/* чтобы хедер/герой не перекрывал форму */
-.hero, .header, .banner{position:relative;z-index:1}
-#vin-pay{position:relative;z-index:2}
-/* безопасный отступ, если сверху fixed-элементы */
-body.has-fixed-header #vin-pay{margin-top:72px}
+/* Контейнер Stripe и порядок слоёв */
+#vin-pay{position:relative;z-index:2;max-width:480px;margin:24px auto;padding:16px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+.header,.hero,.banner{position:relative;z-index:1}
+/* на всякий случай визуал контейнера */
+#vin-payment-element{min-height:64px}

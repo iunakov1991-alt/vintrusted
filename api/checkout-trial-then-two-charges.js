@@ -1,45 +1,45 @@
 import Stripe from 'stripe';
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req, res){
-  if(req.method !== 'POST') return res.status(405).end();
-  const { setup_intent_id, email } = req.body || {};
-  if(!setup_intent_id) return res.status(400).json({ error: 'Missing setup_intent_id' });
-  
-  try{
+// ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_20D указывает на price с interval=day, interval_count=20
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  try {
+    const { setup_intent_id, email } = req.body || {};
+    if (!setup_intent_id) throw new Error('setup_intent_id is required');
+
     const si = await stripe.setupIntents.retrieve(setup_intent_id);
-    const pm = si.payment_method; if(!pm) throw new Error('No payment_method in SetupIntent');
+    if (!si || !si.payment_method) throw new Error('SetupIntent has no payment_method');
 
+    // 1) Customer с привязанным PM
     const customer = await stripe.customers.create({
-      payment_method: pm,
       email: email || undefined,
-      invoice_settings: { default_payment_method: pm },
-      metadata: { consent_checked: 'true', plan: '3-now, 49@10d, 49@after-phase1' }
+      payment_method: si.payment_method,
+      invoice_settings: { default_payment_method: si.payment_method }
     });
 
-    const returnUrl = process.env.RETURN_URL;
-    const trialPi = await stripe.paymentIntents.create({
-      amount: 300, currency: 'usd', customer: customer.id, payment_method: pm,
-      confirm: true, return_url: returnUrl,
-      description: 'VIN report trial ($3 for 10 days)',
-      statement_descriptor: 'VIN UNLIMITED', statement_descriptor_suffix: 'TRIAL 3 USD'
+    // 2) Снимаем $3 сразу
+    const pi = await stripe.paymentIntents.create({
+      amount: 300,
+      currency: 'usd',
+      customer: customer.id,
+      payment_method: si.payment_method,
+      confirm: true,
+      off_session: true,
+      statement_descriptor: 'VIN UNLIMITED',
+      description: 'Trial activation $3'
     });
 
-    if(trialPi.status === 'requires_action'){
-      return res.status(200).json({ next_action: true, client_secret: trialPi.client_secret, return_url: returnUrl });
-    }
-
-    const now = Math.floor(Date.now()/1000);
-    const t10 = now + 10*24*60*60; // старт расписания через 10 дней
-
+    // 3) План на два списания $49: t+10 и t+30 (каждые 20 дней, 2 итерации)
+    const startAt = Math.floor(Date.now() / 1000) + 10 * 86400;
     const schedule = await stripe.subscriptionSchedules.create({
       customer: customer.id,
-      start_date: t10, // через 10 дней после покупки триала
-      end_behavior: 'cancel', // после двух платежей отменить
+      start_date: startAt,
+      end_behavior: 'cancel',
       phases: [
         {
-          iterations: 2, // два цикла: t+10 и t+30
-          default_payment_method: pm,
+          iterations: 2,
+          default_payment_method: si.payment_method,
           collection_method: 'charge_automatically',
           proration_behavior: 'none',
           items: [{ price: process.env.PRICE_49_EVERY_20D }]
@@ -47,11 +47,16 @@ export default async function handler(req, res){
       ]
     });
 
-    res.status(200).json({ ok: true, schedule_id: schedule.id, success_url: returnUrl });
-  }catch(e){
-    if(e.raw && e.raw.payment_intent && e.raw.payment_intent.client_secret){
-      return res.status(200).json({ next_action: true, client_secret: e.raw.payment_intent.client_secret, return_url: process.env.RETURN_URL });
+    // Если $3 потребовал доп. действия (редко), вернём клиентский secret для confirmCardPayment
+    const payload = { success: true, success_url: process.env.RETURN_URL };
+    if (pi.status === 'requires_action' || pi.status === 'requires_confirmation') {
+      payload.next_action = true;
+      payload.client_secret = pi.client_secret;
     }
+
+    res.status(200).json(payload);
+  } catch (e) {
+    console.error(e);
     res.status(400).json({ error: e.message });
   }
 }
