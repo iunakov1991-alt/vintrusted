@@ -6,6 +6,9 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com;">
     <title>Vehicle Report - VIN Trust</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/stripe-fixes.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script defer src="/public/vin-stripe.js"></script>
     <style>
         /* Report Page Specific Styles */
         .report-container {
@@ -481,12 +484,15 @@
             </div>
         </div>
 
-        <!-- Right Column: Empty for now -->
+        <!-- Right Column: Payment Form -->
         <div class="report-right">
             <div class="report-header">
-                <h2 class="report-title">Additional Information</h2>
-                <p>This section will be updated with payment integration.</p>
+                <h2 class="report-title">Get Full Report</h2>
+                <p>Complete vehicle history with detailed information</p>
             </div>
+            
+            <!-- Stripe Payment Element Container -->
+            <div id="vin-pay"></div>
         </div>
     </div>
 
@@ -787,6 +793,13 @@
                 });
             });
         }
+        
+        // Initialize Stripe widget when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.VIN && window.VIN.mount) {
+                VIN.mount('#vin-pay');
+            }
+        });
     </script>
 </body>
 </html>

@@ -34,11 +34,16 @@ export default async function handler(req, res){
 
     const schedule = await stripe.subscriptionSchedules.create({
       customer: customer.id,
-      start_date: t10,
-      end_behavior: 'cancel',
+      start_date: t10, // через 10 дней после покупки триала
+      end_behavior: 'cancel', // после двух платежей отменить
       phases: [
-        { iterations: 1, default_payment_method: pm, collection_method: 'charge_automatically', proration_behavior: 'none', items: [{ price: process.env.PRICE_49_RECURRING }] },
-        { iterations: 1, default_payment_method: pm, collection_method: 'charge_automatically', proration_behavior: 'none', items: [{ price: process.env.PRICE_49_RECURRING }] }
+        {
+          iterations: 2, // два цикла: t+10 и t+30
+          default_payment_method: pm,
+          collection_method: 'charge_automatically',
+          proration_behavior: 'none',
+          items: [{ price: process.env.PRICE_49_EVERY_20D }]
+        }
       ]
     });
 
