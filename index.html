@@ -227,9 +227,6 @@
       ]
     }
     </script>
-    
-    <!-- Checkout Integration -->
-    <script src="/public/checkout-bind.js" defer></script>
 </head>
 <body>
     <!-- Main Page -->
@@ -265,12 +262,12 @@
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="vin-mode">
-                            <input type="text" class="vin-input" data-vin placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;">
+                            <input type="text" class="vin-input" placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;">
       </div>
                         
                         <!-- Plate Mode -->
                         <div class="mode-content" id="plate-mode">
-                            <select class="state-select" data-state>
+                            <select class="state-select">
                                 <option value="">Choose Your State</option>
                                 <!-- Top 5 most populous states (highlighted in blue) -->
                                 <option value="CA" class="populous-state">California</option>
@@ -326,7 +323,7 @@
                                 <option value="WY">Wyoming</option>
                                 <option value="DC">District of Columbia</option>
                             </select>
-                            <input type="text" class="plate-input" data-plate placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
+                            <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
           </div>
                         
                         <button type="submit" class="search-btn">
@@ -953,12 +950,12 @@
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="comparison-vin-mode">
-                            <input type="text" class="vin-input" data-vin placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;">
+                            <input type="text" class="vin-input"  placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;">
         </div>
                         
                         <!-- Plate Mode -->
                         <div class="mode-content" id="comparison-plate-mode">
-                            <select class="state-select" data-state>
+                            <select class="state-select" >
                                 <option value="">Choose Your State</option>
                                 <!-- Top 5 most populous states (highlighted in blue) -->
                                 <option value="CA" class="populous-state">California</option>
@@ -1014,7 +1011,7 @@
                                 <option value="WY">Wyoming</option>
                                 <option value="DC">District of Columbia</option>
                             </select>
-                            <input type="text" class="plate-input" data-plate placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
+                            <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
           </div>
                         
                         <button type="submit" class="search-btn">
@@ -2014,6 +2011,40 @@
         console.log('Calling showPage with loading and:', inputValue);
         showPage('loading', inputValue);
     };
+    
+    // Handle form submission
+    document.querySelectorAll('.search-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const container = form.closest('.search-form-container');
+            const vinMode = container.querySelector('.mode-btn[data-mode="vin"]');
+            const plateMode = container.querySelector('.mode-btn[data-mode="plate"]');
+            
+            let inputValue = '';
+            let isVinMode = false;
+            
+            if (vinMode && vinMode.classList.contains('active')) {
+                const vinInput = form.querySelector('.vin-input');
+                inputValue = vinInput ? vinInput.value.trim() : '';
+                isVinMode = true;
+            } else if (plateMode && plateMode.classList.contains('active')) {
+                const plateInput = form.querySelector('.plate-input');
+                const stateSelect = form.querySelector('.state-select');
+                const plate = plateInput ? plateInput.value.trim() : '';
+                const state = stateSelect ? stateSelect.value : '';
+                inputValue = state && plate ? `${state}-${plate}` : '';
+                isVinMode = false;
+            }
+            
+            if (!inputValue) {
+                alert(isVinMode ? 'Please enter a VIN code' : 'Please select state and enter license plate');
+                return;
+            }
+            
+            showPage('loading', inputValue);
+        });
+    });
     
     // Simple mode switching function
     window.switchMode = (mode) => {
