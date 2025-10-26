@@ -3683,7 +3683,7 @@ button[type="submit"],
     backdrop-filter: none;
     border-bottom: none;
     box-shadow: none;
-    padding: 20px 0;
+    padding: 40px 0 20px 0;
 }
 
 .loading-page .header-content {
@@ -3696,6 +3696,13 @@ button[type="submit"],
 
 .loading-page .logo {
     margin: 0;
+    display: block;
+}
+
+.loading-page .logo-img {
+    display: block;
+    max-width: 200px;
+    margin: 0 auto;
 }
 
 /* Results Page Styles */
