@@ -3371,6 +3371,9 @@ button[type="submit"],
     background: white;
     border-radius: 25px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .progress-bar-overlay {
@@ -3383,22 +3386,16 @@ button[type="submit"],
     border-radius: 25px;
     z-index: 10;
     animation: progressBarMove 12s linear forwards;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
 }
 
 .progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    z-index: 20;
     color: #000000 !important;
     font-weight: bold;
     font-size: 1.5rem;
-    z-index: 20;
-    pointer-events: none;
+    text-align: center;
 }
 
 @keyframes textPulse {
