@@ -1847,20 +1847,22 @@
                     if (progress >= 100) {
                         progress = 100;
                         clearInterval(progressInterval);
-                        
-                        // Redirect immediately when progress reaches 100%
-                        console.log('Progress bar reached 100%, redirecting to report page');
-                        if (currentVin) {
-                            window.location.href = `report.html?vin=${currentVin}`;
-                        } else {
-                            // Fallback to main page if no VIN
-                            showPage('main');
-                        }
                     }
                     progressBar.style.width = progress + '%';
                     progressText.textContent = Math.round(progress) + '%';
                     console.log('Progress:', progress);
                 }, 100);
+                
+                // Redirect after 5 seconds (when progress reaches 100%)
+                setTimeout(() => {
+                    console.log('Progress bar reached 100%, redirecting to report page');
+                    if (currentVin) {
+                        window.location.href = `report.html?vin=${currentVin}`;
+                    } else {
+                        // Fallback to main page if no VIN
+                        showPage('main');
+                    }
+                }, 5100); // 5.1 seconds to ensure progress is at 100%
             } else {
                 console.error('Progress bar or text element not found!');
             }
