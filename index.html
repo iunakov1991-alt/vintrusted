@@ -228,6 +228,8 @@
     }
     </script>
     
+    <!-- Checkout Integration -->
+    <script src="/public/checkout-bind.js" defer></script>
 </head>
 <body>
     <!-- Main Page -->
@@ -259,16 +261,16 @@
                     <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')">License Plate</button>
         </div>
                 
-                <div class="search-form">
+                <form class="search-form">
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="vin-mode">
-                            <input type="text" class="vin-input" placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;">
+                            <input type="text" class="vin-input" data-vin placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;">
       </div>
                         
                         <!-- Plate Mode -->
                         <div class="mode-content" id="plate-mode">
-                            <select class="state-select">
+                            <select class="state-select" data-state>
                                 <option value="">Choose Your State</option>
                                 <!-- Top 5 most populous states (highlighted in blue) -->
                                 <option value="CA" class="populous-state">California</option>
@@ -947,16 +949,16 @@
                             <button class="mode-btn" data-mode="plate">License Plate</button>
           </div>
                 
-                <div class="search-form">
+                <form class="search-form">
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="comparison-vin-mode">
-                            <input type="text" class="vin-input" placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;">
+                            <input type="text" class="vin-input" data-vin placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;">
         </div>
                         
                         <!-- Plate Mode -->
                         <div class="mode-content" id="comparison-plate-mode">
-                            <select class="state-select">
+                            <select class="state-select" data-state>
                                 <option value="">Choose Your State</option>
                                 <!-- Top 5 most populous states (highlighted in blue) -->
                                 <option value="CA" class="populous-state">California</option>
@@ -1012,15 +1014,15 @@
                                 <option value="WY">Wyoming</option>
                                 <option value="DC">District of Columbia</option>
                             </select>
-                            <input type="text" class="plate-input" placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
-                  </div>
+                            <input type="text" class="plate-input" data-plate placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
+          </div>
                         
-                        <button class="search-btn" onclick="submitForm()">
+                        <button type="submit" class="search-btn">
                             <span>Get My Report</span>
                             <span>✓</span>
                         </button>
-                </div>
-              </div>
+                    </div>
+                </form>
             </div>
           </div>
         </div>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle History Report - VIN Trust</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .report-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        .report-header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .report-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+        .report-vin {
+            font-size: 1.2rem;
+            color: #666;
+            font-family: monospace;
+        }
+        .report-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FFD700;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .info-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .info-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #111827;
+        }
+        .loading-state {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .loader {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #FFD700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error-state {
+            text-align: center;
+            padding: 100px 20px;
+            color: #dc2626;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #111827;
+        }
+        .source-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f0f9ff;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container" id="reportContainer">
+        <div class="loading-state" id="loadingState">
+            <div class="loader"></div>
+            <h2>Building your report...</h2>
+            <p>Please wait while we gather vehicle information</p>
+        </div>
+    </div>
+
+    <script>
+        (async function() {
+            const params = new URLSearchParams(window.location.search);
+            const reportId = params.get('id');
+            
+            if (!reportId) {
+                document.getElementById('reportContainer').innerHTML = `
+                    <div class="error-state">
+                        <h2>No Report ID</h2>
+                        <p>Please start from the beginning</p>
+                        <a href="/" style="color: #FFD700; text-decoration: underline;">Go to Home</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Poll for report status
+            let attempts = 0;
+            const maxAttempts = 30;
+            
+            const checkReport = async () => {
+                try {
+                    const response = await fetch(`/api/report?id=${reportId}`);
+                    const data = await response.json();
+                    
+                    if (data.status === 'ready' && data.report) {
+                        renderReport(data.report);
+                    } else if (data.status === 'error') {
+                        showError(data.error || 'Report generation failed');
+                    } else if (attempts < maxAttempts) {
+                        attempts++;
+                        setTimeout(checkReport, 2000);
+                    } else {
+                        showError('Report generation timed out. Please contact support.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching report:', error);
+                    if (attempts < maxAttempts) {
+                        attempts++;
+                        setTimeout(checkReport, 2000);
+                    } else {
+                        showError('Failed to load report. Please try again.');
+                    }
+                }
+            };
+
+            function renderReport(report) {
+                const attr = report.attributes || {};
+                const sections = report.sections || {};
+                
+                document.getElementById('reportContainer').innerHTML = `
+                    <div class="report-header">
+                        <h1 class="report-title">Vehicle History Report</h1>
+                        <div class="report-vin">VIN: ${report.vin}</div>
+                    </div>
+
+                    <div class="report-section">
+                        <h2 class="section-title">Vehicle Summary</h2>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Year</div>
+                                <div class="info-value">${attr.year || 'N/A'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Make</div>
+                                <div class="info-value">${attr.make || 'N/A'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Model</div>
+                                <div class="info-value">${attr.model || 'N/A'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Engine</div>
+                                <div class="info-value">${attr.engine || 'N/A'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Type</div>
+                                <div class="info-value">${attr.type || 'N/A'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Trim</div>
+                                <div class="info-value">${attr.trim || 'N/A'}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${renderSection('Title Brands', sections.title_brands)}
+                    ${renderSection('Odometer Records', sections.odometer_records)}
+                    ${renderSection('Accidents', sections.accidents)}
+                    ${renderSection('Sales History', sections.sales_history)}
+                    ${renderSection('Recalls', sections.recalls)}
+
+                    <div class="source-info">
+                        <strong>Data Source:</strong> ${report.source || 'VinAudit'}<br>
+                        VinTrusted aggregates third-party data for comprehensive vehicle history reports.
+                    </div>
+                `;
+            }
+
+            function renderSection(title, data) {
+                if (!data || (Array.isArray(data) && data.length === 0)) {
+                    return `
+                        <div class="report-section">
+                            <h2 class="section-title">${title}</h2>
+                            <p style="color: #666;">No records found</p>
+                        </div>
+                    `;
+                }
+
+                let content = '';
+                if (Array.isArray(data)) {
+                    content = `<pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; overflow-x: auto;">${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    content = `<pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; overflow-x: auto;">${JSON.stringify(data, null, 2)}</pre>`;
+                }
+
+                return `
+                    <div class="report-section">
+                        <h2 class="section-title">${title}</h2>
+                        ${content}
+                    </div>
+                `;
+            }
+
+            function showError(message) {
+                document.getElementById('reportContainer').innerHTML = `
+                    <div class="error-state">
+                        <h2>Error</h2>
+                        <p>${message}</p>
+                        <a href="/" style="color: #FFD700; text-decoration: underline; margin-top: 20px; display: inline-block;">Go to Home</a>
+                    </div>
+                `;
+            }
+
+            // Start checking for report
+            checkReport();
+        })();
+    </script>
+</body>
+</html>
+
