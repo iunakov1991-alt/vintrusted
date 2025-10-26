@@ -18,6 +18,14 @@
   }
 
   async function startCheckout(payload){
+    // Показываем loading page
+    if(typeof showPage === 'function'){
+      showPage('loading', payload.vin || 'PROCESSING');
+    }
+    
+    // Небольшая задержка для отображения loading
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
     const r=await fetch(API,{
       method:'POST',
       headers:{'content-type':'application/json'},

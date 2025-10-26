@@ -2,9 +2,6 @@ const { stripe } = require('./_lib/stripe');
 const { createOrGetReport } = require('./_lib/vinaudit');
 const { store } = require('./_lib/store');
 
-// Disable body parsing for webhook signature verification
-export const config = { api: { bodyParser: false } };
-
 function buffer(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -15,6 +12,8 @@ function buffer(req) {
 }
 
 module.exports = async (req, res) => {
+  // Disable body parsing for raw body access
+  req.rawBody = true;
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
