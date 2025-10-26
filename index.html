@@ -1843,7 +1843,7 @@
                 // Update progress bar and text every 100ms
                 let progress = 0;
                 const progressInterval = setInterval(() => {
-                    progress += 0.83; // 100% / 12s / 100ms = ~0.83%
+                    progress += 1; // 100% / 10s / 100ms = 1%
                     if (progress >= 100) {
                         progress = 100;
                         clearInterval(progressInterval);
@@ -1863,7 +1863,7 @@
                         // Fallback to main page if no VIN
                         showPage('main');
                     }
-                }, 12000); // 12 seconds
+                }, 10000); // 10 seconds to match the new speed
             } else {
                 console.error('Progress bar or text element not found!');
             }
