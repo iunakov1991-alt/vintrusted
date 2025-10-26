@@ -3394,12 +3394,11 @@ button[type="submit"],
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #000000 !important; /* Принудительно черный цвет для процентов */
+    color: #000000 !important;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     z-index: 20;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    animation: textPulse 1s ease-in-out infinite alternate;
+    pointer-events: none;
 }
 
 @keyframes textPulse {
@@ -3478,13 +3477,6 @@ button[type="submit"],
     z-index: 5;
 }
 
-.progress-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #2c3e50;
-    min-width: 60px;
-    text-align: center;
-}
 
 @keyframes pulse {
     0%, 100% {
@@ -3529,12 +3521,6 @@ button[type="submit"],
     100% { background-position: 20px 0; }
 }
 
-.progress-text {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #FFD700;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
 
 .loading-messages {
     text-align: center;
