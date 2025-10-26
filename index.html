@@ -942,8 +942,8 @@
                         
                         <div class="search-form-container">
                         <div class="mode-buttons">
-                            <button class="mode-btn active" data-mode="vin">VIN</button>
-                            <button class="mode-btn" data-mode="plate">License Plate</button>
+                            <button class="mode-btn active" data-mode="vin" onclick="switchMode('vin')">VIN</button>
+                            <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')">License Plate</button>
           </div>
                 
                 <div class="search-form">
@@ -2051,7 +2051,10 @@
     window.switchMode = (mode) => {
         console.log('Switching to mode:', mode);
         
-        const form = document.querySelector('.search-form-container');
+        // Find the closest form container from the clicked button
+        const clickedButton = event ? event.target : null;
+        const form = clickedButton ? clickedButton.closest('.search-form-container') : document.querySelector('.search-form-container');
+        
         if (!form) {
             console.error('Form not found');
             return;
@@ -2059,8 +2062,8 @@
         
         const vinMode = form.querySelector('.mode-btn[data-mode="vin"]');
         const plateMode = form.querySelector('.mode-btn[data-mode="plate"]');
-        const vinModeContent = form.querySelector('#vin-mode');
-        const plateModeContent = form.querySelector('#plate-mode');
+        const vinModeContent = form.querySelector('#vin-mode, #comparison-vin-mode');
+        const plateModeContent = form.querySelector('#plate-mode, #comparison-plate-mode');
         
         console.log('Found elements:', {
             vinMode: !!vinMode,
@@ -2090,6 +2093,14 @@
             if (vinModeContent) {
                 vinModeContent.style.display = 'flex';
                 vinModeContent.classList.add('active');
+                
+                // Auto-focus VIN input
+                setTimeout(() => {
+                    const vinInput = vinModeContent.querySelector('.vin-input');
+                    if (vinInput) {
+                        vinInput.focus();
+                    }
+                }, 100);
             }
         } else if (mode === 'plate') {
             console.log('Showing Plate mode');
