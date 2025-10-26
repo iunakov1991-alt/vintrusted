@@ -15,12 +15,6 @@
     { "src": "js/**", "use": "@vercel/static" }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "headers": { "host": "www.vintrusted.com" },
-      "dest": "https://vintrusted.com/$1",
-      "status": 301
-    },
     { "src": "/api/checkout", "dest": "/api/checkout.js" },
     { "src": "/api/stripe-webhook", "dest": "/api/stripe-webhook.js" },
     { "src": "/api/report", "dest": "/api/report.js" },
