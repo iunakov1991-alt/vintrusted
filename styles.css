@@ -3368,7 +3368,7 @@ button[type="submit"],
     height: 40px;
     background: white;
     border-radius: 25px;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .progress-bar-overlay {
@@ -3392,6 +3392,8 @@ button[type="submit"],
     font-weight: bold;
     font-size: 1.5rem;
     pointer-events: none;
+    min-width: 60px;
+    text-align: center;
 }
 
 @keyframes textPulse {
