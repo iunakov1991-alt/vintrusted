@@ -258,7 +258,7 @@
                     <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')">License Plate</button>
         </div>
                 
-                <form class="search-form">
+                <div class="search-form">
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="vin-mode">
@@ -326,12 +326,12 @@
                             <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
           </div>
                         
-                        <button type="submit" class="search-btn">
+                        <button class="search-btn" onclick="submitForm()">
                             <span>Get My Report</span>
                             <span>✓</span>
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
           </div>
             
@@ -946,7 +946,7 @@
                             <button class="mode-btn" data-mode="plate">License Plate</button>
           </div>
                 
-                <form class="search-form">
+                <div class="search-form">
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="comparison-vin-mode">
@@ -1014,12 +1014,12 @@
                             <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
           </div>
                         
-                        <button type="submit" class="search-btn">
+                        <button class="search-btn" onclick="submitForm()">
                             <span>Get My Report</span>
                             <span>✓</span>
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
           </div>
         </div>
@@ -2012,39 +2012,40 @@
         showPage('loading', inputValue);
     };
     
-    // Handle form submission
-    document.querySelectorAll('.search-form').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const container = form.closest('.search-form-container');
-            const vinMode = container.querySelector('.mode-btn[data-mode="vin"]');
-            const plateMode = container.querySelector('.mode-btn[data-mode="plate"]');
-            
-            let inputValue = '';
-            let isVinMode = false;
-            
-            if (vinMode && vinMode.classList.contains('active')) {
-                const vinInput = form.querySelector('.vin-input');
-                inputValue = vinInput ? vinInput.value.trim() : '';
-                isVinMode = true;
-            } else if (plateMode && plateMode.classList.contains('active')) {
-                const plateInput = form.querySelector('.plate-input');
-                const stateSelect = form.querySelector('.state-select');
-                const plate = plateInput ? plateInput.value.trim() : '';
-                const state = stateSelect ? stateSelect.value : '';
-                inputValue = state && plate ? `${state}-${plate}` : '';
-                isVinMode = false;
-            }
-            
-            if (!inputValue) {
-                alert(isVinMode ? 'Please enter a VIN code' : 'Please select state and enter license plate');
-                return;
-            }
-            
-            showPage('loading', inputValue);
-        });
-    });
+    // Form submission function
+    window.submitForm = function() {
+        const form = event.target.closest('.search-form-container');
+        if (!form) {
+            console.error('Form container not found');
+            return;
+        }
+        
+        const vinMode = form.querySelector('.mode-btn[data-mode="vin"]');
+        const plateMode = form.querySelector('.mode-btn[data-mode="plate"]');
+        
+        let inputValue = '';
+        let isVinMode = false;
+        
+        if (vinMode && vinMode.classList.contains('active')) {
+            const vinInput = form.querySelector('.vin-input');
+            inputValue = vinInput ? vinInput.value.trim() : '';
+            isVinMode = true;
+        } else if (plateMode && plateMode.classList.contains('active')) {
+            const plateInput = form.querySelector('.plate-input');
+            const stateSelect = form.querySelector('.state-select');
+            const plate = plateInput ? plateInput.value.trim() : '';
+            const state = stateSelect ? stateSelect.value : '';
+            inputValue = state && plate ? `${state}-${plate}` : '';
+            isVinMode = false;
+        }
+        
+        if (!inputValue) {
+            alert(isVinMode ? 'Please enter a VIN code' : 'Please select state and enter license plate');
+            return;
+        }
+        
+        showPage('loading', inputValue);
+    };
     
     // Simple mode switching function
     window.switchMode = (mode) => {
