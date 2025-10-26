@@ -1843,27 +1843,24 @@
                 // Update progress bar and text every 100ms
                 let progress = 0;
                 const progressInterval = setInterval(() => {
-                    progress += 1; // 100% / 10s / 100ms = 1%
+                    progress += 2; // 100% / 5s / 100ms = 2%
                     if (progress >= 100) {
                         progress = 100;
                         clearInterval(progressInterval);
+                        
+                        // Redirect immediately when progress reaches 100%
+                        console.log('Progress bar reached 100%, redirecting to report page');
+                        if (currentVin) {
+                            window.location.href = `report.html?vin=${currentVin}`;
+                        } else {
+                            // Fallback to main page if no VIN
+                            showPage('main');
+                        }
                     }
                     progressBar.style.width = progress + '%';
                     progressText.textContent = Math.round(progress) + '%';
                     console.log('Progress:', progress);
                 }, 100);
-                
-                // Wait for progress bar to reach 100% before showing main page
-                setTimeout(() => {
-                    console.log('Progress bar reached 100%, redirecting to report page');
-                    // Redirect to report page with VIN parameter
-                    if (currentVin) {
-                        window.location.href = `report.html?vin=${currentVin}`;
-                    } else {
-                        // Fallback to main page if no VIN
-                        showPage('main');
-                    }
-                }, 10000); // 10 seconds to match the new speed
             } else {
                 console.error('Progress bar or text element not found!');
             }
