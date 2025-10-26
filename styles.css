@@ -3364,6 +3364,15 @@ button[type="submit"],
 }
 
 /* Желтый прогресс-бар с текстом */
+.progress-bar-container {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
 .progress-bar-overlay {
     position: absolute;
     top: 0;
@@ -3381,10 +3390,15 @@ button[type="submit"],
 }
 
 .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #000000 !important; /* Принудительно черный цвет для процентов */
     font-weight: bold;
-    font-size: 0.8rem;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    z-index: 20;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     animation: textPulse 1s ease-in-out infinite alternate;
 }
 
