@@ -1045,12 +1045,6 @@
             <div class="loading-content">
                 <div class="loading-header">
                     <h1 class="loading-title">Searching Vehicle Records for VIN <span id="vinNumber">Loading...</span></h1>
-                    <div class="loading-field">
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-overlay"></div>
-                            <div class="progress-text">0%</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1830,43 +1824,16 @@
     function startLoadingAnimations() {
         console.log('Starting loading animations...');
         
-        // Small delay to ensure DOM is ready
+        // Redirect after 5 seconds
         setTimeout(() => {
-            // Start progress bar animation
-            const progressBar = document.querySelector('.progress-bar-overlay');
-            const progressText = document.querySelector('.progress-text');
-            
-            console.log('Progress bar element:', progressBar);
-            console.log('Progress text element:', progressText);
-            
-            if (progressBar && progressText) {
-                // Update progress bar and text every 100ms
-                let progress = 0;
-                const progressInterval = setInterval(() => {
-                    progress += 2; // 100% / 5s / 100ms = 2%
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(progressInterval);
-                    }
-                    progressBar.style.width = progress + '%';
-                    progressText.textContent = Math.round(progress) + '%';
-                    console.log('Progress:', progress);
-                }, 100);
-                
-                // Redirect after 5 seconds (when progress reaches 100%)
-                setTimeout(() => {
-                    console.log('Progress bar reached 100%, redirecting to report page');
-                    if (currentVin) {
-                        window.location.href = `report.html?vin=${currentVin}`;
-                    } else {
-                        // Fallback to main page if no VIN
-                        showPage('main');
-                    }
-                }, 5100); // 5.1 seconds to ensure progress is at 100%
+            console.log('Redirecting to report page');
+            if (currentVin) {
+                window.location.href = `report.html?vin=${currentVin}`;
             } else {
-                console.error('Progress bar or text element not found!');
+                // Fallback to main page if no VIN
+                showPage('main');
             }
-        }, 100);
+        }, 5000);
     }
     
     // Mode switching handler - simplified version
