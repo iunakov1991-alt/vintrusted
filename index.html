@@ -2302,5 +2302,18 @@
     </footer>
 
     <script src="script.js"></script>
+    
+    <script>
+    // Auto-focus first VIN input on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            const firstVinInput = document.querySelector('#vin-mode .vin-input');
+            if (firstVinInput) {
+                firstVinInput.focus();
+                console.log('Auto-focused first VIN input on page load');
+            }
+        }, 500);
+    });
+    </script>
 </body>
 </html>
