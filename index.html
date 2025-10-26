@@ -1835,7 +1835,7 @@
         const progressText = document.querySelector('.progress-text');
         
         if (progressBar && progressText) {
-            // Update progress bar and text every 100ms
+            // Update progress text every 100ms
             let progress = 0;
             const progressInterval = setInterval(() => {
                 progress += 0.83; // 100% / 12s / 100ms = ~0.83%
@@ -1843,7 +1843,6 @@
                     progress = 100;
                     clearInterval(progressInterval);
                 }
-                progressBar.style.width = progress + '%';
                 progressText.textContent = Math.round(progress) + '%';
             }, 100);
             

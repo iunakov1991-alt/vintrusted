@@ -3382,8 +3382,11 @@ button[type="submit"],
     background: linear-gradient(90deg, #FFD700, #FFA500);
     border-radius: 25px;
     z-index: 10;
+    animation: progressBarMove 12s linear forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
-    transition: width 0.1s linear;
 }
 
 .progress-text {
