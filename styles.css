@@ -557,12 +557,13 @@ body {
     outline: none;
     text-transform: uppercase;
     caret-color: #000000;
-    caret-width: 4px;
+    text-shadow: 0 0 0 #000000;
 }
 
 .vin-input:focus {
     caret-color: #000000;
-    caret-width: 4px;
+    text-shadow: 0 0 0 #000000;
+    filter: drop-shadow(0 0 0.5px #000000);
 }
 
 .vin-input::placeholder {
