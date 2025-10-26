@@ -3382,7 +3382,6 @@ button[type="submit"],
     background: #FFD700;
     border-radius: 25px;
     z-index: 1;
-    transition: width 0.1s linear;
 }
 
 .progress-text {
