@@ -3365,10 +3365,9 @@ button[type="submit"],
 .progress-bar-container {
     position: relative;
     width: 100%;
-    height: 40px;
-    background: white;
+    height: 100%;
     border-radius: 25px;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .progress-bar-overlay {
