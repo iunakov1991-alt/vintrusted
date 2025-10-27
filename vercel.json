@@ -2,7 +2,11 @@
   "version": 2,
   "builds": [
     { "src": "api/checkout.js", "use": "@vercel/node" },
+    { "src": "api/create-payment-intent.js", "use": "@vercel/node" },
+    { "src": "api/create-setup-intent.js", "use": "@vercel/node" },
+    { "src": "api/stripe-config.js", "use": "@vercel/node" },
     { "src": "api/stripe-webhook.js", "use": "@vercel/node" },
+    { "src": "api/checkout-trial-then-two-charges.js", "use": "@vercel/node" },
     { "src": "api/report.js", "use": "@vercel/node" },
     { "src": "api/health.js", "use": "@vercel/node" },
     { "src": "public/**", "use": "@vercel/static" },
@@ -17,7 +21,11 @@
   ],
   "routes": [
     { "src": "/api/checkout", "dest": "/api/checkout.js" },
+    { "src": "/api/create-payment-intent", "dest": "/api/create-payment-intent.js" },
+    { "src": "/api/create-setup-intent", "dest": "/api/create-setup-intent.js" },
+    { "src": "/api/stripe-config", "dest": "/api/stripe-config.js" },
     { "src": "/api/stripe-webhook", "dest": "/api/stripe-webhook.js" },
+    { "src": "/api/checkout-trial-then-two-charges", "dest": "/api/checkout-trial-then-two-charges.js" },
     { "src": "/api/report", "dest": "/api/report.js" },
     { "src": "/api/health", "dest": "/api/health.js" },
     { "src": "/hero-background.jpg", "dest": "/hero-background.jpg" },
