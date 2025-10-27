@@ -57,8 +57,8 @@
           spacingUnit: '6px'
         }
       };
-      const elements = stripe.elements({ clientSecret: si.client_secret, appearance, paymentMethodOrder: ['apple_pay','google_pay','card'] });
-      const paymentEl = elements.create('payment', { layout: 'tabs' });
+      const elements = stripe.elements({ clientSecret: si.client_secret, appearance });
+      const paymentEl = elements.create('payment');
       paymentEl.mount('#vin-payment-element');
       log('Payment Element mounted');
 
