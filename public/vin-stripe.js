@@ -26,7 +26,7 @@
           <div style="font-weight:800;font-size:28px;line-height:1.1;margin-bottom:6px">Get Full Report</div>
           <div style="font-size:13px;color:#475569">Complete vehicle history with detailed information</div>
         </div>
-        <div id="vin-payment-element" style="margin:8px 0 14px;min-height:64px"></div>
+        <div id="vin-payment-element" style="margin:8px 0 14px;min-height:350px"></div>
         <button id="vin-submit" type="submit" style="width:100%;padding:12px 16px;border-radius:12px;border:0;background:#111827;color:#fff;font-weight:700">Pay $3 to Continue</button>
         <div id="vin-msg" role="alert" style="min-height:18px;color:#b00020;margin-top:10px"></div>
         <div id="vin-log" style="margin-top:10px;font-size:12px;color:#475569"></div>
