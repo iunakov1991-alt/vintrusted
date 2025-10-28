@@ -82,8 +82,13 @@
           log('confirmSetup ok: '+setupIntent.id+' status='+setupIntent.status);
 
           log('POST /api/checkout-trial-then-two-charges …');
+          log('Sending setup_intent_id: '+setupIntent.id);
           const r = await fetch('/api/checkout-trial-then-two-charges',{ method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ setup_intent_id: setupIntent.id }) });
-          if(!r.ok){ throw new Error('checkout HTTP '+r.status); }
+          if(!r.ok){ 
+            const errData = await r.json().catch(()=>({}));
+            log('checkout error: HTTP '+r.status+' - '+JSON.stringify(errData));
+            throw new Error('checkout HTTP '+r.status+': '+(errData.error || 'Unknown error')); 
+          }
           const data = await r.json();
           if(data.error){ log('backend error: '+data.error); throw new Error(data.error); }
 
