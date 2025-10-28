@@ -65,8 +65,19 @@
       document.getElementById('vin-form').addEventListener('submit', async (e)=>{
         e.preventDefault(); msg.textContent=''; btn.disabled=true; const old=btn.textContent; btn.textContent='Processing…';
         try{
+          log('elements.submit() …');
+          const { error: submitError } = await elements.submit();
+          if(submitError){ log('elements.submit error: '+submitError.message); throw submitError; }
+          
           log('confirmSetup …');
-          const { error, setupIntent } = await stripe.confirmSetup({ elements, clientSecret: si.client_secret, confirmParams: { return_url: returnUrl } });
+          const { error, setupIntent } = await stripe.confirmSetup({ 
+            elements, 
+            clientSecret: si.client_secret, 
+            redirect: 'if_required',
+            confirmParams: { 
+              return_url: returnUrl 
+            } 
+          });
           if(error){ log('confirmSetup error: '+error.message); throw error; }
           log('confirmSetup ok: '+setupIntent.id+' status='+setupIntent.status);
 
