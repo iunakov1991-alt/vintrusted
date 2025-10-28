@@ -98,7 +98,16 @@
             if(piRes.error){ log('confirmCardPayment error: '+piRes.error.message); throw piRes.error; }
           }
           log('redirect to success');
-          location.href = data.success_url || returnUrl;
+          
+          // Get VIN from URL or page data
+          const urlParams = new URLSearchParams(window.location.search);
+          const currentVin = urlParams.get('vin') || document.querySelector('[data-vin]')?.dataset?.vin || '';
+          
+          const successUrl = (data.success_url || returnUrl) + 
+            (setupIntent ? '?setup_intent=' + setupIntent.id : '') +
+            (currentVin ? '&vin=' + encodeURIComponent(currentVin) : '');
+          
+          location.href = successUrl;
         }catch(e){
           console.error(e); msg.textContent = e && e.message ? e.message : 'Payment error';
         }finally{ btn.disabled=false; btn.textContent=old; }

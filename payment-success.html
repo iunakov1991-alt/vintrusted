@@ -124,10 +124,72 @@
             </div>
         </div>
         
+        <form id="email-form" style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px">
+            <input
+                type="email"
+                id="email-input"
+                placeholder="your@email.com"
+                required
+                style="padding:12px;border:2px solid #e5e7eb;border-radius:12px;font-size:1rem;font-family:inherit"
+            />
+            <button
+                type="submit"
+                id="submit-btn"
+                style="width:100%;margin:0;padding:12px 24px;background:#FFC107;color:#000;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s"
+                onmouseover="this.style.background='#FFB300'"
+                onmouseout="this.style.background='#FFC107'"
+            >
+                Send Receipt & Report
+            </button>
+            <div id="message" style="font-size:0.9rem;min-height:20px;text-align:center"></div>
+        </form>
+        
         <div class="action-buttons">
-            <a href="/report.html" class="btn btn-primary">View Report</a>
             <a href="/index.html" class="btn btn-secondary">Back to Home</a>
         </div>
     </div>
+
+    <script>
+        document.getElementById('email-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email-input').value;
+            const submitBtn = document.getElementById('submit-btn');
+            const message = document.getElementById('message');
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const setup_intent_id = urlParams.get('setup_intent');
+            const vin = urlParams.get('vin');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            message.textContent = '';
+            
+            try {
+                const response = await fetch('/api/send-receipt-and-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, setup_intent_id, vin })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    message.style.color = '#28a745';
+                    message.textContent = '✓ Receipt and report sent to ' + email;
+                    document.getElementById('email-input').value = '';
+                } else {
+                    message.style.color = '#dc3545';
+                    message.textContent = '✗ ' + (data.error || 'Failed to send');
+                }
+            } catch (error) {
+                message.style.color = '#dc3545';
+                message.textContent = '✗ Network error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Receipt & Report';
+            }
+        });
+    </script>
 </body>
 </html>
