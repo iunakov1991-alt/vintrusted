@@ -4,12 +4,17 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 // ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_20D указывает на price с interval=day, interval_count=20
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  
+  console.log('Checkout request:', req.body);
+  
   try {
     const { setup_intent_id, email } = req.body || {};
     if (!setup_intent_id) throw new Error('setup_intent_id is required');
 
+    console.log('Retrieving SetupIntent:', setup_intent_id);
     const si = await stripe.setupIntents.retrieve(setup_intent_id);
     if (!si || !si.payment_method) throw new Error('SetupIntent has no payment_method');
+    console.log('SetupIntent OK, payment_method:', si.payment_method);
 
     // 1) Customer с привязанным PM
     const customer = await stripe.customers.create({
@@ -26,7 +31,7 @@ export default async function handler(req, res) {
       payment_method: si.payment_method,
       confirm: true,
       off_session: true,
-      statement_descriptor: 'VIN UNLIMITED',
+      statement_descriptor_suffix: 'VIN Report',
       description: 'Trial activation $3'
     });
 
@@ -54,9 +59,10 @@ export default async function handler(req, res) {
       payload.client_secret = pi.client_secret;
     }
 
+    console.log('Checkout success!');
     res.status(200).json(payload);
   } catch (e) {
-    console.error(e);
-    res.status(400).json({ error: e.message });
+    console.error('Checkout error:', e.message, e.type, e.code);
+    res.status(400).json({ error: e.message, type: e.type, code: e.code });
   }
 }
