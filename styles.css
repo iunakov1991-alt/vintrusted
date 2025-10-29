@@ -6695,13 +6695,14 @@ button[type="submit"],
   /* HERO SECTION - Main container */
   .hero-section {
     margin: 0 !important;
-    padding: calc(env(safe-area-inset-top, 20px) + 40px) 0 calc(env(safe-area-inset-bottom, 20px) + 80px) !important;
-    min-height: auto !important;
+    padding: calc(env(safe-area-inset-top, 20px) + 40px) 0 calc(env(safe-area-inset-bottom, 20px) + 120px) !important;
+    min-height: 100vh !important;
     background-attachment: scroll !important;
     background-image: none !important;
     width: 100% !important;
     box-sizing: border-box !important;
     transform: none !important;
+    overflow: visible !important;
   }
   
   .hero-container {
