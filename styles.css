@@ -6666,12 +6666,22 @@ button[type="submit"],
    ============================================================================= */
 
 @media screen and (max-width: 1023px) {
+  /* DEBUG BORDERS */
+  html {
+    border: 3px solid blue !important;
+  }
+  
+  body {
+    border: 3px solid green !important;
+  }
+  
   /* FORCE REMOVE DESKTOP BACKGROUND IMAGE */
   html, body {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
     overflow-x: hidden !important;
+    box-sizing: border-box !important;
   }
   
   html body .hero-section {
@@ -6700,6 +6710,7 @@ button[type="submit"],
     background-image: none !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    border: 3px solid yellow !important;
   }
   
   .hero-container {
@@ -6716,6 +6727,7 @@ button[type="submit"],
     position: relative !important;
     left: 0 !important;
     right: 0 !important;
+    border: 3px solid orange !important;
   }
   
   /* 1. LOGO - centered at top */
@@ -6763,6 +6775,7 @@ button[type="submit"],
     width: 100% !important;
     box-sizing: border-box !important;
     order: 2 !important;
+    border: 3px solid red !important;
   }
   
   /* HIDE SUBTITLE */
