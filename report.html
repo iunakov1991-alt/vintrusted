@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com https://*.stripe.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://vercel.live; frame-src https://js.stripe.com https://hooks.stripe.com https://vercel.live; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com https://*.stripe.com https://pay.google.com https://www.google.com https://www.gstatic.com https://vpic.nhtsa.dot.gov; manifest-src https://pay.google.com;">
     <title>Vehicle Report - VIN Trust</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="/css/stripe-fixes.css" />
+    <link rel="stylesheet" href="/css/stripe-fixes.css?v=2" />
     <script src="https://js.stripe.com/v3/"></script>
-    <script defer src="/public/vin-stripe.js?v=4"></script>
+    <script defer src="/public/vin-stripe.js?v=20"></script>
     <style>
+        /* Override global styles for report page */
+        body {
+            background: #f5f5f5 !important;
+            background-image: none !important;
+        }
+        
         /* Report Page Specific Styles */
         .report-container {
             max-width: 1200px;
@@ -24,8 +30,12 @@
         .report-left {
             background: white;
             border-radius: 12px;
-            padding: 30px;
+            padding: 25px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 600px;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         .report-right {
@@ -40,8 +50,8 @@
 
         .report-header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 2px solid #f0f0f0;
         }
 
@@ -62,45 +72,119 @@
             display: inline-block;
         }
 
-        .report-section {
-            margin-bottom: 30px;
+        /* Vehicle Header */
+        .vehicle-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
         }
 
-        .section-title {
-            font-size: 1.3rem;
+        .vehicle-image img {
+            width: 250px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .vehicle-info {
+            flex: 1;
+        }
+
+        .vehicle-title {
+            font-size: 1.8rem;
             font-weight: bold;
             color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e9ecef;
+            margin: 0 0 10px 0;
         }
 
-        .report-data {
-            background: #f8f9fa;
-            padding: 20px;
+        .vin-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-family: monospace;
+        }
+
+        .vin-label span {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        /* Alerts Grid */
+        .alerts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .alert-card {
+            background: #fff;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
-            margin-bottom: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
+        .alert-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .alert-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .alert-status {
+            font-size: 0.8rem;
+            color: #ff8c00;
+        }
+
+        /* Specs Table */
+        .specs-table {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .specs-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             border-bottom: 1px solid #e9ecef;
         }
 
-        .data-row:last-child {
+        .specs-row:last-child {
             border-bottom: none;
         }
 
-        .data-label {
-            font-weight: 600;
-            color: #495057;
+        .spec-cell {
+            padding: 12px 15px;
+            border-right: 1px solid #e9ecef;
         }
 
-        .data-value {
+        .spec-cell:last-child {
+            border-right: none;
+        }
+
+        .spec-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 4px;
+        }
+
+        .spec-value {
+            font-size: 0.95rem;
             color: #2c3e50;
-            text-align: right;
+            font-weight: 600;
         }
 
         .status-badge {
@@ -380,105 +464,96 @@
     <div class="report-container">
         <!-- Left Column: Report Data -->
         <div class="report-left">
-            <div class="report-header">
-                <h1 class="report-title">Vehicle History Report</h1>
-                <div class="vin-display" id="vinDisplay">Loading...</div>
-            </div>
-
-            <!-- Basic Information -->
-            <div class="report-section">
-                <h2 class="section-title">Basic Information</h2>
-                <div class="report-data" id="basicInfo">
-                    <div class="data-row">
-                        <span class="data-label">Year:</span>
-                        <span class="data-value" id="year">-</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Make:</span>
-                        <span class="data-value" id="make">-</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Model:</span>
-                        <span class="data-value" id="model">-</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Engine:</span>
-                        <span class="data-value" id="engine">-</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Transmission:</span>
-                        <span class="data-value" id="transmission">-</span>
-                    </div>
+            <!-- Vehicle Header with Image -->
+            <div class="vehicle-header">
+                <div class="vehicle-image">
+                    <img id="vehicleImage" src="https://via.placeholder.com/300x200/2c3e50/ffffff?text=Vehicle+Image" alt="Vehicle">
+                </div>
+                <div class="vehicle-info">
+                    <h1 class="vehicle-title"><span id="year">2017</span> <span id="make">Tesla</span> <span id="model">Model S</span></h1>
+                    <div class="vin-label">VIN: <span id="vinDisplay">Loading...</span></div>
                 </div>
             </div>
 
-            <!-- Safety Information -->
-            <div class="report-section">
-                <h2 class="section-title">Safety Information</h2>
-                <div class="report-data" id="safetyInfo">
-                    <div class="data-row">
-                        <span class="data-label">Recalls:</span>
-                        <span class="data-value">
-                            <span class="status-badge status-clean" id="recallsStatus">No Recalls</span>
-                        </span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Airbag Status:</span>
-                        <span class="data-value" id="airbagStatus">-</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Safety Rating:</span>
-                        <span class="data-value" id="safetyRating">-</span>
-                    </div>
+            <!-- Alert Grid -->
+            <div class="alerts-grid">
+                <div class="alert-card" id="accidentsCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Accidents</div>
+                    <div class="alert-status" id="accidentsStatus">Information Available</div>
+                </div>
+                <div class="alert-card" id="titleCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Title Records</div>
+                    <div class="alert-status">Information Available</div>
+                </div>
+                <div class="alert-card" id="odometerCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Odometer</div>
+                    <div class="alert-status" id="odometerStatus">Information Available</div>
+                </div>
+                <div class="alert-card" id="issuesCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Major Issues</div>
+                    <div class="alert-status">Information Available</div>
+                </div>
+                <div class="alert-card" id="valuesCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Market Values</div>
+                    <div class="alert-status">Information Available</div>
+                </div>
+                <div class="alert-card" id="recallsCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Recall & Defects</div>
+                    <div class="alert-status" id="recallsStatus">Information Available</div>
+                </div>
+                <div class="alert-card" id="junkCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Junk & Salvage</div>
+                    <div class="alert-status">Information Available</div>
+                </div>
+                <div class="alert-card" id="salesCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Sales History</div>
+                    <div class="alert-status">Information Available</div>
+                </div>
+                <div class="alert-card" id="lossCard">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-title">Total Loss</div>
+                    <div class="alert-status">Information Available</div>
                 </div>
             </div>
 
-            <!-- History Information -->
-            <div class="report-section">
-                <h2 class="section-title">Vehicle History</h2>
-                <div class="report-data" id="historyInfo">
-                    <div class="data-row">
-                        <span class="data-label">Accidents:</span>
-                        <span class="data-value">
-                            <span class="status-badge status-clean" id="accidentsStatus">No Accidents</span>
-                        </span>
+            <!-- Specifications Table -->
+            <div class="specs-table">
+                <div class="specs-row">
+                    <div class="spec-cell">
+                        <div class="spec-label">Year</div>
+                        <div class="spec-value" id="yearSpec">2017</div>
                     </div>
-                    <div class="data-row">
-                        <span class="data-label">Owners:</span>
-                        <span class="data-value" id="ownersCount">-</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Service Records:</span>
-                        <span class="data-value" id="serviceRecords">-</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Title Status:</span>
-                        <span class="data-value">
-                            <span class="status-badge status-clean" id="titleStatus">Clean</span>
-                        </span>
+                    <div class="spec-cell">
+                        <div class="spec-label">Make, Model</div>
+                        <div class="spec-value"><span id="makeSpec">TESLA</span> <span id="modelSpec">MODEL S</span></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Additional Information -->
-            <div class="report-section">
-                <h2 class="section-title">Additional Information</h2>
-                <div class="report-data" id="additionalInfo">
-                    <div class="data-row">
-                        <span class="data-label">Mileage:</span>
-                        <span class="data-value" id="mileage">-</span>
+                <div class="specs-row">
+                    <div class="spec-cell">
+                        <div class="spec-label">Trim</div>
+                        <div class="spec-value" id="trimSpec">-</div>
                     </div>
-                    <div class="data-row">
-                        <span class="data-label">Fuel Type:</span>
-                        <span class="data-value" id="fuelType">-</span>
+                    <div class="spec-cell">
+                        <div class="spec-label">Drive Type</div>
+                        <div class="spec-value" id="driveType">AWD</div>
                     </div>
-                    <div class="data-row">
-                        <span class="data-label">Body Style:</span>
-                        <span class="data-value" id="bodyStyle">-</span>
+                </div>
+                <div class="specs-row">
+                    <div class="spec-cell">
+                        <div class="spec-label">Brake System</div>
+                        <div class="spec-value" id="brakeSystem">-</div>
                     </div>
-                    <div class="data-row">
-                        <span class="data-label">Drive Type:</span>
-                        <span class="data-value" id="driveType">-</span>
+                    <div class="spec-cell">
+                        <div class="spec-label">Engine</div>
+                        <div class="spec-value" id="engine">Electric</div>
                     </div>
                 </div>
             </div>
@@ -523,34 +598,128 @@
             document.getElementById('vinDisplay').textContent = 'No VIN or Plate provided';
         }
 
+        // Decode VIN using NHTSA API
+        async function decodeVIN(vin) {
+            try {
+                const apiUrl = `https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`;
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to decode VIN');
+                }
+                
+                const data = await response.json();
+                
+                if (data.Results && data.Results.length > 0) {
+                    return parseNHTSAData(data.Results);
+                }
+                
+                return null;
+            } catch (error) {
+                console.error('Error decoding VIN:', error);
+                return null;
+            }
+        }
+        
+        // Parse NHTSA data
+        function parseNHTSAData(results) {
+            const parsed = {};
+            
+            results.forEach(result => {
+                const variable = result.Variable;
+                const value = result.Value;
+                
+                if (value && value !== 'Not Applicable' && value !== '') {
+                    switch(variable) {
+                        case 'Model Year':
+                            parsed.year = value;
+                            break;
+                        case 'Make':
+                            parsed.make = value;
+                            break;
+                        case 'Model':
+                            parsed.model = value;
+                            break;
+                        case 'Engine Configuration':
+                        case 'Engine Number of Cylinders':
+                            if (!parsed.engine) parsed.engine = value;
+                            else parsed.engine += ' ' + value;
+                            break;
+                        case 'Transmission Style':
+                            parsed.transmission = value;
+                            break;
+                        case 'Fuel Type - Primary':
+                            parsed.fuelType = value;
+                            break;
+                        case 'Body Class':
+                            parsed.bodyStyle = value;
+                            break;
+                        case 'Drive Type':
+                            parsed.driveType = value;
+                            break;
+                    }
+                }
+            });
+            
+            return parsed;
+        }
+        
         // Load report data from VinAudit API
         async function loadReportData(input, type) {
             try {
                 // Show loading state
                 document.querySelector('.report-left').classList.add('loading');
                 
-                // Simulate API call (replace with actual VinAudit API)
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                let data = null;
                 
-                // Simulate API error for invalid input
                 if (type === 'vin') {
                     if (input.length !== 17 || !input.match(/^[A-HJ-NPR-Z0-9]{17}$/)) {
                         throw new Error('INVALID_VIN');
                     }
+                    
+                    // Decode VIN using NHTSA API
+                    data = await decodeVIN(input);
+                    
+                    // If no data or incomplete data, use mock data as fallback
+                    if (!data || !data.year || !data.make) {
+                        data = {
+                            year: '2017',
+                            make: 'Tesla',
+                            model: 'Model S',
+                            engine: 'Electric',
+                            transmission: 'Automatic',
+                            fuelType: 'Electric',
+                            bodyStyle: 'Sedan',
+                            driveType: 'AWD'
+                        };
+                    }
+                    
                 } else if (type === 'plate') {
                     // Simulate plate validation (you can customize this)
                     if (input.length < 3 || input.length > 10) {
                         throw new Error('INVALID_PLATE');
                     }
+                    
+                    // Mock data for plates (no free API available)
+                    data = {
+                        year: '2015',
+                        make: 'Toyota',
+                        model: 'Camry',
+                        engine: 'V6',
+                        transmission: 'Automatic',
+                        fuelType: 'Gasoline',
+                        bodyStyle: 'Sedan',
+                        driveType: 'FWD'
+                    };
                 }
                 
-                // Mock data - replace with actual VinAudit API response
-                const mockData = {
-                    year: '2015',
-                    make: 'Toyota',
-                    model: 'Camry',
-                    engine: '2.5L 4-Cylinder',
-                    transmission: 'Automatic',
+                // Add default values for missing fields
+                const reportData = {
+                    year: data.year || '-',
+                    make: data.make || '-',
+                    model: data.model || '-',
+                    engine: data.engine || '-',
+                    transmission: data.transmission || '-',
                     recalls: 0,
                     airbagStatus: 'Active',
                     safetyRating: '5 Stars',
@@ -559,13 +728,13 @@
                     serviceRecords: '12',
                     titleStatus: 'Clean',
                     mileage: '85,432',
-                    fuelType: 'Gasoline',
-                    bodyStyle: 'Sedan',
-                    driveType: 'Front Wheel Drive'
+                    fuelType: data.fuelType || 'Gasoline',
+                    bodyStyle: data.bodyStyle || 'Sedan',
+                    driveType: data.driveType || 'FWD'
                 };
                 
                 // Populate the report
-                populateReport(mockData);
+                populateReport(reportData);
                 
             } catch (error) {
                 console.error('Error loading report:', error);
@@ -583,32 +752,44 @@
 
         // Populate report with data
         function populateReport(data) {
+            // Update vehicle title
             document.getElementById('year').textContent = data.year;
             document.getElementById('make').textContent = data.make;
             document.getElementById('model').textContent = data.model;
-            document.getElementById('engine').textContent = data.engine;
-            document.getElementById('transmission').textContent = data.transmission;
             
-            document.getElementById('airbagStatus').textContent = data.airbagStatus;
-            document.getElementById('safetyRating').textContent = data.safetyRating;
+            // Update specs table
+            document.getElementById('yearSpec').textContent = data.year;
+            document.getElementById('makeSpec').textContent = data.make?.toUpperCase() || '-';
+            document.getElementById('modelSpec').textContent = data.model?.toUpperCase() || '-';
+            document.getElementById('driveType').textContent = data.driveType || '-';
+            document.getElementById('engine').textContent = data.engine || data.fuelType || '-';
+            document.getElementById('trimSpec').textContent = data.trim || '-';
+            document.getElementById('brakeSystem').textContent = data.brakeSystem || '-';
             
-            document.getElementById('ownersCount').textContent = data.ownersCount;
-            document.getElementById('serviceRecords').textContent = data.serviceRecords;
-            
-            document.getElementById('mileage').textContent = data.mileage;
-            document.getElementById('fuelType').textContent = data.fuelType;
-            document.getElementById('bodyStyle').textContent = data.bodyStyle;
-            document.getElementById('driveType').textContent = data.driveType;
-            
-            // Update status badges
-            if (data.recalls > 0) {
-                document.getElementById('recallsStatus').textContent = `${data.recalls} Recalls`;
-                document.getElementById('recallsStatus').className = 'status-badge status-warning';
+            // Update alert cards
+            const accidentsCard = document.getElementById('accidentsCard');
+            if (data.accidents > 0) {
+                document.getElementById('accidentsStatus').textContent = `${data.accidents} Reported`;
+                accidentsCard.style.borderLeft = '4px solid #dc3545';
+            } else {
+                document.getElementById('accidentsStatus').textContent = 'No Accidents';
+                accidentsCard.style.borderLeft = '4px solid #28a745';
             }
             
-            if (data.accidents > 0) {
-                document.getElementById('accidentsStatus').textContent = `${data.accidents} Accidents`;
-                document.getElementById('accidentsStatus').className = 'status-badge status-danger';
+            const recallsCard = document.getElementById('recallsCard');
+            if (data.recalls > 0) {
+                document.getElementById('recallsStatus').textContent = `${data.recalls} Recalls`;
+                recallsCard.style.borderLeft = '4px solid #ffc107';
+            } else {
+                document.getElementById('recallsStatus').textContent = 'No Recalls';
+                recallsCard.style.borderLeft = '4px solid #28a745';
+            }
+            
+            // Update odometer
+            const odometerCard = document.getElementById('odometerCard');
+            if (data.mileage) {
+                document.getElementById('odometerStatus').textContent = data.mileage + ' miles';
+                odometerCard.style.borderLeft = '4px solid #17a2b8';
             }
         }
 
