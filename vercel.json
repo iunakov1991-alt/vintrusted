@@ -47,6 +47,8 @@
     { "src": "/payment-cancel", "dest": "/payment-cancel.html" },
     { "src": "/mobile.html", "dest": "/mobile.html" },
     { "src": "/test-mobile.html", "dest": "/test-mobile.html" },
+    { "src": "/m.html", "dest": "/m.html" },
+    { "src": "/", "dest": "/index.html" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
