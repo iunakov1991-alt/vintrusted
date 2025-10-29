@@ -7249,14 +7249,14 @@ button[type="submit"],
   }
   
   .logo-img {
-    height: 70px !important;
+    height: 175px !important;
     width: auto !important;
   }
   
   /* === Hero Section === */
   .hero-section {
     margin-top: 0 !important;
-    padding: 0 16px 40px !important;
+    padding: 0 16px 100px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -7265,7 +7265,7 @@ button[type="submit"],
   
   .hero-container {
     width: 100% !important;
-    max-width: 400px !important;
+    max-width: 1000px !important;
     margin: 0 auto !important;
     padding: 0 !important;
     display: flex !important;
@@ -7277,17 +7277,17 @@ button[type="submit"],
   .hero-container::before {
     content: '' !important;
     display: block !important;
-    height: 24px !important;
+    height: 60px !important;
   }
   
   /* === 3. ЗАГОЛОВОК "CHECK VIN" (центр) === */
   .main-title {
-    font-size: 32px !important;
+    font-size: 80px !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
     color: #ffffff !important;
     text-align: center !important;
-    margin: 0 0 24px 0 !important;
+    margin: 0 0 60px 0 !important;
     padding: 0 !important;
     display: block !important;
     width: 100% !important;
@@ -7314,24 +7314,24 @@ button[type="submit"],
   /* === 5. КНОПКИ VIN / PLATE (центр) === */
   .mode-tabs {
     display: flex !important;
-    gap: 12px !important;
-    margin-bottom: 8px !important;
+    gap: 30px !important;
+    margin-bottom: 20px !important;
     width: 100% !important;
     justify-content: center !important;
   }
   
   .mode-btn {
     flex: 1 !important;
-    max-width: 180px !important;
-    height: 50px !important;
-    border-radius: 12px !important;
-    font-size: 16px !important;
+    max-width: 450px !important;
+    height: 125px !important;
+    border-radius: 30px !important;
+    font-size: 40px !important;
     font-weight: 600 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     background: rgba(255, 255, 255, 0.2) !important;
-    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    border: 5px solid rgba(255, 255, 255, 0.4) !important;
     color: #ffffff !important;
     cursor: pointer !important;
   }
@@ -7344,7 +7344,7 @@ button[type="submit"],
   
   /* === 6. ОТСТУП 0.5 === */
   .mode-tabs {
-    margin-bottom: 8px !important;
+    margin-bottom: 20px !important;
   }
   
   /* === 7. ПОЛЕ ВВОДА (переключается) === */
@@ -7353,7 +7353,7 @@ button[type="submit"],
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
+    gap: 30px !important;
   }
   
   /* Скрыть неактивный режим */
@@ -7368,12 +7368,12 @@ button[type="submit"],
   input[type="text"],
   select {
     width: 100% !important;
-    height: 52px !important;
-    border-radius: 12px !important;
-    padding: 0 16px !important;
-    font-size: 16px !important;
+    height: 130px !important;
+    border-radius: 30px !important;
+    padding: 0 40px !important;
+    font-size: 40px !important;
     background: rgba(255, 255, 255, 0.95) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border: 5px solid rgba(255, 255, 255, 0.3) !important;
     color: #1a1a1a !important;
     box-sizing: border-box !important;
     margin: 0 !important;
@@ -7382,16 +7382,16 @@ button[type="submit"],
   /* === 8. ОТСТУП перед кнопкой === */
   #vin-mode,
   #plate-mode {
-    margin-bottom: 16px !important;
+    margin-bottom: 40px !important;
   }
   
   /* === 9. КНОПКА GET REPORT (центр) === */
   .search-btn,
   button[type="submit"] {
     width: 100% !important;
-    height: 56px !important;
-    border-radius: 14px !important;
-    font-size: 18px !important;
+    height: 140px !important;
+    border-radius: 35px !important;
+    font-size: 45px !important;
     font-weight: 700 !important;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     color: #1a1a1a !important;
@@ -7408,7 +7408,7 @@ button[type="submit"],
   /* === 10. ОТСТУП после кнопки === */
   .search-btn,
   button[type="submit"] {
-    margin-bottom: 32px !important;
+    margin-bottom: 80px !important;
   }
   
   /* Скрыть features и другое */
