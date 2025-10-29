@@ -6793,12 +6793,15 @@ button[type="submit"],
   #vin-mode,
   #plate-mode {
     display: none !important;
+    position: relative !important;
   }
   
   #vin-mode.active,
   #plate-mode.active {
     display: block !important;
-    margin-bottom: 0 !important;
+    margin-bottom: 20px !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
   
   .hero-section input[type="text"],
@@ -6818,14 +6821,15 @@ button[type="submit"],
     background: #ffffff !important;
     color: #1a1a1a !important;
     box-sizing: border-box !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 0 !important;
     text-align: center !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
   
-  /* Last input gets bigger margin */
-  #vin-mode input:last-child,
-  #plate-mode select:last-child {
-    margin-bottom: 20px !important;
+  /* Separate input in plate mode */
+  #plate-mode input {
+    margin-bottom: 15px !important;
   }
   
   /* 6. SUBMIT BUTTON "GET REPORT" - extra top margin */
@@ -6846,6 +6850,9 @@ button[type="submit"],
     margin: 20px 0 20px 0 !important;
     box-sizing: border-box !important;
     box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4) !important;
+    position: relative !important;
+    z-index: 2 !important;
+    clear: both !important;
   }
   
   /* HIDE hero features on first screen */
