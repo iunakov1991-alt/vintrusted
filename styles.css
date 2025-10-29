@@ -6708,7 +6708,7 @@ button[type="submit"],
   .hero-container {
     max-width: 480px !important;
     margin: 0 auto !important;
-    padding: 0 !important;
+    padding: 0 0 40px 0 !important;
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
@@ -6720,6 +6720,7 @@ button[type="submit"],
     left: 0 !important;
     right: 0 !important;
     transform: none !important;
+    overflow: visible !important;
   }
   
   /* 1. LOGO - centered at top */
@@ -6789,6 +6790,7 @@ button[type="submit"],
     margin: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
+    overflow: visible !important;
   }
   
   .search-form {
@@ -6798,6 +6800,7 @@ button[type="submit"],
     box-shadow: none !important;
     width: 100% !important;
     max-width: 100% !important;
+    overflow: visible !important;
   }
   
   /* Hide specific form children */
@@ -6806,6 +6809,7 @@ button[type="submit"],
     flex-direction: column !important;
     gap: 0 !important;
     width: 100% !important;
+    overflow: visible !important;
   }
   
   /* 4. MODE BUTTONS (VIN / License Plate) - side by side */
@@ -6856,7 +6860,7 @@ button[type="submit"],
   .search-form .form-content #plate-mode {
     display: none !important;
     width: calc(100% - 40px) !important;
-    margin: 0 20px 20px 20px !important;
+    margin: 0 20px 40px 20px !important;
     box-sizing: border-box !important;
     height: 54px !important;
     min-height: 54px !important;
