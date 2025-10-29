@@ -116,7 +116,7 @@
   
   .hero-section {
     margin-top: calc(60px + var(--safe-top));
-    padding: calc(32px + var(--safe-top)) 0 40px;
+    padding: calc(8px + var(--safe-top)) 0 40px;
     min-height: auto;
     background-attachment: scroll;
     transform: none;
