@@ -1,0 +1,978 @@
+/* =============================================================================
+   MOBILE.CSS - VinTrusted Mobile & Tablet Responsive Styles
+   ============================================================================= */
+
+/* Safe Area CSS Variables for iOS Dynamic Island & Notches */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+/* =============================================================================
+   MOBILE & TABLET BASE STYLES (0-1023px)
+   ============================================================================= */
+
+@media (max-width: 1023px) {
+  /* Override Desktop Constraints */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Mobile Container - Single Column, Max Width 480px */
+  .m-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  /* Override Desktop Container */
+  .container {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  /* =============================================================================
+     HEADER - MOBILE
+     ============================================================================= */
+  
+  .header {
+    padding-top: calc(12px + var(--safe-top));
+    padding-bottom: 12px;
+    height: auto;
+    min-height: calc(60px + var(--safe-top));
+  }
+
+  .header-content {
+    height: auto;
+    min-height: 50px;
+    padding: 8px 0;
+  }
+
+  .logo {
+    margin-left: 0;
+    transform: scale(0.8);
+  }
+
+  .logo-img {
+    height: 80px;
+    width: auto;
+  }
+
+  .nav, 
+  .header-actions {
+    display: none;
+  }
+
+  /* Mobile Menu Toggle (if needed in future) */
+  .m-menu-toggle {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  /* =============================================================================
+     HERO SECTION - MOBILE
+     ============================================================================= */
+  
+  .hero-section {
+    margin-top: calc(60px + var(--safe-top));
+    padding: calc(32px + var(--safe-top)) 0 40px;
+    min-height: auto;
+    background-attachment: scroll;
+    transform: none;
+  }
+
+  .hero-container {
+    transform: none;
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .main-title {
+    font-size: 28px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .yellow-text {
+    display: inline;
+  }
+
+  /* =============================================================================
+     VIN SEARCH FORM - MOBILE
+     ============================================================================= */
+  
+  .search-form-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .m-form-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+
+  .m-tab-btn,
+  .mode-btn {
+    flex: 1;
+    max-width: 150px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .m-tab-btn.active,
+  .mode-btn.active {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    border-color: #fbbf24;
+  }
+
+  /* VIN Form Fields */
+  .m-vin-field,
+  .vin-mode-content,
+  .plate-mode-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .m-vin-input-wrapper {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .vin-input,
+  .plate-input,
+  .state-select,
+  input[data-vin-input] {
+    flex: 1;
+    height: 48px;
+    border-radius: 12px;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    color: #1a1a1a;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .vin-input:focus,
+  .plate-input:focus,
+  .state-select:focus,
+  input[data-vin-input]:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  /* VIN Validation Colors */
+  .vin-input.valid {
+    color: #51cf66 !important;
+    border-color: #51cf66;
+  }
+
+  .vin-input.invalid {
+    color: #ff6b6b !important;
+    border-color: #ff6b6b;
+  }
+
+  /* Search Button */
+  .search-btn,
+  button[data-vin-submit] {
+    width: 100%;
+    height: 52px;
+    border-radius: 14px;
+    padding: 0 24px;
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+  }
+
+  .search-btn:active,
+  button[data-vin-submit]:active {
+    transform: scale(0.98);
+  }
+
+  .search-btn:disabled,
+  button[data-vin-submit]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Error Message */
+  .m-error,
+  .error-message {
+    margin-top: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid #ff6b6b;
+  }
+
+  /* =============================================================================
+     HERO FEATURES GRID - MOBILE
+     ============================================================================= */
+  
+  .hero-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 24px auto 16px;
+    padding: 0 8px;
+    max-width: 100%;
+  }
+
+  .feature-item {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+  }
+
+  .feature-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .feature-text {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  /* =============================================================================
+     FEATURES SECTION - MOBILE
+     ============================================================================= */
+  
+  .features-section {
+    padding: 40px 0;
+  }
+
+  .features-grid,
+  .m-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .feature-card {
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .feature-title,
+  .feature-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+  }
+
+  .feature-description,
+  .feature-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4b5563;
+  }
+
+  /* =============================================================================
+     BLACK PANELS / INFO SECTIONS - MOBILE
+     ============================================================================= */
+  
+  .black-panel,
+  .info-panel {
+    padding: 32px 16px;
+    margin: 24px 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+  }
+
+  .panel-title {
+    font-size: 22px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .panel-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .panel-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  .panel-feature-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .panel-feature-text {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #e5e7eb;
+  }
+
+  /* =============================================================================
+     COMPARISON TABLE - MOBILE
+     ============================================================================= */
+  
+  .comparison-section {
+    padding: 40px 0;
+  }
+
+  .comparison-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+
+  .comparison-subtitle {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 24px;
+    color: #e5e7eb;
+  }
+
+  .comparison-table {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .comparison-table table {
+    width: 100%;
+    min-width: 300px;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .comparison-table th {
+    font-size: 13px;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* =============================================================================
+     PRICING SECTION - MOBILE
+     ============================================================================= */
+  
+  .pricing-section {
+    padding: 40px 0;
+  }
+
+  .pricing-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 16px;
+    color: #ffffff;
+  }
+
+  .pricing-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .pricing-card {
+    padding: 24px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+  }
+
+  .pricing-card.featured {
+    border-color: #fbbf24;
+    box-shadow: 0 8px 24px rgba(251, 191, 36, 0.3);
+  }
+
+  .price {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 16px 0;
+    color: #1a1a1a;
+  }
+
+  .pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .pricing-features li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #4b5563;
+  }
+
+  .pricing-btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+  }
+
+  /* =============================================================================
+     REVIEWS SECTION - MOBILE
+     ============================================================================= */
+  
+  .reviews-section {
+    padding: 40px 0;
+  }
+
+  .reviews-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 24px;
+    color: #ffffff;
+  }
+
+  .reviews-carousel {
+    position: relative;
+    overflow: hidden;
+    padding: 0 16px;
+  }
+
+  .reviews-track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.5s ease;
+  }
+
+  .review-card {
+    min-width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .review-rating {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+    justify-content: center;
+  }
+
+  .review-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin-bottom: 16px;
+  }
+
+  .review-author {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .review-location {
+    font-size: 12px;
+    color: #6b7280;
+  }
+
+  /* Carousel Controls */
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .prev-btn,
+  .next-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    width: 24px;
+    border-radius: 4px;
+    background: #fbbf24;
+  }
+
+  /* =============================================================================
+     FAQ SECTION - MOBILE
+     ============================================================================= */
+  
+  .faq-section,
+  .faqs__container {
+    padding: 40px 0;
+  }
+
+  .faq-title,
+  .faqs__title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 24px;
+    color: #ffffff;
+  }
+
+  .faq-item,
+  .spollers-faq__item {
+    margin-bottom: 12px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .faq-question,
+  .spollers-faq__button {
+    width: 100%;
+    padding: 16px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+  }
+
+  .faq-question span,
+  .spollers-faq__button span {
+    padding-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .faq-question img,
+  .spollers-faq__button img {
+    padding-right: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  .faq-answer,
+  .spollers-faq__text {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .faq-item.active .faq-answer,
+  .spollers-faq__item.active .spollers-faq__text {
+    max-height: 1000px;
+  }
+
+  .faq-answer-content,
+  .spollers-faq__inner {
+    padding: 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #4b5563;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(59, 130, 246, 0.2);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    margin-top: -12px;
+  }
+
+  /* =============================================================================
+     FOOTER - MOBILE
+     ============================================================================= */
+  
+  .footer {
+    padding: 32px 0 calc(32px + var(--safe-bottom));
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .footer-section {
+    width: 100%;
+  }
+
+  .footer-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #ffffff;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-link {
+    font-size: 13px;
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-link:hover {
+    color: #fbbf24;
+  }
+
+  .footer-bottom {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+
+  .footer-copyright {
+    font-size: 12px;
+    color: #6b7280;
+  }
+
+  .footer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: calc(32px + var(--safe-bottom));
+  }
+
+  .footer__policy,
+  .footer__copyright {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .footer__logo {
+    margin: 16px 0;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+
+  /* =============================================================================
+     STICKY CTA BAR - MOBILE
+     ============================================================================= */
+  
+  .m-cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 16px calc(10px + var(--safe-bottom));
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .m-cta-bar.visible {
+    transform: translateY(0);
+  }
+
+  .m-cta-btn {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    display: block;
+    height: 52px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+  }
+
+  /* =============================================================================
+     LANDSCAPE ORIENTATION - KEEP SINGLE COLUMN
+     ============================================================================= */
+  
+  @media (orientation: landscape) and (max-width: 1023px) {
+    .m-container {
+      max-width: 480px;
+    }
+
+    .hero-features {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Ensure scrollability for landscape */
+    body {
+      overflow-y: auto;
+    }
+  }
+
+  /* =============================================================================
+     PHABLET ADJUSTMENTS (600-767px)
+     ============================================================================= */
+  
+  @media (min-width: 600px) and (max-width: 767px) {
+    .m-container {
+      padding: 0 24px;
+    }
+
+    .main-title {
+      font-size: 32px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+    }
+
+    .hero-features {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .features-grid,
+    .m-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* =============================================================================
+     TABLET ADJUSTMENTS (768-1023px)
+     ============================================================================= */
+  
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .m-container {
+      max-width: 640px;
+      padding: 0 32px;
+    }
+
+    .main-title {
+      font-size: 36px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+    }
+
+    .hero-features {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .features-grid,
+    .m-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .pricing-cards {
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .pricing-card {
+      flex: 1;
+    }
+
+    .review-card {
+      min-width: calc(50% - 8px);
+    }
+  }
+
+  /* =============================================================================
+     UTILITIES - MOBILE
+     ============================================================================= */
+  
+  .m-hide {
+    display: none !important;
+  }
+
+  .m-show {
+    display: block !important;
+  }
+
+  .m-text-center {
+    text-align: center;
+  }
+
+  .m-mt-0 { margin-top: 0; }
+  .m-mt-1 { margin-top: 8px; }
+  .m-mt-2 { margin-top: 16px; }
+  .m-mt-3 { margin-top: 24px; }
+  .m-mt-4 { margin-top: 32px; }
+
+  .m-mb-0 { margin-bottom: 0; }
+  .m-mb-1 { margin-bottom: 8px; }
+  .m-mb-2 { margin-bottom: 16px; }
+  .m-mb-3 { margin-bottom: 24px; }
+  .m-mb-4 { margin-bottom: 32px; }
+
+  .m-p-0 { padding: 0; }
+  .m-p-1 { padding: 8px; }
+  .m-p-2 { padding: 16px; }
+  .m-p-3 { padding: 24px; }
+  .m-p-4 { padding: 32px; }
+
+  /* Touch-friendly tap targets */
+  .m-tap-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Prevent text selection on tap */
+  .m-no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* =============================================================================
+     ACCESSIBILITY - MOBILE
+     ============================================================================= */
+  
+  /* Focus visible for keyboard navigation */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible {
+    outline: 3px solid #fbbf24;
+    outline-offset: 2px;
+  }
+
+  /* High contrast mode adjustments */
+  @media (prefers-contrast: high) {
+    .m-tab-btn,
+    .mode-btn,
+    .search-btn,
+    .pricing-btn {
+      border-width: 3px;
+    }
+  }
+
+  /* Reduced motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* =============================================================================
+   END MOBILE STYLES
+   ============================================================================= */
+

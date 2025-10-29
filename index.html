@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -127,6 +127,10 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css?v=3">
+    
+    <!-- Mobile & Tablet Styles (0-1023px only) -->
+    <link rel="preload" href="/public/css/mobile.css" as="style" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/public/css/mobile.css" media="(max-width: 1023px)">
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -2347,6 +2351,9 @@
     </footer>
 
     <script src="script.js"></script>
+    
+    <!-- Mobile JavaScript (loads on all devices but only executes on mobile/tablet) -->
+    <script src="/public/js/mobile.js" defer></script>
     
     <script>
     // Auto-focus first VIN input on page load
