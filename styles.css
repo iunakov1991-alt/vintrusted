@@ -6666,6 +6666,11 @@ button[type="submit"],
    ============================================================================= */
 
 @media screen and (max-width: 1023px) {
+  /* DEBUG TEST - YOU SHOULD SEE THIS! */
+  * {
+    outline: 3px dashed red !important;
+  }
+  
   /* FORCE REMOVE DESKTOP BACKGROUND IMAGE */
   html, body {
     margin: 0 !important;
