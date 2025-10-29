@@ -115,9 +115,9 @@
      ============================================================================= */
   
   .hero-section {
-    margin-top: 70px !important;
+    margin-top: 0 !important;
     padding: 0 0 40px !important;
-    padding-top: 0 !important;
+    padding-top: 10px !important;
     min-height: auto;
     background-attachment: scroll;
     transform: none;
@@ -135,7 +135,15 @@
     font-size: 28px;
     line-height: 1.15;
     margin-bottom: 20px;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
     text-align: center;
+  }
+  
+  /* Убираем все возможные отступы сверху */
+  .hero-section *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   .subtitle {
