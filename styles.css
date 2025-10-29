@@ -6835,7 +6835,6 @@ button[type="submit"],
     opacity: 1 !important;
     flex: 1 !important;
     height: 54px !important;
-    max-width: 230px !important;
     border-radius: 27px !important;
     font-size: 17px !important;
     font-weight: 600 !important;
@@ -6859,8 +6858,9 @@ button[type="submit"],
   .search-form .form-content #vin-mode,
   .search-form .form-content #plate-mode {
     display: none !important;
-    width: calc(100% - 24px) !important;
-    margin: 0 12px 40px 12px !important;
+    width: 100% !important;
+    margin: 0 0 40px 0 !important;
+    padding: 0 12px !important;
     box-sizing: border-box !important;
     height: 54px !important;
     min-height: 54px !important;
