@@ -1873,9 +1873,12 @@
                 if (progress >= 100) {
                     progress = 100;
                     clearInterval(progressInterval);
+                    // Change text to "Vehicle Found" at 100%
+                    progressText.innerHTML = '<div style="font-size: 0.9rem; font-weight: 400; margin-bottom: 5px;">Vehicle Found</div><div style="font-size: 1.1rem; font-weight: 700;">Loading Report...</div>';
+                } else {
+                    progressBar.style.width = progress + '%';
+                    progressText.textContent = Math.round(progress) + '%';
                 }
-                progressBar.style.width = progress + '%';
-                progressText.textContent = Math.round(progress) + '%';
                 
                 // Show notification at 40%
                 if (progress >= 40 && !notificationShown) {
