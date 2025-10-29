@@ -2310,9 +2310,49 @@
             const firstVinInput = document.querySelector('#vin-mode .vin-input');
             if (firstVinInput) {
                 firstVinInput.focus();
-                console.log('Auto-focused first VIN input on page load');
             }
         }, 500);
+    });
+
+    // Auto-paste VIN from clipboard
+    document.addEventListener('DOMContentLoaded', function() {
+        const vinInputs = document.querySelectorAll('.vin-input');
+        
+        vinInputs.forEach(input => {
+            input.addEventListener('focus', async function() {
+                if (this.value.trim() === '') {
+                    try {
+                        const text = await navigator.clipboard.readText();
+                        if (text && /^[A-HJ-NPR-Z0-9]{17}$/i.test(text.trim())) {
+                            this.value = text.trim().toUpperCase();
+                        }
+                    } catch (err) {
+                        // Clipboard access denied or not available
+                    }
+                }
+            });
+        });
+    });
+
+    // Enter key to submit form
+    document.addEventListener('DOMContentLoaded', function() {
+        const vinInputs = document.querySelectorAll('.vin-input');
+        const plateInputs = document.querySelectorAll('.plate-input');
+        
+        [...vinInputs, ...plateInputs].forEach(input => {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const form = this.closest('.search-form-container');
+                    if (form) {
+                        const button = form.querySelector('.search-btn');
+                        if (button) {
+                            button.click();
+                        }
+                    }
+                }
+            });
+        });
     });
     </script>
 </body>
