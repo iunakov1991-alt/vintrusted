@@ -6820,7 +6820,7 @@ button[type="submit"],
     flex: 1 !important;
     height: 54px !important;
     max-width: 230px !important;
-    border-radius: 12px !important;
+    border-radius: 27px !important;
     font-size: 17px !important;
     font-weight: 600 !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
@@ -6829,6 +6829,8 @@ button[type="submit"],
     align-items: center !important;
     justify-content: center !important;
     margin: 0 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
   }
   
   .mode-btn.active {
