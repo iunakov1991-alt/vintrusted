@@ -7154,3 +7154,58 @@ button[type="submit"],
     text-align: left !important;
   }
 }
+
+/* =============================================================================
+   MOBILE: HIDE HEADER & HERO SECTION (max-width: 1023px)
+   ============================================================================= */
+
+@media screen and (max-width: 1023px) {
+  /* Hide header completely on mobile */
+  html body .header,
+  body .header,
+  .header {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Hide entire hero section on mobile */
+  html body .hero-section,
+  body .hero-section,
+  .hero-section {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Hide all hero children */
+  .hero-section *,
+  .hero-container,
+  .hero-container *,
+  .main-title,
+  .subtitle,
+  .search-form-container,
+  .hero-features {
+    display: none !important;
+  }
+  
+  /* Start content from top */
+  html body,
+  body {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* First visible section should start from top */
+  body > div:first-child,
+  body > section:first-child:not(.hero-section) {
+    margin-top: 0 !important;
+    padding-top: 20px !important;
+  }
+}
