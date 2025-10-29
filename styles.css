@@ -7229,28 +7229,22 @@ button[type="submit"],
     overflow: visible !important;
   }
   
-  /* === 1. ЛОГО (центр) === */
+  /* === УДАЛИТЬ ШАПКУ === */
   .header {
-    position: relative !important;
-    padding: 20px 0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
   }
   
-  .header-content {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-  
-  .logo {
-    margin: 0 !important;
-  }
-  
-  .logo-img {
+  /* === 1. ЛОГО в hero section === */
+  .hero-section::before {
+    content: url('/logo-vin-trust.png') !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-bottom: 60px !important;
     height: 175px !important;
-    width: auto !important;
   }
   
   /* === Hero Section === */
