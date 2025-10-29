@@ -7243,8 +7243,9 @@ button[type="submit"],
     display: block !important;
     width: 100% !important;
     text-align: center !important;
-    margin-bottom: 60px !important;
-    height: 175px !important;
+    margin-bottom: 40px !important;
+    max-height: 60px !important;
+    object-fit: contain !important;
   }
   
   /* === Hero Section === */
