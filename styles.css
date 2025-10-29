@@ -7416,3 +7416,36 @@ button[type="submit"],
     display: none !important;
   }
 }
+
+/* =============================================================================
+   FORCE REMOVE HEADER ON MOBILE - MAXIMUM PRIORITY
+   ============================================================================= */
+
+@media screen and (max-width: 1023px) {
+  html body header,
+  html body .header,
+  body header,
+  body .header,
+  header.header,
+  .header {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    pointer-events: none !important;
+  }
+  
+  /* Remove all header children */
+  .header *,
+  .header-content,
+  .header-content *,
+  header * {
+    display: none !important;
+  }
+}
