@@ -6710,6 +6710,7 @@ button[type="submit"],
     background-image: none !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    transform: none !important;
     border: 3px solid yellow !important;
   }
   
