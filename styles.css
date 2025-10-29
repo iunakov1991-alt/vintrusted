@@ -6703,7 +6703,7 @@ button[type="submit"],
   .hero-container .logo {
     display: block !important;
     text-align: center !important;
-    margin: 0 auto 30px auto !important;
+    margin: 0 auto 20px auto !important;
     width: 100% !important;
   }
   
@@ -6723,7 +6723,7 @@ button[type="submit"],
     font-weight: 700 !important;
     color: #ffffff !important;
     text-align: center !important;
-    margin: 0 0 40px 0 !important;
+    margin: 0 0 20px 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
   }
@@ -6798,7 +6798,7 @@ button[type="submit"],
   #vin-mode.active,
   #plate-mode.active {
     display: block !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 0 !important;
   }
   
   .hero-section input[type="text"],
@@ -6818,14 +6818,14 @@ button[type="submit"],
     background: #ffffff !important;
     color: #1a1a1a !important;
     box-sizing: border-box !important;
-    margin-bottom: 15px !important;
+    margin-bottom: 20px !important;
     text-align: center !important;
   }
   
-  /* Remove margin from last input in mode */
+  /* Last input gets 20px margin too */
   #vin-mode input:last-child,
   #plate-mode select:last-child {
-    margin-bottom: 0 !important;
+    margin-bottom: 20px !important;
   }
   
   /* 6. SUBMIT BUTTON "GET REPORT" */
@@ -6843,7 +6843,7 @@ button[type="submit"],
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     color: #1a1a1a !important;
     border: none !important;
-    margin: 20px 0 40px 0 !important;
+    margin: 0 0 20px 0 !important;
     box-sizing: border-box !important;
     box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4) !important;
   }
