@@ -6772,6 +6772,8 @@ button[type="submit"],
     background: #ffffff !important;
     color: #1a1a1a !important;
     box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
   
   /* SUBMIT BUTTON */
@@ -6789,6 +6791,8 @@ button[type="submit"],
     margin-top: 40px !important;
     margin-bottom: 20px !important;
     box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 2 !important;
   }
   
   /* HIDE hero features on first screen */
