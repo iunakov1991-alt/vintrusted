@@ -33,9 +33,14 @@
             padding: 25px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             min-height: 600px;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        
+        .report-left.loaded {
+            opacity: 1;
+            visibility: visible;
         }
 
         .report-right {
@@ -482,8 +487,8 @@
                     <img id="vehicleImage" src="images/logo-vin-trust.png" alt="VIN TRUST Logo">
                 </div>
                 <div class="vehicle-info">
-                    <h1 class="vehicle-title"><span id="year">2017</span> <span id="make">Tesla</span> <span id="model">Model S</span></h1>
-                    <div class="vin-label">VIN: <span id="vinDisplay">Loading...</span></div>
+                    <h1 class="vehicle-title"><span id="year"></span> <span id="make"></span> <span id="model"></span></h1>
+                    <div class="vin-label">VIN: <span id="vinDisplay"></span></div>
                 </div>
             </div>
 
@@ -559,21 +564,21 @@
                 <div class="specs-row">
                     <div class="spec-cell">
                         <div class="spec-label">Year</div>
-                        <div class="spec-value" id="yearSpec">2017</div>
+                        <div class="spec-value" id="yearSpec"></div>
                     </div>
                     <div class="spec-cell">
                         <div class="spec-label">Make, Model</div>
-                        <div class="spec-value"><span id="makeSpec">TESLA</span> <span id="modelSpec">MODEL S</span></div>
+                        <div class="spec-value"><span id="makeSpec"></span> <span id="modelSpec"></span></div>
                     </div>
                 </div>
                 <div class="specs-row">
                     <div class="spec-cell">
                         <div class="spec-label">Drive Type</div>
-                        <div class="spec-value" id="driveType">AWD</div>
+                        <div class="spec-value" id="driveType"></div>
                     </div>
                     <div class="spec-cell">
                         <div class="spec-label">Engine</div>
-                        <div class="spec-value" id="engine">Electric</div>
+                        <div class="spec-value" id="engine"></div>
                     </div>
                 </div>
             </div>
@@ -783,8 +788,6 @@
             document.getElementById('modelSpec').textContent = data.model?.toUpperCase() || '-';
             document.getElementById('driveType').textContent = data.driveType || '-';
             document.getElementById('engine').textContent = data.engine || data.fuelType || '-';
-            document.getElementById('trimSpec').textContent = data.trim || '-';
-            document.getElementById('brakeSystem').textContent = data.brakeSystem || '-';
             
             // Update alert cards
             const accidentsCard = document.getElementById('accidentsCard');
@@ -805,6 +808,9 @@
                 document.getElementById('odometerStatus').textContent = data.mileage + ' miles';
                 odometerCard.style.borderLeft = '4px solid #17a2b8';
             }
+            
+            // Show report after data is loaded
+            document.querySelector('.report-left').classList.add('loaded');
         }
 
         // Show invalid VIN error with retry form
