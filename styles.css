@@ -6658,3 +6658,74 @@ button[type="submit"],
         font-size: 1rem;
     }
 }
+
+/* ========================================================================
+   MOBILE STYLES - CRITICAL (max-width: 1023px)
+   ======================================================================== */
+
+@media (max-width: 1023px) {
+  /* TEST: Red border to verify mobile styles work */
+  body {
+    border: 5px solid red !important;
+  }
+  
+  /* Header - single, fixed */
+  .loading-page,
+  #loadingPage {
+    display: none !important;
+  }
+  
+  .header {
+    position: fixed !important;
+    padding: 10px 0 !important;
+    height: auto !important;
+    min-height: 60px !important;
+  }
+  
+  .header-content {
+    justify-content: center !important;
+    padding: 8px 0 !important;
+  }
+  
+  .logo-img {
+    height: 60px !important;
+    width: auto !important;
+  }
+  
+  /* Hero - reduce spacing */
+  .hero-section {
+    margin-top: 0 !important;
+    padding: 0 0 40px !important;
+    padding-top: 5px !important;
+  }
+  
+  .hero-container {
+    padding: 0 16px !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  .hero-container * {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  .main-title {
+    font-size: 28px !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  
+  .subtitle {
+    font-size: 14px !important;
+    text-align: center !important;
+  }
+  
+  /* Hide nav on mobile */
+  .nav,
+  .header-actions {
+    display: none !important;
+  }
+}
