@@ -7209,3 +7209,216 @@ button[type="submit"],
     padding-top: 20px !important;
   }
 }
+
+/* =============================================================================
+   MOBILE FIRST SCREEN - CLEAN VERSION (max-width: 1023px)
+   ============================================================================= */
+
+@media screen and (max-width: 1023px) {
+  /* UNHIDE - показываем обратно */
+  html body .header,
+  html body .hero-section,
+  body .header,
+  body .hero-section,
+  .header,
+  .hero-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  /* === 1. ЛОГО (центр) === */
+  .header {
+    position: relative !important;
+    padding: 20px 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  .header-content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .logo {
+    margin: 0 !important;
+  }
+  
+  .logo-img {
+    height: 70px !important;
+    width: auto !important;
+  }
+  
+  /* === Hero Section === */
+  .hero-section {
+    margin-top: 0 !important;
+    padding: 0 16px 40px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    background-attachment: scroll !important;
+  }
+  
+  .hero-container {
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  /* === 2. ОТСТУП после лого === */
+  .hero-container::before {
+    content: '' !important;
+    display: block !important;
+    height: 24px !important;
+  }
+  
+  /* === 3. ЗАГОЛОВОК "CHECK VIN" (центр) === */
+  .main-title {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    margin: 0 0 24px 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  /* Скрыть subtitle */
+  .subtitle {
+    display: none !important;
+  }
+  
+  /* === 4. ФОРМА === */
+  .search-form-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0 !important;
+  }
+  
+  /* === 5. КНОПКИ VIN / PLATE (центр) === */
+  .mode-tabs {
+    display: flex !important;
+    gap: 12px !important;
+    margin-bottom: 8px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  
+  .mode-btn {
+    flex: 1 !important;
+    max-width: 180px !important;
+    height: 50px !important;
+    border-radius: 12px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+  }
+  
+  .mode-btn.active {
+    background: #fbbf24 !important;
+    border-color: #fbbf24 !important;
+    color: #1a1a1a !important;
+  }
+  
+  /* === 6. ОТСТУП 0.5 === */
+  .mode-tabs {
+    margin-bottom: 8px !important;
+  }
+  
+  /* === 7. ПОЛЕ ВВОДА (переключается) === */
+  #vin-mode,
+  #plate-mode {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  
+  /* Скрыть неактивный режим */
+  #vin-mode:not(.active),
+  #plate-mode:not(.active) {
+    display: none !important;
+  }
+  
+  .vin-input,
+  .plate-input,
+  .state-select,
+  input[type="text"],
+  select {
+    width: 100% !important;
+    height: 52px !important;
+    border-radius: 12px !important;
+    padding: 0 16px !important;
+    font-size: 16px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    color: #1a1a1a !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+  }
+  
+  /* === 8. ОТСТУП перед кнопкой === */
+  #vin-mode,
+  #plate-mode {
+    margin-bottom: 16px !important;
+  }
+  
+  /* === 9. КНОПКА GET REPORT (центр) === */
+  .search-btn,
+  button[type="submit"] {
+    width: 100% !important;
+    height: 56px !important;
+    border-radius: 14px !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* === 10. ОТСТУП после кнопки === */
+  .search-btn,
+  button[type="submit"] {
+    margin-bottom: 32px !important;
+  }
+  
+  /* Скрыть features и другое */
+  .hero-features {
+    display: none !important;
+  }
+  
+  /* Скрыть навигацию */
+  .nav,
+  .header-actions {
+    display: none !important;
+  }
+}
