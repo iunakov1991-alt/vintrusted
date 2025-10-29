@@ -7237,14 +7237,14 @@ button[type="submit"],
     overflow: hidden !important;
   }
   
-  /* === 1. ЛОГО в hero section === */
+  /* === 1. ЛОГО - маленькое === */
   .hero-section::before {
     content: url('/logo-vin-trust.png') !important;
     display: block !important;
     width: 100% !important;
     text-align: center !important;
-    margin-bottom: 40px !important;
-    max-height: 60px !important;
+    margin-bottom: 30px !important;
+    max-height: 40px !important;
     object-fit: contain !important;
   }
   
