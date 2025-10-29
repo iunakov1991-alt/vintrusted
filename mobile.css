@@ -115,8 +115,9 @@
      ============================================================================= */
   
   .hero-section {
-    margin-top: 70px;
-    padding: 16px 0 40px;
+    margin-top: 70px !important;
+    padding: 0 0 40px !important;
+    padding-top: 0 !important;
     min-height: auto;
     background-attachment: scroll;
     transform: none;
@@ -125,7 +126,9 @@
   .hero-container {
     transform: none;
     max-width: 100%;
-    padding: 0 16px;
+    padding: 0 16px !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
   }
 
   .main-title {
