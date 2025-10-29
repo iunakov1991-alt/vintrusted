@@ -6679,7 +6679,7 @@ button[type="submit"],
   /* HERO SECTION - Main container */
   .hero-section {
     margin-top: 0 !important;
-    padding: calc(env(safe-area-inset-top, 20px) + 40px) 20px 80px !important;
+    padding: calc(env(safe-area-inset-top, 20px) + 40px) 20px 60px !important;
     min-height: 100vh !important;
     background-attachment: scroll !important;
   }
@@ -6691,50 +6691,143 @@ button[type="submit"],
     text-align: center !important;
   }
   
-  /* TITLE */
-  .main-title {
-    display: none !important;
+  /* 1. LOGO - centered at top */
+  .hero-section .logo,
+  .hero-container .logo {
+    display: block !important;
+    text-align: center !important;
+    margin: 0 auto 30px auto !important;
+    width: 100% !important;
   }
   
-  /* SUBTITLE */
+  .hero-section .logo img,
+  .hero-container .logo img,
+  .logo-img {
+    height: 50px !important;
+    width: auto !important;
+    margin: 0 auto !important;
+    display: inline-block !important;
+  }
+  
+  /* 2. TITLE "CHECK VIN" - centered */
+  .main-title {
+    display: block !important;
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    margin: 0 0 40px 0 !important;
+    padding: 0 !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* HIDE SUBTITLE */
   .subtitle {
     display: none !important;
   }
   
-  /* SEARCH FORM - HIDE EVERYTHING */
+  /* 3. SEARCH FORM CONTAINER */
   .search-form-container {
-    display: none !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
   }
   
   .search-form {
-    display: none !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   
+  /* 4. MODE BUTTONS (VIN / License Plate) - side by side */
   .mode-tabs {
-    display: none !important;
+    display: flex !important;
+    gap: 15px !important;
+    margin-bottom: 20px !important;
+    justify-content: center !important;
   }
   
   .mode-btn {
-    display: none !important;
+    display: flex !important;
+    flex: 1 !important;
+    height: 54px !important;
+    max-width: 230px !important;
+    border-radius: 12px !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   
+  .mode-btn.active {
+    background: #fbbf24 !important;
+    border-color: #fbbf24 !important;
+    color: #1a1a1a !important;
+  }
+  
+  /* 5. INPUT FIELDS - toggle based on mode */
   #vin-mode,
   #plate-mode {
     display: none !important;
   }
   
-  input[type="text"],
-  select,
+  #vin-mode.active,
+  #plate-mode.active {
+    display: block !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .hero-section input[type="text"],
+  .hero-section select,
+  .search-form-container input[type="text"],
+  .search-form-container select,
   .vin-input,
   .plate-input,
   .state-select {
-    display: none !important;
+    display: block !important;
+    width: 100% !important;
+    height: 54px !important;
+    border-radius: 12px !important;
+    padding: 0 20px !important;
+    font-size: 17px !important;
+    border: 2px solid #e5e7eb !important;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    box-sizing: border-box !important;
+    margin-bottom: 15px !important;
+    text-align: center !important;
   }
   
-  .search-btn,
-  button[type="submit"],
-  .cta-button {
-    display: none !important;
+  /* Remove margin from last input in mode */
+  #vin-mode input:last-child,
+  #plate-mode select:last-child {
+    margin-bottom: 0 !important;
+  }
+  
+  /* 6. SUBMIT BUTTON "GET REPORT" */
+  .hero-section .search-btn,
+  .hero-section button[type="submit"],
+  .search-form-container .search-btn,
+  .search-form-container button[type="submit"],
+  .search-form .search-btn {
+    display: block !important;
+    width: 100% !important;
+    height: 58px !important;
+    border-radius: 14px !important;
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    margin: 20px 0 40px 0 !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4) !important;
   }
   
   /* HIDE hero features on first screen */
