@@ -6755,7 +6755,7 @@ button[type="submit"],
   #plate-mode.active {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
+    gap: 24px !important;
   }
   
   input[type="text"],
@@ -6786,7 +6786,8 @@ button[type="submit"],
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     color: #1a1a1a !important;
     border: none !important;
-    margin-top: 16px !important;
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
     box-sizing: border-box !important;
   }
   
