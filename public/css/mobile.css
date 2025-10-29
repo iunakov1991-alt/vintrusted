@@ -46,6 +46,17 @@
      HEADER - MOBILE
      ============================================================================= */
   
+  /* Show only main page header, hide loading page header */
+  .loading-page,
+  .loading-page .header,
+  #loadingPage,
+  #loadingPage .header {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Main header - single, fixed at top */
+  #mainPage .header,
   .header {
     position: fixed !important;
     top: 0 !important;
@@ -56,15 +67,14 @@
     height: auto;
     min-height: calc(60px + var(--safe-top));
     z-index: 1000;
+    display: block !important;
+    visibility: visible !important;
   }
 
-  /* Hide duplicate headers */
-  .loading-page .header {
-    display: none;
-  }
-
-  #mainPage .header {
-    display: block;
+  /* Ensure main page is visible */
+  #mainPage {
+    display: block !important;
+    visibility: visible !important;
   }
 
   .header-content {
