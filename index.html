@@ -2314,11 +2314,10 @@
         }, 500);
     });
 
-    // Auto-paste VIN from clipboard
-    document.addEventListener('DOMContentLoaded', function() {
-        const vinInputs = document.querySelectorAll('.vin-input');
-        
-        vinInputs.forEach(input => {
+    // Auto-paste VIN from clipboard and Enter key handler
+    function attachInputHandlers(input) {
+        // Auto-paste on focus
+        if (!input.dataset.pasteHandlerAttached) {
             input.addEventListener('focus', async function() {
                 if (this.value.trim() === '') {
                     try {
@@ -2327,19 +2326,15 @@
                             this.value = text.trim().toUpperCase();
                         }
                     } catch (err) {
-                        // Clipboard access denied or not available
+                        // Clipboard access denied
                     }
                 }
             });
-        });
-    });
-
-    // Enter key to submit form
-    document.addEventListener('DOMContentLoaded', function() {
-        const vinInputs = document.querySelectorAll('.vin-input');
-        const plateInputs = document.querySelectorAll('.plate-input');
+            input.dataset.pasteHandlerAttached = 'true';
+        }
         
-        [...vinInputs, ...plateInputs].forEach(input => {
+        // Enter key to submit
+        if (!input.dataset.enterHandlerAttached) {
             input.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -2352,6 +2347,31 @@
                     }
                 }
             });
+            input.dataset.enterHandlerAttached = 'true';
+        }
+    }
+
+    // Attach to existing inputs
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.vin-input, .plate-input').forEach(attachInputHandlers);
+        
+        // Watch for dynamically added inputs
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.nodeType === 1) {
+                        if (node.matches('.vin-input, .plate-input')) {
+                            attachInputHandlers(node);
+                        }
+                        node.querySelectorAll('.vin-input, .plate-input').forEach(attachInputHandlers);
+                    }
+                });
+            });
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
         });
     });
     </script>
