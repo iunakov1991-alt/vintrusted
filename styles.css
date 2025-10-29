@@ -6721,6 +6721,13 @@ button[type="submit"],
     box-sizing: border-box !important;
   }
   
+  .search-form {
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
   /* MODE TABS (VIN / License Plate) */
   .mode-tabs {
     display: flex !important;
