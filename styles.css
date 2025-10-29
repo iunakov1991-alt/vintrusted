@@ -6766,34 +6766,20 @@ button[type="submit"],
   
   /* CREATE NEW TITLE through hero-container::after */
   .hero-container::after {
-    content: "Vehicle VIN Check" !important;
+    content: "Vehicle VIN Check" "\A" "Only $3 Unlimited" !important;
     display: block !important;
+    white-space: pre-line !important;
     font-size: 36px !important;
     font-weight: 700 !important;
     color: #ffffff !important;
     text-align: center !important;
-    margin: 0 0 12px 0 !important;
+    line-height: 1.3 !important;
+    margin: 0 0 20px 0 !important;
     padding: 0 20px !important;
     width: 100% !important;
     box-sizing: border-box !important;
     order: 2 !important;
     border: 3px solid red !important;
-  }
-  
-  /* CREATE SUBTITLE through mode-tabs::before */
-  .mode-tabs::before {
-    content: "Only $3 Unlimited" !important;
-    display: block !important;
-    font-size: 18px !important;
-    font-weight: 500 !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-    text-align: center !important;
-    margin: 0 0 15px 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-    flex-basis: 100% !important;
-    box-sizing: border-box !important;
-    order: -1 !important;
   }
   
   /* HIDE SUBTITLE */
