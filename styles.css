@@ -7450,3 +7450,143 @@ button[type="submit"],
     display: none !important;
   }
 }
+
+/* =============================================================================
+   🚀 FINAL MOBILE VERSION - MAXIMUM PRIORITY
+   Clean mobile layout without header, scaled 2.5x as requested
+   ============================================================================= */
+
+@media (max-width: 1023px) {
+  /* ABSOLUTE MAXIMUM PRIORITY - Override everything */
+  html body .hero-section {
+    margin-top: 0 !important;
+    padding: calc(env(safe-area-inset-top, 20px) + 100px) 50px 200px !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+  
+  html body .hero-section .hero-container {
+    max-width: 1000px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+  }
+  
+  /* LOGO - small and centered */
+  html body .hero-section::before {
+    content: url('/logo-vin-trust.png') !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-bottom: 75px !important;
+    max-height: 100px !important;
+    object-fit: contain !important;
+  }
+  
+  /* TITLE "CHECK VIN" - 80px, centered */
+  html body .hero-section .hero-container .main-title {
+    font-size: 200px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    margin: 0 0 150px 0 !important;
+    padding: 0 !important;
+    line-height: 1.2 !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* HIDE subtitle */
+  html body .hero-section .hero-container .subtitle {
+    display: none !important;
+  }
+  
+  /* FORM CONTAINER */
+  html body .hero-section .search-form-container {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
+  
+  /* MODE BUTTONS (VIN / License Plate) */
+  html body .search-form-container .mode-tabs {
+    display: flex !important;
+    gap: 75px !important;
+    margin-bottom: 50px !important;
+    justify-content: center !important;
+  }
+  
+  html body .search-form-container .mode-tabs .mode-btn {
+    flex: 1 !important;
+    max-width: 1125px !important;
+    height: 312px !important;
+    border-radius: 75px !important;
+    font-size: 100px !important;
+    font-weight: 600 !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 12px solid rgba(255, 255, 255, 0.4) !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  html body .search-form-container .mode-tabs .mode-btn.active {
+    background: #fbbf24 !important;
+    border-color: #fbbf24 !important;
+    color: #1a1a1a !important;
+  }
+  
+  /* INPUT FIELDS */
+  html body .search-form-container #vin-mode,
+  html body .search-form-container #plate-mode {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 75px !important;
+  }
+  
+  html body .search-form-container #vin-mode:not(.active),
+  html body .search-form-container #plate-mode:not(.active) {
+    display: none !important;
+  }
+  
+  html body .search-form-container input[type="text"],
+  html body .search-form-container select {
+    width: 100% !important;
+    height: 325px !important;
+    border-radius: 75px !important;
+    padding: 0 100px !important;
+    font-size: 100px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 12px solid rgba(255, 255, 255, 0.3) !important;
+    color: #1a1a1a !important;
+    text-align: center !important;
+  }
+  
+  /* GET REPORT BUTTON */
+  html body .search-form-container .search-btn,
+  html body .search-form-container button[type="submit"] {
+    width: 100% !important;
+    height: 350px !important;
+    border-radius: 87px !important;
+    font-size: 112px !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    margin-top: 100px !important;
+    margin-bottom: 200px !important;
+    box-shadow: 0 25px 75px rgba(251, 191, 36, 0.3) !important;
+  }
+  
+  /* HIDE hero features */
+  html body .hero-section .hero-features {
+    display: none !important;
+  }
+}
