@@ -123,7 +123,9 @@
             border: 1px solid #e9ecef;
             border-radius: 8px;
             padding: 15px;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             transition: all 0.3s ease;
         }
 
@@ -134,7 +136,12 @@
 
         .alert-icon {
             font-size: 24px;
-            margin-bottom: 8px;
+            order: 2;
+        }
+
+        .alert-content {
+            text-align: left;
+            flex: 1;
         }
 
         .alert-title {
@@ -147,6 +154,11 @@
         .alert-status {
             font-size: 0.8rem;
             color: #ff8c00;
+        }
+
+        .alert-status.blurred {
+            filter: blur(3px);
+            -webkit-filter: blur(3px);
         }
 
         /* Specs Table */
@@ -478,49 +490,67 @@
             <!-- Alert Grid -->
             <div class="alerts-grid">
                 <div class="alert-card" id="accidentsCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Accidents</div>
+                        <div class="alert-status" id="accidentsStatus">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Accidents</div>
-                    <div class="alert-status" id="accidentsStatus">Information Available</div>
                 </div>
                 <div class="alert-card" id="titleCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Title Records</div>
+                        <div class="alert-status">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Title Records</div>
-                    <div class="alert-status">Information Available</div>
                 </div>
                 <div class="alert-card" id="odometerCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Odometer</div>
+                        <div class="alert-status blurred" id="odometerStatus">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Odometer</div>
-                    <div class="alert-status" id="odometerStatus">Information Available</div>
                 </div>
                 <div class="alert-card" id="issuesCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Major Issues</div>
+                        <div class="alert-status">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Major Issues</div>
-                    <div class="alert-status">Information Available</div>
                 </div>
                 <div class="alert-card" id="valuesCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Market Values</div>
+                        <div class="alert-status">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Market Values</div>
-                    <div class="alert-status">Information Available</div>
                 </div>
                 <div class="alert-card" id="recallsCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Recall & Defects</div>
+                        <div class="alert-status" id="recallsStatus">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Recall & Defects</div>
-                    <div class="alert-status" id="recallsStatus">Information Available</div>
                 </div>
                 <div class="alert-card" id="junkCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Junk & Salvage</div>
+                        <div class="alert-status">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Junk & Salvage</div>
-                    <div class="alert-status">Information Available</div>
                 </div>
                 <div class="alert-card" id="salesCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Sales History</div>
+                        <div class="alert-status">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Sales History</div>
-                    <div class="alert-status">Information Available</div>
                 </div>
                 <div class="alert-card" id="lossCard">
+                    <div class="alert-content">
+                        <div class="alert-title">Total Loss</div>
+                        <div class="alert-status">Information Available</div>
+                    </div>
                     <div class="alert-icon">⚠️</div>
-                    <div class="alert-title">Total Loss</div>
-                    <div class="alert-status">Information Available</div>
                 </div>
             </div>
 
