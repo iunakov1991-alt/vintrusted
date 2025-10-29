@@ -6744,20 +6744,28 @@ button[type="submit"],
     display: none !important;
   }
   
-  /* 3. SEARCH FORM CONTAINER */
+  /* 3. SEARCH FORM CONTAINER - HIDE COMPLETELY */
   .search-form-container {
-    display: block !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
   }
   
   .search-form {
-    display: block !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Hide all form children */
+  .search-form-container *,
+  .search-form * {
+    display: none !important;
+    visibility: hidden !important;
   }
   
   /* 4. MODE BUTTONS (VIN / License Plate) - side by side */
@@ -6789,15 +6797,23 @@ button[type="submit"],
     color: #1a1a1a !important;
   }
   
-  /* HIDE INPUT FIELDS */
+  /* HIDE INPUT FIELDS - AGGRESSIVELY */
   #vin-mode,
-  #plate-mode {
+  #plate-mode,
+  #vin-mode *,
+  #plate-mode * {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
   }
   
   #vin-mode.active,
   #plate-mode.active {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
   }
   
   .hero-section input[type="text"],
@@ -6808,6 +6824,10 @@ button[type="submit"],
   .plate-input,
   .state-select {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
   }
   
   /* HIDE SUBMIT BUTTON */
@@ -6817,6 +6837,9 @@ button[type="submit"],
   .search-form-container button[type="submit"],
   .search-form .search-btn {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    box-shadow: none !important;
   }
   
   /* HIDE hero features on first screen */
