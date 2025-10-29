@@ -6667,6 +6667,13 @@ button[type="submit"],
 
 @media screen and (max-width: 1023px) {
   /* FORCE REMOVE DESKTOP BACKGROUND IMAGE */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  
   html body .hero-section {
     background-image: none !important;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
@@ -6680,15 +6687,19 @@ button[type="submit"],
     visibility: hidden !important;
     height: 0 !important;
     overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   /* HERO SECTION - Main container */
   .hero-section {
-    margin-top: 0 !important;
-    padding: calc(env(safe-area-inset-top, 20px) + 40px) 20px calc(env(safe-area-inset-bottom, 20px) + 80px) !important;
+    margin: 0 !important;
+    padding: calc(env(safe-area-inset-top, 20px) + 40px) 0 calc(env(safe-area-inset-bottom, 20px) + 80px) !important;
     min-height: auto !important;
     background-attachment: scroll !important;
     background-image: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   
   .hero-container {
