@@ -6789,19 +6789,15 @@ button[type="submit"],
     color: #1a1a1a !important;
   }
   
-  /* 5. INPUT FIELDS - toggle based on mode */
+  /* HIDE INPUT FIELDS */
   #vin-mode,
   #plate-mode {
     display: none !important;
-    position: relative !important;
   }
   
   #vin-mode.active,
   #plate-mode.active {
-    display: block !important;
-    margin-bottom: 20px !important;
-    position: relative !important;
-    z-index: 1 !important;
+    display: none !important;
   }
   
   .hero-section input[type="text"],
@@ -6811,48 +6807,16 @@ button[type="submit"],
   .vin-input,
   .plate-input,
   .state-select {
-    display: block !important;
-    width: 100% !important;
-    height: 54px !important;
-    border-radius: 12px !important;
-    padding: 0 20px !important;
-    font-size: 17px !important;
-    border: 2px solid #e5e7eb !important;
-    background: #ffffff !important;
-    color: #1a1a1a !important;
-    box-sizing: border-box !important;
-    margin-bottom: 0 !important;
-    text-align: center !important;
-    position: relative !important;
-    z-index: 1 !important;
+    display: none !important;
   }
   
-  /* Separate input in plate mode */
-  #plate-mode input {
-    margin-bottom: 15px !important;
-  }
-  
-  /* 6. SUBMIT BUTTON "GET REPORT" - extra top margin */
+  /* HIDE SUBMIT BUTTON */
   .hero-section .search-btn,
   .hero-section button[type="submit"],
   .search-form-container .search-btn,
   .search-form-container button[type="submit"],
   .search-form .search-btn {
-    display: block !important;
-    width: 100% !important;
-    height: 58px !important;
-    border-radius: 14px !important;
-    font-size: 19px !important;
-    font-weight: 700 !important;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
-    color: #1a1a1a !important;
-    border: none !important;
-    margin: 20px 0 20px 0 !important;
-    box-sizing: border-box !important;
-    box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4) !important;
-    position: relative !important;
-    z-index: 2 !important;
-    clear: both !important;
+    display: none !important;
   }
   
   /* HIDE hero features on first screen */
