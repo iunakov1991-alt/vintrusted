@@ -6719,43 +6719,56 @@ button[type="submit"],
   
   /* Hero Section - Mobile */
   .hero-section {
-    margin-top: 60px !important;
-    padding: 10px 0 40px !important;
+    margin-top: 70px !important;
+    padding: 20px 0 40px !important;
     min-height: auto !important;
     background-attachment: scroll !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
   
   .hero-container {
     padding: 0 16px !important;
     margin-top: 0 !important;
+    width: 100% !important;
+    max-width: 480px !important;
   }
   
   .main-title {
-    font-size: 28px !important;
-    line-height: 1.2 !important;
+    font-size: 24px !important;
+    line-height: 1.3 !important;
     text-align: center !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 12px !important;
     margin-top: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    visibility: visible !important;
   }
   
   .subtitle {
-    font-size: 14px !important;
+    font-size: 13px !important;
     line-height: 1.5 !important;
     text-align: center !important;
-    margin-bottom: 24px !important;
+    margin-bottom: 20px !important;
+    padding: 0 8px !important;
+    display: block !important;
   }
   
   /* Search Form - Mobile */
   .search-form-container {
     max-width: 100% !important;
-    padding: 0 !important;
+    padding: 0 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   
   .mode-tabs {
-    display: flex;
+    display: flex !important;
     gap: 8px;
     margin-bottom: 16px;
     justify-content: center;
+    width: 100% !important;
   }
   
   .mode-btn {
@@ -6764,26 +6777,57 @@ button[type="submit"],
     padding: 12px 20px;
     border-radius: 12px;
     font-size: 14px;
+    height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* VIN/Plate modes */
+  .vin-mode-content,
+  .plate-mode-content,
+  #vin-mode,
+  #plate-mode {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
   }
   
   .vin-input,
   .plate-input,
-  .state-select {
+  .state-select,
+  input[type="text"] {
     width: 100% !important;
     height: 48px !important;
     font-size: 16px !important;
     border-radius: 12px !important;
     padding: 0 16px !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box !important;
   }
   
   .search-btn,
-  button[type="submit"] {
+  button[type="submit"],
+  .cta-button {
     width: 100% !important;
     height: 52px !important;
     font-size: 16px !important;
+    font-weight: 700 !important;
     border-radius: 14px !important;
     margin-top: 12px !important;
+    margin-bottom: 0 !important;
+    padding: 0 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Hide empty/broken elements */
+  .search-form-container > div:empty,
+  .hero-container > div:empty {
+    display: none !important;
   }
   
   /* Features Grid - Mobile */
@@ -6793,21 +6837,26 @@ button[type="submit"],
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 12px !important;
     margin: 20px 0 !important;
+    padding: 0 !important;
   }
   
   .feature-item {
     padding: 12px !important;
     text-align: center !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
   }
   
   .feature-icon {
     font-size: 24px !important;
     margin-bottom: 8px !important;
+    display: block !important;
   }
   
   .feature-text {
     font-size: 12px !important;
     line-height: 1.3 !important;
+    display: block !important;
   }
   
   /* Black Panel / Info Sections - Mobile */
