@@ -40,15 +40,14 @@
     { "src": "/mobile.css", "dest": "/mobile.css" },
     { "src": "/script.js", "dest": "/script.js" },
     { "src": "/mobile.js", "dest": "/mobile.js" },
+    { "src": "/m.html", "dest": "/m.html" },
+    { "src": "/mobile.html", "dest": "/mobile.html" },
+    { "src": "/test-mobile.html", "dest": "/test-mobile.html" },
     { "src": "/success.html", "dest": "/success.html" },
     { "src": "/report-view.html", "dest": "/report-view.html" },
     { "src": "/report.html", "dest": "/report.html" },
     { "src": "/payment-success", "dest": "/payment-success.html" },
     { "src": "/payment-cancel", "dest": "/payment-cancel.html" },
-    { "src": "/mobile.html", "dest": "/mobile.html" },
-    { "src": "/test-mobile.html", "dest": "/test-mobile.html" },
-    { "src": "/m.html", "dest": "/m.html" },
-    { "src": "/", "dest": "/index.html" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/", "dest": "/index.html" }
   ]
 }
