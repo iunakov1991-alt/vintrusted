@@ -6775,13 +6775,15 @@ button[type="submit"],
     display: none !important;
   }
   
-  /* 3. SEARCH FORM CONTAINER - HIDE COMPLETELY */
+  /* 3. SEARCH FORM CONTAINER - Show buttons only */
   .search-form-container {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
     order: 3 !important;
   }
   
@@ -6793,16 +6795,18 @@ button[type="submit"],
     overflow: hidden !important;
   }
   
-  /* Hide all form children */
-  .search-form-container *,
+  /* Hide all form children except mode-buttons */
   .search-form * {
     display: none !important;
     visibility: hidden !important;
   }
   
   /* 4. MODE BUTTONS (VIN / License Plate) - side by side */
-  .mode-tabs {
+  .search-form-container .mode-buttons {
     display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
     flex-wrap: wrap !important;
     gap: 15px !important;
     margin: 0 0 20px 0 !important;
@@ -6815,8 +6819,10 @@ button[type="submit"],
     position: relative !important;
   }
   
-  .mode-btn {
+  .search-form-container .mode-btn {
     display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     flex: 1 !important;
     height: 54px !important;
     max-width: 230px !important;
@@ -6833,7 +6839,7 @@ button[type="submit"],
     transition: all 0.3s ease !important;
   }
   
-  .mode-btn.active {
+  .search-form-container .mode-btn.active {
     background: #fbbf24 !important;
     border-color: #fbbf24 !important;
     color: #1a1a1a !important;
