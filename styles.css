@@ -6713,9 +6713,9 @@ button[type="submit"],
   
   /* SEARCH FORM */
   .search-form-container {
-    background: rgba(255, 255, 255, 0.98) !important;
-    border-radius: 20px !important;
-    padding: 48px 20px !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
     margin: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -6770,7 +6770,7 @@ button[type="submit"],
     background: #ffffff !important;
     color: #1a1a1a !important;
     box-sizing: border-box !important;
-    margin-bottom: 24px !important;
+    margin-bottom: 20px !important;
     display: block !important;
   }
   
@@ -6786,7 +6786,7 @@ button[type="submit"],
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     color: #1a1a1a !important;
     border: none !important;
-    margin-top: 16px !important;
+    margin-top: 0 !important;
     margin-bottom: 0 !important;
     box-sizing: border-box !important;
     display: block !important;
