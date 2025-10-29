@@ -6720,39 +6720,38 @@ button[type="submit"],
   /* Hero Section - Mobile */
   .hero-section {
     margin-top: 70px !important;
-    padding: 20px 0 40px !important;
+    padding: 30px 16px 40px !important;
     min-height: auto !important;
     background-attachment: scroll !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
   }
   
   .hero-container {
-    padding: 0 16px !important;
-    margin-top: 0 !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
     width: 100% !important;
-    max-width: 480px !important;
+    max-width: 100% !important;
   }
   
   .main-title {
-    font-size: 24px !important;
-    line-height: 1.3 !important;
+    font-size: 22px !important;
+    line-height: 1.4 !important;
     text-align: center !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 16px !important;
     margin-top: 0 !important;
-    padding: 0 !important;
+    padding: 0 16px !important;
     display: block !important;
     visibility: visible !important;
+    color: #ffffff !important;
   }
   
   .subtitle {
     font-size: 13px !important;
-    line-height: 1.5 !important;
+    line-height: 1.6 !important;
     text-align: center !important;
-    margin-bottom: 20px !important;
-    padding: 0 8px !important;
+    margin-bottom: 24px !important;
+    padding: 0 16px !important;
     display: block !important;
+    color: #e5e7eb !important;
   }
   
   /* Search Form - Mobile */
@@ -6761,26 +6760,32 @@ button[type="submit"],
     padding: 0 16px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 16px !important;
+    padding: 20px 16px !important;
+    margin: 0 auto !important;
   }
   
   .mode-tabs {
     display: flex !important;
-    gap: 8px;
-    margin-bottom: 16px;
-    justify-content: center;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+    justify-content: center !important;
     width: 100% !important;
   }
   
   .mode-btn {
-    flex: 1;
-    max-width: 150px;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-size: 14px;
+    flex: 1 !important;
+    max-width: 150px !important;
+    padding: 0 !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
     height: 48px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    box-sizing: border-box !important;
   }
   
   /* VIN/Plate modes */
@@ -6794,17 +6799,27 @@ button[type="submit"],
     gap: 12px !important;
   }
   
+  /* Hide inactive mode */
+  #vin-mode:not(.active),
+  #plate-mode:not(.active),
+  .vin-mode-content:not(.active),
+  .plate-mode-content:not(.active) {
+    display: none !important;
+  }
+  
   .vin-input,
   .plate-input,
   .state-select,
-  input[type="text"] {
+  input[type="text"],
+  select {
     width: 100% !important;
     height: 48px !important;
     font-size: 16px !important;
     border-radius: 12px !important;
     padding: 0 16px !important;
-    margin-bottom: 0 !important;
+    margin: 0 !important;
     box-sizing: border-box !important;
+    border: 2px solid #e5e7eb !important;
   }
   
   .search-btn,
@@ -6815,18 +6830,24 @@ button[type="submit"],
     font-size: 16px !important;
     font-weight: 700 !important;
     border-radius: 14px !important;
-    margin-top: 12px !important;
-    margin-bottom: 0 !important;
-    padding: 0 24px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    margin: 12px 0 0 0 !important;
+    padding: 0 !important;
+    display: block !important;
     box-sizing: border-box !important;
+    text-align: center !important;
+    line-height: 52px !important;
   }
   
   /* Hide empty/broken elements */
   .search-form-container > div:empty,
+  .search-form-container > span:empty,
   .hero-container > div:empty {
+    display: none !important;
+  }
+  
+  /* Hide any strange text/placeholders */
+  .search-form-container::before,
+  .search-form-container::after {
     display: none !important;
   }
   
