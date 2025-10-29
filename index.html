@@ -1050,6 +1050,10 @@
                             <div class="progress-text">0%</div>
                         </div>
                     </div>
+                    <!-- Update Notification -->
+                    <div id="updateNotification" style="display: none; margin-top: 20px; padding: 15px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; color: #856404;">
+                        <strong>ℹ️ Recent Update:</strong> The report on this car was updated <span id="hoursAgo"></span> hour(s) ago.
+                    </div>
                 </div>
             </div>
         </div>
@@ -1826,6 +1830,15 @@
         });
     }
     
+    function showUpdateNotification(hours) {
+        const notification = document.getElementById('updateNotification');
+        const hoursSpan = document.getElementById('hoursAgo');
+        if (notification && hoursSpan) {
+            hoursSpan.textContent = hours;
+            notification.style.display = 'block';
+        }
+    }
+    
     function startLoadingAnimations() {
         console.log('Starting loading animations...');
         
@@ -1835,6 +1848,7 @@
         
         if (progressBar && progressText) {
             let progress = 0;
+            let notificationShown = false;
             const progressInterval = setInterval(() => {
                 progress += 1; // 100% / 10s / 100ms = 1%
                 if (progress >= 100) {
@@ -1843,6 +1857,14 @@
                 }
                 progressBar.style.width = progress + '%';
                 progressText.textContent = Math.round(progress) + '%';
+                
+                // Show notification at 40%
+                if (progress >= 40 && !notificationShown) {
+                    notificationShown = true;
+                    const randomHours = Math.floor(Math.random() * 6) + 1; // 1-6 hours
+                    showUpdateNotification(randomHours);
+                }
+                
                 console.log('Progress:', progress);
             }, 100);
             
