@@ -6857,12 +6857,18 @@ button[type="submit"],
     width: calc(100% - 40px) !important;
     margin: 0 20px 20px 20px !important;
     box-sizing: border-box !important;
+    height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
   }
   
   .search-form .form-content #vin-mode.active {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
   }
   
   .search-form .form-content #plate-mode.active {
@@ -6873,6 +6879,8 @@ button[type="submit"],
     background: #ffffff !important;
     border-radius: 27px !important;
     height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
     overflow: hidden !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
     padding: 0 !important;
@@ -6884,6 +6892,9 @@ button[type="submit"],
     visibility: visible !important;
     width: 100% !important;
     height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
+    line-height: 54px !important;
     border-radius: 27px !important;
     border: none !important;
     background: #ffffff !important;
@@ -6906,12 +6917,15 @@ button[type="submit"],
     visibility: visible !important;
     flex: 1 !important;
     height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
+    line-height: 54px !important;
     border: none !important;
     background: transparent !important;
     color: #1a1a1a !important;
     font-size: 16px !important;
     font-weight: 500 !important;
-    padding: 0 12px !important;
+    padding: 0 28px 0 16px !important;
     outline: none !important;
     border-right: 1px solid #e0e0e0 !important;
     border-radius: 0 !important;
@@ -6922,6 +6936,7 @@ button[type="submit"],
     background-repeat: no-repeat !important;
     background-position: right 10px center !important;
     cursor: pointer !important;
+    box-sizing: border-box !important;
   }
   
   /* Plate Mode - Plate input (right half) */
@@ -6930,6 +6945,9 @@ button[type="submit"],
     visibility: visible !important;
     flex: 1 !important;
     height: 54px !important;
+    min-height: 54px !important;
+    max-height: 54px !important;
+    line-height: 54px !important;
     border: none !important;
     background: transparent !important;
     color: #1a1a1a !important;
@@ -6938,6 +6956,7 @@ button[type="submit"],
     padding: 0 20px !important;
     outline: none !important;
     border-radius: 0 !important;
+    box-sizing: border-box !important;
   }
   
   #plate-mode .plate-input::placeholder {
