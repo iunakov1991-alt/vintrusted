@@ -6709,7 +6709,7 @@ button[type="submit"],
     display: inline-block !important;
   }
   
-  /* 2. TITLE "CHECK VIN" - centered */
+  /* 2. TITLE "CHECK VIN" - centered - FORCE CONTENT */
   .main-title {
     display: block !important;
     font-size: 36px !important;
@@ -6719,6 +6719,17 @@ button[type="submit"],
     margin: 0 0 40px 0 !important;
     padding: 0 !important;
     line-height: 1.2 !important;
+  }
+  
+  /* Force title text to be "CHECK VIN" */
+  .main-title::before {
+    content: "CHECK VIN" !important;
+    display: block !important;
+  }
+  
+  .main-title span,
+  .main-title > * {
+    display: none !important;
   }
   
   /* HIDE SUBTITLE */
