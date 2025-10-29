@@ -6693,74 +6693,34 @@ button[type="submit"],
   
   /* TITLE */
   .main-title {
-    font-size: 32px !important;
-    line-height: 1.2 !important;
-    text-align: center !important;
-    margin: 0 0 20px 0 !important;
-    padding: 0 !important;
-    color: #ffffff !important;
+    display: none !important;
   }
   
   /* SUBTITLE */
   .subtitle {
-    font-size: 16px !important;
-    line-height: 1.5 !important;
-    text-align: center !important;
-    margin: 0 0 30px 0 !important;
-    padding: 0 !important;
-    color: rgba(255, 255, 255, 0.9) !important;
-  }
-  
-  /* SEARCH FORM */
-  .search-form-container {
-    background: transparent !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  
-  .search-form {
-    background: transparent !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  /* MODE TABS (VIN / License Plate) */
-  .mode-tabs {
-    display: flex !important;
-    gap: 20px !important;
-    margin-bottom: 20px !important;
-  }
-  
-  .mode-btn {
-    flex: 1 !important;
-    height: 50px !important;
-    border-radius: 12px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    border: 2px solid #e5e7eb !important;
-    background: #ffffff !important;
-    color: #6b7280 !important;
-  }
-  
-  .mode-btn.active {
-    background: #fbbf24 !important;
-    border-color: #fbbf24 !important;
-    color: #1a1a1a !important;
-  }
-  
-  /* INPUT FIELDS */
-  #vin-mode,
-  #plate-mode {
     display: none !important;
   }
   
-  #vin-mode.active,
-  #plate-mode.active {
-    display: block !important;
+  /* SEARCH FORM - HIDE EVERYTHING */
+  .search-form-container {
+    display: none !important;
+  }
+  
+  .search-form {
+    display: none !important;
+  }
+  
+  .mode-tabs {
+    display: none !important;
+  }
+  
+  .mode-btn {
+    display: none !important;
+  }
+  
+  #vin-mode,
+  #plate-mode {
+    display: none !important;
   }
   
   input[type="text"],
@@ -6768,35 +6728,13 @@ button[type="submit"],
   .vin-input,
   .plate-input,
   .state-select {
-    width: 100% !important;
-    height: 52px !important;
-    border-radius: 12px !important;
-    padding: 0 16px !important;
-    font-size: 16px !important;
-    border: 2px solid #e5e7eb !important;
-    background: #ffffff !important;
-    color: #1a1a1a !important;
-    box-sizing: border-box !important;
-    margin-bottom: 20px !important;
-    display: block !important;
+    display: none !important;
   }
   
-  /* SUBMIT BUTTON */
   .search-btn,
   button[type="submit"],
   .cta-button {
-    width: 100% !important;
-    height: 56px !important;
-    border-radius: 14px !important;
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
-    color: #1a1a1a !important;
-    border: none !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    box-sizing: border-box !important;
-    display: block !important;
+    display: none !important;
   }
   
   /* HIDE hero features on first screen */
