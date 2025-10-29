@@ -6731,7 +6731,7 @@ button[type="submit"],
   /* MODE TABS (VIN / License Plate) */
   .mode-tabs {
     display: flex !important;
-    gap: 12px !important;
+    gap: 20px !important;
     margin-bottom: 20px !important;
   }
   
