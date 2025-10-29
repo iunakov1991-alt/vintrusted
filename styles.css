@@ -7091,3 +7091,66 @@ button[type="submit"],
     content: none !important;
   }
 }
+
+/* =============================================================================
+   MOBILE SUPER OVERRIDE - DO NOT REMOVE (max-width: 1023px)
+   ============================================================================= */
+
+@media screen and (max-width: 1023px) {
+  /* Override desktop .main-title (line 257) */
+  html body .hero-section .hero-container .main-title,
+  html body .hero-section .main-title,
+  html body .main-title,
+  body .main-title,
+  .main-title {
+    font-size: 22px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 16px !important;
+    text-align: center !important;
+    color: #ffffff !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 0 16px !important;
+    max-width: 100% !important;
+  }
+  
+  /* Override desktop .subtitle */
+  html body .hero-section .hero-container .subtitle,
+  html body .hero-section .subtitle,
+  html body .subtitle,
+  body .subtitle,
+  .subtitle {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 24px !important;
+    text-align: center !important;
+    color: #e5e7eb !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 0 16px !important;
+    max-width: 100% !important;
+  }
+  
+  /* Hero section layout */
+  html body .hero-section,
+  body .hero-section,
+  .hero-section {
+    margin-top: 70px !important;
+    padding: 30px 16px 40px !important;
+    text-align: center !important;
+  }
+  
+  /* Form container clean */
+  html body .search-form-container,
+  body .search-form-container,
+  .search-form-container {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 16px !important;
+    padding: 20px 16px !important;
+    margin: 0 auto !important;
+    max-width: calc(100% - 32px) !important;
+    text-align: left !important;
+  }
+}
