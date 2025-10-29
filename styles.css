@@ -6715,7 +6715,7 @@ button[type="submit"],
   .search-form-container {
     background: rgba(255, 255, 255, 0.98) !important;
     border-radius: 20px !important;
-    padding: 24px 20px !important;
+    padding: 48px 20px !important;
     margin: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
