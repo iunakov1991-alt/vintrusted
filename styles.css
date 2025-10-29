@@ -6685,8 +6685,8 @@ button[type="submit"],
   /* HERO SECTION - Main container */
   .hero-section {
     margin-top: 0 !important;
-    padding: calc(env(safe-area-inset-top, 20px) + 40px) 20px 60px !important;
-    min-height: 100vh !important;
+    padding: calc(env(safe-area-inset-top, 20px) + 40px) 20px calc(env(safe-area-inset-bottom, 20px) + 80px) !important;
+    min-height: auto !important;
     background-attachment: scroll !important;
     background-image: none !important;
   }
