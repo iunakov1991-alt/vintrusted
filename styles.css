@@ -6822,13 +6822,13 @@ button[type="submit"],
     text-align: center !important;
   }
   
-  /* Last input gets 20px margin too */
+  /* Last input gets bigger margin */
   #vin-mode input:last-child,
   #plate-mode select:last-child {
     margin-bottom: 20px !important;
   }
   
-  /* 6. SUBMIT BUTTON "GET REPORT" */
+  /* 6. SUBMIT BUTTON "GET REPORT" - extra top margin */
   .hero-section .search-btn,
   .hero-section button[type="submit"],
   .search-form-container .search-btn,
@@ -6843,7 +6843,7 @@ button[type="submit"],
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     color: #1a1a1a !important;
     border: none !important;
-    margin: 0 0 20px 0 !important;
+    margin: 20px 0 20px 0 !important;
     box-sizing: border-box !important;
     box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4) !important;
   }
