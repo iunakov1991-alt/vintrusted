@@ -6752,8 +6752,19 @@ button[type="submit"],
     opacity: 0 !important;
   }
   
-  /* CREATE NEW TITLE through hero-container::after */
+  /* HIDE old hero-container::after if exists */
   .hero-container::after {
+    display: none !important;
+    content: none !important;
+  }
+  
+  /* HIDE SUBTITLE */
+  .subtitle {
+    display: none !important;
+  }
+  
+  /* 2. CREATE TITLE through search-form-container::before */
+  .search-form-container::before {
     content: "Vehicle VIN Check" "\A" "Only $3 Unlimited" !important;
     display: block !important;
     white-space: pre-line !important;
@@ -6766,11 +6777,6 @@ button[type="submit"],
     padding: 0 20px !important;
     width: 100% !important;
     box-sizing: border-box !important;
-  }
-  
-  /* HIDE SUBTITLE */
-  .subtitle {
-    display: none !important;
   }
   
   /* 3. SEARCH FORM CONTAINER - Show buttons and fields */
