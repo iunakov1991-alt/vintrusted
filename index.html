@@ -126,11 +126,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css?v=16">
+    <link rel="stylesheet" href="styles.css?v=17">
     
-    <!-- Mobile & Tablet Styles (0-1023px only) -->
-    <link rel="preload" href="mobile.css?v=6" as="style" media="(max-width: 1023px)">
-    <link rel="stylesheet" href="mobile.css?v=6" media="(max-width: 1023px)">
+    <!-- INLINE MOBILE STYLES - GUARANTEED TO WORK -->
+    <style>
+    @media (max-width: 1023px) {
+        /* СКРЫТЬ ВСЁ ДЕСКТОПНОЕ */
+        body * {
+            display: none !important;
+        }
+        
+        /* ПОКАЗАТЬ ТОЛЬКО МОБИЛЬНЫЙ КОНТЕЙНЕР */
+        body {
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            min-height: 100vh !important;
+            overflow-x: hidden !important;
+        }
+        
+        body::before {
+            content: '' !important;
+            display: block !important;
+            padding-top: env(safe-area-inset-top, 20px) !important;
+        }
+        
+        body::after {
+            content: '' !important;
+            display: block !important;
+            width: 100% !important;
+            max-width: 480px !important;
+            margin: 0 auto !important;
+            padding: 40px 20px !important;
+            text-align: center !important;
+            font-family: 'DM Sans', -apple-system, sans-serif !important;
+            color: white !important;
+        }
+    }
+    </style>
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
