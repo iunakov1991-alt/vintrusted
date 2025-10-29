@@ -1051,12 +1051,12 @@
                         </div>
                     </div>
                     <!-- Update Notification -->
-                    <div id="updateNotification" style="display: none; margin-top: 25px; padding: 18px 24px; background: rgba(255, 215, 0, 0.1); border-left: 5px solid #FFD700; border-radius: 12px; backdrop-filter: blur(10px); animation: slideIn 0.5s ease-out;">
+                    <div id="updateNotification" style="visibility: hidden; opacity: 0; margin-top: 25px; padding: 18px 24px; background: rgba(255, 215, 0, 0.1); border-left: 5px solid #FFD700; border-radius: 12px; backdrop-filter: blur(10px); transition: opacity 0.5s ease-out, visibility 0.5s;">
                         <div style="display: flex; align-items: center; gap: 12px;">
                             <div style="font-size: 28px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">⚠️</div>
                             <div style="flex: 1;">
-                                <div style="font-weight: 700; color: #2c3e50; font-size: 1rem; margin-bottom: 4px;">Recent Update Available</div>
-                                <div style="color: #5a6c7d; font-size: 0.9rem;">This vehicle report was last updated <strong style="color: #FFD700;"><span id="hoursAgo"></span> hour(s)</strong> ago</div>
+                                <div style="font-weight: 700; color: #ffffff; font-size: 1rem; margin-bottom: 4px;">Recent Update Available</div>
+                                <div style="color: #ffffff; font-size: 0.9rem;">This vehicle report was last updated <strong style="color: #FFD700;"><span id="hoursAgo"></span> hour(s)</strong> ago</div>
                             </div>
                         </div>
                     </div>
@@ -1853,7 +1853,8 @@
         const hoursSpan = document.getElementById('hoursAgo');
         if (notification && hoursSpan) {
             hoursSpan.textContent = hours;
-            notification.style.display = 'block';
+            notification.style.visibility = 'visible';
+            notification.style.opacity = '1';
         }
     }
     
