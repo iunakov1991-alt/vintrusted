@@ -30,9 +30,10 @@
         
         /* 1. ЛОГО */
         .logo {
-            width: 150px;
-            height: auto;
+            width: 60px;
+            height: 60px;
             margin-bottom: 30px;
+            object-fit: contain;
         }
         
         /* 2. ЗАГОЛОВОК */
@@ -141,7 +142,7 @@
 <body>
     <div class="mobile-container">
         <!-- 1. ЛОГО -->
-        <img src="/logo-vin-trust.png" alt="VIN TRUST" class="logo">
+        <img src="logo-vin-trust.png" alt="VIN TRUST" class="logo" onerror="this.style.display='none'">
         
         <!-- 2. ЗАГОЛОВОК -->
         <h1 class="title">CHECK VIN</h1>
