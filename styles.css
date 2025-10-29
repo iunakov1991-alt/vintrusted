@@ -6788,17 +6788,20 @@ button[type="submit"],
   }
   
   .search-form {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   
-  /* Hide all form children except mode-buttons */
-  .search-form * {
-    display: none !important;
-    visibility: hidden !important;
+  /* Hide specific form children */
+  .search-form .form-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    width: 100% !important;
   }
   
   /* 4. MODE BUTTONS (VIN / License Plate) - side by side */
@@ -6845,37 +6848,99 @@ button[type="submit"],
     color: #1a1a1a !important;
   }
   
-  /* HIDE INPUT FIELDS - AGGRESSIVELY */
-  #vin-mode,
-  #plate-mode,
-  #vin-mode *,
-  #plate-mode * {
+  /* 5. INPUT FIELDS - Show and style */
+  .search-form .form-content #vin-mode,
+  .search-form .form-content #plate-mode {
     display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
+    width: calc(100% - 40px) !important;
+    margin: 0 20px 20px 20px !important;
+    box-sizing: border-box !important;
+    order: 5 !important;
   }
   
-  #vin-mode.active,
-  #plate-mode.active {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
+  .search-form .form-content #vin-mode.active {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
-  .hero-section input[type="text"],
-  .hero-section select,
-  .search-form-container input[type="text"],
-  .search-form-container select,
-  .vin-input,
-  .plate-input,
-  .state-select {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    box-shadow: none !important;
+  .search-form .form-content #plate-mode.active {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    gap: 0 !important;
+    background: #ffffff !important;
+    border-radius: 27px !important;
+    height: 54px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    padding: 0 !important;
+  }
+  
+  /* VIN Mode - Single input field */
+  #vin-mode .vin-input {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    height: 54px !important;
+    border-radius: 27px !important;
     border: none !important;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  #vin-mode .vin-input::placeholder {
+    color: #999999 !important;
+  }
+  
+  /* Plate Mode - State select (left half) */
+  #plate-mode .state-select {
+    display: block !important;
+    visibility: visible !important;
+    flex: 1 !important;
+    height: 54px !important;
+    border: none !important;
+    background: transparent !important;
+    color: #1a1a1a !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    padding: 0 12px !important;
+    outline: none !important;
+    border-right: 1px solid #e0e0e0 !important;
+    border-radius: 0 !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    cursor: pointer !important;
+  }
+  
+  /* Plate Mode - Plate input (right half) */
+  #plate-mode .plate-input {
+    display: block !important;
+    visibility: visible !important;
+    flex: 1 !important;
+    height: 54px !important;
+    border: none !important;
+    background: transparent !important;
+    color: #1a1a1a !important;
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    padding: 0 20px !important;
+    outline: none !important;
+    border-radius: 0 !important;
+  }
+  
+  #plate-mode .plate-input::placeholder {
+    color: #999999 !important;
   }
   
   /* HIDE SUBMIT BUTTON */
