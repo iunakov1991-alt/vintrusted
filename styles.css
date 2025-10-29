@@ -6742,22 +6742,27 @@ button[type="submit"],
   
   /* 2. TITLE "CHECK VIN" - centered - FORCE CONTENT */
   .main-title {
-    display: block !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     font-size: 36px !important;
     font-weight: 700 !important;
     color: #ffffff !important;
     text-align: center !important;
-    margin: 0 0 20px 0 !important;
-    padding: 0 20px !important;
+    margin: 0 !important;
+    padding: 0 20px 20px 20px !important;
     line-height: 1.2 !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    border: 2px solid red !important;
   }
   
   /* Force title text to be "CHECK VIN" */
   .main-title::before {
     content: "CHECK VIN" !important;
     display: block !important;
+    text-align: center !important;
+    width: 100% !important;
   }
   
   .main-title span,
