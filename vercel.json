@@ -45,6 +45,8 @@
     { "src": "/report.html", "dest": "/report.html" },
     { "src": "/payment-success", "dest": "/payment-success.html" },
     { "src": "/payment-cancel", "dest": "/payment-cancel.html" },
+    { "src": "/mobile.html", "dest": "/mobile.html" },
+    { "src": "/test-mobile.html", "dest": "/test-mobile.html" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
