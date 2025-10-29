@@ -6666,6 +6666,12 @@ button[type="submit"],
    ============================================================================= */
 
 @media screen and (max-width: 1023px) {
+  /* FORCE REMOVE DESKTOP BACKGROUND IMAGE */
+  html body .hero-section {
+    background-image: none !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  }
+  
   /* HIDE HEADER COMPLETELY */
   .header,
   header,
@@ -6682,6 +6688,7 @@ button[type="submit"],
     padding: calc(env(safe-area-inset-top, 20px) + 40px) 20px 60px !important;
     min-height: 100vh !important;
     background-attachment: scroll !important;
+    background-image: none !important;
   }
   
   .hero-container {
