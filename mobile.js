@@ -523,17 +523,22 @@
       modeButtons.forEach(btn => {
         let pressTimer = null;
         let touchStart = 0;
+        let isLongPress = false;
         
-        // Block long-press (> 150ms)
+        // NUCLEAR: Block ALL default behavior on buttons
         btn.addEventListener('touchstart', function(e) {
           touchStart = Date.now();
+          isLongPress = false;
           
+          // Immediately prevent default
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          
+          // Set long-press flag after 150ms
           pressTimer = setTimeout(() => {
-            // Long press detected - block it!
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            console.log('[Mobile] Long-press blocked on button');
+            isLongPress = true;
+            console.log('[Mobile] Long-press detected, blocking');
           }, 150);
         }, { passive: false, capture: true });
         
@@ -541,26 +546,47 @@
           const duration = Date.now() - touchStart;
           clearTimeout(pressTimer);
           
-          // If it was a quick tap (< 150ms), allow it
-          if (duration >= 150) {
-            // Was a long press - block
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            return false;
+          // Always prevent default
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          
+          // If it was a QUICK tap (< 150ms), trigger the action manually
+          if (!isLongPress && duration < 150) {
+            const mode = btn.getAttribute('data-mode');
+            console.log('[Mobile] Quick tap detected on', mode, 'button');
+            
+            // Manually trigger switchMode
+            if (typeof switchMode === 'function') {
+              switchMode(mode);
+            } else if (window.switchMode) {
+              window.switchMode(mode);
+            }
           }
+          
+          return false;
         }, { passive: false, capture: true });
         
-        btn.addEventListener('touchcancel', function() {
+        btn.addEventListener('touchcancel', function(e) {
           clearTimeout(pressTimer);
+          e.preventDefault();
+        }, { passive: false });
+        
+        btn.addEventListener('touchmove', function(e) {
+          clearTimeout(pressTimer);
+          // Don't prevent default on move - allow scrolling
         }, { passive: true });
         
-        btn.addEventListener('touchmove', function() {
-          clearTimeout(pressTimer);
-        }, { passive: true });
+        // Block click events entirely (just in case)
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          return false;
+        }, { passive: false, capture: true });
       });
       
-      console.log('[Mobile] Long-press blocking enabled on', modeButtons.length, 'mode buttons');
+      console.log('[Mobile] NUCLEAR touch handling enabled on', modeButtons.length, 'mode buttons');
     }, 100);
   }
 

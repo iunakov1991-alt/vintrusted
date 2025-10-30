@@ -126,7 +126,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css?v=70">
+    <link rel="stylesheet" href="styles.css?v=71">
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -254,8 +254,8 @@
             
             <div class="search-form-container">
                 <div class="mode-buttons">
-                    <div class="mode-btn active" data-mode="vin" onclick="switchMode('vin')" role="button" tabindex="0"></div>
-                    <div class="mode-btn" data-mode="plate" onclick="switchMode('plate')" role="button" tabindex="0"></div>
+                    <div class="mode-btn active" data-mode="vin" role="button" tabindex="0" aria-label="VIN mode"></div>
+                    <div class="mode-btn" data-mode="plate" role="button" tabindex="0" aria-label="License Plate mode"></div>
         </div>
                 
                 <div class="search-form">
@@ -2349,7 +2349,7 @@
     <script src="script.js"></script>
     
     <!-- Mobile JavaScript (loads on all devices but only executes on mobile/tablet) -->
-    <script src="mobile.js?v=5" defer></script>
+    <script src="mobile.js?v=6" defer></script>
     
     <script>
     // Auto-focus first VIN input on page load
