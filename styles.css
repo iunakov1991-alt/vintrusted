@@ -7087,7 +7087,7 @@ button[type="submit"],
     height: 54px !important;
     min-height: 54px !important;
     max-height: 54px !important;
-    line-height: normal !important;
+    line-height: 54px !important;
     border: none !important;
     background: transparent !important;
     color: #1a1a1a !important;
@@ -7099,6 +7099,19 @@ button[type="submit"],
     box-sizing: border-box !important;
     -webkit-touch-callout: none !important;
     -webkit-tap-highlight-color: transparent !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+  
+  /* Fake input (contenteditable) for plate mode */
+  #plate-mode .fake-input {
+    cursor: text !important;
+  }
+  
+  #plate-mode .fake-input:empty::before {
+    content: attr(data-placeholder) !important;
+    color: #999999 !important;
+    pointer-events: none !important;
   }
   
   #plate-mode .plate-input::placeholder,

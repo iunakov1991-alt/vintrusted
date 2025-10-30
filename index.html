@@ -126,7 +126,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css?v=76">
+    <link rel="stylesheet" href="styles.css?v=77">
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -329,7 +329,7 @@
                                 <option value="WY">Wyoming</option>
                                 <option value="DC">District of Columbia</option>
                             </select>
-                            <input type="text" class="plate-input code-input-plate"  placeholder="Enter number" maxlength="8" style="text-transform: uppercase;" autocomplete="new-password" autocorrect="off" spellcheck="false" data-lpignore="true" readonly onfocus="this.removeAttribute('readonly')">
+                            <div contenteditable="true" class="plate-input code-input-plate fake-input" data-placeholder="Enter number" data-maxlength="8" style="text-transform: uppercase;" spellcheck="false" role="textbox" aria-label="Plate number"></div>
           </div>
                         
                         <button class="search-btn" onclick="submitForm()">
@@ -1017,7 +1017,7 @@
                                 <option value="WY">Wyoming</option>
                                 <option value="DC">District of Columbia</option>
                             </select>
-                            <input type="text" class="plate-input code-input-plate"  placeholder="Enter number" maxlength="8" style="text-transform: uppercase;" autocomplete="new-password" autocorrect="off" spellcheck="false" data-lpignore="true" readonly onfocus="this.removeAttribute('readonly')">
+                            <div contenteditable="true" class="plate-input code-input-plate fake-input" data-placeholder="Enter number" data-maxlength="8" style="text-transform: uppercase;" spellcheck="false" role="textbox" aria-label="Plate number"></div>
           </div>
                         
                         <button class="search-btn" onclick="submitForm()">
