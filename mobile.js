@@ -505,6 +505,50 @@
   }
 
   // =============================================================================
+  // SWITCH MODE FUNCTION (for mobile buttons)
+  // =============================================================================
+  
+  function switchMode(mode) {
+    // Map v17 back to vin for compatibility
+    const actualMode = mode === 'v17' ? 'vin' : mode;
+    
+    // Get mode elements
+    const vinMode = document.getElementById('vin-mode');
+    const plateMode = document.getElementById('plate-mode');
+    const buttons = document.querySelectorAll('.mode-btn');
+    
+    if (!vinMode || !plateMode) {
+      console.log('[Mobile] Mode elements not found');
+      return;
+    }
+    
+    // Update active states
+    if (actualMode === 'vin') {
+      vinMode.classList.add('active');
+      plateMode.classList.remove('active');
+    } else {
+      vinMode.classList.remove('active');
+      plateMode.classList.add('active');
+    }
+    
+    // Update button states
+    buttons.forEach(btn => {
+      if (btn.getAttribute('data-mode') === mode) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+    
+    console.log('[Mobile] Switched to mode:', actualMode);
+  }
+  
+  // Make switchMode available globally
+  if (typeof window !== 'undefined') {
+    window.switchMode = switchMode;
+  }
+
+  // =============================================================================
   // BLOCK LONG-PRESS MENU ON BUTTONS
   // =============================================================================
   
