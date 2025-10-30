@@ -371,6 +371,52 @@
   }
 
   // =============================================================================
+  // DISABLE iOS CONTEXT MENU
+  // =============================================================================
+  
+  function disableContextMenu() {
+    if (!isMobile()) return;
+
+    // Disable context menu on all buttons and inputs
+    const elements = document.querySelectorAll('button, .mode-btn, input, select, .vin-input, .plate-input, .state-select');
+    
+    elements.forEach(el => {
+      el.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      });
+      
+      // Prevent long press
+      let pressTimer;
+      el.addEventListener('touchstart', function(e) {
+        pressTimer = setTimeout(() => {
+          // Cancel any context menu
+        }, 500);
+      });
+      
+      el.addEventListener('touchend', function() {
+        clearTimeout(pressTimer);
+      });
+      
+      el.addEventListener('touchmove', function() {
+        clearTimeout(pressTimer);
+      });
+    });
+
+    // Global context menu blocker
+    document.addEventListener('contextmenu', function(e) {
+      if (e.target.matches('button, .mode-btn, input, select, .vin-input, .plate-input, .state-select')) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, { capture: true });
+
+    console.log('[Mobile] Context menu disabled');
+  }
+
+  // =============================================================================
   // TOUCH IMPROVEMENTS
   // =============================================================================
   
@@ -444,6 +490,7 @@
     // Initialize all mobile features
     updateSafeAreaVars();
     updateViewportHeight();
+    disableContextMenu();
     initVinInputFormatting();
     initPlateInputFormatting();
     initMobileFormSwitching();
