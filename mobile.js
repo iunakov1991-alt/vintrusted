@@ -25,8 +25,13 @@
   // UTILITY FUNCTIONS
   // =============================================================================
   
+  function isTouchDevice() {
+    return (('ontouchstart' in window) || (navigator.maxTouchPoints || 0) > 0 || (navigator.msMaxTouchPoints || 0) > 0);
+  }
+
   function isMobile() {
-    return window.innerWidth < MOBILE_BREAKPOINT;
+    // Run mobile logic ONLY on touch-capable devices AND small viewports
+    return isTouchDevice() && window.innerWidth < MOBILE_BREAKPOINT;
   }
 
   function isIOS() {
