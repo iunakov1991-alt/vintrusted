@@ -371,49 +371,61 @@
   }
 
   // =============================================================================
-  // DISABLE iOS CONTEXT MENU
+  // DISABLE iOS CONTEXT MENU & SELECTION POPUP
   // =============================================================================
   
   function disableContextMenu() {
     if (!isMobile()) return;
 
-    // Disable context menu on all buttons and inputs
-    const elements = document.querySelectorAll('button, .mode-btn, input, select, .vin-input, .plate-input, .state-select');
+    // Aggressive approach - disable on buttons only (not inputs, they need text selection)
+    const buttons = document.querySelectorAll('button, .mode-btn, .search-btn');
     
-    elements.forEach(el => {
-      el.addEventListener('contextmenu', function(e) {
+    buttons.forEach(btn => {
+      // Prevent context menu
+      btn.addEventListener('contextmenu', function(e) {
         e.preventDefault();
-        e.stopPropagation();
         return false;
-      });
+      }, { passive: false });
       
-      // Prevent long press
-      let pressTimer;
-      el.addEventListener('touchstart', function(e) {
-        pressTimer = setTimeout(() => {
-          // Cancel any context menu
-        }, 500);
-      });
+      // Prevent text selection popup
+      btn.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        return false;
+      }, { passive: false });
       
-      el.addEventListener('touchend', function() {
-        clearTimeout(pressTimer);
-      });
+      // Prevent long press with aggressive touchstart block
+      btn.addEventListener('touchstart', function(e) {
+        // Allow the tap but prevent long-press
+        this.setAttribute('data-touch-time', Date.now());
+      }, { passive: true });
       
-      el.addEventListener('touchmove', function() {
-        clearTimeout(pressTimer);
-      });
+      btn.addEventListener('touchend', function(e) {
+        const touchTime = this.getAttribute('data-touch-time');
+        if (touchTime) {
+          const duration = Date.now() - parseInt(touchTime);
+          if (duration > 500) {
+            // It was a long press, block it
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        }
+      }, { passive: false });
     });
 
-    // Global context menu blocker
-    document.addEventListener('contextmenu', function(e) {
-      if (e.target.matches('button, .mode-btn, input, select, .vin-input, .plate-input, .state-select')) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
-    }, { capture: true });
+    // For input fields - keep them functional but prevent popup on empty tap
+    const inputs = document.querySelectorAll('input, select, .vin-input, .plate-input, .state-select');
+    inputs.forEach(input => {
+      input.addEventListener('selectstart', function(e) {
+        // Only prevent if input is empty
+        if (!this.value || this.value.length === 0) {
+          e.preventDefault();
+          return false;
+        }
+      }, { passive: false });
+    });
 
-    console.log('[Mobile] Context menu disabled');
+    console.log('[Mobile] Context menu disabled on', buttons.length, 'buttons');
   }
 
   // =============================================================================
