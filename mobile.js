@@ -67,35 +67,52 @@
     fakeInputs.forEach(input => {
       const maxLength = parseInt(input.getAttribute('data-maxlength')) || 17;
       
-      // SINGLE TAP TO FOCUS
+      // SINGLE TAP TO FOCUS - AGGRESSIVE VERSION
       let tapTimeout;
+      let touchStartTime = 0;
+      
+      // Track touchstart
+      input.addEventListener('touchstart', function(e) {
+        touchStartTime = Date.now();
+      }, { passive: true });
+      
       input.addEventListener('touchend', function(e) {
+        const touchDuration = Date.now() - touchStartTime;
+        
+        // Only handle quick taps (< 300ms)
+        if (touchDuration > 300) return;
+        
         // Clear any previous timeout
         clearTimeout(tapTimeout);
         
-        // If not already focused, focus it
-        if (document.activeElement !== this) {
-          e.preventDefault();
-          e.stopPropagation();
+        // ALWAYS try to focus on tap
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        // Focus immediately
+        tapTimeout = setTimeout(() => {
+          this.focus();
           
-          // Focus after tiny delay to ensure iOS registers it
-          tapTimeout = setTimeout(() => {
-            this.focus();
-            
-            // Move cursor to end if has content
-            if (this.textContent.length > 0) {
+          // Move cursor to end if has content
+          if (this.textContent.length > 0) {
+            try {
               const range = document.createRange();
               const sel = window.getSelection();
               range.selectNodeContents(this);
               range.collapse(false);
               sel.removeAllRanges();
               sel.addRange(range);
+            } catch (err) {
+              console.log('[Mobile] Cursor positioning failed:', err);
             }
-            
-            console.log('[Mobile] Fake input focused on single tap');
-          }, 10);
-        }
-      }, { passive: false });
+          }
+          
+          console.log('[Mobile] Fake input focused on tap');
+        }, 10);
+        
+        return false;
+      }, { passive: false, capture: true });
       
       // Handle input
       input.addEventListener('input', function(e) {
@@ -823,7 +840,7 @@
     initAutoScrollBehavior();
     initTouchImprovements();
     blockLongPressOnButtons();
-    fixInputFirstTap();
+    // fixInputFirstTap(); // DISABLED - not needed for contenteditable fake inputs
 
     // Try to auto-fill VIN from clipboard (after a small delay)
     setTimeout(() => {
