@@ -505,6 +505,66 @@
   }
 
   // =============================================================================
+  // BLOCK LONG-PRESS MENU ON BUTTONS
+  // =============================================================================
+  
+  function blockLongPressOnButtons() {
+    if (!isMobile()) return;
+    
+    // Wait for mode buttons to exist
+    setTimeout(() => {
+      const modeButtons = document.querySelectorAll('.mode-btn');
+      
+      if (modeButtons.length === 0) {
+        console.log('[Mobile] No mode buttons found, skipping long-press blocker');
+        return;
+      }
+      
+      modeButtons.forEach(btn => {
+        let pressTimer = null;
+        let touchStart = 0;
+        
+        // Block long-press (> 150ms)
+        btn.addEventListener('touchstart', function(e) {
+          touchStart = Date.now();
+          
+          pressTimer = setTimeout(() => {
+            // Long press detected - block it!
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            console.log('[Mobile] Long-press blocked on button');
+          }, 150);
+        }, { passive: false, capture: true });
+        
+        btn.addEventListener('touchend', function(e) {
+          const duration = Date.now() - touchStart;
+          clearTimeout(pressTimer);
+          
+          // If it was a quick tap (< 150ms), allow it
+          if (duration >= 150) {
+            // Was a long press - block
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            return false;
+          }
+        }, { passive: false, capture: true });
+        
+        btn.addEventListener('touchcancel', function() {
+          clearTimeout(pressTimer);
+        }, { passive: true });
+        
+        btn.addEventListener('touchmove', function() {
+          clearTimeout(pressTimer);
+        }, { passive: true });
+      });
+      
+      console.log('[Mobile] Long-press blocking enabled on', modeButtons.length, 'mode buttons');
+    }, 100);
+  }
+
+  // =============================================================================
   // INITIALIZATION
   // =============================================================================
   
@@ -527,6 +587,7 @@
     initStickyCTABar();
     initAutoScrollBehavior();
     initTouchImprovements();
+    blockLongPressOnButtons();
 
     // Try to auto-fill VIN from clipboard (after a small delay)
     setTimeout(() => {
