@@ -6852,6 +6852,11 @@ button[type="submit"],
     margin: 0 !important;
     cursor: pointer !important;
     transition: all 0.3s ease !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
   
   .search-form-container .mode-btn.active {
@@ -6916,6 +6921,8 @@ button[type="submit"],
     box-sizing: border-box !important;
     outline: none !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
   
   #vin-mode .vin-input::placeholder {
@@ -6948,6 +6955,8 @@ button[type="submit"],
     background-position: right 8px center !important;
     cursor: pointer !important;
     box-sizing: border-box !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
   
   /* Plate Mode - Plate input (right half) */
@@ -6968,6 +6977,8 @@ button[type="submit"],
     outline: none !important;
     border-radius: 0 !important;
     box-sizing: border-box !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
   
   #plate-mode .plate-input::placeholder {
