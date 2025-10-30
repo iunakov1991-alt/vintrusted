@@ -6799,6 +6799,11 @@ button[type="submit"],
     padding: 0 12px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    /* BLOCK iOS SELECTION ON TITLE */
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+    pointer-events: none !important;
   }
   
   /* 3. SEARCH FORM CONTAINER - Show buttons and fields */
@@ -6877,6 +6882,8 @@ button[type="submit"],
     user-select: none !important;
     -webkit-touch-callout: none !important;
     -webkit-tap-highlight-color: transparent !important;
+    position: relative !important;
+    z-index: 100 !important;
   }
   
   /* Add text via CSS - iOS can't select CSS content! */
