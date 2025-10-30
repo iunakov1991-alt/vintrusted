@@ -6862,7 +6862,7 @@ button[type="submit"],
     flex: 1 !important;
     height: 54px !important;
     border-radius: 27px !important;
-    font-size: 17px !important;
+    font-size: 0 !important; /* Hide any HTML text */
     font-weight: 600 !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     background: rgba(255, 255, 255, 0.15) !important;
@@ -6877,6 +6877,19 @@ button[type="submit"],
     user-select: none !important;
     -webkit-touch-callout: none !important;
     -webkit-tap-highlight-color: transparent !important;
+  }
+  
+  /* Add text via CSS - iOS can't select CSS content! */
+  .search-form-container .mode-btn[data-mode="vin"]::before {
+    content: "VIN" !important;
+    font-size: 17px !important;
+    pointer-events: none !important;
+  }
+  
+  .search-form-container .mode-btn[data-mode="plate"]::before {
+    content: "License Plate" !important;
+    font-size: 17px !important;
+    pointer-events: none !important;
   }
   
   .search-form-container .mode-btn.active {
