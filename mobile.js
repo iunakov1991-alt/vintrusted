@@ -67,6 +67,36 @@
     fakeInputs.forEach(input => {
       const maxLength = parseInt(input.getAttribute('data-maxlength')) || 17;
       
+      // SINGLE TAP TO FOCUS
+      let tapTimeout;
+      input.addEventListener('touchend', function(e) {
+        // Clear any previous timeout
+        clearTimeout(tapTimeout);
+        
+        // If not already focused, focus it
+        if (document.activeElement !== this) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Focus after tiny delay to ensure iOS registers it
+          tapTimeout = setTimeout(() => {
+            this.focus();
+            
+            // Move cursor to end if has content
+            if (this.textContent.length > 0) {
+              const range = document.createRange();
+              const sel = window.getSelection();
+              range.selectNodeContents(this);
+              range.collapse(false);
+              sel.removeAllRanges();
+              sel.addRange(range);
+            }
+            
+            console.log('[Mobile] Fake input focused on single tap');
+          }, 10);
+        }
+      }, { passive: false });
+      
       // Handle input
       input.addEventListener('input', function(e) {
         let text = this.textContent;
