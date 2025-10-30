@@ -56,13 +56,71 @@
   }
 
   // =============================================================================
+  // FAKE INPUT (contenteditable) HANDLING
+  // =============================================================================
+  
+  function initFakeInputs() {
+    if (!isMobile()) return;
+    
+    const fakeInputs = document.querySelectorAll('.fake-input[contenteditable="true"]');
+    
+    fakeInputs.forEach(input => {
+      const maxLength = parseInt(input.getAttribute('data-maxlength')) || 17;
+      
+      // Handle input
+      input.addEventListener('input', function(e) {
+        let text = this.textContent;
+        
+        // Auto-uppercase
+        text = text.toUpperCase().replace(/\s+/g, '');
+        
+        // Limit length
+        if (text.length > maxLength) {
+          text = text.substring(0, maxLength);
+        }
+        
+        // Update content if changed
+        if (this.textContent !== text) {
+          this.textContent = text;
+          // Move cursor to end
+          const range = document.createRange();
+          const sel = window.getSelection();
+          if (this.childNodes.length > 0) {
+            range.setStart(this.childNodes[0], text.length);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+          }
+        }
+      });
+      
+      // Prevent paste formatting
+      input.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const text = (e.clipboardData || window.clipboardData).getData('text');
+        const cleaned = text.toUpperCase().replace(/\s+/g, '').substring(0, maxLength);
+        document.execCommand('insertText', false, cleaned);
+      });
+      
+      // Block line breaks
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+        }
+      });
+    });
+    
+    console.log('[Mobile] Fake inputs initialized:', fakeInputs.length);
+  }
+
+  // =============================================================================
   // VIN INPUT HANDLING
   // =============================================================================
   
   function initVinInputFormatting() {
     if (!isMobile()) return;
 
-    const vinInputs = document.querySelectorAll('[data-vin-input], .vin-input, .code-input-v17');
+    const vinInputs = document.querySelectorAll('[data-vin-input], .vin-input:not(.fake-input), .code-input-v17:not(.fake-input)');
     
     vinInputs.forEach(input => {
       // Auto-uppercase
@@ -642,7 +700,8 @@
     if (!isMobile()) return;
     
     setTimeout(() => {
-      const inputs = document.querySelectorAll('.vin-input, .code-input-v17, .plate-input, .code-input-plate');
+      // Only apply to real inputs, not fake contenteditable ones
+      const inputs = document.querySelectorAll('.vin-input:not(.fake-input), .code-input-v17:not(.fake-input), .plate-input:not(.fake-input), .code-input-plate:not(.fake-input)');
       
       inputs.forEach(input => {
         // Create transparent overlay
@@ -726,6 +785,7 @@
     updateSafeAreaVars();
     updateViewportHeight();
     disableContextMenu();
+    initFakeInputs();
     initVinInputFormatting();
     initPlateInputFormatting();
     initMobileFormSwitching();
