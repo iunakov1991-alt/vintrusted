@@ -635,6 +635,45 @@
   }
 
   // =============================================================================
+  // FIX: Prevent iOS menu on first tap of input fields
+  // =============================================================================
+  
+  function fixInputFirstTap() {
+    if (!isMobile()) return;
+    
+    setTimeout(() => {
+      const inputs = document.querySelectorAll('.vin-input, .code-input-v17, .plate-input, .code-input-plate');
+      
+      inputs.forEach(input => {
+        let hasFocused = false;
+        
+        // Intercept first touchstart
+        input.addEventListener('touchstart', function(e) {
+          if (!hasFocused) {
+            // First touch - block it and focus manually
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            hasFocused = true;
+            
+            // Manually focus after a tiny delay
+            setTimeout(() => {
+              input.focus();
+              // Force keyboard to appear
+              input.click();
+            }, 50);
+            
+            console.log('[Mobile] First tap blocked, manual focus set');
+          }
+        }, { passive: false, capture: true });
+      });
+      
+      console.log('[Mobile] Input first-tap fix enabled on', inputs.length, 'inputs');
+    }, 100);
+  }
+
+  // =============================================================================
   // INITIALIZATION
   // =============================================================================
   
@@ -658,6 +697,7 @@
     initAutoScrollBehavior();
     initTouchImprovements();
     blockLongPressOnButtons();
+    fixInputFirstTap();
 
     // Try to auto-fill VIN from clipboard (after a small delay)
     setTimeout(() => {
