@@ -29,6 +29,15 @@
     return window.innerWidth < MOBILE_BREAKPOINT;
   }
 
+  function isIOS() {
+    if (typeof navigator === 'undefined') return false;
+    const ua = navigator.userAgent || '';
+    // iPhone/iPad/iPod (including iPadOS which reports as Mac with touch)
+    const iOSUA = /iPad|iPhone|iPod/.test(ua);
+    const iPadOS13plus = /Macintosh/.test(ua) && 'ontouchend' in document;
+    return iOSUA || iPadOS13plus;
+  }
+
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -480,75 +489,70 @@
   // =============================================================================
   
   function disableContextMenu() {
-    if (!isMobile()) return;
+    // Only for iOS mobile to avoid desktop regressions
+    if (!isMobile() || !isIOS()) return;
 
-    // Nuclear option: disable on ALL interactive elements
-    const elements = document.querySelectorAll('button, .mode-btn, .search-btn, input, select, .vin-input, .plate-input, .state-select');
-    
+    // Inject minimal iOS-only CSS to suppress callout without breaking inputs
+    const styleId = 'ios-contextmenu-fixes';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = `
+        @media (pointer: coarse) {
+          /* Buttons: no selection/callout, keep clicks working */
+          button, .btn, .mode-btn, .m-tab-btn, .search-btn {
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+          }
+          /* Inputs: suppress callout, keep caret/typing */
+          input[type="text"], input[type="search"], input[type="tel"], input[type="email"],
+          .vin-input, .code-input-v17, .plate-input, .code-input-plate {
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    // Event-level: block only the contextmenu on iOS for buttons/inputs
+    const interactiveSelectors = 'button, .btn, .mode-btn, .m-tab-btn, .search-btn, input, .vin-input, .code-input-v17, .plate-input, .code-input-plate';
+    const elements = document.querySelectorAll(interactiveSelectors);
+
     elements.forEach(el => {
-      // Block ALL selection-related events
       el.addEventListener('contextmenu', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        e.stopImmediatePropagation();
         return false;
       }, { passive: false, capture: true });
-      
-      el.addEventListener('selectstart', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        return false;
-      }, { passive: false, capture: true });
-      
-      el.addEventListener('select', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }, { passive: false });
-      
-      el.addEventListener('copy', function(e) {
-        // Allow copy but prevent menu
-        e.stopPropagation();
-      }, { passive: false });
-      
-      // Block long press completely
-      let longPressTimer;
-      el.addEventListener('touchstart', function(e) {
-        longPressTimer = setTimeout(() => {
-          // Cancel after 400ms
-          e.preventDefault();
-          e.stopPropagation();
-        }, 400);
-      }, { passive: false });
-      
-      el.addEventListener('touchend', function() {
-        clearTimeout(longPressTimer);
-      }, { passive: true });
-      
-      el.addEventListener('touchmove', function() {
-        clearTimeout(longPressTimer);
-      }, { passive: true });
-      
-      el.addEventListener('touchcancel', function() {
-        clearTimeout(longPressTimer);
-      }, { passive: true });
-    });
 
-    // Global nuclear blocker
-    ['contextmenu', 'selectstart', 'select'].forEach(eventType => {
-      document.addEventListener(eventType, function(e) {
-        const target = e.target;
-        if (target.matches('button, .mode-btn, input, select, .vin-input, .plate-input, .state-select')) {
+      // For buttons only, block text selection start to avoid popups on quick tap
+      if (el.matches('button, .btn, .mode-btn, .m-tab-btn, .search-btn')) {
+        el.addEventListener('selectstart', function(e) {
           e.preventDefault();
           e.stopPropagation();
-          e.stopImmediatePropagation();
           return false;
-        }
-      }, { passive: false, capture: true });
+        }, { passive: false, capture: true });
+      }
+
+      // Gentle long-press suppression on buttons only
+      if (el.matches('button, .btn, .mode-btn, .m-tab-btn, .search-btn')) {
+        let longPressTimer;
+        el.addEventListener('touchstart', function() {
+          longPressTimer = setTimeout(() => {
+            // do nothing; CSS suppresses callout. Timer exists to cancel menu tendency
+          }, 350);
+        }, { passive: true });
+        ['touchend','touchmove','touchcancel'].forEach(ev =>
+          el.addEventListener(ev, function() { clearTimeout(longPressTimer); }, { passive: true })
+        );
+      }
     });
 
-    console.log('[Mobile] ULTRA AGGRESSIVE context menu blocking enabled on', elements.length, 'elements');
+    console.log('[Mobile][iOS] Context menu suppressed on', elements.length, 'elements');
   }
 
   // =============================================================================
@@ -658,7 +662,8 @@
   // =============================================================================
   
   function blockLongPressOnButtons() {
-    if (!isMobile()) return;
+    // Only for iOS mobile to avoid interfering with desktop
+    if (!isMobile() || !isIOS()) return;
     
     // Wait for mode buttons to exist
     setTimeout(() => {
@@ -674,34 +679,22 @@
         let touchStart = 0;
         let isLongPress = false;
         
-        // NUCLEAR: Block ALL default behavior on buttons
+        // Softer: do NOT block default immediately; just track timings
         btn.addEventListener('touchstart', function(e) {
           touchStart = Date.now();
           isLongPress = false;
-          
-          // Immediately prevent default
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-          
-          // Set long-press flag after 150ms
+          // Set long-press flag after 300ms
           pressTimer = setTimeout(() => {
             isLongPress = true;
             console.log('[Mobile] Long-press detected, blocking');
-          }, 150);
-        }, { passive: false, capture: true });
+          }, 300);
+        }, { passive: true });
         
         btn.addEventListener('touchend', function(e) {
           const duration = Date.now() - touchStart;
           clearTimeout(pressTimer);
-          
-          // Always prevent default
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-          
-          // If it was a QUICK tap (< 150ms), trigger the action manually
-          if (!isLongPress && duration < 150) {
+          // If it was a QUICK tap (< 250ms), let the click happen, also trigger manually to be safe
+          if (!isLongPress && duration < 250) {
             const mode = btn.getAttribute('data-mode');
             console.log('[Mobile] Quick tap detected on', mode, 'button');
             
@@ -712,30 +705,19 @@
               window.switchMode(mode);
             }
           }
-          
-          return false;
-        }, { passive: false, capture: true });
+        }, { passive: true });
         
         btn.addEventListener('touchcancel', function(e) {
           clearTimeout(pressTimer);
-          e.preventDefault();
-        }, { passive: false });
+        }, { passive: true });
         
         btn.addEventListener('touchmove', function(e) {
           clearTimeout(pressTimer);
           // Don't prevent default on move - allow scrolling
         }, { passive: true });
-        
-        // Block click events entirely (just in case)
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-          return false;
-        }, { passive: false, capture: true });
       });
       
-      console.log('[Mobile] NUCLEAR touch handling enabled on', modeButtons.length, 'mode buttons');
+      console.log('[Mobile][iOS] Gentle touch handling enabled on', modeButtons.length, 'mode buttons');
     }, 100);
   }
 
@@ -832,7 +814,8 @@
     updateSafeAreaVars();
     updateViewportHeight();
     disableContextMenu();
-    initFakeInputs();
+    // Do NOT create fake inputs after rollback; keep native inputs intact
+    // initFakeInputs();
     initVinInputFormatting();
     initPlateInputFormatting();
     initMobileFormSwitching();
