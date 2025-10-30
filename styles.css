@@ -6666,6 +6666,26 @@ button[type="submit"],
    ============================================================================= */
 
 @media screen and (max-width: 1023px) {
+  /* DISABLE iOS CONTEXT MENU GLOBALLY */
+  * {
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  
+  /* Extra aggressive for buttons and inputs */
+  button, input, select, textarea {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+  }
+  
+  /* Allow text selection in input fields */
+  input[type="text"], textarea {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+  }
+  
   /* FORCE REMOVE DESKTOP BACKGROUND IMAGE */
   html, body {
     margin: 0 !important;
