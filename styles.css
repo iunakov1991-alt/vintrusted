@@ -7187,3 +7187,10 @@ button[type="submit"],
     gap: 20px !important;
   }
 }
+
+/* Desktop: hide mobile-only UI to prevent overlap */
+@media (min-width: 1024px) {
+  .mobile-title { display: none !important; }
+  .search-form-container .mode-buttons { display: none !important; }
+  .fake-input { display: none !important; }
+}
