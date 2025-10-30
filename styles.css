@@ -6699,8 +6699,8 @@ button[type="submit"],
   input[type="text"], textarea {
     -webkit-user-select: text !important;
     user-select: text !important;
-  }
-  
+}
+
   /* FORCE REMOVE DESKTOP BACKGROUND IMAGE */
   html, body {
     margin: 0 !important;
@@ -6808,7 +6808,7 @@ button[type="submit"],
   @media screen and (max-width: 1023px) {
     .mobile-title {
       display: block !important;
-      text-align: center !important;
+    text-align: center !important;
       margin: 0 0 20px 0 !important;
       padding: 0 12px !important;
       width: 100% !important;
@@ -6828,7 +6828,7 @@ button[type="submit"],
       color: #ffffff !important;
       line-height: 1.2 !important;
       margin: 0 !important;
-      padding: 0 !important;
+    padding: 0 !important;
       -webkit-user-select: none !important;
       user-select: none !important;
       -webkit-touch-callout: none !important;
@@ -6846,7 +6846,7 @@ button[type="submit"],
       user-select: none !important;
       -webkit-touch-callout: none !important;
       pointer-events: none !important;
-    }
+  }
   }
   
   /* 3. SEARCH FORM CONTAINER - Show buttons and fields */
@@ -6967,6 +6967,43 @@ button[type="submit"],
     background: #fbbf24 !important;
     border-color: #fbbf24 !important;
     color: #1a1a1a !important;
+  }
+
+  /* Desktop overrides: ensure desktop buttons look and behave as before */
+  @media (min-width: 1024px) {
+    /* Hide mobile-only VIN split button variant on desktop */
+    .search-form-container .mode-btn[data-mode="v17"] {
+      display: none !important;
+    }
+
+    /* Restore desktop button visuals */
+    .search-form-container .mode-btn {
+      font-size: inherit !important; /* show real button text */
+      background: initial !important;
+      border: initial !important;
+      color: inherit !important;
+      height: auto !important;
+      min-height: initial !important;
+      max-height: initial !important;
+      border-radius: initial !important;
+      z-index: initial !important;
+      flex: initial !important;
+    }
+
+    /* Remove mobile pseudo-text on desktop */
+    .search-form-container .mode-btn::before,
+    .search-form-container .mode-btn::after {
+      content: none !important;
+    }
+
+    /* Container back to normal flow */
+    .search-form-container .mode-buttons {
+      gap: initial !important;
+      padding: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      margin: initial !important;
+    }
   }
   
   /* 5. INPUT FIELDS - Show and style */
@@ -7101,8 +7138,8 @@ button[type="submit"],
     -webkit-tap-highlight-color: transparent !important;
     white-space: nowrap !important;
     overflow: hidden !important;
-  }
-  
+}
+
   /* Fake input (contenteditable) for plate mode */
   #plate-mode .fake-input {
     cursor: text !important;
