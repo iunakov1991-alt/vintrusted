@@ -6673,11 +6673,26 @@ button[type="submit"],
   }
   
   /* Extra aggressive for buttons and inputs */
-  button, input, select, textarea {
+  button, input, select, textarea, .mode-btn {
     -webkit-touch-callout: none !important;
     -webkit-user-select: none !important;
     -webkit-tap-highlight-color: transparent !important;
     touch-action: manipulation !important;
+  }
+  
+  /* NUCLEAR: Block on div "buttons" */
+  .mode-btn, .mode-btn * {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    pointer-events: auto !important;
+  }
+  
+  .mode-btn::before, .mode-btn::after {
+    pointer-events: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
   }
   
   /* Allow text selection in input fields */
