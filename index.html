@@ -126,7 +126,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css?v=74">
+    <link rel="stylesheet" href="styles.css?v=75">
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -268,7 +268,7 @@
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="vin-mode">
-                            <input type="text" class="vin-input" placeholder="Enter 17-digit code" maxlength="17" style="text-transform: uppercase;" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" data-form-type="other">
+                            <input type="text" class="vin-input code-input-v17" placeholder="Enter code" maxlength="17" style="text-transform: uppercase;" autocomplete="new-password" autocorrect="off" autocapitalize="characters" spellcheck="false" data-form-type="other" data-lpignore="true" readonly onfocus="this.removeAttribute('readonly')">
       </div>
                         
                         <!-- Plate Mode -->
@@ -329,7 +329,7 @@
                                 <option value="WY">Wyoming</option>
                                 <option value="DC">District of Columbia</option>
                             </select>
-                            <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
+                            <input type="text" class="plate-input code-input-plate"  placeholder="Enter number" maxlength="8" style="text-transform: uppercase;" autocomplete="new-password" autocorrect="off" spellcheck="false" data-lpignore="true" readonly onfocus="this.removeAttribute('readonly')">
           </div>
                         
                         <button class="search-btn" onclick="submitForm()">
@@ -1017,7 +1017,7 @@
                                 <option value="WY">Wyoming</option>
                                 <option value="DC">District of Columbia</option>
                             </select>
-                            <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
+                            <input type="text" class="plate-input code-input-plate"  placeholder="Enter number" maxlength="8" style="text-transform: uppercase;" autocomplete="new-password" autocorrect="off" spellcheck="false" data-lpignore="true" readonly onfocus="this.removeAttribute('readonly')">
           </div>
                         
                         <button class="search-btn" onclick="submitForm()">
@@ -2355,7 +2355,7 @@
     <script src="script.js"></script>
     
     <!-- Mobile JavaScript (loads on all devices but only executes on mobile/tablet) -->
-    <script src="mobile.js?v=7" defer></script>
+    <script src="mobile.js?v=8" defer></script>
     
     <script>
     // Auto-focus first VIN input on page load

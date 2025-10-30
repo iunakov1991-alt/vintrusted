@@ -62,7 +62,7 @@
   function initVinInputFormatting() {
     if (!isMobile()) return;
 
-    const vinInputs = document.querySelectorAll('[data-vin-input], .vin-input');
+    const vinInputs = document.querySelectorAll('[data-vin-input], .vin-input, .code-input-v17');
     
     vinInputs.forEach(input => {
       // Auto-uppercase
@@ -149,7 +149,7 @@
       
       // Check if it looks like a VIN (11-17 alphanumeric characters)
       if (/^[A-HJ-NPR-Z0-9]{11,17}$/.test(cleaned)) {
-        const vinInput = document.querySelector('[data-vin-input], .vin-input');
+        const vinInput = document.querySelector('[data-vin-input], .vin-input, .code-input-v17');
         
         if (vinInput && !vinInput.value) {
           vinInput.value = cleaned.slice(0, VIN_LENGTH);
@@ -238,7 +238,7 @@
         
         // Focus on VIN input
         setTimeout(() => {
-          const vinInput = document.querySelector('[data-vin-input], .vin-input');
+          const vinInput = document.querySelector('[data-vin-input], .vin-input, .code-input-v17');
           if (vinInput) vinInput.focus();
         }, 500);
       }

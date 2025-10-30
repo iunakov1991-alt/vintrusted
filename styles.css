@@ -7007,7 +7007,8 @@ button[type="submit"],
   }
   
   /* VIN Mode - Single input field */
-  #vin-mode .vin-input {
+  #vin-mode .vin-input,
+  #vin-mode .code-input-v17 {
     display: block !important;
     visibility: visible !important;
     width: 100% !important;
@@ -7029,7 +7030,8 @@ button[type="submit"],
     -webkit-tap-highlight-color: transparent !important;
   }
   
-  #vin-mode .vin-input::placeholder {
+  #vin-mode .vin-input::placeholder,
+  #vin-mode .code-input-v17::placeholder {
     color: #999999 !important;
   }
   
@@ -7064,7 +7066,8 @@ button[type="submit"],
   }
   
   /* Plate Mode - Plate input (right half) */
-  #plate-mode .plate-input {
+  #plate-mode .plate-input,
+  #plate-mode .code-input-plate {
     display: block !important;
     visibility: visible !important;
     flex: 1 !important;
@@ -7085,7 +7088,8 @@ button[type="submit"],
     -webkit-tap-highlight-color: transparent !important;
   }
   
-  #plate-mode .plate-input::placeholder {
+  #plate-mode .plate-input::placeholder,
+  #plate-mode .code-input-plate::placeholder {
     color: #999999 !important;
   }
   
