@@ -6973,41 +6973,7 @@ button[type="submit"],
 }
 
 /* Desktop overrides must be outside the mobile media query */
-@media (min-width: 1024px) {
-  /* Hide mobile-only VIN split button variant on desktop */
-  .search-form-container .mode-btn[data-mode="v17"] {
-    display: none !important;
-  }
-
-  /* Restore desktop button visuals */
-  .search-form-container .mode-btn {
-    font-size: inherit !important; /* show real button text */
-    background: initial !important;
-    border: initial !important;
-    color: inherit !important;
-    height: auto !important;
-    min-height: initial !important;
-    max-height: initial !important;
-    border-radius: initial !important;
-    z-index: initial !important;
-    flex: initial !important;
-  }
-
-  /* Remove mobile pseudo-text on desktop */
-  .search-form-container .mode-btn::before,
-  .search-form-container .mode-btn::after {
-    content: none !important;
-  }
-
-  /* Container back to normal flow */
-  .search-form-container .mode-buttons {
-    gap: initial !important;
-    padding: 0 !important;
-    width: auto !important;
-    max-width: none !important;
-    margin: initial !important;
-  }
-}
+/* Removed desktop overrides to avoid interfering with existing desktop theme */
   
   /* 5. INPUT FIELDS - Show and style */
   .search-form .form-content #vin-mode,
