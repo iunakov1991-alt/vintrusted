@@ -645,32 +645,68 @@
       const inputs = document.querySelectorAll('.vin-input, .code-input-v17, .plate-input, .code-input-plate');
       
       inputs.forEach(input => {
-        let hasFocused = false;
+        // Create transparent overlay
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 10;
+          background: transparent;
+          cursor: text;
+        `;
         
-        // Intercept first touchstart
-        input.addEventListener('touchstart', function(e) {
-          if (!hasFocused) {
-            // First touch - block it and focus manually
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-            
-            hasFocused = true;
-            
-            // Manually focus after a tiny delay
-            setTimeout(() => {
-              input.focus();
-              // Force keyboard to appear
-              input.click();
-            }, 50);
-            
-            console.log('[Mobile] First tap blocked, manual focus set');
-          }
+        // Make parent position relative
+        const parent = input.parentElement;
+        if (parent && getComputedStyle(parent).position === 'static') {
+          parent.style.position = 'relative';
+        }
+        
+        // Insert overlay
+        parent.appendChild(overlay);
+        
+        // Overlay intercepts ALL touches
+        overlay.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
         }, { passive: false, capture: true });
+        
+        overlay.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          
+          // Hide overlay
+          overlay.style.display = 'none';
+          
+          // Focus input programmatically
+          setTimeout(() => {
+            input.focus();
+            input.click();
+            console.log('[Mobile] Input focused via overlay');
+          }, 10);
+          
+          return false;
+        }, { passive: false, capture: true });
+        
+        // Once input is focused, keep overlay hidden
+        input.addEventListener('focus', function() {
+          overlay.style.display = 'none';
+        });
+        
+        input.addEventListener('blur', function() {
+          // Show overlay again when input loses focus
+          setTimeout(() => {
+            overlay.style.display = 'block';
+          }, 100);
+        });
       });
       
-      console.log('[Mobile] Input first-tap fix enabled on', inputs.length, 'inputs');
-    }, 100);
+      console.log('[Mobile] Input overlay fix enabled on', inputs.length, 'inputs');
+    }, 200);
   }
 
   // =============================================================================
