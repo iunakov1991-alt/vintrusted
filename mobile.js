@@ -371,61 +371,79 @@
   }
 
   // =============================================================================
-  // DISABLE iOS CONTEXT MENU & SELECTION POPUP
+  // ULTRA AGGRESSIVE: DISABLE ALL SELECTION/CONTEXT MENUS
   // =============================================================================
   
   function disableContextMenu() {
     if (!isMobile()) return;
 
-    // Aggressive approach - disable on buttons only (not inputs, they need text selection)
-    const buttons = document.querySelectorAll('button, .mode-btn, .search-btn');
+    // Nuclear option: disable on ALL interactive elements
+    const elements = document.querySelectorAll('button, .mode-btn, .search-btn, input, select, .vin-input, .plate-input, .state-select');
     
-    buttons.forEach(btn => {
-      // Prevent context menu
-      btn.addEventListener('contextmenu', function(e) {
+    elements.forEach(el => {
+      // Block ALL selection-related events
+      el.addEventListener('contextmenu', function(e) {
         e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+      }, { passive: false, capture: true });
+      
+      el.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+      }, { passive: false, capture: true });
+      
+      el.addEventListener('select', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         return false;
       }, { passive: false });
       
-      // Prevent text selection popup
-      btn.addEventListener('selectstart', function(e) {
-        e.preventDefault();
-        return false;
+      el.addEventListener('copy', function(e) {
+        // Allow copy but prevent menu
+        e.stopPropagation();
       }, { passive: false });
       
-      // Prevent long press with aggressive touchstart block
-      btn.addEventListener('touchstart', function(e) {
-        // Allow the tap but prevent long-press
-        this.setAttribute('data-touch-time', Date.now());
+      // Block long press completely
+      let longPressTimer;
+      el.addEventListener('touchstart', function(e) {
+        longPressTimer = setTimeout(() => {
+          // Cancel after 400ms
+          e.preventDefault();
+          e.stopPropagation();
+        }, 400);
+      }, { passive: false });
+      
+      el.addEventListener('touchend', function() {
+        clearTimeout(longPressTimer);
       }, { passive: true });
       
-      btn.addEventListener('touchend', function(e) {
-        const touchTime = this.getAttribute('data-touch-time');
-        if (touchTime) {
-          const duration = Date.now() - parseInt(touchTime);
-          if (duration > 500) {
-            // It was a long press, block it
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-          }
-        }
-      }, { passive: false });
+      el.addEventListener('touchmove', function() {
+        clearTimeout(longPressTimer);
+      }, { passive: true });
+      
+      el.addEventListener('touchcancel', function() {
+        clearTimeout(longPressTimer);
+      }, { passive: true });
     });
 
-    // For input fields - keep them functional but prevent popup on empty tap
-    const inputs = document.querySelectorAll('input, select, .vin-input, .plate-input, .state-select');
-    inputs.forEach(input => {
-      input.addEventListener('selectstart', function(e) {
-        // Only prevent if input is empty
-        if (!this.value || this.value.length === 0) {
+    // Global nuclear blocker
+    ['contextmenu', 'selectstart', 'select'].forEach(eventType => {
+      document.addEventListener(eventType, function(e) {
+        const target = e.target;
+        if (target.matches('button, .mode-btn, input, select, .vin-input, .plate-input, .state-select')) {
           e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
           return false;
         }
-      }, { passive: false });
+      }, { passive: false, capture: true });
     });
 
-    console.log('[Mobile] Context menu disabled on', buttons.length, 'buttons');
+    console.log('[Mobile] ULTRA AGGRESSIVE context menu blocking enabled on', elements.length, 'elements');
   }
 
   // =============================================================================
