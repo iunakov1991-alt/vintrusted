@@ -7193,4 +7193,6 @@ button[type="submit"],
   .mobile-title { display: none !important; }
   .search-form-container .mode-buttons { display: none !important; }
   .fake-input { display: none !important; }
+  /* Hide mobile mode containers to prevent overlay on desktop */
+  #vin-mode, #plate-mode { display: none !important; }
 }
