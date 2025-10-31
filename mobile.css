@@ -1410,9 +1410,10 @@
   }
   
   /* Logo positioning - center in first column */
+  /* First column center = (width / 3) / 2 = width / 6, minus half logo width (39px) */
   .comparison-left .logo-above-stripe {
     top: 6px !important;
-    left: calc((100% - 48px) / 3 / 2 - 39px) !important;
+    left: calc(100% / 6 - 39px) !important;
     width: 78px !important;
   }
   
@@ -1497,9 +1498,10 @@
   }
   
   /* Third column - center CarFax text in its column */
+  /* Third column center = width / 3 * 2 + (width / 3) / 2 = width / 3 * 2 + width / 6 = width * 5/6, minus half logo width (39px) */
   .comparison-left .carfax-above-stripe {
     top: 13px !important;
-    left: calc(100% / 3 * 2 + 8px + (100% / 3) / 2 - 39px) !important;
+    left: calc(100% * 5 / 6 - 39px) !important;
     width: 78px !important;
     font-size: 16px !important;
   }
