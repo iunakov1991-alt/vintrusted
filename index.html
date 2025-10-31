@@ -349,13 +349,13 @@
                             <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
           </div>
                         
-                        <button class="search-btn" onclick="submitForm();">
+                        <button class="search-btn" onclick="submitForm.call(this, event);">
                             <span>Get My Report</span>
                             <span>✓</span>
                         </button>
                     </div>
                     <!-- Mobile Get Report Button -->
-                    <button class="mobile-search-btn" onclick="submitForm();">
+                    <button class="mobile-search-btn" onclick="submitForm.call(this, event);">
                         <span>Get My Report</span>
                         <span>✓</span>
                     </button>
@@ -1059,7 +1059,7 @@
                             <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
           </div>
                         
-                        <button class="search-btn" onclick="submitForm();">
+                        <button class="search-btn" onclick="submitForm.call(this, event);">
                             <span>Get My Report</span>
                             <span>✓</span>
                         </button>
@@ -2065,10 +2065,12 @@
         // Find the closest form container (works with multiple forms on page)
         let form = null;
         // Try to find form from event if available
-        if (arguments.length > 0 && arguments[0] && arguments[0].target) {
-            form = arguments[0].target.closest('.search-form-container');
-        } else if (window.event && window.event.target) {
-            form = window.event.target.closest('.search-form-container');
+        const event = arguments.length > 0 ? arguments[0] : (window.event || null);
+        if (event && event.target) {
+            form = event.target.closest('.search-form-container');
+        } else if (this && this.closest) {
+            // If called via onclick, 'this' is the button
+            form = this.closest('.search-form-container');
         }
         // Fallback to first form
         if (!form) {
@@ -2391,13 +2393,13 @@
                             <input type="text" class="plate-input" placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
                         </div>
                         
-                        <button class="search-btn" onclick="submitForm();">
+                        <button class="search-btn" onclick="submitForm.call(this, event);">
                             <span>Get My Report</span>
                             <span>✓</span>
                         </button>
                     </div>
                     <!-- Mobile Get Report Button -->
-                    <button class="mobile-search-btn" onclick="submitForm();">
+                    <button class="mobile-search-btn" onclick="submitForm.call(this, event);">
                         <span>Get My Report</span>
                         <span>✓</span>
                     </button>
