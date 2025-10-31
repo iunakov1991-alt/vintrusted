@@ -1332,6 +1332,16 @@
     max-width: 480px !important;
     margin: 0 auto !important;
   }
+  
+  /* Hide comparison section on mobile */
+  .comparison-section {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
 
 /* Hide mobile final screen on desktop */
