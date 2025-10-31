@@ -7112,13 +7112,14 @@ button[type="submit"],
   section.mobile-second-screen img,
   .mobile-second-screen img,
   .mobile-second-screen .mobile-second-image,
-  img.mobile-second-image {
+  img.mobile-second-image,
+  .mobile-second-image {
     display: block !important;
     visibility: visible !important;
     width: 100% !important;
     min-width: 100% !important;
     height: auto !important;
-    min-height: 200px !important;
+    min-height: 400px !important;
     max-width: 100% !important;
     object-fit: contain !important;
     margin: 0 auto !important;
