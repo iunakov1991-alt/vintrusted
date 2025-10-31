@@ -56,7 +56,20 @@
     visibility: hidden !important;
   }
 
-  /* Main header - single, fixed at top */
+  /* Hide header completely on mobile */
+  .header,
+  header.header,
+  #mainPage .header {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Main header - single, fixed at top - REMOVED */
+  /*
   #mainPage .header,
   .header {
     position: fixed !important;
@@ -71,6 +84,7 @@
     display: block !important;
     visibility: visible !important;
   }
+  */
 
   /* Ensure main page is visible */
   #mainPage {
