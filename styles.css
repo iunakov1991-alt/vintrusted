@@ -6752,7 +6752,7 @@ button[type="submit"],
     visibility: visible !important;
   }
   
-  /* Ensure mobile logo is visible */
+  /* Ensure mobile logo is visible - MOBILE ONLY */
   .hero-section .mobile-hero-logo,
   .hero-container .mobile-hero-logo {
     display: flex !important;
@@ -7215,6 +7215,23 @@ button[type="submit"],
 }
 
 /* Hide mobile content-action on desktop */
+/* Hide mobile logo on desktop */
+@media (min-width: 1024px) {
+  html body .hero-section .mobile-hero-logo,
+  html body .hero-container .mobile-hero-logo,
+  .hero-section .mobile-hero-logo,
+  .hero-container .mobile-hero-logo,
+  .mobile-hero-logo {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
 @media (min-width: 1024px) {
   .results-screen .content-action {
     display: none !important;
@@ -7252,3 +7269,4 @@ button[type="submit"],
     border-radius: 6px !important;
   }
 }
+
