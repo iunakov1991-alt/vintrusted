@@ -1052,6 +1052,159 @@
     position: relative !important;
     z-index: 101 !important;
   }
+  
+  /* =============================================================================
+     RESULTS SCREEN - MOBILE (3rd screen)
+     ============================================================================= */
+  
+  /* Hide desktop action card on mobile */
+  .results-right,
+  .results-screen .results-right,
+  .action-card {
+    display: none !important;
+  }
+  
+  /* Navigation tabs: 3 on top, 2 on bottom */
+  .results-screen .nav-tabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 12px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .results-screen .nav-tabs::before {
+    content: '';
+    flex-basis: 100%;
+    order: 2;
+    height: 0;
+  }
+  
+  /* First 3 tabs on top */
+  .results-screen .nav-tab:nth-child(1),
+  .results-screen .nav-tab:nth-child(2),
+  .results-screen .nav-tab:nth-child(3) {
+    order: 1;
+    flex: 1 1 calc(33.333% - 6px);
+    min-width: 0;
+    max-width: none;
+  }
+  
+  /* Last 2 tabs on bottom */
+  .results-screen .nav-tab:nth-child(4),
+  .results-screen .nav-tab:nth-child(5) {
+    order: 3;
+    flex: 1 1 calc(50% - 4px);
+    min-width: 0;
+    max-width: none;
+  }
+  
+  .results-screen .nav-tab {
+    padding: 12px 8px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  .results-screen .nav-tab.active {
+    background: #fbbf24 !important;
+    border-color: #fbbf24 !important;
+    color: #1a1a1a !important;
+  }
+  
+  /* Content action (logo + button) under image */
+  .results-screen .content-action {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 24px 16px !important;
+    margin-top: 0 !important;
+  }
+  
+  .results-screen .content-action .action-icon {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  
+  .results-screen .content-action .action-logo {
+    max-width: 120px !important;
+    height: auto !important;
+    width: auto !important;
+  }
+  
+  .results-screen .content-action .action-btn {
+    width: 100% !important;
+    max-width: 320px !important;
+    height: 54px !important;
+    padding: 0 24px !important;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    border: none !important;
+    border-radius: 27px !important;
+    color: #1a1a1a !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3) !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+  }
+  
+  .results-screen .content-action .action-btn:active {
+    transform: scale(0.98) !important;
+  }
+  
+  /* Content image styling */
+  .results-screen .content-image {
+    width: 100% !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .results-screen .content-image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+  
+  /* Results screen container */
+  .results-screen {
+    padding: 20px 0 !important;
+  }
+  
+  .results-screen .container {
+    padding: 0 16px !important;
+  }
+  
+  .results-screen .results-header {
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+  
+  .results-screen .results-title {
+    font-size: 24px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .results-screen .results-subtitle {
+    font-size: 14px !important;
+    padding: 0 !important;
+  }
 }
 
 /* =============================================================================
