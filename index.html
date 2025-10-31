@@ -2121,14 +2121,14 @@
         if (vinMode) vinMode.classList.remove('active');
         if (plateMode) plateMode.classList.remove('active');
         
-        // Hide all content
+        // Hide all content - use class-based approach for desktop CSS
         if (vinModeContent) {
-            vinModeContent.style.display = 'none';
             vinModeContent.classList.remove('active');
+            vinModeContent.style.display = '';
         }
         if (plateModeContent) {
-            plateModeContent.style.display = 'none';
             plateModeContent.classList.remove('active');
+            plateModeContent.style.display = '';
         }
         
         // Show selected mode
@@ -2136,8 +2136,9 @@
             console.log('Showing VIN mode');
             if (vinMode) vinMode.classList.add('active');
             if (vinModeContent) {
-                vinModeContent.style.display = 'flex';
                 vinModeContent.classList.add('active');
+                // Remove any inline display override
+                vinModeContent.style.display = '';
                 
                 // Auto-focus VIN input
                 setTimeout(() => {
@@ -2151,8 +2152,9 @@
             console.log('Showing Plate mode');
             if (plateMode) plateMode.classList.add('active');
             if (plateModeContent) {
-                plateModeContent.style.display = 'flex';
                 plateModeContent.classList.add('active');
+                // Remove any inline display override
+                plateModeContent.style.display = '';
             }
         }
     };
