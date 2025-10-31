@@ -133,19 +133,24 @@
   html body .hero-section {
     margin-top: 0 !important;
     padding: 0 0 0 !important;
-    padding-top: 10px !important;
+    padding-top: calc(var(--safe-top)) !important;
     padding-bottom: 0 !important;
     min-height: auto;
     background: url('images/mobileback.png') center center / cover no-repeat scroll !important;
     transform: none;
+    display: block !important;
+    visibility: visible !important;
   }
 
   .hero-container {
     transform: none;
     max-width: 100%;
     padding: 0 16px !important;
-    padding-top: calc(12px + var(--safe-top)) !important;
+    padding-top: 0 !important;
     margin-top: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    visibility: visible !important;
   }
   
   /* Mobile logo at top of hero section - AGGRESSIVE STYLES */
@@ -161,16 +166,17 @@
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
-    padding-top: calc(8px + var(--safe-top)) !important;
+    padding-top: calc(12px + var(--safe-top)) !important;
     padding-bottom: 20px !important;
     margin-bottom: 0 !important;
     margin-top: 0 !important;
     position: relative !important;
-    z-index: 100 !important;
+    z-index: 1000 !important;
     height: auto !important;
-    min-height: auto !important;
+    min-height: 80px !important;
     max-height: none !important;
     overflow: visible !important;
+    order: -1 !important;
   }
   
   html body .hero-section .mobile-hero-logo img,
