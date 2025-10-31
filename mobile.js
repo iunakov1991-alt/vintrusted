@@ -423,18 +423,29 @@
     function focusAndPlaceCaret(element) {
       if (!element) return;
       try {
-        element.focus();
+        // Force focus to trigger keyboard
+        element.focus({ preventScroll: true });
+        
+        // Double focus for iOS reliability
+        setTimeout(() => {
+          element.focus({ preventScroll: true });
+        }, 10);
+        
         // contenteditable support
         if (element.getAttribute && element.getAttribute('contenteditable') === 'true') {
-          const range = document.createRange();
-          range.selectNodeContents(element);
-          range.collapse(false);
-          const sel = window.getSelection();
-          sel.removeAllRanges();
-          sel.addRange(range);
+          setTimeout(() => {
+            const range = document.createRange();
+            range.selectNodeContents(element);
+            range.collapse(false);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+          }, 20);
         } else if (typeof element.setSelectionRange === 'function') {
-          const len = (element.value || '').length;
-          element.setSelectionRange(len, len);
+          setTimeout(() => {
+            const len = (element.value || '').length;
+            element.setSelectionRange(len, len);
+          }, 20);
         }
       } catch (_) {
         // no-op
