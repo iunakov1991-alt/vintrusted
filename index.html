@@ -2097,9 +2097,8 @@
     window.switchMode = (mode) => {
         console.log('Switching to mode:', mode);
         
-        // Find the closest form container from the clicked button
-        const clickedButton = event ? event.target : null;
-        const form = clickedButton ? clickedButton.closest('.search-form-container') : document.querySelector('.search-form-container');
+        // Find the closest form container
+        const form = document.querySelector('.search-form-container');
         
         if (!form) {
             console.error('Form not found');
