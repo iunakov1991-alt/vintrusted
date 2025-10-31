@@ -7198,9 +7198,20 @@ button[type="submit"],
   display: none !important;
 }
 
+/* Hide mobile final screen on desktop */
+.desktop-device .mobile-final-screen,
+.mobile-final-screen {
+  display: none !important;
+}
+
 /* Hide mobile content-action on desktop */
 @media (min-width: 1024px) {
   .results-screen .content-action {
+    display: none !important;
+  }
+  
+  /* Hide mobile final screen on desktop */
+  .mobile-final-screen {
     display: none !important;
   }
   
