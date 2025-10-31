@@ -21,6 +21,10 @@
   const VIN_PATTERN = /^[A-HJ-NPR-Z0-9]{17}$/;
   const VIN_LENGTH = 17;
   
+  // Store initial window width to detect desktop even when console is open
+  const INITIAL_WIDTH = typeof window !== 'undefined' ? window.innerWidth : 1024;
+  const IS_DESKTOP_DEVICE = INITIAL_WIDTH >= 1024 && !('ontouchstart' in window);
+  
   // =============================================================================
   // UTILITY FUNCTIONS
   // =============================================================================
@@ -30,6 +34,9 @@
   }
 
   function isMobile() {
+    // Never run mobile logic on desktop devices (even if console makes window narrow)
+    if (IS_DESKTOP_DEVICE) return false;
+    
     // Run mobile logic ONLY on touch-capable devices AND small viewports
     return isTouchDevice() && window.innerWidth < MOBILE_BREAKPOINT;
   }
