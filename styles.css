@@ -7197,3 +7197,37 @@ button[type="submit"],
 .desktop-device .mobile-second-screen {
   display: none !important;
 }
+
+/* Hide mobile content-action on desktop */
+@media (min-width: 1024px) {
+  .results-screen .content-action {
+    display: none !important;
+  }
+  
+  /* Ensure desktop styles for content-display and content-image */
+  .results-screen .content-display {
+    background: white !important;
+    border-radius: 12px !important;
+    padding: 25px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #e9ecef !important;
+    min-height: 600px !important;
+  }
+  
+  .results-screen .content-image {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .results-screen .content-image img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    border-radius: 6px !important;
+  }
+}
