@@ -147,6 +147,7 @@
     max-width: 100%;
     padding: 0 16px !important;
     padding-top: 0 !important;
+    padding-bottom: calc(-1 * ((100vh - var(--safe-top) - var(--safe-bottom)) / 5)) !important;
     margin-top: 0 !important;
     display: flex !important;
     flex-direction: column !important;
@@ -254,6 +255,7 @@
   .search-form-container {
     max-width: 100%;
     margin: 0 auto;
+    margin-top: calc((100vh - var(--safe-top) - var(--safe-bottom)) / 5) !important;
   }
 
   .m-form-tabs {

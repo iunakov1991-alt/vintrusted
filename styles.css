@@ -6763,7 +6763,7 @@ button[type="submit"],
   .hero-container {
     max-width: 480px !important;
     margin: 0 auto !important;
-    padding: 0 0 40px 0 !important;
+    padding: 0 0 calc(40px - (100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) / 5) 0 !important;
     text-align: center !important;
     display: flex !important;
     flex-direction: column !important;
