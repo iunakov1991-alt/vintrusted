@@ -282,6 +282,8 @@ body {
     gap: 8px;
     margin-bottom: 50px;
     align-items: center;
+    max-width: 600px;
+    justify-content: flex-start;
 }
 
 .subtitle-chip {
