@@ -420,35 +420,58 @@
       if (stateSelect) stateSelect.value = '';
     }
 
-    vinBtn.addEventListener('click', () => {
+    function focusAndPlaceCaret(element) {
+      if (!element) return;
+      try {
+        element.focus();
+        // contenteditable support
+        if (element.getAttribute && element.getAttribute('contenteditable') === 'true') {
+          const range = document.createRange();
+          range.selectNodeContents(element);
+          range.collapse(false);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+        } else if (typeof element.setSelectionRange === 'function') {
+          const len = (element.value || '').length;
+          element.setSelectionRange(len, len);
+        }
+      } catch (_) {
+        // no-op
+      }
+    }
+
+    function focusVinField() {
       clearAllFields();
       vinBtn.classList.add('active');
       plateBtn.classList.remove('active');
       vinMode.classList.add('active');
       plateMode.classList.remove('active');
       
-      const vinInput = document.querySelector('.vin-input, [data-vin-input]');
-      if (vinInput) {
-        setTimeout(() => vinInput.focus(), 100);
-      }
+      const vinInput = document.querySelector('.vin-input, [data-vin-input], .code-input-v17, #retryVin');
+      if (vinInput) setTimeout(() => focusAndPlaceCaret(vinInput), 60);
       
       console.log('[Mobile] Switched to VIN mode');
-    });
+    }
 
-    plateBtn.addEventListener('click', () => {
+    vinBtn.addEventListener('click', focusVinField);
+    vinBtn.addEventListener('touchend', (e) => { e.preventDefault(); focusVinField(); }, { passive: false });
+
+    function focusPlateField() {
       clearAllFields();
       plateBtn.classList.add('active');
       vinBtn.classList.remove('active');
       plateMode.classList.add('active');
       vinMode.classList.remove('active');
       
-      const plateInput = document.querySelector('.plate-input');
-      if (plateInput) {
-        setTimeout(() => plateInput.focus(), 100);
-      }
+      const plateInput = document.querySelector('.plate-input, .code-input-plate, #retryPlate');
+      if (plateInput) setTimeout(() => focusAndPlaceCaret(plateInput), 60);
       
       console.log('[Mobile] Switched to Plate mode');
-    });
+    }
+
+    plateBtn.addEventListener('click', focusPlateField);
+    plateBtn.addEventListener('touchend', (e) => { e.preventDefault(); focusPlateField(); }, { passive: false });
 
     console.log('[Mobile] Form switching initialized');
   }
