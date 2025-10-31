@@ -7144,3 +7144,8 @@ button[type="submit"],
 .desktop-device .mobile-search-btn {
   display: none !important;
 }
+
+/* Hide mobile second screen image on desktop */
+.desktop-device .mobile-second-screen {
+  display: none !important;
+}

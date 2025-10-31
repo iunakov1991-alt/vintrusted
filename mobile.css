@@ -1008,6 +1008,28 @@
       transition-duration: 0.01ms !important;
     }
   }
+  
+  /* Hide desktop second screen on mobile */
+  .second-screen {
+    display: none !important;
+  }
+  
+  /* Mobile second screen - image replacement */
+  .mobile-second-screen {
+    display: block !important;
+    width: 100% !important;
+    padding: 20px 0 !important;
+    background: transparent !important;
+  }
+  
+  .mobile-second-image {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+  }
 }
 
 /* =============================================================================
