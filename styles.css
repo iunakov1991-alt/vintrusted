@@ -6748,6 +6748,16 @@ button[type="submit"],
     box-sizing: border-box !important;
     transform: none !important;
     overflow: visible !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Ensure mobile logo is visible */
+  .hero-section .mobile-hero-logo,
+  .hero-container .mobile-hero-logo {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   .hero-container {

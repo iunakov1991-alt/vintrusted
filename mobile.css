@@ -148,7 +148,10 @@
     margin-top: 0 !important;
   }
   
-  /* Mobile logo at top of hero section */
+  /* Mobile logo at top of hero section - AGGRESSIVE STYLES */
+  html body .hero-section .mobile-hero-logo,
+  html body .hero-container .mobile-hero-logo,
+  html body section.hero-section div.hero-container div.mobile-hero-logo,
   .hero-section .mobile-hero-logo,
   .hero-container .mobile-hero-logo,
   .mobile-hero-logo {
@@ -161,10 +164,18 @@
     padding-top: calc(8px + var(--safe-top)) !important;
     padding-bottom: 20px !important;
     margin-bottom: 0 !important;
+    margin-top: 0 !important;
     position: relative !important;
-    z-index: 10 !important;
+    z-index: 100 !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
   
+  html body .hero-section .mobile-hero-logo img,
+  html body .hero-container .mobile-hero-logo img,
+  html body section.hero-section div.hero-container div.mobile-hero-logo img,
   .hero-section .mobile-hero-logo img,
   .hero-container .mobile-hero-logo img,
   .mobile-logo-img {
@@ -174,7 +185,10 @@
     height: 60px !important;
     width: auto !important;
     max-width: 180px !important;
+    min-width: 120px !important;
     object-fit: contain !important;
+    position: relative !important;
+    z-index: 101 !important;
   }
   
   /* Hide mobile logo on desktop */
