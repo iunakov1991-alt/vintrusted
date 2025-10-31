@@ -118,8 +118,9 @@
   .hero-section,
   html body .hero-section {
     margin-top: 0 !important;
-    padding: 0 0 40px !important;
+    padding: 0 0 0 !important;
     padding-top: 10px !important;
+    padding-bottom: 0 !important;
     min-height: auto;
     background: url('images/mobileback.png') center center / cover no-repeat scroll !important;
     transform: none;
@@ -1021,8 +1022,9 @@
     visibility: visible !important;
     width: 100% !important;
     min-height: 400px !important;
-    padding: 20px 0 !important;
+    padding: 0 !important;
     margin: 0 !important;
+    margin-top: 0 !important;
     background: transparent !important;
     box-sizing: border-box !important;
     position: relative !important;
