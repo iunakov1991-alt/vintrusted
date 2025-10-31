@@ -7102,7 +7102,7 @@ button[type="submit"],
     min-height: 400px !important;
     padding: 20px 0 !important;
     margin: 0 !important;
-    background: #f0f0f0 !important;
+    background: transparent !important;
     box-sizing: border-box !important;
     position: relative !important;
     z-index: 9999 !important;
