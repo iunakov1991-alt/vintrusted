@@ -144,8 +144,33 @@
     transform: none;
     max-width: 100%;
     padding: 0 16px !important;
-    padding-top: 0 !important;
+    padding-top: calc(12px + var(--safe-top)) !important;
     margin-top: 0 !important;
+  }
+  
+  /* Mobile logo at top of hero section */
+  .mobile-hero-logo {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding-top: calc(8px + var(--safe-top)) !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .mobile-logo-img {
+    height: 60px !important;
+    width: auto !important;
+    max-width: 180px !important;
+    object-fit: contain !important;
+  }
+  
+  /* Hide mobile logo on desktop */
+  @media (min-width: 1024px) {
+    .mobile-hero-logo {
+      display: none !important;
+    }
   }
 
   .main-title {
