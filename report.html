@@ -806,67 +806,66 @@
             document.querySelector('.report-left').classList.add('loaded');
         }
 
-        // Show invalid VIN error with retry form
+        // Show invalid VIN error with diagonal yellow stripe overlay
         function showInvalidVinError() {
-            const reportLeft = document.querySelector('.report-left');
-            reportLeft.innerHTML = `
-                <div class="error-container">
-                    <div class="error-icon">⚠️</div>
-                    <h2 class="error-title">VIN Code Not Recognized</h2>
-                    <p class="error-message">
-                        We couldn't find information for this VIN code. This might be because:
-                    </p>
-                    <ul class="error-reasons">
-                        <li>The VIN code is incorrect or incomplete</li>
-                        <li>The vehicle is too new or too old</li>
-                        <li>The VIN is from a non-US vehicle</li>
-                    </ul>
-                    <p class="error-suggestion">
-                        <strong>Don't worry!</strong> Try searching by license plate instead, or double-check your VIN code.
-                    </p>
-                    
-                    <div class="retry-form">
-                        <h3>Try Another Search</h3>
-                        <div class="mode-buttons">
-                            <button class="mode-btn active" data-mode="vin">VIN Code</button>
-                            <button class="mode-btn" data-mode="plate">License Plate</button>
-                        </div>
-                        
-                        <div class="search-inputs">
-                            <div id="vin-mode" class="input-mode active">
-                                <input type="text" id="retryVin" placeholder="Enter 17-character VIN code" maxlength="17">
-                                <button onclick="retrySearch('vin')" class="search-btn">Search by VIN</button>
-                            </div>
-                            
-                            <div id="plate-mode" class="input-mode">
-                                <select id="retryState">
-                                    <option value="">Select State</option>
-                                    <option value="CA">California</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="FL">Florida</option>
-                                    <option value="NY">New York</option>
-                                    <option value="PA">Pennsylvania</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="OH">Ohio</option>
-                                    <option value="GA">Georgia</option>
-                                    <option value="NC">North Carolina</option>
-                                    <option value="MI">Michigan</option>
-                                </select>
-                                <input type="text" id="retryPlate" placeholder="Enter license plate number">
-                                <button onclick="retrySearch('plate')" class="search-btn">Search by Plate</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="back-options">
-                        <button onclick="goHome()" class="back-btn">Back to Home</button>
-                        <button onclick="contactSupport()" class="support-btn">Contact Support</button>
-                    </div>
-                </div>
+            // Remove existing overlay if any
+            const existingOverlay = document.getElementById('vin-error-overlay');
+            if (existingOverlay) {
+                existingOverlay.remove();
+            }
+            
+            // Create diagonal yellow stripe overlay
+            const overlay = document.createElement('div');
+            overlay.id = 'vin-error-overlay';
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 10000;
+                pointer-events: auto;
+                overflow: hidden;
             `;
             
-            // Add event listeners for mode switching
-            addModeSwitchListeners();
+            // Create diagonal stripe
+            const stripe = document.createElement('div');
+            stripe.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 200%;
+                height: 120px;
+                background: #fbbf24;
+                transform: translate(-50%, -50%) rotate(-15deg);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            // Create text
+            const text = document.createElement('div');
+            text.textContent = 'номер не валидный';
+            text.style.cssText = `
+                font-size: 48px;
+                font-weight: 900;
+                color: #1a1a1a;
+                text-transform: uppercase;
+                letter-spacing: 4px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                white-space: nowrap;
+            `;
+            
+            stripe.appendChild(text);
+            overlay.appendChild(stripe);
+            document.body.appendChild(overlay);
+            
+            // Add click handler to remove overlay and go home
+            overlay.addEventListener('click', () => {
+                overlay.remove();
+                window.location.href = 'index.html';
+            });
         }
 
         // Show invalid Plate error with retry form
