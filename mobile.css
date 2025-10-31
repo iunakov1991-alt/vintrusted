@@ -1183,12 +1183,22 @@
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    min-height: auto !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
   
   .results-screen .content-item {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    display: none !important;
+  }
+  
+  .results-screen .content-item.active {
+    display: block !important;
   }
   
   .results-screen .content-image {
@@ -1197,8 +1207,13 @@
     margin-left: calc(50% - 50vw) !important;
     margin-right: calc(50% - 50vw) !important;
     margin-bottom: 0 !important;
+    margin-top: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+    height: auto !important;
+    display: block !important;
+    align-items: unset !important;
+    justify-content: unset !important;
   }
   
   .results-screen .content-image img {
@@ -1207,6 +1222,9 @@
     height: auto !important;
     display: block !important;
     object-fit: cover !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
   }
   
   /* Results screen container */
