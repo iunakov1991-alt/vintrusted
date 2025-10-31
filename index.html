@@ -2153,8 +2153,17 @@
             if (plateMode) plateMode.classList.add('active');
             if (plateModeContent) {
                 plateModeContent.classList.add('active');
-                // Remove any inline display override
+                // Force remove inline display to let CSS .active class work
                 plateModeContent.style.display = '';
+                // Double-check it's visible
+                setTimeout(() => {
+                    if (plateModeContent.classList.contains('active')) {
+                        plateModeContent.style.display = 'flex';
+                        console.log('Plate mode content should be visible now');
+                    }
+                }, 50);
+            } else {
+                console.error('Plate mode content not found!');
             }
         }
     };
