@@ -1333,14 +1333,40 @@
     margin: 0 auto !important;
   }
   
-  /* Hide comparison section on mobile */
+  /* Hide mobile final screen - use comparison-section instead */
+  .mobile-final-screen {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Comparison section - show only left column (table), hide right column (form) */
   .comparison-section {
+    display: block !important;
+    padding: 40px 16px !important;
+  }
+  
+  .comparison-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  
+  /* Hide right column with form */
+  .comparison-right {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
     overflow: hidden !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+  
+  /* Show left column with table */
+  .comparison-left {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 
