@@ -705,18 +705,9 @@
                     // Decode VIN using NHTSA API
                     data = await decodeVIN(input);
                     
-                    // If no data or incomplete data, use mock data as fallback
+                    // If no data or incomplete data, throw error (don't use fallback)
                     if (!data || !data.year || !data.make) {
-                        data = {
-                            year: '2017',
-                            make: 'Tesla',
-                            model: 'Model S',
-                            engine: 'Electric',
-                            transmission: 'Automatic',
-                            fuelType: 'Electric',
-                            bodyStyle: 'Sedan',
-                            driveType: 'AWD'
-                        };
+                        throw new Error('VIN_NOT_FOUND');
                     }
                     
                 } else if (type === 'plate') {
@@ -765,10 +756,12 @@
                 console.error('Error loading report:', error);
                 if (error.message === 'INVALID_VIN') {
                     showInvalidVinError();
+                } else if (error.message === 'VIN_NOT_FOUND') {
+                    showInvalidVinError();
                 } else if (error.message === 'INVALID_PLATE') {
                     showInvalidPlateError();
                 } else {
-                    showError('Failed to load report data');
+                    showInvalidVinError();
                 }
             } finally {
                 document.querySelector('.report-left').classList.remove('loading');
