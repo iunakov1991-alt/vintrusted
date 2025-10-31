@@ -1015,20 +1015,39 @@
   }
   
   /* Mobile second screen - image replacement */
+  section.mobile-second-screen,
   .mobile-second-screen {
     display: block !important;
+    visibility: visible !important;
     width: 100% !important;
+    min-height: 200px !important;
     padding: 20px 0 !important;
+    margin: 0 !important;
     background: transparent !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 100 !important;
+    opacity: 1 !important;
+    overflow: visible !important;
   }
   
+  section.mobile-second-screen img,
+  .mobile-second-screen img,
   .mobile-second-image {
     display: block !important;
+    visibility: visible !important;
     width: 100% !important;
+    min-width: 100% !important;
     height: auto !important;
+    min-height: 200px !important;
     max-width: 100% !important;
     object-fit: contain !important;
     margin: 0 auto !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 101 !important;
+    background: transparent !important;
   }
 }
 
