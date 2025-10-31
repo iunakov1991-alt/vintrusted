@@ -149,17 +149,28 @@
   }
   
   /* Mobile logo at top of hero section */
+  .hero-section .mobile-hero-logo,
+  .hero-container .mobile-hero-logo,
   .mobile-hero-logo {
     display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
     padding-top: calc(8px + var(--safe-top)) !important;
     padding-bottom: 20px !important;
     margin-bottom: 0 !important;
+    position: relative !important;
+    z-index: 10 !important;
   }
   
+  .hero-section .mobile-hero-logo img,
+  .hero-container .mobile-hero-logo img,
   .mobile-logo-img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     height: 60px !important;
     width: auto !important;
     max-width: 180px !important;
