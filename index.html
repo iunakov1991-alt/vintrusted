@@ -2153,17 +2153,24 @@
             if (plateMode) plateMode.classList.add('active');
             if (plateModeContent) {
                 plateModeContent.classList.add('active');
-                // Force remove inline display to let CSS .active class work
-                plateModeContent.style.display = '';
-                // Double-check it's visible
+                // Force display flex immediately with !important via style attribute
+                plateModeContent.style.setProperty('display', 'flex', 'important');
+                plateModeContent.style.visibility = 'visible';
+                plateModeContent.style.opacity = '1';
+                console.log('Plate mode activated, element:', plateModeContent, 'has active class:', plateModeContent.classList.contains('active'));
+                
+                // Double-check after a moment
                 setTimeout(() => {
-                    if (plateModeContent.classList.contains('active')) {
-                        plateModeContent.style.display = 'flex';
-                        console.log('Plate mode content should be visible now');
+                    if (!plateModeContent.classList.contains('active')) {
+                        console.error('Active class was removed!');
                     }
-                }, 50);
+                    if (getComputedStyle(plateModeContent).display === 'none') {
+                        console.error('Still hidden! Forcing display again');
+                        plateModeContent.style.setProperty('display', 'flex', 'important');
+                    }
+                }, 100);
             } else {
-                console.error('Plate mode content not found!');
+                console.error('Plate mode content not found! Form:', form);
             }
         }
     };
