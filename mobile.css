@@ -133,7 +133,7 @@
   html body .hero-section {
     margin-top: 0 !important;
     padding: 0 0 0 !important;
-    padding-top: calc(var(--safe-top)) !important;
+    padding-top: 0 !important;
     padding-bottom: 0 !important;
     min-height: auto;
     background: url('images/mobileback.png') center center / cover no-repeat scroll !important;
@@ -166,10 +166,10 @@
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
-    padding-top: calc(12px + var(--safe-top)) !important;
+    padding-top: var(--safe-top) !important;
     padding-bottom: 20px !important;
     margin-bottom: 0 !important;
-    margin-top: 0 !important;
+    margin-top: calc(-1 * var(--safe-top, 0px)) !important;
     position: relative !important;
     z-index: 1000 !important;
     height: auto !important;
