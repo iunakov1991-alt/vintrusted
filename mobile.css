@@ -1385,15 +1385,18 @@
   
   /* Cards layout - horizontal scroll */
   .comparison-left .cards-layout {
-    display: block !important;
+    display: flex !important;
+    flex-direction: row !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     padding: 16px !important;
     margin: 0 !important;
     border-radius: 12px !important;
     position: relative !important;
-    min-width: 600px !important;
-    width: auto !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
   }
   
   /* Reset absolute positions for mobile */
@@ -1439,9 +1442,41 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 10px !important;
-    margin-top: 0 !important;
+    margin-top: 40px !important;
     min-width: 120px !important;
     flex-shrink: 0 !important;
+  }
+  
+  /* Add header above first column */
+  .comparison-left .gold-cards-container::before {
+    content: 'VIN TRUST' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 120px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #fbbf24 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Add header above second column */
+  .comparison-left .right-cards-container::before {
+    content: 'VIN TRUST' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 132px !important;
+    width: 120px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #fbbf24 !important;
+    margin-bottom: 8px !important;
   }
   
   .comparison-left .third-column-wrapper {
@@ -1450,31 +1485,32 @@
     align-items: center !important;
     min-width: 120px !important;
     flex-shrink: 0 !important;
+    margin-top: 40px !important;
+    position: relative !important;
   }
   
   /* Add header above third column */
   .comparison-left .third-column-wrapper::before {
     content: 'CarFax' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 120px !important;
     font-family: Impact, 'Arial Black', sans-serif !important;
     font-size: 18px !important;
     font-weight: 900 !important;
     color: white !important;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
     letter-spacing: 1px !important;
-    margin-bottom: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   
   .comparison-left .carfax-above-stripe {
     display: none !important;
   }
   
-  /* Cards wrapper - make containers horizontal */
-  .comparison-left .cards-layout {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 12px !important;
-    align-items: flex-start !important;
-  }
   
   /* Card sizes for mobile */
   .comparison-left .gold-card,
