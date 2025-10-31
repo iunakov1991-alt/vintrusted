@@ -7099,14 +7099,15 @@ button[type="submit"],
     display: block !important;
     visibility: visible !important;
     width: 100% !important;
-    min-height: 200px !important;
+    min-height: 400px !important;
     padding: 20px 0 !important;
-    margin: 0 auto !important;
-    background: transparent !important;
+    margin: 0 !important;
+    background: #f0f0f0 !important;
     box-sizing: border-box !important;
     position: relative !important;
-    z-index: 10 !important;
+    z-index: 9999 !important;
     opacity: 1 !important;
+    overflow: visible !important;
   }
   
   section.mobile-second-screen img,
