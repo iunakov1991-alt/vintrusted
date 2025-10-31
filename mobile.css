@@ -1369,196 +1369,30 @@
     max-width: 100% !important;
   }
   
-  /* Adapt comparison table for mobile */
+  /* Proportional scaling of comparison table for mobile */
   .comparison-left .comparison-title {
-    font-size: 20px !important;
+    font-size: 18px !important;
     line-height: 1.3 !important;
-    margin-bottom: 16px !important;
-    padding: 0 8px !important;
   }
   
   .comparison-left .comparison-subtitle {
-    font-size: 13px !important;
-    margin-bottom: 20px !important;
-    padding: 0 8px !important;
+    font-size: 12px !important;
   }
   
-  /* Cards layout - horizontal scroll */
+  /* Scale cards layout proportionally */
   .comparison-left .cards-layout {
-    display: flex !important;
-    flex-direction: row !important;
+    transform: scale(0.65) !important;
+    transform-origin: top center !important;
+    margin: 0 auto !important;
+    width: 153.85% !important; /* 1/0.65 to compensate for scale */
+    margin-bottom: -20% !important; /* Compensate for scale reduction */
+  }
+  
+  /* Ensure horizontal scroll if needed */
+  .comparison-left {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
-    padding: 16px !important;
-    margin: 0 !important;
-    border-radius: 12px !important;
-    position: relative !important;
-    min-width: 100% !important;
     width: 100% !important;
-    gap: 12px !important;
-    align-items: flex-start !important;
-  }
-  
-  /* Reset absolute positions for mobile */
-  .comparison-left .logo-above-stripe {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    width: auto !important;
-    margin-bottom: 12px !important;
-    justify-content: flex-start !important;
-  }
-  
-  .comparison-left .logo-image {
-    height: 50px !important;
-    width: auto !important;
-  }
-  
-  .comparison-left .yellow-stripe {
-    position: relative !important;
-    top: auto !important;
-    margin: 12px 0 !important;
-  }
-  
-  .comparison-left .carfax-above-stripe {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    width: auto !important;
-    margin-bottom: 12px !important;
-    font-size: 18px !important;
-  }
-  
-  /* Logo and stripe positioning */
-  .comparison-left .logo-above-stripe,
-  .comparison-left .yellow-stripe {
-    display: none !important;
-  }
-  
-  /* Make cards containers vertical (columns) with headers */
-  .comparison-left .gold-cards-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    min-width: 120px !important;
-    flex-shrink: 0 !important;
-    position: relative !important;
-  }
-  
-  /* Add header above first column */
-  .comparison-left .gold-cards-container::before {
-    content: 'VIN TRUST' !important;
-    display: block !important;
-    width: 100% !important;
-    text-align: center !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    color: #fbbf24 !important;
-    margin-bottom: 12px !important;
-    padding-bottom: 8px !important;
-    border-bottom: 2px solid rgba(251, 191, 36, 0.3) !important;
-  }
-  
-  .comparison-left .right-cards-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    min-width: 120px !important;
-    flex-shrink: 0 !important;
-    position: relative !important;
-  }
-  
-  /* Add header above second column */
-  .comparison-left .right-cards-container::before {
-    content: 'VIN TRUST' !important;
-    display: block !important;
-    width: 100% !important;
-    text-align: center !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    color: #fbbf24 !important;
-    margin-bottom: 12px !important;
-    padding-bottom: 8px !important;
-    border-bottom: 2px solid rgba(251, 191, 36, 0.3) !important;
-  }
-  
-  .comparison-left .third-cards-container {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    min-width: 120px !important;
-    flex-shrink: 0 !important;
-  }
-  
-  .comparison-left .third-column-wrapper {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    min-width: 120px !important;
-    flex-shrink: 0 !important;
-    position: relative !important;
-  }
-  
-  /* Add header above third column */
-  .comparison-left .third-column-wrapper::before {
-    content: 'CarFax' !important;
-    display: block !important;
-    width: 100% !important;
-    text-align: center !important;
-    font-family: Impact, 'Arial Black', sans-serif !important;
-    font-size: 18px !important;
-    font-weight: 900 !important;
-    color: white !important;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
-    letter-spacing: 1px !important;
-    margin-bottom: 12px !important;
-    padding-bottom: 8px !important;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
-  }
-  
-  .comparison-left .carfax-above-stripe {
-    display: none !important;
-  }
-  
-  
-  /* Card sizes for mobile */
-  .comparison-left .gold-card,
-  .comparison-left .right-card,
-  .comparison-left .third-card {
-    width: 120px !important;
-    min-width: 120px !important;
-    height: auto !important;
-    min-height: 60px !important;
-    padding: 12px 8px !important;
-    font-size: 11px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 6px !important;
-  }
-  
-  .comparison-left .gold-card .card-icon,
-  .comparison-left .right-card .card-icon,
-  .comparison-left .third-card .card-icon {
-    font-size: 18px !important;
-  }
-  
-  .comparison-left .gold-card .card-text {
-    font-size: 10px !important;
-    line-height: 1.2 !important;
-    text-align: center !important;
-  }
-  
-  .comparison-left .price-right-card,
-  .comparison-left .price-third-card {
-    min-height: 70px !important;
-  }
-  
-  .comparison-left .price-text {
-    font-size: 11px !important;
-    line-height: 1.3 !important;
-    text-align: center !important;
   }
 }
 
