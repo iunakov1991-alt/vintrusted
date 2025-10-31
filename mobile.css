@@ -1369,23 +1369,117 @@
     max-width: 100% !important;
   }
   
-  /* Proportional scaling of comparison table for mobile */
+  /* Proportional scaling of comparison table for mobile - keep original structure */
   .comparison-left .comparison-title {
-    font-size: 18px !important;
+    font-size: 16px !important;
     line-height: 1.3 !important;
+    margin-bottom: 12px !important;
   }
   
   .comparison-left .comparison-subtitle {
-    font-size: 12px !important;
+    font-size: 11px !important;
+    margin-bottom: 16px !important;
   }
   
-  /* Scale cards layout proportionally */
+  /* Scale cards layout proportionally - keep original positioning */
   .comparison-left .cards-layout {
-    transform: scale(0.65) !important;
-    transform-origin: top center !important;
-    margin: 0 auto !important;
-    width: 153.85% !important; /* 1/0.65 to compensate for scale */
-    margin-bottom: -20% !important; /* Compensate for scale reduction */
+    gap: 12px !important;
+    padding: 12px !important;
+    margin-top: 12px !important;
+  }
+  
+  /* Logo positioning - scale proportionally */
+  .comparison-left .logo-above-stripe {
+    top: 6px !important;
+    left: 143px !important;
+    width: 78px !important;
+  }
+  
+  .comparison-left .logo-image {
+    height: 42px !important;
+  }
+  
+  /* Yellow stripe - scale proportionally */
+  .comparison-left .yellow-stripe {
+    top: 39px !important;
+    height: 3px !important;
+  }
+  
+  /* Gold cards - scale proportionally */
+  .comparison-left .gold-cards-container {
+    gap: 8px !important;
+  }
+  
+  .comparison-left .gold-card {
+    height: 42px !important;
+    padding: 8px 10px !important;
+    font-size: 11px !important;
+    border-radius: 6px !important;
+  }
+  
+  .comparison-left .gold-card .card-icon {
+    font-size: 16px !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .comparison-left .gold-card .card-text {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Right cards - scale proportionally */
+  .comparison-left .right-cards-container {
+    gap: 8px !important;
+    margin-top: 47px !important;
+  }
+  
+  .comparison-left .right-card {
+    width: 78px !important;
+    height: 42px !important;
+    padding: 0 8px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+  }
+  
+  .comparison-left .right-card .card-icon {
+    font-size: 16px !important;
+  }
+  
+  .comparison-left .price-right-card {
+    height: 59px !important;
+  }
+  
+  .comparison-left .price-text {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Third column - scale proportionally */
+  .comparison-left .carfax-above-stripe {
+    top: 13px !important;
+    left: 234px !important;
+    width: 78px !important;
+    font-size: 16px !important;
+  }
+  
+  .comparison-left .third-cards-container {
+    gap: 8px !important;
+    margin-top: 47px !important;
+  }
+  
+  .comparison-left .third-card {
+    width: 78px !important;
+    height: 42px !important;
+    padding: 0 8px !important;
+    border-radius: 6px !important;
+  }
+  
+  .comparison-left .third-card .card-icon {
+    font-size: 16px !important;
+  }
+  
+  .comparison-left .price-third-card {
+    height: 59px !important;
   }
   
   /* Ensure horizontal scroll if needed */
