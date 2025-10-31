@@ -6696,7 +6696,7 @@ button[type="submit"],
   }
   
   html body .hero-section {
-    background-image: none !important;
+    /* background-image removed to allow mobile.css to set custom image */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   }
   

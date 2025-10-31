@@ -115,16 +115,13 @@
      HERO SECTION - MOBILE
      ============================================================================= */
   
-  .hero-section {
+  .hero-section,
+  html body .hero-section {
     margin-top: 0 !important;
     padding: 0 0 40px !important;
     padding-top: 10px !important;
     min-height: auto;
-    background-attachment: scroll;
-    background-image: url('../images/485432f2a3d057e9c4ec868f9ec2f27d.jpg') !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
+    background: url('../images/485432f2a3d057e9c4ec868f9ec2f27d.jpg') center center / cover no-repeat scroll !important;
     transform: none;
   }
 
