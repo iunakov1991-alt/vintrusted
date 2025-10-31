@@ -1038,16 +1038,17 @@
     visibility: visible !important;
     width: 100% !important;
     min-width: 100% !important;
-    height: auto !important;
-    min-height: 200px !important;
+    height: 60vh !important;
+    min-height: 400px !important;
     max-width: 100% !important;
-    object-fit: contain !important;
     margin: 0 auto !important;
     padding: 0 !important;
     opacity: 1 !important;
     position: relative !important;
     z-index: 101 !important;
-    background: transparent !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
   }
 }
 
