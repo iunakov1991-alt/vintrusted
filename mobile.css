@@ -262,13 +262,16 @@
     max-width: calc(100% - 32px) !important;
     margin: calc((100vh - var(--safe-top) - var(--safe-bottom)) / 5 - 15px) auto 0 !important;
     padding: 0 !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border-radius: 20px !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-radius: 0 !important;
+    border: none !important;
     box-sizing: border-box !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
   }
   
   /* Show search-form inside unified container */
@@ -311,14 +314,20 @@
     flex-direction: column !important;
   }
 
-  /* Mode buttons - inside unified container - no gaps */
+  /* Mode buttons - first floor with glass background */
   .search-form-container .mode-buttons {
     display: flex !important;
     gap: 0 !important;
     margin: 0 !important;
     width: 100% !important;
     padding: 0 !important;
-    border-radius: 0 !important;
+    border-radius: 20px 20px 0 0 !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-bottom: none !important;
+    overflow: hidden !important;
   }
 
   .m-form-tabs,
@@ -340,7 +349,7 @@
     font-weight: 600 !important;
     border: none !important;
     border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
-    background: rgba(255, 255, 255, 0.15) !important;
+    background: transparent !important;
     color: #ffffff !important;
     cursor: pointer !important;
     transition: all 0.3s ease !important;
@@ -353,10 +362,6 @@
   .search-form-container .mode-btn:last-child {
     border-right: none !important;
   }
-  
-  .search-form-container .mode-btn:first-child {
-    border-top-left-radius: 20px !important;
-  }
 
   .m-tab-btn.active,
   .search-form-container .mode-btn.active {
@@ -368,6 +373,20 @@
   
   .search-form-container .mode-btn.active:last-child {
     border-right: none !important;
+  }
+  
+  /* Input field - second floor with glass background */
+  .search-form-container .search-form {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   /* VIN Form Fields */
@@ -396,7 +415,7 @@
     box-sizing: border-box !important;
   }
   
-  /* Show only active mode - no gaps */
+  /* Show only active mode - no gaps, transparent background */
   .search-form-container .search-form .form-content #vin-mode.active,
   .search-form-container .search-form .form-content #plate-mode.active {
     display: block !important;
@@ -407,6 +426,7 @@
     padding: 0 !important;
     box-sizing: border-box !important;
     border-radius: 0 !important;
+    background: transparent !important;
   }
   
   /* Hide inactive modes */
@@ -416,7 +436,7 @@
     visibility: hidden !important;
   }
   
-  /* Style inputs inside active mode - no borders, no radius */
+  /* Style inputs inside active mode - transparent borders, glass background */
   .search-form-container .search-form .form-content #vin-mode.active .vin-input {
     width: 100% !important;
     height: 54px !important;
@@ -426,8 +446,6 @@
     font-weight: 500 !important;
     background: rgba(255, 255, 255, 0.95) !important;
     border: none !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #1a1a1a !important;
     margin: 0 !important;
     box-sizing: border-box !important;
@@ -453,24 +471,16 @@
     font-weight: 500 !important;
     background: rgba(255, 255, 255, 0.95) !important;
     border: none !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #1a1a1a !important;
     margin: 0 !important;
     box-sizing: border-box !important;
   }
   
   .search-form-container .search-form .form-content #plate-mode.active .state-select {
-    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
   }
   
-  .search-form-container .search-form .form-content #plate-mode.active .plate-input {
-    border-top: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-  }
-  
-  /* Ensure mobile search button is visible - no gaps, rounded bottom */
+  /* Get Report button - third floor with glass background */
   .search-form-container .search-form .mobile-search-btn {
     display: flex !important;
     visibility: visible !important;
@@ -480,8 +490,28 @@
     margin: 0 !important;
     padding: 0 24px !important;
     border-radius: 0 0 20px 20px !important;
-    border: none !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-top: none !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    overflow: hidden !important;
+  }
+  
+  /* Button gradient overlay inside glass container */
+  .search-form-container .search-form .mobile-search-btn::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    z-index: -1 !important;
+  }
+  
+  .search-form-container .search-form .mobile-search-btn {
+    position: relative !important;
   }
 
   .vin-input,
@@ -528,13 +558,14 @@
   .mobile-search-btn {
     width: 100% !important;
     height: 54px !important;
-    border-radius: 27px !important;
+    border-radius: 0 0 20px 20px !important;
     padding: 0 24px !important;
     font-size: 18px !important;
     font-weight: 700 !important;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     color: #1a1a1a !important;
-    border: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-top: none !important;
     cursor: pointer !important;
     transition: all 0.3s ease !important;
     box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3) !important;
@@ -545,6 +576,7 @@
     margin: 0 !important;
     -webkit-tap-highlight-color: transparent !important;
     -webkit-touch-callout: none !important;
+    position: relative !important;
   }
   
   .search-form-container .mobile-search-btn:active,
