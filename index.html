@@ -128,7 +128,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css?v=85">
     <link rel="stylesheet" href="mobile.css?v=68" media="screen and (max-width: 1023px)">
-    <link rel="stylesheet" href="mobile-form-new.css?v=7" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="mobile-form-new.css?v=8">
     
     <!-- Desktop detection script - runs immediately to prevent mobile styles on desktop -->
     <script>
@@ -137,6 +137,60 @@
             if (isDesktop) {
                 document.documentElement.classList.add('desktop-device');
                 document.body.classList.add('desktop-device');
+                
+                // Скрываем мобильную форму через JavaScript на десктопе - АГРЕССИВНО
+                function hideMobileForm() {
+                    const selectors = [
+                        '.mobile-form-wrapper',
+                        '.mobile-mode-buttons',
+                        '.mobile-mode-btn',
+                        '.mobile-input-wrapper',
+                        '.mobile-vin-wrapper',
+                        '.mobile-plate-wrapper',
+                        '.mobile-vin-input',
+                        '.mobile-state-select',
+                        '.mobile-plate-input',
+                        '.mobile-submit-btn'
+                    ];
+                    
+                    selectors.forEach(function(selector) {
+                        const elements = document.querySelectorAll(selector);
+                        elements.forEach(function(el) {
+                            if (el) {
+                                el.style.cssText = 'display: none !important; visibility: hidden !important; opacity: 0 !important; height: 0 !important; overflow: hidden !important; position: absolute !important; left: -9999px !important; width: 0 !important; font-size: 0 !important; line-height: 0 !important; pointer-events: none !important; margin: 0 !important; padding: 0 !important;';
+                            }
+                        });
+                    });
+                }
+                
+                // Выполняем сразу и после загрузки DOM
+                hideMobileForm();
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', hideMobileForm);
+                } else {
+                    setTimeout(hideMobileForm, 0);
+                }
+                setTimeout(hideMobileForm, 50);
+                setTimeout(hideMobileForm, 100);
+                setTimeout(hideMobileForm, 200);
+                setTimeout(hideMobileForm, 500);
+                setTimeout(hideMobileForm, 1000);
+                
+                // Также скрываем при любом изменении размера окна (на случай если открыта консоль)
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth >= 1024) {
+                        hideMobileForm();
+                    }
+                });
+            } else {
+                // На мобилке показываем форму
+                function showMobileForm() {
+                    const wrapper = document.querySelector('.mobile-form-wrapper');
+                    if (wrapper && window.innerWidth <= 768) {
+                        wrapper.style.cssText = '';
+                    }
+                }
+                setTimeout(showMobileForm, 100);
             }
         })();
     </script>
@@ -368,7 +422,7 @@
             </div>
             
             <!-- НОВАЯ МОБИЛЬНАЯ ФОРМА (только для ≤768px) -->
-            <div class="mobile-form-wrapper" style="display: none; visibility: hidden; opacity: 0; height: 0; overflow: hidden; position: absolute; left: -9999px; width: 0; font-size: 0; line-height: 0; pointer-events: none;">
+            <div class="mobile-form-wrapper" style="display: none !important; visibility: hidden !important; opacity: 0 !important; height: 0 !important; overflow: hidden !important; position: absolute !important; left: -9999px !important; width: 0 !important; font-size: 0 !important; line-height: 0 !important; pointer-events: none !important; margin: 0 !important; padding: 0 !important;">
                 <!-- Кнопки выбора режима -->
                 <div class="mobile-mode-buttons">
                     <button type="button" class="mobile-mode-btn active" data-mobile-mode="vin" onclick="switchMobileMode('vin')">

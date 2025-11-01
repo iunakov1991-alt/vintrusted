@@ -3,7 +3,49 @@
    Чистая реализация с правильными отступами и блокировкой iOS меню
    ============================================================================= */
 
+/* ПО УМОЛЧАНИЮ СКРЫВАЕМ НА ВСЕХ ЭКРАНАХ */
+.mobile-form-wrapper,
+.mobile-mode-buttons,
+.mobile-mode-btn,
+.mobile-input-wrapper,
+.mobile-vin-wrapper,
+.mobile-plate-wrapper,
+.mobile-vin-input,
+.mobile-state-select,
+.mobile-plate-input,
+.mobile-submit-btn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  pointer-events: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 @media (max-width: 768px) {
+  /* На мобилке показываем форму */
+  .mobile-form-wrapper {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    overflow: visible !important;
+    position: static !important;
+    left: auto !important;
+    width: 100% !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    pointer-events: auto !important;
+    margin: 0 auto !important;
+    padding: 0 16px !important;
+  }
   
   /* Скрываем старую форму на мобилке */
   .desktop-form-container,
