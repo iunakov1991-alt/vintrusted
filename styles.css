@@ -6800,13 +6800,13 @@ button[type="submit"],
     display: block !important;
   }
   
-  /* 2. HIDE OLD TITLE COMPLETELY */
-  .main-title {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    opacity: 0 !important;
+  /* 2. SHOW TITLE OUTSIDE FORM CONTAINER */
+  .hero-container .main-title {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+    opacity: 1 !important;
   }
   
   /* HIDE old hero-container::after if exists */

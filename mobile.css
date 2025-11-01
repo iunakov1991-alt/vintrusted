@@ -222,15 +222,19 @@
   }
 
   .main-title {
-    font-size: 28px;
-    line-height: 1.15;
+    display: block !important;
+    visibility: visible !important;
+    font-size: 28px !important;
+    line-height: 1.15 !important;
     margin-bottom: 16px !important;
-    margin-top: 0 !important;
+    margin-top: 20px !important;
     padding-top: 0 !important;
-    text-align: center;
+    text-align: center !important;
     width: 100% !important;
     padding: 0 16px !important;
     box-sizing: border-box !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
   }
   
   /* Убираем все возможные отступы сверху */
