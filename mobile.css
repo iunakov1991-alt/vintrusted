@@ -254,43 +254,80 @@
   }
 
   /* =============================================================================
-     VIN SEARCH FORM - MOBILE
+     VIN SEARCH FORM - MOBILE - UNIFIED CONTAINER
      ============================================================================= */
   
   .search-form-container {
-    max-width: 100%;
-    margin: 0 auto;
-    margin-top: calc((100vh - var(--safe-top) - var(--safe-bottom)) / 5 - 15px) !important;
+    width: calc(100% - 32px) !important;
+    max-width: calc(100% - 32px) !important;
+    margin: calc((100vh - var(--safe-top) - var(--safe-bottom)) / 5 - 15px) auto 0 !important;
+    padding: 20px 16px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-sizing: border-box !important;
+  }
+  
+  .search-form {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  .form-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    width: 100% !important;
   }
 
-  .m-form-tabs {
+  /* Mode buttons - inside unified container */
+  .search-form-container .mode-buttons {
+    display: flex !important;
+    gap: 12px !important;
+    margin: 0 0 16px 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .m-form-tabs,
+  .search-form-container .mode-buttons {
     display: flex;
-    gap: 8px;
+    gap: 12px;
     margin-bottom: 16px;
     justify-content: center;
+    width: 100%;
   }
 
   .m-tab-btn,
-  .mode-btn {
-    flex: 1;
-    max-width: 150px;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    -webkit-tap-highlight-color: transparent;
+  .search-form-container .mode-btn {
+    flex: 1 !important;
+    height: 54px !important;
+    padding: 0 !important;
+    border-radius: 27px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    -webkit-tap-highlight-color: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .m-tab-btn.active,
-  .mode-btn.active {
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-    color: #1a1a1a;
-    border-color: #fbbf24;
+  .search-form-container .mode-btn.active {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    color: #1a1a1a !important;
+    border-color: #fbbf24 !important;
   }
 
   /* VIN Form Fields */
@@ -309,18 +346,65 @@
     width: 100%;
   }
 
+  /* Input fields - full width inside container */
+  .search-form-container .vin-input,
+  .search-form-container .plate-input,
+  .search-form-container .state-select,
+  .search-form .form-content #vin-mode,
+  .search-form .form-content #plate-mode,
+  .search-form .form-content #vin-mode.active,
+  .search-form .form-content #plate-mode.active {
+    width: 100% !important;
+    height: 54px !important;
+    border-radius: 27px !important;
+    padding: 0 20px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    color: #1a1a1a !important;
+    transition: all 0.3s ease !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    margin: 0 0 16px 0 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+  
+  .search-form .form-content #plate-mode {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .search-form .form-content #plate-mode .state-select {
+    width: 100% !important;
+    height: 54px !important;
+    border-radius: 27px !important;
+    margin: 0 !important;
+  }
+  
+  .search-form .form-content #plate-mode .plate-input {
+    width: 100% !important;
+    height: 54px !important;
+    border-radius: 27px !important;
+    margin: 0 !important;
+  }
+
   .vin-input,
   .plate-input,
   .state-select,
   input[data-vin-input] {
     flex: 1;
-    height: 48px;
-    border-radius: 12px;
-    padding: 0 16px;
+    height: 54px;
+    border-radius: 27px;
+    padding: 0 20px;
     font-size: 16px;
     font-weight: 500;
     background: rgba(255, 255, 255, 0.95);
-    border: 2px solid rgba(59, 130, 246, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: #1a1a1a;
     transition: all 0.3s ease;
     -webkit-appearance: none;
@@ -348,12 +432,41 @@
     border-color: #ff6b6b;
   }
 
+  /* Get Report Button - inside unified container */
+  .search-form-container .mobile-search-btn,
+  .mobile-search-btn {
+    width: 100% !important;
+    height: 54px !important;
+    border-radius: 27px !important;
+    padding: 0 24px !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+  }
+  
+  .search-form-container .mobile-search-btn:active,
+  .mobile-search-btn:active {
+    transform: scale(0.98) !important;
+  }
+
   /* Search Button */
   .search-btn,
   button[data-vin-submit] {
     width: 100%;
-    height: 52px;
-    border-radius: 14px;
+    height: 54px;
+    border-radius: 27px;
     padding: 0 24px;
     font-size: 16px;
     font-weight: 700;
