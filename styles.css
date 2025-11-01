@@ -488,7 +488,7 @@ body {
     gap: 8px;
     margin-bottom: 12px;
     width: auto;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .mode-btn {
