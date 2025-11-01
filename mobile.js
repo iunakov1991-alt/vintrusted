@@ -1035,6 +1035,53 @@
   
   // Также инициализируем после небольшой задержки для динамически созданных кнопок
   setTimeout(initIOSMenuBlocking, 300);
+  setTimeout(initIOSMenuBlocking, 1000);
+  setTimeout(initIOSMenuBlocking, 2000);
+  
+  // Перехватываем все touch события на document для кнопок
+  document.addEventListener('touchstart', function(e) {
+    if (window.innerWidth > 768) return;
+    if (IS_DESKTOP_DEVICE) return;
+    
+    const target = e.target;
+    if (target && (
+      target.tagName === 'BUTTON' ||
+      target.closest('button') ||
+      target.classList.contains('btn') ||
+      target.classList.contains('mode-btn') ||
+      target.classList.contains('mobile-search-btn') ||
+      target.classList.contains('search-btn')
+    )) {
+      // Принудительно блокируем выделение
+      document.documentElement.style.webkitUserSelect = 'none';
+      document.body.style.webkitUserSelect = 'none';
+      if (target) {
+        target.style.webkitUserSelect = 'none';
+        target.style.userSelect = 'none';
+      }
+    }
+  }, { passive: true, capture: true });
+  
+  // Блокируем контекстное меню глобально для кнопок
+  document.addEventListener('contextmenu', function(e) {
+    if (window.innerWidth > 768) return;
+    if (IS_DESKTOP_DEVICE) return;
+    
+    const target = e.target;
+    if (target && (
+      target.tagName === 'BUTTON' ||
+      target.closest('button') ||
+      target.classList.contains('btn') ||
+      target.classList.contains('mode-btn') ||
+      target.classList.contains('mobile-search-btn') ||
+      target.classList.contains('search-btn')
+    )) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      return false;
+    }
+  }, { passive: false, capture: true });
 
   // Add CSS animation keyframes dynamically
   const style = document.createElement('style');

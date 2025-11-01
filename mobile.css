@@ -508,70 +508,113 @@
   
   /* ВЕРТИКАЛЬНЫЕ ОТСТУПЫ И ИСПРАВЛЕНИЕ НАЛОЖЕНИЙ (только ≤768px) */
   @media (max-width: 768px) {
-    /* Равные вертикальные отступы для полей через gap */
+    /* ПЕРЕОПРЕДЕЛЯЕМ gap для form-content - перекрываем правило gap: 0 */
     .search-form-container .search-form .form-content {
       gap: 16px !important;
+      display: flex !important;
+      flex-direction: column !important;
     }
     
     /* VIN mode - убираем margin-bottom, используем gap */
     .search-form-container .search-form .form-content #vin-mode.active {
       margin: 0 !important;
+      margin-bottom: 0 !important;
     }
     
     /* Plate mode - убираем margin-bottom, используем gap */
     .search-form-container .search-form .form-content #plate-mode.active {
       margin: 0 !important;
+      margin-bottom: 0 !important;
     }
     
-    /* Исправляем наложение кнопки Get My Report */
+    /* Исправляем наложение кнопки Get My Report - она ВНЕ form-content */
+    .search-form-container .search-form {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+    }
+    
     .search-form-container .search-form .mobile-search-btn {
       position: relative !important;
-      z-index: 1 !important;
+      z-index: 10 !important;
       margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      order: 999 !important;
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 100% !important;
+      height: 54px !important;
+      min-height: 54px !important;
+      max-height: 54px !important;
     }
     
-    /* --- Убираем iOS меню и выделение текста на кнопках (только ≤768px) --- */
-    /* Повышаем специфичность для гарантированного применения */
-    .search-form-container button,
-    .search-form-container .btn,
-    .search-form-container .mode-btn,
-    .search-form-container .mobile-search-btn,
-    .search-form-container .search-btn,
-    .mode-buttons button,
-    .mode-buttons .mode-btn,
-    .search-form button,
-    .search-form .btn,
-    .search-form .mobile-search-btn,
-    .search-form .search-btn,
+    /* Убираем margin-bottom у search-form чтобы gap работал */
+    .search-form-container .search-form {
+      margin: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    
+    /* --- АГРЕССИВНАЯ БЛОКИРОВКА iOS меню (только ≤768px) --- */
+    /* Применяем стили ко ВСЕМ кнопкам с максимальной специфичностью */
+    html body .search-form-container button,
+    html body .search-form-container .btn,
+    html body .search-form-container .mode-btn,
+    html body .search-form-container .mobile-search-btn,
+    html body .search-form-container .search-btn,
+    html body .mode-buttons button,
+    html body .mode-buttons .mode-btn,
+    html body .search-form button,
+    html body .search-form .btn,
+    html body .search-form .mobile-search-btn,
+    html body .search-form .search-btn,
     html body button.mode-btn,
     html body button.mobile-search-btn,
     html body button.search-btn,
+    html body .search-form-container button.mode-btn,
+    html body .search-form-container button.mobile-search-btn,
     button.mode-btn,
     button.mobile-search-btn,
     button.search-btn,
-    button,
-    .btn {
+    .mode-btn,
+    .mobile-search-btn,
+    .search-btn {
       -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
       user-select: none !important;
       -webkit-touch-callout: none !important;
-      -webkit-tap-highlight-color: transparent !important;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
       touch-action: manipulation !important;
       -webkit-appearance: none !important;
+      -moz-appearance: none !important;
       appearance: none !important;
       pointer-events: auto !important;
+      /* Дополнительные стили для iOS */
+      -webkit-user-drag: none !important;
+      -khtml-user-drag: none !important;
+      -moz-user-drag: none !important;
+      -o-user-drag: none !important;
+      user-drag: none !important;
     }
     
-    .search-form-container button:focus,
-    .search-form-container .btn:focus,
-    .search-form-container .mode-btn:focus,
-    .search-form-container .mobile-search-btn:focus,
-    .mode-buttons button:focus,
-    .mode-buttons .mode-btn:focus,
+    /* Блокируем focus outline */
+    html body .search-form-container button:focus,
+    html body .search-form-container .btn:focus,
+    html body .search-form-container .mode-btn:focus,
+    html body .search-form-container .mobile-search-btn:focus,
+    html body .mode-buttons button:focus,
+    html body .mode-buttons .mode-btn:focus,
+    html body button.mode-btn:focus,
+    html body button.mobile-search-btn:focus,
     button.mode-btn:focus,
     button.mobile-search-btn:focus,
     button:focus,
-    .btn:focus {
+    .btn:focus,
+    .mode-btn:focus,
+    .mobile-search-btn:focus {
       outline: none !important;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
     }
   }
   
