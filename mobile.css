@@ -370,14 +370,25 @@
     width: 100%;
   }
 
-  /* Input fields - full width inside container */
-  .search-form-container .vin-input,
-  .search-form-container .plate-input,
-  .search-form-container .state-select,
-  .search-form .form-content #vin-mode,
-  .search-form .form-content #plate-mode,
+  /* Input fields - full width inside container - show only active mode */
   .search-form .form-content #vin-mode.active,
   .search-form .form-content #plate-mode.active {
+    width: 100% !important;
+    margin: 0 0 16px 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+  
+  /* Hide inactive modes */
+  .search-form .form-content #vin-mode:not(.active),
+  .search-form .form-content #plate-mode:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Style inputs inside active mode */
+  .search-form .form-content #vin-mode.active .vin-input {
     width: 100% !important;
     height: 54px !important;
     border-radius: 27px !important;
@@ -387,34 +398,31 @@
     background: rgba(255, 255, 255, 0.95) !important;
     border: 2px solid rgba(255, 255, 255, 0.3) !important;
     color: #1a1a1a !important;
-    transition: all 0.3s ease !important;
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    appearance: none !important;
-    margin: 0 0 16px 0 !important;
+    margin: 0 !important;
     box-sizing: border-box !important;
-    display: block !important;
   }
   
-  .search-form .form-content #plate-mode {
+  /* Plate mode - stacked select and input */
+  .search-form .form-content #plate-mode.active {
     display: flex !important;
     flex-direction: column !important;
     gap: 12px !important;
     margin-bottom: 16px !important;
   }
   
-  .search-form .form-content #plate-mode .state-select {
+  .search-form .form-content #plate-mode.active .state-select,
+  .search-form .form-content #plate-mode.active .plate-input {
     width: 100% !important;
     height: 54px !important;
     border-radius: 27px !important;
+    padding: 0 20px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    color: #1a1a1a !important;
     margin: 0 !important;
-  }
-  
-  .search-form .form-content #plate-mode .plate-input {
-    width: 100% !important;
-    height: 54px !important;
-    border-radius: 27px !important;
-    margin: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .vin-input,
