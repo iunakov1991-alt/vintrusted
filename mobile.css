@@ -37,17 +37,14 @@
     padding: 0;
   }
   
-  /* Body - override desktop fixed attachment for iOS, add safe-area padding */
+  /* Body - keep original desktop styles, only add safe-area padding for content */
   body {
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-height: 100dvh;
-    min-height: 100vh;
-    position: relative;
     /* Override desktop background-attachment: fixed to scroll for iOS */
     background-attachment: scroll !important;
-    /* Add safe-area padding to content - background will extend behind it */
+    /* Add safe-area padding to push content away from Dynamic Island */
     padding-top: var(--sat);
     padding-bottom: var(--sab);
     padding-left: var(--sal);
