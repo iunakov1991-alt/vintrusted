@@ -128,7 +128,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css?v=82">
     <link rel="stylesheet" href="mobile.css?v=68" media="screen and (max-width: 1023px)">
-    <link rel="stylesheet" href="mobile-form-new.css?v=2" media="screen and (max-width: 768px)">
+    <link rel="stylesheet" href="mobile-form-new.css?v=3" media="screen and (max-width: 768px)">
     
     <!-- Desktop detection script - runs immediately to prevent mobile styles on desktop -->
     <script>
@@ -2781,6 +2781,117 @@
     // Также после задержки
     setTimeout(initMobileFormIOSBlocking, 300);
     setTimeout(initMobileFormIOSBlocking, 1000);
+    
+    // AUTO-FOCUS VIN поля при загрузке страницы (только ≤768px)
+    function initMobileFormAutoFocus() {
+        if (window.innerWidth > 768) return;
+        
+        const vinInput = document.getElementById('mobile-vin-input');
+        if (!vinInput) return;
+        
+        // Убеждаемся что VIN режим активен
+        const vinBtn = document.querySelector('.mobile-mode-btn[data-mobile-mode="vin"]');
+        const plateBtn = document.querySelector('.mobile-mode-btn[data-mobile-mode="plate"]');
+        const vinWrapper = document.getElementById('mobile-vin-wrapper');
+        const plateWrapper = document.getElementById('mobile-plate-wrapper');
+        
+        if (vinBtn && vinWrapper) {
+            vinBtn.classList.add('active');
+            if (plateBtn) plateBtn.classList.remove('active');
+            vinWrapper.classList.add('active');
+            if (plateWrapper) plateWrapper.classList.remove('active');
+        }
+        
+        // Фокус на VIN поле с задержкой для гарантии
+        setTimeout(() => {
+            if (vinInput) {
+                vinInput.focus();
+                // Устанавливаем курсор в конец
+                const len = vinInput.value.length;
+                try {
+                    vinInput.setSelectionRange(len, len);
+                } catch (e) {
+                    // Для iOS
+                    setTimeout(() => {
+                        vinInput.focus();
+                        vinInput.click();
+                    }, 100);
+                }
+            }
+        }, 200);
+        
+        // Дополнительная попытка через 500ms для надежности
+        setTimeout(() => {
+            if (vinInput && document.activeElement !== vinInput) {
+                vinInput.focus();
+                try {
+                    vinInput.setSelectionRange(vinInput.value.length, vinInput.value.length);
+                } catch (e) {
+                    vinInput.click();
+                }
+            }
+        }, 500);
+    }
+    
+    // Инициализация auto-focus
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileFormAutoFocus);
+    } else {
+        initMobileFormAutoFocus();
+    }
+    
+    // Также после задержки
+    setTimeout(initMobileFormAutoFocus, 300);
+    
+    // Обеспечиваем single-tap focus для полей ввода
+    function initMobileFormSingleTapFocus() {
+        if (window.innerWidth > 768) return;
+        
+        const inputs = document.querySelectorAll('.mobile-vin-input, .mobile-plate-input, .mobile-state-select');
+        
+        inputs.forEach(input => {
+            // Обработчик touchstart для немедленного фокуса
+            input.addEventListener('touchstart', function(e) {
+                // Не предотвращаем default, чтобы focus работал
+                setTimeout(() => {
+                    if (this !== document.activeElement) {
+                        this.focus();
+                        const len = this.value.length;
+                        try {
+                            this.setSelectionRange(len, len);
+                        } catch (err) {
+                            // Для iOS
+                            this.click();
+                        }
+                    }
+                }, 10);
+            }, { passive: true });
+            
+            // Обработчик click для гарантии
+            input.addEventListener('click', function(e) {
+                if (this !== document.activeElement) {
+                    this.focus();
+                    const len = this.value.length;
+                    try {
+                        this.setSelectionRange(len, len);
+                    } catch (err) {
+                        // Ignore
+                    }
+                }
+            }, { passive: true });
+        });
+        
+        console.log('[Mobile Form] Single-tap focus initialized');
+    }
+    
+    // Инициализация single-tap focus
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileFormSingleTapFocus);
+    } else {
+        initMobileFormSingleTapFocus();
+    }
+    
+    setTimeout(initMobileFormSingleTapFocus, 300);
     </script>
     
     <script>

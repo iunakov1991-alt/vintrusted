@@ -132,14 +132,20 @@
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
   
-  /* Поля License Plate */
+  /* Поля License Plate - два поля рядом */
+  .mobile-plate-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px !important;
+  }
+  
   .mobile-state-select,
   .mobile-plate-input {
-    width: 100%;
+    flex: 1; /* Каждое поле занимает 50% минус gap */
     height: 54px;
     min-height: 54px;
     max-height: 54px;
-    padding: 0 20px;
+    padding: 0 16px;
     margin: 0;
     border-radius: 27px;
     border: 2px solid rgba(255, 255, 255, 0.3);
