@@ -126,7 +126,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css?v=82">
     <link rel="stylesheet" href="mobile.css?v=68" media="screen and (max-width: 1023px)">
     <link rel="stylesheet" href="mobile-form-new.css?v=1" media="screen and (max-width: 768px)">
@@ -2618,6 +2617,171 @@
     
     <!-- Mobile JavaScript (loads on all devices but only executes on mobile/tablet) -->
     <script src="mobile.js?v=7" defer></script>
+    
+    <!-- JavaScript для новой мобильной формы (только ≤768px) -->
+    <script>
+    // Переключение режимов в новой мобильной форме
+    function switchMobileMode(mode) {
+        if (window.innerWidth > 768) return; // Только для мобилки
+        
+        const vinBtn = document.querySelector('.mobile-mode-btn[data-mobile-mode="vin"]');
+        const plateBtn = document.querySelector('.mobile-mode-btn[data-mobile-mode="plate"]');
+        const vinWrapper = document.getElementById('mobile-vin-wrapper');
+        const plateWrapper = document.getElementById('mobile-plate-wrapper');
+        const vinInput = document.getElementById('mobile-vin-input');
+        const plateInput = document.getElementById('mobile-plate-input');
+        
+        if (mode === 'vin') {
+            if (vinBtn) vinBtn.classList.add('active');
+            if (plateBtn) plateBtn.classList.remove('active');
+            if (vinWrapper) vinWrapper.classList.add('active');
+            if (plateWrapper) plateWrapper.classList.remove('active');
+            // Очищаем поля
+            if (plateInput) plateInput.value = '';
+            const stateSelect = document.getElementById('mobile-state-select');
+            if (stateSelect) stateSelect.value = '';
+            // Фокус на VIN поле
+            setTimeout(() => {
+                if (vinInput) {
+                    vinInput.focus();
+                    vinInput.setSelectionRange(vinInput.value.length, vinInput.value.length);
+                }
+            }, 100);
+        } else if (mode === 'plate') {
+            if (plateBtn) plateBtn.classList.add('active');
+            if (vinBtn) vinBtn.classList.remove('active');
+            if (plateWrapper) plateWrapper.classList.add('active');
+            if (vinWrapper) vinWrapper.classList.remove('active');
+            // Очищаем поле VIN
+            if (vinInput) vinInput.value = '';
+            // Фокус на plate поле
+            setTimeout(() => {
+                if (plateInput) {
+                    plateInput.focus();
+                    plateInput.setSelectionRange(plateInput.value.length, plateInput.value.length);
+                }
+            }, 100);
+        }
+    }
+    
+    // Отправка новой мобильной формы
+    function submitMobileForm() {
+        if (window.innerWidth > 768) return; // Только для мобилки
+        
+        const vinWrapper = document.getElementById('mobile-vin-wrapper');
+        const plateWrapper = document.getElementById('mobile-plate-wrapper');
+        
+        if (vinWrapper && vinWrapper.classList.contains('active')) {
+            // VIN режим
+            const vinInput = document.getElementById('mobile-vin-input');
+            if (vinInput && vinInput.value.trim().length === 17) {
+                const vin = vinInput.value.trim().toUpperCase();
+                window.location.href = `report.html?vin=${vin}`;
+            } else {
+                alert('Please enter a valid 17-character VIN');
+                if (vinInput) vinInput.focus();
+            }
+        } else if (plateWrapper && plateWrapper.classList.contains('active')) {
+            // Plate режим
+            const stateSelect = document.getElementById('mobile-state-select');
+            const plateInput = document.getElementById('mobile-plate-input');
+            const state = stateSelect ? stateSelect.value : '';
+            const plate = plateInput ? plateInput.value.trim().toUpperCase() : '';
+            
+            if (!state) {
+                alert('Please select your state');
+                if (stateSelect) stateSelect.focus();
+                return;
+            }
+            if (!plate) {
+                alert('Please enter your license plate');
+                if (plateInput) plateInput.focus();
+                return;
+            }
+            
+            window.location.href = `report.html?state=${state}&plate=${plate}`;
+        }
+    }
+    
+    // АГРЕССИВНАЯ БЛОКИРОВКА iOS МЕНЮ ТОЛЬКО ДЛЯ ≤768px
+    function initMobileFormIOSBlocking() {
+        if (window.innerWidth > 768) return;
+        
+        // Блокируем контекстное меню на всех кнопках новой формы
+        const buttons = document.querySelectorAll('.mobile-mode-btn, .mobile-submit-btn');
+        
+        buttons.forEach(btn => {
+            // Блокируем контекстное меню
+            btn.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                return false;
+            }, { passive: false, capture: true });
+            
+            // Блокируем selectstart
+            btn.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, { passive: false, capture: true });
+            
+            // Блокируем copy
+            btn.addEventListener('copy', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, { passive: false, capture: true });
+            
+            // Блокируем выделение при touch
+            btn.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                document.documentElement.style.webkitUserSelect = 'none';
+                document.body.style.webkitUserSelect = 'none';
+                btn.style.webkitUserSelect = 'none';
+                btn.style.userSelect = 'none';
+            }, { passive: true, capture: true });
+            
+            btn.addEventListener('touchend', function(e) {
+                e.stopPropagation();
+                setTimeout(() => {
+                    document.documentElement.style.webkitUserSelect = '';
+                    document.body.style.webkitUserSelect = '';
+                }, 300);
+            }, { passive: true, capture: true });
+        });
+        
+        // Глобальная блокировка для кнопок новой формы
+        document.addEventListener('contextmenu', function(e) {
+            if (window.innerWidth > 768) return;
+            const target = e.target;
+            if (target && (
+                target.classList.contains('mobile-mode-btn') ||
+                target.classList.contains('mobile-submit-btn') ||
+                target.closest('.mobile-mode-btn') ||
+                target.closest('.mobile-submit-btn')
+            )) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                return false;
+            }
+        }, { passive: false, capture: true });
+        
+        console.log('[Mobile Form] iOS menu blocking initialized');
+    }
+    
+    // Инициализация при загрузке
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileFormIOSBlocking);
+    } else {
+        initMobileFormIOSBlocking();
+    }
+    
+    // Также после задержки
+    setTimeout(initMobileFormIOSBlocking, 300);
+    setTimeout(initMobileFormIOSBlocking, 1000);
+    </script>
     
     <script>
     // Auto-focus first VIN input on page load
