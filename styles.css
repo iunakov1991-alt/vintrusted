@@ -6913,6 +6913,54 @@ button[type="submit"],
     }
   }
   
+  /* Скрытие через класс desktop-device */
+  .desktop-device .mobile-form-wrapper,
+  .desktop-device .mobile-mode-buttons,
+  .desktop-device .mobile-mode-btn,
+  .desktop-device .mobile-input-wrapper,
+  .desktop-device .mobile-vin-wrapper,
+  .desktop-device .mobile-plate-wrapper,
+  .desktop-device .mobile-vin-input,
+  .desktop-device .mobile-state-select,
+  .desktop-device .mobile-plate-input,
+  .desktop-device .mobile-submit-btn,
+  html.desktop-device .mobile-form-wrapper,
+  html.desktop-device .mobile-mode-buttons,
+  html.desktop-device .mobile-mode-btn,
+  html.desktop-device .mobile-input-wrapper,
+  html.desktop-device .mobile-vin-wrapper,
+  html.desktop-device .mobile-plate-wrapper,
+  html.desktop-device .mobile-vin-input,
+  html.desktop-device .mobile-state-select,
+  html.desktop-device .mobile-plate-input,
+  html.desktop-device .mobile-submit-btn,
+  body.desktop-device .mobile-form-wrapper,
+  body.desktop-device .mobile-mode-buttons,
+  body.desktop-device .mobile-mode-btn,
+  body.desktop-device .mobile-input-wrapper,
+  body.desktop-device .mobile-vin-wrapper,
+  body.desktop-device .mobile-plate-wrapper,
+  body.desktop-device .mobile-vin-input,
+  body.desktop-device .mobile-state-select,
+  body.desktop-device .mobile-plate-input,
+  body.desktop-device .mobile-submit-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    pointer-events: none !important;
+    text-indent: -9999px !important;
+    clip: rect(0, 0, 0, 0) !important;
+  }
+  
   /* HIDE old hero-container::after if exists */
   .hero-container::after {
     display: none !important;
