@@ -327,19 +327,95 @@
     if (!ctaBar) return;
 
     const formContainer = document.querySelector('.search-form-container, [data-scroll-target]');
+    const heroSection = document.querySelector('.hero-section');
+    const secondScreen = document.querySelector('.mobile-second-screen, .second-screen');
+    const comparisonSection = document.querySelector('.comparison-section');
     
     if (!formContainer) return;
 
     const handleScroll = debounce(() => {
+      // Проверяем, находимся ли мы на первом экране (hero-section)
+      const heroRect = heroSection ? heroSection.getBoundingClientRect() : null;
+      const isOnFirstScreen = heroRect && heroRect.bottom > window.innerHeight * 0.5;
+      
+      // Если мы на первом экране - ВСЕГДА скрываем кнопку
+      if (isOnFirstScreen) {
+        ctaBar.classList.remove('visible');
+        return;
+      }
+      
+      // Проверяем наличие форм/кнопок на текущем экране
+      const currentScreen = getCurrentScreen();
+      const hasFormOrButton = hasVisibleFormOrButton(currentScreen);
+      
+      // Если есть форма или кнопка - скрываем динамическую кнопку
+      if (hasFormOrButton) {
+        ctaBar.classList.remove('visible');
+        return;
+      }
+      
+      // Показываем кнопку только на втором или четвертом экране, когда нет формы/кнопки
       const formRect = formContainer.getBoundingClientRect();
       const isFormVisible = formRect.top < window.innerHeight && formRect.bottom > 0;
       
-      if (!isFormVisible) {
+      if (!isFormVisible && (currentScreen === 'second' || currentScreen === 'fourth')) {
         ctaBar.classList.add('visible');
       } else {
         ctaBar.classList.remove('visible');
       }
     }, 100);
+
+    // Функция для определения текущего экрана
+    function getCurrentScreen() {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const heroRect = heroSection ? heroSection.getBoundingClientRect() : null;
+      const secondRect = secondScreen ? secondScreen.getBoundingClientRect() : null;
+      const comparisonRect = comparisonSection ? comparisonSection.getBoundingClientRect() : null;
+      
+      const windowHeight = window.innerHeight;
+      const viewportCenter = scrollY + windowHeight / 2;
+      
+      // Определяем экран по позиции viewport
+      if (heroRect && viewportCenter >= heroRect.top && viewportCenter <= heroRect.bottom) {
+        return 'first';
+      } else if (secondRect && viewportCenter >= secondRect.top && viewportCenter <= secondRect.bottom) {
+        return 'second';
+      } else if (comparisonRect && viewportCenter >= comparisonRect.top && viewportCenter <= comparisonRect.bottom) {
+        return 'fourth';
+      }
+      
+      return 'other';
+    }
+    
+    // Функция для проверки наличия видимой формы или кнопки на экране
+    function hasVisibleFormOrButton(screen) {
+      if (screen === 'first') {
+        // На первом экране всегда есть форма
+        return true;
+      }
+      
+      // Проверяем наличие форм/кнопок на текущем экране
+      const visibleForms = document.querySelectorAll('.search-form-container:not([style*="display: none"]), .mobile-form-wrapper:not([style*="display: none"])');
+      const visibleButtons = document.querySelectorAll('.search-btn:not([style*="display: none"]), .mobile-search-btn:not([style*="display: none"]), .action-btn:not([style*="display: none"]), .mobile-submit-btn:not([style*="display: none"])');
+      
+      let hasVisible = false;
+      
+      visibleForms.forEach(form => {
+        const rect = form.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          hasVisible = true;
+        }
+      });
+      
+      visibleButtons.forEach(btn => {
+        const rect = btn.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          hasVisible = true;
+        }
+      });
+      
+      return hasVisible;
+    }
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     
