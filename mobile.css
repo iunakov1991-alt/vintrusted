@@ -452,7 +452,13 @@
     flex-direction: column !important;
     gap: 12px !important;
     margin: 0 !important;
+    margin-bottom: 16px !important;
     border-radius: 0 !important;
+  }
+  
+  /* VIN mode - add margin-bottom to match gap */
+  .search-form-container .search-form .form-content #vin-mode.active {
+    margin-bottom: 16px !important;
   }
   
   .search-form-container .search-form .form-content #plate-mode.active .state-select,
