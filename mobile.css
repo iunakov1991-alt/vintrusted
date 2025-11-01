@@ -37,7 +37,7 @@
     padding: 0;
   }
   
-  /* Body - keep original background, override desktop fixed attachment, add safe-area padding */
+  /* Body - override desktop fixed attachment for iOS, add safe-area padding */
   body {
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -47,35 +47,19 @@
     position: relative;
     /* Override desktop background-attachment: fixed to scroll for iOS */
     background-attachment: scroll !important;
-    /* Add safe-area padding */
+    /* Extend background to safe-area by using negative margins */
+    margin-top: calc(-1 * var(--sat));
+    margin-bottom: calc(-1 * var(--sab));
+    margin-left: calc(-1 * var(--sal));
+    margin-right: calc(-1 * var(--sar));
+    /* Add safe-area padding to content */
     padding-top: var(--sat);
     padding-bottom: var(--sab);
     padding-left: var(--sal);
     padding-right: var(--sar);
     box-sizing: border-box;
-  }
-  
-  /* Fixed background overlay to cover safe-area (Dynamic Island) */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    top: calc(-1 * var(--sat));
-    bottom: calc(-1 * var(--sab));
-    left: calc(-1 * var(--sal));
-    right: calc(-1 * var(--sar));
-    z-index: -1;
-    background: #ffffff;
-    background-image: 
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
-      url('hero-background.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    /* Ensure background covers extended area */
+    background-clip: border-box;
   }
 
   /* Mobile Container - Single Column, Max Width 480px */
