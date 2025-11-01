@@ -13,31 +13,29 @@
   }
   
   /* НОВАЯ МОБИЛЬНАЯ ФОРМА - ПОСЛЕ ХАЙЛАЙТОВ */
+  /* Убеждаемся что hero-container использует flex для правильного порядка */
+  .hero-container {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Хайлайты должны быть перед формой */
+  .subtitle-chips {
+    order: 2 !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Форма должна быть после хайлайтов */
   .mobile-form-wrapper {
     width: 100%;
     max-width: 100%;
     padding: 0 16px;
-    margin: 20px auto 0; /* Отступ после subtitle-chips */
+    margin: 0 auto; /* Убираем margin-top, так как порядок задается через order */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 16px; /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
-    order: 3; /* После subtitle-chips (order: 2) */
-  }
-  
-  /* Убираем старый margin-top у формы, так как она должна идти после хайлайтов */
-  .hero-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .subtitle-chips {
-    order: 2;
-    margin-bottom: 20px;
-  }
-  
-  .mobile-form-wrapper {
-    order: 3;
+    order: 3 !important; /* После subtitle-chips (order: 2) */
   }
   
   /* Кнопки выбора режима */
