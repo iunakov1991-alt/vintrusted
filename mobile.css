@@ -221,17 +221,32 @@
     }
   }
 
-  /* Hide desktop title on mobile */
+  /* Hide desktop title on mobile - this is the title "Know the Real History" */
   .main-title {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
   }
   
-  /* Hide mobile title - remove title under logo */
+  /* Restore mobile title "Vehicle VIN Check" / "Only $3 Unlimited" */
   .search-form-container::before {
-    content: none !important;
-    display: none !important;
+    content: "Vehicle VIN Check" "\A" "Only $3 Unlimited" !important;
+    display: block !important;
+    white-space: pre-line !important;
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    line-height: 1.3 !important;
+    margin: 0 0 20px 0 !important;
+    padding: 0 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    pointer-events: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
   }
   
   /* Allow title to have margin-top */
