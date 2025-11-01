@@ -492,26 +492,20 @@
     border-radius: 0 0 20px 20px !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-top: none !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    overflow: hidden !important;
-  }
-  
-  /* Button gradient overlay inside glass container */
-  .search-form-container .search-form .mobile-search-btn::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
-    z-index: -1 !important;
-  }
-  
-  .search-form-container .search-form .mobile-search-btn {
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
     position: relative !important;
+    overflow: hidden !important;
+    color: #1a1a1a !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
   }
 
   .vin-input,
