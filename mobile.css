@@ -21,17 +21,43 @@
 
 @media (max-width: 1023px) {
   
-  /* Fix iOS Dynamic Island background issue - use fixed pseudo-element */
+  /* Fix iOS Dynamic Island background issue - use body::before for safe-area coverage */
   html {
     margin: 0;
     padding: 0;
     min-height: 100dvh;
-    min-height: 100vh; /* Fallback for browsers that don't support dvh */
-    position: relative;
+    min-height: 100vh;
   }
   
-  /* Create fixed background pseudo-element for iOS */
-  html::before {
+  /* Override Desktop Constraints */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Body - keep original background but add fixed pseudo-element for safe-area */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
+    min-height: 100vh;
+    position: relative;
+    /* Keep original background from desktop styles.css */
+    background: #ffffff;
+    background-image: 
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+      url('hero-background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll; /* Changed from fixed to scroll for iOS */
+  }
+  
+  /* Fixed background overlay to cover safe-area (Dynamic Island) */
+  body::before {
     content: "";
     position: fixed;
     inset: 0;
@@ -47,29 +73,14 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
   }
   
-  /* Override Desktop Constraints */
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Body - transparent, extend to safe areas */
+  /* Add safe-area padding to body content */
   body {
-    background: transparent !important;
-    background-image: none !important;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100dvh;
-    min-height: 100vh; /* Fallback */
     padding-top: var(--sat);
     padding-bottom: var(--sab);
     padding-left: var(--sal);
