@@ -237,10 +237,14 @@
     opacity: 1 !important;
   }
   
-  /* Убираем все возможные отступы сверху */
-  .hero-section *:first-child {
+  /* Allow title to have margin-top */
+  .hero-section .mobile-hero-logo {
     margin-top: 0 !important;
     padding-top: 0 !important;
+  }
+  
+  .hero-section .main-title {
+    margin-top: 20px !important;
   }
 
   .subtitle {
