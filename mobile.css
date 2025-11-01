@@ -170,13 +170,17 @@
   html body .hero-section {
     margin-top: 0 !important;
     padding: 0 0 0 !important;
-    padding-top: 0 !important;
+    padding-top: max(16px, var(--sat)) !important; /* Account for safe area */
     padding-bottom: 0 !important;
     min-height: auto;
-    background: url('images/mobileback.png') center center / cover no-repeat scroll !important;
+    /* Remove background from hero-section - it's now on html */
+    background: transparent !important;
+    background-image: none !important;
     transform: none;
     display: block !important;
     visibility: visible !important;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-container {
