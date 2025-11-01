@@ -7422,6 +7422,15 @@ body.desktop-device .mobile-submit-btn {
     margin: 0 !important;
     padding: 0 !important;
   }
+  
+  /* Force mode buttons LEFT alignment on desktop */
+  .mode-buttons,
+  .search-form-container .mode-buttons,
+  html body .mode-buttons,
+  html body .search-form-container .mode-buttons {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
 }
 
 @media (min-width: 1024px) {
