@@ -7024,7 +7024,7 @@ button[type="submit"],
     flex-wrap: wrap !important;
     gap: 15px !important;
     margin: 0 0 20px 0 !important;
-    justify-content: center !important;
+    justify-content: flex-start !important;
     width: 100% !important;
     max-width: 100% !important;
     padding: 0 12px !important;
