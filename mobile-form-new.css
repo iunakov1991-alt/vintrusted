@@ -95,15 +95,57 @@
   /* Обёртки для полей ввода */
   .mobile-input-wrapper {
     width: 100%;
-    display: none;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
     flex-direction: column;
     gap: 12px;
     margin: 0;
     padding: 0;
+    height: 0;
+    overflow: hidden;
   }
   
-  .mobile-input-wrapper.active {
-    display: flex;
+  /* VIN обертка активна */
+  .mobile-vin-wrapper.active {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto;
+    overflow: visible;
+  }
+  
+  /* Plate обертка активна */
+  .mobile-plate-wrapper.active {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto;
+    overflow: visible;
+  }
+  
+  /* Прячем неактивную обертку Plate, когда активна VIN */
+  .mobile-vin-wrapper.active ~ .mobile-plate-wrapper,
+  .mobile-plate-wrapper:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Прячем неактивную обертку VIN, когда активна Plate */
+  .mobile-plate-wrapper.active ~ .mobile-vin-wrapper,
+  .mobile-vin-wrapper:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   /* Поле VIN */
