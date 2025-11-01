@@ -292,6 +292,26 @@
 
 /* На десктопе скрываем новую мобильную форму */
 @media (min-width: 769px) {
+  html body .mobile-form-wrapper,
+  html body .mobile-mode-buttons,
+  html body .mobile-mode-btn,
+  html body .mobile-input-wrapper,
+  html body .mobile-vin-wrapper,
+  html body .mobile-plate-wrapper,
+  html body .mobile-vin-input,
+  html body .mobile-state-select,
+  html body .mobile-plate-input,
+  html body .mobile-submit-btn,
+  .hero-container .mobile-form-wrapper,
+  .hero-container .mobile-mode-buttons,
+  .hero-container .mobile-mode-btn,
+  .hero-container .mobile-input-wrapper,
+  .hero-container .mobile-vin-wrapper,
+  .hero-container .mobile-plate-wrapper,
+  .hero-container .mobile-vin-input,
+  .hero-container .mobile-state-select,
+  .hero-container .mobile-plate-input,
+  .hero-container .mobile-submit-btn,
   .mobile-form-wrapper,
   .mobile-mode-buttons,
   .mobile-mode-btn,
@@ -312,12 +332,44 @@
     position: absolute !important;
     left: -9999px !important;
     width: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    pointer-events: none !important;
+    text-indent: -9999px !important;
   }
   
   .desktop-form-container,
   .search-form-container.desktop-form-container {
     display: block !important;
     visibility: visible !important;
+  }
+}
+
+/* Дополнительное скрытие вне медиа-запроса для гарантии на десктопе */
+@media (min-width: 1024px) {
+  html body .mobile-form-wrapper,
+  html body .mobile-mode-buttons,
+  html body .mobile-mode-btn,
+  html body .mobile-input-wrapper,
+  html body .mobile-vin-wrapper,
+  html body .mobile-plate-wrapper,
+  html body .mobile-vin-input,
+  html body .mobile-state-select,
+  html body .mobile-plate-input,
+  html body .mobile-submit-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    pointer-events: none !important;
   }
 }
 
