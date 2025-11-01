@@ -15,26 +15,11 @@
   --safe-left: var(--sal);
 }
 
-/* iOS Dynamic Island background fix - fixed overlay that extends to safe-area */
+/* =============================================================================
+   MOBILE & TABLET BASE STYLES (0-1023px)
+   ============================================================================= */
+
 @media (max-width: 1023px) {
-  html::before {
-    content: "";
-    position: fixed;
-    top: calc(-1 * var(--sat));
-    left: calc(-1 * var(--sal));
-    right: calc(-1 * var(--sar));
-    bottom: calc(-1 * var(--sab));
-    z-index: -999;
-    background: #ffffff;
-    background-image: 
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
-      url('hero-background.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    pointer-events: none;
-  }
   
   /* Override Desktop Constraints */
   html, body {
@@ -43,19 +28,12 @@
     height: 100%;
   }
 
-  /* Body - override attachment for iOS and add safe-area padding */
   body {
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Override desktop background-attachment: fixed to scroll for iOS */
+    /* Override desktop background-attachment: fixed to scroll for iOS Dynamic Island */
     background-attachment: scroll !important;
-    /* Add safe-area padding to push content away from Dynamic Island */
-    padding-top: var(--sat);
-    padding-bottom: var(--sab);
-    padding-left: var(--sal);
-    padding-right: var(--sar);
-    box-sizing: border-box;
   }
 
   /* Mobile Container - Single Column, Max Width 480px */
