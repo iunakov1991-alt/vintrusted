@@ -37,7 +37,7 @@
     padding: 0;
   }
   
-  /* Body - keep original background but add fixed pseudo-element for safe-area */
+  /* Body - keep original background, override desktop fixed attachment, add safe-area padding */
   body {
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -45,15 +45,14 @@
     min-height: 100dvh;
     min-height: 100vh;
     position: relative;
-    /* Keep original background from desktop styles.css */
-    background: #ffffff;
-    background-image: 
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
-      url('hero-background.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: scroll; /* Changed from fixed to scroll for iOS */
+    /* Override desktop background-attachment: fixed to scroll for iOS */
+    background-attachment: scroll !important;
+    /* Add safe-area padding */
+    padding-top: var(--sat);
+    padding-bottom: var(--sab);
+    padding-left: var(--sal);
+    padding-right: var(--sar);
+    box-sizing: border-box;
   }
   
   /* Fixed background overlay to cover safe-area (Dynamic Island) */
@@ -77,15 +76,6 @@
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-  }
-  
-  /* Add safe-area padding to body content */
-  body {
-    padding-top: var(--sat);
-    padding-bottom: var(--sab);
-    padding-left: var(--sal);
-    padding-right: var(--sar);
-    box-sizing: border-box;
   }
 
   /* Mobile Container - Single Column, Max Width 480px */
