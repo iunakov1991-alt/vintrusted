@@ -289,16 +289,25 @@
     width: 100% !important;
   }
   
-  /* Hide old form elements that are outside unified container */
+  /* Show only new unified form structure */
   .search-form-container > .search-form {
-    display: none !important;
-    visibility: hidden !important;
+    display: block !important;
+    visibility: visible !important;
   }
   
   /* Hide old search button inside form-content */
   .search-form .form-content .search-btn {
     display: none !important;
     visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Ensure form-content displays properly but hides old button */
+  .search-form .form-content {
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   /* Mode buttons - inside unified container */
