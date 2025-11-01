@@ -6817,6 +6817,33 @@ button[type="submit"],
     }
   }
   
+  /* Скрываем мобильную форму на десктопе (даже если медиа-запрос не сработал) */
+  @media (min-width: 769px) {
+    .mobile-form-wrapper,
+    .mobile-mode-buttons,
+    .mobile-mode-btn,
+    .mobile-input-wrapper,
+    .mobile-vin-wrapper,
+    .mobile-plate-wrapper,
+    .mobile-vin-input,
+    .mobile-state-select,
+    .mobile-plate-input,
+    .mobile-submit-btn {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      position: absolute !important;
+      left: -9999px !important;
+      width: 0 !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+    }
+  }
+  
   /* HIDE old hero-container::after if exists */
   .hero-container::after {
     display: none !important;

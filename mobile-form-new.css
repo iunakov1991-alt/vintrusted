@@ -292,13 +292,32 @@
 
 /* На десктопе скрываем новую мобильную форму */
 @media (min-width: 769px) {
-  .mobile-form-wrapper {
+  .mobile-form-wrapper,
+  .mobile-mode-buttons,
+  .mobile-mode-btn,
+  .mobile-input-wrapper,
+  .mobile-vin-wrapper,
+  .mobile-plate-wrapper,
+  .mobile-vin-input,
+  .mobile-state-select,
+  .mobile-plate-input,
+  .mobile-submit-btn {
     display: none !important;
     visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
   }
   
-  .desktop-form-container {
+  .desktop-form-container,
+  .search-form-container.desktop-form-container {
     display: block !important;
+    visibility: visible !important;
   }
 }
 
