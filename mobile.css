@@ -224,10 +224,13 @@
   .main-title {
     font-size: 28px;
     line-height: 1.15;
-    margin-bottom: 20px;
+    margin-bottom: 16px !important;
     margin-top: 0 !important;
     padding-top: 0 !important;
     text-align: center;
+    width: 100% !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
   }
   
   /* Убираем все возможные отступы сверху */
@@ -244,9 +247,13 @@
     max-width: 100%;
   }
   
-  /* Subtitle chips - shift down by 1cm */
+  /* Subtitle chips - above form container */
   .subtitle-chips {
-    margin-top: 10px !important;
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    width: 100% !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
   }
 
   .yellow-text {
