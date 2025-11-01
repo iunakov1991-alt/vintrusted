@@ -6820,20 +6820,10 @@ button[type="submit"],
     display: none !important;
   }
   
-  /* 2. CREATE TITLE through search-form-container::before */
+  /* 2. HIDE TITLE INSIDE FORM CONTAINER - title is now outside */
   .search-form-container::before {
-    content: "Vehicle VIN Check" "\A" "Only $3 Unlimited" !important;
-    display: block !important;
-    white-space: pre-line !important;
-    font-size: 36px !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    text-align: center !important;
-    line-height: 1.3 !important;
-    margin: 0 0 20px 0 !important;
-    padding: 0 12px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+    content: none !important;
+    display: none !important;
   }
   
   /* 3. SEARCH FORM CONTAINER - Show buttons and fields */
