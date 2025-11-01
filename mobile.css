@@ -261,13 +261,14 @@
     width: calc(100% - 32px) !important;
     max-width: calc(100% - 32px) !important;
     margin: calc((100vh - var(--safe-top) - var(--safe-bottom)) / 5 - 15px) auto 0 !important;
-    padding: 20px 16px !important;
+    padding: 0 !important;
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     border-radius: 20px !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
   }
   
   /* Show search-form inside unified container */
@@ -310,13 +311,14 @@
     flex-direction: column !important;
   }
 
-  /* Mode buttons - inside unified container */
+  /* Mode buttons - inside unified container - no gaps */
   .search-form-container .mode-buttons {
     display: flex !important;
-    gap: 12px !important;
-    margin: 0 0 16px 0 !important;
+    gap: 0 !important;
+    margin: 0 !important;
     width: 100% !important;
     padding: 0 !important;
+    border-radius: 0 !important;
   }
 
   .m-form-tabs,
@@ -333,10 +335,11 @@
     flex: 1 !important;
     height: 54px !important;
     padding: 0 !important;
-    border-radius: 27px !important;
+    border-radius: 0 !important;
     font-size: 16px !important;
     font-weight: 600 !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
     background: rgba(255, 255, 255, 0.15) !important;
     color: #ffffff !important;
     cursor: pointer !important;
@@ -346,12 +349,25 @@
     align-items: center !important;
     justify-content: center !important;
   }
+  
+  .search-form-container .mode-btn:last-child {
+    border-right: none !important;
+  }
+  
+  .search-form-container .mode-btn:first-child {
+    border-top-left-radius: 20px !important;
+  }
 
   .m-tab-btn.active,
   .search-form-container .mode-btn.active {
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     color: #1a1a1a !important;
-    border-color: #fbbf24 !important;
+    border-color: transparent !important;
+    border-right: 1px solid rgba(251, 191, 36, 0.5) !important;
+  }
+  
+  .search-form-container .mode-btn.active:last-child {
+    border-right: none !important;
   }
 
   /* VIN Form Fields */
@@ -380,16 +396,17 @@
     box-sizing: border-box !important;
   }
   
-  /* Show only active mode */
+  /* Show only active mode - no gaps */
   .search-form-container .search-form .form-content #vin-mode.active,
   .search-form-container .search-form .form-content #plate-mode.active {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     width: 100% !important;
-    margin: 0 0 16px 0 !important;
+    margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+    border-radius: 0 !important;
   }
   
   /* Hide inactive modes */
@@ -399,53 +416,72 @@
     visibility: hidden !important;
   }
   
-  /* Style inputs inside active mode */
+  /* Style inputs inside active mode - no borders, no radius */
   .search-form-container .search-form .form-content #vin-mode.active .vin-input {
     width: 100% !important;
     height: 54px !important;
-    border-radius: 27px !important;
+    border-radius: 0 !important;
     padding: 0 20px !important;
     font-size: 16px !important;
     font-weight: 500 !important;
     background: rgba(255, 255, 255, 0.95) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #1a1a1a !important;
     margin: 0 !important;
     box-sizing: border-box !important;
     display: block !important;
   }
   
-  /* Plate mode - stacked select and input */
+  /* Plate mode - stacked select and input - no gaps */
   .search-form-container .search-form .form-content #plate-mode.active {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
-    margin-bottom: 16px !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
   }
   
   .search-form-container .search-form .form-content #plate-mode.active .state-select,
   .search-form-container .search-form .form-content #plate-mode.active .plate-input {
     width: 100% !important;
     height: 54px !important;
-    border-radius: 27px !important;
+    border-radius: 0 !important;
     padding: 0 20px !important;
     font-size: 16px !important;
     font-weight: 500 !important;
     background: rgba(255, 255, 255, 0.95) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: #1a1a1a !important;
     margin: 0 !important;
     box-sizing: border-box !important;
   }
   
-  /* Ensure mobile search button is visible */
+  .search-form-container .search-form .form-content #plate-mode.active .state-select {
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  .search-form-container .search-form .form-content #plate-mode.active .plate-input {
+    border-top: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+  
+  /* Ensure mobile search button is visible - no gaps, rounded bottom */
   .search-form-container .search-form .mobile-search-btn {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     width: 100% !important;
+    height: 54px !important;
     margin: 0 !important;
-    margin-top: 0 !important;
+    padding: 0 24px !important;
+    border-radius: 0 0 20px 20px !important;
+    border: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
   }
 
   .vin-input,
