@@ -506,7 +506,47 @@
     border-radius: 0 !important;
   }
   
-  /* VIN mode - add margin-bottom to match gap */
+  /* ВЕРТИКАЛЬНЫЕ ОТСТУПЫ И ИСПРАВЛЕНИЕ НАЛОЖЕНИЙ (только ≤768px) */
+  @media (max-width: 768px) {
+    /* Равные вертикальные отступы для полей через gap */
+    .search-form-container .search-form .form-content {
+      gap: 16px !important;
+    }
+    
+    /* VIN mode - убираем margin-bottom, используем gap */
+    .search-form-container .search-form .form-content #vin-mode.active {
+      margin: 0 !important;
+    }
+    
+    /* Plate mode - убираем margin-bottom, используем gap */
+    .search-form-container .search-form .form-content #plate-mode.active {
+      margin: 0 !important;
+    }
+    
+    /* Исправляем наложение кнопки Get My Report */
+    .search-form-container .search-form .mobile-search-btn {
+      position: relative !important;
+      z-index: 1 !important;
+      margin-top: 0 !important;
+    }
+    
+    /* --- Убираем iOS меню и выделение текста на кнопках (только ≤768px) --- */
+    button, .btn, .mode-btn, .mobile-search-btn, .search-btn {
+      -webkit-user-select: none !important;
+      user-select: none !important;
+      -webkit-touch-callout: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+      touch-action: manipulation !important;
+      -webkit-appearance: none !important;
+      appearance: none !important;
+    }
+    
+    button:focus, .btn:focus, .mode-btn:focus, .mobile-search-btn:focus {
+      outline: none !important;
+    }
+  }
+  
+  /* Для экранов больше 768px - оставляем как было */
   .search-form-container .search-form .form-content #vin-mode.active {
     margin-bottom: 16px !important;
   }
