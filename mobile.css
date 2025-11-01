@@ -34,6 +34,44 @@
     -moz-osx-font-smoothing: grayscale;
     /* Override desktop background-attachment: fixed to scroll for iOS Dynamic Island */
     background-attachment: scroll !important;
+    position: relative;
+  }
+  
+  /* Fixed background overlay ONLY for safe-area (Dynamic Island) - does not affect main background size */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    /* Match body background exactly */
+    background: #ffffff;
+    background-image: 
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+      url('hero-background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    /* Extend only into safe-area using negative positioning */
+    margin-top: calc(-1 * var(--sat));
+    margin-bottom: calc(-1 * var(--sab));
+    margin-left: calc(-1 * var(--sal));
+    margin-right: calc(-1 * var(--sar));
+    width: calc(100% + var(--sal) + var(--sar));
+    height: calc(100% + var(--sat) + var(--sab));
+    pointer-events: none;
+  }
+  
+  /* Add safe-area padding to body content only */
+  body {
+    padding-top: var(--sat);
+    padding-bottom: var(--sab);
+    padding-left: var(--sal);
+    padding-right: var(--sar);
+    box-sizing: border-box;
   }
 
   /* Mobile Container - Single Column, Max Width 480px */
