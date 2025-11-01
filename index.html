@@ -126,8 +126,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Styles -->
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css?v=82">
     <link rel="stylesheet" href="mobile.css?v=68" media="screen and (max-width: 1023px)">
+    <link rel="stylesheet" href="mobile-form-new.css?v=1" media="screen and (max-width: 768px)">
     
     <!-- Desktop detection script - runs immediately to prevent mobile styles on desktop -->
     <script>
@@ -278,7 +280,8 @@
                 <span class="subtitle-chip">VIN report for just $3</span>
             </div>
             
-            <div class="search-form-container">
+            <!-- Desktop Form (скрыта на мобилке) -->
+            <div class="search-form-container desktop-form-container">
                 <div class="mode-buttons">
                     <button class="mode-btn active" data-mode="vin" onclick="switchMode('vin')">VIN</button>
                     <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')">License Plate</button>
@@ -363,6 +366,104 @@
                         <span>✓</span>
                     </button>
                 </div>
+            </div>
+            
+            <!-- НОВАЯ МОБИЛЬНАЯ ФОРМА (только для ≤768px) -->
+            <div class="mobile-form-wrapper">
+                <!-- Кнопки выбора режима -->
+                <div class="mobile-mode-buttons">
+                    <button type="button" class="mobile-mode-btn active" data-mobile-mode="vin" onclick="switchMobileMode('vin')">
+                        VIN
+                    </button>
+                    <button type="button" class="mobile-mode-btn" data-mobile-mode="plate" onclick="switchMobileMode('plate')">
+                        License Plate
+                    </button>
+                </div>
+                
+                <!-- Поле ввода VIN -->
+                <div class="mobile-input-wrapper mobile-vin-wrapper active" id="mobile-vin-wrapper">
+                    <input type="text" 
+                           class="mobile-vin-input" 
+                           id="mobile-vin-input"
+                           placeholder="Enter VIN code" 
+                           maxlength="17" 
+                           autocomplete="off" 
+                           autocorrect="off" 
+                           autocapitalize="characters" 
+                           spellcheck="false"
+                           data-form-type="other"
+                           style="text-transform: uppercase;">
+                </div>
+                
+                <!-- Поля ввода License Plate -->
+                <div class="mobile-input-wrapper mobile-plate-wrapper" id="mobile-plate-wrapper">
+                    <select class="mobile-state-select" id="mobile-state-select">
+                        <option value="">Choose Your State</option>
+                        <option value="CA" class="populous-state">California</option>
+                        <option value="TX" class="populous-state">Texas</option>
+                        <option value="FL" class="populous-state">Florida</option>
+                        <option value="NY" class="populous-state">New York</option>
+                        <option value="PA" class="populous-state">Pennsylvania</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                        <option value="DC">District of Columbia</option>
+                    </select>
+                    <input type="text" 
+                           class="mobile-plate-input" 
+                           id="mobile-plate-input"
+                           placeholder="License Plate" 
+                           maxlength="8"
+                           style="text-transform: uppercase;">
+                </div>
+                
+                <!-- Кнопка отправки -->
+                <button type="button" class="mobile-submit-btn" onclick="submitMobileForm()">
+                    <span>Get My Report</span>
+                    <span>✓</span>
+                </button>
             </div>
           </div>
             
