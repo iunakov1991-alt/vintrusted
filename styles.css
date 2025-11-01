@@ -7015,7 +7015,7 @@ button[type="submit"],
     box-sizing: border-box !important;
   }
   
-  /* 4. MODE BUTTONS (VIN / License Plate) - side by side */
+  /* 4. MODE BUTTONS (VIN / License Plate) - side by side, LEFT ALIGNED on desktop */
   .search-form-container .mode-buttons {
     display: flex !important;
     visibility: visible !important;
@@ -7025,6 +7025,7 @@ button[type="submit"],
     gap: 15px !important;
     margin: 0 0 20px 0 !important;
     justify-content: flex-start !important;
+    align-items: flex-start !important;
     width: 100% !important;
     max-width: 100% !important;
     padding: 0 12px !important;
