@@ -911,44 +911,119 @@
   
   function initIOSMenuBlocking() {
     // Проверяем только для мобильных устройств ≤768px
-    if (window.innerWidth > 768) return;
-    if (IS_DESKTOP_DEVICE) return;
+    const currentWidth = window.innerWidth;
+    if (currentWidth > 768) {
+      console.log('[Mobile] Skipping iOS menu blocking: width =', currentWidth, '> 768px');
+      return;
+    }
+    if (IS_DESKTOP_DEVICE) {
+      console.log('[Mobile] Skipping iOS menu blocking: desktop device detected');
+      return;
+    }
     
-    const buttons = document.querySelectorAll('button, .btn, .mode-btn, .mobile-search-btn, .search-btn');
+    console.log('[Mobile] Initializing iOS menu blocking for width =', currentWidth);
     
-    buttons.forEach(btn => {
+    // Расширяем селекторы для поиска всех кнопок
+    const selectors = [
+      'button',
+      '.btn',
+      '.mode-btn',
+      '.mobile-search-btn',
+      '.search-btn',
+      '.search-form-container button',
+      '.search-form-container .mode-btn',
+      '.mode-buttons button',
+      '.mode-buttons .mode-btn'
+    ];
+    
+    const buttons = [];
+    selectors.forEach(selector => {
+      try {
+        const found = document.querySelectorAll(selector);
+        found.forEach(btn => {
+          if (!buttons.includes(btn)) {
+            buttons.push(btn);
+          }
+        });
+      } catch (e) {
+        console.warn('[Mobile] Error querying selector:', selector, e);
+      }
+    });
+    
+    console.log('[Mobile] Found', buttons.length, 'buttons to protect');
+    
+    buttons.forEach((btn, index) => {
       // Блокируем контекстное меню
       btn.addEventListener('contextmenu', e => {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         return false;
-      }, { passive: false });
+      }, { passive: false, capture: true });
       
       // Блокируем выделение текста при touch
-      btn.addEventListener('touchstart', () => {
+      btn.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
         document.documentElement.style.webkitUserSelect = 'none';
-      }, { passive: true });
+        document.body.style.webkitUserSelect = 'none';
+      }, { passive: true, capture: true });
       
-      btn.addEventListener('touchend', () => {
+      btn.addEventListener('touchend', (e) => {
+        e.stopPropagation();
         setTimeout(() => {
           document.documentElement.style.webkitUserSelect = '';
-        }, 100);
-      }, { passive: true });
+          document.body.style.webkitUserSelect = '';
+        }, 300);
+      }, { passive: true, capture: true });
       
       // Блокируем selectstart событие
       btn.addEventListener('selectstart', e => {
         e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         return false;
-      }, { passive: false });
+      }, { passive: false, capture: true });
       
       // Блокируем copy событие для кнопок
       btn.addEventListener('copy', e => {
         e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         return false;
-      }, { passive: false });
+      }, { passive: false, capture: true });
+      
+      // Дополнительная блокировка для iOS
+      btn.addEventListener('touchcancel', e => {
+        e.stopPropagation();
+      }, { passive: true, capture: true });
+      
+      // Применяем стили напрямую к элементу для гарантии
+      btn.style.webkitUserSelect = 'none';
+      btn.style.userSelect = 'none';
+      btn.style.webkitTouchCallout = 'none';
+      btn.style.webkitTapHighlightColor = 'transparent';
+      
+      console.log('[Mobile] Protected button #' + (index + 1) + ':', btn.className || btn.tagName);
     });
     
-    console.log('[Mobile] iOS menu blocking initialized for buttons');
+    // Глобальная блокировка контекстного меню на кнопках
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target && (
+        e.target.tagName === 'BUTTON' ||
+        e.target.closest('button') ||
+        e.target.classList.contains('btn') ||
+        e.target.classList.contains('mode-btn') ||
+        e.target.classList.contains('mobile-search-btn') ||
+        e.target.classList.contains('search-btn')
+      )) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+      }
+    }, { passive: false, capture: true });
+    
+    console.log('[Mobile] iOS menu blocking initialized for', buttons.length, 'buttons');
   }
   
   // Инициализируем при загрузке

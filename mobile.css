@@ -531,7 +531,26 @@
     }
     
     /* --- Убираем iOS меню и выделение текста на кнопках (только ≤768px) --- */
-    button, .btn, .mode-btn, .mobile-search-btn, .search-btn {
+    /* Повышаем специфичность для гарантированного применения */
+    .search-form-container button,
+    .search-form-container .btn,
+    .search-form-container .mode-btn,
+    .search-form-container .mobile-search-btn,
+    .search-form-container .search-btn,
+    .mode-buttons button,
+    .mode-buttons .mode-btn,
+    .search-form button,
+    .search-form .btn,
+    .search-form .mobile-search-btn,
+    .search-form .search-btn,
+    html body button.mode-btn,
+    html body button.mobile-search-btn,
+    html body button.search-btn,
+    button.mode-btn,
+    button.mobile-search-btn,
+    button.search-btn,
+    button,
+    .btn {
       -webkit-user-select: none !important;
       user-select: none !important;
       -webkit-touch-callout: none !important;
@@ -539,9 +558,19 @@
       touch-action: manipulation !important;
       -webkit-appearance: none !important;
       appearance: none !important;
+      pointer-events: auto !important;
     }
     
-    button:focus, .btn:focus, .mode-btn:focus, .mobile-search-btn:focus {
+    .search-form-container button:focus,
+    .search-form-container .btn:focus,
+    .search-form-container .mode-btn:focus,
+    .search-form-container .mobile-search-btn:focus,
+    .mode-buttons button:focus,
+    .mode-buttons .mode-btn:focus,
+    button.mode-btn:focus,
+    button.mobile-search-btn:focus,
+    button:focus,
+    .btn:focus {
       outline: none !important;
     }
   }
