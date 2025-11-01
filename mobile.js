@@ -904,6 +904,62 @@
 
   // Also try after a delay as fallback
   setTimeout(init, 500);
+  
+  // =============================================================================
+  // БЛОКИРОВКА iOS МЕНЮ "Вставить/Найти в Google" ТОЛЬКО ДЛЯ ≤768px
+  // =============================================================================
+  
+  function initIOSMenuBlocking() {
+    // Проверяем только для мобильных устройств ≤768px
+    if (window.innerWidth > 768) return;
+    if (IS_DESKTOP_DEVICE) return;
+    
+    const buttons = document.querySelectorAll('button, .btn, .mode-btn, .mobile-search-btn, .search-btn');
+    
+    buttons.forEach(btn => {
+      // Блокируем контекстное меню
+      btn.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, { passive: false });
+      
+      // Блокируем выделение текста при touch
+      btn.addEventListener('touchstart', () => {
+        document.documentElement.style.webkitUserSelect = 'none';
+      }, { passive: true });
+      
+      btn.addEventListener('touchend', () => {
+        setTimeout(() => {
+          document.documentElement.style.webkitUserSelect = '';
+        }, 100);
+      }, { passive: true });
+      
+      // Блокируем selectstart событие
+      btn.addEventListener('selectstart', e => {
+        e.preventDefault();
+        return false;
+      }, { passive: false });
+      
+      // Блокируем copy событие для кнопок
+      btn.addEventListener('copy', e => {
+        e.preventDefault();
+        return false;
+      }, { passive: false });
+    });
+    
+    console.log('[Mobile] iOS menu blocking initialized for buttons');
+  }
+  
+  // Инициализируем при загрузке
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIOSMenuBlocking);
+  } else {
+    initIOSMenuBlocking();
+  }
+  
+  // Также инициализируем после небольшой задержки для динамически созданных кнопок
+  setTimeout(initIOSMenuBlocking, 300);
 
   // Add CSS animation keyframes dynamically
   const style = document.createElement('style');

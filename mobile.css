@@ -526,7 +526,7 @@
     box-sizing: border-box !important;
   }
   
-  /* Get Report button - separate button with margin */
+  /* Get Report button - separate button with margin, исправляем наложение */
   .search-form-container .search-form .mobile-search-btn {
     display: flex !important;
     visibility: visible !important;
@@ -552,6 +552,9 @@
     color: #1a1a1a !important;
     font-size: 18px !important;
     font-weight: 700 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    box-sizing: border-box !important;
   }
 
   .vin-input,
