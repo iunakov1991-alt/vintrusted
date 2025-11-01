@@ -47,19 +47,12 @@
     position: relative;
     /* Override desktop background-attachment: fixed to scroll for iOS */
     background-attachment: scroll !important;
-    /* Extend background to safe-area by using negative margins */
-    margin-top: calc(-1 * var(--sat));
-    margin-bottom: calc(-1 * var(--sab));
-    margin-left: calc(-1 * var(--sal));
-    margin-right: calc(-1 * var(--sar));
-    /* Add safe-area padding to content */
+    /* Add safe-area padding to content - background will extend behind it */
     padding-top: var(--sat);
     padding-bottom: var(--sab);
     padding-left: var(--sal);
     padding-right: var(--sar);
     box-sizing: border-box;
-    /* Ensure background covers extended area */
-    background-clip: border-box;
   }
 
   /* Mobile Container - Single Column, Max Width 480px */
