@@ -12,16 +12,32 @@
     visibility: hidden !important;
   }
   
-  /* НОВАЯ МОБИЛЬНАЯ ФОРМА */
+  /* НОВАЯ МОБИЛЬНАЯ ФОРМА - ПОСЛЕ ХАЙЛАЙТОВ */
   .mobile-form-wrapper {
     width: 100%;
     max-width: 100%;
     padding: 0 16px;
-    margin: calc((100vh - var(--safe-top) - var(--safe-bottom)) / 5 - 15px) auto 0;
+    margin: 20px auto 0; /* Отступ после subtitle-chips */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 16px; /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
+    order: 3; /* После subtitle-chips (order: 2) */
+  }
+  
+  /* Убираем старый margin-top у формы, так как она должна идти после хайлайтов */
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .subtitle-chips {
+    order: 2;
+    margin-bottom: 20px;
+  }
+  
+  .mobile-form-wrapper {
+    order: 3;
   }
   
   /* Кнопки выбора режима */
