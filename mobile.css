@@ -1243,7 +1243,10 @@
      ============================================================================= */
   
   .footer {
-    padding: 32px 0 calc(32px + var(--safe-bottom));
+    padding-top: 32px;
+    padding-bottom: max(32px, var(--sab));
+    padding-left: max(16px, var(--sal));
+    padding-right: max(16px, var(--sar));
     background: rgba(26, 26, 26, 0.95);
     backdrop-filter: blur(10px);
   }
