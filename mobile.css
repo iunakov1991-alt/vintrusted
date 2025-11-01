@@ -270,13 +270,16 @@
     box-sizing: border-box !important;
   }
   
-  .search-form {
+  /* Show search-form inside unified container */
+  .search-form-container > .search-form {
     width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
+    display: block !important;
+    visibility: visible !important;
   }
   
   .form-content {
@@ -284,6 +287,18 @@
     flex-direction: column !important;
     gap: 0 !important;
     width: 100% !important;
+  }
+  
+  /* Hide old form elements that are outside unified container */
+  .search-form-container > .search-form {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Hide old search button inside form-content */
+  .search-form .form-content .search-btn {
+    display: none !important;
+    visibility: hidden !important;
   }
 
   /* Mode buttons - inside unified container */
