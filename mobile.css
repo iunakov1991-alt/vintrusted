@@ -193,11 +193,11 @@
     max-width: 100%;
     width: 100%;
     margin: 0 auto !important;
-    padding: clamp(12px, 3vh, 24px) 16px clamp(16px, 4vh, 28px);
+    padding: clamp(10px, 2vh, 20px) 16px clamp(12px, 3vh, 24px);
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    gap: clamp(16px, 3vh, 28px) !important;
+    gap: clamp(10px, 2vh, 20px) !important;
     min-height: calc(100vh - var(--sat) - var(--sab));
     min-height: calc(100dvh - var(--sat) - var(--sab));
     min-height: calc(100svh - var(--sat) - var(--sab));
@@ -222,8 +222,8 @@
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
-    padding-top: var(--safe-top) !important;
-    padding-bottom: 20px !important;
+    padding-top: clamp(4px, 1vh, 12px) !important;
+    padding-bottom: clamp(8px, 1.5vh, 16px) !important;
     margin-bottom: 0 !important;
     margin-top: calc(-1 * var(--safe-top, 0px)) !important;
     position: relative !important;
@@ -244,10 +244,10 @@
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    height: 108px !important;
+    height: clamp(84px, 12vw, 108px) !important;
     width: auto !important;
-    max-width: 324px !important;
-    min-width: 216px !important;
+    max-width: 280px !important;
+    min-width: 200px !important;
     object-fit: contain !important;
     position: relative !important;
     z-index: 101 !important;
@@ -309,12 +309,12 @@
     content: "Vehicle VIN Check" "\A" "Only $3 Unlimited" !important;
     display: block !important;
     white-space: pre-line !important;
-    font-size: clamp(26px, 5vw, 32px) !important;
+    font-size: clamp(24px, 4.5vw, 30px) !important;
     font-weight: 700 !important;
     color: #ffffff !important;
     text-align: center !important;
     line-height: 1.25 !important;
-    margin: 0 0 clamp(12px, 2.5vh, 20px) 0 !important;
+    margin: 0 0 clamp(10px, 2vh, 16px) 0 !important;
     padding: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -334,9 +334,9 @@
   }
 
   .subtitle {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.5;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     text-align: center;
     max-width: 100%;
   }
@@ -351,7 +351,7 @@
     order: 2 !important;
     display: flex !important;
     justify-content: center !important;
-    gap: 8px !important;
+    gap: 6px !important;
     flex-wrap: wrap !important;
   }
   
@@ -449,7 +449,7 @@
   .m-form-tabs,
   .search-form-container .mode-buttons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 16px;
     justify-content: center;
     width: 100%;

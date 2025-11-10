@@ -112,7 +112,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: clamp(12px, 2vh, 18px); /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
+    gap: clamp(10px, 1.6vh, 16px); /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
     order: 3 !important; /* После subtitle-chips (order: 2) */
     flex: 0 0 auto;
   }
@@ -328,7 +328,7 @@
     max-height: 54px;
     padding: 0 24px;
     margin: 0;
-    margin-bottom: max(0px, calc(var(--sab) / 6));
+    margin-bottom: max(0px, calc(var(--sab) / 8));
     border-radius: 27px;
     border: none;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
