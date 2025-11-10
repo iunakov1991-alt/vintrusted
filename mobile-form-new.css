@@ -328,7 +328,7 @@
     max-height: 50px;
     padding: 0 24px;
     margin: 0;
-    margin-bottom: max(0px, calc(var(--sab) / 14));
+    margin-bottom: calc(1cm + max(0px, calc(var(--sab) / 14)));
     border-radius: 27px;
     border: none;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
