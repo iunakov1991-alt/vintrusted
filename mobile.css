@@ -220,6 +220,7 @@
   .hero-section .mobile-hero-logo,
   .hero-container .mobile-hero-logo,
   .mobile-hero-logo {
+    transform: translateY(-5px) !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -230,7 +231,6 @@
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
     margin-top: calc(-1 * var(--safe-top, 0px)) !important;
-    transform: translateY(-5px) !important;
     position: relative !important;
     z-index: 1000 !important;
     height: auto !important;
@@ -2093,6 +2093,13 @@
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     width: 100% !important;
+  }
+  
+  /* Force logo to move up 5px - highest specificity */
+  html body section.hero-section div.hero-container div.mobile-hero-logo,
+  html body .hero-section .hero-container .mobile-hero-logo,
+  html body .hero-container .mobile-hero-logo {
+    transform: translateY(-5px) !important;
   }
 }
 
