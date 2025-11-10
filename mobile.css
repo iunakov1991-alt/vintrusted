@@ -46,8 +46,9 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-    /* Match hero-section mobile background */
-    background: url('images/mobileback.png') center center / cover no-repeat scroll;
+    /* Match hero-section background */
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
+                url('hero-background.jpg') center center / cover no-repeat scroll;
     /* Extend only into safe-area using negative positioning */
     margin-top: calc(-1 * var(--sat));
     margin-bottom: calc(-1 * var(--sab));
@@ -174,8 +175,9 @@
     min-height: calc(100vh - var(--sat) - var(--sab));
     min-height: calc(100dvh - var(--sat) - var(--sab));
     min-height: calc(100svh - var(--sat) - var(--sab));
-    background: url('images/mobileback.png') center center / cover no-repeat scroll !important;
-    transform: none;
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
+                url('hero-background.jpg') center center / cover no-repeat scroll !important;
+    transform: none !important;
     display: flex !important;
     align-items: stretch !important;
     visibility: visible !important;

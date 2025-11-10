@@ -238,30 +238,26 @@ body {
     border-radius: 2px;
 }
 
-/* New Clean Hero Section - Desktop only */
-@media (min-width: 1024px) {
-    .hero-section {
-        background-color: #1a1a1a;
-        background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
-                          url('hero-background.jpg');
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        transform: scaleX(-1);
-        padding: 120px 0 100px;
-        min-height: 700px;
-        margin-top: 80px;
-    }
+/* New Clean Hero Section */
+.hero-section {
+    background-color: #1a1a1a;
+    background-image: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
+                      url('hero-background.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transform: scaleX(-1);
+    padding: 120px 0 100px;
+    min-height: 700px;
+    margin-top: 80px;
 }
 
-@media (min-width: 1024px) {
-    .hero-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        transform: scaleX(-1) translateX(8%);
-    }
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    transform: scaleX(-1) translateX(8%);
 }
 
 .main-title {
