@@ -954,7 +954,12 @@
      ============================================================================= */
   
   .comparison-section {
-    padding: 40px 0;
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   .comparison-title {
@@ -1899,12 +1904,14 @@
     overflow: hidden !important;
   }
   
-  /* Comparison section - show only left column (table), hide right column (form) */
+  /* Hide comparison section on mobile */
   .comparison-section {
-    display: block !important;
-    padding: 40px 0 !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   
   .comparison-section .container {
