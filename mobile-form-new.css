@@ -112,7 +112,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: clamp(4px, 1vh, 10px); /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
+    gap: clamp(0px, 0.5vh, 5px); /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
     order: 3 !important; /* После subtitle-chips (order: 2) */
     flex: 0 0 auto;
   }
