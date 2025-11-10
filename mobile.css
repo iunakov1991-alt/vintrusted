@@ -38,7 +38,7 @@
     position: relative;
   }
   
-  /* Fixed background overlay ONLY for safe-area (Dynamic Island) - matches hero-section background */
+  /* Fixed background overlay ONLY for safe-area (Dynamic Island) - transparent, hero-section handles background */
   body::before {
     content: "";
     position: fixed;
@@ -47,9 +47,7 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-    /* Match hero-section background */
-    background: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
-                url('hero-background.jpg') center center / cover no-repeat scroll;
+    background: transparent;
     /* Extend only into safe-area using negative positioning */
     margin-top: calc(-1 * var(--sat));
     margin-bottom: calc(-1 * var(--sab));
