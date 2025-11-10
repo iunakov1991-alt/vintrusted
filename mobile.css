@@ -216,7 +216,7 @@
   .hero-section .mobile-hero-logo,
   .hero-container .mobile-hero-logo,
   .mobile-hero-logo {
-    transform: translateY(-5px) !important;
+    transform: none !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
