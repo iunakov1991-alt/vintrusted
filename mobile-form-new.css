@@ -99,7 +99,7 @@
   /* Хайлайты должны быть перед формой */
   .subtitle-chips {
     order: 2 !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 12px !important;
   }
   
   /* Форма должна быть после хайлайтов */
@@ -112,7 +112,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: clamp(8px, 1.4vh, 14px); /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
+    gap: clamp(6px, 1.2vh, 12px); /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
     order: 3 !important; /* После subtitle-chips (order: 2) */
     flex: 0 0 auto;
   }
@@ -120,7 +120,7 @@
   /* Кнопки выбора режима */
   .mobile-mode-buttons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -128,9 +128,9 @@
   
   .mobile-mode-btn {
     flex: 1;
-    height: 54px;
-    min-height: 54px;
-    max-height: 54px;
+    height: 52px;
+    min-height: 52px;
+    max-height: 52px;
     padding: 0;
     margin: 0;
     border-radius: 27px;
@@ -230,9 +230,9 @@
   /* Поле VIN */
   .mobile-vin-input {
     width: 100%;
-    height: 54px;
-    min-height: 54px;
-    max-height: 54px;
+    height: 52px;
+    min-height: 52px;
+    max-height: 52px;
     padding: 0 20px;
     margin: 0;
     border-radius: 27px;
@@ -259,9 +259,9 @@
     flex-direction: row !important;
     gap: 0 !important; /* Без gap между элементами */
     width: 100%;
-    height: 54px;
-    min-height: 54px;
-    max-height: 54px;
+    height: 52px;
+    min-height: 52px;
+    max-height: 52px;
     padding: 0;
     margin: 0;
     border-radius: 27px;
@@ -275,7 +275,7 @@
     flex: 0 0 auto; /* Фиксированная ширина для селекта */
     width: auto;
     min-width: 140px; /* Минимальная ширина для селекта */
-    height: 54px;
+    height: 52px;
     padding: 0 20px;
     margin: 0;
     border: none !important; /* Убираем border, он на обертке */
@@ -294,7 +294,7 @@
   
   .mobile-plate-input {
     flex: 1; /* Остальное пространство для поля плейт */
-    height: 54px;
+    height: 52px;
     padding: 0 20px;
     margin: 0;
     border: none !important; /* Убираем border, он на обертке */
@@ -323,9 +323,9 @@
   /* Кнопка отправки */
   .mobile-submit-btn {
     width: 100%;
-    height: 54px;
-    min-height: 54px;
-    max-height: 54px;
+    height: 52px;
+    min-height: 52px;
+    max-height: 52px;
     padding: 0 24px;
     margin: 0;
     margin-bottom: max(0px, calc(var(--sab) / 10));
