@@ -1601,16 +1601,15 @@
   /* Remove white space between first and second screen */
   section.mobile-second-screen,
   .mobile-second-screen {
-    margin-top: 0 !important;
+    margin-top: calc(-1 * var(--sab)) !important;
     padding-top: 0 !important;
     display: flex !important;
     visibility: visible !important;
     width: 100% !important;
-    min-height: calc(100vh - var(--sat) - var(--sab)) !important;
-    min-height: calc(100dvh - var(--sat) - var(--sab)) !important;
-    min-height: calc(100svh - var(--sat) - var(--sab)) !important;
+    min-height: calc(100svh + var(--sab)) !important;
     padding: 0 !important;
     margin: 0 !important;
+    margin-bottom: 0 !important;
     background: transparent !important;
     box-sizing: border-box !important;
     position: relative !important;
