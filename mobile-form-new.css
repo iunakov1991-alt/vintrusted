@@ -107,6 +107,7 @@
     width: 100%;
     max-width: 100%;
     padding: 0 16px;
+    padding-bottom: max(8px, calc(var(--sab) / 4));
     margin: 0 auto; /* Убираем margin-top, так как порядок задается через order */
     box-sizing: border-box;
     display: flex;
@@ -326,6 +327,7 @@
     max-height: 54px;
     padding: 0 24px;
     margin: 0;
+    margin-bottom: max(4px, calc(var(--sab) / 4));
     border-radius: 27px;
     border: none;
     background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
