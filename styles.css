@@ -6720,10 +6720,10 @@ button[type="submit"],
     box-sizing: border-box !important;
   }
   
-  html body .hero-section {
-    /* background-image removed to allow mobile.css to set custom image */
+  /* Background removed to allow mobile.css to set custom image */
+  /* html body .hero-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  }
+  } */
   
   /* HIDE HEADER COMPLETELY */
   .header,
