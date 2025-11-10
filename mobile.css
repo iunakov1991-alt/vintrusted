@@ -188,21 +188,25 @@
     visibility: visible !important;
   }
   
+  html body .hero-section .hero-container,
+  html body .hero-container,
+  .hero-section .hero-container,
   .hero-container {
     transform: none !important;
-    max-width: 100%;
-    width: 100%;
+    max-width: 100% !important;
+    width: 100% !important;
     margin: 0 auto !important;
-    padding: clamp(0px, 0.3vh, 2px) 16px clamp(0px, 0.8vh, 10px);
+    padding: clamp(0px, 0.3vh, 2px) 16px clamp(0px, 0.8vh, 10px) !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
     gap: clamp(0px, 0.5vh, 6px) !important;
-    min-height: calc(100vh - var(--sat) - var(--sab));
-    min-height: calc(100dvh - var(--sat) - var(--sab));
-    min-height: calc(100svh - var(--sat) - var(--sab));
+    min-height: calc(100vh - var(--sat) - var(--sab)) !important;
+    min-height: calc(100dvh - var(--sat) - var(--sab)) !important;
+    min-height: calc(100svh - var(--sat) - var(--sab)) !important;
     visibility: visible !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
+    text-align: left !important;
   }
 
   .hero-container > * {
@@ -353,12 +357,6 @@
     justify-content: center !important;
     gap: 4px !important;
     flex-wrap: wrap !important;
-  }
-  
-  /* Hero container - flex column with order */
-  .hero-container {
-    display: flex !important;
-    flex-direction: column !important;
   }
   
   /* Mobile logo - first (order: 0) */
