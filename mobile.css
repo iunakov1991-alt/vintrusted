@@ -1598,8 +1598,11 @@
   }
   
   /* Mobile second screen - image replacement */
+  /* Remove white space between first and second screen */
   section.mobile-second-screen,
   .mobile-second-screen {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
     display: flex !important;
     visibility: visible !important;
     width: 100% !important;
@@ -1924,14 +1927,19 @@
     overflow: hidden !important;
   }
   
-  /* Hide comparison section on mobile */
+  /* Hide comparison section on mobile - remove all space */
   .comparison-section {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
+    max-height: 0 !important;
     overflow: hidden !important;
     padding: 0 !important;
     margin: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   .comparison-section .container {
