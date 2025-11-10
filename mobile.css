@@ -189,7 +189,7 @@
   }
   
   .hero-container {
-    transform: none;
+    transform: translateY(-5px) !important;
     max-width: 100%;
     width: 100%;
     margin: 0 auto !important;
