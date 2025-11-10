@@ -2101,6 +2101,12 @@
   html body .hero-container .mobile-hero-logo {
     transform: translateY(-5px) !important;
   }
+  
+  /* Force hero-section to move up 5px - highest specificity */
+  html body section.hero-section,
+  html body .hero-section {
+    margin-top: -5px !important;
+  }
 }
 
 /* Hide mobile final screen on desktop */
