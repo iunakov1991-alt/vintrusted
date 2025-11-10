@@ -1601,7 +1601,7 @@
   /* Remove white space between first and second screen - negative margin to overlap */
   section.mobile-second-screen,
   .mobile-second-screen {
-    margin-top: -40px !important;
+    margin-top: -60px !important;
     padding-top: 0 !important;
     display: flex !important;
     visibility: visible !important;
