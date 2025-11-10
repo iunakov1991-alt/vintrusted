@@ -38,6 +38,7 @@
     /* Remove desktop background on mobile to prevent double background */
     background: transparent !important;
     background-image: none !important;
+    background-color: #0f0f0f !important;
     position: relative;
     /* Remove padding to allow background to extend into safe-area */
     padding: 0 !important;
