@@ -196,11 +196,11 @@
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 auto !important;
-    padding: 8px 16px 8px !important;
+    padding: 4px 16px 4px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    gap: 12px !important;
+    gap: 8px !important;
     min-height: calc(100vh - var(--sat) - var(--sab)) !important;
     min-height: calc(100dvh - var(--sat) - var(--sab)) !important;
     min-height: calc(100svh - var(--sat) - var(--sab)) !important;
@@ -318,7 +318,7 @@
     color: #ffffff !important;
     text-align: center !important;
     line-height: 1.25 !important;
-    margin: 0 0 8px 0 !important;
+    margin: 0 0 4px 0 !important;
     padding: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
