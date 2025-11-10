@@ -108,7 +108,7 @@
     max-width: 100%;
     padding: 0 16px;
     padding-bottom: 0;
-    margin: 0 auto; /* Убираем margin-top, так как порядок задается через order */
+    margin: -5px auto 0 auto; /* Поднимаем форму на ~5 мм, сохраняя центрирование */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
