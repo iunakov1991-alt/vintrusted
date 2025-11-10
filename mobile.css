@@ -189,15 +189,15 @@
   }
   
   .hero-container {
-    transform: translateY(-5px) !important;
+    transform: none !important;
     max-width: 100%;
     width: 100%;
     margin: 0 auto !important;
-    padding: clamp(0px, 0.5vh, 7px) 16px clamp(0px, 1vh, 7px);
+    padding: clamp(0px, 0.3vh, 2px) 16px clamp(0px, 0.8vh, 10px);
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    gap: clamp(0px, 0.7vh, 9px) !important;
+    gap: clamp(0px, 0.5vh, 6px) !important;
     min-height: calc(100vh - var(--sat) - var(--sab));
     min-height: calc(100dvh - var(--sat) - var(--sab));
     min-height: calc(100svh - var(--sat) - var(--sab));
@@ -222,10 +222,10 @@
     justify-content: center !important;
     align-items: center !important;
     width: 100% !important;
-    padding-top: clamp(0px, 0.5vh, 5px) !important;
+    padding-top: clamp(0px, 0.3vh, 3px) !important;
     padding-bottom: clamp(3px, 1.1vh, 11px) !important;
     margin-bottom: 0 !important;
-    margin-top: calc(-5px - var(--safe-top, 0px)) !important;
+    margin-top: calc(-1 * var(--safe-top, 0px)) !important;
     position: relative !important;
     z-index: 1000 !important;
     height: auto !important;
@@ -343,7 +343,7 @@
   
   /* Subtitle chips - AFTER title (created via ::before), before form */
   .subtitle-chips {
-    margin-top: -5px !important;
+    margin-top: 0 !important;
     margin-bottom: 0 !important;
     width: 100% !important;
     padding: 0 16px !important;
