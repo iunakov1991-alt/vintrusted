@@ -174,7 +174,7 @@
     min-height: calc(100vh - var(--sat) - var(--sab));
     min-height: calc(100dvh - var(--sat) - var(--sab));
     min-height: calc(100svh - var(--sat) - var(--sab));
-    background: linear-gradient(270deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
                 url('hero-background.jpg') center center / cover no-repeat scroll !important;
     transform: none !important;
     display: flex !important;
