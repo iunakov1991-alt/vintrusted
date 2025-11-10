@@ -379,7 +379,7 @@
   .search-form-container {
     width: 100% !important;
     max-width: 100% !important;
-    margin: calc((100vh - var(--safe-top) - var(--safe-bottom)) / 5 - 15px) auto 0 !important;
+    margin: 4px auto 0 auto !important;
     padding: 0 16px !important;
     background: transparent !important;
     backdrop-filter: none !important;
