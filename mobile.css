@@ -32,8 +32,9 @@
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Override desktop background-attachment: fixed to scroll for iOS Dynamic Island */
-    background-attachment: scroll !important;
+    /* Remove desktop background on mobile to prevent double background */
+    background: transparent !important;
+    background-image: none !important;
     position: relative;
   }
   
