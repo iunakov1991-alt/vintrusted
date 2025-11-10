@@ -310,7 +310,7 @@
     content: "Vehicle VIN Check" "\A" "Only $3 Unlimited" !important;
     display: block !important;
     white-space: pre-line !important;
-    font-size: clamp(32px, 6vw, 38px) !important;
+    font-size: clamp(35.2px, 6.6vw, 41.8px) !important;
     font-weight: 700 !important;
     color: #ffffff !important;
     text-align: center !important;
