@@ -196,7 +196,7 @@
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    gap: 4px !important;
+    gap: 2px !important;
     min-height: calc(100vh - var(--sat) - var(--sab)) !important;
     min-height: calc(100dvh - var(--sat) - var(--sab)) !important;
     min-height: calc(100svh - var(--sat) - var(--sab)) !important;
