@@ -37,7 +37,7 @@
     position: relative;
   }
   
-  /* Fixed background overlay ONLY for safe-area (Dynamic Island) - does not affect main background size */
+  /* Fixed background overlay ONLY for safe-area (Dynamic Island) - matches hero-section background */
   body::before {
     content: "";
     position: fixed;
@@ -46,15 +46,8 @@
     right: 0;
     bottom: 0;
     z-index: -1;
-    /* Match body background exactly */
-    background: #ffffff;
-    background-image: 
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
-      url('hero-background.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
+    /* Match hero-section mobile background */
+    background: url('images/mobileback.png') center center / cover no-repeat scroll;
     /* Extend only into safe-area using negative positioning */
     margin-top: calc(-1 * var(--sat));
     margin-bottom: calc(-1 * var(--sab));
@@ -186,6 +179,8 @@
     display: flex !important;
     align-items: stretch !important;
     visibility: visible !important;
+    position: relative !important;
+    z-index: 0 !important;
   }
   
   html body .hero-section .hero-container,
