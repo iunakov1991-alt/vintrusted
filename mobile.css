@@ -195,7 +195,7 @@
     transform: none !important;
     max-width: 100% !important;
     width: 100% !important;
-    margin: 0 auto !important;
+    margin: -5px auto 0 auto !important;
     padding: 2px 16px 2px !important;
     display: flex !important;
     flex-direction: column !important;
