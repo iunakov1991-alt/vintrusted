@@ -195,8 +195,8 @@
     padding: 2px 16px 2px !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
-    gap: 2px !important;
+    justify-content: flex-start !important;
+    gap: 0px !important;
     min-height: calc(100vh - var(--sat) - var(--sab)) !important;
     min-height: calc(100dvh - var(--sat) - var(--sab)) !important;
     min-height: calc(100svh - var(--sat) - var(--sab)) !important;
@@ -315,13 +315,22 @@
     color: #ffffff !important;
     text-align: center !important;
     line-height: 1.25 !important;
-    margin: 0 0 1px 0 !important;
+    margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
     pointer-events: none !important;
     -webkit-user-select: none !important;
     user-select: none !important;
+  }
+  
+  /* Force remove all margins from title */
+  html body .hero-section .subtitle-chips::before,
+  html body .hero-container .subtitle-chips::before,
+  .hero-section .subtitle-chips::before,
+  .hero-container .subtitle-chips::before {
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   /* Allow title to have margin-top */
@@ -354,6 +363,17 @@
     justify-content: center !important;
     gap: 4px !important;
     flex-wrap: wrap !important;
+  }
+  
+  /* Force remove all margins from subtitle-chips on mobile */
+  html body .hero-section .subtitle-chips,
+  html body .hero-container .subtitle-chips,
+  .hero-section .subtitle-chips,
+  .hero-container .subtitle-chips {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   
   /* Mobile logo - first (order: 0) */
