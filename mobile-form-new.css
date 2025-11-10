@@ -108,11 +108,11 @@
     max-width: 100%;
     padding: 0 16px;
     padding-bottom: 0;
-    margin: -5px auto 0 auto; /* Поднимаем форму на ~5 мм, сохраняя центрирование */
+    margin: 0 auto 0 auto;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: clamp(0px, 0.5vh, 5px); /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
+    gap: 0; /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
     order: 3 !important; /* После subtitle-chips (order: 2) */
     flex: 0 0 auto;
   }
