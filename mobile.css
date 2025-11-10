@@ -197,9 +197,9 @@
     flex-direction: column !important;
     justify-content: space-between !important;
     gap: 0px !important;
-    min-height: calc(100vh - var(--sat) - var(--sab)) !important;
-    min-height: calc(100dvh - var(--sat) - var(--sab)) !important;
-    min-height: calc(100svh - var(--sat) - var(--sab)) !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
     visibility: visible !important;
     box-sizing: border-box !important;
     text-align: left !important;
