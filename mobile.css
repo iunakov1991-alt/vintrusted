@@ -47,14 +47,11 @@
   body::before {
     content: "";
     position: fixed;
-    top: calc(-1 * var(--sat));
-    left: calc(-1 * var(--sal));
-    right: calc(-1 * var(--sar));
-    bottom: calc(-1 * var(--sab));
+    inset: calc(-1 * var(--sat)) calc(-1 * var(--sar)) calc(-1 * var(--sab)) calc(-1 * var(--sal));
     z-index: -1;
-    /* Match hero-section background to extend into safe-area */
+    /* Match hero-section background to extend into safe-area - use fixed for proper coverage */
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
-                url('hero-background.jpg') center center / cover no-repeat scroll;
+                url('hero-background.jpg') center center / cover no-repeat fixed;
     pointer-events: none;
   }
 

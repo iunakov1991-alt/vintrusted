@@ -6718,6 +6718,8 @@ button[type="submit"],
     width: 100% !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
+    background: transparent !important;
+    background-color: transparent !important;
   }
   
   /* Background removed to allow mobile.css to set custom image */
