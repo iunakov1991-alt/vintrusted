@@ -26,6 +26,9 @@
     overflow-x: hidden;
     width: 100%;
     height: 100%;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   body {
@@ -36,35 +39,23 @@
     background: transparent !important;
     background-image: none !important;
     position: relative;
+    /* Remove padding to allow background to extend into safe-area */
+    padding: 0 !important;
   }
   
-  /* Fixed background overlay ONLY for safe-area (Dynamic Island) - transparent, hero-section handles background */
+  /* Fixed background overlay for safe-area (Dynamic Island) - extends hero-section background */
   body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: calc(-1 * var(--sat));
+    left: calc(-1 * var(--sal));
+    right: calc(-1 * var(--sar));
+    bottom: calc(-1 * var(--sab));
     z-index: -1;
-    background: transparent;
-    /* Extend only into safe-area using negative positioning */
-    margin-top: calc(-1 * var(--sat));
-    margin-bottom: calc(-1 * var(--sab));
-    margin-left: calc(-1 * var(--sal));
-    margin-right: calc(-1 * var(--sar));
-    width: calc(100% + var(--sal) + var(--sar));
-    height: calc(100% + var(--sat) + var(--sab));
+    /* Match hero-section background to extend into safe-area */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
+                url('hero-background.jpg') center center / cover no-repeat scroll;
     pointer-events: none;
-  }
-  
-  /* Add safe-area padding to body content only */
-  body {
-    padding-top: var(--sat);
-    padding-bottom: max(6px, calc(var(--sab) / 4));
-    padding-left: var(--sal);
-    padding-right: var(--sar);
-    box-sizing: border-box;
   }
 
   /* Mobile Container - Single Column, Max Width 480px */
@@ -171,9 +162,15 @@
   html body .hero-section {
     margin-top: -5px !important;
     padding: 0 !important;
-    height: calc(100svh - var(--sat) - var(--sab)) !important;
-    min-height: calc(100svh - var(--sat) - var(--sab)) !important;
-    max-height: calc(100svh - var(--sat) - var(--sab)) !important;
+    /* Extend height to include safe-area for transparent effect */
+    height: calc(100svh + var(--sat) + var(--sab)) !important;
+    min-height: calc(100svh + var(--sat) + var(--sab)) !important;
+    max-height: calc(100svh + var(--sat) + var(--sab)) !important;
+    /* Extend background into safe-area */
+    padding-top: var(--sat) !important;
+    padding-bottom: var(--sab) !important;
+    padding-left: var(--sal) !important;
+    padding-right: var(--sar) !important;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(15, 23, 42, 0.8) 30%, rgba(30, 58, 138, 0.4) 100%),
                 url('hero-background.jpg') center center / cover no-repeat scroll !important;
     transform: none !important;
@@ -182,6 +179,7 @@
     visibility: visible !important;
     position: relative !important;
     z-index: 0 !important;
+    box-sizing: border-box !important;
   }
   
   html body .hero-section .hero-container,
@@ -197,9 +195,9 @@
     flex-direction: column !important;
     justify-content: space-between !important;
     gap: 0px !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    max-height: 100% !important;
+    height: calc(100% - var(--sat) - var(--sab)) !important;
+    min-height: calc(100% - var(--sat) - var(--sab)) !important;
+    max-height: calc(100% - var(--sat) - var(--sab)) !important;
     visibility: visible !important;
     box-sizing: border-box !important;
     text-align: left !important;
