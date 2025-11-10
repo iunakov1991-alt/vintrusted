@@ -226,7 +226,7 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
-    margin-top: calc(-1 * var(--safe-top, 0px)) !important;
+    margin-top: calc(5mm - var(--safe-top, 0px)) !important;
     position: relative !important;
     z-index: 1000 !important;
     height: auto !important;
