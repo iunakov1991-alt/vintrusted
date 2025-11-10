@@ -99,7 +99,7 @@
   /* Хайлайты должны быть перед формой */
   .subtitle-chips {
     order: 2 !important;
-    margin-bottom: 12px !important;
+    margin-bottom: 6px !important;
   }
   
   /* Форма должна быть после хайлайтов */
