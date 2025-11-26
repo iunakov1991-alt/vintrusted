@@ -18,7 +18,7 @@ function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-function buildInternalLinksFromGraph(node, linkGraph) {
+function buildInternalLinksFromGraph(node, linkGraph, seedsMap) {
   const entry = linkGraph.get(node.id);
   if (!entry) return [];
 
@@ -26,23 +26,13 @@ function buildInternalLinksFromGraph(node, linkGraph) {
 
   // clusterLinks → обычные "related" ссылки
   for (const c of entry.clusterLinks || []) {
-    const targetNode = Array.from(linkGraph.keys())
-      .map((id) => {
-        const parts = id.split("::");
-        return { id, parts };
-      })
-      .find((n) => n.id === c.targetId);
-    
-    if (targetNode) {
-      // Находим seed по id
-      const allSeeds = buildKnowledgeGraphSeeds();
-      const target = allSeeds.find((s) => s.id === c.targetId);
-      if (target) {
-        internalLinks.push({
-          href: target.urlPath,
-          label: target.cluster[target.lang].label + " " + target.make + (target.model ? " " + target.model : "") + " in " + target.stateName
-        });
-      }
+    const target = seedsMap.get(c.targetId);
+    if (target) {
+      const clusterText = target.cluster[target.lang];
+      internalLinks.push({
+        href: target.urlPath,
+        label: clusterText.label + " " + target.make + (target.model ? " " + target.model : "") + " in " + target.stateName
+      });
     }
   }
 
@@ -62,7 +52,7 @@ function getTodayISO() {
   return now.toISOString().split("T")[0];
 }
 
-function buildPageDataForNode(node, linkGraph) {
+function buildPageDataForNode(node, linkGraph, seedsMap) {
   const { lang, cluster, stateName, stateCode, make, model, urlPath, hreflangs, page, totalPages } =
     node;
 
@@ -273,7 +263,7 @@ function buildPageDataForNode(node, linkGraph) {
     };
   }
 
-  const internalLinks = buildInternalLinksFromGraph(node, linkGraph);
+  const internalLinks = buildInternalLinksFromGraph(node, linkGraph, seedsMap);
 
   const cta =
     lang === "es"
@@ -311,6 +301,12 @@ function main() {
 
   console.log("[SEO-KG] Building link graph...");
   const linkGraph = buildLinkGraph(seeds);
+  
+  // Создаём Map для быстрого поиска seeds по id
+  const seedsMap = new Map();
+  for (const seed of seeds) {
+    seedsMap.set(seed.id, seed);
+  }
 
   let count = 0;
   const targetPages = parseInt(process.env.SEO_TARGET_PAGES || "1000000", 10);
@@ -320,7 +316,7 @@ function main() {
   for (const node of seeds) {
     if (count >= HARD_LIMIT) break;
     
-    const pageData = buildPageDataForNode(node, linkGraph);
+    const pageData = buildPageDataForNode(node, linkGraph, seedsMap);
     const html = renderSeoKgPage(pageData);
 
     const urlPathClean = node.urlPath.replace(/^\//, "").replace(/\/+$/, "");
