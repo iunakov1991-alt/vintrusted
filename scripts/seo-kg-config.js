@@ -70,7 +70,14 @@ function loadMakesModels() {
   try {
     const raw = fs.readFileSync(file, "utf8");
     const json = JSON.parse(raw);
-    return json;
+    // Фильтруем служебные ключи (начинающиеся с _)
+    const filtered = {};
+    for (const [key, value] of Object.entries(json)) {
+      if (!key.startsWith("_") && Array.isArray(value)) {
+        filtered[key] = value;
+      }
+    }
+    return filtered;
   } catch (e) {
     console.error("[SEO-KG] Ошибка чтения makes-models.json:", e.message);
     return {};
