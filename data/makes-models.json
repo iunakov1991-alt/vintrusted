@@ -1,11 +1,44 @@
 {
-  "_comment": "БАЗОВЫЙ ШАБЛОН. Заменить/расширить полноценным списком марок/моделей. Движок сам подцепит любые новые марки и модели.",
-  "Toyota": ["Camry", "Corolla", "RAV4", "Prius", "Tacoma"],
-  "Honda": ["Civic", "Accord", "CR-V", "Fit", "Pilot"],
-  "Ford": ["F-150", "Escape", "Focus", "Explorer", "Mustang"],
-  "Chevrolet": ["Silverado", "Equinox", "Malibu", "Tahoe", "Camaro"],
-  "Nissan": ["Altima", "Rogue", "Sentra", "Pathfinder", "Versa"],
-  "BMW": ["3 Series", "5 Series", "X3", "X5"],
-  "Mercedes-Benz": ["C-Class", "E-Class", "GLC", "GLE"],
-  "Volkswagen": ["Jetta", "Golf", "Passat", "Tiguan"]
+  "Toyota": [
+    "Camry","Corolla","RAV4","Highlander","Tacoma","Tundra","Prius","4Runner","Sienna"
+  ],
+  "Honda": [
+    "Civic","Accord","CR-V","Pilot","Odyssey","Fit","HR-V","Ridgeline"
+  ],
+  "Ford": [
+    "F-150","F-250","F-350","Mustang","Explorer","Escape","Edge","Fusion","Ranger","Bronco"
+  ],
+  "Chevrolet": [
+    "Silverado 1500","Silverado 2500","Tahoe","Suburban","Equinox","Traverse","Camaro","Malibu","Colorado"
+  ],
+  "Nissan": [
+    "Altima","Sentra","Rogue","Murano","Pathfinder","Frontier","Titan","Leaf"
+  ],
+  "BMW": [
+    "3 Series","5 Series","7 Series","X1","X3","X5","X6","M3","M4"
+  ],
+  "Mercedes-Benz": [
+    "C-Class","E-Class","S-Class","GLC","GLE","GLS","A-Class","CLA","GLA"
+  ],
+  "Volkswagen": [
+    "Jetta","Passat","Golf","Tiguan","Atlas","Arteon"
+  ],
+  "Hyundai": [
+    "Elantra","Sonata","Tucson","Santa Fe","Kona","Palisade"
+  ],
+  "Kia": [
+    "Forte","Optima","K5","Soul","Sportage","Sorento","Telluride","Niro"
+  ],
+  "Subaru": [
+    "Impreza","Legacy","Outback","Forester","Crosstrek","WRX"
+  ],
+  "Lexus": [
+    "ES","GS","IS","LS","NX","RX","GX","LX","UX"
+  ],
+  "Audi": [
+    "A3","A4","A6","A8","Q3","Q5","Q7","Q8"
+  ],
+  "Tesla": [
+    "Model S","Model 3","Model X","Model Y"
+  ]
 }

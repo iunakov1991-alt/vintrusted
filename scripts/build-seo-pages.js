@@ -73,6 +73,8 @@ function main() {
 
   runNodeScript("scripts/generate-knowledge-graph-pages.js");
 
+  runNodeScript("generate-knowledge-graph-pages.js");
+
   const syncScript = path.join(ROOT, "sync-articles-to-static-pages.js");
   if (fs.existsSync(syncScript)) {
     log("Run legacy sync script");
