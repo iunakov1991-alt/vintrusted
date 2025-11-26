@@ -1,0 +1,1 @@
+Create smooth left-to-right scrolling animation for reviews without navigation controls: Wed Oct 15 18:04:05 PDT 2025

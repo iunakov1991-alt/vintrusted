@@ -1,0 +1,13 @@
+node_modules/
+.next/
+dist/
+.env
+*.env
+articles/
+articles2/
+public/articles/
+public/articles2/
+public/static-pages/
+public/seo-stats.json
+public/sitemap-seo-*.xml
+public/sitemap-seo.xml

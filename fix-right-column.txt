@@ -1,0 +1,1 @@
+Fix right column - reduce width by 20% instead of shifting: Wed Oct 15 14:52:33 PDT 2025

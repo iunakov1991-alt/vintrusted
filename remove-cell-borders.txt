@@ -1,0 +1,1 @@
+Remove borders from all table cells: Wed Oct 15 23:49:00 PDT 2025

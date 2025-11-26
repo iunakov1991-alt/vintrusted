@@ -1,0 +1,14 @@
+{
+  "name": "vintrusted",
+  "version": "1.0.0",
+  "description": "VIN Trusted website with Stripe integration",
+  "main": "index.html",
+  "scripts": {
+    "build": "node scripts/build-seo-pages.js",
+    "build:seo": "node scripts/build-seo-pages.js",
+    "vercel-build": "node scripts/build-seo-pages.js"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}

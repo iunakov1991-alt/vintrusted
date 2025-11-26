@@ -1,0 +1,1 @@
+Fix cursor animation to use linear instead of steps to avoid empty spaces: Wed Oct 15 17:05:19 PDT 2025

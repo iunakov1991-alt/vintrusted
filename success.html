@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - VIN Trust</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .success-container {
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Report container */
+        .report-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Mobile: Full height container */
+        @media (max-width: 768px) {
+            .success-container {
+                height: 100vh;
+                overflow: hidden;
+            }
+            
+            .report-container {
+                height: 100%;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        /* Email form overlay - shown as popup after report loads */
+        .email-form-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            backdrop-filter: blur(2px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .email-form-overlay.show {
+            display: flex;
+        }
+
+        .email-form-overlay.hidden {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .email-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #111827;
+        }
+
+        .success-message {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .email-input-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        .email-input.error {
+            border-color: #ef4444;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: #111827;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #374151;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            min-height: 20px;
+            text-align: center;
+        }
+
+        .message.error {
+            color: #ef4444;
+        }
+
+        .message.success {
+            color: #10b981;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #111827;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Report styles */
+        .report-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            max-width: 100%;
+            min-height: 200px; /* Ensure minimum height so empty state is visible */
+        }
+        
+        /* Ensure report content is visible */
+        .report-content:not(.report-loading):not(.report-error) {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Iframe for React-based reports */
+        .report-content iframe {
+            width: 100%;
+            min-height: 800px;
+            border: none;
+            display: block;
+        }
+        
+        /* Custom styles for report modifications */
+        .report-content iframe {
+            /* These styles will be injected into iframe via JavaScript */
+        }
+        
+        /* Replace green colors with yellow in report content */
+        .report-content {
+            /* Styles for direct HTML reports */
+        }
+        
+        .report-content [style*="green"],
+        .report-content [style*="#10b981"],
+        .report-content [style*="#34d399"],
+        .report-content [style*="#059669"],
+        .report-content [style*="rgb(16, 185, 129)"],
+        .report-content [style*="rgb(52, 211, 153)"] {
+            color: #FFD700 !important;
+            background-color: #FFD700 !important;
+            border-color: #FFD700 !important;
+        }
+        
+        .report-content .success,
+        .report-content .status-success,
+        .report-content [class*="success"],
+        .report-content [class*="green"] {
+            color: #FFD700 !important;
+            background-color: rgba(255, 215, 0, 0.1) !important;
+            border-color: #FFD700 !important;
+        }
+        
+        /* Mobile responsive for report */
+        @media (max-width: 768px) {
+            .report-container {
+                padding: 10px;
+            }
+            
+            .report-content {
+                padding: 10px;
+                border-radius: 8px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+                overflow: hidden;
+            }
+            
+            .report-content iframe {
+                min-height: calc(100vh - 80px) !important;
+                height: calc(100vh - 80px) !important;
+                flex: 1;
+            }
+            
+            /* Ensure iframe content is scrollable on mobile */
+            .report-content {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* ClearVin report HTML styling */
+        .report-content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .report-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .report-content table td,
+        .report-content table th {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .report-content h1,
+        .report-content h2,
+        .report-content h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .report-content p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* Ensure report is scrollable */
+        .report-content {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .report-loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+        
+        .report-loading .loader {
+            margin: 0 auto 20px;
+        }
+
+        .report-error {
+            text-align: center;
+            padding: 60px 20px;
+            color: #ef4444;
+        }
+        
+        /* Debug: Show report content border when empty */
+        .report-content:empty::after {
+            content: 'Report is empty';
+            display: block;
+            padding: 20px;
+            color: #ef4444;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .email-form-container {
+                padding: 30px 20px;
+            }
+
+            .success-title {
+                font-size: 1.5rem;
+            }
+
+            .report-container {
+                padding: 10px;
+            }
+            
+            .report-content {
+                padding: 15px;
+                border-radius: 8px;
+            }
+            
+            .report-content iframe {
+                min-height: 600px;
+                height: auto;
+            }
+            
+            /* Ensure iframe content is scrollable on mobile */
+            .report-content {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Adjust report loading/error messages for mobile */
+            .report-loading,
+            .report-error {
+                padding: 40px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .report-loading .loader {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Email Form Overlay -->
+    <div class="email-form-overlay" id="emailFormOverlay">
+        <div class="email-form-container">
+            <div class="success-icon">✓</div>
+            <h1 class="success-title">Payment Successful!</h1>
+            <p class="success-message">
+                Enter your email to receive a copy of the VIN report and receipt.
+            </p>
+            <button type="button" class="close-btn" id="closeEmailForm" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s;" onmouseover="this.style.background='#f0f0f0'; this.style.color='#333';" onmouseout="this.style.background='none'; this.style.color='#999';" title="Close (you can enter email later)">×</button>
+            <form id="emailForm">
+                <div class="email-input-wrapper">
+                    <input
+                        type="email"
+                        id="emailInput"
+                        class="email-input"
+                        placeholder="your@email.com"
+                        required
+                        autofocus
+                    />
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Send Report
+                </button>
+                <div class="message" id="message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Report Container -->
+    <div class="success-container">
+        <div class="report-container" id="reportContainer">
+            <div class="report-content" id="reportContent">
+                <div class="report-loading">
+            <div class="loader"></div>
+                    <p style="margin-top: 20px;">Loading your VIN report...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Global flag to track if report was successfully loaded (must be declared first)
+            let reportLoadedSuccessfully = false;
+            
+            function showError(message) {
+                document.getElementById('reportContent').innerHTML = `
+                    <div class="report-error">
+                        <p>${message}</p>
+                        <p style="margin-top: 10px;"><a href="/">Return to home</a></p>
+                    </div>
+                `;
+            }
+            
+            // Get VIN from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            let vin = urlParams.get('vin');
+            const setupIntent = urlParams.get('setup_intent');
+            
+            // If no VIN in URL, try to get from localStorage or sessionStorage
+            if (!vin) {
+                vin = localStorage.getItem('lastVin') || sessionStorage.getItem('lastVin');
+            }
+            
+            // If still no VIN and we have setup_intent, try to fetch from API
+            if (!vin && setupIntent) {
+                // Try to get VIN from setup intent metadata via API
+                fetch(`/api/get-vin-from-setup-intent?setup_intent=${setupIntent}`)
+                    .then(res => {
+                        if (!res.ok) {
+                            throw new Error(`HTTP ${res.status}`);
+                        }
+                        return res.json();
+                    })
+                    .then(data => {
+                        if (data.error) {
+                            throw new Error(data.error);
+                        }
+                        if (data.vin) {
+                            loadReportWithVin(data.vin);
+                        } else {
+                            showError('VIN not found. Please return to the home page and try again.');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching VIN from setup intent:', error);
+                        showError('VIN not found. Please return to the home page and try again.');
+                    });
+                return;
+            }
+            
+            if (!vin) {
+                showError('VIN not found in URL parameters.');
+                return;
+            }
+            
+            // Clean and validate VIN
+            let cleanVin = vin.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            
+            // Validate VIN length
+            if (cleanVin.length !== 17) {
+                showError('Invalid VIN format. VIN must be 17 characters.');
+                return;
+            }
+            
+            // Validate VIN format (A-Z, 0-9, excluding I, O, Q)
+            const vinPattern = /^[A-HJ-NPR-Z0-9]{17}$/;
+            if (!vinPattern.test(cleanVin)) {
+                showError('Invalid VIN format. VIN must contain only valid characters (A-Z, 0-9, excluding I, O, Q).');
+                return;
+            }
+            
+            loadReportWithVin(cleanVin);
+            
+            function loadReportWithVin(cleanVin) {
+                // Store VIN for future use
+                localStorage.setItem('lastVin', cleanVin);
+                
+                // Reset flag
+                reportLoadedSuccessfully = false;
+                
+                console.log('=== Starting report load process ===');
+                console.log('VIN:', cleanVin);
+                
+                // Load report first, then show email form
+                loadReport(cleanVin)
+                    .then(() => {
+                        console.log('=== Report load promise resolved ===');
+                        
+                        // Mark as successfully loaded
+                        reportLoadedSuccessfully = true;
+                        
+                        // Wait a bit for DOM to update
+                setTimeout(() => {
+                            // Verify report is actually visible before showing email form
+                            const reportContentEl = document.getElementById('reportContent');
+                            if (!reportContentEl) {
+                                console.error('❌ Report content element not found');
+                                reportLoadedSuccessfully = false;
+                                return;
+                            }
+                            
+                            console.log('Report element found, checking content...');
+                            console.log('InnerHTML length:', reportContentEl.innerHTML.length);
+                            
+                            // Check if report is in error state
+                            if (reportContentEl.querySelector('.report-error')) {
+                                console.warn('❌ Report is in error state, NOT showing email form');
+                                reportLoadedSuccessfully = false;
+                                return;
+                            }
+                            
+                            // Check if still in loading state
+                            if (reportContentEl.querySelector('.report-loading')) {
+                                console.warn('❌ Report is still loading, NOT showing email form');
+                                reportLoadedSuccessfully = false;
+                                return;
+                            }
+                            
+                            // Check if innerHTML is not empty (first check)
+                            const htmlLength = reportContentEl.innerHTML.trim().length;
+                            if (htmlLength < 100) {
+                                console.warn('❌ Report HTML is too short (' + htmlLength + ' chars), NOT showing email form');
+                                reportLoadedSuccessfully = false;
+                                return;
+                            }
+                            
+                            // Check if report has meaningful content
+                            const reportText = reportContentEl.innerText || reportContentEl.textContent || '';
+                            const textLength = reportText.trim().length;
+                            console.log('Report text content length:', textLength);
+                            console.log('Report text preview:', reportText.substring(0, 200));
+                            
+                            if (textLength < 50) {
+                                console.warn('❌ Report content is too short (' + textLength + ' chars), NOT showing email form');
+                                console.warn('Full HTML preview:', reportContentEl.innerHTML.substring(0, 500));
+                                reportLoadedSuccessfully = false;
+                                return;
+                            }
+                            
+                            // Final verification - check if we can see actual content
+                            const hasVisibleContent = reportText.length > 0 && 
+                                                   !reportText.includes('Loading') && 
+                                                   !reportText.includes('Error') &&
+                                                   !reportText.includes('empty');
+                            
+                            if (!hasVisibleContent) {
+                                console.warn('❌ Report does not have visible content, NOT showing email form');
+                                reportLoadedSuccessfully = false;
+                                return;
+                            }
+                            
+                            // All checks passed
+                            console.log('✅ All checks passed - Report loaded successfully with content');
+                            console.log('Report HTML length:', htmlLength);
+                            console.log('Report text length:', textLength);
+                            
+                            // Only show email form if all checks passed
+                            if (reportLoadedSuccessfully) {
+                                console.log('✅ Showing email form');
+                                showEmailForm(cleanVin);
+                            } else {
+                                console.warn('❌ Report loaded but validation failed, NOT showing email form');
+                            }
+                        }, 1000); // Increased delay to ensure DOM is fully updated
+                    })
+                    .catch((error) => {
+                        // If report fails to load, don't show email form
+                        reportLoadedSuccessfully = false;
+                        console.error('❌ Report failed to load, email form will NOT be shown:', error);
+                        console.error('Error details:', error.message, error.stack);
+                    });
+            }
+
+            function showEmailForm(vin) {
+                // Double-check that report is loaded before showing form
+                if (!reportLoadedSuccessfully) {
+                    console.error('❌ Attempted to show email form but report is not loaded successfully');
+                    return;
+                }
+                
+                const reportContentEl = document.getElementById('reportContent');
+                if (reportContentEl) {
+                    const reportText = reportContentEl.innerText || reportContentEl.textContent || '';
+                    if (reportText.trim().length < 50) {
+                        console.error('❌ Report content is too short, NOT showing email form');
+                        return;
+                    }
+                }
+                
+                console.log('✅ Showing email form overlay');
+                const emailFormOverlay = document.getElementById('emailFormOverlay');
+                emailFormOverlay.classList.add('show');
+                emailFormOverlay.classList.remove('hidden');
+                
+                // Focus on email input
+                const emailInput = document.getElementById('emailInput');
+                if (emailInput) {
+                    setTimeout(() => emailInput.focus(), 100);
+                }
+                
+                // Setup form submission
+                const emailForm = document.getElementById('emailForm');
+                if (emailForm) {
+                    // Remove old listeners
+                    const newForm = emailForm.cloneNode(true);
+                    emailForm.parentNode.replaceChild(newForm, emailForm);
+                    
+                    // Add new listener
+                    document.getElementById('emailForm').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        await handleEmailSubmit(vin);
+                    });
+                }
+                
+                // Close button handler
+                const closeBtn = document.getElementById('closeEmailForm');
+                if (closeBtn) {
+                    closeBtn.onclick = () => {
+                        emailFormOverlay.classList.remove('show');
+                        emailFormOverlay.classList.add('hidden');
+                    };
+                }
+            }
+
+            // Load report
+            async function loadReport(vin) {
+                try {
+                    console.log('Loading report for VIN:', vin);
+                    const url = `/api/get-clearvin-report?vin=${encodeURIComponent(vin)}`;
+                    console.log('Fetching from:', url);
+                    
+                    let response;
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds
+                    
+                    try {
+                        response = await fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json'
+                            },
+                            signal: controller.signal
+                        });
+                        clearTimeout(timeoutId);
+                    } catch (fetchError) {
+                        console.error('Fetch error:', fetchError);
+                        // Handle different types of fetch errors
+                        if (fetchError.name === 'AbortError') {
+                            throw new Error('Request timeout: The server took too long to respond. Please try again.');
+                        } else if (fetchError.name === 'TypeError' && fetchError.message.includes('Failed to fetch')) {
+                            throw new Error('Network error: Could not connect to server. Please check your internet connection and try again.');
+                        } else {
+                            throw new Error(`Network error: ${fetchError.message || 'Failed to fetch'}`);
+                        }
+                    }
+                    
+                    if (!response) {
+                        throw new Error('Network error: No response from server');
+                    }
+
+                    console.log('Response status:', response.status);
+                    console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
+                    let data;
+                    try {
+                        const responseText = await response.text();
+                        console.log('Response text length:', responseText.length);
+                        console.log('Response text preview:', responseText.substring(0, 200));
+                        
+                        if (!responseText || responseText.trim().length === 0) {
+                            throw new Error(`Empty response from server (status ${response.status})`);
+                        }
+                        
+                        try {
+                            data = JSON.parse(responseText);
+                        } catch (parseError) {
+                            console.error('JSON parse error:', parseError);
+                            throw new Error(`Invalid JSON response (status ${response.status}): ${responseText.substring(0, 100)}`);
+                        }
+                    } catch (jsonError) {
+                        console.error('Error parsing response:', jsonError);
+                        throw new Error(`Server error (${response.status}): ${jsonError.message || 'Unknown error'}`);
+                    }
+
+                    if (!response.ok) {
+                        const errorMsg = data.error || data.details || data.message || `Server returned status ${response.status}`;
+                        console.error('❌ API returned error status:', response.status);
+                        console.error('Error message:', errorMsg);
+                        console.error('Full error data:', data);
+                        throw new Error(errorMsg);
+                    }
+                    
+                    if (!data.success) {
+                        const errorMsg = data.error || data.details || data.message || 'Failed to load report';
+                        console.error('❌ API returned success=false');
+                        console.error('Error message:', errorMsg);
+                        console.error('Full error data:', data);
+                        throw new Error(errorMsg);
+                    }
+
+                    if (!data.report || data.report.trim().length === 0) {
+                        throw new Error('Report is empty. The report may still be generating. Please try again in a few moments.');
+                    }
+
+                    // Check if report has meaningful content (not just empty HTML tags)
+                    const reportText = data.report.replace(/<[^>]*>/g, '').trim();
+                    if (reportText.length < 50) {
+                        console.warn('Report seems to have very little content:', reportText.length, 'characters');
+                        throw new Error('Report content is too short. The report may still be generating. Please try again in a few moments.');
+                    }
+
+                    console.log('✅ Report data received successfully');
+                    console.log('Response status:', response.status);
+                    console.log('Data keys:', Object.keys(data));
+                    console.log('Data.success:', data.success);
+                    console.log('Report HTML length:', data.report ? data.report.length : 0);
+                    console.log('Report text content length (without HTML tags):', reportText.length);
+                    console.log('Report preview (first 500 chars):', data.report ? data.report.substring(0, 500) : 'NO REPORT');
+                    
+                    // Additional check: verify report is actually HTML
+                    if (data.report && !data.report.includes('<') && !data.report.includes('>')) {
+                        console.error('❌ Report does not appear to be HTML');
+                        throw new Error('Report format is invalid - expected HTML but got plain text');
+                    }
+                    
+                    // Set report content
+                    const reportContentEl = document.getElementById('reportContent');
+                    if (!reportContentEl) {
+                        throw new Error('Report content element not found');
+                    }
+                    
+                    // Remove loading class and any error classes
+                    reportContentEl.classList.remove('report-loading', 'report-error');
+                    
+                    // Clear any existing content
+                    reportContentEl.innerHTML = '';
+                    
+                    // Function to modify report HTML text
+                    function modifyReportText(htmlReport) {
+                        let modifiedReport = htmlReport;
+                        
+                        // Replace "SOURCE: CLEARVIN" with "SOURCE: VINTRUST"
+                        modifiedReport = modifiedReport.replace(/SOURCE:\s*CLEARVIN/gi, 'SOURCE: VINTRUST');
+                        modifiedReport = modifiedReport.replace(/SOURCE:\s*ClearVin/gi, 'SOURCE: VINTRUST');
+                        modifiedReport = modifiedReport.replace(/SOURCE:\s*Clearvin/gi, 'SOURCE: VINTRUST');
+                        
+                        return modifiedReport;
+                    }
+                    
+                    // Modify report text before displaying
+                    let modifiedReport = modifyReportText(data.report);
+                    
+                    // Check if this is a React-based report (has <div id=root> and script tags)
+                    const isReactReport = modifiedReport.includes('<div id=root>') || modifiedReport.includes('<div id="root">');
+                    
+                    if (isReactReport) {
+                        console.log('Detected React-based report, using iframe for proper rendering');
+                        
+                        // Create iframe to allow scripts to execute
+                        const iframe = document.createElement('iframe');
+                        iframe.style.width = '100%';
+                        iframe.style.border = 'none';
+                        
+                        // Responsive height for mobile
+                        const isMobile = window.innerWidth <= 768;
+                        if (isMobile) {
+                            // Full screen height minus padding and margins
+                            const mobileHeight = window.innerHeight - 100;
+                            iframe.style.height = mobileHeight + 'px';
+                            iframe.style.minHeight = mobileHeight + 'px';
+                        } else {
+                            iframe.style.height = '100vh';
+                            iframe.style.minHeight = '800px';
+                        }
+                        
+                        iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-forms allow-downloads';
+                        
+                        // Update iframe height on window resize
+                        let resizeTimeout;
+                        const updateIframeHeight = () => {
+                            const isMobileNow = window.innerWidth <= 768;
+                            if (isMobileNow) {
+                                const mobileHeight = window.innerHeight - 100;
+                                iframe.style.height = mobileHeight + 'px';
+                                iframe.style.minHeight = mobileHeight + 'px';
+                            } else {
+                                iframe.style.height = '100vh';
+                                iframe.style.minHeight = '800px';
+                            }
+                        };
+                        
+                        window.addEventListener('resize', () => {
+                            clearTimeout(resizeTimeout);
+                            resizeTimeout = setTimeout(updateIframeHeight, 100);
+                        });
+                        
+                        // Also update on orientation change
+                        window.addEventListener('orientationchange', () => {
+                            setTimeout(updateIframeHeight, 300);
+                        });
+                        
+                        // Write HTML to iframe
+                        reportContentEl.appendChild(iframe);
+                        
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        iframeDoc.open();
+                        iframeDoc.write(modifiedReport);
+                        iframeDoc.close();
+                        
+                        // Function to inject CSS and apply color replacements
+                        function injectYellowStyles() {
+                            try {
+                                if (!iframeDoc.head) return;
+                                
+                                // Remove existing style if any
+                                const existingStyle = iframeDoc.getElementById('vintrust-color-replace');
+                                if (existingStyle) {
+                                    existingStyle.remove();
+                                }
+                                
+                                const iframeStyle = iframeDoc.createElement('style');
+                                iframeStyle.id = 'vintrust-color-replace';
+                                iframeStyle.textContent = `
+                                    /* Replace green colors with yellow - VINTRUST branding */
+                                    * {
+                                        --success-color: #FFD700 !important;
+                                        --green-color: #FFD700 !important;
+                                        --green-500: #FFD700 !important;
+                                        --green-400: #FFD700 !important;
+                                        --green-600: #FFD700 !important;
+                                    }
+                                    
+                                    /* Replace inline styles with green colors */
+                                    [style*="green"],
+                                    [style*="#10b981"],
+                                    [style*="#34d399"],
+                                    [style*="#059669"],
+                                    [style*="#065f46"],
+                                    [style*="rgb(16, 185, 129)"],
+                                    [style*="rgb(52, 211, 153)"],
+                                    [style*="rgb(5, 150, 105)"] {
+                                        color: #FFD700 !important;
+                                        background-color: #FFD700 !important;
+                                        border-color: #FFD700 !important;
+                                        fill: #FFD700 !important;
+                                        stroke: #FFD700 !important;
+                                    }
+                                    
+                                    /* Replace classes with green/success */
+                                    .success,
+                                    .status-success,
+                                    [class*="success"],
+                                    [class*="green"],
+                                    [class*="bg-green"],
+                                    [class*="text-green"] {
+                                        color: #FFD700 !important;
+                                        background-color: rgba(255, 215, 0, 0.15) !important;
+                                        border-color: #FFD700 !important;
+                                    }
+                                    
+                                    /* Specific green color replacements */
+                                    [style*="background-color: rgb(16, 185, 129)"],
+                                    [style*="background-color: #10b981"],
+                                    [style*="background-color: #34d399"],
+                                    [style*="background-color: #059669"] {
+                                        background-color: #FFD700 !important;
+                                    }
+                                    
+                                    [style*="color: rgb(16, 185, 129)"],
+                                    [style*="color: #10b981"],
+                                    [style*="color: #34d399"],
+                                    [style*="color: #059669"] {
+                                        color: #FFD700 !important;
+                                    }
+                                    
+                                    /* SVG and icon colors */
+                                    svg [fill*="green"],
+                                    svg [fill="#10b981"],
+                                    svg [fill="#34d399"],
+                                    svg [fill="#059669"] {
+                                        fill: #FFD700 !important;
+                                    }
+                                    
+                                    svg [stroke*="green"],
+                                    svg [stroke="#10b981"],
+                                    svg [stroke="#34d399"] {
+                                        stroke: #FFD700 !important;
+                                    }
+                                `;
+                                iframeDoc.head.appendChild(iframeStyle);
+                                
+                                // Also apply styles directly to elements after React renders
+                                setTimeout(() => {
+                                    try {
+                                        const allElements = iframeDoc.querySelectorAll('*');
+                                        allElements.forEach(el => {
+                                            const style = el.getAttribute('style') || '';
+                                            if (style.includes('green') || 
+                                                style.includes('#10b981') || 
+                                                style.includes('#34d399') || 
+                                                style.includes('#059669') ||
+                                                style.includes('rgb(16, 185, 129)') ||
+                                                style.includes('rgb(52, 211, 153)')) {
+                                                el.style.setProperty('color', '#FFD700', 'important');
+                                                el.style.setProperty('background-color', '#FFD700', 'important');
+                                                el.style.setProperty('border-color', '#FFD700', 'important');
+                                            }
+                                        });
+                                    } catch (e) {
+                                        console.warn('Could not apply direct style replacements:', e);
+                                    }
+                                }, 3000);
+                            } catch (e) {
+                                console.warn('Could not inject styles into iframe:', e);
+                            }
+                        }
+                        
+                        // Handle PDF download links in iframe
+                        function setupPdfDownloadHandler() {
+                            try {
+                                const iframeWindow = iframe.contentWindow;
+                                const iframeDoc = iframe.contentDocument || iframeWindow.document;
+                                
+                                if (!iframeDoc) return;
+                                
+                                // Intercept clicks on PDF download links
+                                iframeDoc.addEventListener('click', (e) => {
+                                    const target = e.target;
+                                    const link = target.closest('a') || (target.tagName === 'A' ? target : null);
+                                    
+                                    if (link && (link.href || link.getAttribute('href'))) {
+                                        const href = link.href || link.getAttribute('href') || '';
+                                        
+                                        // Check if it's a PDF download link
+                                        if (href.includes('format=pdf') || 
+                                            href.includes('.pdf') || 
+                                            href.includes('download') ||
+                                            link.getAttribute('download') ||
+                                            (link.textContent && link.textContent.toLowerCase().includes('pdf')) ||
+                                            (link.textContent && link.textContent.toLowerCase().includes('download'))) {
+                                            
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            
+                                            console.log('PDF download link clicked:', href);
+                                            
+                                            // Get VIN from current page
+                                            const urlParams = new URLSearchParams(window.location.search);
+                                            const vin = urlParams.get('vin') || localStorage.getItem('lastVin');
+                                            
+                                            if (vin) {
+                                                // Fetch PDF via our API
+                                                const pdfUrl = `/api/get-clearvin-report?vin=${encodeURIComponent(vin)}&format=pdf`;
+                                                
+                                                // Create a temporary link to trigger download
+                                                const downloadLink = document.createElement('a');
+                                                downloadLink.href = pdfUrl;
+                                                downloadLink.download = `VIN-Report-${vin}.pdf`;
+                                                downloadLink.style.display = 'none';
+                                                document.body.appendChild(downloadLink);
+                                                downloadLink.click();
+                                                
+                                                // Clean up after a delay
+                                                setTimeout(() => {
+                                                    document.body.removeChild(downloadLink);
+                                                }, 100);
+                                                
+                                                console.log('PDF download initiated');
+                                            } else {
+                                                console.error('VIN not found for PDF download');
+                                            }
+                                            
+                                            return false;
+                                        }
+                                    }
+                                }, true); // Use capture phase to catch early
+                                
+                                // Also watch for dynamically added links
+                                const observer = new MutationObserver(() => {
+                                    try {
+                                        const pdfLinks = iframeDoc.querySelectorAll('a[href*="pdf"], a[href*="format=pdf"], a[download], button[onclick*="pdf"], button[onclick*="download"], [class*="download"], [class*="pdf"]');
+                                        pdfLinks.forEach(link => {
+                                            if (!link.dataset.pdfHandlerAdded) {
+                                                link.dataset.pdfHandlerAdded = 'true';
+                                                link.addEventListener('click', (e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    
+                                                    const urlParams = new URLSearchParams(window.location.search);
+                                                    const vin = urlParams.get('vin') || localStorage.getItem('lastVin');
+                                                    
+                                                    if (vin) {
+                                                        const pdfUrl = `/api/get-clearvin-report?vin=${encodeURIComponent(vin)}&format=pdf`;
+                                                        const downloadLink = document.createElement('a');
+                                                        downloadLink.href = pdfUrl;
+                                                        downloadLink.download = `VIN-Report-${vin}.pdf`;
+                                                        downloadLink.style.display = 'none';
+                                                        document.body.appendChild(downloadLink);
+                                                        downloadLink.click();
+                                                        setTimeout(() => {
+                                                            document.body.removeChild(downloadLink);
+                                                        }, 100);
+                                                    }
+                                                    
+                                                    return false;
+                                                });
+                                            }
+                                        });
+                                    } catch (e) {
+                                        console.warn('Error in PDF link observer:', e);
+                                    }
+                                });
+                                
+                                if (iframeDoc.body) {
+                                    observer.observe(iframeDoc.body, {
+                                        childList: true,
+                                        subtree: true
+                                    });
+                                    
+                                    // Stop observing after 30 seconds
+                                    setTimeout(() => observer.disconnect(), 30000);
+                                }
+                                
+                            } catch (e) {
+                                console.warn('Could not set up PDF download handler:', e);
+                            }
+                        }
+                        
+                        // Inject styles immediately
+                        setTimeout(injectYellowStyles, 100);
+                        
+                        // Also inject after iframe loads
+                        iframe.onload = () => {
+                            setTimeout(() => {
+                                injectYellowStyles();
+                                setupPdfDownloadHandler();
+                            }, 500);
+                        };
+                        
+                        // Setup PDF handler after iframe content is written
+                        setTimeout(setupPdfDownloadHandler, 1000);
+                        
+                        // Use MutationObserver to watch for React rendering and apply styles
+                        setTimeout(() => {
+                            try {
+                                const observer = new MutationObserver(() => {
+                                    injectYellowStyles();
+                                });
+                                
+                                if (iframeDoc.body) {
+                                    observer.observe(iframeDoc.body, {
+                                        childList: true,
+                                        subtree: true,
+                                        attributes: true,
+                                        attributeFilter: ['style', 'class']
+                                    });
+                                }
+                                
+                                // Stop observing after 10 seconds
+                                setTimeout(() => observer.disconnect(), 10000);
+                            } catch (e) {
+                                console.warn('Could not set up MutationObserver:', e);
+                            }
+                        }, 1000);
+                        
+                        console.log('Report HTML inserted in iframe');
+                        
+                        // Wait for iframe to load and React to render
+                        await new Promise(resolve => setTimeout(resolve, 2000));
+                        
+                        // Check iframe content
+                        const iframeContent = iframeDoc.body.innerText || iframeDoc.body.textContent || '';
+                        const iframeContentLength = iframeContent.trim().length;
+                        console.log('Iframe content length:', iframeContentLength);
+                        
+                        if (iframeContentLength < 50) {
+                            console.warn('⚠️ Iframe content is short, React may still be loading');
+                            // Give React more time
+                            await new Promise(resolve => setTimeout(resolve, 2000));
+                        }
+                        
+                        // For React reports, we consider it successful if iframe is loaded
+                        // even if content is still loading (React will render asynchronously)
+                        console.log('✅ React report iframe loaded successfully');
+                        
+                    } else {
+                        // Regular HTML report - insert directly (with modifications)
+                        reportContentEl.innerHTML = modifiedReport;
+                        
+                        console.log('Report HTML inserted, checking content...');
+                        console.log('InnerHTML length after insertion:', reportContentEl.innerHTML.length);
+                        
+                        // Verify that content was actually inserted
+                        if (reportContentEl.innerHTML.trim().length === 0) {
+                            console.error('❌ Failed to insert report content - innerHTML is empty');
+                            throw new Error('Failed to display report content');
+                        }
+                        
+                        // Wait a bit for browser to parse and render HTML
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                        
+                        // Verify that report is actually visible (has text content)
+                        const insertedText = reportContentEl.innerText || reportContentEl.textContent || '';
+                        const insertedTextLength = insertedText.trim().length;
+                        console.log('Inserted text length:', insertedTextLength);
+                        console.log('Inserted text preview:', insertedText.substring(0, 200));
+                        
+                        if (insertedTextLength < 50) {
+                            console.error('❌ Report content is too short after insertion:', insertedTextLength, 'characters');
+                            console.error('Full HTML:', reportContentEl.innerHTML.substring(0, 500));
+                            throw new Error('Report content is too short after insertion. The report may be incomplete.');
+                        }
+                    }
+                    
+                    // Double-check visibility
+                    const computedStyle = window.getComputedStyle(reportContentEl);
+                    console.log('Report element computed style:', {
+                        display: computedStyle.display,
+                        visibility: computedStyle.visibility,
+                        opacity: computedStyle.opacity,
+                        height: computedStyle.height,
+                        width: computedStyle.width
+                    });
+                    
+                    if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden' || computedStyle.opacity === '0') {
+                        console.warn('⚠️ Report element is not visible, forcing visibility');
+                        // Force visibility
+                        reportContentEl.style.display = 'block';
+                        reportContentEl.style.visibility = 'visible';
+                        reportContentEl.style.opacity = '1';
+                    }
+                    
+                    console.log('✅ Report successfully loaded and displayed');
+                    
+                    // Return promise for chaining
+                    return Promise.resolve();
+                } catch (error) {
+                    console.error('Error loading report:', error);
+                    console.error('Error stack:', error.stack);
+                    
+                    let errorMessage = error.message || 'Failed to load report';
+                    
+                    // More specific error messages
+                    if (error.message.includes('Failed to fetch') || error.message.includes('Network error')) {
+                        errorMessage = 'Network error: Could not connect to server. This might be due to:\n' +
+                                      '• Internet connection issues\n' +
+                                      '• Server is temporarily unavailable\n' +
+                                      '• CORS or firewall blocking the request\n\n' +
+                                      'Please check your internet connection and try again.';
+                    } else if (error.message.includes('timeout')) {
+                        errorMessage = 'Request timeout: The server took too long to respond. The report might still be generating. Please try again in a few moments.';
+                    } else if (error.message.includes('404')) {
+                        errorMessage = 'API endpoint not found. Please contact support.';
+                    } else if (error.message.includes('500')) {
+                        errorMessage = 'Server error: Please try again in a few moments.';
+                    } else if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+                        errorMessage = 'Authorization error: API token might be missing or invalid. Please contact support.';
+                    }
+                    
+                    document.getElementById('reportContent').innerHTML = `
+                        <div class="report-error">
+                            <p><strong>Error loading report:</strong></p>
+                            <p style="white-space: pre-line;">${errorMessage}</p>
+                            <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                                If this problem persists, please contact support or try again later.
+                            </p>
+                            <p style="margin-top: 10px;">
+                                <button onclick="location.reload()" style="padding: 8px 16px; background: #111827; color: white; border: none; border-radius: 4px; cursor: pointer;">Retry</button>
+                                <a href="/" style="margin-left: 10px;">Return to home</a>
+                            </p>
+                        </div>
+                    `;
+                    
+                    // Return rejected promise so email form is not shown
+                    return Promise.reject(error);
+                }
+            }
+
+            // Email form elements
+            const emailForm = document.getElementById('emailForm');
+            const emailInput = document.getElementById('emailInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('message');
+            const emailFormOverlay = document.getElementById('emailFormOverlay');
+            const reportContainer = document.getElementById('reportContainer');
+
+            // Email form submission handler
+            async function handleEmailSubmit(vin) {
+                const email = emailInput.value.trim();
+                
+                // Validate email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    emailInput.classList.add('error');
+                    messageDiv.textContent = 'Please enter a valid email address';
+                    messageDiv.className = 'message error';
+                    return;
+                }
+
+                emailInput.classList.remove('error');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+                messageDiv.textContent = '';
+                messageDiv.className = 'message';
+
+                try {
+                    console.log('Sending report to email:', email, 'VIN:', vin);
+                    
+                    let response;
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds
+                    
+                    try {
+                        response = await fetch('/api/send-clearvin-report', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                email: email,
+                                vin: vin
+                            }),
+                            signal: controller.signal
+                        });
+                        clearTimeout(timeoutId);
+                    } catch (fetchError) {
+                        clearTimeout(timeoutId);
+                        console.error('Fetch error:', fetchError);
+                        // Handle different types of fetch errors
+                        if (fetchError.name === 'AbortError') {
+                            throw new Error('Request timeout: The server took too long to respond. Please try again.');
+                        } else if (fetchError.name === 'TypeError' && fetchError.message.includes('Failed to fetch')) {
+                            throw new Error('Network error: Could not connect to server. Please check your internet connection and try again.');
+            } else {
+                            throw new Error(`Network error: ${fetchError.message || 'Failed to fetch'}`);
+                        }
+                    }
+
+                    if (!response) {
+                        throw new Error('Network error: No response from server');
+                    }
+
+                    console.log('Response status:', response.status);
+
+                    let data;
+                    try {
+                        const responseText = await response.text();
+                        console.log('Response text:', responseText.substring(0, 200));
+                        
+                        if (!responseText || responseText.trim().length === 0) {
+                            throw new Error(`Empty response from server (status ${response.status})`);
+                        }
+                        
+                        try {
+                            data = JSON.parse(responseText);
+                        } catch (parseError) {
+                            console.error('JSON parse error:', parseError);
+                            throw new Error(`Invalid JSON response (status ${response.status}): ${responseText.substring(0, 100)}`);
+                        }
+                    } catch (jsonError) {
+                        console.error('Error parsing response:', jsonError);
+                        throw new Error(`Server error (${response.status}): ${jsonError.message || 'Unknown error'}`);
+                    }
+
+                    if (!response.ok || !data.success) {
+                        const errorMsg = data.error || data.details || data.message || 'Failed to send report';
+                        console.error('API error:', errorMsg, data);
+                        throw new Error(errorMsg);
+                    }
+
+                    // Success - hide form
+                    messageDiv.textContent = 'Report sent successfully!';
+                    messageDiv.className = 'message success';
+                    
+                setTimeout(() => {
+                        emailFormOverlay.classList.remove('show');
+                        emailFormOverlay.classList.add('hidden');
+                    }, 1500);
+
+                } catch (error) {
+                    console.error('Error sending report:', error);
+                    console.error('Error stack:', error.stack);
+                    
+                    let errorMessage = error.message || 'Failed to send report. Please try again.';
+                    
+                    // More user-friendly error messages
+                    if (error.message.includes('Failed to fetch') || error.message.includes('Network error')) {
+                        errorMessage = 'Network error: Could not connect to server. Please check your internet connection and try again.';
+                    } else if (error.message.includes('timeout')) {
+                        errorMessage = 'Request timeout: The server took too long to respond. Please try again.';
+                    } else if (error.message.includes('500')) {
+                        errorMessage = 'Server error: Please try again in a few moments.';
+                    } else if (error.message.includes('404')) {
+                        errorMessage = 'API endpoint not found. Please contact support.';
+                    } else if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+                        errorMessage = 'Authorization error: API token might be missing or invalid. Please contact support.';
+                    }
+                    
+                    messageDiv.textContent = errorMessage;
+                    messageDiv.className = 'message error';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Report';
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

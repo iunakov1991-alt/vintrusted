@@ -1,0 +1,1 @@
+Fix logo filename to logo-vin-trust.png: Wed Oct 15 17:18:58 PDT 2025

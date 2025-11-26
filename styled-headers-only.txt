@@ -1,0 +1,1 @@
+Keep only styled headers above columns, revert table cells to simple text: Thu Oct 16 04:42:25 PDT 2025
