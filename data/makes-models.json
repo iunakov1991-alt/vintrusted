@@ -1,60 +1,11 @@
 {
-  "_comment": "Расширяемый файл. Сюда можно догружать ВСЕ марки и ВСЕ модели без смены кода.",
-  "Toyota": [
-    "Camry","Corolla","RAV4","Prius","Highlander","Tacoma","4Runner","Sienna"
-  ],
-  "Honda": [
-    "Civic","Accord","CR-V","Pilot","Fit","Odyssey","HR-V"
-  ],
-  "Ford": [
-    "F-150","Focus","Fusion","Escape","Explorer","Mustang","Edge"
-  ],
-  "Chevrolet": [
-    "Silverado 1500","Equinox","Malibu","Tahoe","Suburban","Camaro","Cruze"
-  ],
-  "Nissan": [
-    "Altima","Sentra","Rogue","Pathfinder","Maxima","Frontier"
-  ],
-  "BMW": [
-    "3 Series","5 Series","X3","X5","X1","4 Series"
-  ],
-  "Mercedes-Benz": [
-    "C-Class","E-Class","S-Class","GLC","GLE","GLA"
-  ],
-  "Volkswagen": [
-    "Jetta","Passat","Golf","Tiguan","Atlas"
-  ],
-  "Hyundai": [
-    "Elantra","Sonata","Tucson","Santa Fe","Kona"
-  ],
-  "Kia": [
-    "Optima","Forte","Sorento","Sportage","Soul","Rio"
-  ],
-  "Subaru": [
-    "Outback","Forester","Impreza","Crosstrek","Legacy"
-  ],
-  "Lexus": [
-    "ES 300h","RX 350","NX 300","IS 250","GX 460"
-  ],
-  "Tesla": [
-    "Model 3","Model S","Model X","Model Y"
-  ],
-  "GMC": [
-    "Sierra 1500","Terrain","Acadia","Yukon"
-  ],
-  "Jeep": [
-    "Wrangler","Grand Cherokee","Cherokee","Compass","Renegade","Gladiator"
-  ],
-  "RAM": [
-    "1500","2500","3500"
-  ],
-  "Audi": [
-    "A3","A4","A6","Q3","Q5","Q7"
-  ],
-  "Mazda": [
-    "Mazda3","Mazda6","CX-5","CX-9","CX-30"
-  ],
-  "Other": [
-    "Generic Sedan","Generic SUV","Generic Truck"
-  ]
+  "_comment": "БАЗОВЫЙ ШАБЛОН. Заменить/расширить полноценным списком марок/моделей. Движок сам подцепит любые новые марки и модели.",
+  "Toyota": ["Camry", "Corolla", "RAV4", "Prius", "Tacoma"],
+  "Honda": ["Civic", "Accord", "CR-V", "Fit", "Pilot"],
+  "Ford": ["F-150", "Escape", "Focus", "Explorer", "Mustang"],
+  "Chevrolet": ["Silverado", "Equinox", "Malibu", "Tahoe", "Camaro"],
+  "Nissan": ["Altima", "Rogue", "Sentra", "Pathfinder", "Versa"],
+  "BMW": ["3 Series", "5 Series", "X3", "X5"],
+  "Mercedes-Benz": ["C-Class", "E-Class", "GLC", "GLE"],
+  "Volkswagen": ["Jetta", "Golf", "Passat", "Tiguan"]
 }

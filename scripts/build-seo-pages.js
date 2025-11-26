@@ -71,6 +71,8 @@ function main() {
 
   runNodeScript("generate-massive-seo-articles.js");
 
+  runNodeScript("scripts/generate-knowledge-graph-pages.js");
+
   const syncScript = path.join(ROOT, "sync-articles-to-static-pages.js");
   if (fs.existsSync(syncScript)) {
     log("Run legacy sync script");
