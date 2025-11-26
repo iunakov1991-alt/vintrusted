@@ -11,3 +11,4 @@ public/static-pages/
 public/seo-stats.json
 public/sitemap-seo-*.xml
 public/sitemap-seo.xml
+.git_backup_*

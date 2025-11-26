@@ -1,6 +1,0 @@
-0000000000000000000000000000000000000000 7385759f9327f4c5711519db8cb1e0201300de80 iunakov1991-alt <iunakov1991@gmail.com> 1764116009 -0800	commit (initial): Clean reinitialize: removed old SEO files and recreated fresh Git repo
-7385759f9327f4c5711519db8cb1e0201300de80 fd5a2fdfca61d2f2bbbff4b6042a9659dde79244 iunakov1991-alt <iunakov1991@gmail.com> 1764116775 -0800	commit: Remove empty backup file
-fd5a2fdfca61d2f2bbbff4b6042a9659dde79244 fd5a2fdfca61d2f2bbbff4b6042a9659dde79244 iunakov1991-alt <iunakov1991@gmail.com> 1764117310 -0800	Branch: renamed refs/heads/main to refs/heads/main
-fd5a2fdfca61d2f2bbbff4b6042a9659dde79244 9cd11bf38d06dc959067a695d18dcf5328ece554 iunakov1991-alt <iunakov1991@gmail.com> 1764117350 -0800	commit: Add .env to gitignore and remove secrets from repository
-9cd11bf38d06dc959067a695d18dcf5328ece554 ceb7b9fd48381397fdfea6d6b7a18a3a534752bc iunakov1991-alt <iunakov1991@gmail.com> 1764117350 -0800	filter-branch: rewrite
-ceb7b9fd48381397fdfea6d6b7a18a3a534752bc 291d022b63f3e81a20c9e7c5613f1b6b4954eff7 iunakov1991-alt <iunakov1991@gmail.com> 1764117845 -0800	commit: Add build-seo-pages.js for Vercel SEO generation
