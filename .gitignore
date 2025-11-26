@@ -1,6 +1,8 @@
 node_modules/
 .next/
 dist/
+.env
+*.env
 articles/
 articles2/
 public/articles/
