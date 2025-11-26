@@ -1,0 +1,542 @@
+/* =============================================================================
+   НОВАЯ МОБИЛЬНАЯ ФОРМА - ТОЛЬКО ДЛЯ ≤768px
+   Чистая реализация с правильными отступами и блокировкой iOS меню
+   ============================================================================= */
+
+/* СКРЫВАЕМ НА ДЕСКТОПЕ (≥769px) */
+@media (min-width: 769px) {
+  .mobile-form-wrapper,
+  .mobile-mode-buttons,
+  .mobile-mode-btn,
+  .mobile-input-wrapper,
+  .mobile-vin-wrapper,
+  .mobile-plate-wrapper,
+  .mobile-vin-input,
+  .mobile-state-select,
+  .mobile-plate-input,
+  .mobile-submit-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    pointer-events: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+@keyframes mobileShineSweep {
+  0% {
+    transform: translateX(-130%) skewX(-20deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  35% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(130%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes mobileVinAutofillGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 220, 130, 0);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+  }
+  40% {
+    box-shadow: 0 0 18px rgba(255, 225, 130, 0.75);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.08));
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 220, 130, 0);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+  }
+}
+
+@media (max-width: 768px) {
+  /* На мобилке показываем форму - ПРИНУДИТЕЛЬНО */
+  .mobile-form-wrapper {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    overflow: visible !important;
+    position: static !important;
+    left: auto !important;
+    width: 100% !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    pointer-events: auto !important;
+    margin: 0 auto !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .mobile-mode-buttons,
+  .mobile-mode-btn,
+  .mobile-input-wrapper,
+  .mobile-vin-wrapper,
+  .mobile-plate-wrapper,
+  .mobile-vin-input,
+  .mobile-state-select,
+  .mobile-plate-input,
+  .mobile-submit-btn {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    left: auto !important;
+    width: auto !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-mode-btn[data-mobile-mode="vin"],
+  .mobile-vin-wrapper,
+  .mobile-submit-btn {
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .mobile-mode-btn[data-mobile-mode="vin"]::after,
+  .mobile-vin-wrapper::after,
+  .mobile-submit-btn::after {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -150%;
+    width: 220%;
+    height: 220%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.65) 50%, transparent 75%);
+    transform: skewX(-20deg);
+    animation: mobileShineSweep 4.2s ease-in-out infinite;
+    animation-delay: var(--shine-seq-delay, 0s);
+    opacity: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    mix-blend-mode: screen;
+  }
+
+  .mobile-mode-btn[data-mobile-mode="vin"] {
+    --shine-seq-delay: 0s;
+  }
+
+  .mobile-vin-wrapper {
+    --shine-seq-delay: 1.2s;
+  }
+
+  .mobile-submit-btn {
+    --shine-seq-delay: 2.4s;
+  }
+
+  .mobile-vin-input.vin-autofill-animating {
+    caret-color: transparent;
+    letter-spacing: 0.06em;
+    transition: letter-spacing 0.25s ease;
+  }
+
+  .mobile-vin-input.vin-autofill-highlight {
+    animation: mobileVinAutofillGlow 1.2s ease-out both;
+  }
+
+  .mobile-vin-input {
+    transition: box-shadow 0.3s ease, background-image 0.3s ease;
+  }
+  
+  .mobile-mode-buttons {
+    display: flex !important;
+  }
+  
+  .mobile-input-wrapper.active {
+    display: flex !important;
+  }
+  
+  .mobile-input-wrapper:not(.active) {
+    display: none !important;
+  }
+  
+  /* Скрываем старую форму на мобилке */
+  .desktop-form-container,
+  .search-form-container.desktop-form-container {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* НОВАЯ МОБИЛЬНАЯ ФОРМА - ПОСЛЕ ХАЙЛАЙТОВ */
+  /* Убеждаемся что hero-container использует flex для правильного порядка */
+  .hero-container {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Хайлайты должны быть перед формой */
+  .subtitle-chips {
+    order: 2 !important;
+    margin-bottom: 0px !important;
+  }
+  
+  /* Форма должна быть после хайлайтов */
+  .mobile-form-wrapper {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 16px;
+    padding-bottom: 0;
+    margin: 0 auto 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* РАВНЫЕ ВЕРТИКАЛЬНЫЕ ОТСТУПЫ */
+    order: 3 !important; /* После subtitle-chips (order: 2) */
+    flex: 0 0 auto;
+  }
+  
+  /* Кнопки выбора режима */
+  .mobile-mode-buttons {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .mobile-mode-btn {
+    flex: 1;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    padding: 0;
+    margin: 0;
+    border-radius: 27px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    
+    /* БЛОКИРОВКА iOS МЕНЮ */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+  }
+  
+  .mobile-mode-btn.active {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    border-color: #fbbf24;
+  }
+  
+  .mobile-mode-btn:focus {
+    outline: none;
+  }
+  
+  /* Обёртки для полей ввода */
+  .mobile-input-wrapper {
+    width: 100%;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  
+  /* VIN обертка активна */
+  .mobile-vin-wrapper.active {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto;
+    overflow: visible;
+  }
+  
+  /* Plate обертка активна */
+  .mobile-plate-wrapper.active {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto;
+    overflow: visible;
+  }
+  
+  /* Прячем неактивную обертку Plate, когда активна VIN */
+  .mobile-vin-wrapper.active ~ .mobile-plate-wrapper,
+  .mobile-plate-wrapper:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Прячем неактивную обертку VIN, когда активна Plate */
+  .mobile-plate-wrapper.active ~ .mobile-vin-wrapper,
+  .mobile-vin-wrapper:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Поле VIN */
+  .mobile-vin-input {
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    padding: 0 20px;
+    margin: 0;
+    border-radius: 27px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    color: #1a1a1a;
+    font-size: 16px;
+    font-weight: 500;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  .mobile-vin-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  /* Поля License Plate - одно поле с двумя элементами внутри (как на десктопе) */
+  .mobile-plate-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0 !important; /* Без gap между элементами */
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    padding: 0;
+    margin: 0;
+    border-radius: 27px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    box-sizing: border-box;
+    overflow: hidden; /* Чтобы содержимое не выходило за границы */
+  }
+  
+  .mobile-state-select {
+    flex: 0 0 auto; /* Фиксированная ширина для селекта */
+    width: auto;
+    min-width: 140px; /* Минимальная ширина для селекта */
+    height: 50px;
+    padding: 0 20px;
+    margin: 0;
+    border: none !important; /* Убираем border, он на обертке */
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important; /* Разделитель */
+    border-radius: 27px 0 0 27px; /* Скругление только слева */
+    background: transparent;
+    color: #1a1a1a;
+    font-size: 16px;
+    font-weight: 500;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  .mobile-plate-input {
+    flex: 1; /* Остальное пространство для поля плейт */
+    height: 50px;
+    padding: 0 20px;
+    margin: 0;
+    border: none !important; /* Убираем border, он на обертке */
+    border-radius: 0 27px 27px 0; /* Скругление только справа */
+    background: transparent;
+    color: #1a1a1a;
+    font-size: 16px;
+    font-weight: 500;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  /* Фокус на всем контейнере */
+  .mobile-plate-wrapper:focus-within {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .mobile-state-select:focus,
+  .mobile-plate-input:focus {
+    outline: none;
+  }
+  
+  /* Кнопка отправки */
+  .mobile-submit-btn {
+    width: 100%;
+    height: auto;
+    min-height: 50px;
+    max-height: none;
+    padding: 16px 24px;
+    margin: 0;
+    margin-bottom: calc(2cm + max(0px, calc(var(--sab) / 12)));
+    border-radius: 27px;
+    border: none;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    
+    /* БЛОКИРОВКА iOS МЕНЮ */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+  }
+  
+  .mobile-submit-btn:active {
+    transform: scale(0.98);
+  }
+  
+  .mobile-submit-btn:focus {
+    outline: none;
+  }
+}
+
+/* На десктопе скрываем новую мобильную форму */
+@media (min-width: 769px) {
+  html body .mobile-form-wrapper,
+  html body .mobile-mode-buttons,
+  html body .mobile-mode-btn,
+  html body .mobile-input-wrapper,
+  html body .mobile-vin-wrapper,
+  html body .mobile-plate-wrapper,
+  html body .mobile-vin-input,
+  html body .mobile-state-select,
+  html body .mobile-plate-input,
+  html body .mobile-submit-btn,
+  .hero-container .mobile-form-wrapper,
+  .hero-container .mobile-mode-buttons,
+  .hero-container .mobile-mode-btn,
+  .hero-container .mobile-input-wrapper,
+  .hero-container .mobile-vin-wrapper,
+  .hero-container .mobile-plate-wrapper,
+  .hero-container .mobile-vin-input,
+  .hero-container .mobile-state-select,
+  .hero-container .mobile-plate-input,
+  .hero-container .mobile-submit-btn,
+  .mobile-form-wrapper,
+  .mobile-mode-buttons,
+  .mobile-mode-btn,
+  .mobile-input-wrapper,
+  .mobile-vin-wrapper,
+  .mobile-plate-wrapper,
+  .mobile-vin-input,
+  .mobile-state-select,
+  .mobile-plate-input,
+  .mobile-submit-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    pointer-events: none !important;
+    text-indent: -9999px !important;
+  }
+  
+  .desktop-form-container,
+  .search-form-container.desktop-form-container {
+    display: block !important;
+    visibility: visible !important;
+  }
+}
+
+/* Дополнительное скрытие вне медиа-запроса для гарантии на десктопе */
+@media (min-width: 1024px) {
+  html body .mobile-form-wrapper,
+  html body .mobile-mode-buttons,
+  html body .mobile-mode-btn,
+  html body .mobile-input-wrapper,
+  html body .mobile-vin-wrapper,
+  html body .mobile-plate-wrapper,
+  html body .mobile-vin-input,
+  html body .mobile-state-select,
+  html body .mobile-plate-input,
+  html body .mobile-submit-btn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    pointer-events: none !important;
+  }
+}
+

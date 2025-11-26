@@ -1,0 +1,8 @@
+node_modules/
+.next/
+dist/
+articles/
+articles2/
+public/articles/
+public/articles2/
+public/static-pages/

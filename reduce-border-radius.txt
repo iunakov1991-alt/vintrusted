@@ -1,0 +1,1 @@
+Reduce cell border radius by 50% (30px to 15px): Wed Oct 15 23:39:57 PDT 2025

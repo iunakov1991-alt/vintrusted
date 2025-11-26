@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест VIN Check USA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #1d4ed8;
+        }
+        .test-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+        }
+        .error {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        .success {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Тест VIN Check USA</h1>
+        <p>Этот файл поможет протестировать основные функции сайта без настройки сервера.</p>
+        
+        <h2>Тестовые VIN номера:</h2>
+        <ul>
+            <li><strong>1HGBH41JXMN109186</strong> - Honda Civic 2021 (чистая история)</li>
+            <li><strong>1FTFW1ET5DFC12345</strong> - Ford F-150 2019 (с авариями)</li>
+            <li><strong>1J4GZ58S6VC123456</strong> - Jeep Grand Cherokee (общий случай)</li>
+        </ul>
+
+        <h2>Быстрые тесты:</h2>
+        <button class="test-button" onclick="testVINValidation()">Тест валидации VIN</button>
+        <button class="test-button" onclick="testMockData()">Тест мок данных</button>
+        <button class="test-button" onclick="testUI()">Тест интерфейса</button>
+        <button class="test-button" onclick="openMainSite()">Открыть главный сайт</button>
+        
+        <div id="testResult" class="test-result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function testVINValidation() {
+            const testVINs = [
+                '1HGBH41JXMN109186', // Валидный
+                '1FTFW1ET5DFC12345', // Валидный
+                '12345678901234567', // Невалидный (только цифры)
+                'ABCDEFGHIJKLMNOPQ', // Невалидный (только буквы)
+                '1HGBH41JXMN10918',  // Невалидный (16 символов)
+                '1HGBH41JXMN1091867', // Невалидный (18 символов)
+                '1HGBH41JXMN10918I',  // Невалидный (содержит I)
+            ];
+
+            let results = '<h3>Результаты валидации VIN:</h3>';
+            
+            testVINs.forEach(vin => {
+                const isValid = validateVIN(vin);
+                const status = isValid ? '✅ Валидный' : '❌ Невалидный';
+                results += `<p><strong>${vin}</strong>: ${status}</p>`;
+            });
+
+            showResult(results, 'success');
+        }
+
+        function testMockData() {
+            const testVIN = '1HGBH41JXMN109186';
+            const mockData = getMockReportData(testVIN);
+            
+            let results = '<h3>Тест мок данных:</h3>';
+            results += `<p><strong>VIN:</strong> ${mockData.data.vin}</p>`;
+            results += `<p><strong>Автомобиль:</strong> ${mockData.data.year} ${mockData.data.make} ${mockData.data.model}</p>`;
+            results += `<p><strong>Двигатель:</strong> ${mockData.data.engine}</p>`;
+            results += `<p><strong>Аварии:</strong> ${mockData.data.accidents}</p>`;
+            results += `<p><strong>Владельцы:</strong> ${mockData.data.owners}</p>`;
+            results += `<p><strong>Пробег:</strong> ${mockData.data.mileage.toLocaleString()} миль</p>`;
+            results += `<p><strong>Стоимость:</strong> $${mockData.data.marketValue.toLocaleString()}</p>`;
+
+            showResult(results, 'success');
+        }
+
+        function testUI() {
+            // Проверяем наличие основных элементов
+            const elements = [
+                { name: 'Главная страница', file: 'index.html' },
+                { name: 'Страница отчета', file: 'report.html' },
+                { name: 'Основные стили', file: 'styles.css' },
+                { name: 'Стили отчета', file: 'report.css' },
+                { name: 'Основной JavaScript', file: 'script.js' },
+                { name: 'JavaScript отчета', file: 'report.js' },
+                { name: 'Сервер', file: 'server.js' },
+                { name: 'Зависимости', file: 'package.json' }
+            ];
+
+            let results = '<h3>Проверка файлов:</h3>';
+            
+            elements.forEach(element => {
+                // Простая проверка существования файла через fetch
+                fetch(element.file)
+                    .then(response => {
+                        const status = response.ok ? '✅ Найден' : '❌ Не найден';
+                        results += `<p><strong>${element.name}:</strong> ${status}</p>`;
+                        updateResult();
+                    })
+                    .catch(() => {
+                        results += `<p><strong>${element.name}:</strong> ❌ Ошибка загрузки</p>`;
+                        updateResult();
+                    });
+            });
+
+            function updateResult() {
+                document.getElementById('testResult').innerHTML = results;
+                document.getElementById('testResult').style.display = 'block';
+            }
+
+            showResult(results, 'success');
+        }
+
+        function openMainSite() {
+            window.open('index.html', '_blank');
+        }
+
+        function showResult(content, type = 'success') {
+            const resultDiv = document.getElementById('testResult');
+            resultDiv.innerHTML = content;
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.style.display = 'block';
+        }
+
+        // Функции валидации VIN (из основного скрипта)
+        function validateVIN(vin) {
+            if (!vin || vin.length !== 17) return false;
+            
+            const invalidChars = /[IOQ]/;
+            if (invalidChars.test(vin)) return false;
+            
+            return validateVINChecksum(vin);
+        }
+
+        function validateVINChecksum(vin) {
+            const weights = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2];
+            const transliteration = {
+                'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8,
+                'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'P': 7, 'R': 9,
+                'S': 2, 'T': 3, 'U': 4, 'V': 5, 'W': 6, 'X': 7, 'Y': 8, 'Z': 9
+            };
+            
+            let sum = 0;
+            
+            for (let i = 0; i < 17; i++) {
+                let value;
+                const char = vin[i];
+                
+                if (char >= '0' && char <= '9') {
+                    value = parseInt(char);
+                } else if (transliteration[char]) {
+                    value = transliteration[char];
+                } else {
+                    return false;
+                }
+                
+                sum += value * weights[i];
+            }
+            
+            const checkDigit = sum % 11;
+            const expectedCheckDigit = vin[8];
+            
+            if (checkDigit === 10) {
+                return expectedCheckDigit === 'X';
+            } else {
+                return expectedCheckDigit === checkDigit.toString();
+            }
+        }
+
+        // Мок данные (из основного скрипта)
+        function getMockReportData(vin) {
+            const mockReports = {
+                '1HGBH41JXMN109186': {
+                    success: true,
+                    data: {
+                        vin: vin,
+                        make: 'Honda',
+                        model: 'Civic',
+                        year: 2021,
+                        engine: '1.5L 4-Cylinder',
+                        transmission: 'CVT',
+                        accidents: 0,
+                        owners: 1,
+                        mileage: 45000,
+                        liens: false,
+                        recalls: 0,
+                        marketValue: 25000
+                    }
+                },
+                '1FTFW1ET5DFC12345': {
+                    success: true,
+                    data: {
+                        vin: vin,
+                        make: 'Ford',
+                        model: 'F-150',
+                        year: 2019,
+                        engine: '3.5L V6',
+                        transmission: 'Automatic',
+                        accidents: 1,
+                        owners: 2,
+                        mileage: 78000,
+                        liens: true,
+                        recalls: 2,
+                        marketValue: 35000
+                    }
+                }
+            };
+            
+            return mockReports[vin] || {
+                success: true,
+                data: {
+                    vin: vin,
+                    make: 'Toyota',
+                    model: 'Camry',
+                    year: 2020,
+                    engine: '2.5L 4-Cylinder',
+                    transmission: 'Automatic',
+                    accidents: 0,
+                    owners: 1,
+                    mileage: 32000,
+                    liens: false,
+                    recalls: 1,
+                    marketValue: 28000
+                }
+            };
+        }
+
+        // Автоматический тест при загрузке
+        window.addEventListener('load', () => {
+            console.log('🧪 Тестовая страница загружена');
+            console.log('📁 Доступные файлы:', [
+                'index.html', 'report.html', 'styles.css', 'report.css',
+                'script.js', 'report.js', 'server.js', 'package.json'
+            ]);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Add automatic field clearing when switching between VIN and License Plate modes: Wed Oct 15 17:38:25 PDT 2025

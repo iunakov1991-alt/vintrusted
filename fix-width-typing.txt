@@ -1,0 +1,1 @@
+Fix typing animation using simple width animation that actually works: Wed Oct 15 16:54:14 PDT 2025

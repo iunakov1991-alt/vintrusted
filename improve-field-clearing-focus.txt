@@ -1,0 +1,1 @@
+Improve field clearing and add auto-focus on input fields when switching modes: Wed Oct 15 17:41:29 PDT 2025

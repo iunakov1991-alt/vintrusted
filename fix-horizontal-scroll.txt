@@ -1,0 +1,1 @@
+Fix horizontal scroll - add overflow-x hidden and reduce image sizes: Wed Oct 15 15:21:01 PDT 2025
