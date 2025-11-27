@@ -16,10 +16,16 @@
     "autonomy:daily": "node scripts/autonomy/run-daily-cycle.js",
     "rl:auto": "node scripts/rl/auto-gsc-train.js",
     "rl:policy": "node scripts/rl/policy-engine.js",
-    "dashboard:build": "node scripts/dashboard/build-dashboard-data.js"
+    "dashboard:build": "node scripts/dashboard/build-dashboard-data.js",
+    "ai:test": "node ai/test-ai-engine.js",
+    "seo:ai-dry-run": "node scripts/ai/seo-writer.js --lang=en --intent=vin-check --state=California --make=Toyota --model=Camry --year=2018"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "dotenv": "^16.3.1",
     "googleapis": "^166.0.0",
+    "groq-sdk": "^0.4.0",
+    "openai": "^6.9.1",
     "stripe": "^14.0.0"
   }
 }
