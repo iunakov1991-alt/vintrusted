@@ -19,6 +19,7 @@
     "dashboard:build": "node scripts/dashboard/build-dashboard-data.js"
   },
   "dependencies": {
+    "googleapis": "^166.0.0",
     "stripe": "^14.0.0"
   }
 }
