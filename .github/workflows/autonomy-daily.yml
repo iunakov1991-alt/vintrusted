@@ -2,7 +2,7 @@ name: Autonomy Daily SEO Cycle
 
 on:
   schedule:
-    - cron: "0 8 * * *"  # каждый день ~08:00 UTC (подстрой при необходимости)
+    - cron: "0 8 * * *"
   workflow_dispatch: {}
 
 jobs:
@@ -30,10 +30,10 @@ jobs:
           GSC_DAYS_BACK: "14"
         run: npm run autonomy:daily
 
-      - name: Build dashboard only (safety)
+      - name: Build dashboard only
         run: npm run dashboard:build
 
-      - name: Deploy to Vercel (optional)
+      - name: Deploy to Vercel
         continue-on-error: true
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -41,7 +41,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
-            echo "VERCEL_TOKEN not set, skipping Vercel deployment"
+            echo "VERCEL_TOKEN not set, skipping deployment"
             exit 0
           fi
           npx vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
