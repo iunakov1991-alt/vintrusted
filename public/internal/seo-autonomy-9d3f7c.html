@@ -293,8 +293,60 @@
       border-radius: 999px;
       background: #f97316;
     }
+    .status-loading {
+      background: #eab308;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .status-success {
+      background: var(--ok);
+    }
+    .status-error {
+      background: var(--danger);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .load-status {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .load-log {
+      max-height: 80px;
+      overflow-y: auto;
+      font-size: 10px;
+      margin-top: 6px;
+      padding: 4px;
+      background: rgba(15,23,42,0.5);
+      border-radius: 6px;
+      border: 1px solid rgba(31,41,55,0.5);
+    }
+    .load-log-item {
+      padding: 2px 0;
+      border-bottom: 1px dashed rgba(31,41,55,0.5);
+      font-family: var(--mono);
+    }
+    .load-log-item:last-child {
+      border-bottom: none;
+    }
+    .load-log-success {
+      color: var(--ok);
+    }
+    .load-log-error {
+      color: var(--danger);
+    }
+    .auto-refresh-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: var(--muted);
+      margin-left: 8px;
+    }
   </style>
-<script id="dashboard-data" type="application/json">{"meta":{"updatedAt":"2025-11-27T01:38:24.763Z","config":{"secretPath":"/internal/seo-autonomy-9d3f7c.html","dataPath":"/internal/dashboard-data.json","projectName":"Vintrusted SEO Autonomy","targetLcpMs":1500,"targetTtfbMs":150,"targetTotalPages":20000000,"targetEnShare":0.7,"targetEsShare":0.3,"maxAllowedErrorsPerDay":5}},"summary":{"projectName":"Vintrusted SEO Autonomy","updatedAt":"2025-11-27T01:38:24.763Z","totalUrls":854407,"exposedUrls":30000,"totalSitemaps":29,"allowedSitemaps":1,"urlsPerSitemap":30000,"builds":{},"lastBuildAt":null},"language":{"enShare":0.7,"esShare":0.3,"lastUpdated":null},"traffic":{"global":{"en":null,"es":null},"clusters":null},"clusters":{"boosted":[],"suppressed":[],"focusTopics":["dmv","fraud","auctions","high-risk-vins","salvage-economics","maintenance-costs","state-specific-risks"]},"logs":{"summary":{"total":8,"info":8,"warn":0,"error":0,"lastErrors":[]}},"cursorTasks":[{"id":"tune-build-limits","title":"Поджать лимит страниц на билд и замедлить раскрытие","reason":"Большой хвост неэкспонированных URL в sitemap, можно уменьшить нагрузку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и настрои параметры:\n# SEO_MAX_PAGES_PER_BUILD=300000\n# SEO_TARGET_FULL_EXPOSURE_DAYS=240\n\n# После правок запусти:\nnpm run build:seo\n"},{"id":"scale-up-pages","title":"Увеличить целевое количество страниц","reason":"Текущее количество страниц сильно ниже целевого, можно расширить сетку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и увеличь:\n# SEO_TARGET_PAGES=10000000\n# SEO_MAX_PAGES_PER_BUILD=500000\n\n# Затем запусти билд:\nnpm run build:seo\n"},{"id":"rebuild-dashboard","title":"Пересобрать дашборд вручную","reason":"Если графики или данные дашборда выглядят неверно.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Собрать данные дашборда:\nnode scripts/dashboard/build-dashboard-data.js\n\n# Затем задеплоить (если используешь Vercel CLI):\n# npx vercel --prod --token \"$VERCEL_TOKEN\" --scope \"$VERCEL_ORG_ID\" --confirm\n"}]}</script>
+
+<script id="dashboard-data" type="application/json">{"meta":{"updatedAt":"2025-11-27T01:42:11.373Z","config":{"secretPath":"/internal/seo-autonomy-9d3f7c.html","dataPath":"/internal/dashboard-data.json","projectName":"Vintrusted SEO Autonomy","targetLcpMs":1500,"targetTtfbMs":150,"targetTotalPages":20000000,"targetEnShare":0.7,"targetEsShare":0.3,"maxAllowedErrorsPerDay":5}},"summary":{"projectName":"Vintrusted SEO Autonomy","updatedAt":"2025-11-27T01:42:11.373Z","totalUrls":854407,"exposedUrls":30000,"totalSitemaps":29,"allowedSitemaps":1,"urlsPerSitemap":30000,"builds":{},"lastBuildAt":null},"language":{"enShare":0.7,"esShare":0.3,"lastUpdated":null},"traffic":{"global":{"en":null,"es":null},"clusters":null},"clusters":{"boosted":[],"suppressed":[],"focusTopics":["dmv","fraud","auctions","high-risk-vins","salvage-economics","maintenance-costs","state-specific-risks"]},"logs":{"summary":{"total":8,"info":8,"warn":0,"error":0,"lastErrors":[]}},"cursorTasks":[{"id":"tune-build-limits","title":"Поджать лимит страниц на билд и замедлить раскрытие","reason":"Большой хвост неэкспонированных URL в sitemap, можно уменьшить нагрузку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и настрои параметры:\n# SEO_MAX_PAGES_PER_BUILD=300000\n# SEO_TARGET_FULL_EXPOSURE_DAYS=240\n\n# После правок запусти:\nnpm run build:seo\n"},{"id":"scale-up-pages","title":"Увеличить целевое количество страниц","reason":"Текущее количество страниц сильно ниже целевого, можно расширить сетку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и увеличь:\n# SEO_TARGET_PAGES=10000000\n# SEO_MAX_PAGES_PER_BUILD=500000\n\n# Затем запусти билд:\nnpm run build:seo\n"},{"id":"rebuild-dashboard","title":"Пересобрать дашборд вручную","reason":"Если графики или данные дашборда выглядят неверно.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Собрать данные дашборда:\nnode scripts/dashboard/build-dashboard-data.js\n\n# Затем задеплоить (если используешь Vercel CLI):\n# npx vercel --prod --token \"$VERCEL_TOKEN\" --scope \"$VERCEL_ORG_ID\" --confirm\n"}]}</script>
 </head>
 <body>
 <div class="shell">
@@ -311,10 +363,13 @@
       </div>
       <div class="meta">
         <div class="pill">
-          <div class="dot"></div>
+          <div class="dot" id="status-dot"></div>
           <span id="state-pill">Waiting data...</span>
+          <span class="auto-refresh-badge" id="refresh-badge"></span>
         </div>
         <div id="meta-updated">Updated: –</div>
+        <div class="load-status" id="load-status"></div>
+        <div class="load-log" id="load-log"></div>
       </div>
     </header>
     <div class="col">
@@ -439,16 +494,92 @@
   </div>
 </div>
 <script>
-(async function() {
+// Лог загрузок
+const loadLog = [];
+const MAX_LOG_ENTRIES = 10;
+const AUTO_REFRESH_INTERVAL = 30000; // 30 секунд (адекватно для генерации страниц)
+
+function addLogEntry(success, message, timestamp) {
+  loadLog.unshift({ success, message, timestamp: timestamp || new Date().toISOString() });
+  if (loadLog.length > MAX_LOG_ENTRIES) {
+    loadLog.pop();
+  }
+  updateLoadStatus();
+}
+
+function updateLoadStatus() {
+  const statusEl = document.getElementById("load-status");
+  const logEl = document.getElementById("load-log");
+  
+  if (!statusEl) return;
+  
+  if (loadLog.length === 0) {
+    statusEl.textContent = "";
+    if (logEl) logEl.innerHTML = "";
+    return;
+  }
+  
+  const last = loadLog[0];
+  const successCount = loadLog.filter(e => e.success).length;
+  const errorCount = loadLog.filter(e => !e.success).length;
+  
+  statusEl.textContent = `Загрузок: ${successCount} успешно, ${errorCount} ошибок`;
+  
+  if (logEl) {
+    logEl.innerHTML = "";
+    loadLog.slice(0, 5).forEach(entry => {
+      const div = document.createElement("div");
+      div.className = "load-log-item " + (entry.success ? "load-log-success" : "load-log-error");
+      const time = new Date(entry.timestamp).toLocaleTimeString();
+      div.textContent = `${time} - ${entry.success ? "✓" : "✗"} ${entry.message}`;
+      logEl.appendChild(div);
+    });
+  }
+}
+
+function updateStatusDot(status) {
+  const dot = document.getElementById("status-dot");
+  if (!dot) return;
+  
+  dot.className = "dot";
+  if (status === "loading") {
+    dot.classList.add("status-loading");
+  } else if (status === "success") {
+    dot.classList.add("status-success");
+  } else if (status === "error") {
+    dot.classList.add("status-error");
+  }
+}
+
+function updateRefreshBadge(secondsLeft) {
+  const badge = document.getElementById("refresh-badge");
+  if (!badge) return;
+  
+  if (secondsLeft > 0) {
+    badge.textContent = `Обновление через ${secondsLeft}с`;
+  } else {
+    badge.textContent = "Обновление...";
+  }
+}
+
+async function loadDashboardData() {
   let data = null;
+  const startTime = Date.now();
+  
+  updateStatusDot("loading");
   
   // Способ 1: Проверяем встроенные данные (работает при открытии файла напрямую)
   const embeddedDataEl = document.getElementById("dashboard-data");
   if (embeddedDataEl) {
     try {
       data = JSON.parse(embeddedDataEl.textContent);
+      const duration = Date.now() - startTime;
+      addLogEntry(true, `Встроенные данные загружены (${duration}ms)`, new Date().toISOString());
+      updateStatusDot("success");
     } catch (e) {
       console.warn("Failed to parse embedded data:", e);
+      addLogEntry(false, `Ошибка парсинга: ${e.message}`, new Date().toISOString());
+      updateStatusDot("error");
     }
   }
   
@@ -460,27 +591,42 @@
       "dashboard-data.json"
     ];
     
+    let loaded = false;
     for (const path of paths) {
       try {
         const res = await fetch(path + "?ts=" + Date.now());
         if (res && res.ok) {
           data = await res.json();
+          const duration = Date.now() - startTime;
+          addLogEntry(true, `Загружено через ${path} (${duration}ms)`, new Date().toISOString());
+          updateStatusDot("success");
+          loaded = true;
           break;
         }
       } catch (e) {
-        // Продолжаем пробовать
+        addLogEntry(false, `Ошибка fetch ${path}: ${e.message}`, new Date().toISOString());
       }
+    }
+    
+    if (!loaded) {
+      addLogEntry(false, "Не удалось загрузить данные", new Date().toISOString());
+      updateStatusDot("error");
     }
   }
   
+  return data;
+}
+
+function renderDashboard(data) {
+  if (!data) {
+    // Если данные не загрузились, показываем инструкцию
+    document.getElementById("state-pill").textContent = "Запусти: npm run dashboard:build";
+    document.getElementById("state-pill").style.color = "#f97373";
+    document.getElementById("meta-updated").textContent = "Данные не загружены. Запусти: npm run dashboard:build";
+    return;
+  }
+  
   try {
-    if (!data) {
-      // Если данные не загрузились, показываем инструкцию
-      document.getElementById("state-pill").textContent = "Запусти: npm run dashboard:build";
-      document.getElementById("state-pill").style.color = "#f97373";
-      document.getElementById("meta-updated").textContent = "Данные не загружены. Запусти: npm run dashboard:build";
-      return;
-    }
     const summary = data.summary || {};
     const lang = data.language || {};
     const logs = data.logs || {};
@@ -627,9 +773,54 @@
     }
   } catch (err) {
     console.error(err);
+    addLogEntry(false, `Ошибка рендеринга: ${err.message}`, new Date().toISOString());
     document.getElementById("state-pill").textContent = "Ошибка загрузки dashboard-data.json";
     document.getElementById("state-pill").style.color = "#f97373";
+    updateStatusDot("error");
   }
+}
+
+// Автообновление
+let refreshInterval = null;
+let countdownInterval = null;
+let secondsUntilRefresh = AUTO_REFRESH_INTERVAL / 1000;
+
+async function refreshDashboard() {
+  updateStatusDot("loading");
+  const data = await loadDashboardData();
+  renderDashboard(data);
+  
+  // Обновляем встроенные данные если они есть
+  const embeddedDataEl = document.getElementById("dashboard-data");
+  if (embeddedDataEl && data) {
+    embeddedDataEl.textContent = JSON.stringify(data);
+  }
+}
+
+function startAutoRefresh() {
+  // Запускаем первый раз сразу
+  refreshDashboard();
+  
+  // Запускаем таймер обратного отсчёта
+  secondsUntilRefresh = AUTO_REFRESH_INTERVAL / 1000;
+  countdownInterval = setInterval(() => {
+    secondsUntilRefresh--;
+    updateRefreshBadge(secondsUntilRefresh);
+    
+    if (secondsUntilRefresh <= 0) {
+      secondsUntilRefresh = AUTO_REFRESH_INTERVAL / 1000;
+    }
+  }, 1000);
+  
+  // Запускаем автообновление
+  refreshInterval = setInterval(() => {
+    refreshDashboard();
+    secondsUntilRefresh = AUTO_REFRESH_INTERVAL / 1000;
+  }, AUTO_REFRESH_INTERVAL);
+}
+
+// Запускаем при загрузке страницы
+startAutoRefresh();
 })();
 </script>
 </body>
