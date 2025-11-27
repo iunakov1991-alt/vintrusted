@@ -33,7 +33,7 @@ jobs:
       - name: Build dashboard only
         run: npm run dashboard:build
 
-      - name: Deploy to Vercel
+      - name: Trigger Vercel redeploy
         continue-on-error: true
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -41,9 +41,19 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
-            echo "VERCEL_TOKEN not set, skipping deployment"
+            echo "No VERCEL_TOKEN provided, skipping redeploy"
             exit 0
           fi
-          npx vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
-          npx vercel build --prod --token "$VERCEL_TOKEN"
-          npx vercel deploy --prebuilt --prod --token "$VERCEL_TOKEN"
+          
+          if [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "No VERCEL_PROJECT_ID provided, skipping redeploy"
+            exit 0
+          fi
+          
+          echo "Triggering Vercel redeploy for project: $VERCEL_PROJECT_ID"
+          curl -X POST "https://api.vercel.com/v1/integrations/deploy/$VERCEL_PROJECT_ID" \
+            -H "Authorization: Bearer $VERCEL_TOKEN" \
+            -H "Content-Type: application/json" || {
+            echo "Vercel redeploy trigger failed, but continuing..."
+            exit 0
+          }
