@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "lastUpdated": null,
+  "boostedClusters": [],
+  "suppressedClusters": [],
+  "focusTopics": [
+    "dmv",
+    "fraud",
+    "auctions",
+    "high-risk-vins",
+    "salvage-economics",
+    "maintenance-costs",
+    "state-specific-risks"
+  ],
+  "notes": "RL engine will rewrite this based on GA4/GSC performance."
+}
+

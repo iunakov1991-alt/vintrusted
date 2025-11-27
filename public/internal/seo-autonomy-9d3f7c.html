@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Vintrusted SEO Autonomy Monitor</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #050711;
+      --card: #0d101f;
+      --accent: #3b82f6;
+      --accent-soft: #1d2340;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --danger: #f97373;
+      --ok: #22c55e;
+      --border: #1f2937;
+      --mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Roboto", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 60%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 24px;
+    }
+    .shell {
+      width: 100%;
+      max-width: 1320px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.16), rgba(147,51,234,0.14));
+      border-radius: 24px;
+      padding: 1px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    }
+    .layout {
+      border-radius: 23px;
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #000 100%);
+      padding: 20px 22px;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) minmax(0, 2.2fr);
+      grid-gap: 16px;
+    }
+    @media (max-width: 1100px) {
+      .layout { grid-template-columns: minmax(0,1fr); }
+    }
+    header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: conic-gradient(from 210deg, #0ea5e9, #22c55e, #eab308, #6366f1, #0ea5e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.6);
+    }
+    .brand-logo-inner {
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      background: radial-gradient(circle at 20% 0, #0b1120 0, #000 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e5e7eb;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+    }
+    .brand-text-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .brand-text-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.3);
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--ok);
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.3);
+    }
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card {
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.95) 0, rgba(2,6,23,0.98) 60%, rgba(0,0,0,0.98) 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(15,23,42,0.9);
+      padding: 12px 12px 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      min-height: 0;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+    .card-sub {
+      font-size: 11px;
+      color: #6b7280;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 8px;
+    }
+    .kpi {
+      background: radial-gradient(circle at top, #020617 0, #020617 60%, #000 100%);
+      border-radius: 10px;
+      padding: 8px;
+      border: 1px solid rgba(31,41,55,0.9);
+    }
+    .kpi-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .kpi-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .kpi-hint {
+      font-size: 10px;
+      color: #6b7280;
+    }
+    .bar-wrap {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(15,23,42,1);
+      overflow: hidden;
+      margin-top: 6px;
+      border: 1px solid rgba(30,64,175,0.7);
+    }
+    .bar-inner {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22c55e, #eab308, #f97316);
+    }
+    .lang-bars {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .lang-bar {
+      flex: 1;
+    }
+    .lang-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .lang-value {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .pill-ctr {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(15,23,42,1);
+      border: 1px solid rgba(55,65,81,0.7);
+      font-size: 10px;
+      color: var(--muted);
+      margin-right: 4px;
+      margin-top: 2px;
+    }
+    .pill-ctr span.value {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+    .bad { color: var(--danger); }
+    .good { color: var(--ok); }
+    .list {
+      font-size: 11px;
+      color: var(--muted);
+      max-height: 160px;
+      overflow: auto;
+    }
+    .list-item {
+      padding: 4px 0;
+      border-bottom: 1px dashed rgba(31,41,55,0.8);
+    }
+    .list-item:last-child { border-bottom: none; }
+    .list-label {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .list-value {
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+    .tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 260px;
+      overflow: auto;
+    }
+    .task {
+      border-radius: 10px;
+      border: 1px solid rgba(31,41,55,0.9);
+      background: radial-gradient(circle at top left, #020617 0, #000 100%);
+      padding: 7px 9px;
+    }
+    .task-title {
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .task-reason {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .task-code {
+      font-family: var(--mono);
+      font-size: 10px;
+      background: #020617;
+      border-radius: 6px;
+      border: 1px solid #0f172a;
+      padding: 6px;
+      color: #d1d5db;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .hint {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(55,65,81,0.9);
+      padding: 2px 7px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #f97316;
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="layout">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">
+          <div class="brand-logo-inner">VT</div>
+        </div>
+        <div>
+          <div class="brand-text-title">SEO Autonomy Monitor</div>
+          <div class="brand-text-sub">VIN SEO Monster · Internal only</div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="pill">
+          <div class="dot"></div>
+          <span id="state-pill">Waiting data...</span>
+        </div>
+        <div id="meta-updated">Updated: –</div>
+      </div>
+    </header>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Общий статус</div>
+            <div class="card-sub">URL, sitemap, билды</div>
+          </div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>Монстр</span>
+          </div>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="kpi-label">Всего URL</div>
+            <div class="kpi-value" id="kpi-total-urls">–</div>
+            <div class="kpi-hint">Сколько страниц уже сгенерировано</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">В sitemap сейчас</div>
+            <div class="kpi-value" id="kpi-exposed-urls">–</div>
+            <div class="kpi-hint">Сколько URL уже «открыто» Google</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Части sitemap</div>
+            <div class="kpi-value" id="kpi-sitemaps">–</div>
+            <div class="kpi-hint">Разрешено / всего частей</div>
+          </div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-inner" id="bar-exposed" style="width:0%"></div>
+        </div>
+        <div class="hint" id="hint-exposed">Доля раскрытых URL будет показана здесь.</div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Автопилот</div>
+            <div class="card-sub">Последние билды и ошибки</div>
+          </div>
+        </div>
+        <div class="list" id="builds-list"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Языковая доля EN / ES</div>
+            <div class="card-sub">Глобальная политика монстра</div>
+          </div>
+        </div>
+        <div class="lang-bars">
+          <div class="lang-bar">
+            <div class="lang-label">EN доля</div>
+            <div class="lang-value" id="lang-en-val">–</div>
+            <div class="bar-wrap">
+              <div class="bar-inner" id="bar-en" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="lang-bar">
+            <div class="lang-label">ES доля</div>
+            <div class="lang-value" id="lang-es-val">–</div>
+            <div class="bar-wrap">
+              <div class="bar-inner" id="bar-es" style="width:0%;background:linear-gradient(90deg,#f97316,#facc15,#22c55e)"></div>
+            </div>
+          </div>
+        </div>
+        <div class="hint">Цифры берутся из lang-policy.json. RL будет их крутить сам.</div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Трафик и CTR</div>
+            <div class="card-sub">По данным GSC/GA4</div>
+          </div>
+        </div>
+        <div id="traffic-block">
+          <div class="pill-ctr">
+            <span>EN CTR:</span>
+            <span class="value" id="ctr-en">–</span>
+          </div>
+          <div class="pill-ctr">
+            <span>ES CTR:</span>
+            <span class="value" id="ctr-es">–</span>
+          </div>
+          <div class="hint" id="hint-ctr">
+            Смотрим, кто стреляет сильнее — англоязычные или испанские страницы.
+          </div>
+        </div>
+        <div style="margin-top:8px;">
+          <div class="card-sub" style="margin-bottom:4px;">Фокусные кластеры</div>
+          <div class="list" id="clusters-list"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Ошибки и предупреждения</div>
+            <div class="card-sub">Последние сообщения автопилота</div>
+          </div>
+        </div>
+        <div class="list" id="errors-list"></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Задачи для Cursor</div>
+            <div class="card-sub">Готовые bash-команды</div>
+          </div>
+        </div>
+        <div class="tasks" id="tasks-list"></div>
+        <div class="hint">
+          Копируешь любой блок целиком → даёшь Cursor → он всё делает за тебя.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(async function() {
+  try {
+    const res = await fetch("/internal/dashboard-data.json?ts=" + Date.now());
+    if (!res.ok) throw new Error("Failed to load dashboard-data.json");
+    const data = await res.json();
+    const summary = data.summary || {};
+    const lang = data.language || {};
+    const logs = data.logs || {};
+    const clusters = data.clusters || {};
+    const traffic = data.traffic || {};
+    const tasks = data.cursorTasks || [];
+    const config = data.meta?.config || {};
+    const fmtInt = (n) => typeof n === "number" ? n.toLocaleString("en-US") : "–";
+    const pct = (x) => (typeof x === "number" ? (x * 100).toFixed(1) + "%" : "–");
+    const pct0 = (x) => (typeof x === "number" ? (x * 100).toFixed(0) + "%" : "–");
+    document.getElementById("meta-updated").textContent = "Updated: " + (data.meta?.updatedAt || "–");
+    const total = summary.totalUrls || 0;
+    const exposed = summary.exposedUrls || 0;
+    const ratio = total > 0 ? exposed / total : 0;
+    const exposedPct = (ratio * 100) || 0;
+    document.getElementById("kpi-total-urls").textContent = fmtInt(total);
+    document.getElementById("kpi-exposed-urls").textContent = fmtInt(exposed);
+    document.getElementById("kpi-sitemaps").textContent =
+      (summary.allowedSitemaps || 0) + " / " + (summary.totalSitemaps || 0);
+    document.getElementById("bar-exposed").style.width = Math.min(100, exposedPct).toFixed(1) + "%";
+    document.getElementById("hint-exposed").textContent =
+      "Сейчас раскрыто примерно " + exposedPct.toFixed(1) + "% от всех сгенерированных URL.";
+    let pillText = "Монстр включен";
+    let pillClass = "good";
+    const errCount = logs.summary?.error || 0;
+    if (errCount > (config.maxAllowedErrorsPerDay || 5)) {
+      pillText = "Нужна проверка: много ошибок";
+      pillClass = "bad";
+    }
+    const statePill = document.getElementById("state-pill");
+    statePill.textContent = pillText;
+    if (pillClass === "bad") statePill.style.color = "#f97373";
+    const buildsEl = document.getElementById("builds-list");
+    buildsEl.innerHTML = "";
+    const builds = summary.builds || {};
+    const days = Object.keys(builds).sort().slice(-7);
+    if (!days.length) {
+      buildsEl.textContent = "Пока нет записей о билдах.";
+    } else {
+      days.reverse().forEach(day => {
+        const count = builds[day];
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML = '<div class="list-label">' + day + '</div>' +
+                        '<div class="list-value">Запусков автопилота: ' + count + '</div>';
+        buildsEl.appendChild(div);
+      });
+    }
+    const enShare = lang.enShare;
+    const esShare = lang.esShare;
+    document.getElementById("lang-en-val").textContent = pct(enShare);
+    document.getElementById("lang-es-val").textContent = pct(esShare);
+    document.getElementById("bar-en").style.width = pct0(enShare);
+    document.getElementById("bar-es").style.width = pct0(esShare);
+    const enCtr = traffic.global?.en?.ctr ?? null;
+    const esCtr = traffic.global?.es?.ctr ?? null;
+    const ctrEnEl = document.getElementById("ctr-en");
+    const ctrEsEl = document.getElementById("ctr-es");
+    ctrEnEl.textContent = enCtr != null ? pct(enCtr) : "нет данных";
+    ctrEsEl.textContent = esCtr != null ? pct(esCtr) : "нет данных";
+    if (enCtr != null && esCtr != null) {
+      const hint = document.getElementById("hint-ctr");
+      if (esCtr > enCtr * 1.3) {
+        ctrEsEl.classList.add("good");
+        hint.textContent = "ES стреляет сильнее: монстр может сам поднять долю ES через RL.";
+      } else if (enCtr > esCtr * 1.3) {
+        ctrEnEl.classList.add("good");
+        hint.textContent = "EN сейчас даёт лучший CTR. Политика будет крутиться в его сторону.";
+      } else {
+        hint.textContent = "EN и ES идут примерно ровно. Монстр держит баланс.";
+      }
+    }
+    const clustersEl = document.getElementById("clusters-list");
+    clustersEl.innerHTML = "";
+    const boosted = clusters.boosted || [];
+    const suppressed = clusters.suppressed || [];
+    const focus = clusters.focusTopics || [];
+    if (!boosted.length && !suppressed.length && !focus.length) {
+      clustersEl.textContent = "Пока нет кластерных приоритетов.";
+    } else {
+      if (focus.length) {
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML = '<div class="list-label">Фокус:</div>' +
+                        '<div class="list-value">' + focus.join(", ") + '</div>';
+        clustersEl.appendChild(div);
+      }
+      if (boosted.length) {
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML = '<div class="list-label">Усиленные кластеры:</div>' +
+                        '<div class="list-value">' + boosted.join(", ") + '</div>';
+        clustersEl.appendChild(div);
+      }
+      if (suppressed.length) {
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML = '<div class="list-label">Пониженные кластеры:</div>' +
+                        '<div class="list-value">' + suppressed.join(", ") + '</div>';
+        clustersEl.appendChild(div);
+      }
+    }
+    const errorsEl = document.getElementById("errors-list");
+    errorsEl.innerHTML = "";
+    const lastErrors = logs.summary?.lastErrors || [];
+    if (!lastErrors.length) {
+      errorsEl.textContent = "Критичных ошибок за последнее время не видно.";
+    } else {
+      lastErrors.forEach(e => {
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML =
+          '<div class="list-label">' + (e.ts || "") + ' · ' + (e.scope || "") + '</div>' +
+          '<div class="list-value">' + (e.message || "") + '</div>';
+        errorsEl.appendChild(div);
+      });
+    }
+    const tasksEl = document.getElementById("tasks-list");
+    tasksEl.innerHTML = "";
+    if (!tasks.length) {
+      const div = document.createElement("div");
+      div.className = "task";
+      div.innerHTML = '<div class="task-title">Пока нет задач</div>' +
+                      '<div class="task-reason">Монстр считает, что всё в порядке. Можно просто наблюдать.</div>';
+      tasksEl.appendChild(div);
+    } else {
+      tasks.forEach(t => {
+        const div = document.createElement("div");
+        div.className = "task";
+        const title = document.createElement("div");
+        title.className = "task-title";
+        title.textContent = t.title || "Задача";
+        const reason = document.createElement("div");
+        reason.className = "task-reason";
+        reason.textContent = t.reason || "";
+        const code = document.createElement("pre");
+        code.className = "task-code";
+        code.textContent = t.bash || "";
+        div.appendChild(title);
+        div.appendChild(reason);
+        div.appendChild(code);
+        tasksEl.appendChild(div);
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    document.getElementById("state-pill").textContent = "Ошибка загрузки dashboard-data.json";
+    document.getElementById("state-pill").style.color = "#f97373";
+  }
+})();
+</script>
+</body>
+</html>

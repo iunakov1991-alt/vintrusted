@@ -1,0 +1,12 @@
+{
+  "secretPath": "/internal/seo-autonomy-9d3f7c.html",
+  "dataPath": "/internal/dashboard-data.json",
+  "projectName": "Vintrusted SEO Autonomy",
+  "targetLcpMs": 1500,
+  "targetTtfbMs": 150,
+  "targetTotalPages": 20000000,
+  "targetEnShare": 0.7,
+  "targetEsShare": 0.3,
+  "maxAllowedErrorsPerDay": 5
+}
+

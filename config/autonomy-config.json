@@ -1,0 +1,19 @@
+{
+  "dailyBuildTimeUTC": "07:00",
+  "maxBuildsPerDay": 2,
+  "minHoursBetweenBuilds": 8,
+  "enableAutoBuild": true,
+  "enableAutoSitemap": true,
+  "enableAutoRL": true,
+  "enableAutoRefresh": true,
+  "enableAutoClusterExpansion": true,
+  "enableAutoLangPolicy": true,
+  "trafficLowThreshold": 50,
+  "trafficHighThreshold": 500,
+  "ctrLowThreshold": 0.02,
+  "ctrHighThreshold": 0.08,
+  "maxPagesPerBuild": 500000,
+  "targetTotalPages": 20000000,
+  "logFile": "data/autonomy-log.jsonl"
+}
+

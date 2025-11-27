@@ -1,0 +1,46 @@
+name: Autonomy Daily SEO Cycle
+
+on:
+  schedule:
+    - cron: "0 8 * * *"  # каждый день ~08:00 UTC (подстрой при необходимости)
+  workflow_dispatch: {}
+
+jobs:
+  run-autonomy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run autonomy daily cycle
+        env:
+          NODE_ENV: production
+          USE_GSC_API: ${{ secrets.USE_GSC_API }} # "1" если хочешь включить GSC API
+          GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
+          GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
+          GSC_PROPERTY_URL: ${{ secrets.GSC_PROPERTY_URL }}
+          GSC_DAYS_BACK: "14"
+        run: npm run autonomy:daily
+
+      - name: Build dashboard only (safety)
+        run: npm run dashboard:build
+
+      - name: Deploy to Vercel (optional)
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npx vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+          npx vercel build --prod --token "$VERCEL_TOKEN"
+          npx vercel deploy --prebuilt --prod --token "$VERCEL_TOKEN"
+
