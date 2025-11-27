@@ -23,7 +23,7 @@ jobs:
       - name: Run autonomy daily cycle
         env:
           NODE_ENV: production
-          USE_GSC_API: ${{ secrets.USE_GSC_API }} # "1" если хочешь включить GSC API
+          USE_GSC_API: ${{ secrets.USE_GSC_API }}
           GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
           GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
           GSC_PROPERTY_URL: ${{ secrets.GSC_PROPERTY_URL }}
@@ -47,4 +47,3 @@ jobs:
           npx vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
           npx vercel build --prod --token "$VERCEL_TOKEN"
           npx vercel deploy --prebuilt --prod --token "$VERCEL_TOKEN"
-
