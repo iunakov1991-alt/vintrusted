@@ -1,8 +1,8 @@
 const { logBehavior } = require("./behavior-logger");
 const { dynamicCTA } = require("./dynamic-cta");
-const { pickTemplate } = require("../../scripts/a-b/ab-engine");
-const { touchPageAge } = require("../../scripts/page-quality/page-age");
-const { routeCrawl } = require("../../scripts/crawl-routing/crawl-router");
+const { pickTemplate } = require("../a-b/ab-engine");
+const { touchPageAge } = require("../page-quality/page-age");
+const { routeCrawl } = require("../crawl-routing/crawl-router");
 
 module.exports.runEngine = function(url) {
   logBehavior(url, { type: "visit" });
