@@ -2,7 +2,7 @@ name: Autonomy Daily SEO Cycle
 
 on:
   schedule:
-    - cron: "0 8 * * *"
+    - cron: '0 8 * * *'
   workflow_dispatch: {}
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Install deps
         run: npm ci
@@ -27,7 +27,7 @@ jobs:
           GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
           GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
           GSC_PROPERTY_URL: ${{ secrets.GSC_PROPERTY_URL }}
-          GSC_DAYS_BACK: "14"
+          GSC_DAYS_BACK: '14'
         run: npm run autonomy:daily
 
       - name: Build dashboard only
