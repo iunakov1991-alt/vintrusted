@@ -14,6 +14,7 @@
     "test:seo": "node --test tests/*.test.mjs",
     "metrics:seo": "node scripts/seo-metrics.js",
     "autonomy:daily": "node scripts/autonomy/run-daily-cycle.js",
+    "autonomy:daily:ci": "node scripts/autonomy/run-daily-cycle-ci.js",
     "rl:auto": "node scripts/rl/auto-gsc-train.js",
     "rl:policy": "node scripts/rl/policy-engine.js",
     "dashboard:build": "node scripts/dashboard/build-dashboard-data.js",

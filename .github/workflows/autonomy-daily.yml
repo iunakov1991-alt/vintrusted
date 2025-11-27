@@ -1,13 +1,39 @@
 name: Autonomy Daily SEO Cycle
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 8 * * *'  # каждый день в 08:00 UTC
+    - cron: "0 7 * * *"   # каждый день в 07:00 UTC
+  workflow_dispatch:
 
 jobs:
   autonomy-daily:
+    name: autonomy-daily
     runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    env:
+      NODE_ENV: production
+      CI: "true"
+
+      # Лёгкий CI-режим SEO
+      SEO_MAX_PAGES_PER_BUILD: "10000"
+      SEO_TARGET_PAGES: "10000"
+      SEO_URLS_PER_SITEMAP: "20000"
+      SEO_TARGET_FULL_EXPOSURE_DAYS: "120"
+      SEO_MIN_SITEMAPS_PER_DAY: "1"
+      SEO_MAX_SITEMAPS_PER_DAY: "20"
+
+      AUTONOMY_HARD_TIMEOUT_MIN: "40"
+      AUTONOMY_MODE: "ci-light"
+
+      # Отключаем тяжёлый RL/AI в CI
+      AI_RL_ENABLED: "false"
+      AI_MAX_TOKENS: "400"
+      AI_MAX_SECTIONS: "3"
+
+      # Остальные переменные берутся из GitHub Secrets/Variables
+      # (STRIPE_*, CLEARVIN_*, SEO_BASE_URL, DEEPSEEK_API_KEY, GROQ_API_KEY и т.д.)
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -15,47 +41,26 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install deps
         run: npm ci
 
-      - name: Run autonomy daily cycle
-        env:
-          NODE_ENV: production
-          # Ограничиваем количество страниц для автономного билда (GitHub Actions имеет лимит времени)
-          SEO_MAX_PAGES_PER_BUILD: 10000
-          SEO_TARGET_PAGES: 10000
-          USE_GSC_API: ${{ secrets.USE_GSC_API }}
-          GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
-          GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
-          GSC_PROPERTY_URL: ${{ secrets.GSC_PROPERTY_URL }}
-          GSC_DAYS_BACK: '14'
-        run: npm run autonomy:daily
+      - name: Run autonomy daily cycle (CI light)
+        run: npm run autonomy:daily:ci
 
       - name: Build dashboard only
         run: npm run dashboard:build
 
       - name: Trigger Vercel redeploy
-        continue-on-error: true
+        if: success()
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
         run: |
-          if [ -z "$VERCEL_TOKEN" ]; then
-            echo "No VERCEL_TOKEN provided, skipping redeploy"
-            exit 0
+          if [ -n "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "Triggering Vercel redeploy..."
+            curl -X POST "$VERCEL_DEPLOY_HOOK"
+          else
+            echo "VERCEL_DEPLOY_HOOK not set, skipping redeploy trigger."
           fi
-          if [ -z "$VERCEL_PROJECT_ID" ]; then
-            echo "No VERCEL_PROJECT_ID provided, skipping redeploy"
-            exit 0
-          fi
-          echo "Triggering Vercel redeploy for project: $VERCEL_PROJECT_ID"
-          # Используем правильный endpoint Vercel API для деплоя
-          curl -X POST "https://api.vercel.com/v13/deployments" \
-            -H "Authorization: Bearer $VERCEL_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "{\"projectId\":\"$VERCEL_PROJECT_ID\",\"target\":\"production\"}" || {
-            echo "Vercel redeploy trigger failed, but continuing..."
-            exit 0
-          }
