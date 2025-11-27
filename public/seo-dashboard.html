@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SEO Quality Dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+        background: #0b1120;
+        color: #e5e7eb;
+        margin: 0;
+        padding: 24px;
+      }
+      .card {
+        max-width: 960px;
+        margin: 0 auto;
+        background: rgba(15, 23, 42, 0.95);
+        border-radius: 18px;
+        padding: 24px 20px;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+      }
+      h1 {
+        font-size: 24px;
+        margin: 0 0 12px 0;
+      }
+      .muted {
+        color: #9ca3af;
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+      .metric {
+        padding: 12px 12px;
+        border-radius: 14px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(55, 65, 81, 0.8);
+      }
+      .metric h2 {
+        font-size: 13px;
+        margin: 0 0 4px 0;
+        color: #9ca3af;
+      }
+      .metric .value {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 2px 8px;
+        font-size: 11px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        color: #e5e7eb;
+        margin-right: 6px;
+      }
+      .badge.bad {
+        border-color: rgba(248, 113, 113, 0.9);
+        color: #fecaca;
+      }
+      ul {
+        margin: 8px 0 0 16px;
+        padding: 0;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>SEO Quality Dashboard</h1>
+      <div class="muted" id="updated">Loading metrics…</div>
+      <div class="grid" id="metrics"></div>
+      <div id="alerts"></div>
+    </div>
+
+    <script>
+      async function load() {
+        try {
+          const res = await fetch("/data/metrics/quality-dashboard.json", {
+            cache: "no-store",
+          });
+          if (!res.ok) throw new Error("No metrics");
+
+          const json = await res.json();
+
+          document.getElementById("updated").textContent =
+            "Updated: " + (json.updatedAt || "n/a");
+
+          const summary = json.summary || {};
+          const metricsEl = document.getElementById("metrics");
+
+          function metric(title, value, suffix) {
+            const div = document.createElement("div");
+            div.className = "metric";
+            div.innerHTML =
+              "<h2>" +
+              title +
+              "</h2><div class='value'>" +
+              (value ?? "—") +
+              (suffix || "") +
+              "</div>";
+            metricsEl.appendChild(div);
+          }
+
+          metric("Total pages (written)", summary.totalPagesWritten || 0, "");
+          metric("Avg words", (summary.avgWords || 0).toFixed(1), "");
+          metric("Avg FAQ count", (summary.avgFaqCount || 0).toFixed(2), "");
+          const langs = summary.langs || {};
+          const total =
+            Object.values(langs).reduce((s, v) => s + v, 0) || 1;
+          const enShare = (((langs.en || 0) / total) * 100).toFixed(1);
+          const esShare = (((langs.es || 0) / total) * 100).toFixed(1);
+          metric("EN share", enShare, " %");
+          metric("ES share", esShare, " %");
+
+          const alertsEl = document.getElementById("alerts");
+          const alerts = json.alerts || [];
+          if (!alerts.length) {
+            alertsEl.innerHTML =
+              "<span class='badge'>No alerts — looks good.</span>";
+          } else {
+            const title = document.createElement("div");
+            title.className = "muted";
+            title.textContent = "Alerts:";
+            alertsEl.appendChild(title);
+
+            const list = document.createElement("ul");
+            alerts.forEach((a) => {
+              const li = document.createElement("li");
+              li.textContent = a;
+              list.appendChild(li);
+            });
+            alertsEl.appendChild(list);
+          }
+        } catch (e) {
+          document.getElementById("updated").textContent =
+            "No metrics yet. Run: node scripts/seo-metrics.js after generation.";
+        }
+      }
+      load();
+    </script>
+  </body>
+</html>
+

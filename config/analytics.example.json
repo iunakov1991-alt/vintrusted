@@ -1,0 +1,17 @@
+{
+  "ga4": {
+    "measurementId": "G-XXXXXXXXXX",
+    "apiSecret": "YOUR_GA4_API_SECRET"
+  },
+  "gsc": {
+    "propertyUrl": "https://vintrusted.com",
+    "notes": "GSC CSV exports should be placed under data/gsc/gsc-latest.csv"
+  },
+  "events": {
+    "en_trial_start": "vin_en_trial_start",
+    "es_trial_start": "vin_es_trial_start",
+    "en_cta_click": "vin_en_cta_click",
+    "es_cta_click": "vin_es_cta_click"
+  }
+}
+
