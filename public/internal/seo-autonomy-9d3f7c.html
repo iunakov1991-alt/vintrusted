@@ -344,9 +344,62 @@
       color: var(--muted);
       margin-left: 8px;
     }
+    .docs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .docs-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 12px;
+      background: rgba(15,23,42,0.45);
+      border: 1px solid rgba(31,41,55,0.6);
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: border 0.2s ease, color 0.2s ease;
+    }
+    .docs-link span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(148,163,184,0.9);
+    }
+    .docs-link:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    .run-button {
+      width: 100%;
+      margin-top: 12px;
+      background: linear-gradient(90deg, #22d3ee, #3b82f6);
+      color: #0b1120;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .run-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .run-button:hover {
+      opacity: 0.9;
+    }
   </style>
 
-<script id="dashboard-data" type="application/json">{"meta":{"updatedAt":"2025-11-27T01:42:11.373Z","config":{"secretPath":"/internal/seo-autonomy-9d3f7c.html","dataPath":"/internal/dashboard-data.json","projectName":"Vintrusted SEO Autonomy","targetLcpMs":1500,"targetTtfbMs":150,"targetTotalPages":20000000,"targetEnShare":0.7,"targetEsShare":0.3,"maxAllowedErrorsPerDay":5}},"summary":{"projectName":"Vintrusted SEO Autonomy","updatedAt":"2025-11-27T01:42:11.373Z","totalUrls":854407,"exposedUrls":30000,"totalSitemaps":29,"allowedSitemaps":1,"urlsPerSitemap":30000,"builds":{},"lastBuildAt":null},"language":{"enShare":0.7,"esShare":0.3,"lastUpdated":null},"traffic":{"global":{"en":null,"es":null},"clusters":null},"clusters":{"boosted":[],"suppressed":[],"focusTopics":["dmv","fraud","auctions","high-risk-vins","salvage-economics","maintenance-costs","state-specific-risks"]},"logs":{"summary":{"total":8,"info":8,"warn":0,"error":0,"lastErrors":[]}},"cursorTasks":[{"id":"tune-build-limits","title":"Поджать лимит страниц на билд и замедлить раскрытие","reason":"Большой хвост неэкспонированных URL в sitemap, можно уменьшить нагрузку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и настрои параметры:\n# SEO_MAX_PAGES_PER_BUILD=300000\n# SEO_TARGET_FULL_EXPOSURE_DAYS=240\n\n# После правок запусти:\nnpm run build:seo\n"},{"id":"scale-up-pages","title":"Увеличить целевое количество страниц","reason":"Текущее количество страниц сильно ниже целевого, можно расширить сетку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и увеличь:\n# SEO_TARGET_PAGES=10000000\n# SEO_MAX_PAGES_PER_BUILD=500000\n\n# Затем запусти билд:\nnpm run build:seo\n"},{"id":"rebuild-dashboard","title":"Пересобрать дашборд вручную","reason":"Если графики или данные дашборда выглядят неверно.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Собрать данные дашборда:\nnode scripts/dashboard/build-dashboard-data.js\n\n# Затем задеплоить (если используешь Vercel CLI):\n# npx vercel --prod --token \"$VERCEL_TOKEN\" --scope \"$VERCEL_ORG_ID\" --confirm\n"}]}</script>
+
+
+
+
+
+
+<script id="dashboard-data" type="application/json">{"meta":{"updatedAt":"2025-11-27T04:19:37.456Z","config":{"secretPath":"/internal/seo-autonomy-9d3f7c.html","dataPath":"/internal/dashboard-data.json","projectName":"Vintrusted SEO Autonomy","targetLcpMs":1500,"targetTtfbMs":150,"targetTotalPages":20000000,"targetEnShare":0.7,"targetEsShare":0.3,"maxAllowedErrorsPerDay":5}},"summary":{"projectName":"Vintrusted SEO Autonomy","updatedAt":"2025-11-27T04:19:37.456Z","totalUrls":854407,"exposedUrls":30000,"totalSitemaps":29,"allowedSitemaps":1,"urlsPerSitemap":30000,"builds":{},"lastBuildAt":null},"language":{"enShare":0.7,"esShare":0.3,"lastUpdated":null},"traffic":{"global":{"en":null,"es":null},"clusters":null},"clusters":{"boosted":[],"suppressed":[],"focusTopics":["dmv","fraud","auctions","high-risk-vins","salvage-economics","maintenance-costs","state-specific-risks"]},"logs":{"summary":{"total":41,"info":32,"warn":6,"error":3,"lastErrors":[{"ts":"2025-11-27T04:19:36.900Z","scope":"AUTONOMY","message":"SEO build failed"},{"ts":"2025-11-27T04:19:36.902Z","scope":"AUTONOMY","message":"SEO build failed"},{"ts":"2025-11-27T04:19:36.914Z","scope":"AUTONOMY","message":"SEO build failed"}]}},"cursorTasks":[{"id":"tune-build-limits","title":"Поджать лимит страниц на билд и замедлить раскрытие","reason":"Большой хвост неэкспонированных URL в sitemap, можно уменьшить нагрузку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и настрои параметры:\n# SEO_MAX_PAGES_PER_BUILD=300000\n# SEO_TARGET_FULL_EXPOSURE_DAYS=240\n\n# После правок запусти:\nnpm run build:seo\n"},{"id":"scale-up-pages","title":"Увеличить целевое количество страниц","reason":"Текущее количество страниц сильно ниже целевого, можно расширить сетку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и увеличь:\n# SEO_TARGET_PAGES=10000000\n# SEO_MAX_PAGES_PER_BUILD=500000\n\n# Затем запусти билд:\nnpm run build:seo\n"},{"id":"rebuild-dashboard","title":"Пересобрать дашборд вручную","reason":"Если графики или данные дашборда выглядят неверно.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Собрать данные дашборда:\nnode scripts/dashboard/build-dashboard-data.js\n\n# Затем задеплоить (если используешь Vercel CLI):\n# npx vercel --prod --token \"$VERCEL_TOKEN\" --scope \"$VERCEL_ORG_ID\" --confirm\n"}]}</script>
 </head>
 <body>
 <div class="shell">
@@ -490,6 +543,40 @@
           Копируешь любой блок целиком → даёшь Cursor → он всё делает за тебя.
         </div>
       </div>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Docs & Control</div>
+            <div class="card-sub">/docs/seo-machine/*</div>
+          </div>
+        </div>
+        <div class="docs-list">
+          <a class="docs-link" href="/docs/seo-machine/01_OVERVIEW.md" target="_blank" rel="noopener">
+            Overview
+            <span>01</span>
+          </a>
+          <a class="docs-link" href="/docs/seo-machine/02_PIPELINE.md" target="_blank" rel="noopener">
+            Pipeline
+            <span>02</span>
+          </a>
+          <a class="docs-link" href="/docs/seo-machine/03_MODULES.md" target="_blank" rel="noopener">
+            Modules & ENV
+            <span>03</span>
+          </a>
+          <a class="docs-link" href="/docs/seo-machine/04_AUTONOMY_AND_AI.md" target="_blank" rel="noopener">
+            Autonomy & AI
+            <span>04</span>
+          </a>
+          <a class="docs-link" href="/docs/seo-machine/05_DASHBOARD.md" target="_blank" rel="noopener">
+            Dashboard spec
+            <span>05</span>
+          </a>
+        </div>
+        <button class="run-button" id="run-machine-btn">Run SEO Machine</button>
+        <div class="hint">
+          Кнопка пока заглушка. План: дёргать эндпоинт, который выполняет `npm run build:seo` или `npm run autonomy:daily`.
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -572,15 +659,24 @@ async function loadDashboardData() {
   const embeddedDataEl = document.getElementById("dashboard-data");
   if (embeddedDataEl) {
     try {
-      data = JSON.parse(embeddedDataEl.textContent);
-      const duration = Date.now() - startTime;
-      addLogEntry(true, `Встроенные данные загружены (${duration}ms)`, new Date().toISOString());
-      updateStatusDot("success");
+      const content = embeddedDataEl.textContent || embeddedDataEl.innerHTML;
+      if (content && content.trim()) {
+        data = JSON.parse(content);
+        const duration = Date.now() - startTime;
+        addLogEntry(true, `Встроенные данные загружены (${duration}ms)`, new Date().toISOString());
+        updateStatusDot("success");
+      } else {
+        addLogEntry(false, "Встроенные данные пусты", new Date().toISOString());
+        updateStatusDot("error");
+      }
     } catch (e) {
-      console.warn("Failed to parse embedded data:", e);
+      console.error("Failed to parse embedded data:", e);
       addLogEntry(false, `Ошибка парсинга: ${e.message}`, new Date().toISOString());
       updateStatusDot("error");
     }
+  } else {
+    addLogEntry(false, "Элемент dashboard-data не найден", new Date().toISOString());
+    updateStatusDot("error");
   }
   
   // Способ 2: Если встроенных данных нет, пробуем загрузить через fetch
@@ -786,14 +882,31 @@ let countdownInterval = null;
 let secondsUntilRefresh = AUTO_REFRESH_INTERVAL / 1000;
 
 async function refreshDashboard() {
-  updateStatusDot("loading");
-  const data = await loadDashboardData();
-  renderDashboard(data);
-  
-  // Обновляем встроенные данные если они есть
-  const embeddedDataEl = document.getElementById("dashboard-data");
-  if (embeddedDataEl && data) {
-    embeddedDataEl.textContent = JSON.stringify(data);
+  try {
+    updateStatusDot("loading");
+    const data = await loadDashboardData();
+    
+    if (data) {
+      renderDashboard(data);
+      
+      // Обновляем встроенные данные если они есть
+      const embeddedDataEl = document.getElementById("dashboard-data");
+      if (embeddedDataEl && data) {
+        embeddedDataEl.textContent = JSON.stringify(data);
+      }
+    } else {
+      // Если данные не загрузились, показываем сообщение
+      const statePill = document.getElementById("state-pill");
+      if (statePill) {
+        statePill.textContent = "Данные не загружены";
+        statePill.style.color = "#f97373";
+      }
+      updateStatusDot("error");
+    }
+  } catch (err) {
+    console.error("Error in refreshDashboard:", err);
+    addLogEntry(false, `Ошибка обновления: ${err.message}`, new Date().toISOString());
+    updateStatusDot("error");
   }
 }
 
@@ -820,7 +933,47 @@ function startAutoRefresh() {
 }
 
 // Запускаем при загрузке страницы
-startAutoRefresh();
+(function() {
+  function init() {
+    console.log("[DASHBOARD] Initializing...");
+    
+    // Проверяем что все элементы на месте
+    const requiredElements = ["state-pill", "status-dot", "meta-updated", "kpi-total-urls"];
+    const missing = requiredElements.filter(id => !document.getElementById(id));
+    if (missing.length > 0) {
+      console.error("[DASHBOARD] Missing elements:", missing);
+      console.error("[DASHBOARD] Retrying in 500ms...");
+      setTimeout(init, 500);
+      return;
+    }
+    
+    const embeddedDataEl = document.getElementById("dashboard-data");
+    if (embeddedDataEl) {
+      const content = embeddedDataEl.textContent || embeddedDataEl.innerHTML;
+      console.log("[DASHBOARD] Found embedded data, length:", content ? content.length : 0);
+    } else {
+      console.warn("[DASHBOARD] Embedded data element not found");
+    }
+    
+    console.log("[DASHBOARD] Starting auto-refresh...");
+    startAutoRefresh();
+    const runButton = document.getElementById("run-machine-btn");
+    if (runButton) {
+      runButton.addEventListener("click", () => {
+        alert("Run SEO Machine → подключи вебхук, который вызовет `npm run build:seo` или `npm run autonomy:daily`.");
+      });
+    }
+  }
+  
+  // Ждём полной загрузки
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(init, 100); // Небольшая задержка для гарантии
+    });
+  } else {
+    // DOM уже загружен, но даём время на рендеринг
+    setTimeout(init, 100);
+  }
 })();
 </script>
 </body>
