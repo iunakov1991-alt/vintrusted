@@ -265,6 +265,23 @@ function main() {
   const outPath = path.join(INTERNAL_DIR, "dashboard-data.json");
   fs.writeFileSync(outPath, JSON.stringify(data, null, 2), "utf8");
   console.log("[DASHBOARD] dashboard-data.json updated:", outPath);
+
+  // Также встраиваем данные в HTML для работы при открытии файла напрямую
+  const htmlPath = path.join(INTERNAL_DIR, "seo-autonomy-9d3f7c.html");
+  if (fs.existsSync(htmlPath)) {
+    let html = fs.readFileSync(htmlPath, "utf8");
+    const scriptTag = `<script id="dashboard-data" type="application/json">${JSON.stringify(data)}</script>`;
+    
+    // Удаляем старые встроенные данные если есть
+    html = html.replace(/<script id="dashboard-data"[^>]*>[\s\S]*?<\/script>/g, "");
+    
+    // Вставляем новые данные перед </head>
+    if (html.includes("</head>")) {
+      html = html.replace("</head>", scriptTag + "\n</head>");
+      fs.writeFileSync(htmlPath, html, "utf8");
+      console.log("[DASHBOARD] Data embedded in HTML:", htmlPath);
+    }
+  }
 }
 
 if (require.main === module) {

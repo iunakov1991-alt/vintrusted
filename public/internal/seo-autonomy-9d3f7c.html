@@ -294,6 +294,7 @@
       background: #f97316;
     }
   </style>
+<script id="dashboard-data" type="application/json">{"meta":{"updatedAt":"2025-11-27T01:38:24.763Z","config":{"secretPath":"/internal/seo-autonomy-9d3f7c.html","dataPath":"/internal/dashboard-data.json","projectName":"Vintrusted SEO Autonomy","targetLcpMs":1500,"targetTtfbMs":150,"targetTotalPages":20000000,"targetEnShare":0.7,"targetEsShare":0.3,"maxAllowedErrorsPerDay":5}},"summary":{"projectName":"Vintrusted SEO Autonomy","updatedAt":"2025-11-27T01:38:24.763Z","totalUrls":854407,"exposedUrls":30000,"totalSitemaps":29,"allowedSitemaps":1,"urlsPerSitemap":30000,"builds":{},"lastBuildAt":null},"language":{"enShare":0.7,"esShare":0.3,"lastUpdated":null},"traffic":{"global":{"en":null,"es":null},"clusters":null},"clusters":{"boosted":[],"suppressed":[],"focusTopics":["dmv","fraud","auctions","high-risk-vins","salvage-economics","maintenance-costs","state-specific-risks"]},"logs":{"summary":{"total":8,"info":8,"warn":0,"error":0,"lastErrors":[]}},"cursorTasks":[{"id":"tune-build-limits","title":"Поджать лимит страниц на билд и замедлить раскрытие","reason":"Большой хвост неэкспонированных URL в sitemap, можно уменьшить нагрузку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и настрои параметры:\n# SEO_MAX_PAGES_PER_BUILD=300000\n# SEO_TARGET_FULL_EXPOSURE_DAYS=240\n\n# После правок запусти:\nnpm run build:seo\n"},{"id":"scale-up-pages","title":"Увеличить целевое количество страниц","reason":"Текущее количество страниц сильно ниже целевого, можно расширить сетку.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Открой .env и увеличь:\n# SEO_TARGET_PAGES=10000000\n# SEO_MAX_PAGES_PER_BUILD=500000\n\n# Затем запусти билд:\nnpm run build:seo\n"},{"id":"rebuild-dashboard","title":"Пересобрать дашборд вручную","reason":"Если графики или данные дашборда выглядят неверно.","bash":"#!/bin/bash\ncd \"/Users/dmitrii/Desktop/website\"\n\n# Собрать данные дашборда:\nnode scripts/dashboard/build-dashboard-data.js\n\n# Затем задеплоить (если используешь Vercel CLI):\n# npx vercel --prod --token \"$VERCEL_TOKEN\" --scope \"$VERCEL_ORG_ID\" --confirm\n"}]}</script>
 </head>
 <body>
 <div class="shell">
@@ -439,10 +440,47 @@
 </div>
 <script>
 (async function() {
+  let data = null;
+  
+  // Способ 1: Проверяем встроенные данные (работает при открытии файла напрямую)
+  const embeddedDataEl = document.getElementById("dashboard-data");
+  if (embeddedDataEl) {
+    try {
+      data = JSON.parse(embeddedDataEl.textContent);
+    } catch (e) {
+      console.warn("Failed to parse embedded data:", e);
+    }
+  }
+  
+  // Способ 2: Если встроенных данных нет, пробуем загрузить через fetch
+  if (!data) {
+    const paths = [
+      "/internal/dashboard-data.json",
+      "./dashboard-data.json",
+      "dashboard-data.json"
+    ];
+    
+    for (const path of paths) {
+      try {
+        const res = await fetch(path + "?ts=" + Date.now());
+        if (res && res.ok) {
+          data = await res.json();
+          break;
+        }
+      } catch (e) {
+        // Продолжаем пробовать
+      }
+    }
+  }
+  
   try {
-    const res = await fetch("/internal/dashboard-data.json?ts=" + Date.now());
-    if (!res.ok) throw new Error("Failed to load dashboard-data.json");
-    const data = await res.json();
+    if (!data) {
+      // Если данные не загрузились, показываем инструкцию
+      document.getElementById("state-pill").textContent = "Запусти: npm run dashboard:build";
+      document.getElementById("state-pill").style.color = "#f97373";
+      document.getElementById("meta-updated").textContent = "Данные не загружены. Запусти: npm run dashboard:build";
+      return;
+    }
     const summary = data.summary || {};
     const lang = data.language || {};
     const logs = data.logs || {};
