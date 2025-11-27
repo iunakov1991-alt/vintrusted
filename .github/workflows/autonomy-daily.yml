@@ -23,6 +23,9 @@ jobs:
       - name: Run autonomy daily cycle
         env:
           NODE_ENV: production
+          # Ограничиваем количество страниц для автономного билда (GitHub Actions имеет лимит времени)
+          SEO_MAX_PAGES_PER_BUILD: 10000
+          SEO_TARGET_PAGES: 10000
           USE_GSC_API: ${{ secrets.USE_GSC_API }}
           GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
           GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
