@@ -44,12 +44,10 @@ jobs:
             echo "No VERCEL_TOKEN provided, skipping redeploy"
             exit 0
           fi
-          
           if [ -z "$VERCEL_PROJECT_ID" ]; then
             echo "No VERCEL_PROJECT_ID provided, skipping redeploy"
             exit 0
           fi
-          
           echo "Triggering Vercel redeploy for project: $VERCEL_PROJECT_ID"
           curl -X POST "https://api.vercel.com/v1/integrations/deploy/$VERCEL_PROJECT_ID" \
             -H "Authorization: Bearer $VERCEL_TOKEN" \
