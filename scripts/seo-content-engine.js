@@ -1,6 +1,6 @@
 // GOD MODE: расширенный контент-движок для EN+ES
 // - Все 50 штатов (из data/states.json)
-// - Марки и модели (data/makes-models.json)
+// - Марки и модели (data/makes-models.json) - новый формат: массив объектов
 // - Годы 1990–2025
 // - EN / ES seeds
 // - Структуры для VIN-level, DMV, fraud, auctions и др.
@@ -11,14 +11,17 @@ const fs = require("fs");
 const STATES_PATH = path.join(__dirname, "..", "data", "states.json");
 const MAKES_MODELS_PATH = path.join(__dirname, "..", "data", "makes-models.json");
 
+// Загружаем 50 штатов
 const STATES = JSON.parse(fs.readFileSync(STATES_PATH, "utf8"));
-const MAKES_MODELS_RAW = JSON.parse(fs.readFileSync(MAKES_MODELS_PATH, "utf8"));
 
-// Фильтруем служебные ключи
+// Загружаем марки и модели (новый формат: массив объектов)
+const MAKES_DATA = JSON.parse(fs.readFileSync(MAKES_MODELS_PATH, "utf8"));
+
+// Преобразуем массив объектов в объект для обратной совместимости
 const MAKES_MODELS = {};
-for (const [key, value] of Object.entries(MAKES_MODELS_RAW)) {
-  if (!key.startsWith("_") && Array.isArray(value)) {
-    MAKES_MODELS[key] = value;
+for (const item of MAKES_DATA) {
+  if (item && item.make && Array.isArray(item.models)) {
+    MAKES_MODELS[item.make] = item.models;
   }
 }
 
