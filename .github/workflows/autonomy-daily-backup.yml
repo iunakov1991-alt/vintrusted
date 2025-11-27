@@ -3,7 +3,7 @@ name: Autonomy Daily SEO Cycle
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: "0 8 * * *"  # каждый день в 08:00 UTC
 
 jobs:
   autonomy-daily:
@@ -12,6 +12,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # Здесь можешь потом вернуть свои скрипты/seo-машину, пока минимальный шаг-заглушка
       - name: Run placeholder step
         run: |
           echo "Autonomy daily job started"
