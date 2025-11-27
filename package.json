@@ -4,9 +4,10 @@
   "description": "VIN Trusted website with Stripe integration",
   "main": "index.html",
   "scripts": {
-    "build": "node scripts/build-seo-pages.js",
-    "build:seo": "node scripts/build-seo-pages.js",
-    "vercel-build": "node scripts/build-seo-pages.js"
+    "build": "node scripts/build-seo-full-3.js",
+    "build:seo": "node scripts/build-seo-full-3.js",
+    "vercel-build": "node scripts/build-seo-full-3.js",
+    "build:seo:legacy": "node scripts/build-seo-pages.js"
   },
   "dependencies": {
     "stripe": "^14.0.0"
