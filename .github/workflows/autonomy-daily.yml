@@ -1,57 +1,31 @@
 name: Autonomy Daily SEO Cycle
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 8 * * *'
-  workflow_dispatch: {}
+    - cron: "0 8 * * *"  # каждый день в 08:00 UTC
 
 jobs:
-  run-autonomy:
+  autonomy-daily:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install deps
-        run: npm ci
-
-      - name: Run autonomy daily cycle
-        env:
-          NODE_ENV: production
-          USE_GSC_API: ${{ secrets.USE_GSC_API }}
-          GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
-          GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
-          GSC_PROPERTY_URL: ${{ secrets.GSC_PROPERTY_URL }}
-          GSC_DAYS_BACK: '14'
-        run: npm run autonomy:daily
-
-      - name: Build dashboard only
-        run: npm run dashboard:build
+      # Здесь можешь потом вернуть свои скрипты/seo-машину, пока минимальный шаг-заглушка
+      - name: Run placeholder step
+        run: |
+          echo "Autonomy daily job started"
+          echo "Add your SEO scripts here"
 
       - name: Trigger Vercel redeploy
         continue-on-error: true
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
             echo "No VERCEL_TOKEN provided, skipping redeploy"
             exit 0
           fi
-          if [ -z "$VERCEL_PROJECT_ID" ]; then
-            echo "No VERCEL_PROJECT_ID provided, skipping redeploy"
-            exit 0
-          fi
-          echo "Triggering Vercel redeploy for project: $VERCEL_PROJECT_ID"
-          curl -X POST "https://api.vercel.com/v1/integrations/deploy/$VERCEL_PROJECT_ID" \
-            -H "Authorization: Bearer $VERCEL_TOKEN" \
-            -H "Content-Type: application/json" || {
-            echo "Vercel redeploy trigger failed, but continuing..."
-            exit 0
-          }
+          curl -X POST "https://api.vercel.com/v1/integrations/deploy/prj_xxx" \
+            -H "Authorization: Bearer $VERCEL_TOKEN"
