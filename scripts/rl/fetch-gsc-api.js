@@ -30,7 +30,16 @@ async function fetchGSCData() {
 
   try {
     // Парсим приватный ключ (может быть с \n или без)
-    const privateKey = key.replace(/\\n/g, "\n");
+    // GitHub Secrets могут хранить ключ с экранированными \n
+    let privateKey = key;
+    if (privateKey.includes("\\n")) {
+      privateKey = privateKey.replace(/\\n/g, "\n");
+    }
+    // Убеждаемся, что ключ начинается правильно
+    if (!privateKey.includes("BEGIN PRIVATE KEY")) {
+      console.error("[GSC-API] Invalid private key format");
+      throw new Error("Invalid private key format");
+    }
 
     // Создаём JWT клиент
     const jwtClient = new google.auth.JWT(

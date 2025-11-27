@@ -48,9 +48,11 @@ jobs:
             exit 0
           fi
           echo "Triggering Vercel redeploy for project: $VERCEL_PROJECT_ID"
-          curl -X POST "https://api.vercel.com/v1/integrations/deploy/$VERCEL_PROJECT_ID" \
+          # Используем правильный endpoint Vercel API для деплоя
+          curl -X POST "https://api.vercel.com/v13/deployments" \
             -H "Authorization: Bearer $VERCEL_TOKEN" \
-            -H "Content-Type: application/json" || {
+            -H "Content-Type: application/json" \
+            -d "{\"projectId\":\"$VERCEL_PROJECT_ID\",\"target\":\"production\"}" || {
             echo "Vercel redeploy trigger failed, but continuing..."
             exit 0
           }

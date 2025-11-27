@@ -6,9 +6,9 @@ const { renderSeoPage } = require("./scripts/seo-template");
 const {
   getAllStateMakeYearSeedsWithLangs,
   buildVinPageData,
-  INTENTS,
   STATES
 } = require("./scripts/seo-content-engine");
+const { INTENTS } = require("./scripts/seo-config");
 const { TOPIC_CLUSTERS, buildTopicPageData } = require("./scripts/seo-topics-engine");
 const { getEnTemplateVariants } = require("./scripts/seo-templates-en");
 const { getEsTemplateVariants } = require("./scripts/seo-templates-es");
