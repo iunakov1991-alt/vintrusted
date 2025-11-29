@@ -61,7 +61,7 @@ async function buildPageContent(item, config) {
 
   const aiText = await generateText(
 
-    `Write a detailed but generic explanation (no specific accidents, no fabricated records) about "${item.intent}" for a vehicle VIN report in ${item.stateSlug}. Focus on why the check matters and what buyers should pay attention to.`,
+    `Write a detailed but generic explanation (no specific accidents, no fabricated records, no personal data) about "${item.intent}" for a vehicle VIN report in ${item.stateSlug}. Focus on why the check matters and what buyers should pay attention to. The text must be safe for SEO and compliant with data privacy rules.`,
 
     { lang: item.lang, intent: item.intent, maxTokens: config.aiMaxTokens || 600 }
 

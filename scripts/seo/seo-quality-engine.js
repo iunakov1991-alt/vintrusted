@@ -51,7 +51,7 @@ function scorePage(pageDoc, config) {
 
   const len = text.length;
 
-  const lenScore = Math.max(0, Math.min(1, len / 4000)); // ~4k символов = 1.0
+  const lenScore = Math.max(0, Math.min(1, len / 4000));
 
 
 

@@ -29,8 +29,6 @@ function writeSitemaps(pages, config) {
 
 
 
-  // Чистим старые XML
-
   const existing = fs.readdirSync(SITEMAP_ROOT);
 
   for (const f of existing) {
@@ -57,7 +55,7 @@ function writeSitemaps(pages, config) {
 
 
 
-  const indexEntries = [];
+  const allIndexEntries = [];
 
   const maxPerFile = 20000;
 
@@ -68,6 +66,10 @@ function writeSitemaps(pages, config) {
     const list = byLang[lang];
 
     const chunksArr = chunk(list, maxPerFile);
+
+    const langEntries = [];
+
+
 
     chunksArr.forEach((chunkPages, idx) => {
 
@@ -91,7 +93,9 @@ ${locs}
 
       fs.writeFileSync(path.join(SITEMAP_ROOT, fileName), xml, 'utf8');
 
-      indexEntries.push({ lang, fileName });
+      langEntries.push({ lang, fileName });
+
+      allIndexEntries.push({ lang, fileName });
 
     });
 
@@ -99,9 +103,7 @@ ${locs}
 
     const indexName = `sitemap-${lang}-index.xml`;
 
-    const entries = indexEntries
-
-      .filter((e) => e.lang === lang)
+    const entriesXml = langEntries
 
       .map(
 
@@ -117,7 +119,7 @@ ${locs}
 
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-${entries}
+${entriesXml}
 
 </sitemapindex>`;
 
@@ -131,7 +133,7 @@ ${entries}
 
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-${indexEntries
+${allIndexEntries
 
   .map(
 

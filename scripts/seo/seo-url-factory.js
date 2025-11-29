@@ -91,7 +91,15 @@ function buildUrlPlan(config, rlState) {
 
 
 
-            const clusterId = buildClusterId({ type: 'vin', stateSlug: state.slug, makeSlug: make.slug });
+            const clusterId = buildClusterId({
+
+              type: 'vin',
+
+              stateSlug: state.slug,
+
+              makeSlug: make.slug
+
+            });
 
 
 
@@ -105,11 +113,13 @@ function buildUrlPlan(config, rlState) {
 
 
 
-            const priority = basePriority * (0.5 + iWeight) * (0.5 + lWeight) * (0.5 + cWeight);
+            const priority =
+
+              basePriority * (0.5 + iWeight) * (0.5 + lWeight) * (0.5 + cWeight);
 
 
 
-            const url = `/vin/${vin}/${state.slug}/`;
+            const url = `/seo/pages/vin/${vin}/${state.slug}/`;
 
 
 

@@ -63,125 +63,174 @@ function appendCache(key, text) {
 
 
 
-async function callGroqAPI(prompt, { lang, intent, maxTokens = 600 }) {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) {
-    throw new Error('GROQ_API_KEY not set');
+async function callAiProvider(prompt, { lang, intent, maxTokens }) {
+
+  const endpoint = process.env.SEO_AI_ENDPOINT;
+
+  const apiKey = process.env.SEO_AI_API_KEY;
+
+  const model = process.env.SEO_AI_MODEL || 'gpt-4o-mini';
+
+
+
+  if (!endpoint || !apiKey) {
+
+    log('AI', 'AI endpoint or API key not configured, using fallback.');
+
+    return null;
+
   }
 
-  const systemPrompt = `You are a helpful assistant that writes informative, factual content about vehicle history reports. Write in ${lang === 'es' ? 'Spanish' : 'English'}. Do not fabricate specific accidents, damage, or records. Focus on general information about why ${intent} checks matter and what buyers should know.`;
 
-  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: 'llama-3.3-70b-versatile',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: prompt }
-      ],
-      max_tokens: maxTokens,
-      temperature: 0.7
-    })
-  });
 
-  if (!response.ok) {
-    const errorText = await response.text().catch(() => '');
-    throw new Error(`Groq API error: ${response.status} ${errorText}`);
+  const body = {
+
+    model,
+
+    messages: [
+
+      {
+
+        role: 'system',
+
+        content:
+
+          'You are an SEO content generator for a VIN history report website. ' +
+
+          'You must NOT fabricate specific accident dates, owners, odometer values or any personal data. ' +
+
+          'Write safe, generic, non-personalized explanations only.'
+
+      },
+
+      {
+
+        role: 'user',
+
+        content: prompt
+
+      }
+
+    ],
+
+    max_tokens: maxTokens || 600,
+
+    temperature: 0.4
+
+  };
+
+
+
+  try {
+
+    const res = await fetch(endpoint, {
+
+      method: 'POST',
+
+      headers: {
+
+        'Authorization': `Bearer ${apiKey}`,
+
+        'Content-Type': 'application/json'
+
+      },
+
+      body: JSON.stringify(body)
+
+    });
+
+
+
+    if (!res.ok) {
+
+      log('AI', `HTTP error: ${res.status}`);
+
+      return null;
+
+    }
+
+
+
+    const data = await res.json();
+
+    const text =
+
+      data.choices?.[0]?.message?.content ||
+
+      data.choices?.[0]?.text ||
+
+      null;
+
+
+
+    if (!text) {
+
+      log('AI', 'No text in AI response, using fallback.');
+
+      return null;
+
+    }
+
+
+
+    return text.trim();
+
+  } catch (e) {
+
+    log('AI', `Request error: ${e.message}`);
+
+    return null;
+
   }
 
-  const data = await response.json();
-  return data.choices?.[0]?.message?.content || '';
 }
 
-async function callDeepSeekAPI(prompt, { lang, intent, maxTokens = 600 }) {
-  const apiKey = process.env.DEEPSEEK_API_KEY;
-  if (!apiKey) {
-    throw new Error('DEEPSEEK_API_KEY not set');
-  }
 
-  const systemPrompt = `You are a helpful assistant that writes informative, factual content about vehicle history reports. Write in ${lang === 'es' ? 'Spanish' : 'English'}. Do not fabricate specific accidents, damage, or records. Focus on general information about why ${intent} checks matter and what buyers should know.`;
-
-  const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: 'deepseek-chat',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: prompt }
-      ],
-      max_tokens: maxTokens,
-      temperature: 0.7
-    })
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text().catch(() => '');
-    throw new Error(`DeepSeek API error: ${response.status} ${errorText}`);
-  }
-
-  const data = await response.json();
-  return data.choices?.[0]?.message?.content || '';
-}
 
 async function generateText(prompt, { lang = 'en', intent = 'generic', maxTokens = 600 } = {}) {
+
   const enableAI = process.env.SEO_ENABLE_AI === '1' || process.env.SEO_ENABLE_AI === 'true';
+
   const key = hashKey(`${lang}|${intent}|${prompt}`);
+
   const cache = readCache();
 
   if (cache.has(key)) {
+
     return cache.get(key);
+
   }
+
+
+
+  const fallback = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
+
+
 
   if (!enableAI) {
-    const fallback = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
+
     appendCache(key, fallback);
+
     return fallback;
+
   }
 
-  // Try Groq first (faster), then DeepSeek as fallback
-  let text = '';
-  let error = null;
 
-  // Try Groq
-  if (process.env.GROQ_API_KEY) {
-    try {
-      text = await callGroqAPI(prompt, { lang, intent, maxTokens });
-      log('AI', `Generated text using Groq (${text.length} chars)`);
-    } catch (e) {
-      error = e;
-      log('AI', `Groq failed: ${e.message}, trying DeepSeek...`);
-    }
-  }
 
-  // Fallback to DeepSeek
-  if (!text && process.env.DEEPSEEK_API_KEY) {
-    try {
-      text = await callDeepSeekAPI(prompt, { lang, intent, maxTokens });
-      log('AI', `Generated text using DeepSeek (${text.length} chars)`);
-    } catch (e) {
-      error = e;
-      log('AI', `DeepSeek failed: ${e.message}`);
-    }
-  }
+  let text = await callAiProvider(prompt, { lang, intent, maxTokens });
 
-  // If both failed, use fallback
   if (!text) {
-    const fallback = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
-    log('AI', `Both APIs failed, using fallback text. Last error: ${error?.message || 'No API keys set'}`);
-    appendCache(key, fallback);
-    return fallback;
+
+    text = fallback;
+
   }
+
+
 
   appendCache(key, text);
+
   return text;
+
 }
 
 
