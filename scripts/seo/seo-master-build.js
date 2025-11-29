@@ -100,9 +100,21 @@ async function main() {
     finishedAt: null
   };
 
+  // На Vercel проверяем, был ли build уже выполнен в этом деплое
+  // Используем переменную окружения VERCEL для определения первого прохода
   if (isVercel && fs.existsSync(BUILD_META_PATH)) {
-    log('MASTER', 'Second Vercel pass detected, skipping SEO build.');
-    process.exit(0);
+    try {
+      const existingMeta = JSON.parse(fs.readFileSync(BUILD_META_PATH, 'utf8'));
+      // Если build уже завершен (есть finishedAt), пропускаем
+      if (existingMeta.finishedAt) {
+        log('MASTER', 'SEO build already completed in this deployment, skipping.');
+        process.exit(0);
+      }
+      // Если build начат, но не завершен - продолжаем (возможно, был прерван)
+      log('MASTER', 'Previous build detected but not finished, continuing...');
+    } catch (e) {
+      log('MASTER', `Error reading build meta: ${e.message}, continuing...`);
+    }
   }
 
   fs.mkdirSync(path.dirname(BUILD_META_PATH), { recursive: true });
