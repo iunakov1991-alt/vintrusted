@@ -3,23 +3,19 @@ const path = require('path');
 
 module.exports = async (req, res) => {
   try {
-    // В Vercel rewrite параметры доступны через req.query
-    // /vin/:vin/:state -> req.query.vin и req.query.state
-    let vin = req.query.vin;
-    let state = req.query.state;
+    // В Vercel rewrite, req.url содержит оригинальный путь запроса
+    // Например: /vin/4T1BF1FK3FU123456/texas/
+    const urlPath = req.url || '';
+    const parts = urlPath.split('/').filter(Boolean);
     
-    // Если параметры не в query, пытаемся извлечь из req.url
-    if (!vin || !state) {
-      const urlPath = req.url || '';
-      const parts = urlPath.split('/').filter(Boolean);
-      
-      // Ищем /vin в пути
-      const vinIdx = parts.indexOf('vin');
-      if (vinIdx !== -1 && vinIdx + 1 < parts.length) {
-        vin = vin || parts[vinIdx + 1];
-        state = state || parts[vinIdx + 2] || '';
-      }
+    // Ищем /vin в пути
+    const vinIdx = parts.indexOf('vin');
+    if (vinIdx === -1 || vinIdx + 1 >= parts.length) {
+      return res.status(404).send('Not found');
     }
+    
+    const vin = parts[vinIdx + 1];
+    const state = parts[vinIdx + 2] || '';
     
     if (!vin || vin.length !== 17) {
       return res.status(404).send('Invalid VIN');
