@@ -94,6 +94,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "public/seo/sitemaps/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.txt",
       "use": "@vercel/static"
     }
@@ -190,6 +194,14 @@
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})",
       "destination": "/seo/pages/vin/:vin/index.html"
+    },
+    {
+      "source": "/seo/sitemaps/:file*",
+      "destination": "/public/seo/sitemaps/:file*"
+    },
+    {
+      "source": "/sitemap-seo-monster.xml",
+      "destination": "/sitemap-seo-monster.xml"
     }
   ]
 }
