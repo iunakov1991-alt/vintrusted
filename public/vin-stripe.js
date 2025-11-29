@@ -131,7 +131,7 @@
     }
 
     try {
-      if (!paymentElement || !stripe) {
+      if (!paymentElement || !stripe || !elements) {
         throw new Error('Payment element not initialized');
       }
 
@@ -139,7 +139,14 @@
       const emailInput = form.querySelector('input[type="email"]');
       const email = emailInput ? emailInput.value.trim() : '';
 
-      // Confirm setup intent
+      // IMPORTANT: Call elements.submit() first to validate the form
+      const { error: submitError } = await elements.submit();
+      
+      if (submitError) {
+        throw submitError;
+      }
+
+      // Now confirm setup intent
       const { error: confirmError, setupIntent } = await stripe.confirmSetup({
         elements,
         clientSecret: paymentElement._clientSecret,
@@ -154,7 +161,7 @@
       }
 
       // If setup intent requires action, handle it
-      if (setupIntent.status === 'requires_action') {
+      if (setupIntent && setupIntent.status === 'requires_action') {
         const { error: actionError } = await stripe.confirmCardSetup(paymentElement._clientSecret);
         if (actionError) {
           throw actionError;
