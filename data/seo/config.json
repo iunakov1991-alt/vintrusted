@@ -11,6 +11,10 @@
 
   "aiMaxTokens": 600,
 
+  "aiProvider": "groq",
+
+  "aiProviderFallback": "deepseek",
+
   "languages": ["en", "es"],
 
   "defaultLanguage": "en",
