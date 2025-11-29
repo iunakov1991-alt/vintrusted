@@ -136,8 +136,8 @@
       }
 
       const vin = getVIN();
-      const emailInput = form.querySelector('input[type="email"]');
-      const email = emailInput ? emailInput.value.trim() : '';
+      // Email removed from form - will be collected later if needed
+      const email = '';
 
       // IMPORTANT: Call elements.submit() first to validate the form
       const { error: submitError } = await elements.submit();
@@ -245,24 +245,6 @@
       form.id = 'vin-payment-form';
       form.style.cssText = 'display: flex; flex-direction: column; gap: 15px;';
 
-      // Email input (optional)
-      const emailGroup = document.createElement('div');
-      emailGroup.style.cssText = 'display: flex; flex-direction: column; gap: 5px;';
-      
-      const emailLabel = document.createElement('label');
-      emailLabel.textContent = 'Email (optional)';
-      emailLabel.style.cssText = 'font-size: 14px; font-weight: 500; color: #374151;';
-      
-      const emailInput = document.createElement('input');
-      emailInput.type = 'email';
-      emailInput.name = 'email';
-      emailInput.placeholder = 'your@email.com';
-      emailInput.style.cssText = 'padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px;';
-      
-      emailGroup.appendChild(emailLabel);
-      emailGroup.appendChild(emailInput);
-      form.appendChild(emailGroup);
-
       // Payment element container (reuse existing temp container or create new)
       const tempContainer = document.getElementById('vin-payment-element-temp');
       let paymentContainer;
@@ -294,7 +276,7 @@
       const submitButton = document.createElement('button');
       submitButton.type = 'submit';
       submitButton.textContent = 'Pay $3.00';
-      submitButton.style.cssText = 'padding: 12px 24px; background: #111827; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s;';
+      submitButton.style.cssText = 'padding: 12px 24px; background: #111827; color: white; border: none; border-radius: 20px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; text-align: center; display: flex; align-items: center; justify-content: center;';
       submitButton.onmouseover = () => submitButton.style.background = '#374151';
       submitButton.onmouseout = () => submitButton.style.background = '#111827';
       form.appendChild(submitButton);
