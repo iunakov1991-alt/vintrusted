@@ -100,20 +100,29 @@ async function main() {
     finishedAt: null
   };
 
-  // На Vercel проверяем, был ли build уже выполнен в этом деплое
-  // Используем переменную окружения VERCEL для определения первого прохода
+  // На Vercel удаляем старый build-meta.json, чтобы гарантировать выполнение build
+  // Vercel делает несколько проходов build для разных функций, но SEO build должен выполниться один раз
   if (isVercel && fs.existsSync(BUILD_META_PATH)) {
     try {
       const existingMeta = JSON.parse(fs.readFileSync(BUILD_META_PATH, 'utf8'));
-      // Если build уже завершен (есть finishedAt), пропускаем
-      if (existingMeta.finishedAt) {
+      // Проверяем, был ли build выполнен в этом же деплое (по buildId или времени)
+      const existingBuildId = existingMeta.buildId;
+      const currentBuildId = buildMeta.buildId;
+      
+      // Если buildId совпадает и build завершен - это тот же деплой, пропускаем
+      if (existingBuildId === currentBuildId && existingMeta.finishedAt) {
         log('MASTER', 'SEO build already completed in this deployment, skipping.');
         process.exit(0);
       }
-      // Если build начат, но не завершен - продолжаем (возможно, был прерван)
-      log('MASTER', 'Previous build detected but not finished, continuing...');
+      
+      // Иначе - новый деплой, удаляем старый файл и продолжаем
+      log('MASTER', 'New deployment detected, removing old build meta and continuing...');
+      fs.unlinkSync(BUILD_META_PATH);
     } catch (e) {
-      log('MASTER', `Error reading build meta: ${e.message}, continuing...`);
+      log('MASTER', `Error reading build meta: ${e.message}, removing and continuing...`);
+      if (fs.existsSync(BUILD_META_PATH)) {
+        fs.unlinkSync(BUILD_META_PATH);
+      }
     }
   }
 
