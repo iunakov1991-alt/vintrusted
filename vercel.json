@@ -66,6 +66,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "public/seo/pages/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "public/**",
       "use": "@vercel/static"
     },
