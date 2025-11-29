@@ -194,14 +194,6 @@
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})",
       "destination": "/seo/pages/vin/:vin/index.html"
-    },
-    {
-      "source": "/seo/sitemaps/sitemap-seo.xml",
-      "destination": "/seo/sitemaps/sitemap-seo.xml"
-    },
-    {
-      "source": "/seo/sitemaps/:file*.xml",
-      "destination": "/seo/sitemaps/:file*.xml"
     }
   ],
   "headers": [
