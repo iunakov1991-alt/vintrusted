@@ -5,11 +5,9 @@ const path = require('path');
 
 const { log } = require('./logger');
 
-
-
 const SITEMAP_ROOT = path.join(process.cwd(), 'public/seo/sitemaps');
 
-
+const PUBLIC_ROOT = path.join(process.cwd(), 'public');
 
 function chunk(arr, n) {
 
@@ -21,13 +19,17 @@ function chunk(arr, n) {
 
 }
 
+function ensureDir(p) {
 
+  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
+
+}
 
 function writeSitemaps(pages, config) {
 
-  if (!fs.existsSync(SITEMAP_ROOT)) fs.mkdirSync(SITEMAP_ROOT, { recursive: true });
+  ensureDir(SITEMAP_ROOT);
 
-
+  // Чистим только свои файлы
 
   const existing = fs.readdirSync(SITEMAP_ROOT);
 
@@ -41,8 +43,6 @@ function writeSitemaps(pages, config) {
 
   }
 
-
-
   const byLang = {};
 
   for (const p of pages) {
@@ -53,23 +53,15 @@ function writeSitemaps(pages, config) {
 
   }
 
+  const indexEntries = [];
 
-
-  const allIndexEntries = [];
-
-  const maxPerFile = 20000;
-
-
+  const maxPerFile = 20000; // Pro позволяет спокойно держать большие sitemap-части
 
   for (const lang of Object.keys(byLang)) {
 
     const list = byLang[lang];
 
     const chunksArr = chunk(list, maxPerFile);
-
-    const langEntries = [];
-
-
 
     chunksArr.forEach((chunkPages, idx) => {
 
@@ -93,17 +85,15 @@ ${locs}
 
       fs.writeFileSync(path.join(SITEMAP_ROOT, fileName), xml, 'utf8');
 
-      langEntries.push({ lang, fileName });
-
-      allIndexEntries.push({ lang, fileName });
+      indexEntries.push({ lang, fileName });
 
     });
 
-
-
     const indexName = `sitemap-${lang}-index.xml`;
 
-    const entriesXml = langEntries
+    const entries = indexEntries
+
+      .filter((e) => e.lang === lang)
 
       .map(
 
@@ -119,7 +109,7 @@ ${locs}
 
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-${entriesXml}
+${entries}
 
 </sitemapindex>`;
 
@@ -127,13 +117,13 @@ ${entriesXml}
 
   }
 
-
+  // Глобальный индекс внутри public/seo/sitemaps
 
   const globalIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
 
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-${allIndexEntries
+${indexEntries
 
   .map(
 
@@ -147,15 +137,111 @@ ${allIndexEntries
 
 </sitemapindex>`;
 
-  fs.writeFileSync(path.join(SITEMAP_ROOT, 'sitemap-seo.xml'), globalIndexXml, 'utf8');
+  const seoIndexPath = path.join(SITEMAP_ROOT, 'sitemap-seo.xml');
 
+  fs.writeFileSync(seoIndexPath, globalIndexXml, 'utf8');
 
+  log(
 
-  log('SITEMAP', `Sitemaps written for ${Object.keys(byLang).length} languages`);
+    'SITEMAP',
+
+    `Sitemaps written for ${Object.keys(byLang).length} languages. Total files (incl. index): ${
+
+      indexEntries.length + 1
+
+    }`
+
+  );
+
+  // Доп. интеграция: копия в корень и мягкое внедрение в sitemap.xml
+
+  integrateWithRootSitemap(seoIndexPath);
 
 }
 
+/**
 
+ * integrateWithRootSitemap:
+
+ *  - Копирует SEO-индекс в public/sitemap-seo-monster.xml
+
+ *  - Если public/sitemap.xml существует и это sitemapindex, добавляет
+
+ *    <sitemap>https://vintrusted.com/seo/sitemaps/sitemap-seo.xml</sitemap>, если ещё нет.
+
+ */
+
+function integrateWithRootSitemap(seoIndexPath) {
+
+  ensureDir(PUBLIC_ROOT);
+
+  // 1) Копия монстра в отдельный файл (ничего не ломает)
+
+  const monsterPath = path.join(PUBLIC_ROOT, 'sitemap-seo-monster.xml');
+
+  try {
+
+    fs.copyFileSync(seoIndexPath, monsterPath);
+
+    log('SITEMAP', 'Root sitemap-seo-monster.xml updated.');
+
+  } catch (e) {
+
+    log('SITEMAP', `copy monster sitemap error: ${e.message}`);
+
+  }
+
+  // 2) Мягкая интеграция в существующий sitemap.xml (если это sitemapindex)
+
+  const rootSitemapPath = path.join(PUBLIC_ROOT, 'sitemap.xml');
+
+  if (!fs.existsSync(rootSitemapPath)) {
+
+    return;
+
+  }
+
+  try {
+
+    let content = fs.readFileSync(rootSitemapPath, 'utf8');
+
+    // Только если это sitemapindex, иначе — не трогаем
+
+    if (!content.includes('<sitemapindex')) {
+
+      return;
+
+    }
+
+    const targetLoc = 'https://vintrusted.com/seo/sitemaps/sitemap-seo.xml';
+
+    if (content.includes(targetLoc)) {
+
+      // Уже подключено
+
+      return;
+
+    }
+
+    const insert = `<sitemap><loc>${targetLoc}</loc></sitemap>`;
+
+    if (content.includes('</sitemapindex>')) {
+
+      content = content.replace('</sitemapindex>', `${insert}\n</sitemapindex>`);
+
+      fs.writeFileSync(rootSitemapPath, content, 'utf8');
+
+      log('SITEMAP', 'Root sitemap.xml patched with SEO index link.');
+
+    }
+
+  } catch (e) {
+
+    log('SITEMAP', `root sitemap integration error: ${e.message}`);
+
+  }
+
+}
 
 module.exports = { writeSitemaps };
 
