@@ -50,6 +50,14 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/sitemap-seo.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/sitemap-seo-monster.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "public/seo/sitemaps/**",
       "use": "@vercel/static"
     },
@@ -182,6 +190,14 @@
     {
       "source": "/sitemaps",
       "destination": "/sitemaps.html"
+    },
+    {
+      "source": "/seo/sitemaps/sitemap-seo.xml",
+      "destination": "/api/sitemap-seo.js"
+    },
+    {
+      "source": "/sitemap-seo-monster.xml",
+      "destination": "/api/sitemap-seo-monster.js"
     },
     {
       "source": "/articles/:slug*",
