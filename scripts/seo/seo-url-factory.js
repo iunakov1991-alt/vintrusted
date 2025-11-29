@@ -119,7 +119,9 @@ function buildUrlPlan(config, rlState) {
 
 
 
-            const url = `/seo/pages/vin/${vin}/${state.slug}/${intent}/${lang}/`;
+            // Include year and make in URL to ensure uniqueness
+
+            const url = `/seo/pages/vin/${vin}/${state.slug}/${intent}/${lang}/${year}/${make.slug}/`;
 
 
 

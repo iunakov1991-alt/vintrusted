@@ -49,7 +49,9 @@ function getOutputPath(item) {
 
   const root = path.join(process.cwd(), 'public/seo/pages');
 
-  const vinDir = path.join(root, 'vin', item.vin || 'vin', item.stateSlug || 'state', item.intent || 'vin_check', item.lang || 'en');
+  // Include year and make in path to avoid overwrites when same vin/state/intent/lang but different year/make
+
+  const vinDir = path.join(root, 'vin', item.vin || 'vin', item.stateSlug || 'state', item.intent || 'vin_check', item.lang || 'en', item.year || 'unknown', item.make || 'unknown');
 
   return path.join(vinDir, 'index.html');
 
