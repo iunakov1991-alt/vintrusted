@@ -63,37 +63,104 @@ function appendCache(key, text) {
 
 
 
-async function callAiProvider(prompt, { lang, intent, maxTokens }) {
-
-  // Поддержка fallback: сначала Groq, потом DeepSeek
-  
-  const providers = [
-    {
-      name: 'Groq',
-      endpoint: process.env.SEO_AI_ENDPOINT || 'https://api.groq.com/openai/v1/chat/completions',
-      apiKey: process.env.SEO_AI_API_KEY || process.env.GROQ_API_KEY,
-      model: process.env.SEO_AI_MODEL || process.env.GROQ_MODEL || 'llama-3.3-70b-versatile'
-    },
-    {
-      name: 'DeepSeek',
-      endpoint: 'https://api.deepseek.com/v1/chat/completions',
-      apiKey: process.env.DEEPSEEK_API_KEY,
-      model: process.env.DEEPSEEK_MODEL || 'deepseek-chat'
-    }
-  ];
-
-  // Если задан явный endpoint и ключ, используем их
-  if (process.env.SEO_AI_ENDPOINT && process.env.SEO_AI_API_KEY) {
-    providers[0].endpoint = process.env.SEO_AI_ENDPOINT;
-    providers[0].apiKey = process.env.SEO_AI_API_KEY;
-    providers[0].model = process.env.SEO_AI_MODEL || 'gpt-4o-mini';
+async function callGroqAPI(prompt, { lang, intent, maxTokens }) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) {
+    return null;
   }
 
-  // Пробуем каждый провайдер по очереди
-  for (const provider of providers) {
-    if (!provider.endpoint || !provider.apiKey) {
-      continue;
+  const systemPrompt = `You are an SEO content generator for a VIN history report website. You must NOT fabricate specific accident dates, owners, odometer values or any personal data. Write safe, generic, non-personalized explanations only.`;
+
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: prompt }
+        ],
+        max_tokens: maxTokens || 600,
+        temperature: 0.4
+      })
+    });
+
+    if (!res.ok) {
+      log('AI', `Groq HTTP error: ${res.status}`);
+      return null;
     }
+
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content || null;
+    if (text) {
+      log('AI', `Generated text using Groq (${text.length} chars)`);
+      return text.trim();
+    }
+    return null;
+  } catch (e) {
+    log('AI', `Groq request error: ${e.message}`);
+    return null;
+  }
+}
+
+async function callDeepSeekAPI(prompt, { lang, intent, maxTokens }) {
+  const apiKey = process.env.DEEPSEEK_API_KEY;
+  if (!apiKey) {
+    return null;
+  }
+
+  const systemPrompt = `You are an SEO content generator for a VIN history report website. You must NOT fabricate specific accident dates, owners, odometer values or any personal data. Write safe, generic, non-personalized explanations only.`;
+
+  try {
+    const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: process.env.DEEPSEEK_MODEL || 'deepseek-chat',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: prompt }
+        ],
+        max_tokens: maxTokens || 600,
+        temperature: 0.4
+      })
+    });
+
+    if (!res.ok) {
+      log('AI', `DeepSeek HTTP error: ${res.status}`);
+      return null;
+    }
+
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content || null;
+    if (text) {
+      log('AI', `Generated text using DeepSeek (${text.length} chars)`);
+      return text.trim();
+    }
+    return null;
+  } catch (e) {
+    log('AI', `DeepSeek request error: ${e.message}`);
+    return null;
+  }
+}
+
+async function callAiProvider(prompt, { lang, intent, maxTokens }) {
+  // Пробуем сначала Groq (быстрый), потом DeepSeek (fallback)
+  let text = await callGroqAPI(prompt, { lang, intent, maxTokens });
+  
+  if (!text) {
+    log('AI', 'Groq failed, trying DeepSeek...');
+    text = await callDeepSeekAPI(prompt, { lang, intent, maxTokens });
+  }
+  
+  return text;
 
 
 
