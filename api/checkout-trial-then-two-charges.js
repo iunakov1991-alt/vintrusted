@@ -45,6 +45,7 @@ module.exports = async function handler(req, res) {
     if (!priceId || priceId === '') {
       console.error('Price ID environment variables:', {
         PRICE_49_EVERY_10D: process.env.PRICE_49_EVERY_10D,
+        PRICE_49_EVERY_20D: process.env.PRICE_49_EVERY_20D,
         STRIPE_PRICE_49_MONTHLY: process.env.STRIPE_PRICE_49_MONTHLY,
         PRICE_49_RECURRING: process.env.PRICE_49_RECURRING
       });
