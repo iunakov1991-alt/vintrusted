@@ -180,6 +180,10 @@
       "destination": "/recall-information.html"
     },
     {
+      "source": "/sitemaps",
+      "destination": "/sitemaps.html"
+    },
+    {
       "source": "/articles/:slug*",
       "destination": "/seo/pages/articles/:slug*/index.html"
     },

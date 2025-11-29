@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemaps - VIN Trusted</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #111827;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+        .sitemap-list {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .sitemap-item {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sitemap-item:last-child {
+            border-bottom: none;
+        }
+        .sitemap-item:hover {
+            background: #f9fafb;
+        }
+        .sitemap-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .sitemap-link:hover {
+            text-decoration: underline;
+        }
+        .sitemap-type {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .note {
+            margin-top: 30px;
+            padding: 15px;
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            border-radius: 4px;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sitemaps</h1>
+    <p class="description">All available sitemaps for VIN Trusted website</p>
+    
+    <div class="sitemap-list">
+        <div class="sitemap-item">
+            <div>
+                <a href="/seo/sitemaps/sitemap-seo.xml" class="sitemap-link">SEO Sitemap Index</a>
+                <div class="sitemap-type">Main SEO sitemap index</div>
+            </div>
+        </div>
+        <div class="sitemap-item">
+            <div>
+                <a href="/sitemap-seo-monster.xml" class="sitemap-link">SEO Monster Sitemap</a>
+                <div class="sitemap-type">Alternative SEO sitemap location</div>
+            </div>
+        </div>
+        <div class="sitemap-item">
+            <div>
+                <a href="/sitemap.xml" class="sitemap-link">Main Sitemap</a>
+                <div class="sitemap-type">Root sitemap (if exists)</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <strong>Note:</strong> If you're looking for a specific sitemap and it's not listed here, it may be generated during the build process. Check the build logs for sitemap generation status.
+    </div>
+</body>
+</html>
+
