@@ -65,123 +65,149 @@ function appendCache(key, text) {
 
 async function callAiProvider(prompt, { lang, intent, maxTokens }) {
 
-  const endpoint = process.env.SEO_AI_ENDPOINT;
+  // Поддержка fallback: сначала Groq, потом DeepSeek
+  
+  const providers = [
+    {
+      name: 'Groq',
+      endpoint: process.env.SEO_AI_ENDPOINT || 'https://api.groq.com/openai/v1/chat/completions',
+      apiKey: process.env.SEO_AI_API_KEY || process.env.GROQ_API_KEY,
+      model: process.env.SEO_AI_MODEL || process.env.GROQ_MODEL || 'llama-3.3-70b-versatile'
+    },
+    {
+      name: 'DeepSeek',
+      endpoint: 'https://api.deepseek.com/v1/chat/completions',
+      apiKey: process.env.DEEPSEEK_API_KEY,
+      model: process.env.DEEPSEEK_MODEL || 'deepseek-chat'
+    }
+  ];
 
-  const apiKey = process.env.SEO_AI_API_KEY;
-
-  const model = process.env.SEO_AI_MODEL || 'gpt-4o-mini';
-
-
-
-  if (!endpoint || !apiKey) {
-
-    log('AI', 'AI endpoint or API key not configured, using fallback.');
-
-    return null;
-
+  // Если задан явный endpoint и ключ, используем их
+  if (process.env.SEO_AI_ENDPOINT && process.env.SEO_AI_API_KEY) {
+    providers[0].endpoint = process.env.SEO_AI_ENDPOINT;
+    providers[0].apiKey = process.env.SEO_AI_API_KEY;
+    providers[0].model = process.env.SEO_AI_MODEL || 'gpt-4o-mini';
   }
 
+  // Пробуем каждый провайдер по очереди
+  for (const provider of providers) {
+    if (!provider.endpoint || !provider.apiKey) {
+      continue;
+    }
 
 
-  const body = {
 
-    model,
+    const body = {
 
-    messages: [
+      model: provider.model,
 
-      {
+      messages: [
 
-        role: 'system',
+        {
 
-        content:
+          role: 'system',
 
-          'You are an SEO content generator for a VIN history report website. ' +
+          content:
 
-          'You must NOT fabricate specific accident dates, owners, odometer values or any personal data. ' +
+            'You are an SEO content generator for a VIN history report website. ' +
 
-          'Write safe, generic, non-personalized explanations only.'
+            'You must NOT fabricate specific accident dates, owners, odometer values or any personal data. ' +
 
-      },
+            'Write safe, generic, non-personalized explanations only.'
 
-      {
+        },
 
-        role: 'user',
+        {
 
-        content: prompt
+          role: 'user',
+
+          content: prompt
+
+        }
+
+      ],
+
+      max_tokens: maxTokens || 600,
+
+      temperature: 0.4
+
+    };
+
+
+
+    try {
+
+      const res = await fetch(provider.endpoint, {
+
+        method: 'POST',
+
+        headers: {
+
+          'Authorization': `Bearer ${provider.apiKey}`,
+
+          'Content-Type': 'application/json'
+
+        },
+
+        body: JSON.stringify(body)
+
+      });
+
+
+
+      if (!res.ok) {
+
+        log('AI', `${provider.name} HTTP error: ${res.status}, trying next provider...`);
+
+        continue;
 
       }
 
-    ],
-
-    max_tokens: maxTokens || 600,
-
-    temperature: 0.4
-
-  };
 
 
+      const data = await res.json();
 
-  try {
+      const text =
 
-    const res = await fetch(endpoint, {
+        data.choices?.[0]?.message?.content ||
 
-      method: 'POST',
+        data.choices?.[0]?.text ||
 
-      headers: {
-
-        'Authorization': `Bearer ${apiKey}`,
-
-        'Content-Type': 'application/json'
-
-      },
-
-      body: JSON.stringify(body)
-
-    });
+        null;
 
 
 
-    if (!res.ok) {
+      if (!text) {
 
-      log('AI', `HTTP error: ${res.status}`);
+        log('AI', `${provider.name} returned no text, trying next provider...`);
 
-      return null;
+        continue;
+
+      }
+
+
+
+      log('AI', `Successfully generated text using ${provider.name} (${text.length} chars)`);
+
+      return text.trim();
+
+    } catch (e) {
+
+      log('AI', `${provider.name} request error: ${e.message}, trying next provider...`);
+
+      continue;
 
     }
-
-
-
-    const data = await res.json();
-
-    const text =
-
-      data.choices?.[0]?.message?.content ||
-
-      data.choices?.[0]?.text ||
-
-      null;
-
-
-
-    if (!text) {
-
-      log('AI', 'No text in AI response, using fallback.');
-
-      return null;
-
-    }
-
-
-
-    return text.trim();
-
-  } catch (e) {
-
-    log('AI', `Request error: ${e.message}`);
-
-    return null;
 
   }
+
+  
+
+  // Если все провайдеры не сработали
+
+  log('AI', 'All AI providers failed, using fallback text.');
+
+  return null;
 
 }
 
