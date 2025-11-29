@@ -36,7 +36,8 @@ module.exports = async function handler(req, res) {
     });
 
     // 3) План на три списания $49: t+10, t+20, t+30 (каждые 10 дней, 3 итерации)
-    const priceId = (process.env.PRICE_49_EVERY_10D || process.env.STRIPE_PRICE_49_MONTHLY || process.env.PRICE_49_RECURRING)?.trim();
+    const rawPriceId = process.env.PRICE_49_EVERY_10D || process.env.STRIPE_PRICE_49_MONTHLY || process.env.PRICE_49_RECURRING;
+    const priceId = rawPriceId ? String(rawPriceId).trim() : null;
     
     if (!priceId || priceId === '') {
       console.error('Price ID environment variables:', {
