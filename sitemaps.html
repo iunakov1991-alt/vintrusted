@@ -66,30 +66,122 @@
     <h1>Sitemaps</h1>
     <p class="description">All available sitemaps for VIN Trusted website</p>
     
-    <div class="sitemap-list">
-        <div class="sitemap-item">
-            <div>
-                <a href="/seo/sitemaps/sitemap-seo.xml" class="sitemap-link">SEO Sitemap Index</a>
-                <div class="sitemap-type">Main SEO sitemap index</div>
-            </div>
+    <div id="loading" style="text-align: center; padding: 40px; color: #6b7280;">
+        Loading sitemap information...
+    </div>
+    
+    <div id="sitemap-content" style="display: none;">
+        <div class="sitemap-list" id="main-sitemaps">
+            <!-- Main sitemaps will be loaded here -->
         </div>
-        <div class="sitemap-item">
-            <div>
-                <a href="/sitemap-seo-monster.xml" class="sitemap-link">SEO Monster Sitemap</a>
-                <div class="sitemap-type">Alternative SEO sitemap location</div>
-            </div>
-        </div>
-        <div class="sitemap-item">
-            <div>
-                <a href="/sitemap.xml" class="sitemap-link">Main Sitemap</a>
-                <div class="sitemap-type">Root sitemap (if exists)</div>
-            </div>
+        
+        <div id="language-sections"></div>
+        
+        <div class="note" id="stats-note" style="display: none;">
+            <!-- Stats will be loaded here -->
         </div>
     </div>
     
-    <div class="note">
-        <strong>Note:</strong> If you're looking for a specific sitemap and it's not listed here, it may be generated during the build process. Check the build logs for sitemap generation status.
+    <div class="note" id="error-note" style="display: none; background: #fee2e2; border-left-color: #ef4444; color: #991b1b;">
+        <strong>Note:</strong> Could not load sitemap metadata. Sitemaps may still be available at the links below.
     </div>
+    
+    <script>
+        async function loadSitemapData() {
+            try {
+                const response = await fetch('/internal/sitemaps-metadata.json');
+                if (!response.ok) {
+                    throw new Error('Metadata not found');
+                }
+                const data = await response.json();
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('sitemap-content').style.display = 'block';
+                
+                // Main sitemaps
+                const mainSitemaps = document.getElementById('main-sitemaps');
+                mainSitemaps.innerHTML = `
+                    <div class="sitemap-item">
+                        <div>
+                            <a href="${data.mainIndex.url}" class="sitemap-link">${data.mainIndex.fileName}</a>
+                            <div class="sitemap-type">Main SEO sitemap index (${data.totalSitemapFiles} files, ${data.totalPages} pages)</div>
+                        </div>
+                    </div>
+                    <div class="sitemap-item">
+                        <div>
+                            <a href="${data.alternativeIndex.url}" class="sitemap-link">${data.alternativeIndex.fileName}</a>
+                            <div class="sitemap-type">Alternative SEO sitemap location</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Language sections
+                const langSections = document.getElementById('language-sections');
+                for (const lang of data.languages) {
+                    const langData = data.byLanguage[lang];
+                    const langSection = document.createElement('div');
+                    langSection.className = 'sitemap-list';
+                    langSection.style.marginTop = '30px';
+                    langSection.innerHTML = `
+                        <h2 style="margin-top: 0; margin-bottom: 20px; color: #111827; font-size: 24px;">
+                            ${lang.toUpperCase()} Language Sitemaps (${langData.pagesCount} pages)
+                        </h2>
+                        <div class="sitemap-item">
+                            <div>
+                                <a href="${langData.indexFile.url}" class="sitemap-link">${langData.indexFile.fileName}</a>
+                                <div class="sitemap-type">Language index (${langData.sitemapFiles.length} sitemap files)</div>
+                            </div>
+                        </div>
+                        ${langData.sitemapFiles.map(file => `
+                            <div class="sitemap-item">
+                                <div>
+                                    <a href="${file.url}" class="sitemap-link">${file.fileName}</a>
+                                    <div class="sitemap-type">Sitemap file</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    `;
+                    langSections.appendChild(langSection);
+                }
+                
+                // Stats
+                const statsNote = document.getElementById('stats-note');
+                const lastUpdated = new Date(data.lastUpdated).toLocaleString();
+                statsNote.innerHTML = `
+                    <strong>SEO Monster Stats:</strong><br>
+                    Total pages: ${data.totalPages} | 
+                    Total sitemap files: ${data.totalSitemapFiles} | 
+                    Languages: ${data.languages.join(', ')} | 
+                    Last updated: ${lastUpdated}
+                `;
+                statsNote.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading sitemap data:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error-note').style.display = 'block';
+                
+                // Fallback to static links
+                document.getElementById('sitemap-content').style.display = 'block';
+                document.getElementById('main-sitemaps').innerHTML = `
+                    <div class="sitemap-item">
+                        <div>
+                            <a href="/seo/sitemaps/sitemap-seo.xml" class="sitemap-link">SEO Sitemap Index</a>
+                            <div class="sitemap-type">Main SEO sitemap index</div>
+                        </div>
+                    </div>
+                    <div class="sitemap-item">
+                        <div>
+                            <a href="/sitemap-seo-monster.xml" class="sitemap-link">SEO Monster Sitemap</a>
+                            <div class="sitemap-type">Alternative SEO sitemap location</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        loadSitemapData();
+    </script>
 </body>
 </html>
 

@@ -164,6 +164,10 @@ ${indexEntries.length > 0
 
   integrateWithRootSitemap(seoIndexPath);
 
+  // Создаем JSON с метаданными о sitemaps для страницы /sitemaps
+
+  writeSitemapMetadata(indexEntries, byLang, pages.length);
+
 }
 
 /**
@@ -248,6 +252,54 @@ function integrateWithRootSitemap(seoIndexPath) {
 
   }
 
+}
+
+/**
+ * writeSitemapMetadata: создает JSON файл с метаданными о sitemaps для страницы /sitemaps
+ */
+function writeSitemapMetadata(indexEntries, byLang, totalPages) {
+  const metadataPath = path.join(PUBLIC_ROOT, 'internal/sitemaps-metadata.json');
+  ensureDir(path.dirname(metadataPath));
+
+  const byLangStats = {};
+  for (const lang of Object.keys(byLang)) {
+    const langEntries = indexEntries.filter((e) => e.lang === lang);
+    byLangStats[lang] = {
+      sitemapFiles: langEntries.map((e) => ({
+        fileName: e.fileName,
+        url: `/seo/sitemaps/${e.fileName}`,
+      })),
+      indexFile: {
+        fileName: `sitemap-${lang}-index.xml`,
+        url: `/seo/sitemaps/sitemap-${lang}-index.xml`,
+      },
+      pagesCount: byLang[lang].length,
+    };
+  }
+
+  const metadata = {
+    lastUpdated: new Date().toISOString(),
+    totalPages,
+    totalSitemapFiles: indexEntries.length,
+    languages: Object.keys(byLang),
+    mainIndex: {
+      fileName: 'sitemap-seo.xml',
+      url: '/seo/sitemaps/sitemap-seo.xml',
+    },
+    alternativeIndex: {
+      fileName: 'sitemap-seo-monster.xml',
+      url: '/sitemap-seo-monster.xml',
+    },
+    byLanguage: byLangStats,
+    allSitemapFiles: indexEntries.map((e) => ({
+      fileName: e.fileName,
+      lang: e.lang,
+      url: `/seo/sitemaps/${e.fileName}`,
+    })),
+  };
+
+  fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2), 'utf8');
+  log('SITEMAP', `Sitemap metadata written to ${metadataPath}`);
 }
 
 module.exports = { writeSitemaps };
