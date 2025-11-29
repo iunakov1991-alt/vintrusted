@@ -5,11 +5,7 @@ const path = require('path');
 
 const { log } = require('./logger');
 
-
-
 const QUALITY_PATH = path.join(process.cwd(), 'data/seo/quality-index.jsonl');
-
-
 
 function resetQualityIndex() {
 
@@ -33,15 +29,11 @@ function resetQualityIndex() {
 
 }
 
-
-
 function stripHtml(html) {
 
   return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 
 }
-
-
 
 function scorePage(pageDoc, config) {
 
@@ -51,17 +43,13 @@ function scorePage(pageDoc, config) {
 
   const len = text.length;
 
-  const lenScore = Math.max(0, Math.min(1, len / 4000));
-
-
+  const lenScore = Math.max(0, Math.min(1, len / 4000)); // ~4k символов = 1.0
 
   const hasH2 = /<h2[^>]*>/i.test(html);
 
   const hasH3 = /<h3[^>]*>/i.test(html);
 
   const headingScore = (hasH2 ? 0.6 : 0) + (hasH3 ? 0.4 : 0);
-
-
 
   const keyWords = [];
 
@@ -70,8 +58,6 @@ function scorePage(pageDoc, config) {
   if (pageDoc.stateSlug) keyWords.push(pageDoc.stateSlug);
 
   if (pageDoc.make) keyWords.push(pageDoc.make);
-
-
 
   let kwHits = 0;
 
@@ -83,15 +69,19 @@ function scorePage(pageDoc, config) {
 
   const keywordScore = Math.min(1, kwHits / Math.max(keyWords.length, 1));
 
-
-
   const hasFaq = /class="faq"/i.test(html);
 
   const hasCta = /class="cta"/i.test(html);
 
-  const structureScore = (hasFaq ? 0.6 : 0) + (hasCta ? 0.4 : 0);
+  const hasKeyFacts = /class="key-facts"/i.test(html);
 
+  const structureScore =
 
+    (hasFaq ? 0.25 : 0) +
+
+    (hasCta ? 0.25 : 0) +
+
+    (hasKeyFacts ? 0.5 : 0);
 
   const score =
 
@@ -103,7 +93,13 @@ function scorePage(pageDoc, config) {
 
     0.25 * structureScore;
 
+  const scored = {
 
+    ...pageDoc,
+
+    qualityScore: score
+
+  };
 
   const rec = {
 
@@ -119,15 +115,27 @@ function scorePage(pageDoc, config) {
 
   };
 
-
-
-  fs.appendFileSync(QUALITY_PATH, JSON.stringify(rec) + '\n');
-
-  return { ...pageDoc, qualityScore: score };
+  return { scored, rec };
 
 }
 
+function writeQualityIndex(records) {
 
+  try {
 
-module.exports = { scorePage, resetQualityIndex };
+    const lines = records.map((r) => JSON.stringify(r)).join('\n') + (records.length ? '\n' : '');
+
+    fs.writeFileSync(QUALITY_PATH, lines, 'utf8');
+
+    log('QUALITY', `quality-index.jsonl written, records=${records.length}`);
+
+  } catch (e) {
+
+    log('QUALITY', `write error: ${e.message}`);
+
+  }
+
+}
+
+module.exports = { scorePage, resetQualityIndex, writeQualityIndex };
 

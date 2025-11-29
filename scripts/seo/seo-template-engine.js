@@ -3,8 +3,6 @@ const escapeHtml = (str = '') =>
 
   str.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-
-
 function renderSchema({ url, title, description }) {
 
   const schema = {
@@ -13,7 +11,7 @@ function renderSchema({ url, title, description }) {
 
     "@type": "WebPage",
 
-    "url": url,
+    "url": `https://vintrusted.com${url}`,
 
     "name": title,
 
@@ -25,77 +23,327 @@ function renderSchema({ url, title, description }) {
 
 }
 
+function renderKeyFacts(ctx) {
 
+  const items = ctx.keyFacts || [
 
-function renderPage(templateName, ctx) {
+    `Covers title, ownership, odometer and basic accident history for this VIN.`,
 
-  const lang = ctx.lang || 'en';
+    `Uses multiple data sources (DMV, auctions, insurance records where available).`,
 
-  const title = ctx.title || 'VIN report';
+    `Helps you avoid overpaying for vehicles with hidden issues in ${ctx.stateLabel || 'your state'}.`
 
-  const description = ctx.description || '';
+  ];
 
-  const h1 = ctx.h1 || title;
+  return `
 
-  const bodyBlocks = ctx.bodyBlocks || [];
+  <section class="key-facts">
 
-  const faq = ctx.faq || [];
+    <h2>Key facts at a glance</h2>
 
-  const internalLinks = ctx.internalLinks || [];
+    <ul>
 
+      ${items.map(i => `<li>${escapeHtml(i)}</li>`).join('')}
 
+    </ul>
 
-  const faqHtml = faq.length
+  </section>`;
 
-    ? `<section class="faq"><h2>FAQ</h2>${faq
+}
 
-        .map(
+function renderLocalInsights(ctx) {
 
-          (q) =>
+  const stateLabel = ctx.stateLabel || 'your state';
 
-            `<div class="faq-item"><h3>${escapeHtml(
+  return `
 
-              q.q
+  <section class="local-insights">
 
-            )}</h3><p>${escapeHtml(q.a)}</p></div>`
+    <h2>Why VIN checks matter in ${escapeHtml(stateLabel)}</h2>
 
-        )
+    <p>
 
-        .join('')}</section>`
+      Vehicle title and registration rules in ${escapeHtml(stateLabel)} can affect
 
-    : '';
+      how salvage, rebuilt and branded titles are recorded. A detailed VIN report
 
+      helps you understand how many owners the vehicle had, how often it was registered,
 
+      and whether it ever appeared at auctions or insurance events in ${escapeHtml(stateLabel)}.
 
-  const linksHtml = internalLinks.length
+    </p>
 
-    ? `<nav class="internal-links"><h2>Related pages</h2><ul>${internalLinks
+  </section>`;
+
+}
+
+function renderComparisonBlock(ctx) {
+
+  return `
+
+  <section class="free-vs-paid">
+
+    <h2>Free VIN check vs full paid report</h2>
+
+    <ul>
+
+      <li><strong>Free VIN check:</strong> basic format validation and limited open data; often no detailed history.</li>
+
+      <li><strong>Full report:</strong> aggregated data from DMVs, insurance and auctions where available, with clearer risk signals.</li>
+
+      <li><strong>Best practice:</strong> use a full report before paying a deposit or signing a bill of sale.</li>
+
+    </ul>
+
+  </section>`;
+
+}
+
+function renderFeatureTable(ctx) {
+
+  return `
+
+  <section class="feature-table">
+
+    <h2>What this VIN report can show</h2>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Check type</th>
+
+          <th>What you see</th>
+
+          <th>Why it matters</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>Title &amp; ownership</td>
+
+          <td>Number of owners, title transfers, possible title brands.</td>
+
+          <td>Helps detect frequently flipped or branded vehicles.</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Accident &amp; damage</td>
+
+          <td>Reported collisions, total loss events, auction announcements.</td>
+
+          <td>Shows history of serious incidents that may affect safety.</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Odometer readings</td>
+
+          <td>Mileage recorded at inspections, registrations and sales.</td>
+
+          <td>Helps reveal unrealistic jumps or rollbacks.</td>
+
+        </tr>
+
+        <tr>
+
+          <td>Usage patterns</td>
+
+          <td>Private, commercial or fleet use where available.</td>
+
+          <td>Explains why some vehicles have higher wear.</td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </section>`;
+
+}
+
+function renderFaq(faq) {
+
+  if (!faq || !faq.length) return '';
+
+  return `
+
+  <section class="faq">
+
+    <h2>FAQ</h2>
+
+    ${faq
+
+      .map(
+
+        (q) =>
+
+          `<div class="faq-item"><h3>${escapeHtml(q.q)}</h3><p>${escapeHtml(
+
+            q.a
+
+          )}</p></div>`
+
+      )
+
+      .join('')}
+
+  </section>`;
+
+}
+
+function renderInternalLinks(links) {
+
+  if (!links || !links.length) return '';
+
+  return `
+
+  <nav class="internal-links">
+
+    <h2>Related VIN checks</h2>
+
+    <ul>
+
+      ${links
 
         .map((l) => `<li><a href="${l.href}">${escapeHtml(l.label)}</a></li>`)
 
-        .join('')}</ul></nav>`
+        .join('')}
 
-    : '';
+    </ul>
 
+  </nav>`;
 
+}
 
-  const schema = renderSchema({ url: ctx.url, title, description });
+function renderBody(layout, ctx) {
 
+  const keyFacts = renderKeyFacts(ctx);
 
+  const localInsights = renderLocalInsights(ctx);
 
-  const body = `
+  const comparison = renderComparisonBlock(ctx);
+
+  const table = renderFeatureTable(ctx);
+
+  const faqHtml = renderFaq(ctx.faq);
+
+  const linksHtml = renderInternalLinks(ctx.internalLinks);
+
+  const aiBlock = ctx.aiSectionHtml || '';
+
+  // Три варианта раскладки блоков
+
+  if (layout === 'B') {
+
+    return `
+
+    <main>
+
+      <header>
+
+        <h1>${escapeHtml(ctx.h1 || ctx.title)}</h1>
+
+        <p class="intro">${escapeHtml(ctx.intro || '')}</p>
+
+      </header>
+
+      ${keyFacts}
+
+      ${aiBlock}
+
+      ${comparison}
+
+      ${table}
+
+      ${localInsights}
+
+      ${faqHtml}
+
+      ${linksHtml}
+
+      <section class="cta">
+
+        <a href="/checkout" class="btn-primary">Check this VIN now</a>
+
+      </section>
+
+    </main>`;
+
+  }
+
+  if (layout === 'C') {
+
+    return `
+
+    <main>
+
+      <header>
+
+        <h1>${escapeHtml(ctx.h1 || ctx.title)}</h1>
+
+        <p class="intro">${escapeHtml(ctx.intro || '')}</p>
+
+      </header>
+
+      ${localInsights}
+
+      ${keyFacts}
+
+      ${table}
+
+      ${aiBlock}
+
+      ${faqHtml}
+
+      ${comparison}
+
+      ${linksHtml}
+
+      <section class="cta">
+
+        <a href="/checkout" class="btn-primary">Run full VIN report</a>
+
+      </section>
+
+    </main>`;
+
+  }
+
+  // Layout A — базовый
+
+  return `
 
   <main>
 
     <header>
 
-      <h1>${escapeHtml(h1)}</h1>
+      <h1>${escapeHtml(ctx.h1 || ctx.title)}</h1>
 
       <p class="intro">${escapeHtml(ctx.intro || '')}</p>
 
     </header>
 
-    ${bodyBlocks.join('\n')}
+    ${keyFacts}
+
+    ${localInsights}
+
+    ${aiBlock}
+
+    ${table}
+
+    ${comparison}
 
     ${faqHtml}
 
@@ -107,11 +355,27 @@ function renderPage(templateName, ctx) {
 
     </section>
 
-  </main>
+  </main>`;
 
-  `;
+}
 
+function renderPage(templateName, ctx) {
 
+  const lang = ctx.lang || 'en';
+
+  const title = ctx.title || 'VIN report';
+
+  const description = ctx.description || '';
+
+  const url = ctx.url || '/';
+
+  const canonicalUrl = ctx.canonicalUrl || url;
+
+  const layout = ctx.layout || 'A';
+
+  const schema = renderSchema({ url, title, description });
+
+  const body = renderBody(layout, ctx);
 
   return `<!doctype html>
 
@@ -127,6 +391,8 @@ function renderPage(templateName, ctx) {
 
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+  <link rel="canonical" href="https://vintrusted.com${canonicalUrl}" />
+
   ${schema}
 
 </head>
@@ -140,8 +406,6 @@ function renderPage(templateName, ctx) {
 </html>`;
 
 }
-
-
 
 module.exports = { renderPage };
 
