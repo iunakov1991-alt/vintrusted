@@ -62,6 +62,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/seo-page.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "public/seo/sitemaps/**",
       "use": "@vercel/static"
     },
