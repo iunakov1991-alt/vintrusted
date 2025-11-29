@@ -14,10 +14,6 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/stripe-config.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "api/stripe-webhook.js",
       "use": "@vercel/node"
     },
