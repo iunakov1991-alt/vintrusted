@@ -17,3 +17,14 @@
     height: 0 !important;
     overflow: hidden !important;
 }
+
+/* Payment button rounded corners for mobile */
+#vin-payment-form button[type="submit"] {
+    border-radius: 50px !important;
+}
+
+@media (max-width: 768px) {
+    #vin-payment-form button[type="submit"] {
+        border-radius: 50px !important;
+    }
+}
