@@ -1,8 +1,8 @@
-import Stripe from 'stripe';
+const Stripe = require('stripe');
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_10D указывает на price с interval=day, interval_count=10
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   
   console.log('Checkout request:', req.body);
