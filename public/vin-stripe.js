@@ -252,25 +252,32 @@
       emailGroup.appendChild(emailInput);
       form.appendChild(emailGroup);
 
-      // Payment element container (reuse existing temp container)
+      // Payment element container (reuse existing temp container or create new)
       const tempContainer = document.getElementById('vin-payment-element-temp');
+      let paymentContainer;
+      
       if (tempContainer) {
         tempContainer.id = 'vin-payment-element';
         tempContainer.style.cssText = 'padding: 15px; background: white; border-radius: 8px; border: 1px solid #e5e7eb; min-height: 200px;';
-        form.insertBefore(tempContainer, submitButton);
+        paymentContainer = tempContainer;
       } else {
-        // Fallback: create new container
-        const paymentContainer = document.createElement('div');
+        // Create new container
+        paymentContainer = document.createElement('div');
         paymentContainer.id = 'vin-payment-element';
         paymentContainer.style.cssText = 'padding: 15px; background: white; border-radius: 8px; border: 1px solid #e5e7eb; min-height: 200px;';
-        form.insertBefore(paymentContainer, submitButton);
         
-        // Remount if needed
+        // Remount payment element to new container
         if (paymentElement) {
-          paymentElement.unmount();
+          try {
+            paymentElement.unmount();
+          } catch (e) {
+            console.warn('Could not unmount payment element:', e);
+          }
           paymentElement.mount(paymentContainer);
         }
       }
+      
+      form.appendChild(paymentContainer);
 
       // Submit button
       const submitButton = document.createElement('button');
