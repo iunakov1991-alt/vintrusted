@@ -94,10 +94,6 @@
       "use": "@vercel/static"
     },
     {
-      "src": "public/seo/sitemaps/**",
-      "use": "@vercel/static"
-    },
-    {
       "src": "*.txt",
       "use": "@vercel/static"
     }
@@ -198,14 +194,17 @@
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})",
       "destination": "/seo/pages/vin/:vin/index.html"
-    },
+    }
+  ],
+  "headers": [
     {
-      "source": "/seo/sitemaps/:file*",
-      "destination": "/seo/sitemaps/:file*"
-    },
-    {
-      "source": "/sitemap-seo-monster.xml",
-      "destination": "/sitemap-seo-monster.xml"
+      "source": "/seo/sitemaps/:file*.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        }
+      ]
     }
   ]
 }
