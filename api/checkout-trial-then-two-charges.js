@@ -36,6 +36,17 @@ export default async function handler(req, res) {
     });
 
     // 3) План на три списания $49: t+10, t+20, t+30 (каждые 10 дней, 3 итерации)
+    const priceId = (process.env.PRICE_49_EVERY_10D || process.env.STRIPE_PRICE_49_MONTHLY || process.env.PRICE_49_RECURRING)?.trim();
+    
+    if (!priceId || priceId === '') {
+      console.error('Price ID environment variables:', {
+        PRICE_49_EVERY_10D: process.env.PRICE_49_EVERY_10D,
+        STRIPE_PRICE_49_MONTHLY: process.env.STRIPE_PRICE_49_MONTHLY,
+        PRICE_49_RECURRING: process.env.PRICE_49_RECURRING
+      });
+      throw new Error('PRICE_49_EVERY_10D environment variable is not set or empty. Please configure Stripe price ID.');
+    }
+
     const startAt = Math.floor(Date.now() / 1000) + 10 * 86400;
     const schedule = await stripe.subscriptionSchedules.create({
       customer: customer.id,
@@ -47,7 +58,7 @@ export default async function handler(req, res) {
           default_payment_method: si.payment_method,
           collection_method: 'charge_automatically',
           proration_behavior: 'none',
-          items: [{ price: process.env.PRICE_49_EVERY_10D }]
+          items: [{ price: priceId }]
         }
       ]
     });
