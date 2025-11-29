@@ -15,3 +15,4 @@ module.exports.logBehavior = function (url, event) {
   fs.appendFileSync(logPath, line);
 };
 
+

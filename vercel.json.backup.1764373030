@@ -1,0 +1,52 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": true,
+
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/internal/seo-autonomy",
+      "destination": "/internal/seo-autonomy.html"
+    },
+    {
+      "source": "/sitemap-seo.xml",
+      "destination": "/sitemap-seo.xml"
+    },
+    {
+      "source": "/articles/:slug*",
+      "destination": "/static-pages/articles/:slug*/index.html"
+    },
+    {
+      "source": "/state/:path*",
+      "destination": "/static-pages/state/:path*/index.html"
+    },
+    {
+      "source": "/make/:path*",
+      "destination": "/static-pages/make/:path*/index.html"
+    },
+    {
+      "source": "/dmv/:path*",
+      "destination": "/static-pages/dmv/:path*/index.html"
+    },
+    {
+      "source": "/fraud/:path*",
+      "destination": "/static-pages/fraud/:path*/index.html"
+    },
+    {
+      "source": "/auctions/:path*",
+      "destination": "/static-pages/auctions/:path*/index.html"
+    },
+    {
+      "source": "/vin-check/:path*",
+      "destination": "/static-pages/vin-check/:path*/index.html"
+    },
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})",
+      "destination": "/static-pages/vin/:vin/index.html"
+    }
+  ]
+}

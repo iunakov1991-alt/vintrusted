@@ -65,3 +65,4 @@
 - **Fallback**: если кнопка недоступна, те же действия выполняет `npm run autonomy:daily` (через GitHub Actions).
 
 
+

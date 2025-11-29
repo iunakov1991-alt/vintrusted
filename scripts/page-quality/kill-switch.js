@@ -6,3 +6,4 @@ module.exports.killSwitch = function () {
   return fs.existsSync(killFile);
 };
 
+

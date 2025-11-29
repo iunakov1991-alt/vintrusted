@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/internal/seo-autonomy",
+      "destination": "/internal/seo-autonomy.html"
+    },
+    {
+      "source": "/internal/seo-autonomy.html",
+      "destination": "/internal/seo-autonomy.html"
+    },
+    {
+      "source": "/sitemap-seo.xml",
+      "destination": "/sitemap-seo.xml"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/static-pages/:path*"
+    }
+  ]
+}
