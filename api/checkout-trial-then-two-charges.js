@@ -36,10 +36,10 @@ module.exports = async function handler(req, res) {
     });
 
     // 3) План на три списания $49: t+10, t+20, t+30 (каждые 10 дней, 3 итерации)
-    // Используем PRICE_49_EVERY_10D если установлен, иначе fallback на STRIPE_PRICE_49_MONTHLY
+    // Используем PRICE_49_EVERY_10D если установлен, иначе fallback на другие переменные
     // ВАЖНО: PRICE_49_EVERY_10D должен быть price с interval=day, interval_count=10
-    // Если используется STRIPE_PRICE_49_MONTHLY, он будет работать, но с месячным интервалом вместо 10 дней
-    const rawPriceId = process.env.PRICE_49_EVERY_10D || process.env.STRIPE_PRICE_49_MONTHLY || process.env.PRICE_49_RECURRING || 'price_1SLgSWIyzEAMYCDXa8g7uV6W';
+    // Для тестирования можно использовать PRICE_49_EVERY_20D (интервал 20 дней)
+    const rawPriceId = process.env.PRICE_49_EVERY_10D || process.env.PRICE_49_EVERY_20D || process.env.STRIPE_PRICE_49_MONTHLY || process.env.PRICE_49_RECURRING || 'price_1SLgSWIyzEAMYCDXa8g7uV6W';
     const priceId = rawPriceId ? String(rawPriceId).trim() : null;
     
     if (!priceId || priceId === '') {
