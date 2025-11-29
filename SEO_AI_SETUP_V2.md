@@ -1,55 +1,38 @@
-# SEO AI Setup v2 - Универсальный Endpoint
+# SEO AI Setup v2 - Прямые API ключи
 
-## Обновление переменных окружения для SEO Monster v2
+## Конфигурация переменных окружения для SEO Monster v2
 
-В версии 2 используется универсальный AI endpoint вместо прямых вызовов Groq/DeepSeek.
+SEO Monster v2 использует прямые API ключи для Groq и DeepSeek с автоматическим fallback.
 
-### Вариант 1: Использовать Groq (рекомендуется - быстрый)
+### Необходимые переменные окружения:
 
 В Vercel Dashboard → Settings → Environment Variables добавьте:
 
 ```
 SEO_ENABLE_AI=1
-SEO_AI_ENDPOINT=https://api.groq.com/openai/v1/chat/completions
-SEO_AI_API_KEY=your_groq_api_key_here
-SEO_AI_MODEL=llama-3.3-70b-versatile
+GROQ_API_KEY=your_groq_api_key_here
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
 ```
 
-Получить ключ: https://console.groq.com/keys
-
-### Вариант 2: Использовать DeepSeek
+### Опциональные переменные:
 
 ```
-SEO_ENABLE_AI=1
-SEO_AI_ENDPOINT=https://api.deepseek.com/v1/chat/completions
-SEO_AI_API_KEY=your_deepseek_api_key_here
-SEO_AI_MODEL=deepseek-chat
+GROQ_MODEL=llama-3.3-70b-versatile  # по умолчанию: llama-3.3-70b-versatile
+DEEPSEEK_MODEL=deepseek-chat        # по умолчанию: deepseek-chat
 ```
 
-### Вариант 3: Использовать другой OpenAI-совместимый endpoint
+## Как это работает:
 
-Любой endpoint, который поддерживает формат OpenAI API:
+- ✅ Система сначала пытается использовать **Groq API** (быстрый, через `GROQ_API_KEY`)
+- ✅ Если Groq недоступен или возвращает ошибку, автоматически переключается на **DeepSeek API** (через `DEEPSEEK_API_KEY`)
+- ✅ Если оба API недоступны, используется безопасный шаблонный текст
+- ✅ Все сгенерированные тексты кешируются в `data/seo/ai-cache.jsonl`
 
-```
-SEO_ENABLE_AI=1
-SEO_AI_ENDPOINT=https://your-proxy-endpoint.com/v1/chat/completions
-SEO_AI_API_KEY=your_api_key
-SEO_AI_MODEL=gpt-4o-mini
-```
+## Преимущества текущей реализации:
 
-## Как обновить существующие переменные:
-
-1. Перейдите в Vercel Dashboard → Ваш проект → Settings → Environment Variables
-2. Удалите старые переменные (если есть):
-   - `GROQ_API_KEY`
-   - `DEEPSEEK_API_KEY`
-3. Добавьте новые переменные (выберите один из вариантов выше)
-4. Сохраните и перезапустите деплой
-
-## Преимущества v2:
-
-- ✅ Универсальный формат - работает с любым OpenAI-совместимым API
-- ✅ Легко переключаться между провайдерами
+- ✅ Простота - не нужно настраивать endpoint
+- ✅ Надежность - автоматический fallback между провайдерами
+- ✅ Понятность - сразу видно, какие провайдеры используются
 - ✅ Не добавляет новых rewrites в vercel.json
 - ✅ Сохраняет существующую конфигурацию Vercel
 

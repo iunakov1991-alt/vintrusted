@@ -48,11 +48,13 @@ set -e
 
 #   SEO_ENABLE_AI=1
 
-#   SEO_AI_API_KEY=...         # ключ DeepSeek/Grok/прокси
+#   GROQ_API_KEY=...           # ключ Groq API (основной провайдер)
 
-#   SEO_AI_ENDPOINT=...        # HTTP endpoint (совместимый с OpenAI API)
+#   DEEPSEEK_API_KEY=...       # ключ DeepSeek API (fallback)
 
-#   SEO_AI_MODEL=...           # имя модели (опционально)
+#   GROQ_MODEL=...             # модель Groq (опционально, по умолчанию: llama-3.3-70b-versatile)
+
+#   DEEPSEEK_MODEL=...         # модель DeepSeek (опционально, по умолчанию: deepseek-chat)
 
 #
 
