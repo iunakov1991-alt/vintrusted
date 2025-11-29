@@ -38,6 +38,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/get-checkout-session.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/send-receipt-and-report.js",
       "use": "@vercel/node"
     },
@@ -117,7 +121,7 @@
     },
     {
       "src": "/api/stripe-config",
-      "dest": "/api/stripe-config.js"
+      "dest": "/api/stripe-webhook.js"
     },
     {
       "src": "/api/stripe-webhook",
@@ -138,6 +142,10 @@
     {
       "src": "/api/get-vin-from-setup-intent",
       "dest": "/api/get-vin-from-setup-intent.js"
+    },
+    {
+      "src": "/api/get-checkout-session",
+      "dest": "/api/get-checkout-session.js"
     },
     {
       "src": "/api/send-receipt-and-report",
