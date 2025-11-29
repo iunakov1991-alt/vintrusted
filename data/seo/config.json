@@ -1,9 +1,8 @@
-
 {
 
   "targetPagesPerBuild": 15000,
 
-  "maxPagesPerCluster": 300,
+  "maxPagesPerCluster": 500,
 
   "minQualityScore": 0.7,
 
@@ -30,4 +29,3 @@
   ]
 
 }
-
