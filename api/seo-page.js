@@ -28,6 +28,9 @@ module.exports = async (req, res) => {
     // Путь к файлу
     const filePath = path.join(process.cwd(), 'public/seo/pages/vin', vin, state, 'index.html');
     
+    // Логирование для отладки
+    console.log('SEO Page API:', { url: req.url, vin, state, filePath, exists: fs.existsSync(filePath) });
+    
     if (fs.existsSync(filePath)) {
       const content = fs.readFileSync(filePath, 'utf8');
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -36,6 +39,7 @@ module.exports = async (req, res) => {
     }
     
     // Если файл не существует, возвращаем 404
+    console.log('SEO Page API: File not found', { filePath, cwd: process.cwd() });
     return res.status(404).send('Page not found');
     
   } catch (error) {
