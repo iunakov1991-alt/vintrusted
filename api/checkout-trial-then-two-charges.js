@@ -78,7 +78,8 @@ module.exports = async function handler(req, res) {
     }
     
     // Build success URL with VIN
-    const baseUrl = process.env.APP_URL || process.env.RETURN_URL?.replace('/success.html', '').replace('/payment-success', '') || 'https://vintrusted.com';
+    const returnUrl = process.env.RETURN_URL || '';
+    const baseUrl = process.env.APP_URL || (returnUrl ? returnUrl.replace('/success.html', '').replace('/payment-success', '') : '') || 'https://vintrusted.com';
     let successUrl = `${baseUrl}/success.html`;
     
     const params = new URLSearchParams();
