@@ -197,7 +197,7 @@
     },
     {
       "source": "/seo/sitemaps/:file*",
-      "destination": "/public/seo/sitemaps/:file*"
+      "destination": "/seo/sitemaps/:file*"
     },
     {
       "source": "/sitemap-seo-monster.xml",
