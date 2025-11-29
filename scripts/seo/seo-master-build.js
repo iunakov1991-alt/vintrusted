@@ -27,9 +27,21 @@ const RUN_SUMMARY_PATH = path.join(process.cwd(), 'public/internal/seo-run-summa
 
 const DEFAULT_CONCURRENCY = parseInt(process.env.SEO_BUILD_CONCURRENCY || '8', 10);
 
-function loadJson(p) {
+function safeLoadJson(p, fallback) {
 
-  return JSON.parse(fs.readFileSync(p, 'utf8'));
+  try {
+
+    if (!fs.existsSync(p)) return fallback;
+
+    return JSON.parse(fs.readFileSync(p, 'utf8'));
+
+  } catch (e) {
+
+    log('MASTER', `JSON load error at ${p}: ${e.message}`);
+
+    return fallback;
+
+  }
 
 }
 
@@ -48,8 +60,6 @@ function attachInternalLinks(plan) {
   for (const clusterId of Object.keys(byCluster)) {
 
     const arr = byCluster[clusterId];
-
-    // arr уже в порядке приоритета (buildUrlPlan так сортирует)
 
     for (let i = 0; i < arr.length; i++) {
 
@@ -75,7 +85,15 @@ function attachInternalLinks(plan) {
 
         used.add(neighbor.url);
 
-        const label = `${neighbor.year} ${neighbor.make.toUpperCase()} VIN check in ${neighbor.stateSlug.replace(/-/g, ' ')}`;
+        const stateSlug = neighbor.stateSlug || '';
+
+        const stateLabel = stateSlug
+
+          ? stateSlug.replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase())
+
+          : 'your state';
+
+        const label = `${neighbor.year} ${String(neighbor.make || '').toUpperCase()} VIN check in ${stateLabel}`;
 
         links.push({ href: neighbor.url, label });
 
@@ -97,41 +115,43 @@ async function runWithConcurrency(items, limit, worker) {
 
   let index = 0;
 
-  async function next() {
+  const actualLimit = Math.max(1, Math.min(limit, items.length || 1));
 
-    const i = index++;
+  async function workerLoop() {
 
-    if (i >= items.length) return;
+    while (true) {
 
-    const item = items[i];
+      const i = index++;
 
-    try {
+      if (i >= items.length) break;
 
-      results[i] = await worker(item, i);
+      const item = items[i];
 
-    } catch (e) {
+      try {
 
-      console.error(e);
+        results[i] = await worker(item, i);
 
-      results[i] = null;
+      } catch (e) {
+
+        console.error(e);
+
+        results[i] = null;
+
+      }
 
     }
 
-    await next();
-
   }
 
-  const runners = [];
-
-  const actualLimit = Math.max(1, Math.min(limit, items.length));
+  const workers = [];
 
   for (let i = 0; i < actualLimit; i++) {
 
-    runners.push(next());
+    workers.push(workerLoop());
 
   }
 
-  await Promise.all(runners);
+  await Promise.all(workers);
 
   return results.filter(Boolean);
 
@@ -167,7 +187,17 @@ async function main() {
 
   const configPath = path.join(process.cwd(), 'data/seo/config.json');
 
-  const config = loadJson(configPath);
+  const config = safeLoadJson(configPath, {
+
+    targetPagesPerBuild: 15000,
+
+    maxPagesPerCluster: 500,
+
+    minQualityScore: 0.7,
+
+    languages: ['en', 'es']
+
+  });
 
   const rlState = loadRlState();
 
@@ -177,7 +207,55 @@ async function main() {
 
   log('MASTER', `URL plan size: ${plan.length}`);
 
-  // Вешаем internalLinks до генерации контента
+  if (!plan.length) {
+
+    log('MASTER', 'No pages planned, finishing early.');
+
+    const finishedAt = new Date().toISOString();
+
+    buildMeta.finishedAt = finishedAt;
+
+    fs.writeFileSync(BUILD_META_PATH, JSON.stringify(buildMeta, null, 2));
+
+    fs.writeFileSync(
+
+      RUN_SUMMARY_PATH,
+
+      JSON.stringify(
+
+        {
+
+          buildId: buildMeta.buildId,
+
+          startedAt,
+
+          finishedAt,
+
+          durationMs: Date.now() - startMs,
+
+          pagesPlanned: 0,
+
+          pagesGenerated: 0,
+
+          pagesAccepted: 0,
+
+          avgQuality: 0,
+
+          concurrency: 0
+
+        },
+
+        null,
+
+        2
+
+      )
+
+    );
+
+    process.exit(0);
+
+  }
 
   attachInternalLinks(plan);
 
@@ -229,7 +307,7 @@ async function main() {
 
   );
 
-  log('MASTER', 'Building graph (analysis only)...');
+  log('MASTER', 'Building graph (analysis only, accepted pages)...');
 
   buildGraph(accepted);
 
@@ -250,8 +328,6 @@ async function main() {
   buildMeta.finishedAt = finishedAt;
 
   fs.writeFileSync(BUILD_META_PATH, JSON.stringify(buildMeta, null, 2));
-
-  // Dashboard + summary
 
   log('MASTER', 'Writing dashboard and run summary...');
 

@@ -9,11 +9,27 @@ const { renderPage } = require('./seo-template-engine');
 
 const { log } = require('./logger');
 
+function safeUpper(str) {
+
+  return (str || '').toString().toUpperCase();
+
+}
+
+function humanizeStateSlug(slug) {
+
+  if (!slug) return 'your state';
+
+  const s = slug.replace(/-/g, ' ');
+
+  return s.charAt(0).toUpperCase() + s.slice(1);
+
+}
+
 function buildTitle(item) {
 
-  const state = (item.stateSlug || '').replace(/-/g, ' ');
+  const state = humanizeStateSlug(item.stateSlug);
 
-  const make = (item.make || '').toUpperCase();
+  const make = safeUpper(item.make);
 
   return `VIN Check for ${item.year} ${make} in ${state} – Full Report`;
 
@@ -21,19 +37,11 @@ function buildTitle(item) {
 
 function buildDescription(item) {
 
-  const state = (item.stateSlug || '').replace(/-/g, ' ');
+  const state = humanizeStateSlug(item.stateSlug);
 
-  const make = (item.make || '').toUpperCase();
+  const make = safeUpper(item.make);
 
-  return `Instant VIN check for ${item.year} ${make} in ${state}. Get ownership, accident and title history before you buy.`;
-
-}
-
-function buildStateLabel(item) {
-
-  const state = (item.stateSlug || '').replace(/-/g, ' ');
-
-  return state ? state[0].toUpperCase() + state.slice(1) : 'your state';
+  return `Instant VIN check for ${item.year} ${make} in ${state}. Review ownership, accident and title history before you buy.`;
 
 }
 
@@ -41,7 +49,7 @@ function getOutputPath(item) {
 
   const root = path.join(process.cwd(), 'public/seo/pages');
 
-  const vinDir = path.join(root, 'vin', item.vin, item.stateSlug || 'state', item.intent || 'vin_check', item.lang || 'en');
+  const vinDir = path.join(root, 'vin', item.vin || 'vin', item.stateSlug || 'state', item.intent || 'vin_check', item.lang || 'en');
 
   return path.join(vinDir, 'index.html');
 
@@ -51,13 +59,13 @@ function chooseLayout(item) {
 
   const layouts = ['A', 'B', 'C'];
 
-  const hashBase = `${item.vin}|${item.stateSlug}|${item.intent}`;
+  const base = `${item.vin || ''}|${item.stateSlug || ''}|${item.intent || ''}`;
 
   let h = 0;
 
-  for (let i = 0; i < hashBase.length; i++) {
+  for (let i = 0; i < base.length; i++) {
 
-    h = (h * 31 + hashBase.charCodeAt(i)) >>> 0;
+    h = (h * 31 + base.charCodeAt(i)) >>> 0;
 
   }
 
@@ -71,11 +79,15 @@ async function buildPageContent(item, config) {
 
   const description = buildDescription(item);
 
-  const h1 = `VIN report for ${item.year} ${(item.make || '').toUpperCase()} in ${(item.stateSlug || '')}`;
+  const stateLabel = humanizeStateSlug(item.stateSlug);
 
-  const stateLabel = buildStateLabel(item);
+  const h1 = `VIN report for ${item.year} ${safeUpper(item.make)} in ${stateLabel}`;
 
-  const intro = `This page explains how to read a VIN report for a ${item.year} ${(item.make || '').toUpperCase()} registered in ${stateLabel}, and why a detailed history check is important before you commit to a purchase.`;
+  const intro = `This page explains how to read a VIN report for a ${item.year} ${safeUpper(
+
+    item.make
+
+  )} registered in ${stateLabel}, and why a detailed history check is important before you commit to a purchase.`;
 
   const aiText = await generateText(
 

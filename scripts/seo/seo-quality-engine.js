@@ -75,13 +75,17 @@ function scorePage(pageDoc, config) {
 
   const hasKeyFacts = /class="key-facts"/i.test(html);
 
+  const hasLocal = /class="local-insights"/i.test(html);
+
   const structureScore =
 
-    (hasFaq ? 0.25 : 0) +
+    (hasFaq ? 0.2 : 0) +
 
-    (hasCta ? 0.25 : 0) +
+    (hasCta ? 0.2 : 0) +
 
-    (hasKeyFacts ? 0.5 : 0);
+    (hasKeyFacts ? 0.3 : 0) +
+
+    (hasLocal ? 0.3 : 0);
 
   const score =
 
@@ -123,7 +127,11 @@ function writeQualityIndex(records) {
 
   try {
 
-    const lines = records.map((r) => JSON.stringify(r)).join('\n') + (records.length ? '\n' : '');
+    const lines =
+
+      records.map((r) => JSON.stringify(r)).join('\n') +
+
+      (records.length ? '\n' : '');
 
     fs.writeFileSync(QUALITY_PATH, lines, 'utf8');
 

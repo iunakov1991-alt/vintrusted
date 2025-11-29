@@ -1,11 +1,49 @@
 
 const escapeHtml = (str = '') =>
 
-  str.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  str.toString()
 
-function renderSchema({ url, title, description }) {
+    .replace(/&/g, '&amp;')
 
-  const schema = {
+    .replace(/</g, '&lt;')
+
+    .replace(/>/g, '&gt;');
+
+function buildFaqSchema(url, faq) {
+
+  if (!faq || !faq.length) return null;
+
+  return {
+
+    "@context": "https://schema.org",
+
+    "@type": "FAQPage",
+
+    "mainEntity": faq.map(q => ({
+
+      "@type": "Question",
+
+      "name": q.q,
+
+      "acceptedAnswer": {
+
+        "@type": "Answer",
+
+        "text": q.a
+
+      }
+
+    })),
+
+    "url": `https://vintrusted.com${url}`
+
+  };
+
+}
+
+function buildBaseSchema({ url, title, description }) {
+
+  return {
 
     "@context": "https://schema.org",
 
@@ -19,7 +57,17 @@ function renderSchema({ url, title, description }) {
 
   };
 
-  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+function renderSchema({ url, title, description, faq }) {
+
+  const base = buildBaseSchema({ url, title, description });
+
+  const faqSchema = buildFaqSchema(url, faq);
+
+  const payload = faqSchema ? [base, faqSchema] : base;
+
+  return `<script type="application/ld+json">${JSON.stringify(payload)}</script>`;
 
 }
 
@@ -69,7 +117,11 @@ function renderLocalInsights(ctx) {
 
       helps you understand how many owners the vehicle had, how often it was registered,
 
-      and whether it ever appeared at auctions or insurance events in ${escapeHtml(stateLabel)}.
+      and whether it ever appeared at auctions or insurance events in ${escapeHtml(
+
+        stateLabel
+
+      )}.
 
     </p>
 
@@ -77,7 +129,7 @@ function renderLocalInsights(ctx) {
 
 }
 
-function renderComparisonBlock(ctx) {
+function renderComparisonBlock() {
 
   return `
 
@@ -99,7 +151,7 @@ function renderComparisonBlock(ctx) {
 
 }
 
-function renderFeatureTable(ctx) {
+function renderFeatureTable() {
 
   return `
 
@@ -243,8 +295,6 @@ function renderBody(layout, ctx) {
 
   const aiBlock = ctx.aiSectionHtml || '';
 
-  // Три варианта раскладки блоков
-
   if (layout === 'B') {
 
     return `
@@ -373,7 +423,7 @@ function renderPage(templateName, ctx) {
 
   const layout = ctx.layout || 'A';
 
-  const schema = renderSchema({ url, title, description });
+  const schema = renderSchema({ url, title, description, faq: ctx.faq || [] });
 
   const body = renderBody(layout, ctx);
 
@@ -392,6 +442,20 @@ function renderPage(templateName, ctx) {
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <link rel="canonical" href="https://vintrusted.com${canonicalUrl}" />
+
+  <meta property="og:title" content="${escapeHtml(title)}" />
+
+  <meta property="og:description" content="${escapeHtml(description)}" />
+
+  <meta property="og:url" content="https://vintrusted.com${url}" />
+
+  <meta property="og:type" content="article" />
+
+  <meta name="twitter:card" content="summary" />
+
+  <meta name="twitter:title" content="${escapeHtml(title)}" />
+
+  <meta name="twitter:description" content="${escapeHtml(description)}" />
 
   ${schema}
 
