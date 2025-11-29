@@ -9,6 +9,7 @@
     "seo-monster": "node scripts/seo/seo-master-build.js"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.2.0",
     "stripe": "^14.0.0"
   }
 }
