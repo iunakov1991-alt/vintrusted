@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
       payment_intent_data: { 
         setup_future_usage: 'off_session'  // ← Сохраняем карту БЕЗ SetupIntent
       },
-      success_url: `${process.env.APP_URL || 'https://vintrusted.com'}/success.html?cs={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.APP_URL || 'https://vintrusted.com'}/success.html?cs={CHECKOUT_SESSION_ID}${normVIN ? '&vin=' + encodeURIComponent(normVIN) : ''}`,
       cancel_url: `${process.env.APP_URL || 'https://vintrusted.com'}/`,
       metadata: { 
         vin: normVIN, 

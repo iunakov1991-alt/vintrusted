@@ -1,3 +1,6 @@
+// Объединённая функция: stripe-config + stripe-webhook
+// Эндпоинт /api/stripe-config теперь обрабатывается здесь
+
 const { stripe } = require('./_lib/stripe');
 const { createOrGetReport } = require('./_lib/vinaudit');
 const { store } = require('./_lib/store');
@@ -12,6 +15,13 @@ function buffer(req) {
 }
 
 module.exports = async (req, res) => {
+  // Если это GET запрос на /api/stripe-config
+  if (req.method === 'GET') {
+    return res.status(200).json({
+      publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLISHABLE_KEY || '',
+    });
+  }
+  
   // Disable body parsing for raw body access
   req.rawBody = true;
   if (req.method !== 'POST') {

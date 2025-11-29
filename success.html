@@ -435,10 +435,80 @@
             const urlParams = new URLSearchParams(window.location.search);
             let vin = urlParams.get('vin');
             const setupIntent = urlParams.get('setup_intent');
+            const checkoutSessionId = urlParams.get('cs');
             
             // If no VIN in URL, try to get from localStorage or sessionStorage
             if (!vin) {
                 vin = localStorage.getItem('lastVin') || sessionStorage.getItem('lastVin');
+            }
+            
+            // If still no VIN and we have checkout session ID, try to fetch from checkout session metadata
+            if (!vin && checkoutSessionId) {
+                fetch(`/api/get-checkout-session?cs=${checkoutSessionId}`)
+                    .then(res => {
+                        if (!res.ok) {
+                            throw new Error(`HTTP ${res.status}`);
+                        }
+                        return res.json();
+                    })
+                    .then(data => {
+                        if (data.error) {
+                            throw new Error(data.error);
+                        }
+                        if (data.vin) {
+                            loadReportWithVin(data.vin);
+                        } else {
+                            // Fallback to setup intent if available
+                            if (setupIntent) {
+                                return fetch(`/api/get-vin-from-setup-intent?setup_intent=${setupIntent}`);
+                            } else {
+                                throw new Error('VIN not found in checkout session');
+                            }
+                        }
+                    })
+                    .then(res => {
+                        if (res && res.ok) {
+                            return res.json();
+                        }
+                        return null;
+                    })
+                    .then(data => {
+                        if (data && data.vin) {
+                            loadReportWithVin(data.vin);
+                        } else if (!vin) {
+                            showError('VIN not found. Please return to the home page and try again.');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching VIN from checkout session:', error);
+                        // Fallback to setup intent if available
+                        if (setupIntent && !vin) {
+                            fetch(`/api/get-vin-from-setup-intent?setup_intent=${setupIntent}`)
+                                .then(res => {
+                                    if (!res.ok) {
+                                        throw new Error(`HTTP ${res.status}`);
+                                    }
+                                    return res.json();
+                                })
+                                .then(data => {
+                                    if (data.error) {
+                                        throw new Error(data.error);
+                                    }
+                                    if (data.vin) {
+                                        loadReportWithVin(data.vin);
+                                    } else {
+                                        showError('VIN not found. Please return to the home page and try again.');
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.error('Error fetching VIN from setup intent:', error);
+                                    showError('VIN not found. Please return to the home page and try again.');
+                                });
+                        } else if (!vin) {
+                            showError('VIN not found. Please return to the home page and try again.');
+                        }
+                    });
+                return;
             }
             
             // If still no VIN and we have setup_intent, try to fetch from API
