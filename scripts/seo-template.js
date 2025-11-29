@@ -16,12 +16,13 @@ function renderSection(sectionId, pageData) {
   <p class="summary-updated">${t.updatedLabel}: <time datetime="${pageData.updatedAtIso}">${pageData.updatedAtIso}</time></p>
 </section>`;
     case "table":
+      const tableRows = pageData.tableRows || [];
       return `
 <section class="seo-table-block">
   <h2>${t.tableTitle}</h2>
   <table class="seo-table">
     <tbody>
-      ${pageData.tableRows
+      ${tableRows
         .map(
           (row) => `
       <tr>
@@ -40,17 +41,18 @@ function renderSection(sectionId, pageData) {
   ${pageData.detailsHtml || ""}
 </section>`;
     case "faq":
+      const faq = pageData.faq || [];
       return `
 <section class="seo-faq">
   <h2>${t.faqTitle}</h2>
   <div class="faq-list">
-    ${pageData.faq
+    ${faq
       .slice(0, 16)
       .map(
         (item) => `
     <article class="faq-item">
-      <h3>${escapeHtml(item.q)}</h3>
-      <p>${escapeHtml(item.a)}</p>
+      <h3>${escapeHtml(item.q || item.question || '')}</h3>
+      <p>${escapeHtml(item.a || item.answer || '')}</p>
     </article>`
       )
       .join("")}
@@ -63,11 +65,12 @@ function renderSection(sectionId, pageData) {
   ${pageData.trustHtml || ""}
 </section>`;
     case "links":
+      const internalLinks = pageData.internalLinks || [];
       return `
 <section class="seo-links">
   <h2>${t.linksTitle}</h2>
   <ul>
-    ${pageData.internalLinks
+    ${internalLinks
       .map(
         (l) => `
     <li><a href="${escapeHtml(l.href)}">${escapeHtml(l.label)}</a></li>`
@@ -128,7 +131,7 @@ function renderSeoPage(pageData) {
     </section>
 
     <article class="seo-article">
-      ${pageData.templateLayout
+      ${(pageData.templateLayout || [])
         .map((sec) => renderSection(sec, pageData))
         .join("\n")}
     </article>
