@@ -1,0 +1,11 @@
+{
+  "buildId": "2025-11-29T16-30-54-563Z",
+  "startedAt": "2025-11-29T16:30:54.563Z",
+  "finishedAt": "2025-11-29T16:30:54.914Z",
+  "durationMs": 340,
+  "pagesPlanned": 960,
+  "pagesGenerated": 960,
+  "pagesAccepted": 960,
+  "avgQuality": 0.9950412109375012,
+  "concurrency": 8
+}

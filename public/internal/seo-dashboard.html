@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>SEO Dashboard</title></head>
+<body>
+<h1>SEO Dashboard</h1>
+<pre id="data"></pre>
+<script>
+fetch('./seo-dashboard-data.json').then(r => r.json()).then(d => {
+  document.getElementById('data').textContent = JSON.stringify(d, null, 2);
+});
+</script>
+</body></html>

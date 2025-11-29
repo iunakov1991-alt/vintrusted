@@ -1,0 +1,53 @@
+{
+  "lastUpdated": "2025-11-29T16:30:54.913Z",
+  "totalPages": 960,
+  "totalSitemapFiles": 6,
+  "languages": [
+    "en",
+    "es"
+  ],
+  "mainIndex": {
+    "fileName": "sitemap-seo.xml",
+    "url": "/seo/sitemaps/sitemap-seo.xml"
+  },
+  "alternativeIndex": {
+    "fileName": "sitemap-seo-monster.xml",
+    "url": "/sitemap-seo-monster.xml"
+  },
+  "byLanguage": {
+    "en": {
+      "sitemapFiles": [
+        {
+          "fileName": "sitemap-en-1.xml",
+          "url": "/seo/sitemaps/sitemap-en-1.xml"
+        }
+      ],
+      "indexFile": {
+        "fileName": "sitemap-en-index.xml",
+        "url": "/seo/sitemaps/sitemap-en-index.xml"
+      },
+      "pagesCount": 480
+    },
+    "es": {
+      "sitemapFiles": [
+        {
+          "fileName": "sitemap-es-1.xml",
+          "url": "/seo/sitemaps/sitemap-es-1.xml"
+        }
+      ],
+      "indexFile": {
+        "fileName": "sitemap-es-index.xml",
+        "url": "/seo/sitemaps/sitemap-es-index.xml"
+      },
+      "pagesCount": 480
+    }
+  },
+  "allSitemapFiles": [
+    "sitemap-en-1.xml",
+    "sitemap-en-index.xml",
+    "sitemap-es-1.xml",
+    "sitemap-es-index.xml",
+    "sitemap-seo.xml",
+    "sitemap-seo-monster.xml"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "buildId": "2025-11-29T16-30-54-563Z",
+  "startedAt": "2025-11-29T16:30:54.563Z",
+  "finishedAt": "2025-11-29T16:30:54.914Z",
+  "pagesPlanned": 960,
+  "pagesAccepted": 960,
+  "avgQuality": 0.9950412109375012,
+  "intentStats": {
+    "vin_check": {
+      "count": 192,
+      "avgQuality": 0.9946276041666667
+    },
+    "accident_check": {
+      "count": 192,
+      "avgQuality": 0.9950820312499996
+    },
+    "ownership_history": {
+      "count": 192,
+      "avgQuality": 0.9954687500000002
+    },
+    "market_value": {
+      "count": 192,
+      "avgQuality": 0.9948242187499995
+    },
+    "dmv_records": {
+      "count": 192,
+      "avgQuality": 0.9952034505208335
+    }
+  }
+}
