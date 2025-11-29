@@ -118,26 +118,33 @@ ${entries}
   }
 
   // Глобальный индекс внутри public/seo/sitemaps
+  // Всегда создаем файл, даже если нет страниц (чтобы избежать 404)
 
   const globalIndexXml = `<?xml version="1.0" encoding="UTF-8"?>
 
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-${indexEntries
+${indexEntries.length > 0
 
-  .map(
+  ? indexEntries
 
-    (e) =>
+      .map(
 
-      `<sitemap><loc>https://vintrusted.com/seo/sitemaps/${e.fileName}</loc></sitemap>`
+        (e) =>
 
-  )
+          `<sitemap><loc>https://vintrusted.com/seo/sitemaps/${e.fileName}</loc></sitemap>`
 
-  .join('')}
+      )
+
+      .join('')
+
+  : ''}
 
 </sitemapindex>`;
 
   const seoIndexPath = path.join(SITEMAP_ROOT, 'sitemap-seo.xml');
+
+  ensureDir(SITEMAP_ROOT);
 
   fs.writeFileSync(seoIndexPath, globalIndexXml, 'utf8');
 
