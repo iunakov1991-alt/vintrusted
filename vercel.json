@@ -50,6 +50,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "public/seo/sitemaps/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "public/**",
       "use": "@vercel/static"
     },
