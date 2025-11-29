@@ -27,7 +27,7 @@
 
   // Initialize Stripe
   async function initStripe() {
-    if (isInitialized) return;
+    if (isInitialized && stripe) return;
 
     try {
       // Get publishable key from API
@@ -49,7 +49,6 @@
       }
 
       stripe = Stripe(publishableKey);
-      elements = stripe.elements();
       
       isInitialized = true;
       console.log('Stripe initialized successfully');
@@ -61,7 +60,7 @@
 
   // Create and mount Payment Element
   async function createPaymentElement(container) {
-    if (!stripe || !elements) {
+    if (!stripe) {
       await initStripe();
     }
 
@@ -85,13 +84,18 @@
 
       const { client_secret, id } = await setupIntentResponse.json();
 
-      // Create Payment Element
-      paymentElement = elements.create('payment', {
-        layout: 'tabs',
-        paymentMethodTypes: ['card'],
+      // Initialize Elements with clientSecret
+      elements = stripe.elements({
+        clientSecret: client_secret,
         appearance: {
           theme: 'stripe',
         }
+      });
+
+      // Create Payment Element
+      paymentElement = elements.create('payment', {
+        layout: 'tabs',
+        paymentMethodTypes: ['card']
       });
 
       // Mount to a temporary container first (will be moved to form later)
