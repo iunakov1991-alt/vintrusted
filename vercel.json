@@ -58,6 +58,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/seo-sitemaps.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "public/seo/sitemaps/**",
       "use": "@vercel/static"
     },
@@ -194,6 +198,10 @@
     {
       "source": "/seo/sitemaps/sitemap-seo.xml",
       "destination": "/api/sitemap-seo.js"
+    },
+    {
+      "source": "/seo/sitemaps/:file*.xml",
+      "destination": "/api/seo-sitemaps.js"
     },
     {
       "source": "/sitemap-seo-monster.xml",
