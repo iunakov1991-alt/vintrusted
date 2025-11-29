@@ -251,5 +251,19 @@
       "src": "/(.*\\.html)",
       "dest": "/$1"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/articles/:slug*",
+      "destination": "/seo/pages/articles/:slug*/index.html"
+    },
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
+      "destination": "/seo/pages/vin/:vin/:state/index.html"
+    },
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})",
+      "destination": "/seo/pages/vin/:vin/index.html"
+    }
   ]
 }

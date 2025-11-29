@@ -4,7 +4,8 @@
   "description": "VIN Trusted website with Stripe integration",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'No build needed'"
+    "build": "echo 'No build needed'",
+    "vercel-build": "node scripts/seo/seo-master-build.js"
   },
   "dependencies": {
     "stripe": "^14.0.0"
