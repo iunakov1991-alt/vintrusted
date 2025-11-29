@@ -4,12 +4,24 @@ const path = require('path');
 module.exports = async (req, res) => {
   try {
     // Извлекаем имя файла из пути
-    // В Vercel rewrite: /seo/sitemaps/:file*.xml -> req.url содержит полный путь
-    // Например: /seo/sitemaps/sitemap-en-1.xml
+    // В Vercel rewrite: /seo/sitemaps/:file*.xml
+    // Параметр :file* доступен через req.query.file
     let fileName = 'sitemap-seo.xml';
     
-    if (req.url) {
+    // Приоритет 1: query параметр file (из rewrite pattern)
+    if (req.query && req.query.file) {
+      // Если file содержит путь, берем только имя файла
+      const fileParam = req.query.file;
+      if (fileParam.includes('/')) {
+        fileName = fileParam.split('/').pop();
+      } else {
+        fileName = fileParam;
+      }
+    }
+    // Приоритет 2: извлекаем из req.url
+    else if (req.url) {
       // Извлекаем последнюю часть пути (имя файла)
+      // Например: /seo/sitemaps/sitemap-en-1.xml -> sitemap-en-1.xml
       const parts = req.url.split('/').filter(Boolean);
       if (parts.length > 0) {
         const lastPart = parts[parts.length - 1];
@@ -19,13 +31,24 @@ module.exports = async (req, res) => {
       }
     }
     
-    // Также проверяем query параметр file, если он есть
-    if (req.query && req.query.file) {
-      fileName = req.query.file;
+    // Убеждаемся, что fileName заканчивается на .xml
+    if (!fileName.endsWith('.xml')) {
+      fileName = fileName + '.xml';
     }
     
     // Путь к файлу в public/seo/sitemaps/
     const sitemapPath = path.join(process.cwd(), 'public/seo/sitemaps', fileName);
+    
+    // Логирование для отладки (только в development)
+    if (process.env.VERCEL_ENV !== 'production') {
+      console.log('Sitemap request:', {
+        url: req.url,
+        query: req.query,
+        fileName,
+        path: sitemapPath,
+        exists: fs.existsSync(sitemapPath)
+      });
+    }
     
     if (fs.existsSync(sitemapPath)) {
       const content = fs.readFileSync(sitemapPath, 'utf8');
