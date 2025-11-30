@@ -473,14 +473,19 @@
         if (qualityBarEl) qualityBarEl.style.width = (avgQuality * 100) + '%';
 
       // Conversion метрики
+      const conversionCard = document.getElementById('conversionCard');
+      const conversionRateCard = document.getElementById('conversionRateCard');
+      const totalConversionsEl = document.getElementById('totalConversions');
+      const avgConversionRateEl = document.getElementById('avgConversionRate');
+      
       if (data.conversion) {
-        document.getElementById('conversionCard').style.display = 'block';
-        document.getElementById('conversionRateCard').style.display = 'block';
-        document.getElementById('totalConversions').textContent = data.conversion.totalConversions || 0;
-        document.getElementById('avgConversionRate').textContent = ((data.conversion.avgConversionRate || 0) * 100).toFixed(2) + '%';
+        if (conversionCard) conversionCard.style.display = 'block';
+        if (conversionRateCard) conversionRateCard.style.display = 'block';
+        if (totalConversionsEl) totalConversionsEl.textContent = data.conversion.totalConversions || 0;
+        if (avgConversionRateEl) avgConversionRateEl.textContent = ((data.conversion.avgConversionRate || 0) * 100).toFixed(2) + '%';
       } else {
-        document.getElementById('conversionCard').style.display = 'none';
-        document.getElementById('conversionRateCard').style.display = 'none';
+        if (conversionCard) conversionCard.style.display = 'none';
+        if (conversionRateCard) conversionRateCard.style.display = 'none';
       }
 
       // Conversion Model статистика
@@ -534,6 +539,7 @@
     // Рендеринг расписания
     function renderSchedule(schedule) {
       const container = document.getElementById('schedule');
+      if (!container) return;
       
       if (!schedule.recommendations || schedule.recommendations.length === 0) {
         container.innerHTML = '<p style="color: #666;">Загрузка расписания...</p>';
@@ -569,6 +575,7 @@
     // Рендеринг рекомендаций
     function renderRecommendations(recs, aiRec = null) {
       const container = document.getElementById('recommendations');
+      if (!container) return;
       
       let html = '';
 
@@ -725,6 +732,7 @@
     // Рендеринг топ страниц
     function renderTopPages(pages) {
       const container = document.getElementById('topPages');
+      if (!container) return;
       
       if (!pages || pages.length === 0) {
         container.innerHTML = '<li style="color: #666;">Нет данных о страницах</li>';
@@ -749,6 +757,7 @@
     // Рендеринг настроек
     function renderConfig(config) {
       const container = document.getElementById('config');
+      if (!container) return;
       
       let html = `
         <div style="padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 8px;">
@@ -773,6 +782,11 @@
       }
 
       const btn = document.getElementById('buildBtn');
+      if (!btn) {
+        alert('Кнопка запуска билда не найдена!');
+        return;
+      }
+      
       btn.disabled = true;
       btn.classList.add('running');
       btn.textContent = '⏳ Билд запускается...';
