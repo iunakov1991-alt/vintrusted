@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test VIN Report - VIN Trust</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+            height: calc(100vh - 40px);
+        }
+
+        /* Left column - VIN input form */
+        .test-form-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .test-form-panel h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .test-form-panel p {
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .vin-input-group {
+            margin-bottom: 20px;
+        }
+
+        .vin-input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .vin-input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            text-transform: uppercase;
+            transition: border-color 0.2s;
+        }
+
+        .vin-input-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .vin-input-group input.error {
+            border-color: #ef4444;
+        }
+
+        .test-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: #111827;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .test-btn:hover:not(:disabled) {
+            background: #374151;
+        }
+
+        .test-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .test-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .test-info h3 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .test-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .test-info li {
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .test-info li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+        }
+
+        /* Right column - Report display */
+        .test-report-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .test-report-panel h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        .report-status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .report-status.loading {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fbbf24;
+        }
+
+        .report-status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #f87171;
+        }
+
+        .report-status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #34d399;
+        }
+
+        .report-content {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            min-height: 200px;
+        }
+        
+        .report-content iframe {
+            width: 100%;
+            min-height: 800px;
+            border: none;
+        }
+
+        .report-content.loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .report-content.error {
+            text-align: center;
+            padding: 60px 20px;
+            color: #ef4444;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #111827;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ClearVin report HTML styling */
+        .report-content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .report-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .report-content table td,
+        .report-content table th {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .report-content h1,
+        .report-content h2,
+        .report-content h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .report-content p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .debug-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+            color: #374151;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .debug-info h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .debug-info pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 1024px) {
+            .test-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .test-form-panel {
+                max-height: 400px;
+            }
+
+            .test-report-panel {
+                min-height: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <!-- Left column - VIN input form -->
+        <div class="test-form-panel">
+            <h1>Test VIN Report</h1>
+            <p>Enter a VIN code to test the ClearVin API integration</p>
+            
+            <form id="testForm">
+                <div class="vin-input-group">
+                    <label for="testVinInput">VIN Code</label>
+                    <input
+                        type="text"
+                        id="testVinInput"
+                        placeholder="Enter 17-character VIN"
+                        maxlength="17"
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="characters"
+                        spellcheck="false"
+                        required
+                    />
+                </div>
+                <button type="submit" class="test-btn" id="testBtn">
+                    Load Report
+                </button>
+            </form>
+
+            <div class="test-info">
+                <h3>Test VINs (from ClearVin docs):</h3>
+                <ul>
+                    <li>5TDYK3DC8DS290235</li>
+                    <li>2T1LR32E35C508537</li>
+                    <li>KNDJD733865514567</li>
+                    <li>WAUDG74F25N111998</li>
+                    <li>55SWF4JB3GU099875</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right column - Report display -->
+        <div class="test-report-panel">
+            <h2>Report Result</h2>
+            
+            <div id="reportStatus" class="report-status" style="display: none;"></div>
+            
+            <div class="report-content loading" id="reportContent">
+                <p>Enter a VIN code and click "Load Report" to test</p>
+            </div>
+
+            <div class="debug-info" id="debugInfo" style="display: none;">
+                <h4>Debug Information</h4>
+                <pre id="debugContent"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const testForm = document.getElementById('testForm');
+            const testVinInput = document.getElementById('testVinInput');
+            const testBtn = document.getElementById('testBtn');
+            const reportContent = document.getElementById('reportContent');
+            const reportStatus = document.getElementById('reportStatus');
+            const debugInfo = document.getElementById('debugInfo');
+            const debugContent = document.getElementById('debugContent');
+
+            let debugLog = [];
+
+            function addDebugLog(message, data = null) {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = `[${timestamp}] ${message}`;
+                debugLog.push(logEntry);
+                if (data) {
+                    debugLog.push(JSON.stringify(data, null, 2));
+                }
+                debugContent.textContent = debugLog.join('\n\n');
+                debugInfo.style.display = 'block';
+            }
+
+            function clearDebugLog() {
+                debugLog = [];
+                debugContent.textContent = '';
+                debugInfo.style.display = 'none';
+            }
+
+            function showStatus(message, type) {
+                reportStatus.textContent = message;
+                reportStatus.className = `report-status ${type}`;
+                reportStatus.style.display = 'block';
+            }
+
+            function hideStatus() {
+                reportStatus.style.display = 'none';
+            }
+
+            function setLoading(message = 'Loading report...') {
+                reportContent.className = 'report-content loading';
+                reportContent.innerHTML = `
+                    <div class="loader"></div>
+                    <p>${message}</p>
+                `;
+                showStatus(message, 'loading');
+            }
+
+            function setError(message, details = null) {
+                reportContent.className = 'report-content error';
+                reportContent.innerHTML = `
+                    <p><strong>Error:</strong></p>
+                    <p>${message}</p>
+                    ${details ? `<p style="margin-top: 10px; font-size: 0.9rem; color: #666;">${details}</p>` : ''}
+                `;
+                showStatus('Error loading report', 'error');
+            }
+
+            function setSuccess(htmlReport) {
+                console.log('setSuccess called with HTML length:', htmlReport ? htmlReport.length : 0);
+                console.log('HTML preview:', htmlReport ? htmlReport.substring(0, 200) : 'null');
+                
+                reportContent.className = 'report-content';
+                
+                // Clear any existing content
+                reportContent.innerHTML = '';
+                
+                // Set new content
+                if (htmlReport && htmlReport.trim().length > 0) {
+                    // Check if this is a React-based report (has <div id=root> and script tags)
+                    const isReactReport = htmlReport.includes('<div id=root>') || htmlReport.includes('<div id="root">');
+                    
+                    if (isReactReport) {
+                        console.log('Detected React-based report, using iframe for proper rendering');
+                        
+                        // Create iframe to allow scripts to execute
+                        const iframe = document.createElement('iframe');
+                        iframe.style.width = '100%';
+                        iframe.style.height = '800px';
+                        iframe.style.border = 'none';
+                        iframe.style.overflow = 'auto';
+                        iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-forms';
+                        
+                        // Write HTML to iframe
+                        reportContent.appendChild(iframe);
+                        
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        iframeDoc.open();
+                        iframeDoc.write(htmlReport);
+                        iframeDoc.close();
+                        
+                        // Wait for iframe to load and check content
+                        iframe.onload = () => {
+                            console.log('Iframe loaded');
+                            const iframeContent = iframeDoc.body.innerText || iframeDoc.body.textContent || '';
+                            console.log('Iframe content length:', iframeContent.length);
+                            
+                            if (iframeContent.trim().length < 50) {
+                                console.warn('⚠️ WARNING: Iframe content is very short, React may still be loading');
+                                // Give React more time to render
+                                setTimeout(() => {
+                                    const updatedContent = iframeDoc.body.innerText || iframeDoc.body.textContent || '';
+                                    if (updatedContent.trim().length > 50) {
+                                        showStatus('Report loaded successfully', 'success');
+                                    } else {
+                                        showStatus('Report loaded (React app may take a moment to render)', 'success');
+                                    }
+                                }, 2000);
+                            } else {
+                                showStatus('Report loaded successfully', 'success');
+                            }
+                        };
+                        
+                        // Fallback: show success after a delay even if onload doesn't fire
+                        setTimeout(() => {
+                            if (reportStatus.textContent !== 'Report loaded successfully') {
+                                showStatus('Report loaded successfully', 'success');
+                            }
+                        }, 3000);
+                        
+                    } else {
+                        // Regular HTML report - insert directly
+                        reportContent.innerHTML = htmlReport;
+                        console.log('Report content set, innerHTML length:', reportContent.innerHTML.length);
+                        
+                        // Verify content was inserted
+                        if (reportContent.innerHTML.length === 0) {
+                            console.error('❌ ERROR: Content was not inserted!');
+                            reportContent.innerHTML = '<p style="color: red;">Error: Report content was not inserted into DOM</p>';
+                            showStatus('Error: Content not inserted', 'error');
+                            return;
+                        }
+                        
+                        // Check if content is visible
+                        const textContent = reportContent.innerText || reportContent.textContent || '';
+                        console.log('Text content length:', textContent.length);
+                        
+                        if (textContent.trim().length < 50) {
+                            console.warn('⚠️ WARNING: Report text content is very short');
+                            showStatus('Report loaded but content seems empty', 'error');
+                        } else {
+                            showStatus('Report loaded successfully', 'success');
+                        }
+                    }
+                } else {
+                    console.error('❌ ERROR: htmlReport is empty or null');
+                    reportContent.innerHTML = '<p style="color: red;">Error: Report content is empty</p>';
+                    showStatus('Error: Empty report', 'error');
+                }
+            }
+
+            testForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const vin = testVinInput.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+                
+                // Validate VIN
+                if (vin.length !== 17) {
+                    setError('Invalid VIN format. VIN must be exactly 17 characters.');
+                    testVinInput.classList.add('error');
+                    return;
+                }
+
+                const vinPattern = /^[A-HJ-NPR-Z0-9]{17}$/;
+                if (!vinPattern.test(vin)) {
+                    setError('Invalid VIN format. VIN must contain only valid characters (A-Z, 0-9, excluding I, O, Q).');
+                    testVinInput.classList.add('error');
+                    return;
+                }
+
+                testVinInput.classList.remove('error');
+                clearDebugLog();
+                setLoading('Fetching report from ClearVin API...');
+                testBtn.disabled = true;
+                testBtn.textContent = 'Loading...';
+
+                addDebugLog('=== Starting report load ===');
+                addDebugLog('VIN:', vin);
+
+                try {
+                    const url = `/api/get-clearvin-report?vin=${encodeURIComponent(vin)}`;
+                    addDebugLog('Fetching from:', url);
+
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+                    let response;
+                    try {
+                        response = await fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json'
+                            },
+                            signal: controller.signal
+                        });
+                        clearTimeout(timeoutId);
+                    } catch (fetchError) {
+                        clearTimeout(timeoutId);
+                        addDebugLog('Fetch error:', fetchError);
+                        if (fetchError.name === 'AbortError') {
+                            throw new Error('Request timeout: The server took too long to respond.');
+                        } else {
+                            throw new Error(`Network error: ${fetchError.message || 'Failed to fetch'}`);
+                        }
+                    }
+
+                    addDebugLog('Response status:', response.status);
+                    addDebugLog('Response headers:', Object.fromEntries(response.headers.entries()));
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        let errorData;
+                        try {
+                            errorData = JSON.parse(errorText);
+                        } catch {
+                            errorData = { message: errorText };
+                        }
+                        addDebugLog('Error response:', errorData);
+                        throw new Error(errorData.error || errorData.message || `Server returned status ${response.status}`);
+                    }
+
+                    const responseText = await response.text();
+                    addDebugLog('Response text length:', responseText.length);
+                    addDebugLog('Response preview:', responseText.substring(0, 500));
+
+                    if (!responseText || responseText.trim().length === 0) {
+                        throw new Error('Empty response from server');
+                    }
+
+                    let data;
+                    try {
+                        data = JSON.parse(responseText);
+                    } catch (parseError) {
+                        addDebugLog('JSON parse error:', parseError);
+                        throw new Error(`Invalid JSON response: ${responseText.substring(0, 100)}`);
+                    }
+
+                    addDebugLog('Parsed data keys:', Object.keys(data));
+                    addDebugLog('Data.success:', data.success);
+                    addDebugLog('Full data object:', data);
+
+                    if (!data.success) {
+                        const errorMsg = data.error || data.details || data.message || 'Failed to load report';
+                        addDebugLog('API error:', data);
+                        throw new Error(errorMsg);
+                    }
+
+                    // Check if report exists
+                    if (!data.report) {
+                        addDebugLog('❌ data.report is undefined or null');
+                        addDebugLog('Available keys in data:', Object.keys(data));
+                        throw new Error('Report field is missing in API response');
+                    }
+
+                    if (data.report.trim().length === 0) {
+                        addDebugLog('❌ data.report is empty string');
+                        throw new Error('Report is empty. The report may still be generating.');
+                    }
+
+                    addDebugLog('Report HTML length:', data.report.length);
+                    addDebugLog('Report first 1000 chars:', data.report.substring(0, 1000));
+                    addDebugLog('Report last 500 chars:', data.report.substring(Math.max(0, data.report.length - 500)));
+
+                    // Check if report has meaningful content
+                    const reportText = data.report.replace(/<[^>]*>/g, '').trim();
+                    addDebugLog('Report text length (without HTML tags):', reportText.length);
+                    addDebugLog('Report text preview (first 500 chars):', reportText.substring(0, 500));
+
+                    if (reportText.length < 50) {
+                        addDebugLog('❌ WARNING: Report content is too short');
+                        addDebugLog('HTML tags count:', (data.report.match(/<[^>]+>/g) || []).length);
+                        addDebugLog('Full HTML structure:', data.report.substring(0, 2000));
+                        throw new Error(`Report content is too short (${reportText.length} chars). The report may still be generating.`);
+                    }
+
+                    // Verify report is HTML
+                    if (!data.report.includes('<') && !data.report.includes('>')) {
+                        addDebugLog('❌ Report does not contain HTML tags');
+                        throw new Error('Report format is invalid - expected HTML but got plain text');
+                    }
+
+                    // Count HTML elements
+                    const htmlElements = data.report.match(/<[^>]+>/g) || [];
+                    addDebugLog('HTML elements found:', htmlElements.length);
+                    addDebugLog('Sample HTML tags:', htmlElements.slice(0, 20));
+
+                    addDebugLog('✅ Report loaded successfully');
+                    addDebugLog('Setting report content in DOM...');
+                    
+                    // Try to set report
+                    setSuccess(data.report);
+                    
+                    // Verify it was set
+                    setTimeout(() => {
+                        const reportEl = document.getElementById('reportContent');
+                        if (reportEl) {
+                            addDebugLog('Report element innerHTML length after setting:', reportEl.innerHTML.length);
+                            addDebugLog('Report element innerText length:', (reportEl.innerText || '').length);
+                            if (reportEl.innerHTML.length === 0) {
+                                addDebugLog('❌ WARNING: Report element is empty after setting!');
+                            }
+                        }
+                    }, 100);
+
+                } catch (error) {
+                    addDebugLog('❌ Error:', error.message);
+                    addDebugLog('Error stack:', error.stack);
+                    
+                    let errorMessage = error.message || 'Failed to load report';
+                    let errorDetails = null;
+
+                    if (error.message.includes('Failed to fetch') || error.message.includes('Network error')) {
+                        errorMessage = 'Network error: Could not connect to server.';
+                        errorDetails = 'Please check your internet connection and try again.';
+                    } else if (error.message.includes('timeout')) {
+                        errorMessage = 'Request timeout: The server took too long to respond.';
+                        errorDetails = 'The report might still be generating. Please try again in a few moments.';
+                    } else if (error.message.includes('404')) {
+                        errorMessage = 'API endpoint not found.';
+                        errorDetails = 'Please check that the API endpoint is correctly configured.';
+                    } else if (error.message.includes('500')) {
+                        errorMessage = 'Server error.';
+                        errorDetails = 'Please check Vercel logs for more details.';
+                    } else if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+                        errorMessage = 'Authorization error.';
+                        errorDetails = 'API token might be missing or invalid. Please check CLEARVIN_API_TOKEN in Vercel.';
+                    }
+
+                    setError(errorMessage, errorDetails);
+                } finally {
+                    testBtn.disabled = false;
+                    testBtn.textContent = 'Load Report';
+                }
+            });
+
+            // Auto-fill test VIN on click
+            document.querySelectorAll('.test-info li').forEach(li => {
+                li.style.cursor = 'pointer';
+                li.addEventListener('click', () => {
+                    const vin = li.textContent.trim();
+                    testVinInput.value = vin;
+                    testVinInput.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
+

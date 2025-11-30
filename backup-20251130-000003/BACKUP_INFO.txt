@@ -1,0 +1,66 @@
+BACKUP INFORMATION
+==================
+Created: 2025-11-30 00:00:20
+Location: backup-20251130-000003
+Total files: 615
+Total size:  29M
+
+CONTENTS:
+---------
+✅ API Endpoints (api/)
+   - Stripe integration (checkout, payment-intent, setup-intent, webhook)
+   - ClearVin integration (get-clearvin-report, send-clearvin-report)
+   - Report endpoints (report.js, send-receipt-and-report.js)
+   - Health check (health.js)
+
+✅ Frontend Files
+   - index.html (main page)
+   - report.html, success.html
+   - about-us.html, contact.html
+   - accident-history.html, title-records.html, recall-information.html
+   - All other HTML pages
+
+✅ Configuration
+   - vercel.json (Vercel deployment config)
+   - package.json (dependencies)
+   - package-lock.json (if exists)
+
+✅ Assets
+   - public/ (all public assets)
+   - css/ (stylesheets)
+   - js/ (JavaScript files)
+   - images/, img/ (images)
+
+✅ Scripts
+   - scripts/ (utility scripts)
+
+✅ Data
+   - data/ (data files)
+
+RESTORE INSTRUCTIONS:
+---------------------
+1. Copy all files from backup-20251130-000003 back to project root
+2. Run: npm install
+3. Set up environment variables in Vercel:
+   - STRIPE_SECRET_KEY
+   - STRIPE_PUBLISHABLE_KEY
+   - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+   - CLEARVIN_API_KEY
+   - PRICE_49_EVERY_10D (or PRICE_49_EVERY_20D)
+   - APP_URL
+4. Deploy to Vercel: vercel --prod
+
+NOT INCLUDED:
+--------------
+- node_modules/ (reinstall with npm install)
+- .vercel/ (regenerated on deploy)
+- .git/ (use git for version control)
+- Environment variables (set in Vercel dashboard)
+
+VERIFICATION:
+-------------
+After restore, verify:
+- Main page loads: https://vintrusted.com
+- Stripe payment form works
+- ClearVin reports work
+- All API endpoints respond correctly

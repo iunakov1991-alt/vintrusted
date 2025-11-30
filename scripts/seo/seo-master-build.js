@@ -1,241 +1,251 @@
 const fs = require('fs');
 const path = require('path');
-const { log } = require('./logger');
-const { buildUrlPlan } = require('./seo-url-factory');
-const { buildPageContent } = require('./seo-content-engine');
-const { scorePage, resetQualityIndex, writeQualityIndex } = require('./seo-quality-engine');
-const { loadRlState, saveRlState, updateRlState } = require('./seo-rl-engine');
-const { buildGraph } = require('./seo-graph-engine');
-const { writeSitemaps } = require('./seo-sitemap-engine');
-const { writeDashboard } = require('./seo-dashboard');
+const { log, error } = require('./logger');
+const { SEOMasterPipeline } = require('./orchestration/seo-master-pipeline');
+const { URLFactory } = require('./orchestration/url-factory');
+const { LayoutEngine } = require('./dom/layout-engine');
+const { TemplateEngine } = require('./dom/template-engine');
+const { UniquenessEngine } = require('./uniqueness-engine');
+const { BaselineBlocks } = require('./content/baseline-blocks');
+const { AIAugmentation } = require('./content/ai-augmentation');
+const { ClusterEngine } = require('./clusters/cluster-engine');
+const { QualityEngine } = require('./quality/quality-engine');
+const { WeightEngine } = require('./ltr/weight-engine');
+const { StaticArchitecture } = require('./platform/static-architecture');
+const { SitemapEngine } = require('./sitemap/sitemap-engine');
+const { InternalLinksEngine } = require('./links/internal-links-engine');
 
-const isVercel = !!(process.env.VERCEL || process.env.VERCEL_ENV);
-const BUILD_META_PATH = path.join(process.cwd(), 'public/internal/build-meta.json');
-const RUN_SUMMARY_PATH = path.join(process.cwd(), 'public/internal/seo-run-summary.json');
-
-const DEFAULT_CONCURRENCY = parseInt(process.env.SEO_BUILD_CONCURRENCY || '8', 10);
-
-function safeLoadJson(p, fallback) {
-  try {
-    if (!fs.existsSync(p)) return fallback;
-    return JSON.parse(fs.readFileSync(p, 'utf8'));
-  } catch (e) {
-    log('MASTER', `JSON load error at ${p}: ${e.message}`);
-    return fallback;
-  }
-}
-
-function attachInternalLinks(plan) {
-  const byCluster = {};
-  plan.forEach((item, index) => {
-    if (!byCluster[item.clusterId]) byCluster[item.clusterId] = [];
-    byCluster[item.clusterId].push({ index, item });
-  });
-
-  for (const clusterId of Object.keys(byCluster)) {
-    const arr = byCluster[clusterId];
-    for (let i = 0; i < arr.length; i++) {
-      const current = arr[i].item;
-      const neighborsIdx = [i - 1, i + 1, i + 2].filter(
-        (j) => j >= 0 && j < arr.length
-      );
-      const links = [];
-      const used = new Set();
-      for (const ni of neighborsIdx) {
-        const neighbor = arr[ni].item;
-        if (!neighbor || neighbor.url === current.url) continue;
-        if (used.has(neighbor.url)) continue;
-        used.add(neighbor.url);
-        const stateSlug = neighbor.stateSlug || '';
-        const stateLabel = stateSlug
-          ? stateSlug.replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase())
-          : 'your state';
-        const label = `${neighbor.year} ${String(neighbor.make || '').toUpperCase()} VIN check in ${stateLabel}`;
-        links.push({ href: neighbor.url, label });
-        if (links.length >= 3) break;
-      }
-      current.internalLinks = links;
-    }
-  }
-}
-
-async function runWithConcurrency(items, limit, worker) {
-  const results = new Array(items.length);
-  let index = 0;
-  const actualLimit = Math.max(1, Math.min(limit, items.length || 1));
-
-  async function workerLoop() {
-    while (true) {
-      const i = index++;
-      if (i >= items.length) break;
-      const item = items[i];
-      try {
-        results[i] = await worker(item, i);
-      } catch (e) {
-        console.error(e);
-        results[i] = null;
-      }
-    }
-  }
-
-  const workers = [];
-  for (let i = 0; i < actualLimit; i++) {
-    workers.push(workerLoop());
-  }
-  await Promise.all(workers);
-  return results.filter(Boolean);
-}
-
+/**
+ * SEO MONSTER 6.0: Master Build
+ * Полная интеграция всех модулей
+ */
 async function main() {
   const startedAt = new Date().toISOString();
   const startMs = Date.now();
-  let buildMeta = {
-    buildId: startedAt.replace(/[:.]/g, '-'),
-    startedAt,
-    finishedAt: null
-  };
 
-  // На Vercel удаляем старый build-meta.json, чтобы гарантировать выполнение build
-  if (isVercel && fs.existsSync(BUILD_META_PATH)) {
-    try {
-      const existingMeta = safeLoadJson(BUILD_META_PATH, {});
-      const existingBuildId = existingMeta.buildId;
-      const currentBuildId = buildMeta.buildId;
-      
-      // Если buildId совпадает и build завершен - это тот же деплой, пропускаем
-      if (existingBuildId === currentBuildId && existingMeta.finishedAt) {
-        log('MASTER', 'SEO build already completed in this deployment, skipping.');
-        process.exit(0);
-      }
-      
-      // Иначе - новый деплой, удаляем старый файл и продолжаем
-      log('MASTER', 'New deployment detected, removing old build meta and continuing...');
-      fs.unlinkSync(BUILD_META_PATH);
-    } catch (e) {
-      log('MASTER', `Error reading build meta: ${e.message}, removing and continuing...`);
-      if (fs.existsSync(BUILD_META_PATH)) {
-        fs.unlinkSync(BUILD_META_PATH);
-      }
+  log('MASTER', 'Starting SEO MONSTER 6.0 build');
+
+  try {
+    // Загрузка конфигурации
+    const configPath = path.join(process.cwd(), 'data/seo/config.json');
+    let config = {};
+    if (fs.existsSync(configPath)) {
+      config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
     }
+
+    // Загрузка RL state
+    const rlStatePath = path.join(process.cwd(), 'data/seo/rl-state.json');
+    let rlState = {
+      intentWeights: {},
+      languageWeights: {},
+      clusterScores: {},
+      layoutWeights: {}
+    };
+    if (fs.existsSync(rlStatePath)) {
+      rlState = JSON.parse(fs.readFileSync(rlStatePath, 'utf8'));
+    }
+
+    // Инициализация компонентов
+    const pipeline = new SEOMasterPipeline();
+    const urlFactory = new URLFactory(config, rlState);
+    const layoutEngine = new LayoutEngine(config);
+    const templateEngine = new TemplateEngine(config);
+    const uniquenessEngine = new UniquenessEngine(config);
+    const baselineBlocks = new BaselineBlocks();
+    const aiAugmentation = new AIAugmentation(config);
+    const clusterEngine = new ClusterEngine();
+    const qualityEngine = new QualityEngine(config);
+    const weightEngine = new WeightEngine();
+    const staticArch = new StaticArchitecture(config);
+    const sitemapEngine = new SitemapEngine(config);
+    const internalLinksEngine = new InternalLinksEngine(config);
+
+    // Этап 1: Планирование URL
+    pipeline.registerStage('url-planning', async (ctx) => {
+      log('STAGE', 'URL Planning');
+      const plan = urlFactory.buildUrlPlan();
+      ctx.urlPlan = plan;
+      ctx.pages = [];
+    });
+
+    // Этап 2: Генерация контента
+    pipeline.registerStage('content-generation', async (ctx) => {
+      log('STAGE', 'Content Generation');
+      const concurrency = parseInt(process.env.SEO_BUILD_CONCURRENCY || '8', 10);
+      
+      async function generatePageContent(item) {
+        // Baseline контент
+        const baseline = baselineBlocks.generateBaselineContent(item);
+        
+        // AI augmentation
+        const aiPrompt = `Write a detailed but generic explanation about "${item.intent}" for a vehicle VIN report in ${baselineBlocks.humanizeStateSlug(item.stateSlug)}. Focus on why this check matters, what buyers should pay attention to, and how it fits into a full history report. Never fabricate specific accidents or records.`;
+        const aiText = await aiAugmentation.generateText(aiPrompt, {
+          lang: item.lang,
+          intent: item.intent,
+          maxTokens: config.aiMaxTokens || 800
+        });
+
+        // Выбор layout
+        const layout = layoutEngine.selectLayout(item, rlState.layoutWeights);
+
+        // Формирование контекста страницы
+        const stateLabel = baselineBlocks.humanizeStateSlug(item.stateSlug);
+        const makeUpper = (item.make || '').toUpperCase();
+        
+        return {
+          ...item,
+          title: `VIN Check for ${item.year} ${makeUpper} in ${stateLabel} – Full Report`,
+          description: `Instant VIN check for ${item.year} ${makeUpper} in ${stateLabel}. Review ownership, accident and title history before you buy.`,
+          h1: `VIN report for ${item.year} ${makeUpper} in ${stateLabel}`,
+          intro: `This page explains how to read a VIN report for a ${item.year} ${makeUpper} registered in ${stateLabel}, and why a detailed history check is important before you commit to a purchase.`,
+          stateLabel,
+          ...baseline,
+          aiText,
+          layout,
+          blocks: layout.blocks
+        };
+      }
+
+      // Генерация с конкурентностью
+      const pages = [];
+      const plan = ctx.urlPlan;
+      const limit = Math.min(concurrency, plan.length);
+      
+      for (let i = 0; i < plan.length; i += limit) {
+        const batch = plan.slice(i, i + limit);
+        const batchResults = await Promise.all(batch.map(generatePageContent));
+        pages.push(...batchResults);
+      }
+
+      ctx.pages = pages;
+      log('STAGE', `Generated ${pages.length} pages`);
+    });
+
+    // Этап 3: Рендеринг HTML
+    pipeline.registerStage('html-rendering', async (ctx) => {
+      log('STAGE', 'HTML Rendering');
+      ctx.pages = ctx.pages.map(page => {
+        const html = templateEngine.renderPage(page, page.layout);
+        return { ...page, html };
+      });
+    });
+
+    // Этап 4: Проверка уникальности
+    pipeline.registerStage('uniqueness-validation', async (ctx) => {
+      log('STAGE', 'Uniqueness Validation');
+      uniquenessEngine.reset();
+      
+      ctx.pages = ctx.pages.map(page => {
+        const uniqueness = uniquenessEngine.validateUniqueness(page);
+        return { ...page, uniqueness };
+      });
+
+      const uniquePages = ctx.pages.filter(p => p.uniqueness.isUnique);
+      log('STAGE', `Unique pages: ${uniquePages.length}/${ctx.pages.length}`);
+      ctx.pages = uniquePages;
+    });
+
+    // Этап 5: Оценка качества
+    pipeline.registerStage('quality-scoring', async (ctx) => {
+      log('STAGE', 'Quality Scoring');
+      const { scored, accepted, avgQuality } = qualityEngine.scorePages(ctx.pages);
+      ctx.pages = scored;
+      ctx.acceptedPages = accepted;
+      ctx.avgQuality = avgQuality;
+    });
+
+    // Этап 6: Кластеризация
+    pipeline.registerStage('clustering', async (ctx) => {
+      log('STAGE', 'Clustering');
+      ctx.acceptedPages.forEach(page => {
+        clusterEngine.registerPage(page);
+        clusterEngine.updateClusterMetrics(page.clusterId, {
+          avgQuality: page.qualityScore
+        });
+      });
+      ctx.clusters = clusterEngine.getAllClusters();
+    });
+
+    // Этап 6.5: Внутренние ссылки
+    pipeline.registerStage('internal-links', async (ctx) => {
+      log('STAGE', 'Internal Links');
+      internalLinksEngine.attachInternalLinks(ctx.acceptedPages, clusterEngine);
+      
+      // Перерендер с внутренними ссылками
+      ctx.acceptedPages = ctx.acceptedPages.map(page => {
+        const layoutWithLinks = {
+          ...page.layout,
+          blocks: [...page.layout.blocks, 'internalLinks']
+        };
+        const html = templateEngine.renderPage(page, layoutWithLinks);
+        return { ...page, html };
+      });
+    });
+
+    // Этап 7: Публикация статических файлов
+    pipeline.registerStage('static-publishing', async (ctx) => {
+      log('STAGE', 'Static Publishing');
+      let published = 0;
+      
+      for (const page of ctx.acceptedPages) {
+        try {
+          staticArch.writeStaticFile(page, page.html);
+          published++;
+        } catch (e) {
+          error('PUBLISH', `Failed to publish ${page.url}`, e);
+        }
+      }
+      
+      log('STAGE', `Published ${published} pages`);
+    });
+
+    // Этап 8: Генерация sitemaps
+    pipeline.registerStage('sitemap-generation', async (ctx) => {
+      log('STAGE', 'Sitemap Generation');
+      sitemapEngine.writeSitemaps(ctx.acceptedPages, config);
+    });
+
+    // Этап 9: Обновление LTR весов
+    pipeline.registerStage('ltr-update', async (ctx) => {
+      log('STAGE', 'LTR Weight Update');
+      const weights = weightEngine.updateWeights(ctx.acceptedPages);
+      
+      // Сохранение обновленного RL state
+      const newRlState = {
+        ...rlState,
+        intentWeights: weightEngine.normalizeWeights(weights.intents),
+        languageWeights: weightEngine.normalizeWeights(weights.languages),
+        layoutWeights: weights.layouts,
+        lastUpdated: new Date().toISOString()
+      };
+      
+      const rlStateDir = path.dirname(rlStatePath);
+      if (!fs.existsSync(rlStateDir)) {
+        fs.mkdirSync(rlStateDir, { recursive: true });
+      }
+      fs.writeFileSync(rlStatePath, JSON.stringify(newRlState, null, 2));
+      log('STAGE', 'RL state updated');
+    });
+
+    // Выполнение пайплайна
+    const result = await pipeline.execute();
+
+    const duration = Date.now() - startMs;
+    log('MASTER', 'SEO MONSTER 6.0 build completed', {
+      duration: `${duration}ms`,
+      pagesGenerated: result.pages.length,
+      pagesAccepted: result.acceptedPages.length,
+      avgQuality: result.avgQuality?.toFixed(3),
+      clusters: result.clusters?.length || 0
+    });
+
+  } catch (e) {
+    error('MASTER', 'Build failed', e);
+    process.exit(1);
   }
-
-  fs.mkdirSync(path.dirname(BUILD_META_PATH), { recursive: true });
-  fs.writeFileSync(BUILD_META_PATH, JSON.stringify(buildMeta, null, 2));
-
-  const configPath = path.join(process.cwd(), 'data/seo/config.json');
-  const config = safeLoadJson(configPath, {
-    targetPagesPerBuild: 10000,
-    maxPagesPerCluster: 450,
-    minQualityScore: 0.7,
-    languages: ['en', 'es']
-  });
-
-  const rlState = loadRlState();
-
-  log('MASTER', 'Building URL plan...');
-  const plan = buildUrlPlan(config, rlState);
-  log('MASTER', `URL plan size: ${plan.length}`);
-
-  if (!plan.length) {
-    log('MASTER', 'No pages planned, finishing early.');
-    const finishedAt = new Date().toISOString();
-    buildMeta.finishedAt = finishedAt;
-    fs.writeFileSync(BUILD_META_PATH, JSON.stringify(buildMeta, null, 2));
-    fs.writeFileSync(
-      RUN_SUMMARY_PATH,
-      JSON.stringify(
-        {
-          buildId: buildMeta.buildId,
-          startedAt,
-          finishedAt,
-          durationMs: Date.now() - startMs,
-          pagesPlanned: 0,
-          pagesGenerated: 0,
-          pagesAccepted: 0,
-          avgQuality: 0,
-          concurrency: 0
-        },
-        null,
-        2
-      )
-    );
-    process.exit(0);
-  }
-
-  attachInternalLinks(plan);
-
-  const concurrency = DEFAULT_CONCURRENCY;
-  log('MASTER', `Generating pages with concurrency=${concurrency}...`);
-
-  const pages = await runWithConcurrency(plan, concurrency, async (item) => {
-    return await buildPageContent(item, config);
-  });
-
-  log('MASTER', `Pages generated: ${pages.length}`);
-
-  log('MASTER', 'Resetting quality index...');
-  resetQualityIndex();
-
-  log('MASTER', 'Scoring pages (in memory)...');
-  const qualityRecords = [];
-  const scored = pages.map((p) => {
-    const { scored, rec } = scorePage(p, config);
-    qualityRecords.push(rec);
-    return scored;
-  });
-
-  writeQualityIndex(qualityRecords);
-
-  const minScore = config.minQualityScore || 0.7;
-  const accepted = scored.filter(
-    (p) => (p.qualityScore || 0) >= minScore
-  );
-
-  log(
-    'MASTER',
-    `Accepted pages (score >= ${minScore}): ${accepted.length}/${scored.length}`
-  );
-
-  log('MASTER', 'Building graph (analysis only, accepted pages)...');
-  buildGraph(accepted);
-
-  log('MASTER', 'Writing sitemaps (accepted pages only)...');
-  writeSitemaps(accepted, config);
-
-  log('MASTER', 'Updating RL state from accepted pages...');
-  const newRl = updateRlState(rlState, accepted);
-  saveRlState(newRl);
-
-  const finishedAt = new Date().toISOString();
-  const durationMs = Date.now() - startMs;
-  buildMeta.finishedAt = finishedAt;
-  fs.writeFileSync(BUILD_META_PATH, JSON.stringify(buildMeta, null, 2));
-
-  log('MASTER', 'Writing dashboard and run summary...');
-  writeDashboard(buildMeta, scored, accepted);
-
-  const avgQuality =
-    accepted.reduce((acc, p) => acc + (p.qualityScore || 0), 0) /
-      Math.max(accepted.length, 1) || 0;
-
-  const summary = {
-    buildId: buildMeta.buildId,
-    startedAt,
-    finishedAt,
-    durationMs,
-    pagesPlanned: plan.length,
-    pagesGenerated: pages.length,
-    pagesAccepted: accepted.length,
-    avgQuality,
-    concurrency
-  };
-
-  fs.writeFileSync(RUN_SUMMARY_PATH, JSON.stringify(summary, null, 2));
-
-  log('MASTER', `SEO build finished in ${durationMs}ms.`);
 }
 
 main().catch((e) => {
-  console.error(e);
+  error('MASTER', 'Fatal error', e);
   process.exit(1);
 });

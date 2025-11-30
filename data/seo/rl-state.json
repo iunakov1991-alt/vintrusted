@@ -1,16 +1,20 @@
 {
   "version": 1,
-  "lastUpdated": "1970-01-01T00:00:00.000Z",
+  "lastUpdated": "2025-11-30T08:10:15.719Z",
   "intentWeights": {
-    "vin_check": 0.4,
-    "accident_check": 0.25,
-    "ownership_history": 0.15,
-    "market_value": 0.15,
-    "dmv_records": 0.05
+    "vin_check": 0.4993416517423374,
+    "accident_check": 0.5006583482576625
   },
   "languageWeights": {
-    "en": 0.8,
-    "es": 0.2
+    "en": 0.5015221522327085,
+    "es": 0.49847784776729154
   },
-  "clusterScores": {}
+  "clusterScores": {},
+  "layoutWeights": {
+    "B": 0.9856250000000001,
+    "A": 0.9795250000000001,
+    "C": 0.9974375000000001,
+    "H": 0.981171875,
+    "E": 0.9795708333333334
+  }
 }

@@ -1,0 +1,11 @@
+{
+  "name": "vintrusted",
+  "version": "1.0.0",
+  "description": "VIN Trusted website with Stripe integration",
+  "main": "index.html",
+  "scripts": {},
+  "dependencies": {
+    "@vercel/speed-insights": "^1.2.0",
+    "stripe": "^14.0.0"
+  }
+}

@@ -1,9 +1,11 @@
 {
+  "version": "6.0",
   "targetPagesPerBuild": 10000,
-  "maxPagesPerCluster": 450,
-  "minQualityScore": 0.7,
+  "maxPagesPerCluster": 500,
+  "minQualityScore": 0.75,
   "enableAI": true,
-  "aiMaxTokens": 600,
+  "aiMaxTokens": 800,
+  "aiProviders": ["groq", "deepseek", "openai"],
   "languages": ["en", "es"],
   "defaultLanguage": "en",
   "intents": [
@@ -11,6 +13,26 @@
     "accident_check",
     "ownership_history",
     "market_value",
-    "dmv_records"
-  ]
+    "dmv_records",
+    "title_brand",
+    "odometer_rollback",
+    "theft_records"
+  ],
+  "layoutCount": 9,
+  "minLayoutVariety": 6,
+  "uniquenessThreshold": 0.85,
+  "internalLinksPerPage": {
+    "min": 1,
+    "max": 3
+  },
+  "crawlBudget": {
+    "highPriority": 0.4,
+    "mediumPriority": 0.4,
+    "lowPriority": 0.2
+  },
+  "autoRepair": {
+    "enabled": true,
+    "minQualityForRepair": 0.6,
+    "regenerationThreshold": 0.5
+  }
 }

@@ -1,0 +1,1 @@
+Remove border-radius from cells to eliminate visual artifacts: Thu Oct 16 04:32:11 PDT 2025

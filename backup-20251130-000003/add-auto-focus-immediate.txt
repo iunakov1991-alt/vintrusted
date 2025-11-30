@@ -1,0 +1,1 @@
+Add automatic focus on input field when switching modes - user can start typing immediately: Wed Oct 15 17:46:14 PDT 2025

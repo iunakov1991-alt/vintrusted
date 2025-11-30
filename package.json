@@ -4,9 +4,7 @@
   "description": "VIN Trusted website with Stripe integration",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'No build needed'",
-    "vercel-build": "node scripts/seo/seo-master-build.js",
-    "seo-monster": "node scripts/seo/seo-master-build.js"
+    "vercel-build": "node scripts/seo/seo-master-build.js"
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.2.0",

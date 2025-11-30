@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketCheck API Debug Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>MarketCheck API Debug Test</h1>
+    
+    <div class="test-section">
+        <h2>API Configuration</h2>
+        <div id="configResult" class="result">Loading...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>VIN Search Test</h2>
+        <button onclick="testVinSearch()">Test VIN Search (3CZRU6H77JM726012)</button>
+        <div id="vinResult" class="result">Click button to test...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>History Test</h2>
+        <button onclick="testHistory()">Test History API</button>
+        <div id="historyResult" class="result">Click button to test...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Display Test</h2>
+        <button onclick="testDisplay()">Test Display Update</button>
+        <div id="displayResult" class="result">Click button to test...</div>
+    </div>
+
+    <script>
+        // MarketCheck API Configuration
+        const MARKETCHECK_API_KEY = 'w2MYvaZha9xCvG2VTGlphAE84f9oC3Kj';
+        const MARKETCHECK_API_SECRET = '37zDJBEBNCiJRvY0';
+        
+        const MARKETCHECK_ENDPOINTS = {
+            VIN_SEARCH: 'https://api.marketcheck.com/v2/search/car/active',
+            VIN_HISTORY: 'https://api.marketcheck.com/v2/history/car'
+        };
+        
+        // Display configuration
+        function displayConfig() {
+            const configDiv = document.getElementById('configResult');
+            configDiv.innerHTML = `API Key: ${MARKETCHECK_API_KEY}
+API Secret: ${MARKETCHECK_API_SECRET}
+Search Endpoint: ${MARKETCHECK_ENDPOINTS.VIN_SEARCH}
+History Endpoint: ${MARKETCHECK_ENDPOINTS.VIN_HISTORY}`;
+        }
+        
+        // Test VIN Search
+        async function testVinSearch() {
+            const resultDiv = document.getElementById('vinResult');
+            resultDiv.textContent = 'Testing VIN search...';
+            resultDiv.className = 'result';
+            
+            try {
+                const vin = '3CZRU6H77JM726012';
+                const apiUrl = `${MARKETCHECK_ENDPOINTS.VIN_SEARCH}?vin=${vin}&api_key=${MARKETCHECK_API_KEY}`;
+                console.log('Testing VIN search URL:', apiUrl);
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                console.log('VIN Search Response status:', response.status);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    resultDiv.textContent = `Error ${response.status}: ${errorText}`;
+                    resultDiv.className = 'result error';
+                    return;
+                }
+                
+                const data = await response.json();
+                console.log('VIN Search result:', data);
+                
+                if (data && data.listings && data.listings.length > 0) {
+                    const listing = data.listings[0];
+                    resultDiv.textContent = `SUCCESS! Found vehicle:
+VIN: ${listing.vin}
+Heading: ${listing.heading}
+Price: $${listing.price.toLocaleString()}
+Miles: ${listing.miles.toLocaleString()}
+Make: ${listing.build.make}
+Model: ${listing.build.model}
+Year: ${listing.build.year}`;
+                    resultDiv.className = 'result success';
+                } else {
+                    resultDiv.textContent = 'No listings found for this VIN';
+                    resultDiv.className = 'result error';
+                }
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'result error';
+                console.error('VIN Search error:', error);
+            }
+        }
+        
+        // Test History API
+        async function testHistory() {
+            const resultDiv = document.getElementById('historyResult');
+            resultDiv.textContent = 'Testing History API...';
+            resultDiv.className = 'result';
+            
+            try {
+                const vin = '3CZRU6H77JM726012';
+                const apiUrl = `${MARKETCHECK_ENDPOINTS.VIN_HISTORY}/${vin}?api_key=${MARKETCHECK_API_KEY}`;
+                console.log('Testing History URL:', apiUrl);
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                console.log('History Response status:', response.status);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    resultDiv.textContent = `Error ${response.status}: ${errorText}`;
+                    resultDiv.className = 'result error';
+                    return;
+                }
+                
+                const data = await response.json();
+                console.log('History result:', data);
+                
+                if (Array.isArray(data) && data.length > 0) {
+                    resultDiv.textContent = `SUCCESS! Found ${data.length} history records:
+Latest Price: $${data[0].price.toLocaleString()}
+Latest Date: ${data[0].last_seen_at_date}
+Oldest Price: $${data[data.length-1].price.toLocaleString()}
+Oldest Date: ${data[data.length-1].first_seen_at_date}`;
+                    resultDiv.className = 'result success';
+                } else {
+                    resultDiv.textContent = 'No history data found';
+                    resultDiv.className = 'result error';
+                }
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'result error';
+                console.error('History error:', error);
+            }
+        }
+        
+        // Test Display Update
+        function testDisplay() {
+            const resultDiv = document.getElementById('displayResult');
+            
+            // Simulate the display update process
+            const mockData = {
+                build: {
+                    make: 'Honda',
+                    model: 'HR-V',
+                    year: 2018,
+                    body_type: 'SUV'
+                },
+                price: 19990,
+                miles: 65710
+            };
+            
+            resultDiv.textContent = `Display Update Test:
+Vehicle: ${mockData.build.year} ${mockData.build.make} ${mockData.build.model}
+Price: $${mockData.price.toLocaleString()}
+Miles: ${mockData.miles.toLocaleString()}
+Body Type: ${mockData.build.body_type}
+
+This simulates what should be displayed on the main page.`;
+            resultDiv.className = 'result success';
+        }
+        
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            console.log('Debug test page loaded');
+            displayConfig();
+        });
+    </script>
+</body>
+</html>

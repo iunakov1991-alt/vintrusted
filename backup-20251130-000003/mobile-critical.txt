@@ -1,0 +1,200 @@
+/* =============================================================================
+   MOBILE.CSS - VinTrusted Mobile & Tablet Responsive Styles
+   ============================================================================= */
+
+/* Safe Area CSS Variables for iOS Dynamic Island & Notches */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+/* =============================================================================
+   MOBILE & TABLET BASE STYLES (0-1023px)
+   ============================================================================= */
+
+@media (max-width: 1023px) {
+  /* TEST: If you see red border - mobile.css is working! */
+  body {
+    border: 5px solid red !important;
+  }
+  
+  /* Override Desktop Constraints */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Mobile Container - Single Column, Max Width 480px */
+  .m-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 16px;
+    width: 100%;
+  }
+
+  /* Override Desktop Container */
+  .container {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  /* =============================================================================
+     HEADER - MOBILE
+     ============================================================================= */
+  
+  /* Show only main page header, hide loading page header */
+  .loading-page,
+  .loading-page .header,
+  #loadingPage,
+  #loadingPage .header {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Main header - single, fixed at top */
+  #mainPage .header,
+  .header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    padding-top: calc(12px + var(--safe-top));
+    padding-bottom: 12px;
+    height: auto;
+    min-height: calc(60px + var(--safe-top));
+    z-index: 1000;
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* Ensure main page is visible */
+  #mainPage {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  .header-content {
+    height: auto;
+    min-height: 50px;
+    padding: 8px 0;
+    justify-content: center;
+  }
+
+  .logo {
+    margin-left: 0;
+    transform: scale(0.8);
+  }
+
+  .logo-img {
+    height: 80px;
+    width: auto;
+  }
+
+  .nav, 
+  .header-actions {
+    display: none;
+  }
+
+  /* Mobile Menu Toggle (if needed in future) */
+  .m-menu-toggle {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  /* =============================================================================
+     HERO SECTION - MOBILE
+     ============================================================================= */
+  
+  .hero-section {
+    margin-top: 0 !important;
+    padding: 0 0 40px !important;
+    padding-top: 10px !important;
+    min-height: auto;
+    background-attachment: scroll;
+    transform: none;
+  }
+
+  .hero-container {
+    transform: none;
+    max-width: 100%;
+    padding: 0 16px !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .main-title {
+    font-size: 28px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    text-align: center;
+  }
+  
+  /* Убираем все возможные отступы сверху */
+  .hero-section *:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .yellow-text {
+    display: inline;
+  }
+
+  /* =============================================================================
+     VIN SEARCH FORM - MOBILE
+     ============================================================================= */
+  
+  .search-form-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .m-form-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+
+  .m-tab-btn,
+  .mode-btn {
+    flex: 1;
+    max-width: 150px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .m-tab-btn.active,
+  .mode-btn.active {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);

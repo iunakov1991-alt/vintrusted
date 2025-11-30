@@ -101,7 +101,8 @@ try {
 if (!pkg.scripts) pkg.scripts = {};
 
 // НЕ трогаем остальные скрипты, только vercel-build
-pkg.scripts['vercel-build'] = 'node scripts/seo/seo-master-build.js && next build';
+// ВАЖНО: статический сайт, не Next.js, поэтому без next build
+pkg.scripts['vercel-build'] = 'node scripts/seo/seo-master-build.js';
 
 fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 console.log('[SEO PKG] package.json patched: scripts.vercel-build set.');
@@ -728,7 +729,7 @@ ${entries}
 ${indexEntries
   .map(
     (e) =>
-      `<sitemap><loc>https://www.vintrusted.com/seo/sitemaps/${e.fileName}</loc></sitemap>`
+      `<sitemap><loc>https://vintrusted.com/seo/sitemaps/${e.fileName}</loc></sitemap>`
   )
   .join('')}
 </sitemapindex>`;

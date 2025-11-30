@@ -50,16 +50,8 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/sitemap-seo.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/sitemap-seo-monster.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/seo-sitemaps.js",
-      "use": "@vercel/node"
+      "src": "public/vin/**",
+      "use": "@vercel/static"
     },
     {
       "src": "public/seo/sitemaps/**",
@@ -168,6 +160,14 @@
       "destination": "/api/health.js"
     },
     {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/",
+      "destination": "/vin/:vin/:state/index.html"
+    },
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
+      "destination": "/vin/:vin/:state/index.html"
+    },
+    {
       "source": "/",
       "destination": "/index.html"
     },
@@ -194,33 +194,6 @@
     {
       "source": "/sitemaps",
       "destination": "/sitemaps.html"
-    },
-    {
-      "source": "/seo/sitemaps/sitemap-seo.xml",
-      "destination": "/api/sitemap-seo.js"
-    },
-    {
-      "source": "/seo/sitemaps/:file*.xml",
-      "destination": "/api/seo-sitemaps.js"
-    },
-    {
-      "source": "/sitemap-seo-monster.xml",
-      "destination": "/api/sitemap-seo-monster.js"
-    },
-    {
-      "source": "/articles/:slug*",
-      "destination": "/seo/pages/articles/:slug*/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/seo/sitemaps/:file*.xml",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/xml; charset=utf-8"
-        }
-      ]
     }
   ]
 }

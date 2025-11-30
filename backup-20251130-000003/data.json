@@ -1,0 +1,98 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "VIN Trust",
+  "url": "https://vintrusted.com",
+  "description": "Comprehensive vehicle history report provider offering VIN checks, accident history, title records, and recall information",
+  "service": {
+    "@type": "Service",
+    "name": "VIN Check Service",
+    "description": "Vehicle history reports based on VIN (Vehicle Identification Number)",
+    "provider": {
+      "@type": "Organization",
+      "name": "VIN Trust"
+    },
+    "areaServed": "US",
+    "serviceType": "Vehicle History Report",
+    "offers": {
+      "@type": "Offer",
+      "price": "3.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
+  },
+  "dataSources": [
+    {
+      "name": "NMVTIS",
+      "description": "National Motor Vehicle Title Information System",
+      "type": "Government Database"
+    },
+    {
+      "name": "NHTSA",
+      "description": "National Highway Traffic Safety Administration",
+      "type": "Government Database"
+    },
+    {
+      "name": "DMV Records",
+      "description": "State Department of Motor Vehicles",
+      "type": "Government Database"
+    },
+    {
+      "name": "Insurance Companies",
+      "description": "Accident and claim history",
+      "type": "Industry Database"
+    },
+    {
+      "name": "Auto Auctions",
+      "description": "Sales history and condition reports",
+      "type": "Industry Database"
+    }
+  ],
+  "apiEndpoints": [
+    {
+      "path": "/api/get-clearvin-report",
+      "method": "GET",
+      "description": "Retrieve HTML or PDF vehicle history reports",
+      "parameters": {
+        "vin": {
+          "type": "string",
+          "required": true,
+          "description": "17-character Vehicle Identification Number"
+        },
+        "format": {
+          "type": "string",
+          "required": false,
+          "description": "Report format: 'html' or 'pdf'",
+          "default": "html"
+        }
+      }
+    },
+    {
+      "path": "/api/send-clearvin-report",
+      "method": "POST",
+      "description": "Send vehicle history reports via email",
+      "parameters": {
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "Recipient email address"
+        },
+        "vin": {
+          "type": "string",
+          "required": true,
+          "description": "17-character Vehicle Identification Number"
+        }
+      }
+    }
+  ],
+  "reportContents": [
+    "Vehicle Specifications",
+    "Accident History",
+    "Title Records",
+    "Recall Information",
+    "Odometer Readings",
+    "Auction History",
+    "Service Records"
+  ]
+}
+
