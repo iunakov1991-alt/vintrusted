@@ -14,6 +14,17 @@ const { WeightEngine } = require('./ltr/weight-engine');
 const { StaticArchitecture } = require('./platform/static-architecture');
 const { SitemapEngine } = require('./sitemap/sitemap-engine');
 const { InternalLinksEngine } = require('./links/internal-links-engine');
+const { KeywordExtractor } = require('./keywords/keyword-extractor');
+const { KeywordAligner } = require('./keywords/keyword-aligner');
+const { SmartEmbedder } = require('./keywords/smart-embedder');
+const { AutoOptimizer } = require('./content/auto-optimizer');
+const { BuildHistory } = require('./analytics/build-history');
+const { Dashboard } = require('./analytics/dashboard');
+const { ForecastEngine } = require('./analytics/forecast-engine');
+const { CrawlBudgetEngine } = require('./crawl/crawl-budget-engine');
+const { SelfDiagnosis } = require('./health/self-diagnosis');
+const { AutoRepair } = require('./health/auto-repair');
+const { I18nEngine } = require('./i18n/i18n-engine');
 
 /**
  * SEO MONSTER 6.0: Master Build
@@ -101,6 +112,29 @@ async function main() {
     const staticArch = new StaticArchitecture(config);
     const sitemapEngine = new SitemapEngine(config);
     const internalLinksEngine = new InternalLinksEngine(config);
+    const keywordExtractor = new KeywordExtractor(config);
+    const keywordAligner = new KeywordAligner(config);
+    const smartEmbedder = new SmartEmbedder(config);
+    const autoOptimizer = new AutoOptimizer(config);
+    const buildHistory = new BuildHistory(config);
+    const dashboard = new Dashboard(config);
+    const forecastEngine = new ForecastEngine(config);
+    const crawlBudgetEngine = new CrawlBudgetEngine(config);
+    const selfDiagnosis = new SelfDiagnosis(config);
+    const autoRepair = new AutoRepair(config);
+    const i18nEngine = new I18nEngine(config);
+
+    // Этап 0: Pre-build check: диагностика и автоисправление
+    pipeline.registerStage('pre-build-check', async (ctx) => {
+      log('STAGE', 'Pre-Build Check');
+      const canProceed = await autoRepair.preBuildCheck();
+      if (!canProceed) {
+        throw new Error('Pre-build check failed. Critical issues detected.');
+      }
+      const diagnosis = selfDiagnosis.diagnose();
+      ctx.diagnosis = diagnosis;
+      log('STAGE', `Pre-build check completed. Status: ${diagnosis.status}, Score: ${diagnosis.score}`);
+    });
 
     // Этап 1: Планирование URL
     pipeline.registerStage('url-planning', async (ctx) => {
@@ -161,6 +195,42 @@ async function main() {
 
       ctx.pages = pages;
       log('STAGE', `Generated ${pages.length} pages`);
+    });
+
+    // Этап 2.5: Keyword Intelligence
+    pipeline.registerStage('keyword-intelligence', async (ctx) => {
+      log('STAGE', 'Keyword Intelligence');
+      ctx.pages = ctx.pages.map(page => {
+        // Извлечение ключевых слов
+        const keywords = keywordExtractor.extractFromPage(page);
+        
+        // Выравнивание ключевых слов
+        const aligned = keywordAligner.alignWithPage(page, keywords);
+        
+        // Умное встраивание ключевых слов
+        const embedded = smartEmbedder.embedInPage(aligned, keywords);
+        
+        return { ...embedded, keywords };
+      });
+      log('STAGE', `Keywords extracted and aligned for ${ctx.pages.length} pages`);
+    });
+
+    // Этап 2.6: Auto-Optimization
+    pipeline.registerStage('auto-optimization', async (ctx) => {
+      log('STAGE', 'Auto-Optimization');
+      ctx.pages = ctx.pages.map(page => {
+        return autoOptimizer.optimizePage(page, page.keywords);
+      });
+      log('STAGE', `Optimized ${ctx.pages.length} pages`);
+    });
+
+    // Этап 2.7: i18n Localization
+    pipeline.registerStage('i18n-localization', async (ctx) => {
+      log('STAGE', 'i18n Localization');
+      ctx.pages = ctx.pages.map(page => {
+        return i18nEngine.localizePage(page);
+      });
+      log('STAGE', `Localized ${ctx.pages.length} pages`);
     });
 
     // Этап 3: Рендеринг HTML
@@ -241,6 +311,14 @@ async function main() {
       log('STAGE', `Published ${published} pages`);
     });
 
+    // Этап 7.5: Crawl Budget Distribution
+    pipeline.registerStage('crawl-budget', async (ctx) => {
+      log('STAGE', 'Crawl Budget Distribution');
+      const strategy = crawlBudgetEngine.generateCrawlStrategy(ctx.acceptedPages);
+      ctx.crawlStrategy = strategy;
+      log('STAGE', `Crawl budget distributed: ${strategy.selectedPages} pages`);
+    });
+
     // Этап 8: Генерация sitemaps
     pipeline.registerStage('sitemap-generation', async (ctx) => {
       log('STAGE', 'Sitemap Generation');
@@ -273,12 +351,41 @@ async function main() {
     const result = await pipeline.execute();
 
     const duration = Date.now() - startMs;
+    
+    // Запись истории билда
+    const buildData = {
+      buildId: buildId,
+      pagesGenerated: result.pages.length,
+      pagesAccepted: result.acceptedPages.length,
+      avgQuality: result.avgQuality || 0,
+      duration: duration,
+      clusters: result.clusters?.length || 0,
+      uniquePages: result.pages.length,
+      aiEnabled: config.enableAI && (!!process.env.GROQ_API_KEY || !!process.env.DEEPSEEK_API_KEY),
+      config: config
+    };
+    
+    buildHistory.recordBuild(buildData);
+
+    // Генерация дашборда
+    const dashboardData = dashboard.generateDashboardData(buildData);
+    dashboard.saveDashboard(dashboardData);
+
+    // Генерация прогноза
+    const forecast = forecastEngine.generateForecast(5);
+    log('FORECAST', `Forecast generated for next 5 builds`);
+
+    // Финальная диагностика
+    const finalDiagnosis = selfDiagnosis.diagnose();
+    log('DIAGNOSIS', `Final diagnosis: ${finalDiagnosis.status}, Score: ${finalDiagnosis.score}`);
+
     log('MASTER', 'SEO MONSTER 6.0 build completed', {
       duration: `${duration}ms`,
       pagesGenerated: result.pages.length,
       pagesAccepted: result.acceptedPages.length,
       avgQuality: result.avgQuality?.toFixed(3),
-      clusters: result.clusters?.length || 0
+      clusters: result.clusters?.length || 0,
+      healthScore: finalDiagnosis.score
     });
 
   } catch (e) {
