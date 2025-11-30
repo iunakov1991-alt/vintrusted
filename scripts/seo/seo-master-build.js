@@ -212,8 +212,6 @@ REQUIREMENTS:
 
 Write a comprehensive, expert-level analysis about "${item.intent}" that feels like an official report from a DMV analyst + antifraud specialist + automotive expert.`;
         
-        // Формирование контекста страницы (stateLabel используется в промпте выше)
-        const stateLabel = baselineBlocks.humanizeStateSlug(item.stateSlug);
         const aiText = await aiAugmentation.generateText(aiPrompt, {
           lang: item.lang,
           intent: item.intent,
