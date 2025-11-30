@@ -375,6 +375,15 @@
             }
         }
     </style>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CX3CT2K2FC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CX3CT2K2FC');
+    </script>
 </head>
 <body>
     <!-- Email Form Overlay -->
@@ -1319,6 +1328,85 @@
                         console.error('Fetch error:', fetchError);
                         // Handle different types of fetch errors
                         if (fetchError.name === 'AbortError') {
+                            throw new Error('Request timeout: The server took too long to respond. Please try again.');
+                        } else if (fetchError.name === 'TypeError' && fetchError.message.includes('Failed to fetch')) {
+                            throw new Error('Network error: Could not connect to server. Please check your internet connection and try again.');
+            } else {
+                            throw new Error(`Network error: ${fetchError.message || 'Failed to fetch'}`);
+                        }
+                    }
+
+                    if (!response) {
+                        throw new Error('Network error: No response from server');
+                    }
+
+                    console.log('Response status:', response.status);
+
+                    let data;
+                    try {
+                        const responseText = await response.text();
+                        console.log('Response text:', responseText.substring(0, 200));
+                        
+                        if (!responseText || responseText.trim().length === 0) {
+                            throw new Error(`Empty response from server (status ${response.status})`);
+                        }
+                        
+                        try {
+                            data = JSON.parse(responseText);
+                        } catch (parseError) {
+                            console.error('JSON parse error:', parseError);
+                            throw new Error(`Invalid JSON response (status ${response.status}): ${responseText.substring(0, 100)}`);
+                        }
+                    } catch (jsonError) {
+                        console.error('Error parsing response:', jsonError);
+                        throw new Error(`Server error (${response.status}): ${jsonError.message || 'Unknown error'}`);
+                    }
+
+                    if (!response.ok || !data.success) {
+                        const errorMsg = data.error || data.details || data.message || 'Failed to send report';
+                        console.error('API error:', errorMsg, data);
+                        throw new Error(errorMsg);
+                    }
+
+                    // Success - hide form
+                    messageDiv.textContent = 'Report sent successfully!';
+                    messageDiv.className = 'message success';
+                    
+                setTimeout(() => {
+                        emailFormOverlay.classList.remove('show');
+                        emailFormOverlay.classList.add('hidden');
+                    }, 1500);
+
+                } catch (error) {
+                    console.error('Error sending report:', error);
+                    console.error('Error stack:', error.stack);
+                    
+                    let errorMessage = error.message || 'Failed to send report. Please try again.';
+                    
+                    // More user-friendly error messages
+                    if (error.message.includes('Failed to fetch') || error.message.includes('Network error')) {
+                        errorMessage = 'Network error: Could not connect to server. Please check your internet connection and try again.';
+                    } else if (error.message.includes('timeout')) {
+                        errorMessage = 'Request timeout: The server took too long to respond. Please try again.';
+                    } else if (error.message.includes('500')) {
+                        errorMessage = 'Server error: Please try again in a few moments.';
+                    } else if (error.message.includes('404')) {
+                        errorMessage = 'API endpoint not found. Please contact support.';
+                    } else if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+                        errorMessage = 'Authorization error: API token might be missing or invalid. Please contact support.';
+                    }
+                    
+                    messageDiv.textContent = errorMessage;
+                    messageDiv.className = 'message error';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Report';
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
+
                             throw new Error('Request timeout: The server took too long to respond. Please try again.');
                         } else if (fetchError.name === 'TypeError' && fetchError.message.includes('Failed to fetch')) {
                             throw new Error('Network error: Could not connect to server. Please check your internet connection and try again.');
