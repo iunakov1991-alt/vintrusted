@@ -363,11 +363,15 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       log('STAGE', 'Internal Links');
       internalLinksEngine.attachInternalLinks(ctx.acceptedPages, clusterEngine);
       
-      // Перерендер с внутренними ссылками
+      // Перерендер с внутренними ссылками (только если блока еще нет)
       ctx.acceptedPages = ctx.acceptedPages.map(page => {
+        // Проверяем, нет ли уже блока internalLinks
+        const hasInternalLinks = page.layout.blocks && page.layout.blocks.includes('internalLinks');
         const layoutWithLinks = {
           ...page.layout,
-          blocks: [...page.layout.blocks, 'internalLinks']
+          blocks: hasInternalLinks 
+            ? page.layout.blocks 
+            : [...page.layout.blocks, 'internalLinks']
         };
         const html = templateEngine.renderPage(page, layoutWithLinks);
         return { ...page, html };

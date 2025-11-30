@@ -308,9 +308,33 @@ class TemplateEngineAbsolute {
     const links = ctx.internalLinks || [];
     if (!links.length) return '';
 
+    // Убираем дубликаты по href
+    const uniqueLinks = [];
+    const seenHrefs = new Set();
+    for (const link of links) {
+      if (link.href && !seenHrefs.has(link.href)) {
+        seenHrefs.add(link.href);
+        uniqueLinks.push(link);
+      }
+    }
+
     // Разделяем на две группы
-    const stateLinks = links.filter(l => l.type === 'state' || l.href.includes(ctx.stateSlug));
-    const makeLinks = links.filter(l => l.type === 'make' || l.href.includes(ctx.make));
+    const stateLinks = uniqueLinks.filter(l => {
+      // Исключаем текущую страницу
+      const currentUrl = `/vin/${ctx.vin}/${ctx.stateSlug}/`;
+      return l.href !== currentUrl && (l.type === 'state' || l.href.includes(ctx.stateSlug));
+    });
+    
+    const makeLinks = uniqueLinks.filter(l => {
+      // Исключаем текущую страницу и ссылки, которые уже в stateLinks
+      const currentUrl = `/vin/${ctx.vin}/${ctx.stateSlug}/`;
+      return l.href !== currentUrl && 
+             !stateLinks.some(sl => sl.href === l.href) &&
+             (l.type === 'make' || (l.href.includes(ctx.make) && !l.href.includes(ctx.stateSlug)));
+    });
+
+    // Если нет ссылок, не рендерим блок
+    if (stateLinks.length === 0 && makeLinks.length === 0) return '';
 
     return `
 <section class="seo-internal-links seo-section">
