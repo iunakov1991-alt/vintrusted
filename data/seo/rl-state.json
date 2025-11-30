@@ -1,33 +1,16 @@
 {
   "version": 1,
-  "lastUpdated": "2025-11-29T16:30:54.914Z",
+  "lastUpdated": "1970-01-01T00:00:00.000Z",
   "intentWeights": {
-    "vin_check": 0.44000000000000006,
-    "accident_check": 0.29000000000000004,
-    "ownership_history": 0.18999999999999997,
-    "market_value": 0.18999999999999997,
-    "dmv_records": 0.12000000000000001
+    "vin_check": 0.4,
+    "accident_check": 0.25,
+    "ownership_history": 0.15,
+    "market_value": 0.15,
+    "dmv_records": 0.05
   },
   "languageWeights": {
     "en": 0.8,
     "es": 0.2
   },
-  "clusterScores": {
-    "vin_california_toyota": 1.1,
-    "vin_california_honda": 1.1,
-    "vin_california_ford": 1.1,
-    "vin_california_chevrolet": 1.1,
-    "vin_texas_toyota": 1.1,
-    "vin_texas_honda": 1.1,
-    "vin_texas_ford": 1.1,
-    "vin_texas_chevrolet": 1.1,
-    "vin_florida_toyota": 1.1,
-    "vin_florida_honda": 1.1,
-    "vin_florida_ford": 1.1,
-    "vin_florida_chevrolet": 1.1,
-    "vin_new-york_toyota": 1.1,
-    "vin_new-york_honda": 1.1,
-    "vin_new-york_ford": 1.1,
-    "vin_new-york_chevrolet": 1.1
-  }
+  "clusterScores": {}
 }

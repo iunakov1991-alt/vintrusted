@@ -74,45 +74,43 @@ function hashKey(str) {
 
 async function callGroqAPI(prompt, { lang, intent, maxTokens }) {
   const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) return null;
+  if (!apiKey) {
+    return null;
+  }
 
   const model = process.env.GROQ_MODEL || 'llama-3.1-70b-versatile';
-  const endpoint = 'https://api.groq.com/openai/v1/chat/completions';
-
-  const body = {
-    model,
-    messages: [
-      {
-        role: 'system',
-        content: 'You are an SEO content generator for a VIN history report website. ' +
-          'You must NOT fabricate specific accident dates, owners, odometer values or any personal data. ' +
-          'Write safe, generic, non-personalized explanations only.'
-      },
-      {
-        role: 'user',
-        content: prompt
-      }
-    ],
-    max_tokens: maxTokens || 600,
-    temperature: 0.4
-  };
+  const url = 'https://api.groq.com/openai/v1/chat/completions';
 
   try {
-    const res = await fetch(endpoint, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify({
+        model,
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an SEO content generator for a VIN history report website. You must NOT fabricate specific accident dates, owners, odometer values or any personal data. Write safe, generic, non-personalized explanations only.'
+          },
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        max_tokens: maxTokens || 600,
+        temperature: 0.4
+      })
     });
 
-    if (!res.ok) {
-      log('AI', `Groq HTTP error: ${res.status}`);
+    if (!response.ok) {
+      log('AI', `Groq API error: ${response.status}`);
       return null;
     }
 
-    const data = await res.json();
+    const data = await response.json();
     const text = data.choices?.[0]?.message?.content || null;
     if (!text) {
       log('AI', 'No text in Groq response');
@@ -127,45 +125,43 @@ async function callGroqAPI(prompt, { lang, intent, maxTokens }) {
 
 async function callDeepSeekAPI(prompt, { lang, intent, maxTokens }) {
   const apiKey = process.env.DEEPSEEK_API_KEY;
-  if (!apiKey) return null;
+  if (!apiKey) {
+    return null;
+  }
 
   const model = process.env.DEEPSEEK_MODEL || 'deepseek-chat';
-  const endpoint = 'https://api.deepseek.com/v1/chat/completions';
-
-  const body = {
-    model,
-    messages: [
-      {
-        role: 'system',
-        content: 'You are an SEO content generator for a VIN history report website. ' +
-          'You must NOT fabricate specific accident dates, owners, odometer values or any personal data. ' +
-          'Write safe, generic, non-personalized explanations only.'
-      },
-      {
-        role: 'user',
-        content: prompt
-      }
-    ],
-    max_tokens: maxTokens || 600,
-    temperature: 0.4
-  };
+  const url = 'https://api.deepseek.com/v1/chat/completions';
 
   try {
-    const res = await fetch(endpoint, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify({
+        model,
+        messages: [
+          {
+            role: 'system',
+            content: 'You are an SEO content generator for a VIN history report website. You must NOT fabricate specific accident dates, owners, odometer values or any personal data. Write safe, generic, non-personalized explanations only.'
+          },
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        max_tokens: maxTokens || 600,
+        temperature: 0.4
+      })
     });
 
-    if (!res.ok) {
-      log('AI', `DeepSeek HTTP error: ${res.status}`);
+    if (!response.ok) {
+      log('AI', `DeepSeek API error: ${response.status}`);
       return null;
     }
 
-    const data = await res.json();
+    const data = await response.json();
     const text = data.choices?.[0]?.message?.content || null;
     if (!text) {
       log('AI', 'No text in DeepSeek response');
@@ -182,6 +178,7 @@ async function callAiProvider(prompt, { lang, intent, maxTokens }) {
   // Сначала пробуем Groq (быстрый)
   let text = await callGroqAPI(prompt, { lang, intent, maxTokens });
   if (!text) {
+    // Если Groq не сработал, пробуем DeepSeek (fallback)
     log('AI', 'Groq failed, trying DeepSeek...');
     text = await callDeepSeekAPI(prompt, { lang, intent, maxTokens });
   }
@@ -193,7 +190,7 @@ async function callAiProvider(prompt, { lang, intent, maxTokens }) {
  *
  * 1. Проверяет кеш (в памяти).
  * 2. Если AI выключен (config.enableAI=false или ENV/ключа нет) — fallback.
- * 3. Если включен — здесь интегрируется реальный провайдер (DeepSeek, Grok и т.п.).
+ * 3. Если включен — использует Groq API с fallback на DeepSeek.
  */
 async function generateText(prompt, { lang = 'en', intent = 'generic', maxTokens = 600 } = {}) {
   if (inMemoryCache === null) {
@@ -217,18 +214,16 @@ async function generateText(prompt, { lang = 'en', intent = 'generic', maxTokens
   // AI отключен или нет ключа — безопасный fallback (генерик, без фактов о конкретном VIN)
   if (!effectiveAI) {
     const fallback = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
-
     appendCache(key, fallback);
     return fallback;
   }
 
-  // Реальная интеграция с Groq и DeepSeek
+  // Вызываем реальный AI провайдер (Groq → DeepSeek fallback)
   let text = await callAiProvider(prompt, { lang, intent, maxTokens });
   if (!text) {
-    const fallback = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
-    text = fallback;
+    // Если оба провайдера не сработали, используем fallback
+    text = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
   }
-
   appendCache(key, text);
   return text;
 }

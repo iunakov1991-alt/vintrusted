@@ -38,7 +38,6 @@ function attachInternalLinks(plan) {
     const arr = byCluster[clusterId];
     for (let i = 0; i < arr.length; i++) {
       const current = arr[i].item;
-
       const neighborsIdx = [i - 1, i + 1, i + 2].filter(
         (j) => j >= 0 && j < arr.length
       );
@@ -55,10 +54,8 @@ function attachInternalLinks(plan) {
           : 'your state';
         const label = `${neighbor.year} ${String(neighbor.make || '').toUpperCase()} VIN check in ${stateLabel}`;
         links.push({ href: neighbor.url, label });
-
         if (links.length >= 3) break;
       }
-
       current.internalLinks = links;
     }
   }
@@ -104,7 +101,7 @@ async function main() {
   // Vercel делает несколько проходов build для разных функций, но SEO build должен выполниться один раз
   if (isVercel && fs.existsSync(BUILD_META_PATH)) {
     try {
-      const existingMeta = JSON.parse(fs.readFileSync(BUILD_META_PATH, 'utf8'));
+      const existingMeta = safeLoadJson(BUILD_META_PATH, {});
       // Проверяем, был ли build выполнен в этом же деплое (по buildId или времени)
       const existingBuildId = existingMeta.buildId;
       const currentBuildId = buildMeta.buildId;

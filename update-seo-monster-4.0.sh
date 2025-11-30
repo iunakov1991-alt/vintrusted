@@ -47,7 +47,7 @@ set -e
 #     - seo-ai-client (оптимизированный, без fetch, один read, далее append)
 #     - seo-url-factory (план URL с RL-весами)
 #     - seo-graph-engine
-#     - seo-sitemap-engine (Pro-ready, root integration + /sitemaps metadata)
+#     - seo-sitemap-engine (Pro-ready, root integration + metadata JSON)
 #     - seo-dashboard
 #
 #   STAGE 2 — SEO-HARDENED 3.0:
@@ -59,7 +59,7 @@ set -e
 # ПРЕДПОСЫЛКА:
 #   - В package.json уже прописан:
 #       "scripts": { "vercel-build": "node scripts/seo/seo-master-build.js" }
-#   - vercel.json уже настроен на rewrites /vin/... → /seo/pages/...
+#   - vercel.json уже настроен на rewrites /vin/... → /seo/pages/... или /api/seo-page
 ########################################################################
 
 echo "[SEO-MONSTER 4.0] Init (core + SEO-hardening) ..."
@@ -277,14 +277,12 @@ async function generateText(prompt, { lang = 'en', intent = 'generic', maxTokens
   // AI отключен или нет ключа — безопасный fallback (генерик, без фактов о конкретном VIN)
   if (!effectiveAI) {
     const fallback = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
-
     appendCache(key, fallback);
     return fallback;
   }
 
   // Точка расширения для реального провайдера.
   const text = `AI-generated content placeholder for intent "${intent}" (lang=${lang}). Replace this with real provider integration.`;
-
   appendCache(key, text);
   return text;
 }
@@ -502,7 +500,7 @@ module.exports = { buildGraph };
 EOF
 
 ########################################
-# 10. seo-sitemap-engine.js — Pro-версия с интеграцией в root sitemap + /sitemaps metadata
+# 10. seo-sitemap-engine.js — Pro-версия с интеграцией в root sitemap + metadata JSON
 ########################################
 
 cat > scripts/seo/seo-sitemap-engine.js << 'EOF'
@@ -512,7 +510,7 @@ const { log } = require('./logger');
 
 const SITEMAP_ROOT = path.join(process.cwd(), 'public/seo/sitemaps');
 const PUBLIC_ROOT = path.join(process.cwd(), 'public');
-const INTERNAL_ROOT = path.join(process.cwd(), 'public/internal');
+const INTERNAL_ROOT = path.join(PUBLIC_ROOT, 'internal');
 
 function chunk(arr, n) {
   const res = [];
@@ -522,95 +520,6 @@ function chunk(arr, n) {
 
 function ensureDir(p) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
-}
-
-/**
- * JSON-метаданные для страницы /sitemaps
- *
- * Формат:
- * {
- *   "lastUpdated": "...",
- *   "totalPages": 360,
- *   "totalSitemapFiles": 2,
- *   "languages": ["en","es"],
- *   "mainIndex": { "fileName": "sitemap-seo.xml", "url": "/seo/sitemaps/sitemap-seo.xml" },
- *   "alternativeIndex": { "fileName": "sitemap-seo-monster.xml", "url": "/sitemap-seo-monster.xml" },
- *   "byLanguage": {
- *     "en": {
- *       "sitemapFiles": [...],
- *       "indexFile": {...},
- *       "pagesCount": 180
- *     },
- *     "es": {...}
- *   },
- *   "allSitemapFiles": [...]
- * }
- */
-function writeSitemapMetadata(indexEntries, byLang, totalPages) {
-  try {
-    ensureDir(INTERNAL_ROOT);
-
-    const languages = Object.keys(byLang || {});
-    const byLanguage = {};
-    const allFilesSet = new Set();
-
-    // Файлы по языкам
-    for (const lang of languages) {
-      const langEntries = indexEntries.filter((e) => e.lang === lang);
-
-      const sitemapFiles = langEntries.map((e) => {
-        allFilesSet.add(e.fileName);
-        return {
-          fileName: e.fileName,
-          url: `/seo/sitemaps/${e.fileName}`
-        };
-      });
-
-      const indexFileName = `sitemap-${lang}-index.xml`;
-      allFilesSet.add(indexFileName);
-
-      byLanguage[lang] = {
-        sitemapFiles,
-        indexFile: {
-          fileName: indexFileName,
-          url: `/seo/sitemaps/${indexFileName}`
-        },
-        pagesCount: (byLang[lang] || []).length
-      };
-    }
-
-    // Глобальные индексы
-    const mainIndex = {
-      fileName: 'sitemap-seo.xml',
-      url: '/seo/sitemaps/sitemap-seo.xml'
-    };
-    const alternativeIndex = {
-      fileName: 'sitemap-seo-monster.xml',
-      url: '/sitemap-seo-monster.xml'
-    };
-
-    allFilesSet.add(mainIndex.fileName);
-    allFilesSet.add(alternativeIndex.fileName);
-
-    const allSitemapFiles = Array.from(allFilesSet);
-
-    const payload = {
-      lastUpdated: new Date().toISOString(),
-      totalPages: totalPages || 0,
-      totalSitemapFiles: allSitemapFiles.length,
-      languages,
-      mainIndex,
-      alternativeIndex,
-      byLanguage,
-      allSitemapFiles
-    };
-
-    const metaPath = path.join(INTERNAL_ROOT, 'sitemaps-metadata.json');
-    fs.writeFileSync(metaPath, JSON.stringify(payload, null, 2), 'utf8');
-    log('SITEMAP', `sitemaps-metadata.json written (pages=${payload.totalPages}, files=${payload.totalSitemapFiles})`);
-  } catch (e) {
-    log('SITEMAP', `metadata write error: ${e.message}`);
-  }
 }
 
 function writeSitemaps(pages, config) {
@@ -682,13 +591,13 @@ ${indexEntries
   log(
     'SITEMAP',
     `Sitemaps written for ${Object.keys(byLang).length} languages. Total files (incl. index): ${
-      indexEntries.length + Object.keys(byLang).length + 1
+      indexEntries.length + 1
     }`
   );
 
   integrateWithRootSitemap(seoIndexPath);
 
-  // Запись JSON-метаданных для страницы /sitemaps
+  // Записываем JSON-метаданные для страницы /sitemaps
   writeSitemapMetadata(indexEntries, byLang, pages.length);
 }
 
@@ -735,6 +644,88 @@ function integrateWithRootSitemap(seoIndexPath) {
     }
   } catch (e) {
     log('SITEMAP', `root sitemap integration error: ${e.message}`);
+  }
+}
+
+/**
+ * writeSitemapMetadata:
+ *  - Создаёт public/internal/sitemaps-metadata.json
+ *  - Даёт странице /sitemaps актуальные данные о sitemap-файлах
+ *
+ * Формат:
+ * {
+ *   lastUpdated: ISO,
+ *   totalPages,
+ *   totalSitemapFiles,
+ *   languages: ["en","es"],
+ *   mainIndex: { fileName, url },
+ *   alternativeIndex: { fileName, url },
+ *   byLanguage: {
+ *     en: {
+ *       sitemapFiles: [...],
+ *       indexFile: {...},
+ *       pagesCount: N
+ *     },
+ *     ...
+ *   },
+ *   allSitemapFiles: [...]
+ * }
+ */
+function writeSitemapMetadata(indexEntries, byLang, totalPages) {
+  try {
+    ensureDir(INTERNAL_ROOT);
+
+    const languages = Object.keys(byLang || {});
+    const allFiles = fs
+      .readdirSync(SITEMAP_ROOT)
+      .filter((f) => f.endsWith('.xml'))
+      .sort();
+
+    const byLanguage = {};
+    for (const lang of languages) {
+      const filesForLang = indexEntries
+        .filter((e) => e.lang === lang)
+        .map((e) => ({
+          fileName: e.fileName,
+          url: `/seo/sitemaps/${e.fileName}`
+        }));
+
+      const indexFileName = `sitemap-${lang}-index.xml`;
+      byLanguage[lang] = {
+        sitemapFiles: filesForLang,
+        indexFile: {
+          fileName: indexFileName,
+          url: `/seo/sitemaps/${indexFileName}`
+        },
+        pagesCount: (byLang[lang] || []).length
+      };
+    }
+
+    const payload = {
+      lastUpdated: new Date().toISOString(),
+      totalPages: totalPages || 0,
+      totalSitemapFiles: allFiles.length,
+      languages,
+      mainIndex: {
+        fileName: 'sitemap-seo.xml',
+        url: '/seo/sitemaps/sitemap-seo.xml'
+      },
+      alternativeIndex: {
+        fileName: 'sitemap-seo-monster.xml',
+        url: '/sitemap-seo-monster.xml'
+      },
+      byLanguage,
+      allSitemapFiles: allFiles.map((f) => ({
+        fileName: f,
+        url: `/seo/sitemaps/${f}`
+      }))
+    };
+
+    const outPath = path.join(INTERNAL_ROOT, 'sitemaps-metadata.json');
+    fs.writeFileSync(outPath, JSON.stringify(payload, null, 2), 'utf8');
+    log('SITEMAP', `sitemaps-metadata.json written (${allFiles.length} files, ${totalPages} pages).`);
+  } catch (e) {
+    log('SITEMAP', `sitemaps-metadata write error: ${e.message}`);
   }
 }
 
@@ -1329,7 +1320,6 @@ function attachInternalLinks(plan) {
     const arr = byCluster[clusterId];
     for (let i = 0; i < arr.length; i++) {
       const current = arr[i].item;
-
       const neighborsIdx = [i - 1, i + 1, i + 2].filter(
         (j) => j >= 0 && j < arr.length
       );
@@ -1346,10 +1336,8 @@ function attachInternalLinks(plan) {
           : 'your state';
         const label = `${neighbor.year} ${String(neighbor.make || '').toUpperCase()} VIN check in ${stateLabel}`;
         links.push({ href: neighbor.url, label });
-
         if (links.length >= 3) break;
       }
-
       current.internalLinks = links;
     }
   }
@@ -1519,4 +1507,3 @@ main().catch((e) => {
 EOF
 
 echo "[SEO-MONSTER 4.0] Done. Run build via: npm run vercel-build (Vercel Pro)."
-
