@@ -234,7 +234,7 @@ STRATEGY GOALS:
 5. Learn from past performance
 
 CONVERSION OPTIMIZATION:
-${aiContext.conversionMetrics.hasConversionData ? `
+${aiContext.conversionMetrics && aiContext.conversionMetrics.hasConversionData ? `
 - Average predicted conversion rate: ${(aiContext.conversionMetrics.avgPredictedRate * 100).toFixed(2)}%
 - Model accuracy: ${(aiContext.conversionMetrics.modelAccuracy * 100).toFixed(1)}%
 - Training samples: ${aiContext.conversionMetrics.trainingSamples}
