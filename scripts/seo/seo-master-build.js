@@ -1,6 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 const { log, error } = require('./logger');
+
+// Загрузка переменных окружения из .env.local (для локальной разработки)
+if (fs.existsSync(path.join(process.cwd(), '.env.local'))) {
+  const envLocal = fs.readFileSync(path.join(process.cwd(), '.env.local'), 'utf8');
+  envLocal.split('\n').forEach(line => {
+    const match = line.match(/^([^=]+)=(.*)$/);
+    if (match && !process.env[match[1].trim()]) {
+      const key = match[1].trim();
+      const value = match[2].trim().replace(/^["']|["']$/g, '');
+      process.env[key] = value;
+    }
+  });
+}
 const { SEOMasterPipeline } = require('./orchestration/seo-master-pipeline');
 const { URLFactory } = require('./orchestration/url-factory');
 const { LayoutEngineAbsolute } = require('./dom/layout-engine-absolute');

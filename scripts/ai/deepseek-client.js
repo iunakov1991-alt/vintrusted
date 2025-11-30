@@ -12,10 +12,11 @@ if (!apiKey) {
   console.warn("[DEEPSEEK] DEEPSEEK_API_KEY не задан — AI-контент работать не будет.");
 }
 
-const deepseekClient = new OpenAI({
+// Создаём клиент только если есть ключ, иначе null
+const deepseekClient = apiKey ? new OpenAI({
   apiKey,
   baseURL,
-});
+}) : null;
 
 /**
  * Базовый вызов DeepSeek chat/completions
