@@ -174,6 +174,10 @@ async function main() {
         // Baseline контент
         const baseline = baselineBlocks.generateBaselineContent(item);
         
+        // Формирование контекста страницы (нужно для промпта)
+        const stateLabel = baselineBlocks.humanizeStateSlug(item.stateSlug);
+        const makeUpper = (item.make || '').toUpperCase();
+        
         // AI augmentation с Tier 1 семантическими требованиями
         const aiPrompt = `You are an expert automotive analyst writing an official DMV-style report combined with antifraud expertise and vehicle history analysis.
 
