@@ -162,20 +162,30 @@ async function getStats(req, res) {
   let conversionStats = null;
   try {
     const { ConversionTracker } = require('../scripts/seo/analytics/conversion-tracker');
-    const conversionTracker = new ConversionTracker(config);
-    conversionStats = conversionTracker.getStatistics();
+    if (ConversionTracker) {
+      const conversionTracker = new ConversionTracker(config);
+      if (conversionTracker && typeof conversionTracker.getStatistics === 'function') {
+        conversionStats = conversionTracker.getStatistics();
+      }
+    }
   } catch (e) {
     console.error('Conversion stats error:', e);
+    // Продолжаем работу без conversion stats
   }
 
   // Conversion Predictor статистика
   let conversionModelStats = null;
   try {
     const { ConversionPredictor } = require('../scripts/seo/analytics/conversion-predictor');
-    const conversionPredictor = new ConversionPredictor(config);
-    conversionModelStats = conversionPredictor.getStatistics();
+    if (ConversionPredictor) {
+      const conversionPredictor = new ConversionPredictor(config);
+      if (conversionPredictor && typeof conversionPredictor.getStatistics === 'function') {
+        conversionModelStats = conversionPredictor.getStatistics();
+      }
+    }
   } catch (e) {
     console.error('Conversion model stats error:', e);
+    // Продолжаем работу без conversion model stats
   }
 
   // AI рекомендации
@@ -189,23 +199,35 @@ async function getStats(req, res) {
     }
   } catch (e) {
     console.error('AI recommendation error:', e);
-    console.error('AI recommendation error stack:', e.stack);
+    // Продолжаем работу без AI рекомендаций
   }
 
   // Безопасная обработка avgQuality (перед использованием)
   const safeAvgQuality = typeof avgQuality === 'number' ? avgQuality : parseFloat(avgQuality) || 0;
 
   // Рекомендации (используем safeAvgQuality)
-  const recommendations = generateRecommendations(dashboard, rlState, config, {
-    totalPages: totalPages || 0,
-    avgQuality: safeAvgQuality,
-    acceptedPages: acceptedPages || 0,
-    rejectedPages: rejectedPages || 0,
-    totalGenerated: totalGenerated || 0
-  }, aiRecommendation);
+  let recommendations = [];
+  try {
+    recommendations = generateRecommendations(dashboard, rlState, config, {
+      totalPages: totalPages || 0,
+      avgQuality: safeAvgQuality,
+      acceptedPages: acceptedPages || 0,
+      rejectedPages: rejectedPages || 0,
+      totalGenerated: totalGenerated || 0
+    }, aiRecommendation);
+  } catch (e) {
+    console.error('Error generating recommendations:', e);
+    recommendations = [];
+  }
 
   // Оптимальное расписание
-  const schedule = calculateOptimalSchedule(dashboard, config);
+  let schedule = {};
+  try {
+    schedule = calculateOptimalSchedule(dashboard, config);
+  } catch (e) {
+    console.error('Error calculating schedule:', e);
+    schedule = {};
+  }
 
   return res.json({
     stats: {
