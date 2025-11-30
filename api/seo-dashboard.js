@@ -171,16 +171,7 @@ async function getStats(req, res) {
     console.error('AI recommendation error:', e);
   }
 
-  // Рекомендации
-  const recommendations = generateRecommendations(dashboard, rlState, config, {
-    totalPages: totalPages || 0,
-    avgQuality: safeAvgQuality,
-    acceptedPages: acceptedPages || 0,
-    rejectedPages: rejectedPages || 0,
-    totalGenerated: totalGenerated || 0
-  }, aiRecommendation);
-
-  // Безопасная обработка avgQuality (перед использованием в recommendations)
+  // Безопасная обработка avgQuality (перед использованием)
   const safeAvgQuality = typeof avgQuality === 'number' ? avgQuality : parseFloat(avgQuality) || 0;
 
   // Рекомендации (используем safeAvgQuality)
@@ -765,8 +756,24 @@ function generateRecommendations(dashboard, rlState, config, stats, aiRecommenda
  * Расчет оптимального расписания
  */
 function calculateOptimalSchedule(dashboard, config) {
-  const lastBuild = dashboard.lastBuild || {};
-  const lastBuildTime = lastBuild.timestamp ? new Date(lastBuild.timestamp) : null;
+  // Безопасная обработка входных данных
+  const safeDashboard = dashboard || {};
+  const safeConfig = config || {};
+  
+  const lastBuild = safeDashboard.lastBuild || {};
+  let lastBuildTime = null;
+  
+  try {
+    if (lastBuild.timestamp) {
+      lastBuildTime = new Date(lastBuild.timestamp);
+      // Проверка на валидную дату
+      if (isNaN(lastBuildTime.getTime())) {
+        lastBuildTime = null;
+      }
+    }
+  } catch (e) {
+    lastBuildTime = null;
+  }
   
   const now = new Date();
   const hoursSinceLastBuild = lastBuildTime 
