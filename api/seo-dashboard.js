@@ -696,18 +696,19 @@ function generateRecommendations(dashboard, rlState, config, stats, aiRecommenda
   }
 
   // Анализ количества страниц
-  if (stats.totalPages < 100) {
+  const totalPages = safeStats.totalPages || 0;
+  if (totalPages > 0 && totalPages < 100) {
     suggestions.push({
       type: 'volume',
       level: 'info',
       title: 'Мало страниц для эффективного обучения',
-      message: `Текущее количество: ${stats.totalPages}. Для лучшего обучения рекомендуется 100+ страниц.`,
+      message: `Текущее количество: ${totalPages}. Для лучшего обучения рекомендуется 100+ страниц.`,
       action: 'Запустите билд для генерации большего количества страниц.'
     });
   }
 
   // Анализ layout весов
-  const layouts = rlState.layoutWeights || {};
+  const layouts = safeRlState.layoutWeights || {};
   const layoutEntries = Object.entries(layouts);
   if (layoutEntries.length > 0) {
     const bestLayout = layoutEntries.sort((a, b) => b[1] - a[1])[0];
