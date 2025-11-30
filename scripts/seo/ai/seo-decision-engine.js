@@ -193,6 +193,7 @@ class SEODecisionEngine {
     }
 
     // Формируем контекст для AI
+    // Важно: conversionMetrics должен быть установлен ПОСЛЕ ...context, чтобы не перезаписаться
     const aiContext = {
       existingPages: existing.totalPages,
       pagesByState: existing.pagesByState,
@@ -204,7 +205,6 @@ class SEODecisionEngine {
         trend: buildMetrics.trend,
         recentBuildsCount: buildMetrics.recentBuilds.length
       },
-      conversionMetrics: conversionMetrics,
       gscMetrics: gscMetrics ? {
         totalClicks: gscMetrics.totalClicks,
         avgCTR: gscMetrics.avgCTR,
@@ -221,7 +221,9 @@ class SEODecisionEngine {
         languagesCount: Object.keys(rlState.languageWeights || {}).length,
         lastUpdated: rlState.lastUpdated
       },
-      ...context
+      ...context,
+      // Устанавливаем conversionMetrics ПОСЛЕ ...context, чтобы гарантировать его наличие
+      conversionMetrics: conversionMetrics || (context.conversionMetrics || null)
     };
 
     // AI промпт для принятия решения
