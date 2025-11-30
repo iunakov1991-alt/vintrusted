@@ -215,9 +215,17 @@
       "source": "/seo/sitemaps/:file*",
       "destination": "/api/seo-sitemap.js?file=:file*"
     },
-    {
-      "source": "/seo/images/clusters/:file*",
-      "destination": "/api/seo-image.js"
-    }
+      {
+        "source": "/seo/images/clusters/:file*",
+        "destination": "/api/seo-image.js"
+      },
+      {
+        "source": "/api/seo-dashboard",
+        "destination": "/api/seo-dashboard.js"
+      },
+      {
+        "source": "/seo-dashboard",
+        "destination": "/seo-dashboard.html"
+      }
   ]
 }

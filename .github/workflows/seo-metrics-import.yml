@@ -1,0 +1,71 @@
+name: SEO Metrics Import (Weekly)
+
+on:
+  schedule:
+    # Каждый понедельник в 2:00 UTC (можно настроить)
+    - cron: '0 2 * * 1'
+  workflow_dispatch: # Позволяет запускать вручную
+
+jobs:
+  import-metrics:
+    runs-on: ubuntu-latest
+    name: Import GSC and GA Metrics
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Check for GSC data
+        id: check-gsc
+        run: |
+          if [ -f "${{ secrets.GSC_DATA_PATH }}" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+      
+      - name: Import GSC data (if available)
+        if: steps.check-gsc.outputs.exists == 'true'
+        run: |
+          echo "GSC data import would run here"
+          echo "Place your GSC export file in repository and update path"
+          # node scripts/seo/utils/gsc-import.js --csv path/to/gsc-export.csv
+        continue-on-error: true
+      
+      - name: Check for GA data
+        id: check-ga
+        run: |
+          if [ -f "${{ secrets.GA_DATA_PATH }}" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+      
+      - name: Import GA data (if available)
+        if: steps.check-ga.outputs.exists == 'true'
+        run: |
+          echo "GA data import would run here"
+          echo "Place your GA export file in repository and update path"
+          # node scripts/seo/utils/metrics-import.js --csv path/to/ga-export.csv
+        continue-on-error: true
+      
+      - name: Commit and push if data changed
+        if: always()
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/seo/*.json || true
+          git diff --staged --quiet || git commit -m "Auto: Update SEO metrics from GSC/GA import"
+          git push || true
+
