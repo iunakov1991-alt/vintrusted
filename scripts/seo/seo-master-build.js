@@ -175,7 +175,6 @@ async function main() {
         const baseline = baselineBlocks.generateBaselineContent(item);
         
         // AI augmentation с Tier 1 семантическими требованиями
-        const stateLabel = baselineBlocks.humanizeStateSlug(item.stateSlug);
         const aiPrompt = `You are an expert automotive analyst writing an official DMV-style report combined with antifraud expertise and vehicle history analysis.
 
 TONE & STYLE:
@@ -208,6 +207,9 @@ REQUIREMENTS:
 8. Focus on patterns, probabilities, and professional insights
 
 Write a comprehensive, expert-level analysis about "${item.intent}" that feels like an official report from a DMV analyst + antifraud specialist + automotive expert.`;
+        
+        // Формирование контекста страницы (stateLabel используется в промпте выше)
+        const stateLabel = baselineBlocks.humanizeStateSlug(item.stateSlug);
         const aiText = await aiAugmentation.generateText(aiPrompt, {
           lang: item.lang,
           intent: item.intent,
@@ -216,9 +218,6 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
 
         // Выбор layout
         const layout = layoutEngine.selectLayout(item, rlState.layoutWeights);
-
-        // Формирование контекста страницы
-        const stateLabel = baselineBlocks.humanizeStateSlug(item.stateSlug);
         const makeUpper = (item.make || '').toUpperCase();
         
         return {
