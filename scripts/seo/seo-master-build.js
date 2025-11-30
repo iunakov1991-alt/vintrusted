@@ -157,6 +157,24 @@ async function main() {
       log('STAGE', `Pre-build check completed. Status: ${diagnosis.status}, Score: ${diagnosis.score}`);
     });
 
+    // Этап 0.5: AI Decision - определение количества страниц
+    const { SEODecisionEngine } = require('./ai/seo-decision-engine');
+    const decisionEngine = new SEODecisionEngine(config);
+    let aiDecision = null;
+    
+    pipeline.registerStage('ai-decision', async (ctx) => {
+      log('STAGE', 'AI Decision Engine');
+      aiDecision = await decisionEngine.makeDecision();
+      log('AI-DECISION', `AI decided: ${aiDecision.targetPages} pages, strategy: ${aiDecision.strategy}, confidence: ${aiDecision.confidence.toFixed(2)}`);
+      log('AI-DECISION', `Reasoning: ${aiDecision.reasoning}`);
+      
+      // Временно обновляем config для этого билда
+      const originalTarget = config.targetPagesPerBuild;
+      config.targetPagesPerBuild = aiDecision.targetPages;
+      ctx.aiDecision = aiDecision;
+      ctx.originalTarget = originalTarget;
+    });
+
     // Этап 1: Планирование URL
     pipeline.registerStage('url-planning', async (ctx) => {
       log('STAGE', 'URL Planning');
@@ -462,10 +480,29 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       clusters: result.clusters?.length || 0,
       uniquePages: result.pages.length,
       aiEnabled: config.enableAI && (!!process.env.GROQ_API_KEY || !!process.env.DEEPSEEK_API_KEY),
+      aiDecision: aiDecision ? {
+        targetPages: aiDecision.targetPages,
+        strategy: aiDecision.strategy,
+        confidence: aiDecision.confidence
+      } : null,
       config: config
     };
     
     buildHistory.recordBuild(buildData);
+
+    // Обновление производительности AI решения (обучение)
+    if (aiDecision && aiDecision.timestamp) {
+      decisionEngine.updatePerformance(aiDecision.timestamp, {
+        pagesGenerated: result.pages.length,
+        pagesAccepted: result.acceptedPages.length,
+        avgQuality: result.avgQuality || 0
+      });
+    }
+
+    // Восстановление оригинального target
+    if (result.originalTarget !== undefined) {
+      config.targetPagesPerBuild = result.originalTarget;
+    }
 
     // Генерация дашборда
     const dashboardData = dashboard.generateDashboardData(buildData);

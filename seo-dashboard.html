@@ -436,11 +436,27 @@
       document.getElementById('avgQuality').textContent = (avgQuality * 100).toFixed(1) + '%';
       document.getElementById('qualityBar').style.width = (avgQuality * 100) + '%';
 
+      // AI рекомендация (обновляем кнопку)
+      if (data.aiRecommendation && data.aiRecommendation.shouldBuild) {
+        const btn = document.getElementById('buildBtn');
+        const urgency = data.aiRecommendation.urgency;
+        if (urgency === 'high') {
+          btn.style.background = 'linear-gradient(135deg, #f5576c 0%, #f093fb 100%)';
+          btn.textContent = `🚀 ${data.aiRecommendation.targetPages} страниц (AI рекомендует)`;
+        } else if (urgency === 'medium') {
+          btn.style.background = 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)';
+          btn.textContent = `▶ ${data.aiRecommendation.targetPages} страниц (AI рекомендует)`;
+        } else {
+          btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+          btn.textContent = `▶ Запустить билд (${data.aiRecommendation.targetPages} страниц)`;
+        }
+      }
+
       // Расписание
       renderSchedule(data.schedule || {});
 
       // Рекомендации
-      renderRecommendations(data.recommendations || {});
+      renderRecommendations(data.recommendations || {}, data.aiRecommendation);
 
       // Топ страниц
       renderTopPages(stats.topPages || []);
@@ -485,7 +501,7 @@
     }
 
     // Рендеринг рекомендаций
-    function renderRecommendations(recs) {
+    function renderRecommendations(recs, aiRec = null) {
       const container = document.getElementById('recommendations');
       
       let html = '';

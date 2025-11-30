@@ -3,6 +3,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const { promisify } = require('util');
 const execAsync = promisify(exec);
+const { SEODecisionEngine } = require('../scripts/seo/ai/seo-decision-engine');
 
 /**
  * SEO Dashboard API
@@ -141,13 +142,22 @@ async function getStats(req, res) {
     topPages = [];
   }
 
+  // AI рекомендации
+  let aiRecommendation = null;
+  try {
+    const decisionEngine = new SEODecisionEngine(config);
+    aiRecommendation = await decisionEngine.getDashboardRecommendation();
+  } catch (e) {
+    console.error('AI recommendation error:', e);
+  }
+
   // Рекомендации
   const recommendations = generateRecommendations(dashboard, rlState, config, {
     totalPages,
     avgQuality,
     acceptedPages,
     rejectedPages
-  });
+  }, aiRecommendation);
 
   // Оптимальное расписание
   const schedule = calculateOptimalSchedule(dashboard, config);
