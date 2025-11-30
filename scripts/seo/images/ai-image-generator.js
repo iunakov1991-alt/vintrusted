@@ -285,18 +285,20 @@ Generate the complete, sophisticated SVG code with proper structure, gradients, 
   generateSVGImage(stateSlug, make, intent, type, width, height) {
     // Генерируем уникальный цвет на основе параметров кластера
     const hash = this.hashString(`${stateSlug}-${make}-${intent}`);
-    const hue = hash % 360;
     
-    // Более профессиональная цветовая палитра (синие, серые, темно-синие тона)
-    const professionalHue = (hue + 200) % 360; // Сдвигаем к синим/серым тонам
-    const saturation = 25 + (hash % 15); // 25-40% - более приглушенные
-    const lightness = type === 'hero' ? 92 : 88; // Очень светлые тона для документального стиля
+    // ЖЕСТКО фиксируем профессиональную сине-серую палитру (НЕ зеленую!)
+    // Синие тона: 200-240, серые: низкая насыщенность
+    const baseHue = 210; // Синий цвет (не зеленый!)
+    const hueVariation = (hash % 30); // Вариация 0-30 градусов (210-240 = синие тона)
+    const professionalHue = baseHue + hueVariation;
+    const saturation = 20 + (hash % 10); // 20-30% - очень приглушенные (серые тона)
+    const lightness = type === 'hero' ? 94 : 90; // Очень светлые тона для документального стиля
 
-    // Профессиональная цветовая палитра (сине-серые тона)
+    // Профессиональная цветовая палитра (ТОЛЬКО сине-серые тона, НЕ зеленые!)
     const primaryColor = `hsl(${professionalHue}, ${saturation}%, ${lightness}%)`;
-    const secondaryColor = `hsl(${(professionalHue + 20) % 360}, ${Math.max(15, saturation - 5)}%, ${Math.min(95, lightness + 2)}%)`;
-    const accentColor = `hsl(${(professionalHue + 40) % 360}, ${Math.max(20, saturation - 3)}%, ${Math.max(70, lightness - 8)}%)`;
-    const darkAccent = `hsl(${professionalHue}, ${Math.min(50, saturation + 10)}%, ${Math.max(60, lightness - 15)}%)`;
+    const secondaryColor = `hsl(${professionalHue + 15}, ${Math.max(15, saturation - 3)}%, ${Math.min(96, lightness + 1)}%)`;
+    const accentColor = `hsl(${professionalHue + 25}, ${Math.max(25, saturation + 5)}%, ${Math.max(75, lightness - 10)}%)`;
+    const darkAccent = `hsl(${professionalHue}, ${Math.min(45, saturation + 15)}%, ${Math.max(65, lightness - 20)}%)`;
 
     // Геометрические паттерны для уникальности
     const patternSeed = hash % 4;
@@ -338,6 +340,55 @@ Generate the complete, sophisticated SVG code with proper structure, gradients, 
 
     // Конвертируем SVG в Buffer
     return Buffer.from(svg, 'utf8');
+  }
+
+  /**
+   * Генерация линий документов (абстрактные горизонтальные линии)
+   */
+  generateDocumentLines(width, height, color, hash) {
+    const lines = [];
+    const lineCount = 8 + (hash % 5);
+    const spacing = height / (lineCount + 1);
+    
+    for (let i = 1; i <= lineCount; i++) {
+      const y = i * spacing + (hash % 10);
+      const length = width * (0.6 + (hash % 20) / 100);
+      const x = (width - length) / 2;
+      const opacity = 0.08 + (hash % 5) * 0.02;
+      lines.push(`<line x1="${x}" y1="${y}" x2="${x + length}" y2="${y}" stroke="${color}" stroke-width="1" opacity="${opacity}" />`);
+    }
+    return lines.join('\n  ');
+  }
+
+  /**
+   * Генерация абстрактных автомобильных элементов (круги как колеса, линии как дорога)
+   */
+  generateAutomotiveElements(width, height, color, hash) {
+    const elements = [];
+    const centerX = width / 2;
+    const centerY = height / 2;
+    
+    // Абстрактные "колеса" - круги
+    const wheelSize = Math.min(width, height) * 0.15;
+    const wheelY = centerY + (hash % 50) - 25;
+    const leftWheelX = centerX - width * 0.25;
+    const rightWheelX = centerX + width * 0.25;
+    
+    elements.push(`<circle cx="${leftWheelX}" cy="${wheelY}" r="${wheelSize}" fill="none" stroke="${color}" stroke-width="2" opacity="0.12" />`);
+    elements.push(`<circle cx="${rightWheelX}" cy="${wheelY}" r="${wheelSize}" fill="none" stroke="${color}" stroke-width="2" opacity="0.12" />`);
+    elements.push(`<circle cx="${leftWheelX}" cy="${wheelY}" r="${wheelSize * 0.6}" fill="none" stroke="${color}" stroke-width="1" opacity="0.08" />`);
+    elements.push(`<circle cx="${rightWheelX}" cy="${wheelY}" r="${wheelSize * 0.6}" fill="none" stroke="${color}" stroke-width="1" opacity="0.08" />`);
+    
+    // Абстрактная "дорога" - горизонтальная линия
+    elements.push(`<line x1="${width * 0.1}" y1="${wheelY}" x2="${width * 0.9}" y2="${wheelY}" stroke="${color}" stroke-width="1.5" opacity="0.1" />`);
+    
+    // Вертикальные линии как элементы документов
+    for (let i = 0; i < 3; i++) {
+      const x = width * (0.2 + i * 0.2) + (hash % 20);
+      elements.push(`<line x1="${x}" y1="${height * 0.2}" x2="${x}" y2="${height * 0.8}" stroke="${color}" stroke-width="0.5" opacity="0.06" />`);
+    }
+    
+    return elements.join('\n  ');
   }
 
   /**
