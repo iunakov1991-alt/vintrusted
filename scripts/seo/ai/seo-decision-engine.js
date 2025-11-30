@@ -264,16 +264,19 @@ STRATEGY GOALS (PRIORITY ORDER):
 IMPORTANT: These are SEO landing pages. The PRIMARY goal is to make Google love them so much that it drives massive traffic. Conversion optimization is SECONDARY - first we need traffic from Google.
 
 CONVERSION OPTIMIZATION:
-${(aiContext.conversionMetrics && 
-  typeof aiContext.conversionMetrics === 'object' &&
-  aiContext.conversionMetrics.hasConversionData !== undefined && 
-  aiContext.conversionMetrics.hasConversionData) ? `
-- Average predicted conversion rate: ${(aiContext.conversionMetrics.avgPredictedRate * 100).toFixed(2)}%
-- Model accuracy: ${(aiContext.conversionMetrics.modelAccuracy * 100).toFixed(1)}%
-- Training samples: ${aiContext.conversionMetrics.trainingSamples}
+${(() => {
+  const cm = aiContext.conversionMetrics;
+  if (cm && typeof cm === 'object' && cm !== null && cm.hasConversionData !== undefined && cm.hasConversionData) {
+    return `
+- Average predicted conversion rate: ${((cm.avgPredictedRate || 0) * 100).toFixed(2)}%
+- Model accuracy: ${((cm.modelAccuracy || 0) * 100).toFixed(1)}%
+- Training samples: ${cm.trainingSamples || 0}
 - Focus on pages with HIGH predicted conversion rates
 - Prioritize quality over quantity when conversion data is available
-` : '- No conversion data yet - focus on quality and traffic first'}
+`;
+  }
+  return '- No conversion data yet - focus on quality and traffic first';
+})()}
 
 DECISION RULES:
 - If pages < 100: Aggressive growth (15000-20000 pages) to establish presence

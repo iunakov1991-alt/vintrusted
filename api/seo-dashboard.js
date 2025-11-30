@@ -182,41 +182,44 @@ async function getStats(req, res) {
   // Оптимальное расписание
   const schedule = calculateOptimalSchedule(dashboard, config);
 
+  // Безопасная обработка avgQuality
+  const safeAvgQuality = typeof avgQuality === 'number' ? avgQuality : parseFloat(avgQuality) || 0;
+
   return res.json({
     stats: {
-      totalPages,
-      pagesByState,
+      totalPages: totalPages || 0,
+      pagesByState: pagesByState || {},
       lastBuild: {
-        timestamp: lastBuild.timestamp,
-        pagesGenerated: totalGenerated,
-        pagesAccepted: acceptedPages,
-        pagesRejected: rejectedPages,
-        avgQuality: avgQuality.toFixed(3),
+        timestamp: lastBuild.timestamp || null,
+        pagesGenerated: totalGenerated || 0,
+        pagesAccepted: acceptedPages || 0,
+        pagesRejected: rejectedPages || 0,
+        avgQuality: safeAvgQuality.toFixed(3),
         qualityBreakdown: lastBuild.qualityBreakdown || {}
       },
-      topPages,
+      topPages: topPages || [],
       rlState: {
         intents: Object.keys(rlState.intentWeights || {}).length,
         languages: Object.keys(rlState.languageWeights || {}).length,
         layouts: Object.keys(rlState.layoutWeights || {}).length,
-        lastUpdated: rlState.lastUpdated
+        lastUpdated: rlState.lastUpdated || null
       }
     },
-    recommendations,
-    schedule,
+    recommendations: recommendations || [],
+    schedule: schedule || {},
     conversion: conversionStats ? {
-      totalConversions: conversionStats.totalConversions,
-      totalRevenue: conversionStats.totalRevenue,
-      avgConversionRate: conversionStats.avgConversionRate,
-      pagesWithConversions: conversionStats.pagesWithConversions,
-      topConvertingPages: conversionStats.topConvertingPages
+      totalConversions: conversionStats.totalConversions || 0,
+      totalRevenue: conversionStats.totalRevenue || 0,
+      avgConversionRate: conversionStats.avgConversionRate || 0,
+      pagesWithConversions: conversionStats.pagesWithConversions || 0,
+      topConvertingPages: conversionStats.topConvertingPages || []
     } : null,
     conversionModel: conversionModelStats ? {
-      accuracy: conversionModelStats.accuracy,
-      trainingSamples: conversionModelStats.trainingSamples,
-      avgPredictedRate: conversionModelStats.avgPredictedRate,
-      avgActualRate: conversionModelStats.avgActualRate,
-      lastTrained: conversionModelStats.lastTrained
+      accuracy: conversionModelStats.accuracy || 0,
+      trainingSamples: conversionModelStats.trainingSamples || 0,
+      avgPredictedRate: conversionModelStats.avgPredictedRate || 0,
+      avgActualRate: conversionModelStats.avgActualRate || 0,
+      lastTrained: conversionModelStats.lastTrained || null
     } : null,
     aiRecommendation: aiRecommendation ? {
       shouldBuild: aiRecommendation.shouldBuild,
