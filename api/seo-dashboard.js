@@ -260,6 +260,43 @@ async function getStats(req, res) {
       semanticWeight: config.semanticRequirements?.semanticWeightInQuality || 0.20
     }
   });
+  } catch (error) {
+    console.error('Error in getStats:', error);
+    console.error('Error stack:', error.stack);
+    return res.status(500).json({ 
+      error: 'Failed to get stats',
+      message: error.message,
+      stats: {
+        totalPages: 0,
+        pagesByState: {},
+        lastBuild: {
+          timestamp: null,
+          pagesGenerated: 0,
+          pagesAccepted: 0,
+          pagesRejected: 0,
+          avgQuality: '0.000',
+          qualityBreakdown: {}
+        },
+        topPages: [],
+        rlState: {
+          intents: 0,
+          languages: 0,
+          layouts: 0,
+          lastUpdated: null
+        }
+      },
+      recommendations: [],
+      schedule: {},
+      conversion: null,
+      conversionModel: null,
+      aiRecommendation: null,
+      config: {
+        targetPages: 10000,
+        minQuality: 0.70,
+        semanticWeight: 0.20
+      }
+    });
+  }
 }
 
 /**
