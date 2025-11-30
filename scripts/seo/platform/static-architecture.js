@@ -10,15 +10,8 @@ const { log } = require('../logger');
 class StaticArchitecture {
   constructor(config) {
     this.config = config;
-    // На Vercel используем .vercel/output/static, локально - public/vin
-    const isVercel = !!(process.env.VERCEL || process.env.VERCEL_ENV);
-    if (isVercel && process.env.VERCEL) {
-      // Build Output API путь
-      this.outputRoot = path.join(process.cwd(), '.vercel', 'output', 'static', 'vin');
-    } else {
-      // Локальный путь
-      this.outputRoot = path.join(process.cwd(), 'public', 'vin');
-    }
+    // Всегда используем public/vin - Vercel обрабатывает public/ после vercel-build
+    this.outputRoot = path.join(process.cwd(), 'public', 'vin');
   }
 
   /**
