@@ -1,0 +1,138 @@
+{
+  "timestamp": "2025-11-30T10:13:12.142Z",
+  "currentBuild": {
+    "buildId": "local",
+    "pagesGenerated": 16,
+    "pagesAccepted": 11,
+    "avgQuality": 0.7704687499999998,
+    "duration": 143,
+    "clusters": 6,
+    "uniquePages": 16,
+    "aiEnabled": false,
+    "config": {
+      "version": "6.0",
+      "targetPagesPerBuild": 10000,
+      "maxPagesPerCluster": 500,
+      "minQualityScore": 0.75,
+      "enableAI": true,
+      "aiMaxTokens": 800,
+      "aiProviders": [
+        "groq",
+        "deepseek",
+        "openai"
+      ],
+      "languages": [
+        "en",
+        "es"
+      ],
+      "defaultLanguage": "en",
+      "intents": [
+        "vin_check",
+        "accident_check",
+        "ownership_history",
+        "market_value",
+        "dmv_records",
+        "title_brand",
+        "odometer_rollback",
+        "theft_records"
+      ],
+      "layoutCount": 9,
+      "minLayoutVariety": 6,
+      "uniquenessThreshold": 0.85,
+      "internalLinksPerPage": {
+        "min": 1,
+        "max": 3
+      },
+      "crawlBudget": {
+        "highPriority": 0.4,
+        "mediumPriority": 0.4,
+        "lowPriority": 0.2
+      },
+      "autoRepair": {
+        "enabled": true,
+        "minQualityForRepair": 0.6,
+        "regenerationThreshold": 0.5
+      },
+      "googleAnalyticsId": "G-CX3CT2K2FC"
+    }
+  },
+  "lastBuild": {
+    "timestamp": "2025-11-30T10:13:12.140Z",
+    "buildId": "local",
+    "pagesGenerated": 16,
+    "pagesAccepted": 11,
+    "avgQuality": 0.7704687499999998,
+    "duration": 143,
+    "clusters": 6,
+    "uniquePages": 16,
+    "aiEnabled": false,
+    "config": {
+      "targetPages": 10000,
+      "maxPagesPerCluster": 500,
+      "minQualityScore": 0.75
+    }
+  },
+  "comparison": {
+    "pagesGenerated": {
+      "current": 16,
+      "previous": 16,
+      "change": 0
+    },
+    "pagesAccepted": {
+      "current": 11,
+      "previous": 11,
+      "change": 0
+    },
+    "avgQuality": {
+      "current": 0.7704687499999998,
+      "previous": 0.7704687499999998,
+      "change": 0
+    },
+    "duration": {
+      "current": 143,
+      "previous": 143,
+      "change": 0
+    }
+  },
+  "statistics": {
+    "totalBuilds": 1,
+    "avgPagesGenerated": 16,
+    "avgPagesAccepted": 11,
+    "avgQuality": 0.7704687499999998,
+    "avgDuration": 143,
+    "successRate": 1
+  },
+  "recentBuilds": [
+    {
+      "timestamp": "2025-11-30T10:13:12.140Z",
+      "buildId": "local",
+      "pagesGenerated": 16,
+      "pagesAccepted": 11,
+      "avgQuality": 0.7704687499999998,
+      "duration": 143,
+      "clusters": 6,
+      "uniquePages": 16,
+      "aiEnabled": false,
+      "config": {
+        "targetPages": 10000,
+        "maxPagesPerCluster": 500,
+        "minQualityScore": 0.75
+      }
+    }
+  ],
+  "trends": null,
+  "health": {
+    "score": 90,
+    "issues": [
+      "Low acceptance rate"
+    ],
+    "status": "healthy"
+  },
+  "recommendations": [
+    {
+      "type": "acceptance",
+      "priority": "medium",
+      "message": "Low page acceptance rate. Review quality scoring criteria."
+    }
+  ]
+}

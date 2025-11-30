@@ -164,10 +164,12 @@ class TemplateEngine {
       'View complete report'
     ];
     const ctaText = ctaTexts[Math.floor(Math.random() * ctaTexts.length)];
+    const vin = ctx.vin || '';
+    const href = vin ? `/?vin=${encodeURIComponent(vin)}` : '/';
     
     return `
       <section class="cta">
-        <a href="/checkout" class="btn-primary">${this.escapeHtml(ctaText)}</a>
+        <a href="${href}" class="btn-primary">${this.escapeHtml(ctaText)}</a>
       </section>`;
   }
 
