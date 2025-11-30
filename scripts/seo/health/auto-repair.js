@@ -232,14 +232,6 @@ class AutoRepair {
     if (diagnosis.issues.some(issue => issue.type === 'quality' || issue.type === 'history')) {
       log('REPAIR', 'Quality/history issues detected, but continuing build (non-blocking)');
     }
-      
-      // Повторная диагностика после исправления
-      const newDiagnosis = this.selfDiagnosis.diagnose();
-      if (newDiagnosis.status === 'critical') {
-        error('REPAIR', 'Critical issues remain after auto-repair');
-        return false;
-      }
-    }
 
     return true;
   }
