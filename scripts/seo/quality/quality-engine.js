@@ -54,12 +54,29 @@ class QualityEngine {
     const uniqueWords = new Set(text.toLowerCase().split(/\s+/));
     const diversityScore = Math.min(1, uniqueWords.size / 200);
 
+    // 5. Semantic coverage score (Tier 1 themes) (0-1)
+    const tier1Keywords = [
+      'vin structure', 'model lineage', 'recalls', 'manufacturing',
+      'accident', 'frame damage', 'salvage', 'rebuilt', 'airbag', 'inspection',
+      'ownership', 'fleet', 'rental', 'personal use', 'title transfer',
+      'odometer', 'mileage', 'fraud', 'rollback',
+      'curbstoning', 'title washing', 'cloned', 'fake vin',
+      'state specific', 'dmv', 'emissions', 'smog', 'title brand'
+    ];
+    let semanticHits = 0;
+    const textLower = text.toLowerCase();
+    for (const kw of tier1Keywords) {
+      if (textLower.includes(kw)) semanticHits++;
+    }
+    const semanticScore = Math.min(1, semanticHits / tier1Keywords.length);
+
     // Итоговый score
     const score = (
-      0.25 * lenScore +
-      0.30 * structureScore +
-      0.25 * keywordScore +
-      0.20 * diversityScore
+      0.20 * lenScore +
+      0.25 * structureScore +
+      0.20 * keywordScore +
+      0.15 * diversityScore +
+      0.20 * semanticScore  // Новый фактор: семантическое покрытие Tier 1
     );
 
     return {
@@ -68,7 +85,8 @@ class QualityEngine {
         length: lenScore,
         structure: structureScore,
         keywords: keywordScore,
-        diversity: diversityScore
+        diversity: diversityScore,
+        semantic: semanticScore
       },
       isAccepted: score >= this.minScore
     };

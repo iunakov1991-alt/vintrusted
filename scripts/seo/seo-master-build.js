@@ -174,8 +174,40 @@ async function main() {
         // Baseline контент
         const baseline = baselineBlocks.generateBaselineContent(item);
         
-        // AI augmentation
-        const aiPrompt = `Write a detailed but generic explanation about "${item.intent}" for a vehicle VIN report in ${baselineBlocks.humanizeStateSlug(item.stateSlug)}. Focus on why this check matters, what buyers should pay attention to, and how it fits into a full history report. Never fabricate specific accidents or records.`;
+        // AI augmentation с Tier 1 семантическими требованиями
+        const stateLabel = baselineBlocks.humanizeStateSlug(item.stateSlug);
+        const aiPrompt = `You are an expert automotive analyst writing an official DMV-style report combined with antifraud expertise and vehicle history analysis.
+
+TONE & STYLE:
+- Official document style (DMV × LegalTech × Expert Analyst)
+- Professional, authoritative, analytical
+- Not just informative — ANALYZE, WARN, TEACH, COMPARE, DRAW CONCLUSIONS
+- Each VIN is a story, risk profile, state context, purchase logic, and legal nuance
+- This is not just text — it's a professional micro-report
+
+REQUIRED SEMANTIC COVERAGE (Tier 1 - all must be addressed naturally):
+1. Vehicle Identity Core: VIN structure and decoding, model lineage, year-specific factory issues, typical mileage ranges, known recalls for this generation
+2. Accident & Damage Intelligence: Most common accident types for this model, frame damage explanation, airbag deployment logic, salvage vs rebuilt vs junk title differences, state inspection rules
+3. Ownership Logic: Ownership timeline analysis, high-risk ownership patterns, fleet vs rental vs personal use indicators, insurance claim probability
+4. State-Specific Automotive Rules: Title transfer laws and procedures in ${stateLabel}, smog/emissions testing requirements, odometer fraud risk by state, rebuilt title procedures, flood-risk regions
+5. Fraud Prevention: Fake VIN patterns and detection, auction fraud warning signs, mileage rollback techniques and detection, canceled insurance tricks, curbstoning warning signs
+
+CONTEXT:
+- Vehicle: ${item.year || ''} ${(item.make || '').toUpperCase()} in ${stateLabel}
+- Intent: ${item.intent || 'vin_check'}
+- State: ${stateLabel}
+
+REQUIREMENTS:
+1. Cover ALL Tier 1 semantic themes naturally in the content
+2. Provide deep analysis, not just facts
+3. Include warnings and risk assessments
+4. Compare and contrast different scenarios
+5. Give clear, actionable conclusions
+6. Use expert terminology appropriately
+7. Never fabricate specific accidents or records
+8. Focus on patterns, probabilities, and professional insights
+
+Write a comprehensive, expert-level analysis about "${item.intent}" that feels like an official report from a DMV analyst + antifraud specialist + automotive expert.`;
         const aiText = await aiAugmentation.generateText(aiPrompt, {
           lang: item.lang,
           intent: item.intent,

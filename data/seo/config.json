@@ -35,5 +35,17 @@
     "minQualityForRepair": 0.6,
     "regenerationThreshold": 0.5
   },
-  "googleAnalyticsId": "G-CX3CT2K2FC"
+  "googleAnalyticsId": "G-CX3CT2K2FC",
+  "semanticRequirements": {
+    "tier1Required": true,
+    "tier1Themes": [
+      "vehicle-identity-core",
+      "accident-damage-intelligence",
+      "ownership-logic",
+      "state-specific-rules",
+      "fraud-prevention"
+    ],
+    "minTier1Coverage": 0.8,
+    "semanticWeightInQuality": 0.20
+  }
 }
