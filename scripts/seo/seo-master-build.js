@@ -20,6 +20,37 @@ const { InternalLinksEngine } = require('./links/internal-links-engine');
  * Полная интеграция всех модулей
  */
 async function main() {
+  // Защита от множественных запусков на Vercel
+  const lockFile = path.join(process.cwd(), '.seo-build.lock');
+  const lockTimeout = 30000; // 30 секунд
+  
+  if (fs.existsSync(lockFile)) {
+    const lockData = JSON.parse(fs.readFileSync(lockFile, 'utf8'));
+    const lockAge = Date.now() - lockData.timestamp;
+    
+    if (lockAge < lockTimeout) {
+      log('MASTER', `SEO build already running (lock age: ${lockAge}ms), skipping...`);
+      return;
+    } else {
+      // Старый lock, удаляем
+      fs.unlinkSync(lockFile);
+      log('MASTER', 'Removed stale lock file');
+    }
+  }
+  
+  // Создаем lock файл
+  fs.writeFileSync(lockFile, JSON.stringify({ 
+    timestamp: Date.now(),
+    pid: process.pid 
+  }), 'utf8');
+  
+  // Удаляем lock при завершении
+  process.on('exit', () => {
+    if (fs.existsSync(lockFile)) {
+      fs.unlinkSync(lockFile);
+    }
+  });
+  
   const startedAt = new Date().toISOString();
   const startMs = Date.now();
 
@@ -247,5 +278,10 @@ async function main() {
 
 main().catch((e) => {
   error('MASTER', 'Fatal error', e);
+  // Удаляем lock при ошибке
+  const lockFile = path.join(process.cwd(), '.seo-build.lock');
+  if (fs.existsSync(lockFile)) {
+    fs.unlinkSync(lockFile);
+  }
   process.exit(1);
 });
