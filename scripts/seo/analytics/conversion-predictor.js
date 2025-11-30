@@ -20,22 +20,23 @@ class ConversionPredictor {
         this.model = JSON.parse(fs.readFileSync(this.modelPath, 'utf8'));
       } else {
         // Инициализация модели с базовыми весами
-        // Для SEO страниц: фокус на трафик с высоким conversion potential
+        // ПРИОРИТЕТ 1: Максимизация SEO (чтобы Google нравился и вел трафик)
+        // ПРИОРИТЕТ 2: Максимизация конвертирующего трафика
         this.model = {
           version: '1.0',
           weights: {
-            // SEO факторы (приоритет на трафик)
-            trafficVolume: 0.30,      // Увеличен вес - больше трафика
-            ctr: 0.20,                // Высокий CTR = качественный трафик
-            position: 0.15,           // Лучшие позиции = больше трафика
-            qualityScore: 0.15,       // Качество важно для SEO
-            semanticScore: 0.10,      // Semantic для релевантности
-            // Engagement факторы (показывают conversion potential)
-            timeOnPage: 0.05,         // Время на странице
-            bounceRate: -0.05,         // Низкий bounce = лучше
-            internalLinks: 0.03,      // Внутренние ссылки
-            layoutType: 0.02,         // Layout
-            intentType: 0.02          // Intent
+            // ПРИОРИТЕТ 1: SEO факторы (чтобы Google нравился)
+            qualityScore: 0.30,       // Качество контента - КРИТИЧНО для Google
+            semanticScore: 0.25,      // Semantic релевантность - КРИТИЧНО для ранжирования
+            position: 0.15,           // Позиции в поиске (результат хорошего SEO)
+            ctr: 0.10,                // CTR (результат хорошего SEO)
+            trafficVolume: 0.10,      // Трафик (результат хорошего SEO)
+            // ПРИОРИТЕТ 2: Conversion potential (вторичный фактор)
+            timeOnPage: 0.04,         // Время на странице (engagement)
+            bounceRate: -0.03,        // Низкий bounce (engagement)
+            internalLinks: 0.02,      // Внутренние ссылки (SEO + UX)
+            layoutType: 0.01,         // Layout
+            intentType: 0.01          // Intent
           },
           intercept: 0.02, // Низкий базовый CR для SEO страниц (нормально)
           trainingData: {
@@ -63,18 +64,18 @@ class ConversionPredictor {
     return {
       version: '1.0',
       weights: {
-        // SEO факторы (приоритет на трафик)
-        trafficVolume: 0.30,
-        ctr: 0.20,
+        // ПРИОРИТЕТ 1: SEO факторы (чтобы Google нравился)
+        qualityScore: 0.30,
+        semanticScore: 0.25,
         position: 0.15,
-        qualityScore: 0.15,
-        semanticScore: 0.10,
-        // Engagement факторы
-        timeOnPage: 0.05,
-        bounceRate: -0.05,
-        internalLinks: 0.03,
-        layoutType: 0.02,
-        intentType: 0.02
+        ctr: 0.10,
+        trafficVolume: 0.10,
+        // ПРИОРИТЕТ 2: Conversion potential (вторичный)
+        timeOnPage: 0.04,
+        bounceRate: -0.03,
+        internalLinks: 0.02,
+        layoutType: 0.01,
+        intentType: 0.01
       },
       intercept: 0.02, // Низкий базовый CR для SEO страниц
       trainingData: {
@@ -314,18 +315,29 @@ class ConversionPredictor {
   }
 
   /**
-   * Генерация рекомендаций для улучшения трафика с conversion potential
+   * Генерация рекомендаций
+   * ПРИОРИТЕТ 1: SEO факторы (чтобы Google нравился)
+   * ПРИОРИТЕТ 2: Conversion potential
    */
   generateRecommendations(features, prediction) {
     const recommendations = [];
 
-    // Приоритет на SEO факторы (трафик)
-    if (features.ctr < 0.3) {
+    // ПРИОРИТЕТ 1: SEO факторы (чтобы Google нравился и вел трафик)
+    if (features.qualityScore < 0.75) {
       recommendations.push({
         type: 'seo',
-        priority: 'high',
-        message: 'Улучшите CTR в поиске - оптимизируйте title и description для большего трафика',
-        expectedImpact: '+30-50% трафика с высоким conversion potential'
+        priority: 'critical',
+        message: 'КРИТИЧНО: Улучшите качество контента - это основа для того, чтобы Google нравился ваш SEO',
+        expectedImpact: '+50-100% трафика через лучшее ранжирование в Google'
+      });
+    }
+
+    if (features.semanticScore < 0.7) {
+      recommendations.push({
+        type: 'seo',
+        priority: 'critical',
+        message: 'КРИТИЧНО: Улучшите Semantic Score - покройте все Tier 1 темы для релевантности в Google',
+        expectedImpact: '+40-80% трафика через лучшую релевантность и понимание Google'
       });
     }
 
@@ -333,30 +345,21 @@ class ConversionPredictor {
       recommendations.push({
         type: 'seo',
         priority: 'high',
-        message: 'Улучшите позиции в поиске - оптимизируйте контент и структуру',
-        expectedImpact: '+40-60% трафика при улучшении позиций'
+        message: 'Улучшите позиции в поиске - результат хорошего SEO',
+        expectedImpact: '+30-60% трафика при улучшении позиций'
       });
     }
 
-    if (features.qualityScore < 0.75) {
+    if (features.ctr < 0.3) {
       recommendations.push({
-        type: 'quality',
+        type: 'seo',
         priority: 'high',
-        message: 'Улучшите качество контента - это улучшит ранжирование и трафик',
-        expectedImpact: '+20-30% трафика через лучшее ранжирование'
+        message: 'Улучшите CTR в поиске - оптимизируйте title и description',
+        expectedImpact: '+20-40% трафика через лучший CTR'
       });
     }
 
-    if (features.semanticScore < 0.7) {
-      recommendations.push({
-        type: 'semantic',
-        priority: 'medium',
-        message: 'Улучшите Semantic Score - покройте все Tier 1 темы для релевантности',
-        expectedImpact: '+15-25% трафика через лучшую релевантность'
-      });
-    }
-
-    // Engagement факторы (показывают conversion potential трафика)
+    // ПРИОРИТЕТ 2: Conversion potential (вторичный фактор)
     if (features.bounceRate > 0.5) {
       recommendations.push({
         type: 'engagement',
@@ -379,7 +382,7 @@ class ConversionPredictor {
       recommendations.push({
         type: 'linking',
         priority: 'low',
-        message: 'Добавьте больше внутренних ссылок для улучшения навигации и SEO',
+        message: 'Добавьте больше внутренних ссылок для улучшения SEO и навигации',
         expectedImpact: '+5-10% трафика через внутренние ссылки'
       });
     }

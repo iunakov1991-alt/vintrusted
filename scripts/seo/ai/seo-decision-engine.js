@@ -226,15 +226,23 @@ ${aiContext.gscMetrics ? `
 - Config target: ${aiContext.config.targetPagesPerBuild} pages
 - Min quality threshold: ${aiContext.config.minQualityScore}
 
-STRATEGY GOALS:
-1. Maximize SEO coverage and organic traffic (PRIMARY GOAL for SEO pages)
-2. Maximize traffic with HIGH conversion potential (not just any traffic, but quality traffic that converts)
-3. Focus on traffic that leads to conversions with highest probability
-4. Maintain high quality (quality score >= ${aiContext.config.minQualityScore})
-5. Optimize resource usage
-6. Learn from past performance
+STRATEGY GOALS (PRIORITY ORDER):
+1. PRIMARY GOAL: Maximize SEO to make Google love your pages and drive MASSIVE traffic
+   - Focus on quality content (Google loves high-quality content)
+   - Focus on semantic relevance (Google understands and ranks better)
+   - Focus on structure and optimization (Google crawls and indexes better)
+   - Result: Google ranks higher → More traffic → More conversions
 
-IMPORTANT: These are SEO landing pages, not the main page. Conversion rates will be lower (1-3% is normal), but the goal is to maximize QUALITY TRAFFIC that has high conversion potential.
+2. SECONDARY GOAL: Maximize traffic with HIGH conversion potential
+   - Once we have traffic from Google, optimize for conversion potential
+   - Focus on engagement factors (time on page, bounce rate)
+   - But SEO comes FIRST - no traffic = no conversions
+
+3. Maintain high quality (quality score >= ${aiContext.config.minQualityScore}) - CRITICAL for Google
+4. Optimize resource usage
+5. Learn from past performance
+
+IMPORTANT: These are SEO landing pages. The PRIMARY goal is to make Google love them so much that it drives massive traffic. Conversion optimization is SECONDARY - first we need traffic from Google.
 
 CONVERSION OPTIMIZATION:
 ${aiContext.conversionMetrics && aiContext.conversionMetrics.hasConversionData ? `
@@ -255,13 +263,14 @@ DECISION RULES:
 - If GSC shows low CTR: focus on quality over quantity
 - If GSC shows high CTR: can increase quantity
 - Consider rejection rate: if high (>30%), reduce target to maintain quality
-- For SEO pages: focus on TRAFFIC VOLUME with high conversion potential
-- If conversion data available: prioritize pages with high TRAFFIC CONVERSION POTENTIAL (traffic × conversion rate)
-- If avg predicted conversion < 1%: normal for SEO pages, focus on maximizing traffic
-- If avg predicted conversion > 3%: excellent for SEO pages, can increase quantity
-- Traffic optimization is PRIMARY goal, but prioritize traffic that converts
-- High CTR + Good positions = Quality traffic with conversion potential
-- Quality content = Better rankings = More traffic = More conversions
+- PRIMARY: Focus on SEO factors that make Google love your pages (Quality, Semantic, Structure)
+- PRIMARY: Maximize traffic volume from Google (result of good SEO)
+- SECONDARY: Once we have traffic, optimize for conversion potential
+- If avg predicted conversion < 1%: normal for SEO pages, PRIMARY focus on SEO and traffic
+- If avg predicted conversion > 3%: excellent, but still PRIMARY focus on SEO and traffic
+- Quality content + Semantic relevance = Google loves it = Better rankings = MASSIVE traffic
+- High traffic from Google = More opportunities for conversions
+- Conversion optimization is SECONDARY - first maximize SEO and traffic
 
 RESPOND WITH JSON:
 {

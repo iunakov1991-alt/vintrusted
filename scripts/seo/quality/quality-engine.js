@@ -78,7 +78,9 @@ class QualityEngine {
     }
     const semanticScore = Math.min(1, semanticHits / tier1Keywords.length);
 
-    // 6. Traffic Conversion Potential score (0-1) - для SEO страниц важнее потенциал трафика
+    // 6. Traffic Conversion Potential score (0-1) - ВТОРИЧНЫЙ фактор
+    // ПРИОРИТЕТ 1: SEO факторы (качество, semantic, structure) - уже учтены выше
+    // ПРИОРИТЕТ 2: Conversion potential - учитываем, но с меньшим весом
     let trafficConversionScore = 0.5; // Нейтральный score по умолчанию
     if (this.useConversionPrediction && this.conversionPredictor) {
       try {
@@ -89,8 +91,7 @@ class QualityEngine {
           bounceRate: page.externalMetrics?.bounceRate || 0,
           timeOnPage: page.externalMetrics?.timeOnPage || 0
         });
-        // Для SEO страниц используем Traffic Conversion Potential, а не просто CR
-        // Это учитывает и трафик, и его conversion potential
+        // Используем Traffic Conversion Potential как ВТОРИЧНЫЙ фактор
         trafficConversionScore = prediction.trafficConversionPotential || prediction.predictedRate;
       } catch (e) {
         // Если ошибка, используем нейтральный score
@@ -98,18 +99,19 @@ class QualityEngine {
       }
     }
 
-    // Итоговый score (с учетом Traffic Conversion Potential для SEO страниц)
-    // Меньший вес на conversion, больше на SEO факторы
-    const trafficConversionWeight = this.useConversionPrediction ? 0.10 : 0; // Снижен до 10%
+    // Итоговый score
+    // ПРИОРИТЕТ 1: SEO факторы (85% веса) - чтобы Google нравился
+    // ПРИОРИТЕТ 2: Conversion potential (5% веса) - вторичный фактор
+    const trafficConversionWeight = this.useConversionPrediction ? 0.05 : 0; // Снижен до 5% (вторичный)
     const baseWeight = 1 - trafficConversionWeight;
     
     const score = (
-      (baseWeight * 0.20) * lenScore +
-      (baseWeight * 0.25) * structureScore +
-      (baseWeight * 0.20) * keywordScore +
-      (baseWeight * 0.15) * diversityScore +
-      (baseWeight * 0.20) * semanticScore +
-      (trafficConversionWeight) * trafficConversionScore  // Traffic Conversion Potential
+      (baseWeight * 0.20) * lenScore +           // SEO: длина контента
+      (baseWeight * 0.25) * structureScore +     // SEO: структура (Google любит)
+      (baseWeight * 0.20) * keywordScore +       // SEO: ключевые слова
+      (baseWeight * 0.15) * diversityScore +     // SEO: разнообразие
+      (baseWeight * 0.20) * semanticScore +       // SEO: semantic (Google понимает)
+      (trafficConversionWeight) * trafficConversionScore  // ВТОРИЧНО: conversion potential
     );
 
     return {
@@ -120,7 +122,7 @@ class QualityEngine {
         keywords: keywordScore,
         diversity: diversityScore,
         semantic: semanticScore,
-        trafficConversionPotential: this.useConversionPrediction ? trafficConversionScore : undefined
+        conversionPotential: this.useConversionPrediction ? trafficConversionScore : undefined // Вторичный фактор
       },
       isAccepted: score >= this.minScore
     };
