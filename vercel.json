@@ -120,7 +120,15 @@
   ],
   "rewrites": [
     {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/:intent([a-zA-Z_-]+)/:lang([a-z]{2})/:year([0-9]{4})/:make([a-zA-Z0-9-]+)/",
+      "destination": "/api/seo-page.js"
+    },
+    {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/:intent([a-zA-Z_-]+)/:lang([a-z]{2})/:year([0-9]{4})/:make([a-zA-Z0-9-]+)",
+      "destination": "/api/seo-page.js"
+    },
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/:intent([a-zA-Z_-]+)/:lang([a-z]{2})/",
       "destination": "/api/seo-page.js"
     },
     {
@@ -128,7 +136,15 @@
       "destination": "/api/seo-page.js"
     },
     {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/",
+      "destination": "/api/seo-page.js"
+    },
+    {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
+      "destination": "/api/seo-page.js"
+    },
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/",
       "destination": "/api/seo-page.js"
     },
     {

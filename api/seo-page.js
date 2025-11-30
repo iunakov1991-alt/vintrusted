@@ -8,12 +8,28 @@ module.exports = async (req, res) => {
       url: req.url, 
       method: req.method,
       query: req.query,
-      headers: req.headers
+      headers: req.headers,
+      // Vercel может передавать путь через разные поля
+      originalUrl: req.originalUrl,
+      path: req.path
     });
     
-    // В Vercel rewrite, req.url содержит оригинальный путь запроса
-    // Например: /vin/4T1BF1FK3FU123456/texas/
-    const urlPath = req.url || '';
+    // В Vercel rewrite, путь может быть в req.url, req.originalUrl или req.path
+    // Также проверяем query параметры, которые могут быть извлечены из rewrite pattern
+    let urlPath = req.url || req.originalUrl || req.path || '';
+    
+    // Если путь начинается с /api/, это значит rewrite не сработал или путь уже переписан
+    // В этом случае пытаемся извлечь из query параметров
+    if (urlPath.startsWith('/api/')) {
+      // Пытаемся извлечь из query параметров (если Vercel передал их)
+      if (req.query && req.query.vin) {
+        urlPath = `/vin/${req.query.vin}${req.query.state ? '/' + req.query.state : ''}`;
+      } else {
+        console.log('SEO Page API: Path starts with /api/, and no query params found', { urlPath, query: req.query });
+        return res.status(404).send('Not found - invalid path format');
+      }
+    }
+    
     const parts = urlPath.split('/').filter(Boolean);
     
     // Ищем /vin в пути
@@ -48,6 +64,10 @@ module.exports = async (req, res) => {
       path.join(__dirname, '..', 'public/seo/pages/vin', vin, state, 'index.html'),
       // Vercel может использовать .vercel/output/static
       path.join(cwd, '.vercel/output/static/public/seo/pages/vin', vin, state, 'index.html'),
+      // Vercel может использовать /var/task для serverless функций
+      path.join('/var/task', 'public/seo/pages/vin', vin, state, 'index.html'),
+      // Альтернативный путь для Vercel serverless
+      path.join('/var/task', 'seo/pages/vin', vin, state, 'index.html'),
     ];
     
     let filePath = null;
@@ -84,7 +104,13 @@ module.exports = async (req, res) => {
       state, 
       triedPaths: possiblePaths,
       cwd: process.cwd(),
-      __dirname: __dirname
+      __dirname: __dirname,
+      // Дополнительная информация для отладки
+      env: {
+        VERCEL: process.env.VERCEL,
+        VERCEL_ENV: process.env.VERCEL_ENV,
+        PWD: process.env.PWD
+      }
     });
     return res.status(404).send('Page not found');
     
