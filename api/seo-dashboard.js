@@ -42,13 +42,14 @@ module.exports = async (req, res) => {
  * Получение статистики
  */
 async function getStats(req, res) {
-  const dashboardPath = path.join(process.cwd(), 'public', 'internal', 'seo-dashboard.json');
-  const rlStatePath = path.join(process.cwd(), 'data', 'seo', 'rl-state.json');
-  const configPath = path.join(process.cwd(), 'data', 'seo', 'config.json');
+  try {
+    const dashboardPath = path.join(process.cwd(), 'public', 'internal', 'seo-dashboard.json');
+    const rlStatePath = path.join(process.cwd(), 'data', 'seo', 'rl-state.json');
+    const configPath = path.join(process.cwd(), 'data', 'seo', 'config.json');
 
-  let dashboard = {};
-  let rlState = {};
-  let config = {};
+    let dashboard = {};
+    let rlState = {};
+    let config = {};
 
   // Загрузка данных (с безопасной обработкой ошибок)
   try {
@@ -180,10 +181,15 @@ async function getStats(req, res) {
   // AI рекомендации
   let aiRecommendation = null;
   try {
-    const decisionEngine = new SEODecisionEngine(config);
-    aiRecommendation = await decisionEngine.getDashboardRecommendation();
+    if (SEODecisionEngine) {
+      const decisionEngine = new SEODecisionEngine(config);
+      if (decisionEngine && typeof decisionEngine.getDashboardRecommendation === 'function') {
+        aiRecommendation = await decisionEngine.getDashboardRecommendation();
+      }
+    }
   } catch (e) {
     console.error('AI recommendation error:', e);
+    console.error('AI recommendation error stack:', e.stack);
   }
 
   // Безопасная обработка avgQuality (перед использованием)
