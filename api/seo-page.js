@@ -36,21 +36,56 @@ module.exports = async (req, res) => {
       return res.status(404).send('State required');
     }
     
-    // Путь к файлу
-    const filePath = path.join(process.cwd(), 'public/seo/pages/vin', vin, state, 'index.html');
+    // Пробуем несколько путей к файлу (для разных окружений Vercel)
+    // На Vercel файлы из public/ могут быть в разных местах
+    const cwd = process.cwd();
+    const possiblePaths = [
+      // Стандартный путь (локально и на Vercel)
+      path.join(cwd, 'public/seo/pages/vin', vin, state, 'index.html'),
+      // Альтернативный путь (если public/ не в корне)
+      path.join(cwd, 'seo/pages/vin', vin, state, 'index.html'),
+      // Путь относительно __dirname (если функция в другой директории)
+      path.join(__dirname, '..', 'public/seo/pages/vin', vin, state, 'index.html'),
+      // Vercel может использовать .vercel/output/static
+      path.join(cwd, '.vercel/output/static/public/seo/pages/vin', vin, state, 'index.html'),
+    ];
     
-    console.log('SEO Page API:', { url: req.url, vin, state, filePath, exists: fs.existsSync(filePath), cwd: process.cwd() });
+    let filePath = null;
+    let content = null;
     
-    if (fs.existsSync(filePath)) {
-      const content = fs.readFileSync(filePath, 'utf8');
+    console.log('SEO Page API: Searching for file:', { vin, state, cwd, __dirname });
+    
+    for (const testPath of possiblePaths) {
+      try {
+        console.log('SEO Page API: Trying path:', testPath);
+        if (fs.existsSync(testPath)) {
+          filePath = testPath;
+          content = fs.readFileSync(testPath, 'utf8');
+          console.log('SEO Page API: File found at:', filePath, 'size:', content.length);
+          break;
+        } else {
+          console.log('SEO Page API: Path does not exist:', testPath);
+        }
+      } catch (err) {
+        console.log('SEO Page API: Error checking path:', testPath, err.message);
+      }
+    }
+    
+    if (content) {
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'public, max-age=3600');
-      console.log('SEO Page API: File served successfully', { vin, state });
+      console.log('SEO Page API: File served successfully', { vin, state, filePath });
       return res.status(200).send(content);
     }
     
-    // Если файл не существует, возвращаем 404
-    console.log('SEO Page API: File not found', { filePath, cwd: process.cwd() });
+    // Если файл не найден ни по одному пути, возвращаем 404
+    console.log('SEO Page API: File not found', { 
+      vin, 
+      state, 
+      triedPaths: possiblePaths,
+      cwd: process.cwd(),
+      __dirname: __dirname
+    });
     return res.status(404).send('Page not found');
     
   } catch (error) {
