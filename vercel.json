@@ -48,7 +48,11 @@
     {
       "src": "api/health.js",
       "use": "@vercel/node"
-    },
+    }
+  ],
+  "functions": {},
+  "outputDirectory": "public",
+  "builds": [
     {
       "src": "public/**",
       "use": "@vercel/static"
