@@ -506,6 +506,24 @@
       
       let html = '';
 
+      // AI рекомендация (показываем первой, если есть)
+      if (aiRec && aiRec.shouldBuild) {
+        const urgencyClass = aiRec.urgency === 'high' ? 'warning' : aiRec.urgency === 'medium' ? 'info' : 'success';
+        html += `
+          <div class="recommendation ${urgencyClass}" style="border-left: 4px solid #667eea; background: linear-gradient(90deg, rgba(102, 126, 234, 0.15), #f8f9fa); margin-bottom: 20px;">
+            <h4>🤖 AI Рекомендация: ${aiRec.strategy} <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2px 8px; border-radius: 8px; font-size: 10px; margin-left: 8px; font-weight: 600;">AI POWERED</span></h4>
+            <p style="font-size: 15px; line-height: 1.6; margin-bottom: 12px;">${aiRec.recommendation}</p>
+            <div class="action" style="font-size: 14px; font-weight: 600; color: #667eea; margin-top: 8px;">
+              💡 ${aiRec.action || `Запустить билд на ${aiRec.targetPages} страниц`}
+            </div>
+            ${aiRec.confidence ? `<div style="margin-top: 12px; padding: 8px; background: rgba(102, 126, 234, 0.1); border-radius: 8px; font-size: 12px;">
+              <strong>Уверенность AI:</strong> ${(aiRec.confidence * 100).toFixed(0)}% | 
+              <strong>Ожидаемый результат:</strong> ${aiRec.expectedOutcome}
+            </div>` : ''}
+          </div>
+        `;
+      }
+
       // Предупреждения
       if (recs.warnings && recs.warnings.length > 0) {
         recs.warnings.forEach(w => {
