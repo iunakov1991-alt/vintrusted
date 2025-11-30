@@ -70,6 +70,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "public/**/*.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "**/index.html",
       "use": "@vercel/static"
     },
