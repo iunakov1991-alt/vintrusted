@@ -197,33 +197,52 @@ async function getStats(req, res) {
  */
 async function triggerBuild(req, res) {
   // Проверка, не запущен ли уже билд
-  const lockFile = path.join(process.cwd(), '.seo-build-running.lock');
+  // Используем /tmp для lock файла (доступен для записи на Vercel)
+  const lockFile = path.join('/tmp', '.seo-build-running.lock');
+  
+  // Проверяем lock файл с таймаутом (5 минут)
   if (fs.existsSync(lockFile)) {
-    return res.status(429).json({ 
-      error: 'Build already in progress',
-      message: 'Пожалуйста, подождите. Билд уже запущен.'
-    });
+    try {
+      const lockData = JSON.parse(fs.readFileSync(lockFile, 'utf8'));
+      const lockAge = Date.now() - lockData.timestamp;
+      const lockTimeout = 5 * 60 * 1000; // 5 минут
+      
+      if (lockAge < lockTimeout) {
+        return res.status(429).json({ 
+          error: 'Build already in progress',
+          message: 'Пожалуйста, подождите. Билд уже запущен.'
+        });
+      } else {
+        // Старый lock, удаляем
+        fs.unlinkSync(lockFile);
+      }
+    } catch (e) {
+      // Если не можем прочитать lock, удаляем его
+      try {
+        fs.unlinkSync(lockFile);
+      } catch (e2) {
+        // Ignore
+      }
+    }
   }
 
   // Создаем lock файл
-  fs.writeFileSync(lockFile, JSON.stringify({ 
-    timestamp: Date.now(),
-    pid: process.pid
-  }), 'utf8');
+  try {
+    fs.writeFileSync(lockFile, JSON.stringify({ 
+      timestamp: Date.now(),
+      pid: process.pid,
+      buildId: process.env.VERCEL_DEPLOYMENT_ID || 'manual'
+    }), 'utf8');
+  } catch (e) {
+    // Если не можем создать lock, продолжаем (на Vercel может быть проблема)
+    console.warn('Could not create lock file:', e.message);
+  }
 
-  // Запускаем билд в фоне (неблокирующе)
-  const buildScript = path.join(process.cwd(), 'scripts', 'seo', 'seo-master-build.js');
+  // На Vercel нельзя запускать билды напрямую через API
+  // Вместо этого возвращаем инструкцию для запуска через дашборд или GitHub Actions
+  // Или можно использовать Vercel Deploy Hook для триггера нового деплоя
   
-  // Используем spawn для неблокирующего запуска
-  const { spawn } = require('child_process');
-  const buildProcess = spawn('node', [buildScript], {
-    detached: true,
-    stdio: 'ignore'
-  });
-  
-  buildProcess.unref(); // Позволяем процессу работать независимо
-  
-  // Удаляем lock через таймаут (на случай если процесс завершится быстро)
+  // Удаляем lock сразу, так как билд будет запущен через Vercel build
   setTimeout(() => {
     if (fs.existsSync(lockFile)) {
       try {
@@ -232,7 +251,50 @@ async function triggerBuild(req, res) {
         // Ignore
       }
     }
-  }, 60000); // 1 минута
+  }, 1000);
+  
+  // Проверяем, есть ли VERCEL_DEPLOY_HOOK для автоматического деплоя
+  const deployHook = process.env.VERCEL_DEPLOY_HOOK;
+  
+  if (deployHook) {
+    // Триггерим новый деплой через webhook
+    try {
+      const https = require('https');
+      const url = new URL(deployHook);
+      const options = {
+        hostname: url.hostname,
+        path: url.pathname + url.search,
+        method: 'POST'
+      };
+      
+      const req = https.request(options, (res) => {
+        console.log(`Deploy hook triggered: ${res.statusCode}`);
+      });
+      
+      req.on('error', (e) => {
+        console.error('Deploy hook error:', e);
+      });
+      
+      req.end();
+    } catch (e) {
+      console.error('Failed to trigger deploy hook:', e);
+    }
+    
+    return res.json({ 
+      success: true,
+      message: 'Билд запущен через Vercel Deploy Hook! Новый деплой начнется через несколько секунд.',
+      estimatedTime: '2-5 минут',
+      note: 'Билд будет выполнен автоматически при деплое'
+    });
+  } else {
+    // Если нет deploy hook, возвращаем инструкцию
+    return res.json({ 
+      success: false,
+      error: 'Build trigger not configured',
+      message: 'Для запуска билда нажмите "Redeploy" в Vercel Dashboard или настройте VERCEL_DEPLOY_HOOK в переменных окружения.',
+      alternative: 'Билд автоматически запускается при каждом деплое через vercel-build скрипт'
+    });
+  }
 
   return res.json({ 
     success: true,
