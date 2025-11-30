@@ -173,17 +173,27 @@ async function getStats(req, res) {
 
   // Рекомендации
   const recommendations = generateRecommendations(dashboard, rlState, config, {
-    totalPages,
-    avgQuality,
-    acceptedPages,
-    rejectedPages
+    totalPages: totalPages || 0,
+    avgQuality: safeAvgQuality,
+    acceptedPages: acceptedPages || 0,
+    rejectedPages: rejectedPages || 0,
+    totalGenerated: totalGenerated || 0
+  }, aiRecommendation);
+
+  // Безопасная обработка avgQuality (перед использованием в recommendations)
+  const safeAvgQuality = typeof avgQuality === 'number' ? avgQuality : parseFloat(avgQuality) || 0;
+
+  // Рекомендации (используем safeAvgQuality)
+  const recommendations = generateRecommendations(dashboard, rlState, config, {
+    totalPages: totalPages || 0,
+    avgQuality: safeAvgQuality,
+    acceptedPages: acceptedPages || 0,
+    rejectedPages: rejectedPages || 0,
+    totalGenerated: totalGenerated || 0
   }, aiRecommendation);
 
   // Оптимальное расписание
   const schedule = calculateOptimalSchedule(dashboard, config);
-
-  // Безопасная обработка avgQuality
-  const safeAvgQuality = typeof avgQuality === 'number' ? avgQuality : parseFloat(avgQuality) || 0;
 
   return res.json({
     stats: {
@@ -613,26 +623,29 @@ function generateRecommendations(dashboard, rlState, config, stats, aiRecommenda
   }
 
   // Анализ качества
-  if (stats.avgQuality < 0.75) {
+  const avgQuality = safeStats.avgQuality || 0;
+  if (avgQuality > 0 && avgQuality < 0.75) {
     warnings.push({
       type: 'quality',
       level: 'warning',
       title: 'Среднее качество ниже оптимального',
-      message: `Текущее качество: ${(stats.avgQuality * 100).toFixed(1)}%. Рекомендуется: 75%+.`,
+      message: `Текущее качество: ${(avgQuality * 100).toFixed(1)}%. Рекомендуется: 75%+.`,
       action: 'Проверьте Semantic Score и убедитесь, что Tier 1 темы покрыты в контенте.'
     });
-  } else {
+  } else if (avgQuality >= 0.75) {
     suggestions.push({
       type: 'quality',
       level: 'success',
       title: 'Отличное качество!',
-      message: `Качество: ${(stats.avgQuality * 100).toFixed(1)}% - отличный результат!`
+      message: `Качество: ${(avgQuality * 100).toFixed(1)}% - отличный результат!`
     });
   }
 
   // Анализ отклоненных страниц
-  const rejectionRate = stats.totalGenerated > 0 
-    ? (stats.rejectedPages / stats.totalGenerated) * 100 
+  const totalGenerated = safeStats.totalGenerated || 0;
+  const rejectedPages = safeStats.rejectedPages || 0;
+  const rejectionRate = totalGenerated > 0 
+    ? (rejectedPages / totalGenerated) * 100 
     : 0;
   
   if (rejectionRate > 20) {
@@ -646,7 +659,8 @@ function generateRecommendations(dashboard, rlState, config, stats, aiRecommenda
   }
 
   // Анализ RL state
-  if (!rlState.lastUpdated || (Date.now() - new Date(rlState.lastUpdated).getTime()) > 7 * 24 * 60 * 60 * 1000) {
+  const rlLastUpdated = safeRlState.lastUpdated;
+  if (!rlLastUpdated || (Date.now() - new Date(rlLastUpdated).getTime()) > 7 * 24 * 60 * 60 * 1000) {
     suggestions.push({
       type: 'rl-state',
       level: 'info',
@@ -657,8 +671,8 @@ function generateRecommendations(dashboard, rlState, config, stats, aiRecommenda
   }
 
   // Анализ метрик
-  const hasGSCData = dashboard.gscStats?.urlsWithData > 0;
-  const hasGAData = dashboard.externalStats?.urlsWithBounceRate > 0;
+  const hasGSCData = safeDashboard.gscStats?.urlsWithData > 0;
+  const hasGAData = safeDashboard.externalStats?.urlsWithBounceRate > 0;
 
   if (!hasGSCData && !hasGAData) {
     suggestions.push({
