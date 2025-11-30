@@ -9,7 +9,6 @@ module.exports = async (req, res) => {
       method: req.method,
       query: req.query,
       headers: req.headers,
-      // Vercel может передавать путь через разные поля
       originalUrl: req.originalUrl,
       path: req.path
     });
@@ -52,20 +51,25 @@ module.exports = async (req, res) => {
       return res.status(404).send('State required');
     }
     
-    // Пробуем несколько путей к файлу (для разных окружений Vercel)
-    // На Vercel файлы из public/ могут быть в разных местах
+    // На Vercel, файлы из public/ доступны через файловую систему в serverless функциях
+    // Но путь может отличаться. Пробуем несколько вариантов:
     const cwd = process.cwd();
+    const isVercel = !!(process.env.VERCEL || process.env.VERCEL_ENV);
+    
+    // На Vercel, файлы из public/ копируются в .vercel/output/static/ во время build
+    // Но в runtime serverless функции, они доступны через process.cwd()/public/
+    // или могут быть в /var/task/public/ (в зависимости от версии Vercel)
     const possiblePaths = [
       // Стандартный путь (локально и на Vercel)
       path.join(cwd, 'public/seo/pages/vin', vin, state, 'index.html'),
-      // Альтернативный путь (если public/ не в корне)
-      path.join(cwd, 'seo/pages/vin', vin, state, 'index.html'),
       // Путь относительно __dirname (если функция в другой директории)
       path.join(__dirname, '..', 'public/seo/pages/vin', vin, state, 'index.html'),
-      // Vercel может использовать .vercel/output/static
-      path.join(cwd, '.vercel/output/static/public/seo/pages/vin', vin, state, 'index.html'),
       // Vercel может использовать /var/task для serverless функций
       path.join('/var/task', 'public/seo/pages/vin', vin, state, 'index.html'),
+      // Альтернативный путь (если public/ не в корне)
+      path.join(cwd, 'seo/pages/vin', vin, state, 'index.html'),
+      // Vercel может использовать .vercel/output/static (только во время build, не в runtime)
+      path.join(cwd, '.vercel/output/static/public/seo/pages/vin', vin, state, 'index.html'),
       // Альтернативный путь для Vercel serverless
       path.join('/var/task', 'seo/pages/vin', vin, state, 'index.html'),
     ];
@@ -73,7 +77,7 @@ module.exports = async (req, res) => {
     let filePath = null;
     let content = null;
     
-    console.log('SEO Page API: Searching for file:', { vin, state, cwd, __dirname });
+    console.log('SEO Page API: Searching for file:', { vin, state, cwd, __dirname, isVercel });
     
     for (const testPath of possiblePaths) {
       try {
@@ -91,10 +95,25 @@ module.exports = async (req, res) => {
       }
     }
     
+    // Дополнительная диагностика: проверяем, что находится в директории
+    if (!content) {
+      try {
+        const baseDir = path.join(cwd, 'public/seo/pages/vin', vin);
+        if (fs.existsSync(baseDir)) {
+          const dirContents = fs.readdirSync(baseDir);
+          console.log('SEO Page API: Directory exists, contents:', dirContents);
+        } else {
+          console.log('SEO Page API: Base directory does not exist:', baseDir);
+        }
+      } catch (dirErr) {
+        console.log('SEO Page API: Error checking directory:', dirErr.message);
+      }
+    }
+    
     if (content) {
       res.setHeader('Content-Type', 'text/html; charset=utf-8');
       res.setHeader('Cache-Control', 'public, max-age=3600');
-      console.log('SEO Page API: File served successfully', { vin, state, filePath });
+      console.log('SEO Page API: File served successfully', { vin, state, filePath: filePath || 'HTTP' });
       return res.status(200).send(content);
     }
     
@@ -105,7 +124,7 @@ module.exports = async (req, res) => {
       triedPaths: possiblePaths,
       cwd: process.cwd(),
       __dirname: __dirname,
-      // Дополнительная информация для отладки
+      isVercel,
       env: {
         VERCEL: process.env.VERCEL,
         VERCEL_ENV: process.env.VERCEL_ENV,
