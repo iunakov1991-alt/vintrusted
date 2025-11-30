@@ -105,11 +105,11 @@
   "rewrites": [
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/",
-      "destination": "/api/seo-vin-page?vin=:vin&state=:state"
+      "destination": "/api/seo-vin-page.js?vin=:vin&state=:state"
     },
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
-      "destination": "/api/seo-vin-page?vin=:vin&state=:state"
+      "destination": "/api/seo-vin-page.js?vin=:vin&state=:state"
     },
     {
       "source": "/api/checkout",
@@ -193,7 +193,7 @@
     },
     {
       "source": "/seo/sitemaps/:file*",
-      "destination": "/api/seo-sitemap?file=:file*"
+      "destination": "/api/seo-sitemap.js?file=:file*"
     }
   ]
 }

@@ -7,7 +7,18 @@ const path = require('path');
  */
 module.exports = async (req, res) => {
   try {
-    const { vin, state } = req.query;
+    // Получаем параметры из query или из URL path
+    let vin = req.query.vin;
+    let state = req.query.state;
+    
+    // Если параметры не в query, пытаемся извлечь из URL
+    if (!vin || !state) {
+      const urlMatch = req.url.match(/\/vin\/([A-HJ-NPR-Z0-9]{17})\/([a-zA-Z-]+)/);
+      if (urlMatch) {
+        vin = urlMatch[1];
+        state = urlMatch[2];
+      }
+    }
     
     if (!vin || !state) {
       return res.status(400).json({ error: 'VIN and state are required' });
