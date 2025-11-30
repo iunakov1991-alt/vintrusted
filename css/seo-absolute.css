@@ -1,7 +1,7 @@
 /**
- * SEO-ДИЗАЙН ABSOLUTE 1000%
+ * SEO-ДИЗАЙН ABSOLUTE 1000% - УЛУЧШЕННАЯ ВЕРСИЯ
  * Стиль: DMV × Apple × LegalTech
- * Только для SEO-страниц /vin/.../
+ * Оптимизировано для 1.5-2.2 скролла на десктопе
  */
 
 /* ============================================
@@ -18,38 +18,80 @@
   --color-bg: #ffffff;
   --color-text: #111111;
   --color-text-secondary: #6B7280;
+  --color-text-tertiary: #9CA3AF;
   --color-accent: #0A84FF;
   --color-accent-hover: #0066CC;
   --color-border: #E5E7EB;
   --color-card-bg: #ffffff;
-  --color-shadow: rgba(0, 0, 0, 0.05);
-  --color-shadow-hover: rgba(0, 0, 0, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.04);
+  --color-shadow-hover: rgba(0, 0, 0, 0.08);
   
   --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
   
-  --content-width: 680px;
-  --content-width-wide: 900px;
-  --line-height: 1.58;
-  --spacing-xs: 8px;
-  --spacing-sm: 16px;
-  --spacing-md: 24px;
-  --spacing-lg: 32px;
-  --spacing-xl: 48px;
-  --spacing-2xl: 64px;
+  --content-width: 720px;
+  --content-width-wide: 960px;
+  --line-height: 1.5;
   
-  --border-radius: 8px;
+  /* Компактные отступы для 1.5-2.2 скролла */
+  --spacing-xs: 6px;
+  --spacing-sm: 12px;
+  --spacing-md: 18px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
+  
+  --border-radius: 6px;
   --border-radius-sm: 4px;
 }
 
 body {
   font-family: var(--font-family);
-  font-size: 16px;
+  font-size: 15px;
   line-height: var(--line-height);
   color: var(--color-text);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   HEADER WITH LOGO
+   ============================================ */
+
+.seo-header {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-sm) 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.seo-header-content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.seo-logo {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.seo-header-descriptor {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  max-width: 200px;
 }
 
 /* ============================================
@@ -77,57 +119,57 @@ body {
 }
 
 /* ============================================
-   HERO SECTION
+   HERO SECTION (COMPACT)
    ============================================ */
 
 .seo-hero {
-  margin-bottom: var(--spacing-2xl);
-  padding: var(--spacing-xl) 0;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg) 0;
   border-bottom: 1px solid var(--color-border);
 }
 
 .seo-hero-vin {
   font-family: var(--font-mono);
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 0.5px;
   color: var(--color-text);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   display: block;
 }
 
 .seo-hero-meta {
-  font-size: 18px;
+  font-size: 15px;
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-md);
-  line-height: 1.5;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
 }
 
 .seo-hero-summary {
-  font-size: 17px;
+  font-size: 15px;
   line-height: var(--line-height);
   color: var(--color-text);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   max-width: 600px;
 }
 
 .seo-hero-cta {
   display: inline-block;
-  padding: 14px 32px;
+  padding: 11px 28px;
   background: var(--color-accent);
   color: white;
   text-decoration: none;
   border-radius: var(--border-radius);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   transition: background 0.2s, transform 0.1s;
-  box-shadow: 0 2px 8px var(--color-shadow);
+  box-shadow: 0 2px 6px var(--color-shadow);
 }
 
 .seo-hero-cta:hover {
   background: var(--color-accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px var(--color-shadow-hover);
+  box-shadow: 0 4px 10px var(--color-shadow-hover);
 }
 
 .seo-hero-cta:active {
@@ -135,77 +177,78 @@ body {
 }
 
 /* ============================================
-   KEY FACTS (CARDS)
+   KEY FACTS (COMPACT CARDS)
    ============================================ */
 
 .seo-key-facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-2xl);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
 }
 
 .seo-key-fact-card {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  padding: var(--spacing-md);
-  box-shadow: 0 1px 3px var(--color-shadow);
+  padding: var(--spacing-sm);
+  box-shadow: 0 1px 2px var(--color-shadow);
   transition: box-shadow 0.2s, transform 0.1s;
 }
 
 .seo-key-fact-card:hover {
-  box-shadow: 0 4px 12px var(--color-shadow-hover);
-  transform: translateY(-2px);
+  box-shadow: 0 3px 8px var(--color-shadow-hover);
+  transform: translateY(-1px);
 }
 
 .seo-key-fact-icon {
-  width: 32px;
-  height: 32px;
-  margin-bottom: var(--spacing-sm);
+  width: 24px;
+  height: 24px;
+  margin-bottom: var(--spacing-xs);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 16px;
   color: var(--color-accent);
 }
 
 .seo-key-fact-label {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 4px;
 }
 
 .seo-key-fact-value {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--color-text);
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 /* ============================================
-   DEEP EXPLANATION
+   DEEP EXPLANATION (COMPACT)
    ============================================ */
 
 .seo-explanation {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .seo-explanation h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text);
+  letter-spacing: -0.2px;
 }
 
 .seo-explanation p {
-  font-size: 17px;
+  font-size: 15px;
   line-height: var(--line-height);
   color: var(--color-text);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   max-width: 640px;
 }
 
@@ -214,16 +257,16 @@ body {
 }
 
 /* ============================================
-   VEHICLE SPECS TABLE (DMV STYLE)
+   VEHICLE SPECS TABLE (COMPACT DMV STYLE)
    ============================================ */
 
 .seo-specs-table {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 1px 3px var(--color-shadow);
+  box-shadow: 0 1px 2px var(--color-shadow);
 }
 
 .seo-specs-table table {
@@ -237,9 +280,9 @@ body {
 }
 
 .seo-specs-table th {
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   text-align: left;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -247,9 +290,9 @@ body {
 }
 
 .seo-specs-table td {
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   border-bottom: 1px solid var(--color-border);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--color-text);
 }
 
@@ -259,50 +302,52 @@ body {
 
 .seo-specs-table .vin-cell {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   color: var(--color-accent);
 }
 
 /* ============================================
-   STATE INSIGHTS (CARD)
+   STATE INSIGHTS (COMPACT CARD)
    ============================================ */
 
 .seo-state-insights {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-2xl);
-  box-shadow: 0 1px 3px var(--color-shadow);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: 0 1px 2px var(--color-shadow);
 }
 
 .seo-state-insights h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text);
+  letter-spacing: -0.2px;
 }
 
 .seo-state-insights p {
-  font-size: 16px;
+  font-size: 14px;
   line-height: var(--line-height);
   color: var(--color-text);
 }
 
 /* ============================================
-   COMMON RISKS (LIST)
+   COMMON RISKS (COMPACT LIST)
    ============================================ */
 
 .seo-risks {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .seo-risks h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text);
+  letter-spacing: -0.2px;
 }
 
 .seo-risks ul {
@@ -311,10 +356,10 @@ body {
 }
 
 .seo-risks li {
-  padding: var(--spacing-sm) 0;
-  padding-left: var(--spacing-lg);
+  padding: var(--spacing-xs) 0;
+  padding-left: var(--spacing-md);
   position: relative;
-  font-size: 16px;
+  font-size: 14px;
   line-height: var(--line-height);
   color: var(--color-text);
 }
@@ -325,73 +370,75 @@ body {
   left: 0;
   color: var(--color-accent);
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /* ============================================
-   MARKET VALUE
+   MARKET VALUE (COMPACT)
    ============================================ */
 
 .seo-market-value {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .seo-market-value h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text);
+  letter-spacing: -0.2px;
 }
 
 .seo-market-range {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
   background: #F9FAFB;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-border);
 }
 
 .seo-market-range-label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--color-text-secondary);
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .seo-market-range-value {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   color: var(--color-accent);
   font-family: var(--font-mono);
 }
 
 /* ============================================
-   AI ANALYSIS
+   AI ANALYSIS (COMPACT)
    ============================================ */
 
 .seo-ai-analysis {
   background: #F9FAFB;
-  border-left: 4px solid var(--color-accent);
-  padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-2xl);
+  border-left: 3px solid var(--color-accent);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
   border-radius: var(--border-radius-sm);
 }
 
 .seo-ai-analysis h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text);
+  letter-spacing: -0.2px;
 }
 
 .seo-ai-analysis p {
-  font-size: 16px;
+  font-size: 14px;
   line-height: var(--line-height);
   color: var(--color-text);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 .seo-ai-analysis p:last-child {
@@ -399,18 +446,19 @@ body {
 }
 
 /* ============================================
-   FREE VS PAID (TABLE)
+   FREE VS PAID (COMPACT TABLE)
    ============================================ */
 
 .seo-comparison {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .seo-comparison h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text);
+  letter-spacing: -0.2px;
 }
 
 .seo-comparison-table {
@@ -420,13 +468,13 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: 0 1px 3px var(--color-shadow);
+  box-shadow: 0 1px 2px var(--color-shadow);
 }
 
 .seo-comparison-table th {
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   text-align: left;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--color-text);
   background: #F9FAFB;
@@ -434,9 +482,9 @@ body {
 }
 
 .seo-comparison-table td {
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   border-bottom: 1px solid var(--color-border);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--color-text);
 }
 
@@ -454,22 +502,23 @@ body {
 }
 
 /* ============================================
-   FAQ
+   FAQ (COMPACT)
    ============================================ */
 
 .seo-faq {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .seo-faq h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   color: var(--color-text);
+  letter-spacing: -0.2px;
 }
 
 .seo-faq-item {
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-sm) 0;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -478,42 +527,44 @@ body {
 }
 
 .seo-faq-question {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: var(--spacing-xs);
+  letter-spacing: -0.1px;
 }
 
 .seo-faq-answer {
-  font-size: 16px;
+  font-size: 14px;
   line-height: var(--line-height);
   color: var(--color-text-secondary);
 }
 
 /* ============================================
-   INTERNAL LINKS
+   INTERNAL LINKS (COMPACT)
    ============================================ */
 
 .seo-internal-links {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-md);
 }
 
 .seo-internal-links-section {
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  padding: var(--spacing-md);
-  box-shadow: 0 1px 3px var(--color-shadow);
+  padding: var(--spacing-sm);
+  box-shadow: 0 1px 2px var(--color-shadow);
 }
 
 .seo-internal-links-section h3 {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
   color: var(--color-text);
+  letter-spacing: -0.1px;
 }
 
 .seo-internal-links-section ul {
@@ -528,7 +579,7 @@ body {
 .seo-internal-links-section a {
   color: var(--color-accent);
   text-decoration: none;
-  font-size: 15px;
+  font-size: 13px;
   transition: color 0.2s;
 }
 
@@ -559,20 +610,33 @@ body {
    ============================================ */
 
 @media (max-width: 768px) {
+  .seo-header-content {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .seo-logo {
+    height: 28px;
+  }
+  
+  .seo-header-descriptor {
+    font-size: 10px;
+    max-width: 150px;
+  }
+  
   .seo-container {
     padding: var(--spacing-md) var(--spacing-sm);
   }
   
   .seo-hero-vin {
-    font-size: 24px;
+    font-size: 20px;
   }
   
   .seo-hero-meta {
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .seo-hero-summary {
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .seo-key-facts {
@@ -585,14 +649,14 @@ body {
   
   .seo-specs-table,
   .seo-comparison-table {
-    font-size: 14px;
+    font-size: 13px;
   }
   
   .seo-specs-table th,
   .seo-specs-table td,
   .seo-comparison-table th,
   .seo-comparison-table td {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
   
   .seo-hero-cta {
@@ -606,7 +670,7 @@ body {
    ============================================ */
 
 .seo-section {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .seo-text-center {
@@ -620,4 +684,3 @@ body {
 .seo-mb-lg {
   margin-bottom: var(--spacing-lg);
 }
-

@@ -468,11 +468,25 @@ class TemplateEngineAbsolute {
   }
 
   /**
+   * Рендеринг header с логотипом и дескриптором
+   */
+  renderHeader() {
+    return `
+<header class="seo-header">
+  <div class="seo-header-content">
+    <img src="/logo.svg" alt="VIN Trusted" class="seo-logo" />
+    <div class="seo-header-descriptor">Trusted VIN reports with instant access to vehicle history, accidents, and ownership records</div>
+  </div>
+</header>`;
+  }
+
+  /**
    * Рендеринг полной страницы
    */
   renderPage(page, layout) {
     const blocks = layout.blocks || [];
     const body = blocks.map(blockType => this.renderBlock(blockType, page)).join('\n');
+    const header = this.renderHeader();
 
     const schema = this.renderSchema(page);
     const gaCode = this.renderGoogleAnalytics();
@@ -506,6 +520,7 @@ class TemplateEngineAbsolute {
 </head>
 <body>
   <div class="seo-page">
+    ${header}
     ${body}
   </div>
 </body>
