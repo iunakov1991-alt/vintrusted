@@ -204,12 +204,12 @@ class ConversionPredictor {
     const qualityScore = features.qualityScore;
     const semanticScore = features.semanticScore;
     
-    // Комбинированный потенциал трафика
+    // Комбинированный потенциал трафика (ПРИОРИТЕТ 1: SEO факторы)
     const trafficPotential = (
-      ctrScore * 0.35 +        // CTR - самый важный для трафика
-      positionScore * 0.30 +   // Позиция - очень важна
-      qualityScore * 0.20 +    // Качество влияет на ранжирование
-      semanticScore * 0.15     // Semantic для релевантности
+      qualityScore * 0.40 +      // Качество - КРИТИЧНО для Google (ПРИОРИТЕТ 1)
+      semanticScore * 0.35 +     // Semantic - КРИТИЧНО для ранжирования (ПРИОРИТЕТ 1)
+      positionScore * 0.15 +     // Позиция (результат SEO)
+      ctrScore * 0.10            // CTR (результат SEO)
     );
     
     return Math.max(0, Math.min(1, trafficPotential));
