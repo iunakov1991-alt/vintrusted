@@ -238,62 +238,266 @@ async function triggerBuild(req, res) {
     console.warn('Could not create lock file:', e.message);
   }
 
-  // На Vercel нельзя запускать билды напрямую через API
-  // Вместо этого возвращаем инструкцию для запуска через дашборд или GitHub Actions
-  // Или можно использовать Vercel Deploy Hook для триггера нового деплоя
+  // Триггерим билд через git push (создаем пустой commit)
+  // Это запустит Vercel деплой, который автоматически запустит vercel-build
   
-  // Удаляем lock сразу, так как билд будет запущен через Vercel build
-  setTimeout(() => {
-    if (fs.existsSync(lockFile)) {
-      try {
-        fs.unlinkSync(lockFile);
-      } catch (e) {
-        // Ignore
-      }
-    }
-  }, 1000);
+  // Проверяем, есть ли GitHub токен для push
+  const githubToken = process.env.GITHUB_TOKEN;
+  const githubRepo = process.env.GITHUB_REPO; // формат: owner/repo
   
-  // Проверяем, есть ли VERCEL_DEPLOY_HOOK для автоматического деплоя
-  const deployHook = process.env.VERCEL_DEPLOY_HOOK;
-  
-  if (deployHook) {
-    // Триггерим новый деплой через webhook
+  if (githubToken && githubRepo) {
+    // Используем GitHub API для создания пустого commit и push
     try {
       const https = require('https');
-      const url = new URL(deployHook);
-      const options = {
-        hostname: url.hostname,
-        path: url.pathname + url.search,
-        method: 'POST'
+      const [owner, repo] = githubRepo.split('/');
+      
+      // Получаем последний commit SHA
+      const getLatestCommit = () => {
+        return new Promise((resolve, reject) => {
+          const options = {
+            hostname: 'api.github.com',
+            path: `/repos/${owner}/${repo}/git/ref/heads/main`,
+            method: 'GET',
+            headers: {
+              'Authorization': `token ${githubToken}`,
+              'User-Agent': 'VIN-Trusted-SEO-Dashboard',
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          };
+          
+          const req = https.request(options, (res) => {
+            let data = '';
+            res.on('data', (chunk) => { data += chunk; });
+            res.on('end', () => {
+              if (res.statusCode === 200) {
+                const ref = JSON.parse(data);
+                resolve(ref.object.sha);
+              } else {
+                reject(new Error(`GitHub API error: ${res.statusCode}`));
+              }
+            });
+          });
+          
+          req.on('error', reject);
+          req.end();
+        });
       };
       
-      const req = https.request(options, (res) => {
-        console.log(`Deploy hook triggered: ${res.statusCode}`);
+      // Создаем пустое дерево и commit
+      const createEmptyCommit = async () => {
+        const latestSha = await getLatestCommit();
+        
+        // Получаем дерево последнего commit
+        const getTree = () => {
+          return new Promise((resolve, reject) => {
+            const options = {
+              hostname: 'api.github.com',
+              path: `/repos/${owner}/${repo}/git/commits/${latestSha}`,
+              method: 'GET',
+              headers: {
+                'Authorization': `token ${githubToken}`,
+                'User-Agent': 'VIN-Trusted-SEO-Dashboard',
+                'Accept': 'application/vnd.github.v3+json'
+              }
+            };
+            
+            const req = https.request(options, (res) => {
+              let data = '';
+              res.on('data', (chunk) => { data += chunk; });
+              res.on('end', () => {
+                if (res.statusCode === 200) {
+                  const commit = JSON.parse(data);
+                  resolve(commit.tree.sha);
+                } else {
+                  reject(new Error(`GitHub API error: ${res.statusCode}`));
+                }
+              });
+            });
+            
+            req.on('error', reject);
+            req.end();
+          });
+        };
+        
+        const treeSha = await getTree();
+        
+        // Создаем новый commit с тем же деревом (пустой commit)
+        return new Promise((resolve, reject) => {
+          const commitData = JSON.stringify({
+            message: `[SEO Build] Trigger build via dashboard - ${new Date().toISOString()}`,
+            tree: treeSha,
+            parents: [latestSha]
+          });
+          
+          const options = {
+            hostname: 'api.github.com',
+            path: `/repos/${owner}/${repo}/git/commits`,
+            method: 'POST',
+            headers: {
+              'Authorization': `token ${githubToken}`,
+              'User-Agent': 'VIN-Trusted-SEO-Dashboard',
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json',
+              'Content-Length': commitData.length
+            }
+          };
+          
+          const req = https.request(options, (res) => {
+            let data = '';
+            res.on('data', (chunk) => { data += chunk; });
+            res.on('end', () => {
+              if (res.statusCode === 201) {
+                const commit = JSON.parse(data);
+                resolve(commit.sha);
+              } else {
+                reject(new Error(`GitHub API error: ${res.statusCode} - ${data}`));
+              }
+            });
+          });
+          
+          req.on('error', reject);
+          req.write(commitData);
+          req.end();
+        });
+      };
+      
+      // Обновляем ref (push)
+      const pushCommit = (commitSha) => {
+        return new Promise((resolve, reject) => {
+          const updateData = JSON.stringify({
+            sha: commitSha,
+            force: false
+          });
+          
+          const options = {
+            hostname: 'api.github.com',
+            path: `/repos/${owner}/${repo}/git/refs/heads/main`,
+            method: 'PATCH',
+            headers: {
+              'Authorization': `token ${githubToken}`,
+              'User-Agent': 'VIN-Trusted-SEO-Dashboard',
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json',
+              'Content-Length': updateData.length
+            }
+          };
+          
+          const req = https.request(options, (res) => {
+            let data = '';
+            res.on('data', (chunk) => { data += chunk; });
+            res.on('end', () => {
+              if (res.statusCode === 200) {
+                resolve();
+              } else {
+                reject(new Error(`GitHub API error: ${res.statusCode} - ${data}`));
+              }
+            });
+          });
+          
+          req.on('error', reject);
+          req.write(updateData);
+          req.end();
+        });
+      };
+      
+      // Выполняем все шаги
+      createEmptyCommit()
+        .then(commitSha => pushCommit(commitSha))
+        .then(() => {
+          console.log('Git push successful, build will start automatically');
+        })
+        .catch(err => {
+          console.error('Git push failed:', err);
+        });
+      
+      // Удаляем lock через таймаут
+      setTimeout(() => {
+        if (fs.existsSync(lockFile)) {
+          try {
+            fs.unlinkSync(lockFile);
+          } catch (e) {
+            // Ignore
+          }
+        }
+      }, 1000);
+      
+      return res.json({ 
+        success: true,
+        message: 'Билд запущен! Git push выполнен, Vercel автоматически начнет деплой и генерацию страниц.',
+        estimatedTime: '2-5 минут',
+        note: 'Проверьте статус деплоя в Vercel Dashboard'
       });
       
-      req.on('error', (e) => {
-        console.error('Deploy hook error:', e);
-      });
-      
-      req.end();
     } catch (e) {
-      console.error('Failed to trigger deploy hook:', e);
+      console.error('Git push error:', e);
+      return res.status(500).json({ 
+        success: false,
+        error: 'Git push failed',
+        message: `Ошибка при выполнении git push: ${e.message}`,
+        note: 'Убедитесь, что GITHUB_TOKEN и GITHUB_REPO настроены в переменных окружения Vercel'
+      });
     }
-    
-    return res.json({ 
-      success: true,
-      message: 'Билд запущен через Vercel Deploy Hook! Новый деплой начнется через несколько секунд.',
-      estimatedTime: '2-5 минут',
-      note: 'Билд будет выполнен автоматически при деплое'
-    });
   } else {
-    // Если нет deploy hook, возвращаем инструкцию
-    return res.json({ 
-      success: false,
-      error: 'Build trigger not configured',
-      message: 'Для запуска билда нажмите "Redeploy" в Vercel Dashboard или настройте VERCEL_DEPLOY_HOOK в переменных окружения.',
-      alternative: 'Билд автоматически запускается при каждом деплое через vercel-build скрипт'
-    });
+    // Если нет GitHub токена, используем Vercel Deploy Hook
+    const deployHook = process.env.VERCEL_DEPLOY_HOOK;
+    
+    if (deployHook) {
+      // Триггерим новый деплой через webhook
+      try {
+        const https = require('https');
+        const url = new URL(deployHook);
+        const options = {
+          hostname: url.hostname,
+          path: url.pathname + url.search,
+          method: 'POST'
+        };
+        
+        const req = https.request(options, (res) => {
+          console.log(`Deploy hook triggered: ${res.statusCode}`);
+        });
+        
+        req.on('error', (e) => {
+          console.error('Deploy hook error:', e);
+        });
+        
+        req.end();
+      } catch (e) {
+        console.error('Failed to trigger deploy hook:', e);
+      }
+      
+      // Удаляем lock через таймаут
+      setTimeout(() => {
+        if (fs.existsSync(lockFile)) {
+          try {
+            fs.unlinkSync(lockFile);
+          } catch (e) {
+            // Ignore
+          }
+        }
+      }, 1000);
+      
+      return res.json({ 
+        success: true,
+        message: 'Билд запущен через Vercel Deploy Hook! Новый деплой начнется через несколько секунд.',
+        estimatedTime: '2-5 минут',
+        note: 'Билд будет выполнен автоматически при деплое'
+      });
+    } else {
+      // Если нет ни GitHub токена, ни Deploy Hook
+      return res.json({ 
+        success: false,
+        error: 'Build trigger not configured',
+        message: 'Для запуска билда через git push настройте GITHUB_TOKEN и GITHUB_REPO в переменных окружения Vercel.',
+        instructions: [
+          '1. Создайте GitHub Personal Access Token с правами repo',
+          '2. Добавьте в Vercel Environment Variables:',
+          '   - GITHUB_TOKEN: ваш токен',
+          '   - GITHUB_REPO: owner/repo (например: iunakov1991-alt/vintrusted)',
+          '3. Или настройте VERCEL_DEPLOY_HOOK для альтернативного метода'
+        ],
+        alternative: 'Билд автоматически запускается при каждом git push вручную'
+      });
+    }
   }
 
   return res.json({ 
