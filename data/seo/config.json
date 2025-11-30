@@ -34,5 +34,6 @@
     "enabled": true,
     "minQualityForRepair": 0.6,
     "regenerationThreshold": 0.5
-  }
+  },
+  "googleAnalyticsId": "G-CX3CT2K2FC"
 }

@@ -172,6 +172,24 @@ class TemplateEngine {
   }
 
   /**
+   * Рендеринг Google Analytics кода
+   */
+  renderGoogleAnalytics() {
+    const gaId = process.env.GOOGLE_ANALYTICS_ID || this.config?.googleAnalyticsId || 'G-CX3CT2K2FC';
+    if (!gaId) return '';
+
+    return `
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${gaId}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${gaId}');
+  </script>`;
+  }
+
+  /**
    * Рендеринг полной страницы
    */
   renderPage(page, layout) {
@@ -182,6 +200,7 @@ class TemplateEngine {
     }).join('');
 
     const schema = this.renderSchema(page);
+    const gaCode = this.renderGoogleAnalytics();
 
     return `<!doctype html>
 <html lang="${page.lang || 'en'}">
@@ -198,7 +217,7 @@ class TemplateEngine {
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="${this.escapeHtml(page.title)}" />
   <meta name="twitter:description" content="${this.escapeHtml(page.description)}" />
-  ${schema}
+  ${schema}${gaCode}
 </head>
 <body>
   <main>

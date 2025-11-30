@@ -21,6 +21,9 @@ const { AutoOptimizer } = require('./content/auto-optimizer');
 const { BuildHistory } = require('./analytics/build-history');
 const { Dashboard } = require('./analytics/dashboard');
 const { ForecastEngine } = require('./analytics/forecast-engine');
+const { GSCIntegration } = require('./analytics/gsc-integration');
+const { ExternalMetrics } = require('./analytics/external-metrics');
+const { ABTestEngine } = require('./testing/ab-test-engine');
 const { CrawlBudgetEngine } = require('./crawl/crawl-budget-engine');
 const { SelfDiagnosis } = require('./health/self-diagnosis');
 const { AutoRepair } = require('./health/auto-repair');
@@ -119,6 +122,9 @@ async function main() {
     const buildHistory = new BuildHistory(config);
     const dashboard = new Dashboard(config);
     const forecastEngine = new ForecastEngine(config);
+    const gscIntegration = new GSCIntegration(config);
+    const externalMetrics = new ExternalMetrics(config);
+    const abTestEngine = new ABTestEngine(config);
     const crawlBudgetEngine = new CrawlBudgetEngine(config);
     const selfDiagnosis = new SelfDiagnosis(config);
     const autoRepair = new AutoRepair(config);
@@ -323,6 +329,22 @@ async function main() {
     pipeline.registerStage('sitemap-generation', async (ctx) => {
       log('STAGE', 'Sitemap Generation');
       sitemapEngine.writeSitemaps(ctx.acceptedPages, config);
+    });
+
+    // Этап 8.5: Обогащение данными из GSC
+    pipeline.registerStage('gsc-enrichment', async (ctx) => {
+      log('STAGE', 'GSC Data Enrichment');
+      ctx.acceptedPages = gscIntegration.enrichPagesWithGSCData(ctx.acceptedPages);
+      const stats = gscIntegration.getStatistics();
+      log('STAGE', `GSC stats: ${stats.urlsWithData} pages with data, avg CTR: ${stats.avgCTR.toFixed(2)}%`);
+    });
+
+    // Этап 8.6: Обогащение внешними метриками (аналитика)
+    pipeline.registerStage('external-metrics-enrichment', async (ctx) => {
+      log('STAGE', 'External Metrics Enrichment');
+      ctx.acceptedPages = externalMetrics.enrichPagesWithMetrics(ctx.acceptedPages);
+      const stats = externalMetrics.getStatistics();
+      log('STAGE', `External metrics: ${stats.urlsWithBounceRate} pages with bounce rate, ${stats.urlsWithTimeOnPage} with time on page`);
     });
 
     // Этап 9: Обновление LTR весов
