@@ -50,14 +50,6 @@
       "use": "@vercel/node"
     },
     {
-      "src": "public/vin/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "public/seo/sitemaps/**",
-      "use": "@vercel/static"
-    },
-    {
       "src": "public/**",
       "use": "@vercel/static"
     },
@@ -114,10 +106,6 @@
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
       "destination": "/vin/:vin/:state/index.html"
-    },
-    {
-      "source": "/seo/sitemaps/:file*",
-      "destination": "/seo/sitemaps/:file*"
     },
     {
       "source": "/api/checkout",
