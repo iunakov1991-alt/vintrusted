@@ -299,32 +299,32 @@ async function main() {
       ctx.clusters = clusterEngine.getAllClusters();
     });
 
-    // Этап 6.2: Генерация AI-изображений для кластеров (неблокирующая)
-    pipeline.registerStage('ai-images-generation', async (ctx) => {
-      log('STAGE', 'AI Images Generation (non-blocking)');
-      
-      // Собираем уникальные кластеры
-      const uniqueClusters = new Map();
-      for (const page of ctx.acceptedPages) {
-        const clusterId = `${page.stateSlug}-${page.make}-${page.intent}`;
-        if (!uniqueClusters.has(clusterId)) {
-          uniqueClusters.set(clusterId, {
-            stateSlug: page.stateSlug,
-            make: page.make,
-            intent: page.intent
-          });
-        }
-      }
-      
-      const clusters = Array.from(uniqueClusters.values());
-      log('STAGE', `Found ${clusters.length} unique clusters for image generation`);
-      
-      // Генерируем изображения асинхронно (не блокируем билд)
-      aiImageGenerator.generateImagesForClusters(clusters).catch(err => {
-        error('AI-IMAGE', 'Failed to generate some images', err);
-        // Не прерываем билд из-за ошибок генерации изображений
-      });
-    });
+    // Этап 6.2: Генерация AI-изображений для кластеров (ОТКЛЮЧЕНО)
+    // pipeline.registerStage('ai-images-generation', async (ctx) => {
+    //   log('STAGE', 'AI Images Generation (non-blocking)');
+    //   
+    //   // Собираем уникальные кластеры
+    //   const uniqueClusters = new Map();
+    //   for (const page of ctx.acceptedPages) {
+    //     const clusterId = `${page.stateSlug}-${page.make}-${page.intent}`;
+    //     if (!uniqueClusters.has(clusterId)) {
+    //       uniqueClusters.set(clusterId, {
+    //         stateSlug: page.stateSlug,
+    //         make: page.make,
+    //         intent: page.intent
+    //       });
+    //     }
+    //   }
+    //   
+    //   const clusters = Array.from(uniqueClusters.values());
+    //   log('STAGE', `Found ${clusters.length} unique clusters for image generation`);
+    //   
+    //   // Генерируем изображения асинхронно (не блокируем билд)
+    //   aiImageGenerator.generateImagesForClusters(clusters).catch(err => {
+    //     error('AI-IMAGE', 'Failed to generate some images', err);
+    //     // Не прерываем билд из-за ошибок генерации изображений
+    //   });
+    // });
 
     // Этап 6.5: Внутренние ссылки
     pipeline.registerStage('internal-links', async (ctx) => {
