@@ -425,28 +425,52 @@
     async function loadDashboard() {
       try {
         const response = await fetch('/api/seo-dashboard?action=stats');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
+        
+        if (!data || !data.stats) {
+          throw new Error('Invalid data format from API');
+        }
+        
         updateDashboard(data);
       } catch (error) {
         console.error('Error loading dashboard:', error);
-        document.getElementById('statsGrid').innerHTML = 
-          '<div class="loading"><div class="spinner"></div>Ошибка загрузки данных</div>';
+        const statsGrid = document.getElementById('statsGrid');
+        if (statsGrid) {
+          statsGrid.innerHTML = 
+            '<div class="loading" style="color: #dc2626; padding: 20px; text-align: center;">' +
+            '<div class="spinner"></div>' +
+            '<div style="margin-top: 10px;">Ошибка загрузки данных</div>' +
+            '<div style="margin-top: 5px; font-size: 12px; color: #666;">' + error.message + '</div>' +
+            '</div>';
+        }
       }
     }
 
     // Обновление дашборда
     function updateDashboard(data) {
-      const stats = data.stats || {};
-      const lastBuild = stats.lastBuild || {};
+      try {
+        const stats = data.stats || {};
+        const lastBuild = stats.lastBuild || {};
 
-      // Основные метрики
-      document.getElementById('totalPages').textContent = stats.totalPages || 0;
-      document.getElementById('acceptedPages').textContent = lastBuild.pagesAccepted || 0;
-      document.getElementById('rejectedPages').textContent = lastBuild.pagesRejected || 0;
-      
-      const avgQuality = parseFloat(lastBuild.avgQuality || 0);
-      document.getElementById('avgQuality').textContent = (avgQuality * 100).toFixed(1) + '%';
-      document.getElementById('qualityBar').style.width = (avgQuality * 100) + '%';
+        // Основные метрики (с проверкой на существование элементов)
+        const totalPagesEl = document.getElementById('totalPages');
+        const acceptedPagesEl = document.getElementById('acceptedPages');
+        const rejectedPagesEl = document.getElementById('rejectedPages');
+        const avgQualityEl = document.getElementById('avgQuality');
+        const qualityBarEl = document.getElementById('qualityBar');
+
+        if (totalPagesEl) totalPagesEl.textContent = stats.totalPages || 0;
+        if (acceptedPagesEl) acceptedPagesEl.textContent = lastBuild.pagesAccepted || 0;
+        if (rejectedPagesEl) rejectedPagesEl.textContent = lastBuild.pagesRejected || 0;
+        
+        const avgQuality = parseFloat(lastBuild.avgQuality || 0);
+        if (avgQualityEl) avgQualityEl.textContent = (avgQuality * 100).toFixed(1) + '%';
+        if (qualityBarEl) qualityBarEl.style.width = (avgQuality * 100) + '%';
 
       // Conversion метрики
       if (data.conversion) {
@@ -495,6 +519,14 @@
 
       // Conversion статистика
       renderConversionStats(data.conversion, data.conversionModel);
+      } catch (error) {
+        console.error('Error updating dashboard:', error);
+        // Показываем ошибку в консоли, но не ломаем весь дашборд
+        const statsGrid = document.getElementById('statsGrid');
+        if (statsGrid) {
+          statsGrid.innerHTML = '<div class="loading" style="color: #dc2626;">Ошибка обновления данных. Проверьте консоль.</div>';
+        }
+      }
     }
 
     // Рендеринг расписания
