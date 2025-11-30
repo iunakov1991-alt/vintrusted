@@ -254,8 +254,8 @@ RESPOND WITH JSON:
 }`;
 
     try {
-      // Используем Groq для быстрого ответа
-      const response = await callGroqChat({
+      // Используем DeepSeek для принятия решения
+      const response = await callDeepseekChat({
         messages: [
           {
             role: 'system',

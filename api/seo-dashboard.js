@@ -267,10 +267,36 @@ function getRecommendations(req, res) {
 /**
  * Генерация рекомендаций
  */
-function generateRecommendations(dashboard, rlState, config, stats) {
+function generateRecommendations(dashboard, rlState, config, stats, aiRecommendation = null) {
   const recommendations = [];
   const warnings = [];
   const suggestions = [];
+
+  // AI рекомендация (приоритетная)
+  if (aiRecommendation && aiRecommendation.shouldBuild) {
+    const urgencyEmoji = aiRecommendation.urgency === 'high' ? '🔴' : aiRecommendation.urgency === 'medium' ? '🟡' : '🟢';
+    suggestions.unshift({
+      type: 'ai-recommendation',
+      level: aiRecommendation.urgency === 'high' ? 'warning' : 'info',
+      title: `${urgencyEmoji} AI Рекомендация: ${aiRecommendation.strategy}`,
+      message: aiRecommendation.recommendation,
+      action: `Запустить билд на ${aiRecommendation.targetPages} страниц. Ожидаемый результат: ${aiRecommendation.expectedOutcome}`,
+      confidence: `Уверенность AI: ${(aiRecommendation.confidence * 100).toFixed(0)}%`,
+      aiPowered: true
+    });
+
+    if (aiRecommendation.recommendations && aiRecommendation.recommendations.length > 0) {
+      aiRecommendation.recommendations.forEach(rec => {
+        suggestions.push({
+          type: 'ai-suggestion',
+          level: 'info',
+          title: '💡 AI Совет',
+          message: rec,
+          aiPowered: true
+        });
+      });
+    }
+  }
 
   // Анализ качества
   if (stats.avgQuality < 0.75) {
