@@ -220,7 +220,6 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
 
         // Выбор layout
         const layout = layoutEngine.selectLayout(item, rlState.layoutWeights);
-        const makeUpper = (item.make || '').toUpperCase();
         
         return {
           ...item,
