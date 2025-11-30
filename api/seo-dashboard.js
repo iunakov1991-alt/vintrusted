@@ -740,7 +740,7 @@ function generateRecommendations(dashboard, rlState, config, stats, aiRecommenda
   // Пожелания от машины
   const machineWishes = [];
   
-  if (stats.avgQuality > 0.85) {
+  if (avgQuality > 0.85) {
     machineWishes.push({
       type: 'praise',
       message: '🎉 Отличная работа! Качество контента на высоком уровне.'
