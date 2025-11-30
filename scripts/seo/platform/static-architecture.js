@@ -10,19 +10,16 @@ const { log } = require('../logger');
 class StaticArchitecture {
   constructor(config) {
     this.config = config;
-    // Используем Build Output API для прямого вывода в .vercel/output/static/
-    // Это гарантирует, что файлы попадут в финальный артефакт
-    const vercelOutput = path.join(process.cwd(), '.vercel', 'output', 'static');
-    this.outputRoot = path.join(vercelOutput, 'vin');
-    
-    // Также пишем в public/vin для совместимости
+    // Пишем только в public/vin - Vercel автоматически соберет файлы оттуда
+    // Не используем Build Output API, чтобы избежать проблем с config.json
     this.publicRoot = path.join(process.cwd(), 'public', 'vin');
+    this.outputRoot = this.publicRoot; // Используем тот же путь
   }
 
   /**
    * Получить путь для статического файла
    * URL: /vin/:vin/:state/
-   * File: .vercel/output/static/vin/:vin/:state/index.html
+   * File: public/vin/:vin/:state/index.html
    */
   getOutputPath(item) {
     const vinDir = path.join(
@@ -47,10 +44,9 @@ class StaticArchitecture {
 
   /**
    * Записать статический HTML файл
-   * Пишем в оба места: .vercel/output/static/ и public/ для совместимости
+   * Пишем только в public/vin - Vercel автоматически соберет файлы оттуда
    */
   writeStaticFile(item, html) {
-    // Основной путь через Build Output API
     const outputPath = this.getOutputPath(item);
     const outputDir = path.dirname(outputPath);
     
@@ -59,18 +55,7 @@ class StaticArchitecture {
     }
     
     fs.writeFileSync(outputPath, html, 'utf8');
-    log('STATIC', `Written (Build Output): ${outputPath}`);
-    
-    // Также пишем в public/ для совместимости
-    const publicPath = this.getPublicPath(item);
-    const publicDir = path.dirname(publicPath);
-    
-    if (!fs.existsSync(publicDir)) {
-      fs.mkdirSync(publicDir, { recursive: true });
-    }
-    
-    fs.writeFileSync(publicPath, html, 'utf8');
-    log('STATIC', `Written (public): ${publicPath}`);
+    log('STATIC', `Written: ${outputPath}`);
     
     return outputPath;
   }

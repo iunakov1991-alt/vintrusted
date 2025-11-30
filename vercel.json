@@ -192,6 +192,10 @@
       "destination": "/sitemaps.html"
     },
     {
+      "source": "/checkout",
+      "destination": "/index.html"
+    },
+    {
       "source": "/seo/sitemaps/:file*",
       "destination": "/api/seo-sitemap.js?file=:file*"
     }
