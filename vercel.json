@@ -50,6 +50,14 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/seo-vin-page.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-sitemap.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -97,11 +105,11 @@
   "rewrites": [
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/",
-      "destination": "/vin/:vin/:state/index.html"
+      "destination": "/api/seo-vin-page?vin=:vin&state=:state"
     },
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
-      "destination": "/vin/:vin/:state/index.html"
+      "destination": "/api/seo-vin-page?vin=:vin&state=:state"
     },
     {
       "source": "/api/checkout",
@@ -182,6 +190,10 @@
     {
       "source": "/sitemaps",
       "destination": "/sitemaps.html"
+    },
+    {
+      "source": "/seo/sitemaps/:file*.xml",
+      "destination": "/api/seo-sitemap?file=:file*.xml"
     }
   ]
 }
