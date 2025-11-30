@@ -79,10 +79,29 @@ class InternalLinksEngine {
    */
   attachInternalLinks(pages, clusterEngine) {
     pages.forEach(page => {
-      page.internalLinks = this.generateInternalLinks(page, pages, clusterEngine);
+      const links = this.generateInternalLinks(page, pages, clusterEngine);
+      // Добавляем тип для нового template engine
+      page.internalLinks = links.map(link => ({
+        ...link,
+        type: this.determineLinkType(link, page)
+      }));
     });
 
     log('LINKS', `Internal links attached: avg ${(pages.reduce((sum, p) => sum + p.internalLinks.length, 0) / pages.length).toFixed(1)} per page`);
+  }
+
+  /**
+   * Определение типа ссылки (state или make)
+   */
+  determineLinkType(link, page) {
+    const linkUrl = link.href || '';
+    if (linkUrl.includes(page.stateSlug)) {
+      return 'state';
+    }
+    if (linkUrl.includes(page.make)) {
+      return 'make';
+    }
+    return 'general';
   }
 }
 

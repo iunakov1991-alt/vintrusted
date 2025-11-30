@@ -3,8 +3,9 @@ const path = require('path');
 const { log, error } = require('./logger');
 const { SEOMasterPipeline } = require('./orchestration/seo-master-pipeline');
 const { URLFactory } = require('./orchestration/url-factory');
-const { LayoutEngine } = require('./dom/layout-engine');
-const { TemplateEngine } = require('./dom/template-engine');
+const { LayoutEngineAbsolute } = require('./dom/layout-engine-absolute');
+const { TemplateEngineAbsolute } = require('./dom/template-engine-absolute');
+const { AIImageGenerator } = require('./images/ai-image-generator');
 const { UniquenessEngine } = require('./uniqueness-engine');
 const { BaselineBlocks } = require('./content/baseline-blocks');
 const { AIAugmentation } = require('./content/ai-augmentation');
@@ -104,8 +105,9 @@ async function main() {
     // Инициализация компонентов
     const pipeline = new SEOMasterPipeline();
     const urlFactory = new URLFactory(config, rlState);
-    const layoutEngine = new LayoutEngine(config);
-    const templateEngine = new TemplateEngine(config);
+    const layoutEngine = new LayoutEngineAbsolute(config);
+    const templateEngine = new TemplateEngineAbsolute(config);
+    const aiImageGenerator = new AIImageGenerator(config);
     const uniquenessEngine = new UniquenessEngine(config);
     const baselineBlocks = new BaselineBlocks();
     const aiAugmentation = new AIAugmentation(config);
@@ -282,6 +284,33 @@ async function main() {
         });
       });
       ctx.clusters = clusterEngine.getAllClusters();
+    });
+
+    // Этап 6.2: Генерация AI-изображений для кластеров (неблокирующая)
+    pipeline.registerStage('ai-images-generation', async (ctx) => {
+      log('STAGE', 'AI Images Generation (non-blocking)');
+      
+      // Собираем уникальные кластеры
+      const uniqueClusters = new Map();
+      for (const page of ctx.acceptedPages) {
+        const clusterId = `${page.stateSlug}-${page.make}-${page.intent}`;
+        if (!uniqueClusters.has(clusterId)) {
+          uniqueClusters.set(clusterId, {
+            stateSlug: page.stateSlug,
+            make: page.make,
+            intent: page.intent
+          });
+        }
+      }
+      
+      const clusters = Array.from(uniqueClusters.values());
+      log('STAGE', `Found ${clusters.length} unique clusters for image generation`);
+      
+      // Генерируем изображения асинхронно (не блокируем билд)
+      aiImageGenerator.generateImagesForClusters(clusters).catch(err => {
+        error('AI-IMAGE', 'Failed to generate some images', err);
+        // Не прерываем билд из-за ошибок генерации изображений
+      });
     });
 
     // Этап 6.5: Внутренние ссылки

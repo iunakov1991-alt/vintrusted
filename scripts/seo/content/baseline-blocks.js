@@ -72,16 +72,61 @@ class BaselineBlocks {
   }
 
   /**
-   * Генерация baseline контента
+   * Генерация baseline контента для всех новых блоков
    */
   generateBaselineContent(item) {
     const stateLabel = this.humanizeStateSlug(item.stateSlug);
+    const make = item.make || 'Vehicle';
+    const year = item.year || '';
+    const vin = item.vin || '';
+    const intent = item.intent || 'vin_check';
     
     return {
-      keyFacts: this.templates.keyFacts(stateLabel),
+      // Hero
+      heroSummary: `Complete VIN history report for ${year} ${make} in ${stateLabel}. Get detailed information about title, accidents, ownership, and more.`,
+      
+      // Key Facts (как карточки)
+      keyFacts: [
+        { label: 'VIN', value: vin },
+        { label: 'State', value: stateLabel },
+        { label: 'Make', value: make },
+        { label: 'Year', value: year },
+        { label: 'Report Type', value: intent.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) },
+        { label: 'Data Sources', value: 'DMV, Insurance, Auctions' }
+      ],
+      
+      // Deep Explanation
+      deepExplanation: `A comprehensive VIN report provides crucial information about a vehicle's history, helping buyers make informed decisions. This report aggregates data from multiple sources including state DMV records, insurance databases, and auction listings to give you a complete picture of the vehicle's past.`,
+      
+      // State Insights
+      stateInsights: this.templates.localInsights(stateLabel),
+      
+      // Common Risks
+      commonRisks: [
+        'Title branding issues (salvage, flood, rebuilt)',
+        'Undisclosed accident history',
+        'Odometer rollback or tampering',
+        'Active liens or loans',
+        'Theft records or recovery history',
+        'Multiple owners in short timeframe'
+      ],
+      
+      // Market Value
+      marketValue: {
+        retail: { min: 15000, max: 25000 },
+        tradeIn: { min: 12000, max: 20000 }
+      },
+      
+      // Feature Table (legacy)
       featureTable: this.templates.featureTable(),
+      
+      // Comparison (legacy)
       comparison: this.templates.comparison(),
+      
+      // FAQ
       faq: this.templates.faq(),
+      
+      // Local Insights (legacy)
       localInsights: this.templates.localInsights(stateLabel)
     };
   }
