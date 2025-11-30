@@ -44,10 +44,12 @@ class TemplateEngineAbsolute {
     const state = ctx.stateLabel || ctx.stateSlug || '';
     const summary = ctx.heroSummary || ctx.intro || `Complete VIN history report for ${year} ${make} in ${state}`;
     
-    // AI изображение для кластера
-    const clusterId = `${ctx.stateSlug}-${ctx.make}-${ctx.intent}`;
-    const heroImage = this.getClusterImagePath(clusterId, 'hero');
-    const ogImage = this.getClusterImagePath(clusterId, 'og');
+    // AI изображение для кластера (ОТКЛЮЧЕНО)
+    // const clusterId = `${ctx.stateSlug}-${ctx.make}-${ctx.intent}`;
+    // const heroImage = this.getClusterImagePath(clusterId, 'hero');
+    // const ogImage = this.getClusterImagePath(clusterId, 'og');
+    const heroImage = null; // Отключено
+    const ogImage = null; // Отключено
     
     const ctaVariants = [
       'Get Full Report',
@@ -476,9 +478,11 @@ class TemplateEngineAbsolute {
     const gaCode = this.renderGoogleAnalytics();
     
     // OG Image для кластера
-    const clusterId = `${page.stateSlug}-${page.make}-${page.intent}`;
-    const ogImage = this.getClusterImagePath(clusterId, 'og');
-    const ogImageUrl = ogImage ? `https://vintrusted.com${ogImage}` : '';
+    // AI изображение для кластера (ОТКЛЮЧЕНО)
+    // const clusterId = `${page.stateSlug}-${page.make}-${page.intent}`;
+    // const ogImage = this.getClusterImagePath(clusterId, 'og');
+    // const ogImageUrl = ogImage ? `https://vintrusted.com${ogImage}` : '';
+    const ogImageUrl = ''; // Отключено
 
     return `<!doctype html>
 <html lang="${page.lang || 'en'}">
