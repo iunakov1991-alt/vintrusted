@@ -78,8 +78,8 @@ class QualityEngine {
     }
     const semanticScore = Math.min(1, semanticHits / tier1Keywords.length);
 
-    // 6. Conversion prediction score (0-1) - если доступен Conversion Predictor
-    let conversionScore = 0.5; // Нейтральный score по умолчанию
+    // 6. Traffic Conversion Potential score (0-1) - для SEO страниц важнее потенциал трафика
+    let trafficConversionScore = 0.5; // Нейтральный score по умолчанию
     if (this.useConversionPrediction && this.conversionPredictor) {
       try {
         const prediction = this.conversionPredictor.predictConversion(page, {
@@ -89,16 +89,19 @@ class QualityEngine {
           bounceRate: page.externalMetrics?.bounceRate || 0,
           timeOnPage: page.externalMetrics?.timeOnPage || 0
         });
-        conversionScore = prediction.predictedRate;
+        // Для SEO страниц используем Traffic Conversion Potential, а не просто CR
+        // Это учитывает и трафик, и его conversion potential
+        trafficConversionScore = prediction.trafficConversionPotential || prediction.predictedRate;
       } catch (e) {
         // Если ошибка, используем нейтральный score
-        conversionScore = 0.5;
+        trafficConversionScore = 0.5;
       }
     }
 
-    // Итоговый score (с учетом конверсий, если доступны)
-    const conversionWeight = this.useConversionPrediction ? 0.15 : 0;
-    const baseWeight = 1 - conversionWeight;
+    // Итоговый score (с учетом Traffic Conversion Potential для SEO страниц)
+    // Меньший вес на conversion, больше на SEO факторы
+    const trafficConversionWeight = this.useConversionPrediction ? 0.10 : 0; // Снижен до 10%
+    const baseWeight = 1 - trafficConversionWeight;
     
     const score = (
       (baseWeight * 0.20) * lenScore +
@@ -106,7 +109,7 @@ class QualityEngine {
       (baseWeight * 0.20) * keywordScore +
       (baseWeight * 0.15) * diversityScore +
       (baseWeight * 0.20) * semanticScore +
-      (conversionWeight) * conversionScore  // Новый фактор: предсказанные конверсии
+      (trafficConversionWeight) * trafficConversionScore  // Traffic Conversion Potential
     );
 
     return {
@@ -117,7 +120,7 @@ class QualityEngine {
         keywords: keywordScore,
         diversity: diversityScore,
         semantic: semanticScore,
-        conversion: this.useConversionPrediction ? conversionScore : undefined
+        trafficConversionPotential: this.useConversionPrediction ? trafficConversionScore : undefined
       },
       isAccepted: score >= this.minScore
     };

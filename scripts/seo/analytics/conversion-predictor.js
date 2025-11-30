@@ -20,21 +20,24 @@ class ConversionPredictor {
         this.model = JSON.parse(fs.readFileSync(this.modelPath, 'utf8'));
       } else {
         // Инициализация модели с базовыми весами
+        // Для SEO страниц: фокус на трафик с высоким conversion potential
         this.model = {
           version: '1.0',
           weights: {
-            qualityScore: 0.25,
-            trafficVolume: 0.20,
-            ctr: 0.15,
-            position: 0.10,
-            bounceRate: -0.15, // Отрицательный вес
-            timeOnPage: 0.10,
-            semanticScore: 0.10,
-            internalLinks: 0.05,
-            layoutType: 0.05,
-            intentType: 0.05
+            // SEO факторы (приоритет на трафик)
+            trafficVolume: 0.30,      // Увеличен вес - больше трафика
+            ctr: 0.20,                // Высокий CTR = качественный трафик
+            position: 0.15,           // Лучшие позиции = больше трафика
+            qualityScore: 0.15,       // Качество важно для SEO
+            semanticScore: 0.10,      // Semantic для релевантности
+            // Engagement факторы (показывают conversion potential)
+            timeOnPage: 0.05,         // Время на странице
+            bounceRate: -0.05,         // Низкий bounce = лучше
+            internalLinks: 0.03,      // Внутренние ссылки
+            layoutType: 0.02,         // Layout
+            intentType: 0.02          // Intent
           },
-          intercept: 0.05, // Базовый conversion rate
+          intercept: 0.02, // Низкий базовый CR для SEO страниц (нормально)
           trainingData: {
             totalSamples: 0,
             lastUpdated: null,
@@ -161,17 +164,52 @@ class ConversionPredictor {
 
   /**
    * Предсказание конверсии для страницы
+   * Для SEO страниц: предсказываем не только CR, но и Traffic Conversion Potential
    */
   predictConversion(pageData, metrics = {}) {
     const features = this.extractFeatures(pageData, metrics);
     const prediction = this.calculatePrediction(features);
     
+    // Для SEO страниц важнее Traffic Conversion Potential, чем сам CR
+    // TCP = предсказанный CR × потенциал трафика
+    const trafficPotential = this.calculateTrafficPotential(features, metrics);
+    const trafficConversionPotential = prediction.rate * trafficPotential;
+    
     return {
       predictedRate: prediction.rate,
+      trafficConversionPotential: trafficConversionPotential, // Новый метрика
+      trafficPotential: trafficPotential,
       confidence: prediction.confidence,
       factors: prediction.factors,
       recommendations: this.generateRecommendations(features, prediction)
     };
+  }
+
+  /**
+   * Расчет потенциала трафика (0-1)
+   * Учитывает SEO факторы, которые влияют на объем трафика
+   */
+  calculateTrafficPotential(features, metrics = {}) {
+    // Факторы, влияющие на трафик:
+    // 1. CTR в поиске (высокий CTR = больше кликов)
+    // 2. Позиция (лучшая позиция = больше трафика)
+    // 3. Quality Score (высокое качество = лучше ранжирование)
+    // 4. Semantic Score (релевантность = больше показов)
+    
+    const ctrScore = features.ctr; // Уже нормализован
+    const positionScore = features.position; // Уже нормализован (инвертирован)
+    const qualityScore = features.qualityScore;
+    const semanticScore = features.semanticScore;
+    
+    // Комбинированный потенциал трафика
+    const trafficPotential = (
+      ctrScore * 0.35 +        // CTR - самый важный для трафика
+      positionScore * 0.30 +   // Позиция - очень важна
+      qualityScore * 0.20 +    // Качество влияет на ранжирование
+      semanticScore * 0.15     // Semantic для релевантности
+    );
+    
+    return Math.max(0, Math.min(1, trafficPotential));
   }
 
   /**
@@ -274,44 +312,36 @@ class ConversionPredictor {
   }
 
   /**
-   * Генерация рекомендаций для улучшения конверсий
+   * Генерация рекомендаций для улучшения трафика с conversion potential
    */
   generateRecommendations(features, prediction) {
     const recommendations = [];
+
+    // Приоритет на SEO факторы (трафик)
+    if (features.ctr < 0.3) {
+      recommendations.push({
+        type: 'seo',
+        priority: 'high',
+        message: 'Улучшите CTR в поиске - оптимизируйте title и description для большего трафика',
+        expectedImpact: '+30-50% трафика с высоким conversion potential'
+      });
+    }
+
+    if (features.position < 0.5) {
+      recommendations.push({
+        type: 'seo',
+        priority: 'high',
+        message: 'Улучшите позиции в поиске - оптимизируйте контент и структуру',
+        expectedImpact: '+40-60% трафика при улучшении позиций'
+      });
+    }
 
     if (features.qualityScore < 0.75) {
       recommendations.push({
         type: 'quality',
         priority: 'high',
-        message: 'Улучшите качество контента для повышения конверсий',
-        expectedImpact: '+15-25% конверсий'
-      });
-    }
-
-    if (features.bounceRate > 0.4) {
-      recommendations.push({
-        type: 'engagement',
-        priority: 'high',
-        message: 'Снизьте bounce rate - улучшите релевантность и UX',
-        expectedImpact: '+20-30% конверсий'
-      });
-    }
-
-    if (features.timeOnPage < 0.4) {
-      recommendations.push({
-        type: 'engagement',
-        priority: 'medium',
-        message: 'Увеличьте время на странице - добавьте интерактивные элементы',
-        expectedImpact: '+10-15% конверсий'
-      });
-    }
-
-    if (features.ctr < 0.3) {
-      recommendations.push({
-        type: 'seo',
-        priority: 'medium',
-        message: 'Улучшите CTR в поиске - оптимизируйте title и description',
-        expectedImpact: '+15-20% трафика и конверсий'
+        message: 'Улучшите качество контента - это улучшит ранжирование и трафик',
+        expectedImpact: '+20-30% трафика через лучшее ранжирование'
       });
     }
 
@@ -319,8 +349,27 @@ class ConversionPredictor {
       recommendations.push({
         type: 'semantic',
         priority: 'medium',
-        message: 'Улучшите Semantic Score - покройте все Tier 1 темы',
-        expectedImpact: '+10-15% конверсий'
+        message: 'Улучшите Semantic Score - покройте все Tier 1 темы для релевантности',
+        expectedImpact: '+15-25% трафика через лучшую релевантность'
+      });
+    }
+
+    // Engagement факторы (показывают conversion potential трафика)
+    if (features.bounceRate > 0.5) {
+      recommendations.push({
+        type: 'engagement',
+        priority: 'medium',
+        message: 'Снизьте bounce rate - улучшите релевантность для удержания трафика',
+        expectedImpact: 'Больше трафика останется на сайте и конвертируется'
+      });
+    }
+
+    if (features.timeOnPage < 0.3) {
+      recommendations.push({
+        type: 'engagement',
+        priority: 'low',
+        message: 'Увеличьте время на странице - улучшите контент для удержания',
+        expectedImpact: 'Больше engagement = выше conversion potential'
       });
     }
 
@@ -328,8 +377,8 @@ class ConversionPredictor {
       recommendations.push({
         type: 'linking',
         priority: 'low',
-        message: 'Добавьте больше внутренних ссылок для улучшения навигации',
-        expectedImpact: '+5-10% конверсий'
+        message: 'Добавьте больше внутренних ссылок для улучшения навигации и SEO',
+        expectedImpact: '+5-10% трафика через внутренние ссылки'
       });
     }
 

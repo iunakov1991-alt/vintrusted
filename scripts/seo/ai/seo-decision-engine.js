@@ -227,11 +227,14 @@ ${aiContext.gscMetrics ? `
 - Min quality threshold: ${aiContext.config.minQualityScore}
 
 STRATEGY GOALS:
-1. Maximize SEO coverage and organic traffic
-2. Maximize conversion potential (PRIMARY GOAL - optimize for conversions, not just traffic)
-3. Maintain high quality (quality score >= ${aiContext.config.minQualityScore})
-4. Optimize resource usage
-5. Learn from past performance
+1. Maximize SEO coverage and organic traffic (PRIMARY GOAL for SEO pages)
+2. Maximize traffic with HIGH conversion potential (not just any traffic, but quality traffic that converts)
+3. Focus on traffic that leads to conversions with highest probability
+4. Maintain high quality (quality score >= ${aiContext.config.minQualityScore})
+5. Optimize resource usage
+6. Learn from past performance
+
+IMPORTANT: These are SEO landing pages, not the main page. Conversion rates will be lower (1-3% is normal), but the goal is to maximize QUALITY TRAFFIC that has high conversion potential.
 
 CONVERSION OPTIMIZATION:
 ${aiContext.conversionMetrics && aiContext.conversionMetrics.hasConversionData ? `
@@ -252,10 +255,13 @@ DECISION RULES:
 - If GSC shows low CTR: focus on quality over quantity
 - If GSC shows high CTR: can increase quantity
 - Consider rejection rate: if high (>30%), reduce target to maintain quality
-- If conversion data available: prioritize pages with high predicted conversion rates
-- If avg predicted conversion < 2%: focus on quality improvements first (reduce quantity, increase quality)
-- If avg predicted conversion > 5%: can increase quantity (high conversion = good quality)
-- Conversion optimization is PRIMARY goal when data is available
+- For SEO pages: focus on TRAFFIC VOLUME with high conversion potential
+- If conversion data available: prioritize pages with high TRAFFIC CONVERSION POTENTIAL (traffic × conversion rate)
+- If avg predicted conversion < 1%: normal for SEO pages, focus on maximizing traffic
+- If avg predicted conversion > 3%: excellent for SEO pages, can increase quantity
+- Traffic optimization is PRIMARY goal, but prioritize traffic that converts
+- High CTR + Good positions = Quality traffic with conversion potential
+- Quality content = Better rankings = More traffic = More conversions
 
 RESPOND WITH JSON:
 {
