@@ -602,6 +602,92 @@
       container.innerHTML = html;
     }
 
+    // Рендеринг статистики конверсий
+    function renderConversionStats(conversion, model) {
+      const panel = document.getElementById('conversionPanel');
+      const container = document.getElementById('conversionStats');
+      
+      if (!conversion) {
+        panel.style.display = 'none';
+        return;
+      }
+
+      panel.style.display = 'block';
+      
+      let html = `
+        <div style="padding: 16px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 12px; margin-bottom: 16px;">
+          <h3 style="margin: 0 0 12px 0; font-size: 18px;">Общая статистика</h3>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+            <div>
+              <div style="font-size: 24px; font-weight: 700;">${conversion.totalConversions || 0}</div>
+              <div style="font-size: 12px; opacity: 0.9;">Всего конверсий</div>
+            </div>
+            <div>
+              <div style="font-size: 24px; font-weight: 700;">$${(conversion.totalRevenue || 0).toLocaleString()}</div>
+              <div style="font-size: 12px; opacity: 0.9;">Общий доход</div>
+            </div>
+            <div>
+              <div style="font-size: 24px; font-weight: 700;">${((conversion.avgConversionRate || 0) * 100).toFixed(2)}%</div>
+              <div style="font-size: 12px; opacity: 0.9;">Средний CR</div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (model) {
+        html += `
+          <div style="padding: 16px; background: #f8f9fa; border-radius: 12px; margin-bottom: 16px;">
+            <h3 style="margin: 0 0 12px 0; font-size: 16px;">🤖 Conversion Prediction Model</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; font-size: 14px;">
+              <div>
+                <strong>Точность модели:</strong> ${(model.accuracy * 100).toFixed(1)}%
+              </div>
+              <div>
+                <strong>Обучено на:</strong> ${model.trainingSamples} примерах
+              </div>
+              <div>
+                <strong>Средний предсказанный CR:</strong> ${(model.avgPredictedRate * 100).toFixed(2)}%
+              </div>
+              <div>
+                <strong>Средний фактический CR:</strong> ${(model.avgActualRate * 100).toFixed(2)}%
+              </div>
+            </div>
+            ${model.lastTrained ? `<div style="margin-top: 8px; font-size: 12px; color: #666;">Последнее обучение: ${new Date(model.lastTrained).toLocaleDateString('ru-RU')}</div>` : ''}
+          </div>
+        `;
+      }
+
+      if (conversion.topConvertingPages && conversion.topConvertingPages.length > 0) {
+        html += `
+          <div style="padding: 16px; background: #f8f9fa; border-radius: 12px;">
+            <h3 style="margin: 0 0 12px 0; font-size: 16px;">🏆 Топ конвертирующие страницы</h3>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+        `;
+        
+        conversion.topConvertingPages.slice(0, 5).forEach((page, idx) => {
+          html += `
+            <li style="padding: 12px; background: white; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span style="color: #999; margin-right: 8px;">#${idx + 1}</span>
+                <span style="font-size: 14px;">${page.url}</span>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: 600; color: #10b981;">${(page.conversionRate * 100).toFixed(2)}%</div>
+                <div style="font-size: 12px; color: #666;">${page.conversions} конверсий</div>
+              </div>
+            </li>
+          `;
+        });
+        
+        html += `
+            </ul>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
     // Рендеринг топ страниц
     function renderTopPages(pages) {
       const container = document.getElementById('topPages');

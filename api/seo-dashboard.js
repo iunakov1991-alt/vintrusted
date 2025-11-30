@@ -204,6 +204,31 @@ async function getStats(req, res) {
     },
     recommendations,
     schedule,
+    conversion: conversionStats ? {
+      totalConversions: conversionStats.totalConversions,
+      totalRevenue: conversionStats.totalRevenue,
+      avgConversionRate: conversionStats.avgConversionRate,
+      pagesWithConversions: conversionStats.pagesWithConversions,
+      topConvertingPages: conversionStats.topConvertingPages
+    } : null,
+    conversionModel: conversionModelStats ? {
+      accuracy: conversionModelStats.accuracy,
+      trainingSamples: conversionModelStats.trainingSamples,
+      avgPredictedRate: conversionModelStats.avgPredictedRate,
+      avgActualRate: conversionModelStats.avgActualRate,
+      lastTrained: conversionModelStats.lastTrained
+    } : null,
+    aiRecommendation: aiRecommendation ? {
+      shouldBuild: aiRecommendation.shouldBuild,
+      urgency: aiRecommendation.urgency,
+      recommendation: aiRecommendation.recommendation,
+      targetPages: aiRecommendation.targetPages,
+      strategy: aiRecommendation.strategy,
+      confidence: aiRecommendation.confidence,
+      recommendations: aiRecommendation.recommendations,
+      expectedOutcome: aiRecommendation.expectedOutcome,
+      aiPowered: aiRecommendation.aiPowered
+    } : null,
     config: {
       targetPages: config.targetPagesPerBuild || 10000,
       minQuality: config.minQualityScore || 0.70,
