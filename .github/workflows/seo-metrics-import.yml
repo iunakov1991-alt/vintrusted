@@ -24,40 +24,36 @@ jobs:
       - name: Install dependencies
         run: npm install
       
-      - name: Check for GSC data
-        id: check-gsc
+      - name: Import GSC data (if file provided)
         run: |
-          if [ -f "${{ secrets.GSC_DATA_PATH }}" ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
+          if [ -f "data/seo/gsc-export.csv" ]; then
+            echo "📊 Importing GSC data from CSV..."
+            node scripts/seo/utils/gsc-import.js --csv data/seo/gsc-export.csv
+          elif [ -f "data/seo/gsc-export.json" ]; then
+            echo "📊 Importing GSC data from JSON..."
+            node scripts/seo/utils/gsc-import.js --json data/seo/gsc-export.json
           else
-            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No GSC export file found. To enable GSC import:"
+            echo "   1. Export data from Google Search Console (CSV or JSON)"
+            echo "   2. Place file as data/seo/gsc-export.csv or data/seo/gsc-export.json"
+            echo "   3. Commit and push the file"
           fi
         continue-on-error: true
       
-      - name: Import GSC data (if available)
-        if: steps.check-gsc.outputs.exists == 'true'
+      - name: Import GA data (if file provided)
         run: |
-          echo "GSC data import would run here"
-          echo "Place your GSC export file in repository and update path"
-          # node scripts/seo/utils/gsc-import.js --csv path/to/gsc-export.csv
-        continue-on-error: true
-      
-      - name: Check for GA data
-        id: check-ga
-        run: |
-          if [ -f "${{ secrets.GA_DATA_PATH }}" ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
+          if [ -f "data/seo/ga-export.csv" ]; then
+            echo "📊 Importing GA data from CSV..."
+            node scripts/seo/utils/metrics-import.js --csv data/seo/ga-export.csv
+          elif [ -f "data/seo/ga-export.json" ]; then
+            echo "📊 Importing GA data from JSON..."
+            node scripts/seo/utils/metrics-import.js --json data/seo/ga-export.json
           else
-            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "ℹ️  No GA export file found. To enable GA import:"
+            echo "   1. Export data from Google Analytics 4 (CSV or JSON)"
+            echo "   2. Place file as data/seo/ga-export.csv or data/seo/ga-export.json"
+            echo "   3. Commit and push the file"
           fi
-        continue-on-error: true
-      
-      - name: Import GA data (if available)
-        if: steps.check-ga.outputs.exists == 'true'
-        run: |
-          echo "GA data import would run here"
-          echo "Place your GA export file in repository and update path"
-          # node scripts/seo/utils/metrics-import.js --csv path/to/ga-export.csv
         continue-on-error: true
       
       - name: Commit and push if data changed
@@ -65,7 +61,18 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/seo/*.json || true
-          git diff --staged --quiet || git commit -m "Auto: Update SEO metrics from GSC/GA import"
-          git push || true
+          git add data/seo/gsc-cache.json data/seo/gsc-data.json data/seo/external-metrics.json || true
+          git diff --staged --quiet || (git commit -m "Auto: Update SEO metrics from GSC/GA import [skip ci]" && git push) || true
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 📊 SEO Metrics Import Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Weekly metrics import completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Note:** To enable automatic import:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Export data from GSC/GA" >> $GITHUB_STEP_SUMMARY
+          echo "2. Place files in data/seo/ directory" >> $GITHUB_STEP_SUMMARY
+          echo "3. Commit and push" >> $GITHUB_STEP_SUMMARY
 
