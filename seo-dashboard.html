@@ -377,6 +377,18 @@
           <div class="quality-bar-fill" id="qualityBar" style="width: 0%"></div>
         </div>
       </div>
+
+      <div class="stat-card" id="conversionCard" style="display: none;">
+        <h3>Конверсии</h3>
+        <div class="value" id="totalConversions">-</div>
+        <div class="label">Всего конверсий</div>
+      </div>
+
+      <div class="stat-card" id="conversionRateCard" style="display: none;">
+        <h3>Conversion Rate</h3>
+        <div class="value" id="avgConversionRate">-</div>
+        <div class="label">Средний процент конверсий</div>
+      </div>
     </div>
 
     <div class="main-content">
@@ -436,6 +448,23 @@
       document.getElementById('avgQuality').textContent = (avgQuality * 100).toFixed(1) + '%';
       document.getElementById('qualityBar').style.width = (avgQuality * 100) + '%';
 
+      // Conversion метрики
+      if (data.conversion) {
+        document.getElementById('conversionCard').style.display = 'block';
+        document.getElementById('conversionRateCard').style.display = 'block';
+        document.getElementById('totalConversions').textContent = data.conversion.totalConversions || 0;
+        document.getElementById('avgConversionRate').textContent = ((data.conversion.avgConversionRate || 0) * 100).toFixed(2) + '%';
+      } else {
+        document.getElementById('conversionCard').style.display = 'none';
+        document.getElementById('conversionRateCard').style.display = 'none';
+      }
+
+      // Conversion Model статистика
+      if (data.conversionModel) {
+        // Можно добавить отображение статистики модели
+        console.log('Conversion Model:', data.conversionModel);
+      }
+
       // AI рекомендация (обновляем кнопку)
       if (data.aiRecommendation && data.aiRecommendation.shouldBuild) {
         const btn = document.getElementById('buildBtn');
@@ -463,6 +492,9 @@
 
       // Настройки
       renderConfig(data.config || {});
+
+      // Conversion статистика
+      renderConversionStats(data.conversion, data.conversionModel);
     }
 
     // Рендеринг расписания

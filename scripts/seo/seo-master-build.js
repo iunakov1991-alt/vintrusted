@@ -144,6 +144,8 @@ async function main() {
     const selfDiagnosis = new SelfDiagnosis(config);
     const autoRepair = new AutoRepair(config);
     const i18nEngine = new I18nEngine(config);
+    const { ConversionTracker } = require('./analytics/conversion-tracker');
+    const conversionTracker = new ConversionTracker(config);
 
     // Этап 0: Pre-build check: диагностика и автоисправление
     pipeline.registerStage('pre-build-check', async (ctx) => {
@@ -441,6 +443,14 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       ctx.acceptedPages = externalMetrics.enrichPagesWithMetrics(ctx.acceptedPages);
       const stats = externalMetrics.getStatistics();
       log('STAGE', `External metrics: ${stats.urlsWithBounceRate} pages with bounce rate, ${stats.urlsWithTimeOnPage} with time on page`);
+    });
+
+    // Этап 8.7: Обогащение данными о конверсиях и предсказания
+    pipeline.registerStage('conversion-enrichment', async (ctx) => {
+      log('STAGE', 'Conversion Enrichment');
+      ctx.acceptedPages = conversionTracker.enrichPagesWithConversions(ctx.acceptedPages);
+      const stats = conversionTracker.getStatistics();
+      log('STAGE', `Conversion data: ${stats.pagesWithConversions} pages with conversions, avg rate: ${(stats.avgConversionRate * 100).toFixed(2)}%`);
     });
 
     // Этап 9: Обновление LTR весов

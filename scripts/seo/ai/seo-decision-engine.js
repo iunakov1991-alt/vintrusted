@@ -2,6 +2,7 @@ const { callDeepseekChat } = require('../../ai/deepseek-client');
 const fs = require('fs');
 const path = require('path');
 const { log } = require('../logger');
+const { ConversionPredictor } = require('../analytics/conversion-predictor');
 
 /**
  * SEO MONSTER 6.0: AI Decision Engine
@@ -11,6 +12,7 @@ class SEODecisionEngine {
   constructor(config) {
     this.config = config;
     this.decisionsPath = path.join(process.cwd(), 'data/seo/ai-decisions.json');
+    this.conversionPredictor = new ConversionPredictor(config);
     this.loadHistory();
   }
 
@@ -226,10 +228,19 @@ ${aiContext.gscMetrics ? `
 
 STRATEGY GOALS:
 1. Maximize SEO coverage and organic traffic
-2. Maximize conversion potential
+2. Maximize conversion potential (PRIMARY GOAL - optimize for conversions, not just traffic)
 3. Maintain high quality (quality score >= ${aiContext.config.minQualityScore})
 4. Optimize resource usage
 5. Learn from past performance
+
+CONVERSION OPTIMIZATION:
+${aiContext.conversionMetrics.hasConversionData ? `
+- Average predicted conversion rate: ${(aiContext.conversionMetrics.avgPredictedRate * 100).toFixed(2)}%
+- Model accuracy: ${(aiContext.conversionMetrics.modelAccuracy * 100).toFixed(1)}%
+- Training samples: ${aiContext.conversionMetrics.trainingSamples}
+- Focus on pages with HIGH predicted conversion rates
+- Prioritize quality over quantity when conversion data is available
+` : '- No conversion data yet - focus on quality and traffic first'}
 
 DECISION RULES:
 - If pages < 100: Aggressive growth (15000-20000 pages) to establish presence
@@ -241,6 +252,10 @@ DECISION RULES:
 - If GSC shows low CTR: focus on quality over quantity
 - If GSC shows high CTR: can increase quantity
 - Consider rejection rate: if high (>30%), reduce target to maintain quality
+- If conversion data available: prioritize pages with high predicted conversion rates
+- If avg predicted conversion < 2%: focus on quality improvements first (reduce quantity, increase quality)
+- If avg predicted conversion > 5%: can increase quantity (high conversion = good quality)
+- Conversion optimization is PRIMARY goal when data is available
 
 RESPOND WITH JSON:
 {

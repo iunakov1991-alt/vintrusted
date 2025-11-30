@@ -142,6 +142,26 @@ async function getStats(req, res) {
     topPages = [];
   }
 
+  // Conversion статистика
+  let conversionStats = null;
+  try {
+    const { ConversionTracker } = require('../scripts/seo/analytics/conversion-tracker');
+    const conversionTracker = new ConversionTracker(config);
+    conversionStats = conversionTracker.getStatistics();
+  } catch (e) {
+    console.error('Conversion stats error:', e);
+  }
+
+  // Conversion Predictor статистика
+  let conversionModelStats = null;
+  try {
+    const { ConversionPredictor } = require('../scripts/seo/analytics/conversion-predictor');
+    const conversionPredictor = new ConversionPredictor(config);
+    conversionModelStats = conversionPredictor.getStatistics();
+  } catch (e) {
+    console.error('Conversion model stats error:', e);
+  }
+
   // AI рекомендации
   let aiRecommendation = null;
   try {

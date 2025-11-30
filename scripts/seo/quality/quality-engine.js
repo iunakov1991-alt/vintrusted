@@ -8,6 +8,14 @@ class QualityEngine {
   constructor(config) {
     this.config = config;
     this.minScore = config.minQualityScore || 0.75;
+    // Опциональная интеграция с Conversion Predictor
+    try {
+      const { ConversionPredictor } = require('../analytics/conversion-predictor');
+      this.conversionPredictor = new ConversionPredictor(config);
+      this.useConversionPrediction = true;
+    } catch (e) {
+      this.useConversionPrediction = false;
+    }
   }
 
   /**
@@ -70,13 +78,35 @@ class QualityEngine {
     }
     const semanticScore = Math.min(1, semanticHits / tier1Keywords.length);
 
-    // Итоговый score
+    // 6. Conversion prediction score (0-1) - если доступен Conversion Predictor
+    let conversionScore = 0.5; // Нейтральный score по умолчанию
+    if (this.useConversionPrediction && this.conversionPredictor) {
+      try {
+        const prediction = this.conversionPredictor.predictConversion(page, {
+          traffic: page.gscMetrics?.clicks || 0,
+          ctr: page.gscMetrics?.ctr || 0,
+          position: page.gscMetrics?.position || 0,
+          bounceRate: page.externalMetrics?.bounceRate || 0,
+          timeOnPage: page.externalMetrics?.timeOnPage || 0
+        });
+        conversionScore = prediction.predictedRate;
+      } catch (e) {
+        // Если ошибка, используем нейтральный score
+        conversionScore = 0.5;
+      }
+    }
+
+    // Итоговый score (с учетом конверсий, если доступны)
+    const conversionWeight = this.useConversionPrediction ? 0.15 : 0;
+    const baseWeight = 1 - conversionWeight;
+    
     const score = (
-      0.20 * lenScore +
-      0.25 * structureScore +
-      0.20 * keywordScore +
-      0.15 * diversityScore +
-      0.20 * semanticScore  // Новый фактор: семантическое покрытие Tier 1
+      (baseWeight * 0.20) * lenScore +
+      (baseWeight * 0.25) * structureScore +
+      (baseWeight * 0.20) * keywordScore +
+      (baseWeight * 0.15) * diversityScore +
+      (baseWeight * 0.20) * semanticScore +
+      (conversionWeight) * conversionScore  // Новый фактор: предсказанные конверсии
     );
 
     return {
@@ -86,7 +116,8 @@ class QualityEngine {
         structure: structureScore,
         keywords: keywordScore,
         diversity: diversityScore,
-        semantic: semanticScore
+        semantic: semanticScore,
+        conversion: this.useConversionPrediction ? conversionScore : undefined
       },
       isAccepted: score >= this.minScore
     };
