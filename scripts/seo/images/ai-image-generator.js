@@ -175,19 +175,22 @@ class AIImageGenerator {
               messages: [
                 {
                   role: 'system',
-                  content: 'You are an expert prompt engineer for AI image generation. Create detailed, specific prompts that will help generate professional SVG graphics for vehicle VIN report pages.'
+                  content: 'You are an expert prompt engineer for AI SVG generation. Create detailed, specific prompts for professional vehicle VIN report graphics. Focus on automotive themes, document aesthetics, and visual elements that represent vehicle history reports.'
                 },
                 {
                   role: 'user',
-                  content: `Create an optimized prompt for generating an SVG image for a VIN report page:
-- Type: ${type} (${type === 'hero' ? 'hero section' : 'social media preview'})
+                  content: `Create a detailed SVG generation prompt for a VIN report page hero image:
+- Type: ${type} (${type === 'hero' ? 'hero section banner' : 'social media preview card'})
 - Dimensions: ${width}x${height} pixels
-- Vehicle: ${makeName}
+- Vehicle brand: ${makeName}
 - State: ${stateName}
-- Style: Official DMV document aesthetic, minimal geometric design
-- Requirements: Professional, subtle colors, geometric shapes, clean lines, no text
+- Style: Official DMV/document aesthetic, professional, minimal geometric design
+- Theme: Vehicle history report, automotive documentation, official records
+- Visual elements to include: Abstract representation of vehicle documents, geometric patterns suggesting data/records, subtle automotive iconography (wheels, dashboard elements, document lines), professional color scheme
+- Requirements: No text, only visual elements, professional appearance, suitable for ${makeName} brand identity, ${stateName} state context
+- Color palette: Professional, subtle, appropriate for official documents and ${makeName} vehicles
 
-Generate a detailed, specific prompt that will help an AI create the perfect SVG for this context. Return ONLY the prompt text, nothing else.`
+Generate a comprehensive, detailed prompt that will result in a sophisticated, professional SVG graphic. Return ONLY the prompt text, nothing else.`
                 }
               ],
               max_tokens: 300,
@@ -209,20 +212,31 @@ Generate a detailed, specific prompt that will help an AI create the perfect SVG
       }
       
       // Шаг 2: Используем DeepSeek для генерации SVG на основе улучшенного промпта
-      const systemPrompt = `You are an expert SVG designer. Generate clean, professional SVG code for vehicle VIN report pages. 
-The SVG should be in DMV/official document style - minimal, geometric, professional.
-Use subtle colors, geometric shapes, and clean lines. No text in the image.
-Return ONLY valid SVG XML code, nothing else.`;
+      const systemPrompt = `You are an expert SVG designer specializing in professional vehicle documentation graphics. 
+Generate sophisticated, visually appealing SVG code for vehicle VIN report pages.
+The SVG should:
+- Use DMV/official document aesthetic with modern, clean design
+- Include abstract automotive elements (subtle wheel patterns, dashboard lines, document grids)
+- Use professional color gradients and geometric patterns
+- Be visually interesting but not overwhelming
+- Represent vehicle history, documentation, and official records
+- NO text, only visual elements
+- Be suitable for ${width}x${height} dimensions
 
-      const userPrompt = enhancedPrompt || `Create an SVG image for a VIN report page:
-- Type: ${type} (${type === 'hero' ? 'hero section' : 'social media preview'})
+Return ONLY valid, complete SVG XML code with proper structure, nothing else.`;
+
+      const userPrompt = enhancedPrompt || `Create a professional SVG hero image for a VIN report page:
+- Type: ${type} (${type === 'hero' ? 'hero section banner' : 'social media preview card'})
 - Dimensions: ${width}x${height} pixels
-- Style: Official DMV document aesthetic, minimal geometric design
-- Colors: Professional, subtle palette suitable for ${makeName} vehicles in ${stateName}
-- Theme: Vehicle history report, official document style
-- No text, only visual elements
+- Vehicle brand: ${makeName}
+- State: ${stateName}
+- Style: Official DMV/document aesthetic, modern minimal geometric design
+- Visual elements: Abstract vehicle documentation theme, geometric patterns suggesting data/records, subtle automotive iconography, professional gradients
+- Colors: Professional palette suitable for ${makeName} vehicles and ${stateName} state context
+- Theme: Vehicle history report, official records, automotive documentation
+- Requirements: No text, visually appealing, professional appearance
 
-Generate the complete SVG code:`;
+Generate the complete, sophisticated SVG code with proper structure, gradients, and geometric elements:`;
 
       const svgCode = await callDeepseekChat({
         messages: [
@@ -266,37 +280,60 @@ Generate the complete SVG code:`;
 
   /**
    * Генерация SVG изображения программно (fallback)
-   * Создает уникальное изображение для каждого кластера
+   * Создает уникальное изображение для каждого кластера с автомобильной тематикой
    */
   generateSVGImage(stateSlug, make, intent, type, width, height) {
     // Генерируем уникальный цвет на основе параметров кластера
     const hash = this.hashString(`${stateSlug}-${make}-${intent}`);
     const hue = hash % 360;
-    const saturation = 40 + (hash % 20); // 40-60%
-    const lightness = type === 'hero' ? 85 : 80; // Светлее для hero
+    
+    // Более профессиональная цветовая палитра (синие, серые, темно-синие тона)
+    const professionalHue = (hue + 200) % 360; // Сдвигаем к синим/серым тонам
+    const saturation = 25 + (hash % 15); // 25-40% - более приглушенные
+    const lightness = type === 'hero' ? 92 : 88; // Очень светлые тона для документального стиля
 
-    // Основной цвет
-    const primaryColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-    const secondaryColor = `hsl(${hue + 30}, ${saturation - 10}%, ${lightness - 5}%)`;
-    const accentColor = `hsl(${hue + 60}, ${saturation - 5}%, ${lightness - 10}%)`;
+    // Профессиональная цветовая палитра (сине-серые тона)
+    const primaryColor = `hsl(${professionalHue}, ${saturation}%, ${lightness}%)`;
+    const secondaryColor = `hsl(${(professionalHue + 20) % 360}, ${Math.max(15, saturation - 5)}%, ${Math.min(95, lightness + 2)}%)`;
+    const accentColor = `hsl(${(professionalHue + 40) % 360}, ${Math.max(20, saturation - 3)}%, ${Math.max(70, lightness - 8)}%)`;
+    const darkAccent = `hsl(${professionalHue}, ${Math.min(50, saturation + 10)}%, ${Math.max(60, lightness - 15)}%)`;
 
     // Геометрические паттерны для уникальности
     const patternSeed = hash % 4;
     const shapes = this.generateShapes(patternSeed, width, height, primaryColor, secondaryColor, accentColor);
 
-    // Формируем SVG
+    // Добавляем абстрактные элементы документов/автомобилей
+    const docLines = this.generateDocumentLines(width, height, darkAccent, hash);
+    const automotiveElements = this.generateAutomotiveElements(width, height, accentColor, hash);
+
+    // Формируем SVG с более сложной структурой
     const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:${primaryColor};stop-opacity:1" />
-      <stop offset="100%" style="stop-color:${secondaryColor};stop-opacity:1" />
+      <stop offset="50%" style="stop-color:${secondaryColor};stop-opacity:1" />
+      <stop offset="100%" style="stop-color:${primaryColor};stop-opacity:0.95" />
     </linearGradient>
+    <pattern id="gridPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="${darkAccent}" stroke-width="0.5" opacity="0.15"/>
+    </pattern>
   </defs>
+  <!-- Background -->
   <rect width="${width}" height="${height}" fill="url(#bgGradient)" />
+  <rect width="${width}" height="${height}" fill="url(#gridPattern)" opacity="0.3" />
+  
+  <!-- Abstract shapes -->
   ${shapes}
-  <!-- DMV-style border -->
-  <rect x="0" y="0" width="${width}" height="${height}" fill="none" stroke="${accentColor}" stroke-width="2" opacity="0.3" />
+  
+  <!-- Document lines pattern -->
+  ${docLines}
+  
+  <!-- Automotive elements -->
+  ${automotiveElements}
+  
+  <!-- Subtle border -->
+  <rect x="0" y="0" width="${width}" height="${height}" fill="none" stroke="${darkAccent}" stroke-width="1" opacity="0.2" />
 </svg>`;
 
     // Конвертируем SVG в Buffer
