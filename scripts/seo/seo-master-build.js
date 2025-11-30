@@ -21,15 +21,18 @@ const { InternalLinksEngine } = require('./links/internal-links-engine');
  */
 async function main() {
   // Защита от множественных запусков на Vercel
-  const lockFile = path.join(process.cwd(), '.seo-build.lock');
-  const lockTimeout = 30000; // 30 секунд
+  // Используем переменную окружения Vercel для однократного запуска
+  const buildId = process.env.VERCEL || process.env.VERCEL_DEPLOYMENT_ID || 'local';
+  const lockFile = path.join(process.cwd(), `.seo-build-${buildId}.lock`);
+  const lockTimeout = 60000; // 60 секунд
   
+  // Проверяем, был ли уже запущен build для этого deployment
   if (fs.existsSync(lockFile)) {
     const lockData = JSON.parse(fs.readFileSync(lockFile, 'utf8'));
     const lockAge = Date.now() - lockData.timestamp;
     
     if (lockAge < lockTimeout) {
-      log('MASTER', `SEO build already running (lock age: ${lockAge}ms), skipping...`);
+      log('MASTER', `SEO build already completed for this deployment (lock age: ${lockAge}ms), skipping...`);
       return;
     } else {
       // Старый lock, удаляем
@@ -41,20 +44,28 @@ async function main() {
   // Создаем lock файл
   fs.writeFileSync(lockFile, JSON.stringify({ 
     timestamp: Date.now(),
-    pid: process.pid 
+    pid: process.pid,
+    buildId: buildId
   }), 'utf8');
   
   // Удаляем lock при завершении
-  process.on('exit', () => {
+  const cleanup = () => {
     if (fs.existsSync(lockFile)) {
-      fs.unlinkSync(lockFile);
+      try {
+        fs.unlinkSync(lockFile);
+      } catch (e) {
+        // Ignore cleanup errors
+      }
     }
-  });
+  };
+  process.on('exit', cleanup);
+  process.on('SIGINT', cleanup);
+  process.on('SIGTERM', cleanup);
   
   const startedAt = new Date().toISOString();
   const startMs = Date.now();
 
-  log('MASTER', 'Starting SEO MONSTER 6.0 build');
+  log('MASTER', `Starting SEO MONSTER 6.0 build (buildId: ${buildId})`);
 
   try {
     // Загрузка конфигурации
@@ -279,9 +290,14 @@ async function main() {
 main().catch((e) => {
   error('MASTER', 'Fatal error', e);
   // Удаляем lock при ошибке
-  const lockFile = path.join(process.cwd(), '.seo-build.lock');
+  const buildId = process.env.VERCEL || process.env.VERCEL_DEPLOYMENT_ID || 'local';
+  const lockFile = path.join(process.cwd(), `.seo-build-${buildId}.lock`);
   if (fs.existsSync(lockFile)) {
-    fs.unlinkSync(lockFile);
+    try {
+      fs.unlinkSync(lockFile);
+    } catch (cleanupErr) {
+      // Ignore cleanup errors
+    }
   }
   process.exit(1);
 });
