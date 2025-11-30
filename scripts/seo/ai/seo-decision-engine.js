@@ -245,7 +245,9 @@ STRATEGY GOALS (PRIORITY ORDER):
 IMPORTANT: These are SEO landing pages. The PRIMARY goal is to make Google love them so much that it drives massive traffic. Conversion optimization is SECONDARY - first we need traffic from Google.
 
 CONVERSION OPTIMIZATION:
-${aiContext.conversionMetrics && aiContext.conversionMetrics.hasConversionData ? `
+${aiContext.conversionMetrics && 
+  aiContext.conversionMetrics.hasConversionData !== undefined && 
+  aiContext.conversionMetrics.hasConversionData ? `
 - Average predicted conversion rate: ${(aiContext.conversionMetrics.avgPredictedRate * 100).toFixed(2)}%
 - Model accuracy: ${(aiContext.conversionMetrics.modelAccuracy * 100).toFixed(1)}%
 - Training samples: ${aiContext.conversionMetrics.trainingSamples}
@@ -397,7 +399,9 @@ RESPOND WITH JSON:
     }
 
     // Корректировка на основе conversion metrics (если есть)
-    if (context.conversionMetrics && context.conversionMetrics.hasConversionData) {
+    if (context.conversionMetrics && 
+        context.conversionMetrics.hasConversionData !== undefined && 
+        context.conversionMetrics.hasConversionData) {
       const avgCR = context.conversionMetrics.avgPredictedRate || 0;
       if (avgCR > 0.03) {
         // Высокий CR для SEO страниц - можно увеличить количество
