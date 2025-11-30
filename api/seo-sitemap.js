@@ -7,9 +7,18 @@ const path = require('path');
  */
 module.exports = async (req, res) => {
   try {
-    const file = req.query.file || 'sitemap-seo.xml';
+    // Получаем имя файла из query параметра
+    let file = req.query.file;
     
-    // Валидация имени файла (только буквы, цифры, дефисы, точки)
+    // Если file не передан, используем дефолтный
+    if (!file) {
+      file = 'sitemap-seo.xml';
+    }
+    
+    // Убираем возможные слеши в начале
+    file = file.replace(/^\//, '');
+    
+    // Валидация имени файла (только буквы, цифры, дефисы, точки, должно заканчиваться на .xml)
     if (!/^[a-zA-Z0-9._-]+\.xml$/.test(file)) {
       return res.status(400).json({ error: 'Invalid file name' });
     }
