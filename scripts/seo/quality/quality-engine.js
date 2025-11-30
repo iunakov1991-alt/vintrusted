@@ -23,20 +23,23 @@ class QualityEngine {
     // 2. Structure score (0-1)
     const hasH2 = /<h2[^>]*>/i.test(html);
     const hasH3 = /<h3[^>]*>/i.test(html);
-    const hasFaq = /class="faq"/i.test(html);
-    const hasCta = /class="cta"/i.test(html);
-    const hasKeyFacts = /class="key-facts"/i.test(html);
-    const hasLocal = /class="local-insights"/i.test(html);
+    // Поддержка старых и новых классов
+    const hasFaq = /class="(seo-)?faq/i.test(html);
+    const hasCta = /class="(seo-)?(hero-)?cta/i.test(html);
+    const hasKeyFacts = /class="(seo-)?key-facts/i.test(html);
+    const hasLocal = /class="(seo-)?(state-insights|local-insights)/i.test(html);
     const hasTable = /<table/i.test(html);
+    const hasHero = /class="seo-hero/i.test(html);
     
     const structureScore = (
-      (hasH2 ? 0.15 : 0) +
-      (hasH3 ? 0.1 : 0) +
-      (hasFaq ? 0.15 : 0) +
-      (hasCta ? 0.15 : 0) +
-      (hasKeyFacts ? 0.15 : 0) +
-      (hasLocal ? 0.15 : 0) +
-      (hasTable ? 0.15 : 0)
+      (hasH2 ? 0.12 : 0) +
+      (hasH3 ? 0.08 : 0) +
+      (hasFaq ? 0.12 : 0) +
+      (hasCta ? 0.12 : 0) +
+      (hasKeyFacts ? 0.12 : 0) +
+      (hasLocal ? 0.12 : 0) +
+      (hasTable ? 0.12 : 0) +
+      (hasHero ? 0.2 : 0) // Бонус за новый дизайн
     );
 
     // 3. Keyword score (0-1)

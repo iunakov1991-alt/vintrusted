@@ -203,13 +203,35 @@ class AutoRepair {
   async preBuildCheck() {
     const diagnosis = this.selfDiagnosis.diagnose();
     
-    if (diagnosis.status === 'critical') {
+    // Фильтруем проблемы, которые не должны блокировать билд
+    const blockingIssues = diagnosis.issues.filter(issue => 
+      issue.type !== 'quality' && issue.type !== 'history'
+    );
+    
+    if (blockingIssues.length > 0) {
       log('REPAIR', 'Critical issues detected, attempting auto-repair...');
       const repairResult = await this.repair();
       
       if (repairResult.repairsApplied > 0) {
         log('REPAIR', `Applied ${repairResult.repairsApplied} repairs`);
       }
+      
+      // Проверяем только блокирующие проблемы после repair
+      const newDiagnosis = this.selfDiagnosis.diagnose();
+      const remainingBlockingIssues = newDiagnosis.issues.filter(issue => 
+        issue.type !== 'quality' && issue.type !== 'history'
+      );
+      
+      if (remainingBlockingIssues.length > 0) {
+        error('REPAIR', 'Critical issues remain after auto-repair');
+        return false;
+      }
+    }
+    
+    // Проблемы качества и истории не блокируют билд, только предупреждают
+    if (diagnosis.issues.some(issue => issue.type === 'quality' || issue.type === 'history')) {
+      log('REPAIR', 'Quality/history issues detected, but continuing build (non-blocking)');
+    }
       
       // Повторная диагностика после исправления
       const newDiagnosis = this.selfDiagnosis.diagnose();

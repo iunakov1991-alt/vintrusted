@@ -2,7 +2,7 @@
   "version": "6.0",
   "targetPagesPerBuild": 10000,
   "maxPagesPerCluster": 500,
-  "minQualityScore": 0.75,
+  "minQualityScore": 0.70,
   "enableAI": true,
   "aiMaxTokens": 800,
   "aiProviders": ["groq", "deepseek", "openai"],

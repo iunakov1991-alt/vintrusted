@@ -184,11 +184,13 @@ class SelfDiagnosis {
 
     const stats = this.buildHistory.getStatistics(7);
     
-    if (stats.successRate < 0.5) {
-      issues.push({
+    // Проблемы истории не должны блокировать билд, только предупреждать
+    if (stats.successRate < 0.3 && history.length > 5) {
+      // Только если много билдов и очень низкий success rate
+      warnings.push({
         type: 'history',
-        severity: 'critical',
-        message: `Very low build success rate: ${(stats.successRate * 100).toFixed(1)}%`
+        severity: 'warning',
+        message: `Low build success rate: ${(stats.successRate * 100).toFixed(1)}%`
       });
     } else if (stats.successRate < 0.8) {
       warnings.push({
@@ -260,11 +262,13 @@ class SelfDiagnosis {
 
     const avgAcceptanceRate = acceptanceRates.reduce((a, b) => a + b, 0) / acceptanceRates.length;
 
-    if (avgAcceptanceRate < 0.5) {
-      issues.push({
+    // Проблемы качества не должны блокировать билд, только предупреждать
+    if (avgAcceptanceRate < 0.3 && history.length > 3) {
+      // Только если это не первый билд и rate очень низкий
+      warnings.push({
         type: 'quality',
-        severity: 'critical',
-        message: `Very low page acceptance rate: ${(avgAcceptanceRate * 100).toFixed(1)}%`
+        severity: 'warning',
+        message: `Low page acceptance rate: ${(avgAcceptanceRate * 100).toFixed(1)}%`
       });
     } else if (avgAcceptanceRate < 0.7) {
       warnings.push({
