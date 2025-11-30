@@ -58,6 +58,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/seo-image.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -213,7 +217,7 @@
     },
     {
       "source": "/seo/images/clusters/:file*",
-      "destination": "/seo/images/clusters/:file*"
+      "destination": "/api/seo-image.js"
     }
   ]
 }
