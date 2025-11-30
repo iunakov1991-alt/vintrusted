@@ -63,18 +63,20 @@ class ConversionPredictor {
     return {
       version: '1.0',
       weights: {
-        qualityScore: 0.25,
-        trafficVolume: 0.20,
-        ctr: 0.15,
-        position: 0.10,
-        bounceRate: -0.15,
-        timeOnPage: 0.10,
+        // SEO факторы (приоритет на трафик)
+        trafficVolume: 0.30,
+        ctr: 0.20,
+        position: 0.15,
+        qualityScore: 0.15,
         semanticScore: 0.10,
-        internalLinks: 0.05,
-        layoutType: 0.05,
-        intentType: 0.05
+        // Engagement факторы
+        timeOnPage: 0.05,
+        bounceRate: -0.05,
+        internalLinks: 0.03,
+        layoutType: 0.02,
+        intentType: 0.02
       },
-      intercept: 0.05,
+      intercept: 0.02, // Низкий базовый CR для SEO страниц
       trainingData: {
         totalSamples: 0,
         lastUpdated: null,
