@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build": "echo 'No build needed'",
-    "vercel-build": "node scripts/seo/seo-master-build.js && next build",
+    "vercel-build": "node scripts/seo/seo-master-build.js",
     "seo-monster": "node scripts/seo/seo-master-build.js"
   },
   "dependencies": {
