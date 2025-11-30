@@ -733,10 +733,10 @@ function generateRecommendations(dashboard, rlState, config, stats, aiRecommenda
     });
   }
   
-  if (stats.totalPages > 1000) {
+  if (totalPages > 1000) {
     machineWishes.push({
       type: 'praise',
-      message: `🚀 Отличный объем: ${stats.totalPages} страниц! Система имеет много данных для обучения.`
+      message: `🚀 Отличный объем: ${totalPages} страниц! Система имеет много данных для обучения.`
     });
   }
 
