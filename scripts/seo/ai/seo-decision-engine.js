@@ -176,6 +176,22 @@ class SEODecisionEngine {
       rlState = JSON.parse(fs.readFileSync(rlStatePath, 'utf8'));
     }
 
+    // Получаем предсказания конверсий для существующих страниц
+    let conversionMetrics = null;
+    try {
+      const conversionStats = this.conversionPredictor.getStatistics();
+      const avgPredictedConversion = conversionStats.avgPredictedRate || 0;
+      conversionMetrics = {
+        avgPredictedRate: avgPredictedConversion,
+        modelAccuracy: conversionStats.accuracy || 0,
+        trainingSamples: conversionStats.trainingSamples || 0,
+        hasConversionData: (conversionStats.trainingSamples || 0) > 0
+      };
+    } catch (e) {
+      // Если ошибка, используем null
+      conversionMetrics = null;
+    }
+
     // Формируем контекст для AI
     const aiContext = {
       existingPages: existing.totalPages,
@@ -188,6 +204,7 @@ class SEODecisionEngine {
         trend: buildMetrics.trend,
         recentBuildsCount: buildMetrics.recentBuilds.length
       },
+      conversionMetrics: conversionMetrics,
       gscMetrics: gscMetrics ? {
         totalClicks: gscMetrics.totalClicks,
         avgCTR: gscMetrics.avgCTR,
