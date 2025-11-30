@@ -192,8 +192,8 @@
       "destination": "/sitemaps.html"
     },
     {
-      "source": "/seo/sitemaps/:file*.xml",
-      "destination": "/api/seo-sitemap?file=:file*.xml"
+      "source": "/seo/sitemaps/:file*",
+      "destination": "/api/seo-sitemap?file=:file*"
     }
   ]
 }
