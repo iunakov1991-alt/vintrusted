@@ -598,6 +598,12 @@ function getRecommendations(req, res) {
  * Генерация рекомендаций
  */
 function generateRecommendations(dashboard, rlState, config, stats, aiRecommendation = null) {
+  // Безопасная обработка входных данных
+  const safeStats = stats || {};
+  const safeDashboard = dashboard || {};
+  const safeRlState = rlState || {};
+  const safeConfig = config || {};
+  
   const recommendations = [];
   const warnings = [];
   const suggestions = [];
