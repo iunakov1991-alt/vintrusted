@@ -1,0 +1,74 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f9fa" />
+      <stop offset="100%" stop-color="#e9ecef" />
+    </linearGradient>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066cc" />
+      <stop offset="100%" stop-color="#004d99" />
+    </linearGradient>
+    <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b35" />
+      <stop offset="100%" stop-color="#e55a2b" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="800" fill="url(#bgGradient)" />
+  
+  <!-- Header Section -->
+  <rect x="50" y="40" width="1100" height="80" rx="8" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="70" y="60" width="200" height="40" rx="4" fill="url(#blueGradient)" opacity="0.9" />
+  <rect x="290" y="60" width="120" height="40" rx="4" fill="#6c757d" opacity="0.7" />
+  <rect x="430" y="60" width="120" height="40" rx="4" fill="#6c757d" opacity="0.7" />
+  
+  <!-- Main Vehicle Graphic -->
+  <rect x="300" y="180" width="600" height="300" rx="12" fill="white" stroke="#dee2e6" stroke-width="1" />
+  
+  <!-- Vehicle Outline -->
+  <path d="M400 300 L500 280 L700 280 L800 300 L800 400 L700 420 L500 420 L400 400 Z" 
+        fill="none" stroke="#495057" stroke-width="3" stroke-linejoin="round" />
+  
+  <!-- Vehicle Details -->
+  <rect x="450" y="320" width="200" height="60" rx="6" fill="url(#blueGradient)" opacity="0.8" />
+  <rect x="470" y="340" width="160" height="20" rx="3" fill="white" opacity="0.9" />
+  
+  <!-- Status Indicators -->
+  <circle cx="350" cy="350" r="15" fill="#28a745" opacity="0.8" />
+  <circle cx="750" cy="350" r="15" fill="#28a745" opacity="0.8" />
+  
+  <!-- Data Sections -->
+  <rect x="100" y="520" width="320" height="200" rx="8" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="440" y="520" width="320" height="200" rx="8" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="780" y="520" width="320" height="200" rx="8" fill="white" stroke="#dee2e6" stroke-width="1" />
+  
+  <!-- Section Headers -->
+  <rect x="120" y="540" width="120" height="25" rx="4" fill="url(#blueGradient)" opacity="0.9" />
+  <rect x="460" y="540" width="120" height="25" rx="4" fill="url(#blueGradient)" opacity="0.9" />
+  <rect x="800" y="540" width="120" height="25" rx="4" fill="url(#blueGradient)" opacity="0.9" />
+  
+  <!-- Data Lines -->
+  <rect x="140" y="580" width="240" height="12" rx="2" fill="#e9ecef" />
+  <rect x="140" y="610" width="200" height="12" rx="2" fill="#e9ecef" />
+  <rect x="140" y="640" width="220" height="12" rx="2" fill="#e9ecef" />
+  
+  <rect x="480" y="580" width="240" height="12" rx="2" fill="#e9ecef" />
+  <rect x="480" y="610" width="200" height="12" rx="2" fill="#e9ecef" />
+  <rect x="480" y="640" width="220" height="12" rx="2" fill="#e9ecef" />
+  
+  <rect x="820" y="580" width="240" height="12" rx="2" fill="#e9ecef" />
+  <rect x="820" y="610" width="200" height="12" rx="2" fill="#e9ecef" />
+  <rect x="820" y="640" width="220" height="12" rx="2" fill="#e9ecef" />
+  
+  <!-- Decorative Elements -->
+  <circle cx="150" cy="150" r="8" fill="url(#orangeGradient)" opacity="0.6" />
+  <circle cx="1150" cy="150" r="8" fill="url(#orangeGradient)" opacity="0.6" />
+  <circle cx="150" cy="650" r="8" fill="url(#orangeGradient)" opacity="0.6" />
+  <circle cx="1150" cy="650" r="8" fill="url(#orangeGradient)" opacity="0.6" />
+  
+  <!-- Subtle Grid Pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#dee2e6" stroke-width="0.5" opacity="0.3" />
+  </pattern>
+  <rect width="1200" height="800" fill="url(#grid)" opacity="0.2" />
+</svg>

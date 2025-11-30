@@ -1,0 +1,67 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f9fa" />
+      <stop offset="100%" stop-color="#e9ecef" />
+    </linearGradient>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0052b4" />
+      <stop offset="100%" stop-color="#003d82" />
+    </linearGradient>
+    <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b6b" />
+      <stop offset="100%" stop-color="#ff5252" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="800" fill="url(#bgGradient)" />
+  
+  <!-- Header Section -->
+  <rect x="50" y="40" width="1100" height="80" rx="8" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="70" y="60" width="200" height="40" rx="4" fill="url(#blueGradient)" opacity="0.9" />
+  
+  <!-- Main Content Area -->
+  <rect x="50" y="150" width="1100" height="580" rx="8" fill="white" stroke="#dee2e6" stroke-width="1" />
+  
+  <!-- Left Side Panel -->
+  <rect x="70" y="180" width="300" height="520" rx="6" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1" />
+  
+  <!-- Vehicle Graphic -->
+  <rect x="120" y="220" width="200" height="120" rx="4" fill="#e9ecef" />
+  <rect x="140" y="240" width="160" height="40" rx="2" fill="url(#blueGradient)" opacity="0.8" />
+  <circle cx="150" cy="370" r="12" fill="#495057" />
+  <circle cx="290" cy="370" r="12" fill="#495057" />
+  
+  <!-- Status Indicators -->
+  <circle cx="120" cy="420" r="8" fill="#51cf66" />
+  <circle cx="120" cy="450" r="8" fill="#ffd43b" />
+  <circle cx="120" cy="480" r="8" fill="#ff6b6b" />
+  <circle cx="120" cy="510" r="8" fill="#339af0" />
+  <circle cx="120" cy="540" r="8" fill="#845ef7" />
+  
+  <!-- Right Content Area -->
+  <rect x="400" y="180" width="700" height="520" rx="6" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1" />
+  
+  <!-- Data Sections -->
+  <rect x="430" y="220" width="640" height="40" rx="4" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="430" y="280" width="640" height="40" rx="4" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="430" y="340" width="640" height="40" rx="4" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="430" y="400" width="640" height="40" rx="4" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="430" y="460" width="640" height="40" rx="4" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="430" y="520" width="640" height="40" rx="4" fill="white" stroke="#dee2e6" stroke-width="1" />
+  <rect x="430" y="580" width="640" height="40" rx="4" fill="white" stroke="#dee2e6" stroke-width="1" />
+  
+  <!-- Progress Indicators -->
+  <rect x="430" y="640" width="500" height="12" rx="6" fill="#e9ecef" />
+  <rect x="430" y="640" width="350" height="12" rx="6" fill="url(#blueGradient)" />
+  
+  <!-- Decorative Elements -->
+  <rect x="950" y="640" width="120" height="40" rx="20" fill="url(#blueGradient)" />
+  <rect x="1080" y="640" width="120" height="40" rx="20" fill="url(#redGradient)" />
+  
+  <!-- Subtle Grid Pattern -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#dee2e6" stroke-width="0.5" opacity="0.3" />
+  </pattern>
+  <rect width="1200" height="800" fill="url(#grid)" opacity="0.1" />
+</svg>
