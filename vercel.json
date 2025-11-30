@@ -62,6 +62,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/seo-dashboard.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },

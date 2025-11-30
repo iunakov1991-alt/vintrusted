@@ -95,7 +95,17 @@ async function getStats(req, res) {
   const rejectedPages = totalGenerated - acceptedPages;
 
   // Топ 10 страниц (по качеству)
-  const topPages = (dashboard.topPages || []).slice(0, 10);
+  let topPages = [];
+  if (dashboard.topPages && Array.isArray(dashboard.topPages)) {
+    topPages = dashboard.topPages
+      .sort((a, b) => (b.qualityScore || 0) - (a.qualityScore || 0))
+      .slice(0, 10)
+      .map(page => ({
+        url: page.url || 'N/A',
+        qualityScore: page.qualityScore || 0,
+        qualityBreakdown: page.qualityBreakdown || {}
+      }));
+  }
 
   // Рекомендации
   const recommendations = generateRecommendations(dashboard, rlState, config, {
@@ -157,19 +167,28 @@ async function triggerBuild(req, res) {
     pid: process.pid
   }), 'utf8');
 
-  // Запускаем билд в фоне
+  // Запускаем билд в фоне (неблокирующе)
   const buildScript = path.join(process.cwd(), 'scripts', 'seo', 'seo-master-build.js');
   
-  exec(`node ${buildScript}`, (error, stdout, stderr) => {
-    // Удаляем lock после завершения
-    if (fs.existsSync(lockFile)) {
-      fs.unlinkSync(lockFile);
-    }
-    
-    if (error) {
-      console.error('Build error:', error);
-    }
+  // Используем spawn для неблокирующего запуска
+  const { spawn } = require('child_process');
+  const buildProcess = spawn('node', [buildScript], {
+    detached: true,
+    stdio: 'ignore'
   });
+  
+  buildProcess.unref(); // Позволяем процессу работать независимо
+  
+  // Удаляем lock через таймаут (на случай если процесс завершится быстро)
+  setTimeout(() => {
+    if (fs.existsSync(lockFile)) {
+      try {
+        fs.unlinkSync(lockFile);
+      } catch (e) {
+        // Ignore
+      }
+    }
+  }, 60000); // 1 минута
 
   return res.json({ 
     success: true,
