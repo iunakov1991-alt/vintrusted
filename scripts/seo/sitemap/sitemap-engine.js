@@ -9,7 +9,15 @@ const { log } = require('../logger');
 class SitemapEngine {
   constructor(config) {
     this.config = config;
-    this.sitemapRoot = path.join(process.cwd(), 'public', 'seo', 'sitemaps');
+    // На Vercel используем .vercel/output/static, локально - public/seo/sitemaps
+    const isVercel = !!(process.env.VERCEL || process.env.VERCEL_ENV);
+    if (isVercel && process.env.VERCEL) {
+      // Build Output API путь
+      this.sitemapRoot = path.join(process.cwd(), '.vercel', 'output', 'static', 'seo', 'sitemaps');
+    } else {
+      // Локальный путь
+      this.sitemapRoot = path.join(process.cwd(), 'public', 'seo', 'sitemaps');
+    }
   }
 
   ensureDir(p) {
@@ -105,10 +113,14 @@ ${indexEntries
     const seoIndexPath = path.join(this.sitemapRoot, 'sitemap-seo.xml');
     fs.writeFileSync(seoIndexPath, globalIndexXml, 'utf8');
 
-    // Копирование в корень public
-    const publicRoot = path.join(process.cwd(), 'public');
-    const rootIndexPath = path.join(publicRoot, 'sitemap-seo-monster.xml');
-    fs.copyFileSync(seoIndexPath, rootIndexPath);
+    // Копирование в корень public (только локально)
+    if (!process.env.VERCEL) {
+      const publicRoot = path.join(process.cwd(), 'public');
+      const rootIndexPath = path.join(publicRoot, 'sitemap-seo-monster.xml');
+      if (fs.existsSync(publicRoot)) {
+        fs.copyFileSync(seoIndexPath, rootIndexPath);
+      }
+    }
 
     log('SITEMAP', `Sitemaps written: ${indexEntries.length} files for ${Object.keys(byLang).length} languages`);
   }
