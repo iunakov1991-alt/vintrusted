@@ -65,7 +65,7 @@ class TemplateEngineAbsolute {
     <span class="seo-hero-vin">${this.escapeHtml(vin)}</span>
     <div class="seo-hero-meta">${year} ${this.escapeHtml(make)} • ${this.escapeHtml(state)}</div>
     <p class="seo-hero-summary">${this.escapeHtml(summary)}</p>
-    <a href="/?vin=${encodeURIComponent(vin)}" class="seo-hero-cta">${this.escapeHtml(ctaText)}</a>
+    <a href="/checkout?vin=${encodeURIComponent(vin)}" class="seo-hero-cta">${this.escapeHtml(ctaText)}</a>
   </div>
 </section>`;
   }
