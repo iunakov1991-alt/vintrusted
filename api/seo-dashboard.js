@@ -50,17 +50,32 @@ async function getStats(req, res) {
   let rlState = {};
   let config = {};
 
-  // Загрузка данных
-  if (fs.existsSync(dashboardPath)) {
-    dashboard = JSON.parse(fs.readFileSync(dashboardPath, 'utf8'));
+  // Загрузка данных (с безопасной обработкой ошибок)
+  try {
+    if (fs.existsSync(dashboardPath)) {
+      dashboard = JSON.parse(fs.readFileSync(dashboardPath, 'utf8'));
+    }
+  } catch (e) {
+    console.error('Error loading dashboard:', e);
+    dashboard = {};
   }
 
-  if (fs.existsSync(rlStatePath)) {
-    rlState = JSON.parse(fs.readFileSync(rlStatePath, 'utf8'));
+  try {
+    if (fs.existsSync(rlStatePath)) {
+      rlState = JSON.parse(fs.readFileSync(rlStatePath, 'utf8'));
+    }
+  } catch (e) {
+    console.error('Error loading rlState:', e);
+    rlState = {};
   }
 
-  if (fs.existsSync(configPath)) {
-    config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  try {
+    if (fs.existsSync(configPath)) {
+      config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    }
+  } catch (e) {
+    console.error('Error loading config:', e);
+    config = {};
   }
 
   // Подсчет страниц
@@ -783,23 +798,29 @@ function calculateOptimalSchedule(dashboard, config) {
   // Рекомендации по расписанию
   const recommendations = [];
   
-  if (!lastBuildTime || hoursSinceLastBuild > 168) { // 7 дней
+  if (!lastBuildTime || (hoursSinceLastBuild !== null && hoursSinceLastBuild > 168)) { // 7 дней
     recommendations.push({
       type: 'urgent',
       message: 'Рекомендуется запустить билд - прошло более недели с последнего билда.',
       nextRun: 'Сейчас'
     });
-  } else if (hoursSinceLastBuild > 72) { // 3 дня
+  } else if (hoursSinceLastBuild !== null && hoursSinceLastBuild > 72) { // 3 дня
     recommendations.push({
       type: 'suggested',
       message: 'Можно запустить билд для обновления контента.',
       nextRun: 'В ближайшие дни'
     });
-  } else {
+  } else if (hoursSinceLastBuild !== null) {
     recommendations.push({
       type: 'optimal',
       message: 'Билд недавно запускался. Оптимальная частота: раз в неделю.',
       nextRun: `Через ${Math.ceil(168 - hoursSinceLastBuild)} часов`
+    });
+  } else {
+    recommendations.push({
+      type: 'suggested',
+      message: 'Нет данных о последнем билде. Рекомендуется запустить билд.',
+      nextRun: 'Сейчас'
     });
   }
 
