@@ -474,7 +474,7 @@ class TemplateEngineAbsolute {
     return `
 <header class="seo-header">
   <div class="seo-header-content">
-    <img src="/logo.svg" alt="VIN Trusted" class="seo-logo" />
+    <img src="/logo-vin-trust.png" alt="VIN TRUST" class="seo-logo" />
     <div class="seo-header-descriptor">Trusted VIN reports with instant access to vehicle history, accidents, and ownership records</div>
   </div>
 </header>`;
