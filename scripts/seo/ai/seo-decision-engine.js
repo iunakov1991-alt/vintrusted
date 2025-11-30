@@ -352,32 +352,32 @@ RESPOND WITH JSON:
     if (existing < 100) {
       targetPages = 15000;
       strategy = 'aggressive-growth';
-      reasoning = 'Мало страниц (<100). Агрессивный рост для установления присутствия.';
+      reasoning = 'Мало страниц (<100). Агрессивный рост для максимизации SEO трафика.';
     } else if (existing < 1000) {
       targetPages = 12000;
       strategy = 'standard-growth';
-      reasoning = 'Средний объем (100-1000). Стандартный рост для расширения покрытия.';
+      reasoning = 'Средний объем (100-1000). Стандартный рост для расширения SEO покрытия и трафика.';
     } else if (existing < 10000) {
       targetPages = 10000;
       strategy = 'balanced-growth';
-      reasoning = 'Хороший объем (1000-10000). Сбалансированный рост.';
+      reasoning = 'Хороший объем (1000-10000). Сбалансированный рост с фокусом на качественный трафик.';
     } else if (existing < 50000) {
       targetPages = 5000;
       strategy = 'selective-growth';
-      reasoning = 'Большой объем (>10000). Селективный рост для заполнения пробелов.';
+      reasoning = 'Большой объем (>10000). Селективный рост для заполнения пробелов и увеличения трафика.';
     } else {
       targetPages = 2000;
       strategy = 'maintenance';
-      reasoning = 'Очень большой объем (>50000). Режим обновления существующих страниц.';
+      reasoning = 'Очень большой объем (>50000). Режим обновления существующих страниц для поддержания трафика.';
     }
 
-    // Корректировка на основе качества
+    // Корректировка на основе качества (качество = лучшее ранжирование = больше трафика)
     if (context.buildMetrics.avgQuality < 0.70) {
       targetPages = Math.floor(targetPages * 0.7);
-      reasoning += ' Снижено из-за низкого качества.';
+      reasoning += ' Снижено из-за низкого качества (влияет на ранжирование и трафик).';
     } else if (context.buildMetrics.avgQuality > 0.85) {
       targetPages = Math.floor(targetPages * 1.1);
-      reasoning += ' Увеличено из-за высокого качества.';
+      reasoning += ' Увеличено из-за высокого качества (лучшее ранжирование = больше трафика).';
     }
 
     // Корректировка на основе rejection rate
@@ -387,13 +387,27 @@ RESPOND WITH JSON:
       reasoning += ' Снижено из-за высокого процента отклонений.';
     }
 
+    // Корректировка на основе conversion metrics (если есть)
+    if (context.conversionMetrics && context.conversionMetrics.hasConversionData) {
+      const avgCR = context.conversionMetrics.avgPredictedRate || 0;
+      if (avgCR > 0.03) {
+        // Высокий CR для SEO страниц - можно увеличить количество
+        targetPages = Math.floor(targetPages * 1.1);
+        reasoning += ' Увеличено - высокий conversion potential трафика.';
+      } else if (avgCR < 0.01) {
+        // Очень низкий CR - фокус на качество трафика
+        targetPages = Math.floor(targetPages * 0.9);
+        reasoning += ' Слегка снижено - фокус на качество трафика с лучшим conversion potential.';
+      }
+    }
+
     return {
       targetPages: Math.max(100, Math.min(20000, targetPages)),
       reasoning,
       strategy,
       confidence: 0.7,
       recommendations: [],
-      expectedOutcome: `Ожидается генерация ~${targetPages} страниц с учетом отсеивания.`
+      expectedOutcome: `Ожидается генерация ~${targetPages} страниц для максимизации SEO трафика с высоким conversion potential.`
     };
   }
 
