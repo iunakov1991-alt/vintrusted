@@ -9,8 +9,11 @@ const { log } = require('../logger');
 class SitemapEngine {
   constructor(config) {
     this.config = config;
-    // Всегда используем public/seo/sitemaps - Vercel обрабатывает public/ после vercel-build
-    this.sitemapRoot = path.join(process.cwd(), 'public', 'seo', 'sitemaps');
+    // Используем Build Output API для прямого вывода в .vercel/output/static/
+    const vercelOutput = path.join(process.cwd(), '.vercel', 'output', 'static');
+    this.sitemapRoot = path.join(vercelOutput, 'seo', 'sitemaps');
+    // Также пишем в public/ для совместимости
+    this.publicSitemapRoot = path.join(process.cwd(), 'public', 'seo', 'sitemaps');
   }
 
   ensureDir(p) {
@@ -29,14 +32,18 @@ class SitemapEngine {
    * Генерация sitemaps с приоритетами
    */
   writeSitemaps(pages, config) {
+    // Создаем директории в обоих местах
     this.ensureDir(this.sitemapRoot);
+    this.ensureDir(this.publicSitemapRoot);
 
-    // Очистка старых sitemaps
-    if (fs.existsSync(this.sitemapRoot)) {
-      const existing = fs.readdirSync(this.sitemapRoot);
-      for (const f of existing) {
-        if (f.endsWith('.xml')) {
-          fs.unlinkSync(path.join(this.sitemapRoot, f));
+    // Очистка старых sitemaps в обоих местах
+    for (const root of [this.sitemapRoot, this.publicSitemapRoot]) {
+      if (fs.existsSync(root)) {
+        const existing = fs.readdirSync(root);
+        for (const f of existing) {
+          if (f.endsWith('.xml')) {
+            fs.unlinkSync(path.join(root, f));
+          }
         }
       }
     }
@@ -76,7 +83,11 @@ class SitemapEngine {
 ${locs}
 </urlset>`;
 
-        fs.writeFileSync(path.join(this.sitemapRoot, fileName), xml, 'utf8');
+        // Пишем в оба места
+        const outputPath = path.join(this.sitemapRoot, fileName);
+        const publicPath = path.join(this.publicSitemapRoot, fileName);
+        fs.writeFileSync(outputPath, xml, 'utf8');
+        fs.writeFileSync(publicPath, xml, 'utf8');
         indexEntries.push({ lang, fileName });
       });
 
@@ -92,7 +103,11 @@ ${locs}
 ${entries}
 </sitemapindex>`;
 
-      fs.writeFileSync(path.join(this.sitemapRoot, indexName), indexXml, 'utf8');
+      // Пишем в оба места
+      const outputIndexPath = path.join(this.sitemapRoot, indexName);
+      const publicIndexPath = path.join(this.publicSitemapRoot, indexName);
+      fs.writeFileSync(outputIndexPath, indexXml, 'utf8');
+      fs.writeFileSync(publicIndexPath, indexXml, 'utf8');
     }
 
     // Глобальный индекс
@@ -103,15 +118,21 @@ ${indexEntries
   .join('')}
 </sitemapindex>`;
 
+    // Пишем глобальный индекс в оба места
     const seoIndexPath = path.join(this.sitemapRoot, 'sitemap-seo.xml');
+    const publicSeoIndexPath = path.join(this.publicSitemapRoot, 'sitemap-seo.xml');
     fs.writeFileSync(seoIndexPath, globalIndexXml, 'utf8');
+    fs.writeFileSync(publicSeoIndexPath, globalIndexXml, 'utf8');
 
     // Копирование в корень public
     const publicRoot = path.join(process.cwd(), 'public');
     const rootIndexPath = path.join(publicRoot, 'sitemap-seo-monster.xml');
-    if (fs.existsSync(publicRoot)) {
-      fs.copyFileSync(seoIndexPath, rootIndexPath);
-    }
+    fs.writeFileSync(rootIndexPath, globalIndexXml, 'utf8');
+    
+    // Также в .vercel/output/static/
+    const vercelOutput = path.join(process.cwd(), '.vercel', 'output', 'static');
+    const vercelRootIndexPath = path.join(vercelOutput, 'sitemap-seo-monster.xml');
+    fs.writeFileSync(vercelRootIndexPath, globalIndexXml, 'utf8');
 
     log('SITEMAP', `Sitemaps written: ${indexEntries.length} files for ${Object.keys(byLang).length} languages`);
   }

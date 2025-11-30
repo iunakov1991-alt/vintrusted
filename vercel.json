@@ -96,14 +96,6 @@
   ],
   "rewrites": [
     {
-      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/",
-      "destination": "/vin/:vin/:state/index.html"
-    },
-    {
-      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
-      "destination": "/vin/:vin/:state/index.html"
-    },
-    {
       "source": "/api/checkout",
       "destination": "/api/checkout.js"
     },
