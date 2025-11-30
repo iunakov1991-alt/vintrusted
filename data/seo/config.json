@@ -1,6 +1,6 @@
 {
   "version": "6.0",
-  "targetPagesPerBuild": 10000,
+  "targetPagesPerBuild": 1,
   "maxPagesPerCluster": 500,
   "minQualityScore": 0.70,
   "enableAI": true,
