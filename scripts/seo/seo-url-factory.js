@@ -31,6 +31,7 @@ function buildUrlPlan(config, rlState) {
 
   const intentWeights = normalizeWeights(rlState.intentWeights || {});
   const langWeights = normalizeWeights(rlState.languageWeights || {});
+
   const clusterScores = rlState.clusterScores || {};
 
   const pages = [];

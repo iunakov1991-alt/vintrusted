@@ -4,7 +4,7 @@ const { log } = require('./logger');
 
 const SITEMAP_ROOT = path.join(process.cwd(), 'public/seo/sitemaps');
 const PUBLIC_ROOT = path.join(process.cwd(), 'public');
-const INTERNAL_ROOT = path.join(PUBLIC_ROOT, 'internal');
+const INTERNAL_ROOT = path.join(process.cwd(), 'public/internal');
 
 function chunk(arr, n) {
   const res = [];
@@ -91,16 +91,10 @@ ${indexEntries
 
   integrateWithRootSitemap(seoIndexPath);
 
-  // Записываем JSON-метаданные для страницы /sitemaps
+  // JSON метаданные для /sitemaps
   writeSitemapMetadata(indexEntries, byLang, pages.length);
 }
 
-/**
- * integrateWithRootSitemap:
- *  - Копирует SEO-индекс в public/sitemap-seo-monster.xml
- *  - Если public/sitemap.xml существует и это sitemapindex, добавляет
- *    ссылку на https://vintrusted.com/seo/sitemaps/sitemap-seo.xml (если её ещё нет)
- */
 function integrateWithRootSitemap(seoIndexPath) {
   ensureDir(PUBLIC_ROOT);
 
@@ -141,52 +135,23 @@ function integrateWithRootSitemap(seoIndexPath) {
   }
 }
 
-/**
- * writeSitemapMetadata:
- *  - Создаёт public/internal/sitemaps-metadata.json
- *  - Даёт странице /sitemaps актуальные данные о sitemap-файлах
- *
- * Формат:
- * {
- *   lastUpdated: ISO,
- *   totalPages,
- *   totalSitemapFiles,
- *   languages: ["en","es"],
- *   mainIndex: { fileName, url },
- *   alternativeIndex: { fileName, url },
- *   byLanguage: {
- *     en: {
- *       sitemapFiles: [...],
- *       indexFile: {...},
- *       pagesCount: N
- *     },
- *     ...
- *   },
- *   allSitemapFiles: [...]
- * }
- */
 function writeSitemapMetadata(indexEntries, byLang, totalPages) {
   try {
     ensureDir(INTERNAL_ROOT);
 
-    const languages = Object.keys(byLang || {});
-    const allFiles = fs
-      .readdirSync(SITEMAP_ROOT)
-      .filter((f) => f.endsWith('.xml'))
-      .sort();
+    const languages = Object.keys(byLang);
+    const totalSitemapFiles = indexEntries.length + 1; // +1 за sitemap-seo.xml
 
     const byLanguage = {};
     for (const lang of languages) {
-      const filesForLang = indexEntries
-        .filter((e) => e.lang === lang)
-        .map((e) => ({
-          fileName: e.fileName,
-          url: `/seo/sitemaps/${e.fileName}`
-        }));
-
+      const langEntries = indexEntries.filter((e) => e.lang === lang);
+      const sitemapFiles = langEntries.map((e) => ({
+        fileName: e.fileName,
+        url: `/seo/sitemaps/${e.fileName}`
+      }));
       const indexFileName = `sitemap-${lang}-index.xml`;
       byLanguage[lang] = {
-        sitemapFiles: filesForLang,
+        sitemapFiles,
         indexFile: {
           fileName: indexFileName,
           url: `/seo/sitemaps/${indexFileName}`
@@ -195,10 +160,16 @@ function writeSitemapMetadata(indexEntries, byLang, totalPages) {
       };
     }
 
+    const allSitemapFiles = indexEntries.map((e) => ({
+      lang: e.lang,
+      fileName: e.fileName,
+      url: `/seo/sitemaps/${e.fileName}`
+    }));
+
     const payload = {
       lastUpdated: new Date().toISOString(),
-      totalPages: totalPages || 0,
-      totalSitemapFiles: allFiles.length,
+      totalPages,
+      totalSitemapFiles,
       languages,
       mainIndex: {
         fileName: 'sitemap-seo.xml',
@@ -209,15 +180,12 @@ function writeSitemapMetadata(indexEntries, byLang, totalPages) {
         url: '/sitemap-seo-monster.xml'
       },
       byLanguage,
-      allSitemapFiles: allFiles.map((f) => ({
-        fileName: f,
-        url: `/seo/sitemaps/${f}`
-      }))
+      allSitemapFiles
     };
 
     const outPath = path.join(INTERNAL_ROOT, 'sitemaps-metadata.json');
     fs.writeFileSync(outPath, JSON.stringify(payload, null, 2), 'utf8');
-    log('SITEMAP', `sitemaps-metadata.json written (${allFiles.length} files, ${totalPages} pages).`);
+    log('SITEMAP', 'sitemaps-metadata.json updated.');
   } catch (e) {
     log('SITEMAP', `sitemaps-metadata write error: ${e.message}`);
   }

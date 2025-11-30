@@ -26,8 +26,10 @@ function buildDescription(item) {
   return `Instant VIN check for ${item.year} ${make} in ${state}. Review ownership, accident and title history before you buy.`;
 }
 
+// ВАЖНО: пишем прямо в public/vin/:vin/:state/index.html,
+// чтобы /vin/... обслуживалось как статика без rewrite.
 function getOutputPath(item) {
-  const root = path.join(process.cwd(), 'public/seo/pages');
+  const root = path.join(process.cwd(), 'public');
   const vinDir = path.join(root, 'vin', item.vin || 'vin', item.stateSlug || 'state');
   return path.join(vinDir, 'index.html');
 }

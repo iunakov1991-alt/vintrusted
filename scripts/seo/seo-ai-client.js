@@ -9,7 +9,6 @@ const CONFIG_PATH = path.join(process.cwd(), 'data/seo/config.json');
 let inMemoryCache = null;
 let configEnableAI = true;
 
-// Ленивая подгрузка конфига
 function loadConfigEnableAI() {
   if (!fs.existsSync(CONFIG_PATH)) {
     return true;
@@ -23,7 +22,6 @@ function loadConfigEnableAI() {
   }
 }
 
-// Ленивая подгрузка кеша (один read за билд)
 function loadCacheOnce() {
   if (inMemoryCache !== null) return inMemoryCache;
 
@@ -185,13 +183,6 @@ async function callAiProvider(prompt, { lang, intent, maxTokens }) {
   return text;
 }
 
-/**
- * generateText(prompt, { lang, intent, maxTokens })
- *
- * 1. Проверяет кеш (в памяти).
- * 2. Если AI выключен (config.enableAI=false или ENV/ключа нет) — fallback.
- * 3. Если включен — использует Groq API с fallback на DeepSeek.
- */
 async function generateText(prompt, { lang = 'en', intent = 'generic', maxTokens = 600 } = {}) {
   if (inMemoryCache === null) {
     loadCacheOnce();
@@ -207,22 +198,19 @@ async function generateText(prompt, { lang = 'en', intent = 'generic', maxTokens
     process.env.SEO_ENABLE_AI === '1' ||
     process.env.SEO_ENABLE_AI === 'true' ||
     process.env.SEO_ENABLE_AI === 'on';
-
   const hasApiKeys = !!(process.env.GROQ_API_KEY || process.env.DEEPSEEK_API_KEY);
   const effectiveAI = configEnableAI && envEnable && hasApiKeys;
 
-  // AI отключен или нет ключа — безопасный fallback (генерик, без фактов о конкретном VIN)
   if (!effectiveAI) {
     const fallback = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
     appendCache(key, fallback);
     return fallback;
   }
 
-  // Вызываем реальный AI провайдер (Groq → DeepSeek fallback)
   let text = await callAiProvider(prompt, { lang, intent, maxTokens });
   if (!text) {
-    // Если оба провайдера не сработали, используем fallback
-    text = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
+    const fallback = `This section provides general, non-personalized information about ${intent} in the context of vehicle history reports. It explains why this check matters, what is usually included, and how drivers can use this information to make safer decisions when buying or owning a vehicle in the ${lang.toUpperCase()} locale. No specific VIN data is inferred or fabricated.`;
+    text = fallback;
   }
   appendCache(key, text);
   return text;

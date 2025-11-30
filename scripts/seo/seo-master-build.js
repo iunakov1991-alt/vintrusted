@@ -13,8 +13,6 @@ const isVercel = !!(process.env.VERCEL || process.env.VERCEL_ENV);
 const BUILD_META_PATH = path.join(process.cwd(), 'public/internal/build-meta.json');
 const RUN_SUMMARY_PATH = path.join(process.cwd(), 'public/internal/seo-run-summary.json');
 
-// concurrency можно регулировать через ENV:
-//   SEO_BUILD_CONCURRENCY=8..12
 const DEFAULT_CONCURRENCY = parseInt(process.env.SEO_BUILD_CONCURRENCY || '8', 10);
 
 function safeLoadJson(p, fallback) {
@@ -98,11 +96,9 @@ async function main() {
   };
 
   // На Vercel удаляем старый build-meta.json, чтобы гарантировать выполнение build
-  // Vercel делает несколько проходов build для разных функций, но SEO build должен выполниться один раз
   if (isVercel && fs.existsSync(BUILD_META_PATH)) {
     try {
       const existingMeta = safeLoadJson(BUILD_META_PATH, {});
-      // Проверяем, был ли build выполнен в этом же деплое (по buildId или времени)
       const existingBuildId = existingMeta.buildId;
       const currentBuildId = buildMeta.buildId;
       
