@@ -152,19 +152,69 @@ class AIImageGenerator {
 
   /**
    * Генерация SVG через DeepSeek LLM
-   * Использует DeepSeek для создания SVG-кода на основе промпта
+   * Использует Groq для генерации улучшенного промпта, затем DeepSeek для создания SVG
    */
   async generateSVGWithDeepSeek(stateSlug, make, intent, type, width, height, prompt) {
     try {
       const stateName = stateSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
       const makeName = make.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
       
+      // Шаг 1: Используем Groq для генерации улучшенного промпта
+      let enhancedPrompt = prompt;
+      const groqKey = process.env.GROQ_API_KEY;
+      if (groqKey) {
+        try {
+          const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${groqKey}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
+              messages: [
+                {
+                  role: 'system',
+                  content: 'You are an expert prompt engineer for AI image generation. Create detailed, specific prompts that will help generate professional SVG graphics for vehicle VIN report pages.'
+                },
+                {
+                  role: 'user',
+                  content: `Create an optimized prompt for generating an SVG image for a VIN report page:
+- Type: ${type} (${type === 'hero' ? 'hero section' : 'social media preview'})
+- Dimensions: ${width}x${height} pixels
+- Vehicle: ${makeName}
+- State: ${stateName}
+- Style: Official DMV document aesthetic, minimal geometric design
+- Requirements: Professional, subtle colors, geometric shapes, clean lines, no text
+
+Generate a detailed, specific prompt that will help an AI create the perfect SVG for this context. Return ONLY the prompt text, nothing else.`
+                }
+              ],
+              max_tokens: 300,
+              temperature: 0.7
+            })
+          });
+
+          if (groqResponse.ok) {
+            const groqData = await groqResponse.json();
+            const groqPrompt = groqData.choices?.[0]?.message?.content;
+            if (groqPrompt && groqPrompt.trim()) {
+              enhancedPrompt = groqPrompt.trim();
+              log('AI-IMAGE', 'Groq generated enhanced prompt for DeepSeek');
+            }
+          }
+        } catch (e) {
+          log('AI-IMAGE', `Groq prompt generation failed, using default: ${e.message}`);
+        }
+      }
+      
+      // Шаг 2: Используем DeepSeek для генерации SVG на основе улучшенного промпта
       const systemPrompt = `You are an expert SVG designer. Generate clean, professional SVG code for vehicle VIN report pages. 
 The SVG should be in DMV/official document style - minimal, geometric, professional.
 Use subtle colors, geometric shapes, and clean lines. No text in the image.
 Return ONLY valid SVG XML code, nothing else.`;
 
-      const userPrompt = `Create an SVG image for a VIN report page:
+      const userPrompt = enhancedPrompt || `Create an SVG image for a VIN report page:
 - Type: ${type} (${type === 'hero' ? 'hero section' : 'social media preview'})
 - Dimensions: ${width}x${height} pixels
 - Style: Official DMV document aesthetic, minimal geometric design

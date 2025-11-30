@@ -210,6 +210,10 @@
     {
       "source": "/seo/sitemaps/:file*",
       "destination": "/api/seo-sitemap.js?file=:file*"
+    },
+    {
+      "source": "/seo/images/clusters/:file*",
+      "destination": "/seo/images/clusters/:file*"
     }
   ]
 }
