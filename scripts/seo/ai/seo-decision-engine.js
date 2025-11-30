@@ -1,5 +1,5 @@
 const { callDeepseekChat } = require('../../ai/deepseek-client');
-const { callGroqChat } = require('../../ai/groq-client');
+const { callDeepseekChat } = require('../../ai/groq-client');
 const fs = require('fs');
 const path = require('path');
 const { log } = require('../logger');
