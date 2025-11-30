@@ -1,19 +1,18 @@
 {
   "version": 1,
-  "lastUpdated": "2025-11-30T10:13:12.140Z",
+  "lastUpdated": "2025-11-30T11:45:40.184Z",
   "intentWeights": {
-    "accident_check": 0.5,
-    "vin_check": 0.5
+    "vin_check": 1
   },
   "languageWeights": {
-    "en": 0.5,
-    "es": 0.5
+    "en": 0.5029111292817243,
+    "es": 0.49708887071827557
   },
   "clusterScores": {},
   "layoutWeights": {
-    "APPLE": 0.9580000000000001,
-    "HYBRID": 0.9580000000000001,
-    "LEGAL": 0.9580000000000001,
-    "RISK": 0.9580000000000001
+    "APPLE": 0.9952000000000001,
+    "DMV": 0.9827,
+    "LEGAL": 0.988,
+    "RISK": 0.9952000000000001
   }
 }

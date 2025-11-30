@@ -6,8 +6,8 @@
 
 ```
 SEO_ENABLE_AI=1
-GROQ_API_KEY=your_groq_api_key_here
-DEEPSEEK_API_KEY=your_deepseek_api_key_here
+GROQ_API_KEY=<your-groq-api-key>
+DEEPSEEK_API_KEY=<your-deepseek-api-key>
 ```
 
 ## ✅ Как работает код:

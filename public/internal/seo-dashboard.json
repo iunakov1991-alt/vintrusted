@@ -1,19 +1,19 @@
 {
-  "timestamp": "2025-11-30T10:13:12.142Z",
+  "timestamp": "2025-11-30T11:45:40.185Z",
   "currentBuild": {
     "buildId": "local",
-    "pagesGenerated": 16,
-    "pagesAccepted": 11,
-    "avgQuality": 0.7704687499999998,
-    "duration": 143,
-    "clusters": 6,
-    "uniquePages": 16,
+    "pagesGenerated": 8,
+    "pagesAccepted": 8,
+    "avgQuality": 0.9480625,
+    "duration": 137,
+    "clusters": 4,
+    "uniquePages": 8,
     "aiEnabled": false,
     "config": {
       "version": "6.0",
       "targetPagesPerBuild": 10000,
       "maxPagesPerCluster": 500,
-      "minQualityScore": 0.75,
+      "minQualityScore": 0.7,
       "enableAI": true,
       "aiMaxTokens": 800,
       "aiProviders": [
@@ -57,49 +57,49 @@
     }
   },
   "lastBuild": {
-    "timestamp": "2025-11-30T10:13:12.140Z",
+    "timestamp": "2025-11-30T11:45:40.185Z",
     "buildId": "local",
-    "pagesGenerated": 16,
-    "pagesAccepted": 11,
-    "avgQuality": 0.7704687499999998,
-    "duration": 143,
-    "clusters": 6,
-    "uniquePages": 16,
+    "pagesGenerated": 8,
+    "pagesAccepted": 8,
+    "avgQuality": 0.9480625,
+    "duration": 137,
+    "clusters": 4,
+    "uniquePages": 8,
     "aiEnabled": false,
     "config": {
       "targetPages": 10000,
       "maxPagesPerCluster": 500,
-      "minQualityScore": 0.75
+      "minQualityScore": 0.7
     }
   },
   "comparison": {
     "pagesGenerated": {
-      "current": 16,
-      "previous": 16,
+      "current": 8,
+      "previous": 8,
       "change": 0
     },
     "pagesAccepted": {
-      "current": 11,
-      "previous": 11,
+      "current": 8,
+      "previous": 8,
       "change": 0
     },
     "avgQuality": {
-      "current": 0.7704687499999998,
-      "previous": 0.7704687499999998,
+      "current": 0.9480625,
+      "previous": 0.9480625,
       "change": 0
     },
     "duration": {
-      "current": 143,
-      "previous": 143,
+      "current": 137,
+      "previous": 137,
       "change": 0
     }
   },
   "statistics": {
-    "totalBuilds": 1,
-    "avgPagesGenerated": 16,
-    "avgPagesAccepted": 11,
-    "avgQuality": 0.7704687499999998,
-    "avgDuration": 143,
+    "totalBuilds": 2,
+    "avgPagesGenerated": 12,
+    "avgPagesAccepted": 9.5,
+    "avgQuality": 0.8592656249999999,
+    "avgDuration": 140,
     "successRate": 1
   },
   "recentBuilds": [
@@ -118,6 +118,22 @@
         "maxPagesPerCluster": 500,
         "minQualityScore": 0.75
       }
+    },
+    {
+      "timestamp": "2025-11-30T11:45:40.185Z",
+      "buildId": "local",
+      "pagesGenerated": 8,
+      "pagesAccepted": 8,
+      "avgQuality": 0.9480625,
+      "duration": 137,
+      "clusters": 4,
+      "uniquePages": 8,
+      "aiEnabled": false,
+      "config": {
+        "targetPages": 10000,
+        "maxPagesPerCluster": 500,
+        "minQualityScore": 0.7
+      }
     }
   ],
   "trends": null,
@@ -128,11 +144,5 @@
     ],
     "status": "healthy"
   },
-  "recommendations": [
-    {
-      "type": "acceptance",
-      "priority": "medium",
-      "message": "Low page acceptance rate. Review quality scoring criteria."
-    }
-  ]
+  "recommendations": []
 }

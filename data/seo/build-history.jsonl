@@ -1,1 +1,2 @@
 {"timestamp":"2025-11-30T10:13:12.140Z","buildId":"local","pagesGenerated":16,"pagesAccepted":11,"avgQuality":0.7704687499999998,"duration":143,"clusters":6,"uniquePages":16,"aiEnabled":false,"config":{"targetPages":10000,"maxPagesPerCluster":500,"minQualityScore":0.75}}
+{"timestamp":"2025-11-30T11:45:40.185Z","buildId":"local","pagesGenerated":8,"pagesAccepted":8,"avgQuality":0.9480625,"duration":137,"clusters":4,"uniquePages":8,"aiEnabled":false,"config":{"targetPages":10000,"maxPagesPerCluster":500,"minQualityScore":0.7}}

@@ -1,8 +1,8 @@
-const Stripe = require('stripe');
+import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_10D указывает на price с interval=day, interval_count=10
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   
   console.log('Checkout request:', req.body);
@@ -36,24 +36,6 @@ module.exports = async function handler(req, res) {
     });
 
     // 3) План на три списания $49: t+10, t+20, t+30 (каждые 10 дней, 3 итерации)
-    // Используем PRICE_49_EVERY_10D если установлен, иначе fallback на другие переменные
-    // ВАЖНО: PRICE_49_EVERY_10D должен быть price с interval=day, interval_count=10
-    // Для тестирования можно использовать PRICE_49_EVERY_20D (интервал 20 дней)
-    const rawPriceId = process.env.PRICE_49_EVERY_10D || process.env.PRICE_49_EVERY_20D || process.env.STRIPE_PRICE_49_MONTHLY || process.env.PRICE_49_RECURRING || 'price_1SLgSWIyzEAMYCDXa8g7uV6W';
-    const priceId = rawPriceId ? String(rawPriceId).trim() : null;
-    
-    if (!priceId || priceId === '') {
-      console.error('Price ID environment variables:', {
-        PRICE_49_EVERY_10D: process.env.PRICE_49_EVERY_10D,
-        PRICE_49_EVERY_20D: process.env.PRICE_49_EVERY_20D,
-        STRIPE_PRICE_49_MONTHLY: process.env.STRIPE_PRICE_49_MONTHLY,
-        PRICE_49_RECURRING: process.env.PRICE_49_RECURRING
-      });
-      throw new Error('PRICE_49_EVERY_10D environment variable is not set or empty. Please configure Stripe price ID.');
-    }
-    
-    console.log('Using Price ID:', priceId);
-
     const startAt = Math.floor(Date.now() / 1000) + 10 * 86400;
     const schedule = await stripe.subscriptionSchedules.create({
       customer: customer.id,
@@ -65,7 +47,7 @@ module.exports = async function handler(req, res) {
           default_payment_method: si.payment_method,
           collection_method: 'charge_automatically',
           proration_behavior: 'none',
-          items: [{ price: priceId }]
+          items: [{ price: process.env.PRICE_49_EVERY_10D }]
         }
       ]
     });
@@ -79,8 +61,7 @@ module.exports = async function handler(req, res) {
     }
     
     // Build success URL with VIN
-    const returnUrl = process.env.RETURN_URL || '';
-    const baseUrl = process.env.APP_URL || (returnUrl ? returnUrl.replace('/success.html', '').replace('/payment-success', '') : '') || 'https://vintrusted.com';
+    const baseUrl = process.env.APP_URL || process.env.RETURN_URL?.replace('/success.html', '').replace('/payment-success', '') || 'https://vintrusted.com';
     let successUrl = `${baseUrl}/success.html`;
     
     const params = new URLSearchParams();
