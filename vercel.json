@@ -98,6 +98,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "public/seo/images/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "js/**",
       "use": "@vercel/static"
     },
