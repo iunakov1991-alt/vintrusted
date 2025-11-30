@@ -22,16 +22,14 @@ class TemplateEngineAbsolute {
 
   /**
    * Получение пути к AI-изображению для кластера
+   * Все изображения в формате SVG (генерируются через DeepSeek или программно)
    */
   getClusterImagePath(clusterId, type = 'hero') {
     const imagesDir = path.join(process.cwd(), 'public', 'seo', 'images', 'clusters');
-    const fileName = `${clusterId}-${type}.webp`;
-    const filePath = path.join(imagesDir, fileName);
-    const urlPath = `/seo/images/clusters/${fileName}`;
+    const svgPath = path.join(imagesDir, `${clusterId}-${type}.svg`);
     
-    // Проверяем существование файла
-    if (fs.existsSync(filePath)) {
-      return urlPath;
+    if (fs.existsSync(svgPath)) {
+      return `/seo/images/clusters/${clusterId}-${type}.svg`;
     }
     return null;
   }

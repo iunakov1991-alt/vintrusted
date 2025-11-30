@@ -82,6 +82,14 @@
       "use": "@vercel/static"
     },
     {
+      "src": "*.svg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.webp",
+      "use": "@vercel/static"
+    },
+    {
       "src": "css/**",
       "use": "@vercel/static"
     },
