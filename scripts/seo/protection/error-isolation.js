@@ -67,17 +67,42 @@ class ErrorIsolation {
 
     try {
       const result = await fn();
-      this.resetModuleErrors(moduleName);
+      
+      // Успешное выполнение - уменьшаем счетчик ошибок (но не сбрасываем полностью)
+      // Это позволяет модулю восстановиться после временных проблем
+      const state = this.getModuleState(moduleName);
+      if (state.errors.length > 0) {
+        // Удаляем старые ошибки (старше 2 минут)
+        const now = Date.now();
+        state.errors = state.errors.filter(e => (now - e.timestamp) < 120000);
+        
+        // Если ошибок стало мало - восстанавливаем модуль
+        if (state.errors.length < 3 && state.isolated) {
+          this.resetModuleErrors(moduleName);
+          log('ERROR-ISOLATION', `${moduleName}: Module recovered after successful operations`);
+        }
+      } else {
+        this.resetModuleErrors(moduleName);
+      }
+      
       return result;
     } catch (err) {
       this.recordModuleError(moduleName, err);
       
+      // Логируем детали ошибки для диагностики
+      const state = this.getModuleState(moduleName);
+      log('ERROR-ISOLATION', `${moduleName}: Error #${state.errors.length}: ${err.message.substring(0, 100)}`);
+      
       if (this.shouldIsolateModule(moduleName)) {
         this.isolateModuleState(moduleName);
-        error('ERROR-ISOLATION', `${moduleName}: Module ISOLATED`);
+        error('ERROR-ISOLATION', `${moduleName}: Module ISOLATED due to ${state.errors.length} errors`);
+        // Логируем последние ошибки для диагностики
+        const recentErrors = state.errors.slice(-5);
+        log('ERROR-ISOLATION', `Recent errors: ${recentErrors.map(e => e.error.substring(0, 50)).join('; ')}`);
       }
       
       if (fallback) {
+        log('ERROR-ISOLATION', `${moduleName}: Using fallback after error`);
         return typeof fallback === 'function' ? await fallback() : fallback;
       }
       
@@ -146,15 +171,27 @@ class ErrorIsolation {
    */
   shouldIsolateModule(moduleName) {
     const state = this.getModuleState(moduleName);
-    const threshold = this.config.errorIsolation?.threshold || 5;
-    const window = this.config.errorIsolation?.window || 60000; // 1 минута
+    
+    // Для критичных модулей (content-generation) используем более мягкие пороги
+    const isCritical = moduleName === 'content-generation';
+    const threshold = isCritical 
+      ? (this.config.errorIsolation?.criticalThreshold || 15) // 15 ошибок для критичных
+      : (this.config.errorIsolation?.threshold || 5);
+    const window = isCritical
+      ? (this.config.errorIsolation?.criticalWindow || 300000) // 5 минут для критичных
+      : (this.config.errorIsolation?.window || 60000); // 1 минута
     
     const now = Date.now();
     const recentErrors = state.errors.filter(
       e => (now - e.timestamp) < window
     );
     
-    return recentErrors.length >= threshold;
+    if (recentErrors.length >= threshold) {
+      log('ERROR-ISOLATION', `${moduleName}: ${recentErrors.length} errors in ${window/1000}s (threshold: ${threshold})`);
+      return true;
+    }
+    
+    return false;
   }
 
   /**
