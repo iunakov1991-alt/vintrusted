@@ -186,6 +186,12 @@ class SERPFeaturesOptimizer {
    * Обработка батча
    */
   processBatch(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('SERP-FEATURES', 'No pages provided for processing');
+      return [];
+    }
+    
     const processed = [];
 
     for (const page of pages) {

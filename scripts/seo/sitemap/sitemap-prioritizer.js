@@ -6,11 +6,17 @@ class SitemapPrioritizer {
   }
 
   prioritize(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('SITEMAP-PRIORITIZER', 'No pages provided for prioritization');
+      return [];
+    }
+    
     return pages.map(page => ({
       ...page,
       sitemapPriority: this.calculatePriority(page),
       changefreq: this.calculateChangeFreq(page)
-    })).sort((a, b) => b.sitemapPriority - a.sitemapPriority);
+    })).sort((a, b) => (b.sitemapPriority || 0) - (a.sitemapPriority || 0));
   }
 
   calculatePriority(page) {

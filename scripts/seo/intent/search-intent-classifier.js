@@ -112,6 +112,12 @@ class SearchIntentClassifier {
    * Обработка батча страниц
    */
   processBatch(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('SEARCH-INTENT', 'No pages provided for processing');
+      return [];
+    }
+    
     const processed = [];
 
     for (const page of pages) {
