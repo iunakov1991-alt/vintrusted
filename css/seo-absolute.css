@@ -446,6 +446,91 @@ body {
   margin-bottom: 0;
 }
 
+/* Стили для конвертированного markdown контента */
+.seo-ai-content {
+  font-size: 14px;
+  line-height: var(--line-height);
+  color: var(--color-text);
+}
+
+.seo-ai-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-ai-content h3:first-child {
+  margin-top: 0;
+}
+
+.seo-ai-content h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-ai-content h2:first-child {
+  margin-top: 0;
+}
+
+.seo-ai-content h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+  letter-spacing: -0.3px;
+}
+
+.seo-ai-content h1:first-child {
+  margin-top: 0;
+}
+
+.seo-ai-content p {
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height);
+}
+
+.seo-ai-content p:last-child {
+  margin-bottom: 0;
+}
+
+.seo-ai-content strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.seo-ai-content em {
+  font-style: italic;
+}
+
+.seo-ai-content hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--spacing-lg) 0;
+}
+
+.seo-ai-content ul {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+  list-style-type: disc;
+}
+
+.seo-ai-content li {
+  margin-bottom: var(--spacing-xs);
+  line-height: var(--line-height);
+}
+
+.seo-ai-content li:last-child {
+  margin-bottom: 0;
+}
+
 /* ============================================
    FREE VS PAID (COMPACT TABLE)
    ============================================ */

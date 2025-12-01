@@ -21,6 +21,52 @@ class TemplateEngineAbsolute {
   }
 
   /**
+   * Конвертация markdown в HTML для AI-контента
+   */
+  markdownToHtml(markdown = '') {
+    if (!markdown) return '';
+    
+    let html = markdown;
+    
+    // Заголовки ### -> <h3>, ## -> <h2>, # -> <h1>
+    html = html.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');
+    
+    // Жирный текст **text** -> <strong>text</strong>
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    
+    // Курсив *text* -> <em>text</em> (только если не жирный)
+    html = html.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>');
+    
+    // Горизонтальная линия --- -> <hr>
+    html = html.replace(/^---$/gm, '<hr>');
+    
+    // Списки - item -> <li>item</li>
+    html = html.replace(/^-\s+(.+)$/gm, '<li>$1</li>');
+    // Обернуть последовательные <li> в <ul>
+    html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => {
+      return '<ul>' + match + '</ul>';
+    });
+    
+    // Разделение на параграфы (двойной перенос строки)
+    html = html.split('\n\n').map(block => {
+      block = block.trim();
+      if (!block) return '';
+      // Если блок уже содержит HTML теги (h1-h6, ul, hr), не оборачиваем в <p>
+      if (/^<(h[1-6]|ul|hr|p)/.test(block)) {
+        return block;
+      }
+      return '<p>' + block + '</p>';
+    }).join('\n');
+    
+    // Очистка лишних переносов строк
+    html = html.replace(/\n{3,}/g, '\n\n');
+    
+    return html;
+  }
+
+  /**
    * Получение пути к AI-изображению для кластера
    * Все изображения в формате SVG (генерируются через DeepSeek или программно)
    */
@@ -107,14 +153,16 @@ class TemplateEngineAbsolute {
     const explanation = ctx.deepExplanation || ctx.aiText || '';
     if (!explanation) return '';
 
-    // Разбиваем на абзацы
-    const paragraphs = explanation.split('\n\n').filter(p => p.trim());
+    // Конвертируем markdown в HTML
+    const htmlContent = this.markdownToHtml(explanation);
     
     return `
 <section class="seo-explanation seo-section">
   <div class="seo-container">
     <h2>Understanding This VIN Report</h2>
-    ${paragraphs.map(p => `<p>${this.escapeHtml(p.trim())}</p>`).join('')}
+    <div class="seo-ai-content">
+      ${htmlContent}
+    </div>
   </div>
 </section>`;
   }
@@ -230,13 +278,16 @@ class TemplateEngineAbsolute {
     const aiText = ctx.aiText || ctx.deepExplanation || '';
     if (!aiText) return '';
 
-    const paragraphs = aiText.split('\n\n').filter(p => p.trim());
+    // Конвертируем markdown в HTML
+    const htmlContent = this.markdownToHtml(aiText);
 
     return `
 <section class="seo-ai-analysis seo-section">
   <div class="seo-container">
     <h2>Expert Analysis</h2>
-    ${paragraphs.map(p => `<p>${this.escapeHtml(p.trim())}</p>`).join('')}
+    <div class="seo-ai-content">
+      ${htmlContent}
+    </div>
   </div>
 </section>`;
   }
