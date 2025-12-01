@@ -150,7 +150,9 @@ async function main() {
     const selfEvolution = new SelfEvolutionEngine(config);
     
     // Инициализация модулей
-    memoryMonitor.start();
+    // На Vercel отключаем фоновые процессы - они замедляют деплой
+    const isVercel = !!process.env.VERCEL || !!process.env.VERCEL_DEPLOYMENT_ID;
+    memoryMonitor.start({ skipPeriodicCleanup: isVercel });
     selfCleanup.initializeDefaultRules();
     continuousQA.initializeDefaultChecks();
     
@@ -1154,8 +1156,18 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       healthScore: finalDiagnosis.score || 0
     });
 
+    // Останавливаем фоновые процессы после завершения билда
+    if (memoryMonitor && typeof memoryMonitor.stop === 'function') {
+      memoryMonitor.stop();
+      log('MEMORY-MONITOR', 'Memory monitoring stopped after build completion');
+    }
+
   } catch (e) {
     error('MASTER', 'Build failed', e);
+    // Останавливаем фоновые процессы даже при ошибке
+    if (typeof memoryMonitor !== 'undefined' && memoryMonitor && typeof memoryMonitor.stop === 'function') {
+      memoryMonitor.stop();
+    }
     process.exit(1);
   }
 }

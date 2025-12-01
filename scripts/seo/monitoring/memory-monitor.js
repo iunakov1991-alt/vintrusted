@@ -17,10 +17,18 @@ class MemoryMonitor {
   /**
    * Инициализация мониторинга
    */
-  start() {
+  start(options = {}) {
+    const { skipPeriodicCleanup = false } = options;
+    
     this.monitor();
-    this.startPeriodicCleanup();
-    log('MEMORY-MONITOR', 'Memory monitoring started');
+    
+    // Периодическая очистка только если не на деплое
+    if (!skipPeriodicCleanup) {
+      this.startPeriodicCleanup();
+      log('MEMORY-MONITOR', 'Memory monitoring started with periodic cleanup');
+    } else {
+      log('MEMORY-MONITOR', 'Memory monitoring started (periodic cleanup disabled for deployment)');
+    }
   }
 
   /**
