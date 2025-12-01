@@ -613,6 +613,11 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 2.5: Keyword Intelligence
     pipeline.registerStage('keyword-intelligence', async (ctx) => {
       log('STAGE', 'Keyword Intelligence');
+      if (!ctx.pages || !Array.isArray(ctx.pages)) {
+        ctx.pages = [];
+        log('STAGE', 'No pages for keyword intelligence');
+        return;
+      }
       ctx.pages = ctx.pages.map(page => {
         // Извлечение ключевых слов
         const extracted = keywordExtractor.extractFromPage(page);
@@ -647,6 +652,11 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 2.6: Auto-Optimization
     pipeline.registerStage('auto-optimization', async (ctx) => {
       log('STAGE', 'Auto-Optimization');
+      if (!ctx.pages || !Array.isArray(ctx.pages)) {
+        ctx.pages = [];
+        log('STAGE', 'No pages for auto-optimization');
+        return;
+      }
       ctx.pages = ctx.pages.map(page => {
         // Безопасная передача keywords (может быть объектом {keywords: [...], phrases: [...]} или null)
         const keywords = page.keywords && page.keywords.keywords ? page.keywords.keywords : (page.keywords || null);
@@ -658,6 +668,11 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 2.7: i18n Localization
     pipeline.registerStage('i18n-localization', async (ctx) => {
       log('STAGE', 'i18n Localization');
+      if (!ctx.pages || !Array.isArray(ctx.pages)) {
+        ctx.pages = [];
+        log('STAGE', 'No pages for i18n localization');
+        return;
+      }
       ctx.pages = ctx.pages.map(page => {
         let localized = i18nEngine.localizePage(page);
         
@@ -685,6 +700,12 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         const { SynonymEngine } = require('./content/synonym-engine');
         const synonymEngine = new SynonymEngine(config);
         
+        if (!ctx.pages || !Array.isArray(ctx.pages)) {
+          ctx.pages = [];
+          log('STAGE', 'No pages for synonym enrichment');
+          return;
+        }
+        
         ctx.pages = ctx.pages.map(page => 
           synonymEngine.applySynonymsToPage(page)
         );
@@ -698,6 +719,11 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 3: Рендеринг HTML
     pipeline.registerStage('html-rendering', async (ctx) => {
       log('STAGE', 'HTML Rendering');
+      if (!ctx.pages || !Array.isArray(ctx.pages)) {
+        ctx.pages = [];
+        log('STAGE', 'No pages for HTML rendering');
+        return;
+      }
       ctx.pages = ctx.pages.map(page => {
         // Проверяем наличие layout и его структуры, если нет - выбираем дефолтный
         if (!page.layout || !page.layout.blocks || !Array.isArray(page.layout.blocks)) {
