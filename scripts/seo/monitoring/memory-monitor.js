@@ -69,6 +69,13 @@ class MemoryMonitor {
       this.memoryHistory = this.memoryHistory.slice(-this.maxHistorySize);
     }
 
+    // На Vercel не трогаем пороги и не триггерим emergency cleanup,
+    // чтобы не заспамливать логи и не мешать деплою
+    const isVercel = !!process.env.VERCEL || !!process.env.VERCEL_DEPLOYMENT_ID;
+    if (isVercel) {
+      return snapshot;
+    }
+
     // Проверка порога
     if (usagePercent > this.memoryThreshold) {
       error('MEMORY-MONITOR', `Memory usage critical: ${(usagePercent * 100).toFixed(1)}%`);
