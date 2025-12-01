@@ -483,7 +483,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
           ...baseline,
           aiText,
           layout,
-          blocks: layout.blocks,
+          blocks: (layout && layout.blocks) ? layout.blocks : [],
           h1Variants: enrichedItem.h1Variants // Сохраняем варианты если есть
         };
       }
@@ -642,7 +642,9 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     pipeline.registerStage('auto-optimization', async (ctx) => {
       log('STAGE', 'Auto-Optimization');
       ctx.pages = ctx.pages.map(page => {
-        return autoOptimizer.optimizePage(page, page.keywords);
+        // Безопасная передача keywords (может быть объектом {keywords: [...], phrases: [...]} или null)
+        const keywords = page.keywords && page.keywords.keywords ? page.keywords.keywords : (page.keywords || null);
+        return autoOptimizer.optimizePage(page, keywords);
       });
       log('STAGE', `Optimized ${ctx.pages.length} pages`);
     });
@@ -799,9 +801,11 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       log('STAGE', 'Clustering');
       ctx.acceptedPages.forEach(page => {
         clusterEngine.registerPage(page);
-        clusterEngine.updateClusterMetrics(page.clusterId, {
-          avgQuality: page.qualityScore
-        });
+        if (page.clusterId) {
+          clusterEngine.updateClusterMetrics(page.clusterId, {
+            avgQuality: page.qualityScore || 0
+          });
+        }
       });
       ctx.clusters = clusterEngine.getAllClusters();
     });
@@ -855,6 +859,11 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       
       // Перерендер с внутренними ссылками (только если блока еще нет)
       ctx.acceptedPages = ctx.acceptedPages.map(page => {
+        // Проверяем наличие layout и его структуры
+        if (!page.layout || !page.layout.blocks || !Array.isArray(page.layout.blocks)) {
+          page.layout = layoutEngine.selectLayout(page, rlState.layoutWeights);
+        }
+        
         // Проверяем, нет ли уже блока internalLinks
         const hasInternalLinks = page.layout.blocks && page.layout.blocks.includes('internalLinks');
         const layoutWithLinks = {
@@ -1036,12 +1045,12 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Запись истории билда
     const buildData = {
       buildId: buildId,
-      pagesGenerated: result.pages.length,
-      pagesAccepted: result.acceptedPages.length,
+      pagesGenerated: (result.pages && Array.isArray(result.pages)) ? result.pages.length : 0,
+      pagesAccepted: (result.acceptedPages && Array.isArray(result.acceptedPages)) ? result.acceptedPages.length : 0,
       avgQuality: result.avgQuality || 0,
       duration: duration,
-      clusters: result.clusters?.length || 0,
-      uniquePages: result.pages.length,
+      clusters: (result.clusters && Array.isArray(result.clusters)) ? result.clusters.length : 0,
+      uniquePages: (result.pages && Array.isArray(result.pages)) ? result.pages.length : 0,
       aiEnabled: config.enableAI && (!!process.env.GROQ_API_KEY || !!process.env.DEEPSEEK_API_KEY),
       aiDecision: aiDecision ? {
         targetPages: aiDecision.targetPages,
@@ -1056,8 +1065,8 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Обновление производительности AI решения (обучение)
     if (aiDecision && aiDecision.timestamp) {
       decisionEngine.updatePerformance(aiDecision.timestamp, {
-        pagesGenerated: result.pages.length,
-        pagesAccepted: result.acceptedPages.length,
+        pagesGenerated: (result.pages && Array.isArray(result.pages)) ? result.pages.length : 0,
+        pagesAccepted: (result.acceptedPages && Array.isArray(result.acceptedPages)) ? result.acceptedPages.length : 0,
         avgQuality: result.avgQuality || 0
       });
     }
@@ -1081,11 +1090,11 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
 
     log('MASTER', 'SEO MONSTER 6.0 build completed', {
       duration: `${duration}ms`,
-      pagesGenerated: result.pages.length,
-      pagesAccepted: result.acceptedPages.length,
-      avgQuality: result.avgQuality?.toFixed(3),
-      clusters: result.clusters?.length || 0,
-      healthScore: finalDiagnosis.score
+      pagesGenerated: (result.pages && Array.isArray(result.pages)) ? result.pages.length : 0,
+      pagesAccepted: (result.acceptedPages && Array.isArray(result.acceptedPages)) ? result.acceptedPages.length : 0,
+      avgQuality: (result.avgQuality !== undefined && result.avgQuality !== null) ? result.avgQuality.toFixed(3) : '0.000',
+      clusters: (result.clusters && Array.isArray(result.clusters)) ? result.clusters.length : 0,
+      healthScore: finalDiagnosis.score || 0
     });
 
   } catch (e) {
