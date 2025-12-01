@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Dashboard - MONSTER 6.0</title>
+  <style>
+    :root {
+      /* Light theme (default) */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --bg-tertiary: #e8e8e8;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --text-tertiary: #999999;
+      --accent: #0066cc;
+      --accent-hover: #0052a3;
+      --border: #dddddd;
+      --success: #28a745;
+      --warning: #ffc107;
+      --error: #dc3545;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] {
+      /* Dark theme */
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #2d2d2d;
+      --bg-tertiary: #404040;
+      --text-primary: #ffffff;
+      --text-secondary: #b3b3b3;
+      --text-tertiary: #808080;
+      --accent: #4da6ff;
+      --accent-hover: #3399ff;
+      --border: #404040;
+      --success: #48c774;
+      --warning: #ffdd57;
+      --error: #f14668;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .theme-toggle, .settings-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle:hover, .settings-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--accent);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .stat-card h3 {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .change {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+
+    .stat-card .change.positive {
+      color: var(--success);
+    }
+
+    .stat-card .change.negative {
+      color: var(--error);
+    }
+
+    .actions {
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-right: 1rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .section h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .table th {
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .table td {
+      color: var(--text-primary);
+    }
+
+    .table tr:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .badge-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .badge-warning {
+      background: var(--warning);
+      color: #1a1a1a;
+    }
+
+    .badge-error {
+      background: var(--error);
+      color: white;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+    }
+
+    .error {
+      background: var(--error);
+      color: white;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .stat-card {
+        padding: 1rem;
+      }
+
+      .stat-card .value {
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        margin-right: 0;
+      }
+
+      .table {
+        font-size: 0.9rem;
+      }
+
+      .table th,
+      .table td {
+        padding: 0.5rem;
+      }
+
+      .section {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.25rem;
+      }
+
+      .stat-card .value {
+        font-size: 1.25rem;
+      }
+
+      .table {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Settings panel */
+    .settings-panel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100vh;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border);
+      padding: 2rem;
+      overflow-y: auto;
+      transition: right 0.3s;
+      z-index: 1000;
+    }
+
+    .settings-panel.open {
+      right: 0;
+    }
+
+    .settings-panel h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    .settings-group {
+      margin-bottom: 2rem;
+    }
+
+    .settings-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .settings-group select,
+    .settings-group input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 999;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  
+  <header class="header">
+    <h1>🚀 SEO MONSTER 6.0 Dashboard</h1>
+    <div class="header-controls">
+      <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+      <button class="settings-btn" id="settingsBtn">⚙️ Settings</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="actions">
+      <button class="btn" id="runBuildBtn">▶️ Run Build</button>
+      <button class="btn btn-secondary" id="refreshBtn">🔄 Refresh</button>
+    </div>
+
+    <div id="errorContainer"></div>
+
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <h3>Pages Generated</h3>
+        <div class="value" id="pagesGenerated">-</div>
+        <div class="change" id="pagesGeneratedChange">-</div>
+      </div>
+      <div class="stat-card">
+        <h3>Pages Accepted</h3>
+        <div class="value" id="pagesAccepted">-</div>
+        <div class="change" id="pagesAcceptedChange">-</div>
+      </div>
+      <div class="stat-card">
+        <h3>Average Quality</h3>
+        <div class="value" id="avgQuality">-</div>
+        <div class="change" id="avgQualityChange">-</div>
+      </div>
+      <div class="stat-card">
+        <h3>Build Status</h3>
+        <div class="value" id="buildStatus">-</div>
+        <div class="change" id="buildStatusChange">-</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📊 Recent Builds</h2>
+      <div id="buildsTable">
+        <div class="loading">Loading...</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🎯 Top Pages</h2>
+      <div id="topPagesTable">
+        <div class="loading">Loading...</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>💡 Recommendations</h2>
+      <div id="recommendations">
+        <div class="loading">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-panel" id="settingsPanel">
+    <h2>⚙️ Settings</h2>
+    
+    <div class="settings-group">
+      <label>Theme</label>
+      <select id="themeSelect">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="auto">Auto (System)</option>
+      </select>
+    </div>
+
+    <div class="settings-group">
+      <label>Refresh Interval (seconds)</label>
+      <input type="number" id="refreshInterval" value="30" min="5" max="300">
+    </div>
+
+    <div class="settings-group">
+      <label>Default View</label>
+      <select id="defaultView">
+        <option value="overview">Overview</option>
+        <option value="builds">Builds</option>
+        <option value="pages">Pages</option>
+        <option value="analytics">Analytics</option>
+      </select>
+    </div>
+
+    <div class="settings-group">
+      <label>Notifications</label>
+      <select id="notifications">
+        <option value="enabled">Enabled</option>
+        <option value="disabled">Disabled</option>
+      </select>
+    </div>
+
+    <button class="btn" onclick="saveSettings()">💾 Save Settings</button>
+  </div>
+
+  <script>
+    // Theme management
+    const themeToggle = document.getElementById('themeToggle');
+    const themeSelect = document.getElementById('themeSelect');
+    const body = document.body;
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('dashboard-theme') || 'light';
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      let theme = savedTheme;
+      if (savedTheme === 'auto') {
+        theme = systemPrefersDark ? 'dark' : 'light';
+      }
+
+      applyTheme(theme);
+      themeSelect.value = savedTheme;
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️ Light';
+      } else {
+        body.removeAttribute('data-theme');
+        themeToggle.textContent = '🌙 Dark';
+      }
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      localStorage.setItem('dashboard-theme', newTheme);
+      themeSelect.value = newTheme;
+    });
+
+    themeSelect.addEventListener('change', (e) => {
+      const selected = e.target.value;
+      localStorage.setItem('dashboard-theme', selected);
+      initTheme();
+    });
+
+    // Settings panel
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsPanel = document.getElementById('settingsPanel');
+    const overlay = document.getElementById('overlay');
+
+    settingsBtn.addEventListener('click', () => {
+      settingsPanel.classList.add('open');
+      overlay.classList.add('show');
+    });
+
+    overlay.addEventListener('click', () => {
+      settingsPanel.classList.remove('open');
+      overlay.classList.remove('show');
+    });
+
+    // Settings persistence
+    function loadSettings() {
+      const refreshInterval = localStorage.getItem('refresh-interval') || '30';
+      const defaultView = localStorage.getItem('default-view') || 'overview';
+      const notifications = localStorage.getItem('notifications') || 'enabled';
+
+      document.getElementById('refreshInterval').value = refreshInterval;
+      document.getElementById('defaultView').value = defaultView;
+      document.getElementById('notifications').value = notifications;
+    }
+
+    function saveSettings() {
+      const refreshInterval = document.getElementById('refreshInterval').value;
+      const defaultView = document.getElementById('defaultView').value;
+      const notifications = document.getElementById('notifications').value;
+
+      localStorage.setItem('refresh-interval', refreshInterval);
+      localStorage.setItem('default-view', defaultView);
+      localStorage.setItem('notifications', notifications);
+
+      alert('Settings saved!');
+      settingsPanel.classList.remove('open');
+      overlay.classList.remove('show');
+    }
+
+    // Data loading
+    async function loadDashboardData() {
+      try {
+        const response = await fetch('/api/seo-dashboard');
+        const data = await response.json();
+
+        // Update stats
+        document.getElementById('pagesGenerated').textContent = data.pagesGenerated || 0;
+        document.getElementById('pagesAccepted').textContent = data.pagesAccepted || 0;
+        document.getElementById('avgQuality').textContent = (data.avgQuality || 0).toFixed(2);
+        document.getElementById('buildStatus').textContent = data.buildStatus || 'Unknown';
+
+        // Update tables
+        updateBuildsTable(data.recentBuilds || []);
+        updateTopPagesTable(data.topPages || []);
+        updateRecommendations(data.recommendations || []);
+
+      } catch (error) {
+        document.getElementById('errorContainer').innerHTML = 
+          `<div class="error">Ошибка загрузки данных: ${error.message}</div>`;
+      }
+    }
+
+    function updateBuildsTable(builds) {
+      const container = document.getElementById('buildsTable');
+      if (builds.length === 0) {
+        container.innerHTML = '<div class="loading">No builds yet</div>';
+        return;
+      }
+
+      let html = '<table class="table"><thead><tr><th>Build ID</th><th>Pages</th><th>Quality</th><th>Status</th><th>Date</th></tr></thead><tbody>';
+      builds.forEach(build => {
+        html += `<tr>
+          <td>${build.buildId || '-'}</td>
+          <td>${build.pagesGenerated || 0}</td>
+          <td>${(build.avgQuality || 0).toFixed(2)}</td>
+          <td><span class="badge badge-${build.status === 'success' ? 'success' : 'error'}">${build.status || 'unknown'}</span></td>
+          <td>${build.date || '-'}</td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function updateTopPagesTable(pages) {
+      const container = document.getElementById('topPagesTable');
+      if (pages.length === 0) {
+        container.innerHTML = '<div class="loading">No pages yet</div>';
+        return;
+      }
+
+      let html = '<table class="table"><thead><tr><th>URL</th><th>Quality</th><th>Clicks</th><th>CTR</th></tr></thead><tbody>';
+      pages.forEach(page => {
+        html += `<tr>
+          <td><a href="${page.url}" target="_blank">${page.url}</a></td>
+          <td>${(page.quality || 0).toFixed(2)}</td>
+          <td>${page.clicks || 0}</td>
+          <td>${((page.ctr || 0) * 100).toFixed(2)}%</td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function updateRecommendations(recommendations) {
+      const container = document.getElementById('recommendations');
+      if (recommendations.length === 0) {
+        container.innerHTML = '<div class="loading">No recommendations</div>';
+        return;
+      }
+
+      let html = '<ul style="list-style: none; padding: 0;">';
+      recommendations.forEach(rec => {
+        html += `<li style="padding: 0.75rem; margin-bottom: 0.5rem; background: var(--bg-tertiary); border-radius: 4px;">
+          <strong>${rec.priority || 'Info'}:</strong> ${rec.message || rec}
+        </li>`;
+      });
+      html += '</ul>';
+      container.innerHTML = html;
+    }
+
+    // Build trigger
+    document.getElementById('runBuildBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('runBuildBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Running...';
+
+      try {
+        const response = await fetch('/api/seo-dashboard?action=build', { method: 'POST' });
+        const data = await response.json();
+        
+        if (data.success) {
+          alert('Build started!');
+          setTimeout(loadDashboardData, 2000);
+        } else {
+          alert('Build failed: ' + (data.error || 'Unknown error'));
+        }
+      } catch (error) {
+        alert('Error: ' + error.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '▶️ Run Build';
+      }
+    });
+
+    document.getElementById('refreshBtn').addEventListener('click', loadDashboardData);
+
+    // Initialize
+    initTheme();
+    loadSettings();
+    loadDashboardData();
+
+    // Auto-refresh
+    const refreshInterval = parseInt(localStorage.getItem('refresh-interval') || '30') * 1000;
+    setInterval(loadDashboardData, refreshInterval);
+
+    // System theme change listener
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (localStorage.getItem('dashboard-theme') === 'auto') {
+        initTheme();
+      }
+    });
+  </script>
+</body>
+</html>
+
+

@@ -37,8 +37,8 @@ class SitemapEngine {
     // Очистка старых sitemaps
     if (fs.existsSync(this.sitemapRoot)) {
       const existing = fs.readdirSync(this.sitemapRoot);
-      for (const f of existing) {
-        if (f.endsWith('.xml')) {
+        for (const f of existing) {
+          if (f.endsWith('.xml')) {
           fs.unlinkSync(path.join(this.sitemapRoot, f));
         }
       }

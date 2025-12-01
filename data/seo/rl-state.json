@@ -1,18 +1,21 @@
 {
   "version": 1,
-  "lastUpdated": "2025-11-30T13:41:42.697Z",
+  "lastUpdated": "2025-12-01T03:23:40.145Z",
   "intentWeights": {
-    "vin_check": 1
+    "vin_check": 0.20073448443588207,
+    "accident_check": 0.1999605797792786,
+    "ownership_history": 0.20020210431674612,
+    "market_value": 0.19981749425701595,
+    "dmv_records": 0.1992853372110773
   },
   "languageWeights": {
-    "en": 0.504811619613078,
-    "es": 0.4951883803869219
+    "en": 0.49961704439952465,
+    "es": 0.5003829556004753
   },
   "clusterScores": {},
   "layoutWeights": {
-    "APPLE": 0.9952000000000001,
-    "DMV": 0.9827,
-    "RISK": 0.9827,
-    "LEGAL": 0.9755
+    "HYBRID": 0.9711424583333333,
+    "APPLE": 0.9741998511904763,
+    "LEGAL": 0.9705390029761906
   }
 }

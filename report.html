@@ -771,6 +771,17 @@
         
         const vin = sanitizeVIN(rawVin);
         
+        // ТРИЗ: Сбор неоплаченных VIN кодов для обучения AI
+        // Принцип: Максимальное использование ресурсов - каждый просмотр становится источником обучения
+        if (vin) {
+            // Отправляем VIN на сервер для сохранения (неоплаченный)
+            fetch('/api/collect-vin', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ vin, type: 'unpaid', page: 'report' })
+            }).catch(err => console.log('VIN collection error:', err));
+        }
+        
         if (vin) {
             document.getElementById('vinDisplay').textContent = vin;
             loadReportData(vin, 'vin');

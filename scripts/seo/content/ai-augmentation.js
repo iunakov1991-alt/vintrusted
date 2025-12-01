@@ -15,6 +15,25 @@ class AIAugmentation {
     // Оптимизация: DeepSeek первый для экономии Groq лимитов
     this.providers = config.aiProviders || ['deepseek', 'groq'];
     this.loadCache();
+    this.loadAITrainingStrategy();
+  }
+
+  /**
+   * Загрузка обученной стратегии AI
+   */
+  loadAITrainingStrategy() {
+    try {
+      const strategyPath = path.join(process.cwd(), 'data/seo/ai-training/learned-strategy.json');
+      if (fs.existsSync(strategyPath)) {
+        this.aiStrategy = JSON.parse(fs.readFileSync(strategyPath, 'utf8'));
+        log('AI', 'AI training strategy loaded');
+      } else {
+        this.aiStrategy = null;
+      }
+    } catch (e) {
+      log('AI', `Error loading AI strategy: ${e.message}`);
+      this.aiStrategy = null;
+    }
   }
 
   loadCache() {
@@ -45,6 +64,114 @@ class AIAugmentation {
 
   hashKey(str) {
     return crypto.createHash('sha1').update(str).digest('hex');
+  }
+
+  /**
+   * Обогащение промпта обученной стратегией AI
+   * AI использует свои знания о том, что любит Google, и свою успешную стратегию
+   */
+  enrichPromptWithStrategy(originalPrompt, options) {
+    if (!this.aiStrategy || !this.aiStrategy.core_principles) {
+      // Если стратегии нет, используем оригинальный промпт
+      return originalPrompt;
+    }
+
+    // Загружаем базу знаний для контекста
+    const knowledgeBase = this.loadKnowledgeBase();
+    
+    // Строим обогащенный промпт с учетом стратегии AI
+    let enrichedPrompt = originalPrompt;
+    
+    // Добавляем контекст о том, что любит Google (из официальной документации)
+    enrichedPrompt += `\n\n---\nAI TRAINING CONTEXT (Based on official Google documentation and learned strategy):\n`;
+    
+    // Core Principles (может быть объектом или массивом)
+    if (this.aiStrategy.core_principles) {
+      enrichedPrompt += `\nCORE SEO PRINCIPLES (What Google loves, from official docs):\n`;
+      if (Array.isArray(this.aiStrategy.core_principles)) {
+        this.aiStrategy.core_principles.forEach((principle, i) => {
+          if (principle && (typeof principle === 'string' ? principle.trim() : true)) {
+            enrichedPrompt += `${i + 1}. ${typeof principle === 'string' ? principle : JSON.stringify(principle)}\n`;
+          }
+        });
+      } else if (typeof this.aiStrategy.core_principles === 'object') {
+        // Если это объект, выводим ключи и значения
+        Object.entries(this.aiStrategy.core_principles).forEach(([key, value], i) => {
+          enrichedPrompt += `${i + 1}. ${key}: ${value}\n`;
+        });
+      } else if (typeof this.aiStrategy.core_principles === 'string') {
+        enrichedPrompt += this.aiStrategy.core_principles;
+      }
+    }
+    
+    // Content Strategy (может быть объектом или строкой)
+    if (this.aiStrategy.content_strategy) {
+      enrichedPrompt += `\nCONTENT STRATEGY (Learned from experience):\n`;
+      if (typeof this.aiStrategy.content_strategy === 'object') {
+        Object.entries(this.aiStrategy.content_strategy).forEach(([key, value]) => {
+          enrichedPrompt += `- ${key}: ${value}\n`;
+        });
+      } else if (typeof this.aiStrategy.content_strategy === 'string' && this.aiStrategy.content_strategy.trim()) {
+        enrichedPrompt += this.aiStrategy.content_strategy + '\n';
+      }
+    }
+    
+    // Unique Approaches (может быть объектом или массивом)
+    if (this.aiStrategy.unique_approaches) {
+      enrichedPrompt += `\nUNIQUE APPROACHES (What works best for this use case):\n`;
+      if (Array.isArray(this.aiStrategy.unique_approaches)) {
+        this.aiStrategy.unique_approaches.forEach((approach, i) => {
+          if (approach && (typeof approach === 'string' ? approach.trim() : true)) {
+            enrichedPrompt += `${i + 1}. ${typeof approach === 'string' ? approach : JSON.stringify(approach)}\n`;
+          }
+        });
+      } else if (typeof this.aiStrategy.unique_approaches === 'object') {
+        Object.entries(this.aiStrategy.unique_approaches).forEach(([key, value], i) => {
+          enrichedPrompt += `${i + 1}. ${key}: ${value}\n`;
+        });
+      }
+    }
+    
+    // Добавляем контекст из базы знаний (официальная документация Google)
+    if (knowledgeBase.length > 0) {
+      enrichedPrompt += `\nGOOGLE OFFICIAL DOCUMENTATION CONTEXT:\n`;
+      enrichedPrompt += `- Follow Google Search Essentials and Fundamentals\n`;
+      enrichedPrompt += `- Optimize for Core Web Vitals (LCP, CLS, FID)\n`;
+      enrichedPrompt += `- Use structured data (Schema.org) appropriately\n`;
+      enrichedPrompt += `- Focus on quality content that serves user intent\n`;
+    }
+    
+    enrichedPrompt += `\n---\n`;
+    enrichedPrompt += `\nIMPORTANT: Apply these principles naturally in your content. Don't just list them - integrate them into high-quality, useful content that Google will love and users will find valuable.\n`;
+    
+    return enrichedPrompt;
+  }
+
+  /**
+   * Загрузка базы знаний
+   */
+  loadKnowledgeBase() {
+    try {
+      const knowledgeBasePath = path.join(process.cwd(), 'data/seo/ai-training/knowledge-base.jsonl');
+      if (!fs.existsSync(knowledgeBasePath)) return [];
+      
+      const lines = fs.readFileSync(knowledgeBasePath, 'utf8')
+        .split('\n')
+        .filter(Boolean);
+      
+      const knowledge = [];
+      for (const line of lines) {
+        try {
+          knowledge.push(JSON.parse(line));
+        } catch (e) {
+          // Skip invalid lines
+        }
+      }
+      return knowledge;
+    } catch (e) {
+      log('AI', `Error loading knowledge base: ${e.message}`);
+      return [];
+    }
   }
 
   /**
@@ -142,8 +269,12 @@ class AIAugmentation {
    */
   async generateText(prompt, options = {}) {
     const { lang = 'en', intent = 'generic', maxTokens = 600, make, year, stateSlug } = options;
+    
+    // КРИТИЧНО: Обогащаем промпт обученной стратегией AI
+    const enrichedPrompt = this.enrichPromptWithStrategy(prompt, options);
+    
     // Улучшенный ключ кеша: добавляем make, year, state для лучшего кеширования
-    const cacheKeyParts = [lang, intent, make || '', year || '', stateSlug || '', prompt];
+    const cacheKeyParts = [lang, intent, make || '', year || '', stateSlug || '', enrichedPrompt];
     const key = this.hashKey(cacheKeyParts.join('|'));
 
     // Проверка включенности AI
@@ -182,8 +313,8 @@ class AIAugmentation {
     let usedProvider = null;
     for (const provider of this.providers) {
       if (provider === 'groq') {
-        log('AI', `Trying Groq API for ${intent} in ${lang}`);
-        text = await this.callGroqAPI(prompt, { lang, intent, maxTokens });
+        log('AI', `Trying Groq API for ${intent} in ${lang} (with AI training strategy)`);
+        text = await this.callGroqAPI(enrichedPrompt || prompt, { lang, intent, maxTokens });
         if (text) {
           usedProvider = 'groq';
           log('AI', `Groq API success for ${intent} in ${lang}`);
@@ -192,8 +323,8 @@ class AIAugmentation {
           log('AI', `Groq API failed for ${intent} in ${lang}`);
         }
       } else if (provider === 'deepseek') {
-        log('AI', `Trying DeepSeek API for ${intent} in ${lang}`);
-        text = await this.callDeepSeekAPI(prompt, { lang, intent, maxTokens });
+        log('AI', `Trying DeepSeek API for ${intent} in ${lang} (with AI training strategy)`);
+        text = await this.callDeepSeekAPI(enrichedPrompt || prompt, { lang, intent, maxTokens });
         if (text) {
           usedProvider = 'deepseek';
           log('AI', `DeepSeek API success for ${intent} in ${lang}`);

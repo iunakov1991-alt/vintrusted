@@ -1,0 +1,40 @@
+{
+  "core_principles": {
+    "understanding_search_intent": "Prioritize user intent modeling to create relevant and useful content for users searching for VIN check information",
+    "content_quality": "Focus on creating high-quality, accurate, and up-to-date content that provides value to users",
+    "technical_optimization": "Ensure technical SEO best practices are followed, including page speed, mobile-friendliness, and secure browsing",
+    "entity Markup": "Use schema.org markup to help search engines understand the entity graph structure of the website"
+  },
+  "content_strategy": {
+    "vin_centric_content": "Generate content centered around individual VINs, including vehicle history reports, market value, and safety recalls",
+    "automotive_industry_insights": "Create informative content about the automotive industry, including trends, news, and analysis",
+    "user_generated_content": "Encourage users to generate content, such as reviews and ratings, to increase engagement and provide social proof",
+    "content_refresh": "Regularly update and refresh content to ensure accuracy and relevance"
+  },
+  "technical_strategy": {
+    "page_speed_optimization": "Optimize page speed to ensure fast loading times, using techniques such as code splitting, minification, and compression",
+    "mobile_friendly_design": "Ensure a mobile-friendly design that provides a seamless user experience across devices",
+    "secure_browsing": "Implement HTTPS to ensure secure browsing and protect user data",
+    "xml_sitemap": "Use XML sitemaps to help search engines discover and crawl new content"
+  },
+  "entity_graph_strategy": {
+    "brand_model_year_vin_hierarchy": "Establish a clear hierarchy of entities, from brand to model to year to VIN, using schema.org markup",
+    "entity_disambiguation": "Use entity disambiguation techniques to ensure search engines understand the context and relationships between entities",
+    "entity_enrichment": "Enrich entity data with additional information, such as vehicle features, options, and specifications"
+  },
+  "crawl_budget_strategy": {
+    "prioritize_new_content": "Prioritize crawling and indexing of new content, such as newly added VINs or updated vehicle history reports",
+    "use_sitemap_index": "Use a sitemap index to help search engines discover and crawl large numbers of pages",
+    "robotstxt_optimization": "Optimize robots.txt files to ensure search engines can crawl and index important pages"
+  },
+  "learning_strategy": {
+    "google_search_console": "Use Google Search Console to monitor search traffic, impressions, and click-through rates",
+    "user_feedback": "Collect user feedback and reviews to identify areas for improvement and optimize content and user experience",
+    "a_b_testing": "Conduct A/B testing to measure the impact of changes to content, design, and technical optimization"
+  },
+  "unique_approaches": {
+    "vin_based_entity_clustering": "Use VIN-based entity clustering to group related entities and provide a more comprehensive view of vehicle history and information",
+    "automotive_industry_partnerships": "Establish partnerships with automotive industry leaders to provide exclusive content, data, and insights",
+    "ai_generated_content": "Use AI-generated content to create high-quality, informative content at scale, such as vehicle descriptions and specifications"
+  }
+}

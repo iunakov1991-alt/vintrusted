@@ -27,6 +27,23 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid VIN format. VIN must contain only valid characters (A-Z, 0-9, excluding I, O, Q)' });
     }
 
+    // ТРИЗ: Проверка кэша перед API вызовом
+    // Принцип: Максимальное использование ресурсов - не делаем повторные API вызовы
+    const { VINReportCache } = require('./_lib/vin-report-cache');
+    const reportCache = new VINReportCache();
+    
+    const cachedReport = reportCache.getReport(cleanVin);
+    if (cachedReport) {
+      console.log('Returning cached report for VIN:', cleanVin);
+      return res.status(200).json({
+        success: true,
+        report: cachedReport.report,
+        vin: cleanVin,
+        cached: true,
+        savedAt: cachedReport.savedAt
+      });
+    }
+
     // Get token from environment variable
     const token = process.env.CLEARVIN_API_TOKEN;
     if (!token) {
@@ -261,10 +278,21 @@ export default async function handler(req, res) {
     console.log('Successfully extracted HTML report, length:', htmlReport.length);
     console.log('Report text content length (without HTML tags):', reportText.length);
 
+    // ТРИЗ: Сохранение отчета в кэш после получения
+    // Принцип: Минимальный шаг - максимальный эффект - один раз получили, используем многократно
+    try {
+      await reportCache.saveReport(cleanVin, htmlReport, 'clearvin-api');
+      console.log('Report cached for VIN:', cleanVin);
+    } catch (cacheError) {
+      console.error('Error caching report:', cacheError.message);
+      // Не прерываем ответ, если кэширование не удалось
+    }
+
     return res.status(200).json({
       success: true,
       report: htmlReport,
-      vin: cleanVin
+      vin: cleanVin,
+      cached: false
     });
   } catch (error) {
     console.error('ClearVin API error:', error);

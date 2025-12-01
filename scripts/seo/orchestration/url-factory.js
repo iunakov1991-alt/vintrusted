@@ -34,6 +34,28 @@ class URLFactory {
     };
   }
 
+  /**
+   * Обновление seeds из Seed Expansion Engine
+   * Используется для интеграции с AI Seed Expansion
+   */
+  updateSeeds(expandedSeeds) {
+    if (!expandedSeeds || typeof expandedSeeds !== 'object') {
+      log('URL', 'Invalid expanded seeds, using current seeds');
+      return;
+    }
+    
+    // Сохраняем расширенные seeds для этого билда
+    this.currentSeeds = expandedSeeds;
+    log('URL', `Seeds updated: ${expandedSeeds.states?.length || 0} states, ${expandedSeeds.makes?.length || 0} makes, ${expandedSeeds.years?.length || 0} years`);
+  }
+
+  /**
+   * Получение текущих seeds (с учетом обновлений от Seed Expansion)
+   */
+  getCurrentSeeds() {
+    return this.currentSeeds || this.loadSeeds();
+  }
+
   buildClusterId({ type, stateSlug, makeSlug, intent }) {
     return `${type}_${stateSlug}_${makeSlug}_${intent}`;
   }
@@ -51,7 +73,7 @@ class URLFactory {
    * Построить план URL с учетом приоритетов
    */
   buildUrlPlan() {
-    const seeds = this.loadSeeds();
+    const seeds = this.getCurrentSeeds();
     const intents = this.config.intents || [];
     const states = seeds.states || [];
     const makes = seeds.makes || [];

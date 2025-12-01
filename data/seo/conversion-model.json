@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "weights": {
+    "qualityScore": 0.3,
+    "semanticScore": 0.25,
+    "position": 0.15,
+    "ctr": 0.1,
+    "trafficVolume": 0.1,
+    "timeOnPage": 0.04,
+    "bounceRate": -0.03,
+    "internalLinks": 0.02,
+    "layoutType": 0.01,
+    "intentType": 0.01
+  },
+  "intercept": 0.02,
+  "trainingData": {
+    "totalSamples": 0,
+    "lastUpdated": null,
+    "accuracy": 0
+  },
+  "factors": {
+    "highQualityThreshold": 0.85,
+    "lowBounceThreshold": 30,
+    "optimalTimeOnPage": 180,
+    "optimalCTR": 5
+  }
+}

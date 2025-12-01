@@ -81,11 +81,41 @@ module.exports = async (req, res) => {
 
       store.touch(orderId, { status: 'processing' });
 
+      // ТРИЗ: Перехват VIN при оплате (VIN введен + отчет оплачен)
+      // Принцип: Конфликты превращены в функции - событие оплаты становится источником данных
+      const { VINCollector } = require('./_lib/vin-collector');
+      const vinCollector = new VINCollector();
+      
+      if (vin) {
+        vinCollector.savePaidVIN(vin, {
+          orderId,
+          plate,
+          state,
+          customerId: cs.customer
+        });
+      }
+
       // Асинхронная генерация отчёта
       setImmediate(async () => {
         try {
           const report = await createOrGetReport({ vin, plate, state });
           store.save(orderId, { status: 'ready', report });
+          
+          // ТРИЗ: Сохранение отчета в кэш после получения
+          // Принцип: Максимальное использование ресурсов
+          if (vin && report) {
+            try {
+              const { VINReportCache } = require('./_lib/vin-report-cache');
+              const reportCache = new VINReportCache();
+              
+              // Сохраняем отчет (может быть HTML или объект)
+              const reportData = typeof report === 'string' ? report : JSON.stringify(report);
+              await reportCache.saveReport(vin, reportData, 'vinaudit-api');
+              console.log('Report cached after payment for VIN:', vin);
+            } catch (cacheError) {
+              console.error('Error caching report after payment:', cacheError.message);
+            }
+          }
         } catch (e) {
           console.error('Report generation error:', e);
           store.save(orderId, { 
