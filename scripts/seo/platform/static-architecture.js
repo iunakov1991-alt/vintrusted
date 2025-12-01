@@ -51,8 +51,17 @@ class StaticArchitecture {
     const outputPath = this.getOutputPath(item);
     const outputDir = path.dirname(outputPath);
     
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
+    // ТРИЗ: защита от race conditions при параллельной записи
+    // Используем try-catch для mkdirSync (может быть создана другим процессом)
+    try {
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+    } catch (e) {
+      // Если директория уже создана другим процессом - это нормально
+      if (e.code !== 'EEXIST') {
+        throw e; // Другие ошибки пробрасываем
+      }
     }
     
     fs.writeFileSync(outputPath, html, 'utf8');

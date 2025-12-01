@@ -87,7 +87,7 @@ class AdaptiveComplexityManager {
   getDefaultParameters(operation) {
     const defaults = {
       content_generation: {
-        concurrency: 20, // ТРИЗ: увеличено с 8 до 20 для быстрых билдов
+        concurrency: 12, // ТРИЗ: баланс между скоростью и стабильностью (было 20)
         aiMaxTokens: 400, // ТРИЗ: уменьшено с 600 до 400 для ускорения
         enableAdvancedFeatures: true,
         cacheEnabled: true
@@ -172,8 +172,8 @@ class AdaptiveComplexityManager {
   /**
    * Получение рекомендуемой конкурентности
    */
-  // ТРИЗ оптимизация: увеличиваем базовую конкурентность для быстрых билдов
-  getRecommendedConcurrency(baseConcurrency = 20) {
+  // ТРИЗ оптимизация: баланс между скоростью и стабильностью
+  getRecommendedConcurrency(baseConcurrency = 12) {
     const adjustment = this.getComplexityAdjustments(this.complexityLevel).concurrency || 1.0;
     return Math.max(1, Math.round(baseConcurrency * adjustment));
   }

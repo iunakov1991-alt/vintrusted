@@ -390,10 +390,10 @@ async function main() {
         log('STAGE', 'No URL plan for content generation');
         return;
       }
-      // ТРИЗ оптимизация: увеличиваем concurrency для быстрых билдов
-      // Приоритет скорости над безопасностью для достижения 3-4 минут
-      const baseConcurrency = parseInt(process.env.SEO_BUILD_CONCURRENCY || '20', 10);
-      const concurrency = Math.min(baseConcurrency, 30); // Максимум 30 для стабильности
+      // ТРИЗ оптимизация: баланс между скоростью и стабильностью
+      // Уменьшено с 20-30 до 12-15 для избежания race conditions
+      const baseConcurrency = parseInt(process.env.SEO_BUILD_CONCURRENCY || '12', 10);
+      const concurrency = Math.min(baseConcurrency, 15); // Максимум 15 для стабильности
       
       async function generatePageContent(item, cachedAiText = null, maxTokensOverride = null) {
         // Защита от undefined stateSlug
@@ -564,9 +564,9 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
               return generatePageContent(item, cached.aiText);
             }
             
-            // ТРИЗ: пропускаем AI для 30% страниц (используем baseline) для ускорения
-            // Это позволяет генерировать больше страниц быстрее
-            const skipAI = Math.random() < 0.3; // 30% страниц без AI
+            // ТРИЗ: пропускаем AI для 20% страниц (используем baseline) для ускорения
+            // Уменьшено с 30% до 20% для лучшего качества
+            const skipAI = Math.random() < 0.2; // 20% страниц без AI
             if (skipAI && config.enableAI) {
               log('SPEED-OPTIMIZATION', `Skipping AI for ${item.url} (baseline only)`);
               return generatePageContent(item, '', adaptiveMaxTokens); // Пустой aiText = только baseline
@@ -988,8 +988,9 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       }
       
       // ТРИЗ оптимизация: батчинг записи файлов для параллелизации
-      const writeBatchSize = 50; // Записываем батчами по 50 файлов
-      const writeConcurrency = 10; // Параллельно 10 батчей
+      // Уменьшено для избежания race conditions при создании директорий
+      const writeBatchSize = 25; // Записываем батчами по 25 файлов (было 50)
+      const writeConcurrency = 5; // Параллельно 5 батчей (было 10)
       const batches = [];
       
       for (let i = 0; i < ctx.acceptedPages.length; i += writeBatchSize) {
