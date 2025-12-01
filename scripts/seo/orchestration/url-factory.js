@@ -113,7 +113,39 @@ class URLFactory {
         for (const year of years) {
           for (const intent of intents) {
             for (const lang of languages) {
-              const vin = vins.length ? vins[vinIndex % vins.length] : '1HGCM82633A004352';
+              // Генерируем уникальный VIN на основе комбинации параметров
+              // Это позволяет создавать больше уникальных страниц
+              let vin;
+              if (vins.length > 0) {
+                // Используем существующий VIN как базу и модифицируем последние символы
+                const baseVin = vins[vinIndex % vins.length];
+                // Создаем уникальный идентификатор из комбинации параметров
+                const uniqueId = `${makeSlug}-${year}-${stateSlug}-${intent}-${lang}`;
+                const hash = this.simpleHash(uniqueId);
+                // Заменяем последние 4 символа VIN на хеш (сохраняя формат VIN)
+                const hashStr = hash.toString(16).toUpperCase().padStart(4, '0').substring(0, 4);
+                // Используем только допустимые символы VIN (A-HJ-NPR-Z0-9)
+                const vinChars = 'ABCDEFGHJKLMNPRSTUVWXYZ0123456789';
+                let vinSuffix = '';
+                for (let i = 0; i < 4; i++) {
+                  const charCode = hashStr.charCodeAt(i) || 0;
+                  vinSuffix += vinChars[charCode % vinChars.length];
+                }
+                vin = baseVin.substring(0, 13) + vinSuffix;
+              } else {
+                // Генерируем новый VIN на основе параметров
+                const baseVin = '1HGCM82633A004352';
+                const uniqueId = `${makeSlug}-${year}-${stateSlug}-${intent}-${lang}`;
+                const hash = this.simpleHash(uniqueId);
+                const hashStr = hash.toString(16).toUpperCase().padStart(4, '0').substring(0, 4);
+                const vinChars = 'ABCDEFGHJKLMNPRSTUVWXYZ0123456789';
+                let vinSuffix = '';
+                for (let i = 0; i < 4; i++) {
+                  const charCode = hashStr.charCodeAt(i) || 0;
+                  vinSuffix += vinChars[charCode % vinChars.length];
+                }
+                vin = baseVin.substring(0, 13) + vinSuffix;
+              }
               vinIndex++;
 
               const clusterId = this.buildClusterId({
