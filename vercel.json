@@ -129,11 +129,11 @@
   "rewrites": [
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/",
-      "destination": "/vin/:vin/:state/index.html"
+      "destination": "/api/seo-vin-page.js?vin=:vin&state=:state"
     },
     {
       "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
-      "destination": "/vin/:vin/:state/index.html"
+      "destination": "/api/seo-vin-page.js?vin=:vin&state=:state"
     },
     {
       "source": "/api/checkout",
