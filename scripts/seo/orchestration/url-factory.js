@@ -89,7 +89,14 @@ class URLFactory {
     let vinIndex = 0;
 
     for (const state of states) {
+      // Защита от undefined state
+      const stateSlug = (typeof state === 'string' ? state : state?.slug) || 'california';
+      const stateCode = (typeof state === 'object' ? state?.code : null) || 'CA';
+      
       for (const make of makes) {
+        // Защита от undefined make
+        const makeSlug = (typeof make === 'string' ? make : make?.slug) || 'toyota';
+        
         for (const year of years) {
           for (const intent of intents) {
             for (const lang of languages) {
@@ -98,8 +105,8 @@ class URLFactory {
 
               const clusterId = this.buildClusterId({
                 type: 'vin',
-                stateSlug: state.slug,
-                makeSlug: make.slug,
+                stateSlug: stateSlug,
+                makeSlug: makeSlug,
                 intent
               });
 
@@ -110,7 +117,7 @@ class URLFactory {
 
               const priority = basePriority * (0.5 + iWeight) * (0.5 + lWeight) * (0.5 + cWeight);
 
-              const url = `/vin/${vin}/${state.slug}/`;
+              const url = `/vin/${vin}/${stateSlug}/`;
 
               pages.push({
                 url,
@@ -118,9 +125,9 @@ class URLFactory {
                 intent,
                 clusterId,
                 template: 'vin-report',
-                stateSlug: state.slug,
-                stateCode: state.code,
-                make: make.slug,
+                stateSlug: stateSlug,
+                stateCode: stateCode,
+                make: makeSlug,
                 year,
                 vin,
                 priority

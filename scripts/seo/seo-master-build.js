@@ -393,6 +393,19 @@ async function main() {
       const concurrency = parseInt(process.env.SEO_BUILD_CONCURRENCY || '8', 10);
       
       async function generatePageContent(item, cachedAiText = null, maxTokensOverride = null) {
+        // Защита от undefined stateSlug
+        if (!item.stateSlug) {
+          // Пытаемся извлечь stateSlug из URL
+          const urlMatch = item.url?.match(/\/vin\/[^\/]+\/([^\/]+)\//);
+          if (urlMatch && urlMatch[1] && urlMatch[1] !== 'undefined') {
+            item.stateSlug = urlMatch[1];
+          } else {
+            // Fallback на дефолтный штат
+            item.stateSlug = 'california';
+            log('CONTENT-GEN', `Warning: stateSlug missing for ${item.url}, using fallback: california`);
+          }
+        }
+        
         // Baseline контент (baselineBlocks доступен из замыкания)
         const baseline = baselineBlocks.generateBaselineContent(item);
         
@@ -475,7 +488,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         // Выбор layout (Adaptive Layout Selection)
         let layout;
         if (config.features && config.features.adaptiveLayout !== false) {
-          layout = adaptiveLayout.selectBestLayout(enrichedItem, layoutEngine.getAvailableLayouts()) || 
+          layout = adaptiveLayout.selectBestLayout(enrichedItem, layoutEngine.getAllLayouts()) || 
                    layoutEngine.selectLayout(enrichedItem, rlState.layoutWeights);
         } else {
           layout = layoutEngine.selectLayout(enrichedItem, rlState.layoutWeights);
