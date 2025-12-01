@@ -50,28 +50,16 @@ module.exports = async (req, res) => {
     }
     
     // Множественные пути поиска файла
-    // Теперь файлы хранятся в public/vin/:vin/:state/:intent-:lang/index.html
-    // Но для обратной совместимости ищем и старые пути тоже
-    const possiblePaths = [];
-    
-    // Новый формат: с intent-lang в пути (пробуем все возможные комбинации)
-    const intents = ['vin_check', 'accident_check', 'ownership_history', 'market_value', 'dmv_records', 'title_brand', 'odometer_rollback', 'theft_records'];
-    const langs = ['en', 'es'];
-    for (const intent of intents) {
-      for (const lang of langs) {
-        possiblePaths.push(
-          path.join(process.cwd(), 'public', 'vin', vin, state, `${intent}-${lang}`, 'index.html')
-        );
-      }
-    }
-    
-    // Старый формат (для обратной совместимости)
-    possiblePaths.push(
+    const possiblePaths = [
+      // Основной путь
       path.join(process.cwd(), 'public', 'vin', vin, state, 'index.html'),
+      // Альтернативный путь (если state с заглавной)
       path.join(process.cwd(), 'public', 'vin', vin, state.charAt(0).toUpperCase() + state.slice(1), 'index.html'),
+      // Путь с .vercel/output (для Vercel builds)
       path.join(process.cwd(), '.vercel', 'output', 'static', 'vin', vin, state, 'index.html'),
-      path.join(process.cwd(), 'vin', vin, state, 'index.html')
-    );
+      // Путь из корня проекта (fallback)
+      path.join(process.cwd(), 'vin', vin, state, 'index.html'),
+    ];
     
     let filePath = null;
     let foundPath = null;

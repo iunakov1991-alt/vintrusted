@@ -18,19 +18,15 @@ class StaticArchitecture {
 
   /**
    * Получить путь для статического файла
-   * URL: /vin/:vin/:state/ (остается прежним для SEO)
-   * File: public/vin/:vin/:state/:intent-:lang/index.html (включаем intent и lang в путь файла)
-   * Это позволяет хранить разные страницы для разных intents и языков
+   * URL: /vin/:vin/:state/
+   * File: public/vin/:vin/:state/index.html
+   * Одна страница на VIN+state, контент учитывает intent и lang через AI
    */
   getOutputPath(item) {
-    // Включаем intent и lang в путь файла, чтобы разные страницы не перезаписывали друг друга
-    const intent = item.intent || 'vin_check';
-    const lang = item.lang || 'en';
     const vinDir = path.join(
       this.outputRoot,
       item.vin || 'vin',
-      item.stateSlug || 'state',
-      `${intent}-${lang}`
+      item.stateSlug || 'state'
     );
     return path.join(vinDir, 'index.html');
   }
@@ -39,8 +35,12 @@ class StaticArchitecture {
    * Получить путь в public/ для совместимости
    */
   getPublicPath(item) {
-    // Используем тот же путь, что и getOutputPath
-    return this.getOutputPath(item);
+    const vinDir = path.join(
+      this.publicRoot,
+      item.vin || 'vin',
+      item.stateSlug || 'state'
+    );
+    return path.join(vinDir, 'index.html');
   }
 
   /**

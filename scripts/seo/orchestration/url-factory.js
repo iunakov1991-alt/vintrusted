@@ -70,6 +70,19 @@ class URLFactory {
   }
 
   /**
+   * Простая хеш-функция для генерации уникальных VIN
+   */
+  simpleHash(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32bit integer
+    }
+    return Math.abs(hash);
+  }
+
+  /**
    * Построить план URL с учетом приоритетов
    */
   buildUrlPlan() {
@@ -138,14 +151,13 @@ class URLFactory {
       }
     }
 
-    // Дедупликация по vin+stateSlug+intent+lang
-    // Это позволяет создавать разные страницы для разных intents и языков
-    // но предотвращает дубликаты для одного VIN+state+intent+lang
+    // Дедупликация по vin+stateSlug
+    // Одна страница на VIN+state, контент учитывает intent и lang через AI
+    // Для увеличения количества страниц генерируем больше VIN динамически
     const seen = new Set();
     const deduplicated = [];
     for (const p of pages) {
-      // Включаем intent и lang в ключ, чтобы создавать разные страницы
-      const key = `${p.vin}|${p.stateSlug}|${p.intent}|${p.lang}`;
+      const key = `${p.vin}|${p.stateSlug}`;
       if (seen.has(key)) continue;
       seen.add(key);
       deduplicated.push(p);
