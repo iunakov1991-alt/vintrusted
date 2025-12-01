@@ -447,10 +447,19 @@ class TemplateEngineAbsolute {
     const schemas = [];
 
     // WebPage
+    // Формирование URL для Schema.org с защитой от undefined
+    let schemaUrl = page.url;
+    if (!schemaUrl || schemaUrl.includes('undefined')) {
+      const stateSlug = page.stateSlug && page.stateSlug !== 'undefined' ? page.stateSlug : 'state';
+      const vin = page.vin || 'vin';
+      schemaUrl = `/vin/${vin}/${stateSlug}/`;
+    }
+    schemaUrl = schemaUrl.replace(/undefined/g, 'state');
+
     schemas.push({
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "url": `https://vintrusted.com${page.url}`,
+      "url": `https://vintrusted.com${schemaUrl}`,
       "name": page.title,
       "description": page.description,
       "inLanguage": page.lang || "en"
@@ -470,8 +479,8 @@ class TemplateEngineAbsolute {
         {
           "@type": "ListItem",
           "position": 2,
-          "name": page.stateLabel || page.stateSlug,
-          "item": `https://vintrusted.com/vin/${page.vin}/${page.stateSlug}/`
+          "name": page.stateLabel || page.stateSlug || 'your state',
+          "item": `https://vintrusted.com/vin/${page.vin || 'vin'}/${page.stateSlug && page.stateSlug !== 'undefined' ? page.stateSlug : 'state'}/`
         }
       ]
     });
@@ -573,6 +582,17 @@ class TemplateEngineAbsolute {
     // const ogImageUrl = ogImage ? `https://vintrusted.com${ogImage}` : '';
     const ogImageUrl = ''; // Отключено
 
+    // Формирование canonical URL с защитой от undefined
+    let canonicalUrl = page.url;
+    if (!canonicalUrl || canonicalUrl.includes('undefined')) {
+      // Формируем URL из компонентов
+      const stateSlug = page.stateSlug && page.stateSlug !== 'undefined' ? page.stateSlug : 'state';
+      const vin = page.vin || 'vin';
+      canonicalUrl = `/vin/${vin}/${stateSlug}/`;
+    }
+    // Убеждаемся, что URL не содержит undefined
+    canonicalUrl = canonicalUrl.replace(/undefined/g, 'state');
+
     return `<!doctype html>
 <html lang="${page.lang || 'en'}">
 <head>
@@ -580,10 +600,10 @@ class TemplateEngineAbsolute {
   <title>${this.escapeHtml(page.title)}</title>
   <meta name="description" content="${this.escapeHtml(page.description)}" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="canonical" href="https://vintrusted.com${page.url}" />
+  <link rel="canonical" href="https://vintrusted.com${canonicalUrl}" />
   <meta property="og:title" content="${this.escapeHtml(page.title)}" />
   <meta property="og:description" content="${this.escapeHtml(page.description)}" />
-  <meta property="og:url" content="https://vintrusted.com${page.url}" />
+  <meta property="og:url" content="https://vintrusted.com${canonicalUrl}" />
   <meta property="og:type" content="article" />
   ${ogImageUrl ? `<meta property="og:image" content="${ogImageUrl}" />` : ''}
   <meta name="twitter:card" content="summary_large_image" />
