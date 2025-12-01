@@ -1018,22 +1018,19 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 9: Обновление LTR весов
     pipeline.registerStage('ltr-update', async (ctx) => {
       log('STAGE', 'LTR Weight Update');
-      const weights = weightEngine.updateWeights(ctx.acceptedPages);
+      const weights = weightEngine.updateWeights(ctx.acceptedPages || []);
       
       // Сохранение обновленного RL state
       const newRlState = {
         ...rlState,
-        intentWeights: weightEngine.normalizeWeights(weights.intents),
-        languageWeights: weightEngine.normalizeWeights(weights.languages),
-        layoutWeights: weights.layouts,
+        intentWeights: weightEngine.normalizeWeights(weights.intents || {}),
+        languageWeights: weightEngine.normalizeWeights(weights.languages || {}),
+        layoutWeights: weights.layouts || {},
         lastUpdated: new Date().toISOString()
       };
       
-      const rlStateDir = path.dirname(rlStatePath);
-      if (!fs.existsSync(rlStateDir)) {
-        fs.mkdirSync(rlStateDir, { recursive: true });
-      }
-      fs.writeFileSync(rlStatePath, JSON.stringify(newRlState, null, 2));
+      // Используем configManager для сохранения RL state
+      configManager.saveRLState(newRlState);
       log('STAGE', 'RL state updated');
     });
 
