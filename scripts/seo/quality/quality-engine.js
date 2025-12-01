@@ -136,6 +136,12 @@ class QualityEngine {
    * Batch scoring
    */
   scorePages(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('QUALITY', 'No pages provided for scoring, returning empty result');
+      return { scored: [], accepted: [], avgQuality: 0 };
+    }
+    
     const scored = pages.map(page => {
       const quality = this.scorePage(page);
       return {
@@ -147,7 +153,9 @@ class QualityEngine {
     });
 
     const accepted = scored.filter(p => p.isAccepted);
-    const avgQuality = scored.reduce((sum, p) => sum + p.qualityScore, 0) / scored.length;
+    const avgQuality = scored.length > 0 
+      ? scored.reduce((sum, p) => sum + (p.qualityScore || 0), 0) / scored.length 
+      : 0;
 
     log('QUALITY', `Scored ${scored.length} pages`, {
       accepted: accepted.length,

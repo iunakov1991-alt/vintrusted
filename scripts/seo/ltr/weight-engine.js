@@ -19,6 +19,16 @@ class WeightEngine {
    * Использует реальные метрики из GSC если доступны
    */
   updateWeights(pages, metrics = {}) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('LTR', 'No pages provided for weight update, returning default weights');
+      return {
+        intents: {},
+        languages: {},
+        layouts: {}
+      };
+    }
+    
     // Обновление весов для intents
     const byIntent = {};
     pages.forEach(page => {

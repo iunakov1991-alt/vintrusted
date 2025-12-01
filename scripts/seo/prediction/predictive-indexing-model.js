@@ -176,6 +176,12 @@ class PredictiveIndexingModel {
    * Приоритизация страниц для индексации
    */
   prioritizePages(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('PREDICTIVE-INDEXING', 'No pages provided for prioritization');
+      return { highPriority: [], mediumPriority: [], lowPriority: [] };
+    }
+    
     const predictions = pages.map(page => ({
       page,
       prediction: this.predict(page)

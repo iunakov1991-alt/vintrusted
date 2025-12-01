@@ -152,9 +152,15 @@ class ConversionTracker {
   }
 
   /**
-   * Обогащение страниц данными о конверсиях
+   * Обогащение страниц данными о конверсиям
    */
   enrichPagesWithConversions(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('CONVERSION', 'No pages provided for enrichment');
+      return [];
+    }
+    
     return pages.map(page => {
       const conversions = this.getPageConversions(page.url);
       return {
@@ -180,27 +186,43 @@ class ConversionTracker {
    * Получение статистики конверсий
    */
   getStatistics() {
+    // Безопасная проверка на существование conversions
+    if (!this.conversions || !this.conversions.pages) {
+      return {
+        totalPages: 0,
+        pagesWithConversions: 0,
+        totalConversions: 0,
+        totalRevenue: 0,
+        totalSessions: 0,
+        avgConversionRate: 0,
+        avgRevenuePerPage: 0,
+        topConvertingPages: []
+      };
+    }
+    
     const pages = Object.values(this.conversions.pages);
     const pagesWithConversions = pages.filter(p => p.conversions > 0);
     
     const avgConversionRate = pages.length > 0
-      ? pages.reduce((sum, p) => sum + p.conversionRate, 0) / pages.length
+      ? pages.reduce((sum, p) => sum + (p.conversionRate || 0), 0) / pages.length
       : 0;
 
     const avgRevenuePerPage = pagesWithConversions.length > 0
-      ? pagesWithConversions.reduce((sum, p) => sum + p.revenue, 0) / pagesWithConversions.length
+      ? pagesWithConversions.reduce((sum, p) => sum + (p.revenue || 0), 0) / pagesWithConversions.length
       : 0;
+
+    const totals = this.conversions.totals || {};
 
     return {
       totalPages: pages.length,
       pagesWithConversions: pagesWithConversions.length,
-      totalConversions: this.conversions.totals.conversions,
-      totalRevenue: this.conversions.totals.revenue,
-      totalSessions: this.conversions.totals.sessions,
+      totalConversions: totals.conversions || 0,
+      totalRevenue: totals.revenue || 0,
+      totalSessions: totals.sessions || 0,
       avgConversionRate,
       avgRevenuePerPage,
       topConvertingPages: pages
-        .sort((a, b) => b.conversionRate - a.conversionRate)
+        .sort((a, b) => (b.conversionRate || 0) - (a.conversionRate || 0))
         .slice(0, 10)
         .map(p => ({
           url: p.url,

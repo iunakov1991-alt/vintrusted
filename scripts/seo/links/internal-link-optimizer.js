@@ -16,6 +16,12 @@ class InternalLinkOptimizer {
    * Вычисление PageRank
    */
   calculatePageRank(pages, iterations = 10) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages) || pages.length === 0) {
+      log('INTERNAL-LINK-OPT', 'No pages provided for PageRank calculation');
+      return;
+    }
+    
     const urls = pages.map(p => p.url);
     const dampingFactor = 0.85;
 
@@ -58,6 +64,12 @@ class InternalLinkOptimizer {
    * Оптимизация внутренних ссылок для страницы
    */
   optimizeLinks(page, allPages) {
+    // Безопасная проверка на массив
+    if (!allPages || !Array.isArray(allPages)) {
+      log('INTERNAL-LINK-OPT', 'No pages provided for link optimization');
+      return page.internalLinks || [];
+    }
+    
     const currentLinks = page.internalLinks || [];
     const optimizedLinks = [];
 

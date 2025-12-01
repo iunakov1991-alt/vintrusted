@@ -212,6 +212,12 @@ class SmartCanonicalEngine {
    * Обработка батча страниц
    */
   processBatch(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('SMART-CANONICAL', 'No pages provided for canonical processing');
+      return [];
+    }
+    
     const processed = [];
 
     for (const page of pages) {

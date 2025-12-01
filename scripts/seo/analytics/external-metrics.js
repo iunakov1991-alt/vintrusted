@@ -220,6 +220,12 @@ class ExternalMetrics {
    * Обогащение страниц внешними метриками
    */
   enrichPagesWithMetrics(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('METRICS', 'No pages provided for enrichment');
+      return [];
+    }
+    
     let enrichedCount = 0;
 
     for (const page of pages) {

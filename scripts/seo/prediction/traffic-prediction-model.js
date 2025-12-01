@@ -157,6 +157,12 @@ class TrafficPredictionModel {
    * Приоритизация страниц по потенциальному трафику
    */
   prioritizePages(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('TRAFFIC-PREDICTION', 'No pages provided for prioritization');
+      return { highPotential: [], mediumPotential: [] };
+    }
+    
     const predictions = pages.map(page => ({
       page,
       prediction: this.predict(page)

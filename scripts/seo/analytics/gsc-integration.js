@@ -182,6 +182,12 @@ class GSCIntegration {
    * Обновление метрик страниц из GSC данных
    */
   enrichPagesWithGSCData(pages) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('GSC', 'No pages provided for enrichment');
+      return [];
+    }
+    
     let enrichedCount = 0;
     
     for (const page of pages) {
