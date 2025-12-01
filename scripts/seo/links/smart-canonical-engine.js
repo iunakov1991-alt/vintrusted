@@ -1,5 +1,12 @@
 const { log } = require('../logger');
-const { JSDOM } = require('jsdom');
+
+// Проверка наличия jsdom
+let JSDOM;
+try {
+  JSDOM = require('jsdom').JSDOM;
+} catch (e) {
+  log('SMART-CANONICAL', 'jsdom not available, canonical will use regex fallback');
+}
 
 /**
  * SEO MONSTER 6.0: Smart Canonical Engine
@@ -159,6 +166,17 @@ class SmartCanonicalEngine {
    * Добавление canonical в HTML
    */
   addCanonicalToHTML(html, canonicalUrl) {
+    if (!JSDOM) {
+      // Fallback: добавляем через regex
+      if (!html.includes('rel="canonical"')) {
+        return html.replace(
+          '</head>',
+          `<link rel="canonical" href="${canonicalUrl}">\n</head>`
+        );
+      }
+      return html;
+    }
+
     try {
       const dom = new JSDOM(html);
       const document = dom.window.document;

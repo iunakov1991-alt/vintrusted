@@ -16,8 +16,15 @@ class VisualContentOptimizer {
    * Оптимизация изображений в HTML
    */
   optimizeImages(html, pageUrl = '') {
+    let JSDOM;
     try {
-      const { JSDOM } = require('jsdom');
+      JSDOM = require('jsdom').JSDOM;
+    } catch (e) {
+      log('VISUAL-OPTIMIZER', 'jsdom not available, skipping image optimization');
+      return html;
+    }
+
+    try {
       const dom = new JSDOM(html);
       const document = dom.window.document;
       const images = document.querySelectorAll('img');
@@ -88,8 +95,15 @@ class VisualContentOptimizer {
    * Оптимизация CSS для визуального контента
    */
   optimizeVisualCSS(html) {
+    let JSDOM;
     try {
-      const { JSDOM } = require('jsdom');
+      JSDOM = require('jsdom').JSDOM;
+    } catch (e) {
+      log('VISUAL-OPTIMIZER', 'jsdom not available, skipping CSS optimization');
+      return html;
+    }
+
+    try {
       const dom = new JSDOM(html);
       const document = dom.window.document;
 
