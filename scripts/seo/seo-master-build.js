@@ -609,17 +609,21 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       log('STAGE', 'Keyword Intelligence');
       ctx.pages = ctx.pages.map(page => {
         // Извлечение ключевых слов
-        const keywords = keywordExtractor.extractFromPage(page);
+        const extracted = keywordExtractor.extractFromPage(page);
+        const keywords = extracted.keywords || [];
+        const phrases = extracted.phrases || [];
         
         // Выравнивание ключевых слов
-        const aligned = keywordAligner.alignWithPage(page, keywords);
+        const aligned = keywordAligner.alignWithPage(page, extracted);
         
         // Умное встраивание ключевых слов
-        const embedded = smartEmbedder.embedInPage(aligned, keywords);
+        const embedded = smartEmbedder.embedInPage(aligned, extracted);
         
         // Keyword Clustering & Topic Modeling
-        if (config.features && config.features.keywordClustering !== false) {
-          const clusters = keywordClustering.clusterKeywords(keywords);
+        if (config.features && config.features.keywordClustering !== false && Array.isArray(keywords) && keywords.length > 0) {
+          // Преобразуем объекты ключевых слов в строки для кластеризации
+          const keywordStrings = keywords.map(kw => typeof kw === 'string' ? kw : kw.word);
+          const clusters = keywordClustering.clusterKeywords(keywordStrings);
           embedded.keywordClusters = clusters;
         }
         
@@ -629,7 +633,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
           embedded.longtailKeywords = longtailVariants;
         }
         
-        return { ...embedded, keywords };
+        return { ...embedded, keywords: extracted };
       });
       log('STAGE', `Keywords extracted and aligned for ${ctx.pages.length} pages`);
     });
