@@ -88,11 +88,21 @@ class URLFactory {
   buildUrlPlan() {
     const seeds = this.getCurrentSeeds();
     const intents = this.config.intents || [];
-    const states = seeds.states || [];
+    let states = seeds.states || [];
     const makes = seeds.makes || [];
     const years = seeds.years || [];
     const vins = seeds.vinExamples || [];
     const languages = this.config.languages || ['en'];
+    
+    // ТРИЗ: фильтрация по штатам для параллельных билдов
+    if (process.env.SEO_BUILD_STATES) {
+      const allowedStates = process.env.SEO_BUILD_STATES.split(',').map(s => s.trim());
+      states = states.filter(s => {
+        const slug = typeof s === 'string' ? s : s.slug;
+        return allowedStates.includes(slug);
+      });
+      log('URL', `Filtered states for batch ${process.env.SEO_BUILD_BATCH || 'N/A'}: ${allowedStates.join(', ')}`);
+    }
 
     const intentWeights = this.normalizeWeights(this.rlState.intentWeights || {});
     const langWeights = this.normalizeWeights(this.rlState.languageWeights || {});
