@@ -17,7 +17,10 @@ class UniquenessEngine {
    * Вычислить fingerprint структуры DOM
    */
   computeStructureFingerprint(layout, blocks) {
-    const structure = `${layout.name}|${blocks.join('|')}`;
+    // Безопасная обработка: проверяем наличие layout и blocks
+    const layoutName = (layout && layout.name) ? layout.name : 'DEFAULT';
+    const blocksArray = (blocks && Array.isArray(blocks)) ? blocks : (layout && layout.blocks && Array.isArray(layout.blocks)) ? layout.blocks : [];
+    const structure = `${layoutName}|${blocksArray.join('|')}`;
     return crypto.createHash('sha256').update(structure).digest('hex').substring(0, 16);
   }
 
