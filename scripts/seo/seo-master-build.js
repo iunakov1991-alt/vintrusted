@@ -235,7 +235,10 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         const aiText = await aiAugmentation.generateText(aiPrompt, {
           lang: item.lang,
           intent: item.intent,
-          maxTokens: config.aiMaxTokens || 800
+          maxTokens: config.aiMaxTokens || 600,
+          make: item.make,
+          year: item.year,
+          stateSlug: item.stateSlug
         });
 
         // Выбор layout

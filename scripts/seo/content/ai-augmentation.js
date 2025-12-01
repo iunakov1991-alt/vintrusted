@@ -12,7 +12,8 @@ class AIAugmentation {
     this.config = config;
     this.cachePath = path.join(process.cwd(), 'data/seo/ai-cache.jsonl');
     this.cache = new Map();
-    this.providers = config.aiProviders || ['groq', 'deepseek'];
+    // Оптимизация: DeepSeek первый для экономии Groq лимитов
+    this.providers = config.aiProviders || ['deepseek', 'groq'];
     this.loadCache();
   }
 
@@ -69,7 +70,7 @@ class AIAugmentation {
             },
             { role: 'user', content: prompt }
           ],
-          max_tokens: options.maxTokens || 800,
+          max_tokens: options.maxTokens || 600,
           temperature: 0.7
         })
       });
@@ -114,7 +115,7 @@ class AIAugmentation {
             },
             { role: 'user', content: prompt }
           ],
-          max_tokens: options.maxTokens || 800,
+          max_tokens: options.maxTokens || 600,
           temperature: 0.7
         })
       });
@@ -140,8 +141,10 @@ class AIAugmentation {
    * Генерация текста с fallback цепочкой
    */
   async generateText(prompt, options = {}) {
-    const { lang = 'en', intent = 'generic', maxTokens = 800 } = options;
-    const key = this.hashKey(`${lang}|${intent}|${prompt}`);
+    const { lang = 'en', intent = 'generic', maxTokens = 600, make, year, stateSlug } = options;
+    // Улучшенный ключ кеша: добавляем make, year, state для лучшего кеширования
+    const cacheKeyParts = [lang, intent, make || '', year || '', stateSlug || '', prompt];
+    const key = this.hashKey(cacheKeyParts.join('|'));
 
     // Проверка включенности AI
     const envEnable = process.env.SEO_ENABLE_AI === '1' || 
@@ -174,7 +177,7 @@ class AIAugmentation {
       return fallback;
     }
 
-    // Пробуем провайдеры по порядку
+    // Пробуем провайдеры по порядку (DeepSeek первый для экономии Groq)
     let text = null;
     let usedProvider = null;
     for (const provider of this.providers) {
