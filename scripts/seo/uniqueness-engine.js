@@ -82,7 +82,9 @@ class UniquenessEngine {
    * Проверить страницу на уникальность
    */
   validateUniqueness(page) {
-    const structureFp = this.computeStructureFingerprint(page.layout, page.blocks);
+    // Безопасная передача: используем page.blocks или layout.blocks или пустой массив
+    const blocks = page.blocks || (page.layout && page.layout.blocks) || [];
+    const structureFp = this.computeStructureFingerprint(page.layout, blocks);
     const contentHash = this.computeContentHash(page);
 
     // Для страниц с разными VIN/state считаем уникальными по структуре
