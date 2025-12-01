@@ -74,6 +74,42 @@ class StaticArchitecture {
   getUrl(item) {
     return `/vin/${item.vin}/${item.stateSlug}/`;
   }
+
+  /**
+   * Подсчитать количество существующих страниц
+   */
+  countExistingPages() {
+    if (!fs.existsSync(this.publicRoot)) {
+      return 0;
+    }
+
+    let count = 0;
+    
+    try {
+      const scanDirectory = (dir) => {
+        if (!fs.existsSync(dir)) return;
+        
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          
+          if (entry.isDirectory()) {
+            scanDirectory(fullPath);
+          } else if (entry.isFile() && entry.name === 'index.html') {
+            count++;
+          }
+        }
+      };
+      
+      scanDirectory(this.publicRoot);
+    } catch (e) {
+      log('STATIC', `Error counting pages: ${e.message}`);
+      return 0;
+    }
+    
+    return count;
+  }
 }
 
 module.exports = { StaticArchitecture };
