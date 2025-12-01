@@ -60,7 +60,7 @@ class ClusterEngine {
     };
 
     // Пересчет avgQuality
-    if (cluster.pages.length > 0) {
+    if (cluster.pages && Array.isArray(cluster.pages) && cluster.pages.length > 0) {
       const totalQuality = cluster.pages.reduce((sum, p) => sum + (p.qualityScore || 0), 0);
       cluster.metrics.avgQuality = totalQuality / cluster.pages.length;
     }

@@ -15,12 +15,18 @@ class InternalLinksEngine {
    * Генерация внутренних ссылок для страницы
    */
   generateInternalLinks(page, allPages, clusterEngine) {
+    // Безопасная проверка на массив
+    if (!allPages || !Array.isArray(allPages)) {
+      log('LINKS', 'No pages provided for link generation');
+      return [];
+    }
+    
     const links = [];
     const used = new Set();
     
     // 1. Ссылка в пределах кластера
-    const cluster = clusterEngine.getCluster(page.clusterId);
-    if (cluster && cluster.pages.length > 1) {
+    const cluster = clusterEngine && clusterEngine.getCluster ? clusterEngine.getCluster(page.clusterId) : null;
+    if (cluster && cluster.pages && Array.isArray(cluster.pages) && cluster.pages.length > 1) {
       const clusterPages = cluster.pages.filter(p => p.url !== page.url);
       if (clusterPages.length > 0) {
         const neighbor = clusterPages[Math.floor(Math.random() * clusterPages.length)];
@@ -78,6 +84,12 @@ class InternalLinksEngine {
    * Присоединение внутренних ссылок ко всем страницам
    */
   attachInternalLinks(pages, clusterEngine) {
+    // Безопасная проверка на массив
+    if (!pages || !Array.isArray(pages)) {
+      log('LINKS', 'No pages provided for attaching internal links');
+      return;
+    }
+    
     pages.forEach(page => {
       const links = this.generateInternalLinks(page, pages, clusterEngine);
       // Добавляем тип для нового template engine
@@ -87,7 +99,10 @@ class InternalLinksEngine {
       }));
     });
 
-    log('LINKS', `Internal links attached: avg ${(pages.reduce((sum, p) => sum + p.internalLinks.length, 0) / pages.length).toFixed(1)} per page`);
+    const avgLinks = pages.length > 0 
+      ? (pages.reduce((sum, p) => sum + ((p.internalLinks && Array.isArray(p.internalLinks)) ? p.internalLinks.length : 0), 0) / pages.length)
+      : 0;
+    log('LINKS', `Internal links attached: avg ${avgLinks.toFixed(1)} per page`);
   }
 
   /**
