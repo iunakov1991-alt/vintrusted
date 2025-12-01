@@ -1,0 +1,16 @@
+{
+  "targetPagesPerBuild": 10000,
+  "maxPagesPerCluster": 450,
+  "minQualityScore": 0.7,
+  "enableAI": true,
+  "aiMaxTokens": 600,
+  "languages": ["en", "es"],
+  "defaultLanguage": "en",
+  "intents": [
+    "vin_check",
+    "accident_check",
+    "ownership_history",
+    "market_value",
+    "dmv_records"
+  ]
+}
