@@ -530,6 +530,11 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       // Генерация с адаптивной конкурентностью и Error Isolation
       const workers = [];
       const running = new Set();
+      const totalPages = plan.length;
+      let processedPages = 0;
+      const progressInterval = 50; // Логируем каждые 50 страниц
+      
+      log('CONTENT-GEN', `Starting generation of ${totalPages} pages with concurrency ${adaptiveConcurrency}`);
       
       for (const item of plan) {
         // Проверяем память перед каждым батчем
@@ -577,6 +582,14 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
           }
         ).then(page => {
           running.delete(promise);
+          processedPages++;
+          
+          // Логируем прогресс каждые N страниц
+          if (processedPages % progressInterval === 0 || processedPages === totalPages) {
+            const progressPercent = ((processedPages / totalPages) * 100).toFixed(1);
+            log('CONTENT-GEN', `Progress: ${processedPages}/${totalPages} pages (${progressPercent}%)`);
+          }
+          
           if (page) {
             pages.push(page);
             

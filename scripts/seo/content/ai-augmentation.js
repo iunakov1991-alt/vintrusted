@@ -175,11 +175,15 @@ class AIAugmentation {
   }
 
   /**
-   * Вызов Groq API
+   * Вызов Groq API с таймаутом
    */
   async callGroqAPI(prompt, options) {
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) return null;
+
+    const timeout = options.timeout || 20000; // 20 секунд по умолчанию
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
 
     try {
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -199,8 +203,11 @@ class AIAugmentation {
           ],
           max_tokens: options.maxTokens || 600,
           temperature: 0.7
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         const errorData = await response.text();
@@ -214,17 +221,26 @@ class AIAugmentation {
       }
       return content;
     } catch (e) {
-      log('AI', `Groq API exception: ${e.message}`);
+      clearTimeout(timeoutId);
+      if (e.name === 'AbortError') {
+        log('AI', `Groq API timeout after ${timeout}ms`);
+      } else {
+        log('AI', `Groq API exception: ${e.message}`);
+      }
       return null;
     }
   }
 
   /**
-   * Вызов DeepSeek API
+   * Вызов DeepSeek API с таймаутом
    */
   async callDeepSeekAPI(prompt, options) {
     const apiKey = process.env.DEEPSEEK_API_KEY;
     if (!apiKey) return null;
+
+    const timeout = options.timeout || 35000; // 35 секунд по умолчанию (DeepSeek медленнее)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
 
     try {
       const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
@@ -244,8 +260,11 @@ class AIAugmentation {
           ],
           max_tokens: options.maxTokens || 600,
           temperature: 0.7
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         const errorData = await response.text();
@@ -259,7 +278,12 @@ class AIAugmentation {
       }
       return content;
     } catch (e) {
-      log('AI', `DeepSeek API exception: ${e.message}`);
+      clearTimeout(timeoutId);
+      if (e.name === 'AbortError') {
+        log('AI', `DeepSeek API timeout after ${timeout}ms`);
+      } else {
+        log('AI', `DeepSeek API exception: ${e.message}`);
+      }
       return null;
     }
   }

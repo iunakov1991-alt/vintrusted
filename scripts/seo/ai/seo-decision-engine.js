@@ -340,7 +340,10 @@ RESPOND WITH JSON:
       }
 
       // Валидация и корректировка
-      decision.targetPages = Math.max(100, Math.min(20000, Math.round(decision.targetPages || 10000)));
+      // На Vercel ограничиваем максимум до 8000 страниц, чтобы деплой не превышал 45 минут
+      const isVercel = !!process.env.VERCEL || !!process.env.VERCEL_DEPLOYMENT_ID;
+      const maxPages = isVercel ? 8000 : 20000;
+      decision.targetPages = Math.max(100, Math.min(maxPages, Math.round(decision.targetPages || 10000)));
       decision.confidence = Math.max(0, Math.min(1, decision.confidence || 0.7));
       
       if (!decision.reasoning) {
@@ -438,13 +441,17 @@ RESPOND WITH JSON:
       }
     }
 
+    // На Vercel ограничиваем максимум до 8000 страниц
+    const isVercel = !!process.env.VERCEL || !!process.env.VERCEL_DEPLOYMENT_ID;
+    const maxPages = isVercel ? 8000 : 20000;
+    
     return {
-      targetPages: Math.max(100, Math.min(20000, targetPages)),
+      targetPages: Math.max(100, Math.min(maxPages, targetPages)),
       reasoning,
       strategy,
       confidence: 0.7,
       recommendations: [],
-      expectedOutcome: `Ожидается генерация ~${targetPages} страниц для максимизации SEO трафика с высоким conversion potential.`
+      expectedOutcome: `Ожидается генерация ~${Math.min(maxPages, targetPages)} страниц для максимизации SEO трафика с высоким conversion potential.`
     };
   }
 
