@@ -808,15 +808,19 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       const { scored, accepted, avgQuality } = qualityEngine.scorePages(ctx.pages);
       
       // Predictive Indexing Model
-      if (config.features && config.features.predictiveIndexing !== false) {
+      if (config.features && config.features.predictiveIndexing !== false && scored && Array.isArray(scored) && scored.length > 0) {
         const prioritized = predictiveIndexing.prioritizePages(scored);
-        log('PREDICTIVE-INDEXING', `High priority: ${prioritized.highPriority.length}, Medium: ${prioritized.mediumPriority.length}, Low: ${prioritized.lowPriority.length}`);
+        if (prioritized) {
+          log('PREDICTIVE-INDEXING', `High priority: ${(prioritized.highPriority && Array.isArray(prioritized.highPriority)) ? prioritized.highPriority.length : 0}, Medium: ${(prioritized.mediumPriority && Array.isArray(prioritized.mediumPriority)) ? prioritized.mediumPriority.length : 0}, Low: ${(prioritized.lowPriority && Array.isArray(prioritized.lowPriority)) ? prioritized.lowPriority.length : 0}`);
+        }
       }
       
       // Traffic Prediction Model
-      if (config.features && config.features.trafficPrediction !== false) {
+      if (config.features && config.features.trafficPrediction !== false && scored && Array.isArray(scored) && scored.length > 0) {
         const trafficPrioritized = trafficPrediction.prioritizePages(scored);
-        log('TRAFFIC-PREDICTION', `High potential: ${trafficPrioritized.highPotential.length}, Medium: ${trafficPrioritized.mediumPotential.length}`);
+        if (trafficPrioritized) {
+          log('TRAFFIC-PREDICTION', `High potential: ${(trafficPrioritized.highPotential && Array.isArray(trafficPrioritized.highPotential)) ? trafficPrioritized.highPotential.length : 0}, Medium: ${(trafficPrioritized.mediumPotential && Array.isArray(trafficPrioritized.mediumPotential)) ? trafficPrioritized.mediumPotential.length : 0}`);
+        }
       }
       
       // Content Performance Analytics
