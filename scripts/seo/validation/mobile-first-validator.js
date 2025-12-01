@@ -27,8 +27,18 @@ class MobileFirstValidator {
     }
 
     try {
+      // Преобразуем относительный URL в полный для JSDOM
+      let fullUrl = pageUrl;
+      if (pageUrl && !pageUrl.startsWith('http://') && !pageUrl.startsWith('https://')) {
+        // Если это относительный URL, создаем полный URL
+        fullUrl = `https://vintrusted.com${pageUrl.startsWith('/') ? pageUrl : '/' + pageUrl}`;
+      } else if (!pageUrl) {
+        // Если URL не передан, используем дефолтный
+        fullUrl = 'https://vintrusted.com/';
+      }
+
       const dom = new JSDOM(html, {
-        url: pageUrl,
+        url: fullUrl,
         pretendToBeVisual: true,
         resources: 'usable'
       });
@@ -59,6 +69,12 @@ class MobileFirstValidator {
         mobileFriendly: issues.filter(i => i.severity === 'error').length === 0
       };
     } catch (e) {
+      // Если ошибка связана с URL, логируем как warning, не error
+      if (e.message && e.message.includes('Invalid URL')) {
+        log('MOBILE-VALIDATOR', `Validation warning: Invalid URL format for ${pageUrl}, using fallback`);
+        // Используем базовую валидацию без JSDOM
+        return this.basicMobileValidation(html);
+      }
       log('MOBILE-VALIDATOR', `Validation error: ${e.message}`);
       return {
         valid: false,
