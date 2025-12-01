@@ -1,21 +1,26 @@
 {
-  "timestamp": "2025-11-30T13:41:42.698Z",
+  "timestamp": "2025-12-01T03:23:40.148Z",
   "currentBuild": {
     "buildId": "local",
-    "pagesGenerated": 8,
-    "pagesAccepted": 8,
-    "avgQuality": 0.9246249999999999,
-    "duration": 157,
-    "clusters": 4,
-    "uniquePages": 8,
+    "pagesGenerated": 9,
+    "pagesAccepted": 9,
+    "avgQuality": 0.8584388888888889,
+    "duration": 44818,
+    "clusters": 5,
+    "uniquePages": 9,
     "aiEnabled": true,
+    "aiDecision": {
+      "targetPages": 15000,
+      "strategy": "Агрессивный рост для установления присутствия",
+      "confidence": 0.85
+    },
     "config": {
       "version": "6.0",
-      "targetPagesPerBuild": 10000,
+      "targetPagesPerBuild": 300,
       "maxPagesPerCluster": 500,
       "minQualityScore": 0.7,
       "enableAI": true,
-      "aiMaxTokens": 800,
+      "aiMaxTokens": 600,
       "aiProviders": [
         "groq",
         "deepseek",
@@ -53,53 +58,75 @@
         "minQualityForRepair": 0.6,
         "regenerationThreshold": 0.5
       },
-      "googleAnalyticsId": "G-CX3CT2K2FC"
+      "googleAnalyticsId": "G-CX3CT2K2FC",
+      "semanticRequirements": {
+        "tier1Required": true,
+        "tier1Themes": [
+          "vehicle-identity-core",
+          "accident-damage-intelligence",
+          "ownership-logic",
+          "state-specific-rules",
+          "fraud-prevention"
+        ],
+        "minTier1Coverage": 0.8,
+        "semanticWeightInQuality": 0.2
+      },
+      "features": {
+        "seedExpansion": true,
+        "h1Variants": true,
+        "synonyms": true,
+        "dynamicMeta": false,
+        "breadcrumbs": true,
+        "canonicalLogic": true,
+        "authorityGraph": true,
+        "landingHubs": true
+      }
     }
   },
   "lastBuild": {
-    "timestamp": "2025-11-30T13:41:42.697Z",
+    "timestamp": "2025-12-01T03:23:40.146Z",
     "buildId": "local",
-    "pagesGenerated": 8,
-    "pagesAccepted": 8,
-    "avgQuality": 0.9246249999999999,
-    "duration": 157,
-    "clusters": 4,
-    "uniquePages": 8,
+    "pagesGenerated": 9,
+    "pagesAccepted": 9,
+    "avgQuality": 0.8584388888888889,
+    "duration": 44818,
+    "clusters": 5,
+    "uniquePages": 9,
     "aiEnabled": true,
     "config": {
-      "targetPages": 10000,
+      "targetPages": 15000,
       "maxPagesPerCluster": 500,
       "minQualityScore": 0.7
     }
   },
   "comparison": {
     "pagesGenerated": {
-      "current": 8,
-      "previous": 8,
+      "current": 9,
+      "previous": 9,
       "change": 0
     },
     "pagesAccepted": {
-      "current": 8,
-      "previous": 8,
+      "current": 9,
+      "previous": 9,
       "change": 0
     },
     "avgQuality": {
-      "current": 0.9246249999999999,
-      "previous": 0.9246249999999999,
+      "current": 0.8584388888888889,
+      "previous": 0.8584388888888889,
       "change": 0
     },
     "duration": {
-      "current": 157,
-      "previous": 157,
+      "current": 44818,
+      "previous": 44818,
       "change": 0
     }
   },
   "statistics": {
-    "totalBuilds": 6,
-    "avgPagesGenerated": 7,
-    "avgPagesAccepted": 6.166666666666667,
-    "avgQuality": 0.9199635416666666,
-    "avgDuration": 724.3333333333334,
+    "totalBuilds": 9,
+    "avgPagesGenerated": 7.444444444444445,
+    "avgPagesAccepted": 6.888888888888889,
+    "avgQuality": 0.9027854717813049,
+    "avgDuration": 12780.888888888889,
     "successRate": 1
   },
   "recentBuilds": [
@@ -195,6 +222,54 @@
       "aiEnabled": true,
       "config": {
         "targetPages": 10000,
+        "maxPagesPerCluster": 500,
+        "minQualityScore": 0.7
+      }
+    },
+    {
+      "timestamp": "2025-12-01T01:36:36.132Z",
+      "buildId": "local",
+      "pagesGenerated": 8,
+      "pagesAccepted": 8,
+      "avgQuality": 0.8710495535714284,
+      "duration": 50696,
+      "clusters": 4,
+      "uniquePages": 8,
+      "aiEnabled": true,
+      "config": {
+        "targetPages": 15000,
+        "maxPagesPerCluster": 500,
+        "minQualityScore": 0.7
+      }
+    },
+    {
+      "timestamp": "2025-12-01T01:42:29.634Z",
+      "buildId": "local",
+      "pagesGenerated": 8,
+      "pagesAccepted": 8,
+      "avgQuality": 0.8757995535714285,
+      "duration": 15168,
+      "clusters": 4,
+      "uniquePages": 8,
+      "aiEnabled": true,
+      "config": {
+        "targetPages": 15000,
+        "maxPagesPerCluster": 500,
+        "minQualityScore": 0.7
+      }
+    },
+    {
+      "timestamp": "2025-12-01T03:23:40.146Z",
+      "buildId": "local",
+      "pagesGenerated": 9,
+      "pagesAccepted": 9,
+      "avgQuality": 0.8584388888888889,
+      "duration": 44818,
+      "clusters": 5,
+      "uniquePages": 9,
+      "aiEnabled": true,
+      "config": {
+        "targetPages": 15000,
         "maxPagesPerCluster": 500,
         "minQualityScore": 0.7
       }

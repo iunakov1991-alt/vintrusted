@@ -16,6 +16,8 @@ class AIAugmentation {
     this.providers = config.aiProviders || ['deepseek', 'groq'];
     this.loadCache();
     this.loadAITrainingStrategy();
+    // Флаг для отключения Groq при достижении лимита
+    this.groqRateLimited = false;
   }
 
   /**
@@ -212,6 +214,13 @@ class AIAugmentation {
       if (!response.ok) {
         const errorData = await response.text();
         log('AI', `Groq API error: ${response.status} ${response.statusText} - ${errorData.substring(0, 200)}`);
+        
+        // Если получили 429 (Rate Limit), отключаем Groq на время этого билда
+        if (response.status === 429) {
+          this.groqRateLimited = true;
+          log('AI', '⚠️ Groq rate limit reached (429). Disabling Groq for this build. Switching to DeepSeek.');
+        }
+        
         return null;
       }
       const data = await response.json();
@@ -337,6 +346,11 @@ class AIAugmentation {
     let usedProvider = null;
     for (const provider of this.providers) {
       if (provider === 'groq') {
+        // Пропускаем Groq, если достигнут лимит
+        if (this.groqRateLimited) {
+          log('AI', `Skipping Groq (rate limited) for ${intent} in ${lang}, using DeepSeek`);
+          continue;
+        }
         log('AI', `Trying Groq API for ${intent} in ${lang} (with AI training strategy)`);
         text = await this.callGroqAPI(enrichedPrompt || prompt, { lang, intent, maxTokens });
         if (text) {
