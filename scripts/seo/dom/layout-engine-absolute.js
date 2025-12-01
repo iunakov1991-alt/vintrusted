@@ -163,7 +163,14 @@ class LayoutEngineAbsolute {
    * Получить все доступные layouts
    */
   getAllLayouts() {
-    return this.layouts;
+    // Возвращаем массив layout'ов в формате, удобном для AdaptiveLayoutSelection
+    // Каждый layout получает явный id, чтобы:
+    // - availableLayouts был именно массивом (есть .length и .map)
+    // - AdaptiveLayoutSelection мог логировать selected.id и считать метрики
+    return Object.keys(this.layouts).map((key) => ({
+      id: key,
+      ...this.layouts[key]
+    }));
   }
 }
 
