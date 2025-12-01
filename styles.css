@@ -301,7 +301,7 @@ body {
 }
 
 .yellow-text {
-    background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+    background: linear-gradient(90deg, #fcd34d 0%, #fbbf24 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

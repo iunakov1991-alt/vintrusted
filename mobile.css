@@ -443,7 +443,8 @@
   }
   
   /* Mobile main title */
-  .mobile-main-title {
+  .mobile-main-title,
+  h2.mobile-main-title {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -455,6 +456,11 @@
     padding: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    border: none !important;
+    background: none !important;
   }
   
   .mobile-title-line {
@@ -465,7 +471,11 @@
   }
   
   .mobile-title-line .yellow-text {
-    color: #fbbf24 !important;
+    background: linear-gradient(90deg, #fcd34d 0%, #fbbf24 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
   }
   
   /* Force remove all margins from title */

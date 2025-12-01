@@ -199,36 +199,15 @@
         })();
     </script>
     
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "VIN TRUST",
-      "url": "https://vintrusted.com",
-      "logo": "https://vintrusted.com/logo.svg",
-      "description": "Official NMVTIS provider for car history checks in the US",
-      "sameAs": [
-        "https://www.facebook.com/vintrust",
-        "https://twitter.com/vintrust",
-        "https://www.instagram.com/vintrust"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+1-800-764-0104",
-        "contactType": "Customer Service",
-        "email": "support@vinreport.com",
-        "availableLanguage": ["en", "ru"]
-      }
-    }
-    </script>
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Product",
       "name": "VIN History Report",
-      "description": "Полный отчет по истории автомобиля по VIN номеру",
+      "description": "Complete vehicle history report by VIN number",
       "brand": {
         "@type": "Brand",
         "name": "VIN TRUST"
@@ -257,43 +236,58 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Что такое VIN номер?",
+          "name": "What is a VIN number?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "VIN (Vehicle Identification Number) - это уникальный 17-значный код, который присваивается каждому автомобилю при производстве. VIN содержит информацию о производителе, модели, годе выпуска и других характеристиках автомобиля."
+            "text": "VIN (Vehicle Identification Number) is a unique 17-character code assigned to each vehicle during production. The VIN contains information about the manufacturer, model, year of manufacture, and other vehicle characteristics."
           }
         },
         {
           "@type": "Question",
-          "name": "Что входит в отчет VIN TRUST?",
+          "name": "What is included in the VIN TRUST report?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Отчет включает: историю аварий, данные о пробеге, информацию о владельцах, проверку на угон, историю обслуживания, данные о залогах, информацию об отзывных кампаниях, рыночную стоимость и технические характеристики автомобиля."
+            "text": "The report includes: accident history, mileage data, owner information, theft check, service history, lien information, recall campaign information, market value, and vehicle technical specifications."
           }
         },
         {
           "@type": "Question",
-          "name": "Сколько стоит проверка VIN?",
+          "name": "How much does a VIN check cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "7-дневный безлимитный доступ к проверкам VIN стоит $2.95. Это позволяет проверить неограниченное количество автомобилей в течение недели."
+            "text": "7-day unlimited access to VIN checks costs $2.95. This allows you to check an unlimited number of vehicles within a week."
           }
         },
         {
           "@type": "Question",
-          "name": "Является ли VIN TRUST официальным провайдером?",
+          "name": "Is VIN TRUST an official provider?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Да, VIN TRUST является официально одобренным NMVTIS (National Motor Vehicle Title Information System) провайдером, что гарантирует достоверность и полноту предоставляемой информации."
+            "text": "Yes, VIN TRUST is an officially approved NMVTIS (National Motor Vehicle Title Information System) provider, which guarantees the accuracy and completeness of the information provided."
           }
         },
         {
           "@type": "Question",
-          "name": "Как быстро я получу отчет?",
+          "name": "How quickly will I receive the report?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Отчет формируется мгновенно после ввода VIN номера и оплаты. Обычно это занимает менее 1 минуты."
+            "text": "The report is generated instantly after entering the VIN number and payment. This usually takes less than 1 minute."
           }
+        }
+      ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://vintrusted.com/"
         }
       ]
     }
@@ -331,14 +325,13 @@
             </div>
             
             <!-- Mobile Title -->
-            <div class="mobile-main-title">
+            <h2 class="mobile-main-title">
                 <div class="mobile-title-line">Full VIN Report</div>
                 <div class="mobile-title-line">Only <span class="yellow-text">$3</span></div>
-            </div>
+            </h2>
             
             <h1 class="main-title">
-                Know the <span class="yellow-text">Real History</span><br>
-                Before You Buy - Only <span class="yellow-text">$3</span>
+                Full VIN Report Only <span class="yellow-text">$3</span>
             </h1>
             
             <div class="subtitle-chips">
