@@ -29,7 +29,7 @@ class UniquenessEngine {
    * Включает VIN и state для уникальности
    */
   computeContentHash(page) {
-    const blocks = page.blocks || [];
+    // keyBlocks всегда массив, так что join безопасен
     const keyBlocks = ['h1', 'intro', 'aiSection'].map(key => {
       if (key === 'h1') return page.h1 || '';
       if (key === 'intro') return page.intro || '';
@@ -38,7 +38,7 @@ class UniquenessEngine {
     });
     // Добавляем VIN и state для уникальности
     const uniqueIdentifiers = `${page.vin || ''}|${page.stateSlug || ''}`;
-    const content = keyBlocks.join('|') + '|' + uniqueIdentifiers;
+    const content = (Array.isArray(keyBlocks) ? keyBlocks.join('|') : '') + '|' + uniqueIdentifiers;
     return crypto.createHash('sha256').update(content).digest('hex').substring(0, 16);
   }
 
