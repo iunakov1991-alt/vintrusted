@@ -87,8 +87,8 @@ class AdaptiveComplexityManager {
   getDefaultParameters(operation) {
     const defaults = {
       content_generation: {
-        concurrency: 8,
-        aiMaxTokens: 600,
+        concurrency: 20, // ТРИЗ: увеличено с 8 до 20 для быстрых билдов
+        aiMaxTokens: 400, // ТРИЗ: уменьшено с 600 до 400 для ускорения
         enableAdvancedFeatures: true,
         cacheEnabled: true
       },
@@ -172,7 +172,8 @@ class AdaptiveComplexityManager {
   /**
    * Получение рекомендуемой конкурентности
    */
-  getRecommendedConcurrency(baseConcurrency = 8) {
+  // ТРИЗ оптимизация: увеличиваем базовую конкурентность для быстрых билдов
+  getRecommendedConcurrency(baseConcurrency = 20) {
     const adjustment = this.getComplexityAdjustments(this.complexityLevel).concurrency || 1.0;
     return Math.max(1, Math.round(baseConcurrency * adjustment));
   }
@@ -180,7 +181,8 @@ class AdaptiveComplexityManager {
   /**
    * Получение рекомендуемого количества токенов
    */
-  getRecommendedMaxTokens(baseTokens = 600) {
+  // ТРИЗ оптимизация: уменьшаем базовые токены для ускорения
+  getRecommendedMaxTokens(baseTokens = 400) {
     const adjustment = this.getComplexityAdjustments(this.complexityLevel).aiMaxTokens || 1.0;
     return Math.round(baseTokens * adjustment);
   }

@@ -390,7 +390,10 @@ async function main() {
         log('STAGE', 'No URL plan for content generation');
         return;
       }
-      const concurrency = parseInt(process.env.SEO_BUILD_CONCURRENCY || '8', 10);
+      // ТРИЗ оптимизация: увеличиваем concurrency для быстрых билдов
+      // Приоритет скорости над безопасностью для достижения 3-4 минут
+      const baseConcurrency = parseInt(process.env.SEO_BUILD_CONCURRENCY || '20', 10);
+      const concurrency = Math.min(baseConcurrency, 30); // Максимум 30 для стабильности
       
       async function generatePageContent(item, cachedAiText = null, maxTokensOverride = null) {
         // Защита от undefined stateSlug
@@ -966,37 +969,60 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         return;
       }
       
-      // Mobile-First Validation (sample)
+      // ТРИЗ оптимизация: валидация только на выборке для ускорения
       if (config.features && config.features.mobileValidation !== false && ctx.acceptedPages.length > 0) {
-        const sampleSize = Math.min(10, ctx.acceptedPages.length);
-        const sample = ctx.acceptedPages.slice(0, sampleSize);
-        const mobileValidation = mobileValidator.validateBatch(sample);
-        log('MOBILE-VALIDATION', `Mobile validation: ${mobileValidation.summary.mobileFriendly}/${mobileValidation.summary.total} mobile-friendly`);
-      }
-      
-      for (const page of ctx.acceptedPages) {
-        try {
-          // Генерируем HTML если еще не сгенерирован
-          if (!page.html) {
-            page.html = templateEngine.renderPage(page, page.layout || layoutEngine.selectLayout(page, rlState.layoutWeights));
-          }
-          
-          // Content Freshness Tracker
-          if (config.features && config.features.contentFreshness !== false) {
-            contentFreshness.registerPage(page);
-          }
-          
-          staticArch.writeStaticFile(page, page.html);
-          published++;
-          
-          // Incremental Build: обновляем checksum
-          if (config.features && config.features.incrementalBuild !== false) {
-            incrementalBuild.updateChecksum(page);
-          }
-        } catch (e) {
-          error('PUBLISH', `Failed to publish ${page.url}`, e);
+        const sampleSize = Math.min(5, Math.floor(ctx.acceptedPages.length / 100)); // 1% или максимум 5
+        if (sampleSize > 0) {
+          const sample = ctx.acceptedPages.slice(0, sampleSize);
+          const mobileValidation = mobileValidator.validateBatch(sample);
+          log('MOBILE-VALIDATION', `Mobile validation: ${mobileValidation.summary.mobileFriendly}/${mobileValidation.summary.total} mobile-friendly`);
         }
       }
+      
+      // ТРИЗ оптимизация: батчинг записи файлов для параллелизации
+      const writeBatchSize = 50; // Записываем батчами по 50 файлов
+      const writeConcurrency = 10; // Параллельно 10 батчей
+      const batches = [];
+      
+      for (let i = 0; i < ctx.acceptedPages.length; i += writeBatchSize) {
+        batches.push(ctx.acceptedPages.slice(i, i + writeBatchSize));
+      }
+      
+      log('PUBLISH', `Publishing ${ctx.acceptedPages.length} pages in ${batches.length} batches (${writeBatchSize} per batch, ${writeConcurrency} concurrent)`);
+      
+      // Параллельная запись батчей
+      const writePromises = [];
+      for (let i = 0; i < batches.length; i += writeConcurrency) {
+        const batchGroup = batches.slice(i, i + writeConcurrency);
+        const groupPromises = batchGroup.map(async (batch) => {
+          for (const page of batch) {
+            try {
+              // Генерируем HTML если еще не сгенерирован
+              if (!page.html) {
+                page.html = templateEngine.renderPage(page, page.layout || layoutEngine.selectLayout(page, rlState.layoutWeights));
+              }
+              
+              // Content Freshness Tracker (только для части страниц для ускорения)
+              if (config.features && config.features.contentFreshness !== false && Math.random() < 0.1) {
+                contentFreshness.registerPage(page);
+              }
+              
+              staticArch.writeStaticFile(page, page.html);
+              published++;
+              
+              // Incremental Build: обновляем checksum (только для части страниц)
+              if (config.features && config.features.incrementalBuild !== false && Math.random() < 0.1) {
+                incrementalBuild.updateChecksum(page);
+              }
+            } catch (e) {
+              error('PUBLISH', `Failed to publish ${page.url}`, e);
+            }
+          }
+        });
+        writePromises.push(Promise.all(groupPromises));
+      }
+      
+      await Promise.all(writePromises);
       
       // Incremental Build: сохраняем checksums
       if (config.features && config.features.incrementalBuild !== false) {

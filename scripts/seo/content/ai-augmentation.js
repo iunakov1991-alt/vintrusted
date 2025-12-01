@@ -183,7 +183,8 @@ class AIAugmentation {
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) return null;
 
-    const timeout = options.timeout || 20000; // 20 секунд по умолчанию
+    // ТРИЗ оптимизация: уменьшаем таймаут для быстрых билдов
+    const timeout = options.timeout || 10000; // 10 секунд (было 20) для ускорения
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
@@ -247,7 +248,8 @@ class AIAugmentation {
     const apiKey = process.env.DEEPSEEK_API_KEY;
     if (!apiKey) return null;
 
-    const timeout = options.timeout || 35000; // 35 секунд по умолчанию (DeepSeek медленнее)
+    // ТРИЗ оптимизация: уменьшаем таймаут для быстрых билдов
+    const timeout = options.timeout || 15000; // 15 секунд (было 35) для ускорения
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
