@@ -382,6 +382,12 @@ async function main() {
     // Этап 2: Генерация контента
     pipeline.registerStage('content-generation', async (ctx) => {
       log('STAGE', 'Content Generation');
+      if (!ctx.urlPlan || !Array.isArray(ctx.urlPlan)) {
+        ctx.urlPlan = [];
+        ctx.pages = [];
+        log('STAGE', 'No URL plan for content generation');
+        return;
+      }
       const concurrency = parseInt(process.env.SEO_BUILD_CONCURRENCY || '8', 10);
       
       async function generatePageContent(item, cachedAiText = null, maxTokensOverride = null) {
@@ -754,12 +760,18 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       log('STAGE', 'Uniqueness Validation');
       uniquenessEngine.reset();
       
+      if (!ctx.pages || !Array.isArray(ctx.pages)) {
+        ctx.pages = [];
+        log('STAGE', 'No pages for uniqueness validation');
+        return;
+      }
+      
       ctx.pages = ctx.pages.map(page => {
         const uniqueness = uniquenessEngine.validateUniqueness(page);
         return { ...page, uniqueness };
       });
 
-      const uniquePages = ctx.pages.filter(p => p.uniqueness.isUnique);
+      const uniquePages = ctx.pages.filter(p => p.uniqueness && p.uniqueness.isUnique);
       log('STAGE', `Unique pages: ${uniquePages.length}/${ctx.pages.length}`);
       ctx.pages = uniquePages;
     });
@@ -799,14 +811,16 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 6: Кластеризация
     pipeline.registerStage('clustering', async (ctx) => {
       log('STAGE', 'Clustering');
-      ctx.acceptedPages.forEach(page => {
-        clusterEngine.registerPage(page);
-        if (page.clusterId) {
-          clusterEngine.updateClusterMetrics(page.clusterId, {
-            avgQuality: page.qualityScore || 0
-          });
-        }
-      });
+      if (ctx.acceptedPages && Array.isArray(ctx.acceptedPages)) {
+        ctx.acceptedPages.forEach(page => {
+          clusterEngine.registerPage(page);
+          if (page.clusterId) {
+            clusterEngine.updateClusterMetrics(page.clusterId, {
+              avgQuality: page.qualityScore || 0
+            });
+          }
+        });
+      }
       ctx.clusters = clusterEngine.getAllClusters();
     });
 
@@ -840,6 +854,12 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 6.5: Внутренние ссылки
     pipeline.registerStage('internal-links', async (ctx) => {
       log('STAGE', 'Internal Links');
+      if (!ctx.acceptedPages || !Array.isArray(ctx.acceptedPages)) {
+        ctx.acceptedPages = [];
+        log('STAGE', 'No accepted pages for internal links');
+        return;
+      }
+      
       internalLinksEngine.attachInternalLinks(ctx.acceptedPages, clusterEngine);
       
       // Internal Link Optimization (PageRank-based)
@@ -882,8 +902,14 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       log('STAGE', 'Static Publishing');
       let published = 0;
       
+      if (!ctx.acceptedPages || !Array.isArray(ctx.acceptedPages)) {
+        ctx.acceptedPages = [];
+        log('STAGE', 'No accepted pages to publish');
+        return;
+      }
+      
       // Mobile-First Validation (sample)
-      if (config.features && config.features.mobileValidation !== false) {
+      if (config.features && config.features.mobileValidation !== false && ctx.acceptedPages.length > 0) {
         const sampleSize = Math.min(10, ctx.acceptedPages.length);
         const sample = ctx.acceptedPages.slice(0, sampleSize);
         const mobileValidation = mobileValidator.validateBatch(sample);
@@ -972,9 +998,10 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 7.5: Crawl Budget Distribution
     pipeline.registerStage('crawl-budget', async (ctx) => {
       log('STAGE', 'Crawl Budget Distribution');
-      const strategy = crawlBudgetEngine.generateCrawlStrategy(ctx.acceptedPages);
+      const pages = (ctx.acceptedPages && Array.isArray(ctx.acceptedPages)) ? ctx.acceptedPages : [];
+      const strategy = crawlBudgetEngine.generateCrawlStrategy(pages);
       ctx.crawlStrategy = strategy;
-      log('STAGE', `Crawl budget distributed: ${strategy.selectedPages} pages`);
+      log('STAGE', `Crawl budget distributed: ${strategy.selectedPages || 0} pages`);
     });
 
     // Этап 8: Генерация sitemaps
@@ -982,9 +1009,9 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       log('STAGE', 'Sitemap Generation');
       
       // Sitemap Prioritization
-      let pagesForSitemap = ctx.acceptedPages;
-      if (config.features && config.features.sitemapPrioritization !== false) {
-        pagesForSitemap = sitemapPrioritizer.prioritize(ctx.acceptedPages);
+      let pagesForSitemap = (ctx.acceptedPages && Array.isArray(ctx.acceptedPages)) ? ctx.acceptedPages : [];
+      if (config.features && config.features.sitemapPrioritization !== false && pagesForSitemap.length > 0) {
+        pagesForSitemap = sitemapPrioritizer.prioritize(pagesForSitemap);
         log('SITEMAP-PRIORITIZER', `Prioritized ${pagesForSitemap.length} pages for sitemap`);
       }
       
@@ -994,25 +1021,28 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Этап 8.5: Обогащение данными из GSC
     pipeline.registerStage('gsc-enrichment', async (ctx) => {
       log('STAGE', 'GSC Data Enrichment');
-      ctx.acceptedPages = gscIntegration.enrichPagesWithGSCData(ctx.acceptedPages);
+      const pages = (ctx.acceptedPages && Array.isArray(ctx.acceptedPages)) ? ctx.acceptedPages : [];
+      ctx.acceptedPages = gscIntegration.enrichPagesWithGSCData(pages);
       const stats = gscIntegration.getStatistics();
-      log('STAGE', `GSC stats: ${stats.urlsWithData} pages with data, avg CTR: ${stats.avgCTR.toFixed(2)}%`);
+      log('STAGE', `GSC stats: ${stats.urlsWithData || 0} pages with data, avg CTR: ${(stats.avgCTR || 0).toFixed(2)}%`);
     });
 
     // Этап 8.6: Обогащение внешними метриками (аналитика)
     pipeline.registerStage('external-metrics-enrichment', async (ctx) => {
       log('STAGE', 'External Metrics Enrichment');
-      ctx.acceptedPages = externalMetrics.enrichPagesWithMetrics(ctx.acceptedPages);
+      const pages = (ctx.acceptedPages && Array.isArray(ctx.acceptedPages)) ? ctx.acceptedPages : [];
+      ctx.acceptedPages = externalMetrics.enrichPagesWithMetrics(pages);
       const stats = externalMetrics.getStatistics();
-      log('STAGE', `External metrics: ${stats.urlsWithBounceRate} pages with bounce rate, ${stats.urlsWithTimeOnPage} with time on page`);
+      log('STAGE', `External metrics: ${stats.urlsWithBounceRate || 0} pages with bounce rate, ${stats.urlsWithTimeOnPage || 0} with time on page`);
     });
 
     // Этап 8.7: Обогащение данными о конверсиях и предсказания
     pipeline.registerStage('conversion-enrichment', async (ctx) => {
       log('STAGE', 'Conversion Enrichment');
-      ctx.acceptedPages = conversionTracker.enrichPagesWithConversions(ctx.acceptedPages);
+      const pages = (ctx.acceptedPages && Array.isArray(ctx.acceptedPages)) ? ctx.acceptedPages : [];
+      ctx.acceptedPages = conversionTracker.enrichPagesWithConversions(pages);
       const stats = conversionTracker.getStatistics();
-      log('STAGE', `Conversion data: ${stats.pagesWithConversions} pages with conversions, avg rate: ${(stats.avgConversionRate * 100).toFixed(2)}%`);
+      log('STAGE', `Conversion data: ${stats.pagesWithConversions || 0} pages with conversions, avg rate: ${((stats.avgConversionRate || 0) * 100).toFixed(2)}%`);
     });
 
     // Этап 9: Обновление LTR весов
