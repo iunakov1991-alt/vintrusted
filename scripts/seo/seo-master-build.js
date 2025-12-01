@@ -540,10 +540,10 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       log('CONTENT-GEN', `Starting generation of ${totalPages} pages with concurrency ${adaptiveConcurrency}`);
       
       for (const item of plan) {
-        // Проверяем память перед каждым батчем
-        if (memoryMonitor.shouldLimitOperations()) {
+        // ТРИЗ КРИТИЧЕСКАЯ: проверка памяти реже для ускорения (каждые 100 страниц)
+        if (processedPages % 100 === 0 && memoryMonitor.shouldLimitOperations()) {
           log('MEMORY-MONITOR', 'Memory limit reached, waiting...');
-          await new Promise(resolve => setTimeout(resolve, 1000));
+          await new Promise(resolve => setTimeout(resolve, 500)); // Уменьшено с 1000 до 500
           memoryMonitor.performCleanup();
         }
         
