@@ -691,6 +691,10 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     pipeline.registerStage('html-rendering', async (ctx) => {
       log('STAGE', 'HTML Rendering');
       ctx.pages = ctx.pages.map(page => {
+        // Проверяем наличие layout, если нет - выбираем дефолтный
+        if (!page.layout) {
+          page.layout = layoutEngine.selectLayout(page, rlState.layoutWeights);
+        }
         let html = templateEngine.renderPage(page, page.layout);
         
         // Search Intent Classification
