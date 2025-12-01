@@ -112,6 +112,13 @@ class BuildHistory {
   }
 
   /**
+   * Получение последних билдов (алиас для getHistory)
+   */
+  getRecentBuilds(limit = 10) {
+    return this.getHistory(limit);
+  }
+
+  /**
    * Получение последнего билда
    */
   getLastBuild() {
