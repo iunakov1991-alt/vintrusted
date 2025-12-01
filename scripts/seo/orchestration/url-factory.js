@@ -138,11 +138,14 @@ class URLFactory {
       }
     }
 
-    // Дедупликация по vin+stateSlug
+    // Дедупликация по vin+stateSlug+intent+lang
+    // Это позволяет создавать разные страницы для разных intents и языков
+    // но предотвращает дубликаты для одного VIN+state+intent+lang
     const seen = new Set();
     const deduplicated = [];
     for (const p of pages) {
-      const key = `${p.vin}|${p.stateSlug}`;
+      // Включаем intent и lang в ключ, чтобы создавать разные страницы
+      const key = `${p.vin}|${p.stateSlug}|${p.intent}|${p.lang}`;
       if (seen.has(key)) continue;
       seen.add(key);
       deduplicated.push(p);
