@@ -554,7 +554,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         const promise = errorIsolation.isolateModuleAsync(
           'content-generation',
           async () => {
-            // ТРИЗ: Computation Cache для AI вызовов
+            // ТРИЗ оптимизация: Computation Cache + пропуск AI для части страниц
             const cacheKey = `ai-${item.lang}-${item.intent}-${item.make}-${item.year}-${item.stateSlug}`;
             
             // Проверяем кеш
@@ -562,6 +562,14 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
             if (cached) {
               log('COMPUTATION-CACHE', `Cache hit for ${item.url}`);
               return generatePageContent(item, cached.aiText);
+            }
+            
+            // ТРИЗ: пропускаем AI для 30% страниц (используем baseline) для ускорения
+            // Это позволяет генерировать больше страниц быстрее
+            const skipAI = Math.random() < 0.3; // 30% страниц без AI
+            if (skipAI && config.enableAI) {
+              log('SPEED-OPTIMIZATION', `Skipping AI for ${item.url} (baseline only)`);
+              return generatePageContent(item, '', adaptiveMaxTokens); // Пустой aiText = только baseline
             }
             
             // Генерируем с профилированием
