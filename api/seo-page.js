@@ -39,16 +39,22 @@ module.exports = async (req, res) => {
     
     console.log('[SEO-PAGE] Requested path:', pagePath);
     
-    // Множественные пути поиска файла
+    // Множественные пути поиска файла (как в seo-vin-page.js)
     const possiblePaths = [
-      // Основной путь
+      // Основной путь (локально и на Vercel)
       path.join(process.cwd(), 'public', 'seo-pages', pagePath, 'index.html'),
       // Альтернативный путь (без trailing slash)
       path.join(process.cwd(), 'public', 'seo-pages', pagePath.replace(/\/$/, ''), 'index.html'),
       // Путь с .vercel/output (для Vercel builds)
       path.join(process.cwd(), '.vercel', 'output', 'static', 'seo-pages', pagePath, 'index.html'),
+      // Путь из .vercel/output/static (альтернативный формат)
+      path.join(process.cwd(), '.vercel', 'output', 'static', 'public', 'seo-pages', pagePath, 'index.html'),
       // Путь из корня проекта (fallback)
       path.join(process.cwd(), 'seo-pages', pagePath, 'index.html'),
+      // Путь из /var/task (Vercel Lambda)
+      path.join('/var/task', 'public', 'seo-pages', pagePath, 'index.html'),
+      // Путь из /var/task/.vercel/output
+      path.join('/var/task', '.vercel', 'output', 'static', 'seo-pages', pagePath, 'index.html'),
     ];
     
     let filePath = null;
@@ -62,6 +68,7 @@ module.exports = async (req, res) => {
           if (stats.isFile() && stats.size > 0) {
             filePath = possiblePath;
             foundPath = possiblePath;
+            console.log('[SEO-PAGE] File found at:', foundPath);
             break;
           }
         }
@@ -69,6 +76,11 @@ module.exports = async (req, res) => {
         // Игнорируем ошибки проверки пути
         continue;
       }
+    }
+    
+    // Логируем все проверенные пути для отладки
+    if (!filePath) {
+      console.warn('[SEO-PAGE] File not found. Checked paths:', possiblePaths);
     }
     
     // Если файл найден - читаем и отдаем
