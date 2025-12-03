@@ -9,11 +9,35 @@ const path = require('path');
 module.exports = async (req, res) => {
   try {
     // Извлекаем путь из query или URL
-    const pagePath = req.query.path || req.url.replace('/api/seo-page?path=', '').replace('/api/seo-page/', '');
+    let pagePath = req.query.path;
+    
+    // Если path не в query, пытаемся извлечь из URL
+    if (!pagePath) {
+      // Из rewrite: /seo-pages/:path* → /api/seo-page.js?path=:path*
+      // path может быть в req.url как /api/seo-page?path=vin-check-0
+      const urlMatch = req.url.match(/[?&]path=([^&]+)/);
+      if (urlMatch) {
+        pagePath = decodeURIComponent(urlMatch[1]);
+      } else {
+        // Пытаемся извлечь из пути напрямую
+        const pathMatch = req.url.match(/\/seo-pages\/(.+)/);
+        if (pathMatch) {
+          pagePath = pathMatch[1].split('?')[0].split('/')[0];
+        }
+      }
+    }
+    
+    // Декодируем URL если нужно
+    if (pagePath) {
+      pagePath = decodeURIComponent(pagePath);
+    }
     
     if (!pagePath) {
+      console.error('[SEO-PAGE] No path provided:', { url: req.url, query: req.query });
       return res.status(400).json({ error: 'Page path is required' });
     }
+    
+    console.log('[SEO-PAGE] Requested path:', pagePath);
     
     // Множественные пути поиска файла
     const possiblePaths = [
