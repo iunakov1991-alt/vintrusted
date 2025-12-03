@@ -7,9 +7,32 @@ const fs = require('fs');
 const path = require('path');
 
 // Встроенный контент для vin-check-0 (временное решение до исправления файловой системы)
-const EMBEDDED_VIN_CHECK_0 = require('./seo-page-vin-check-0-content.js');
+let EMBEDDED_VIN_CHECK_0;
+try {
+  EMBEDDED_VIN_CHECK_0 = require('./seo-page-vin-check-0-content.js');
+} catch (e) {
+  console.warn('[SEO-PAGE] Could not load embedded content, will use fallback');
+  EMBEDDED_VIN_CHECK_0 = null;
+}
 
 module.exports = async (req, res) => {
+  // Сразу возвращаем встроенный контент для vin-check-0 (временное решение)
+  // Это гарантирует, что страница будет работать независимо от файловой системы
+  try {
+    const embeddedHTML = getEmbeddedPageContent();
+    if (embeddedHTML) {
+      console.log('[SEO-PAGE] Serving embedded content');
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+      res.setHeader('X-Served-From', 'embedded');
+      res.status(200).send(embeddedHTML);
+      return;
+    }
+  } catch (e) {
+    console.error('[SEO-PAGE] Error serving embedded content:', e.message);
+  }
+  
+  // Fallback на старую логику
   try {
     // Извлекаем путь из query или URL
     let pagePath = req.query.path;
@@ -17,12 +40,10 @@ module.exports = async (req, res) => {
     // Если path не в query, пытаемся извлечь из URL
     if (!pagePath) {
       // Из rewrite: /seo-pages/(.*) → /api/seo-page.js?path=$1
-      // path может быть в req.url как /api/seo-page?path=vin-check-0
       const urlMatch = req.url.match(/[?&]path=([^&]+)/);
       if (urlMatch) {
         pagePath = decodeURIComponent(urlMatch[1]);
       } else {
-        // Пытаемся извлечь из пути напрямую
         const pathMatch = req.url.match(/\/seo-pages\/(.+)/);
         if (pathMatch) {
           pagePath = pathMatch[1].split('?')[0].split('/')[0];
@@ -30,16 +51,11 @@ module.exports = async (req, res) => {
       }
     }
     
-    // Декодируем URL если нужно
     if (pagePath) {
-      pagePath = decodeURIComponent(pagePath);
-      // Убираем trailing slash
-      pagePath = pagePath.replace(/\/$/, '');
+      pagePath = decodeURIComponent(pagePath).replace(/\/$/, '');
     }
     
-    // Если все еще нет path, используем vin-check-0 как default для тестирования
     if (!pagePath) {
-      console.warn('[SEO-PAGE] No path provided, using default vin-check-0:', { url: req.url, query: req.query });
       pagePath = 'vin-check-0';
     }
     
