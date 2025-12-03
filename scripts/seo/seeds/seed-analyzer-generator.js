@@ -109,7 +109,7 @@ class SeedAnalyzerGenerator {
       vins: Array.from(coverage.vins),
       intents: Array.from(coverage.intents),
       languages: Array.from(coverage.languages),
-      combinations: Array.from(coverage.combinations)
+      combinations: coverage.combinations // Оставляем как Set для использования .has()
     };
   }
 

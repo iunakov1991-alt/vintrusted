@@ -1,0 +1,41 @@
+{
+  "minWords": 3000,
+  "minSections": 8,
+  "maxSections": 12,
+  "minFAQ": 10,
+  "maxFAQ": 15,
+  "minTables": 2,
+  "minScenarios": 2,
+  "maxScenarios": 4,
+  "minFAQAnswerWords": 100,
+  "maxFAQAnswerWords": 200,
+  "minSectionWords": 300,
+  "maxSectionWords": 500,
+  "requiredElements": [
+    "data-breakdown",
+    "sources-pipelines",
+    "patterns-correlations",
+    "regional-nuance",
+    "best-practices",
+    "scenarios",
+    "tables"
+  ],
+  "forbiddenPatterns": [
+    "This comprehensive guide covers everything",
+    "Understanding X is essential for making informed decisions",
+    "By the end of this article",
+    "In this article, we will explore",
+    "This guide will help you"
+  ],
+  "requiredSEO": [
+    "schema-org-article",
+    "schema-org-faqpage",
+    "open-graph-tags",
+    "twitter-card-tags",
+    "breadcrumbs",
+    "internal-links"
+  ],
+  "qualityThreshold": 0.85,
+  "lastUpdated": "2025-12-03T01:21:29.937Z",
+  "source": "seo-audit-learning"
+}

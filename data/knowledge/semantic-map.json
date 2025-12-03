@@ -1,0 +1,113 @@
+{
+  "themes": [],
+  "clusters": [],
+  "gaps": [
+    {
+      "type": "missing-theme",
+      "theme": "vin",
+      "priority": "high",
+      "suggestion": "Add content about vin"
+    },
+    {
+      "type": "missing-theme",
+      "theme": "history",
+      "priority": "high",
+      "suggestion": "Add content about history"
+    },
+    {
+      "type": "missing-theme",
+      "theme": "report",
+      "priority": "high",
+      "suggestion": "Add content about report"
+    },
+    {
+      "type": "missing-theme",
+      "theme": "accident",
+      "priority": "high",
+      "suggestion": "Add content about accident"
+    },
+    {
+      "type": "missing-theme",
+      "theme": "theft",
+      "priority": "high",
+      "suggestion": "Add content about theft"
+    },
+    {
+      "type": "missing-theme",
+      "theme": "ownership",
+      "priority": "high",
+      "suggestion": "Add content about ownership"
+    },
+    {
+      "type": "missing-theme",
+      "theme": "dmv",
+      "priority": "high",
+      "suggestion": "Add content about dmv"
+    },
+    {
+      "type": "missing-theme",
+      "theme": "title",
+      "priority": "high",
+      "suggestion": "Add content about title"
+    },
+    {
+      "type": "missing-theme",
+      "theme": "odometer",
+      "priority": "high",
+      "suggestion": "Add content about odometer"
+    },
+    {
+      "type": "insufficient-clusters",
+      "current": 0,
+      "recommended": 10,
+      "priority": "medium",
+      "suggestion": "Expand to more topic clusters"
+    },
+    {
+      "type": "insufficient-keywords",
+      "current": 0,
+      "recommended": 100,
+      "priority": "medium",
+      "suggestion": "Expand keyword coverage"
+    }
+  ],
+  "competitors": [
+    {
+      "domain": "carfax.com",
+      "strengths": [
+        "brand",
+        "coverage"
+      ],
+      "weaknesses": [
+        "pricing"
+      ]
+    }
+  ],
+  "keywords": [],
+  "intentMapping": {
+    "vin_check": [],
+    "accident_check": [],
+    "ownership_history": [],
+    "market_value": [],
+    "dmv_records": [],
+    "title_brand": [],
+    "odometer_rollback": [],
+    "theft_records": []
+  },
+  "timestamp": "2025-12-02T23:21:34.226Z",
+  "coverage": {
+    "clusters": {
+      "current": 0,
+      "expected": 10,
+      "coverage": 0,
+      "percent": 0
+    },
+    "themes": {
+      "current": 0,
+      "expected": 20,
+      "coverage": 0,
+      "percent": 0
+    },
+    "overall": 0
+  }
+}

@@ -1,6 +1,6 @@
 {
   "version": "6.0",
-  "targetPagesPerBuild": 10000,
+  "targetPagesPerBuild": 1000,
   "maxPagesPerCluster": 500,
   "minQualityScore": 0.70,
   "enableAI": true,
@@ -49,6 +49,8 @@
     "semanticWeightInQuality": 0.20
   },
   "features": {
+    "m1Optimization": true,
+    "localAI": true,
     "seedExpansion": true,
     "h1Variants": true,
     "synonyms": true,

@@ -19,6 +19,40 @@ class ContentGenerator {
       cached: 0,
       errors: 0
     };
+    // Загружаем правила генерации из обучения
+    this.generationRules = this.loadGenerationRules();
+  }
+
+  /**
+   * Загрузка правил генерации из обучения
+   */
+  loadGenerationRules() {
+    const rulesPath = path.join(process.cwd(), 'data/knowledge/generation-rules.json');
+    if (fs.existsSync(rulesPath)) {
+      try {
+        const rules = JSON.parse(fs.readFileSync(rulesPath, 'utf8'));
+        console.log('[CONTENT-GENERATOR] Loaded generation rules from learning:', rules.lastUpdated);
+        return rules;
+      } catch (error) {
+        console.warn('[CONTENT-GENERATOR] Failed to load generation rules:', error.message);
+      }
+    }
+    // Fallback на дефолтные правила
+    return {
+      minWords: 3000,
+      minSections: 8,
+      maxSections: 12,
+      minFAQ: 10,
+      maxFAQ: 15,
+      minTables: 2,
+      minScenarios: 2,
+      maxScenarios: 4,
+      minFAQAnswerWords: 100,
+      maxFAQAnswerWords: 200,
+      minSectionWords: 300,
+      maxSectionWords: 500,
+      qualityThreshold: 0.85
+    };
   }
 
   async execute(params = {}) {
@@ -207,17 +241,24 @@ class ContentGenerator {
       const path = require('path');
       const localAIPath = path.join(process.cwd(), 'scripts', 'seo', 'ai', 'local-ai-provider.js');
       
-      let LocalAIProvider;
+      let LocalAIProviderModule;
       try {
-        LocalAIProvider = require(localAIPath);
+        LocalAIProviderModule = require(localAIPath);
       } catch (requireError) {
         // Альтернативный путь
         const altPath = path.join(__dirname, '../../../scripts/seo/ai/local-ai-provider.js');
         try {
-          LocalAIProvider = require(altPath);
+          LocalAIProviderModule = require(altPath);
         } catch (altError) {
           throw new Error(`LocalAIProvider not found. Tried: ${localAIPath}, ${altPath}`);
         }
+      }
+      
+      // Извлекаем LocalAIProvider из модуля (может быть экспортирован как { LocalAIProvider } или напрямую)
+      const LocalAIProvider = LocalAIProviderModule.LocalAIProvider || LocalAIProviderModule;
+      
+      if (!LocalAIProvider || typeof LocalAIProvider !== 'function') {
+        throw new Error('LocalAIProvider is not a constructor. Module exports:', Object.keys(LocalAIProviderModule));
       }
       
       const localAI = new LocalAIProvider({
@@ -253,19 +294,72 @@ class ContentGenerator {
   }
 
   /**
-   * Построение промта для AI (MASTER SEO PROMPT)
+   * Построение промта для AI (MASTER SEO PROMPT + ПРАВИЛА ИЗ ОБУЧЕНИЯ)
    */
   buildAIPrompt(basePrompt, context) {
     // Используем мастер-промпт для гениальных статей
+    let masterPrompt;
     try {
       const { buildMasterSEOPrompt } = require('../../core/prompts/master-seo-prompt');
-      const masterPrompt = buildMasterSEOPrompt(context.theme || context.intent, context);
-      return masterPrompt;
+      masterPrompt = buildMasterSEOPrompt(context.theme || context.intent, context);
     } catch (error) {
       // Fallback на улучшенный промпт
       console.warn('Master prompt not found, using enhanced prompt:', error.message);
-      return this.buildEnhancedPrompt(basePrompt, context);
+      masterPrompt = this.buildEnhancedPrompt(basePrompt, context);
     }
+
+    // Обогащаем промпт правилами из обучения
+    if (this.generationRules) {
+      const rulesEnrichment = this.buildRulesEnrichment();
+      masterPrompt = `${masterPrompt}\n\n---\nLEARNING-BASED REQUIREMENTS (from SEO audit):\n${rulesEnrichment}`;
+    }
+
+    return masterPrompt;
+  }
+
+  /**
+   * Построение обогащения промпта правилами из обучения
+   */
+  buildRulesEnrichment() {
+    const rules = this.generationRules;
+    let enrichment = '';
+
+    if (rules.minWords) {
+      enrichment += `\n- MINIMUM WORDS: ${rules.minWords} words total (current requirement: ${rules.minWords}+)\n`;
+    }
+
+    if (rules.minSections && rules.maxSections) {
+      enrichment += `- SECTIONS: ${rules.minSections}-${rules.maxSections} main sections, each ${rules.minSectionWords || 300}-${rules.maxSectionWords || 500} words\n`;
+    }
+
+    if (rules.minFAQ && rules.maxFAQ) {
+      enrichment += `- FAQ: ${rules.minFAQ}-${rules.maxFAQ} questions, each answer ${rules.minFAQAnswerWords || 100}-${rules.maxFAQAnswerWords || 200} words\n`;
+    }
+
+    if (rules.minTables) {
+      enrichment += `- TABLES: Minimum ${rules.minTables} Markdown tables with real data\n`;
+    }
+
+    if (rules.minScenarios && rules.maxScenarios) {
+      enrichment += `- SCENARIOS: ${rules.minScenarios}-${rules.maxScenarios} realistic scenarios/case studies\n`;
+    }
+
+    if (rules.requiredElements && rules.requiredElements.length > 0) {
+      enrichment += `- REQUIRED ELEMENTS: ${rules.requiredElements.join(', ')}\n`;
+    }
+
+    if (rules.forbiddenPatterns && rules.forbiddenPatterns.length > 0) {
+      enrichment += `- FORBIDDEN PATTERNS (DO NOT USE):\n`;
+      rules.forbiddenPatterns.forEach(pattern => {
+        enrichment += `  * "${pattern}"\n`;
+      });
+    }
+
+    if (rules.qualityThreshold) {
+      enrichment += `- QUALITY THRESHOLD: ${(rules.qualityThreshold * 100).toFixed(0)}% minimum\n`;
+    }
+
+    return enrichment;
   }
   
   /**

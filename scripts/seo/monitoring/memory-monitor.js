@@ -12,6 +12,7 @@ class MemoryMonitor {
     this.memoryHistory = [];
     this.maxHistorySize = 100;
     this.cleanupTimer = null;
+    this.lastCleanupTime = 0; // Защита от бесконечного цикла
   }
 
   /**
@@ -124,6 +125,14 @@ class MemoryMonitor {
    * Экстренная очистка при превышении порога
    */
   triggerCleanup() {
+    // Защита от бесконечного цикла: ограничиваем частоту вызовов
+    const now = Date.now();
+    if (this.lastCleanupTime && (now - this.lastCleanupTime) < 5000) {
+      // Если последняя очистка была менее 5 секунд назад, пропускаем
+      return;
+    }
+    
+    this.lastCleanupTime = now;
     log('MEMORY-MONITOR', 'Triggering emergency cleanup');
     this.performCleanup();
   }

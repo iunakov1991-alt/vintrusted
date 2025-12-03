@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster 7.0 - Панель управления</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">🚀</span>
+                    <span class="logo-text">Monster 7.0</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-tab="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Панель</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="modules">
+                    <span class="nav-icon">🧩</span>
+                    <span class="nav-text">Модули</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="metrics">
+                    <span class="nav-icon">📈</span>
+                    <span class="nav-text">Метрики</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="logs">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">Логи</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="status-dot" id="status-dot"></span>
+                    <span class="status-text" id="status-text">Готов</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Панель управления</h1>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Память</span>
+                        <span class="stat-value" id="header-memory">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">CPU</span>
+                        <span class="stat-value" id="header-cpu">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Задачи</span>
+                        <span class="stat-value" id="header-tasks">0</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard-tab">
+                <!-- Control Panel -->
+                <div class="card">
+                    <div class="card-title">Панель управления</div>
+                    <div class="card-body">
+                        <div class="button-grid">
+                            <button id="btn-start" class="btn btn-primary btn-large">
+                                <span class="btn-icon">▶</span>
+                                <span>СТАРТ</span>
+                            </button>
+                            <button id="btn-rebuild" class="btn btn-secondary">
+                                <span class="btn-icon">🔄</span>
+                                <span>ПЕРЕСБОРКА</span>
+                            </button>
+                            <button id="btn-learn" class="btn btn-secondary">
+                                <span class="btn-icon">🎓</span>
+                                <span>ОБУЧЕНИЕ</span>
+                            </button>
+                            <button id="btn-evolve" class="btn btn-secondary">
+                                <span class="btn-icon">🧬</span>
+                                <span>ЭВОЛЮЦИЯ</span>
+                            </button>
+                            <button id="btn-repair" class="btn btn-secondary">
+                                <span class="btn-icon">🔧</span>
+                                <span>РЕМОНТ</span>
+                            </button>
+                            <button id="btn-update" class="btn btn-secondary">
+                                <span class="btn-icon">⬇</span>
+                                <span>ОБНОВИТЬ</span>
+                            </button>
+                            <button id="btn-init-knowledge" class="btn btn-info">
+                                <span class="btn-icon">🧠</span>
+                                <span>ИНИТ БД</span>
+                            </button>
+                            <button id="btn-export" class="btn btn-success">
+                                <span class="btn-icon">📤</span>
+                                <span>ЭКСПОРТ</span>
+                            </button>
+                            <button id="btn-stop" class="btn btn-danger">
+                                <span class="btn-icon">⏹</span>
+                                <span>СТОП</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metrics Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">💾</span>
+                            <span class="metric-label">Память</span>
+                        </div>
+                        <div class="metric-value" id="metric-memory">0 MB</div>
+                        <div class="metric-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-memory" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-text" id="progress-memory-text">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">⚡</span>
+                            <span class="metric-label">CPU</span>
+                        </div>
+                        <div class="metric-value" id="metric-cpu">0%</div>
+                        <div class="metric-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-cpu" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-text" id="progress-cpu-text">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">📋</span>
+                            <span class="metric-label">Задачи</span>
+                        </div>
+                        <div class="metric-value" id="metric-tasks">0</div>
+                        <div class="metric-details">
+                            <span class="detail-badge success">✓ <span id="tasks-completed">0</span></span>
+                            <span class="detail-badge error">✗ <span id="tasks-failed">0</span></span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">📄</span>
+                            <span class="metric-label">Сгенерировано</span>
+                        </div>
+                        <div class="metric-value" id="metric-generated">0</div>
+                        <div class="metric-details">
+                            <span class="detail-badge info">Опубликовано: <span id="metric-published">0</span></span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">⭐</span>
+                            <span class="metric-label">Качество</span>
+                        </div>
+                        <div class="metric-value" id="metric-quality">0%</div>
+                        <div class="metric-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-quality" style="width: 0%"></div>
+                            </div>
+                            <span class="progress-text" id="progress-quality-text">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-icon">🔍</span>
+                            <span class="metric-label">Проиндексировано</span>
+                        </div>
+                        <div class="metric-value" id="metric-indexed">0</div>
+                        <div class="metric-trend" id="indexed-trend">Google</div>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div class="card">
+                    <div class="card-title">Текущий прогресс</div>
+                    <div class="card-body">
+                        <div id="progress-steps" class="progress-steps">
+                            <div class="empty-state">
+                                <span class="empty-icon">📭</span>
+                                <span class="empty-text">Нет активных задач</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="card">
+                    <div class="card-title">Результаты и аналитика</div>
+                    <div class="card-body">
+                        <div id="results-content" class="results-content">
+                            <div class="empty-state">
+                                <span class="empty-icon">📊</span>
+                                <span class="empty-text">Нет результатов. Нажмите СТАРТ для начала.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions -->
+                <div class="card">
+                    <div class="card-title">Обратная связь</div>
+                    <div class="card-body">
+                        <div id="feedback-questions" class="questions-list">
+                            <div class="empty-state">
+                                <span class="empty-icon">❓</span>
+                                <span class="empty-text">Нет вопросов</span>
+                            </div>
+                        </div>
+                        <div class="feedback-form" id="feedback-form" style="display: none;">
+                            <textarea id="feedback-answer" placeholder="Ваш ответ..." rows="4"></textarea>
+                            <button id="btn-submit-feedback" class="btn btn-primary">
+                                <span>Отправить</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Learning Materials -->
+                <div class="card">
+                    <div class="card-title">
+                        <span class="card-title-icon">📚</span>
+                        Материалы для обучения AI
+                    </div>
+                    <div class="card-body">
+                        <div class="learning-materials-form">
+                            <div class="form-group">
+                                <label for="material-text" class="form-label">
+                                    <span class="label-icon">✍️</span>
+                                    Текстовый ввод
+                                </label>
+                                <textarea 
+                                    id="material-text" 
+                                    class="form-textarea" 
+                                    placeholder="Введите идеи, заметки, инструкции или любой текстовый материал для обучения AI..."
+                                    rows="5"
+                                ></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="material-files" class="form-label">
+                                    <span class="label-icon">📎</span>
+                                    Прикрепить файлы
+                                </label>
+                                <div class="file-upload-area" id="file-upload-area">
+                                    <input 
+                                        type="file" 
+                                        id="material-files" 
+                                        class="file-input" 
+                                        multiple 
+                                        accept=".txt,.md,.pdf,.doc,.docx,.json,.csv"
+                                    >
+                                    <div class="file-upload-dropzone">
+                                        <span class="dropzone-icon">📁</span>
+                                        <span class="dropzone-text">Перетащите файлы или нажмите для выбора</span>
+                                        <span class="dropzone-hint">Поддерживаются: TXT, MD, PDF, DOC, DOCX, JSON, CSV</span>
+                                    </div>
+                                </div>
+                                <div class="file-list" id="file-list"></div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button id="btn-submit-materials" class="btn btn-primary btn-large">
+                                    <span class="btn-icon">🚀</span>
+                                    <span>Отправить в AI</span>
+                                </button>
+                                <button id="btn-clear-materials" class="btn btn-secondary">
+                                    <span class="btn-icon">🗑️</span>
+                                    <span>Очистить</span>
+                                </button>
+                            </div>
+
+                            <div id="materials-status" class="materials-status" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modules Tab -->
+            <div class="tab-content" id="modules-tab">
+                <div class="card">
+                    <div class="card-title">Статус модулей</div>
+                    <div class="card-body">
+                        <div id="modules-grid" class="modules-grid">
+                            <!-- Modules loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Tab -->
+            <div class="tab-content" id="metrics-tab">
+                <div class="card">
+                    <div class="card-title">Детальные метрики</div>
+                    <div class="card-body">
+                        <div id="detailed-metrics">
+                            <div class="empty-state">
+                                <span class="empty-icon">📈</span>
+                                <span class="empty-text">Метрики появятся здесь</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Tab -->
+            <div class="tab-content" id="logs-tab">
+                <div class="card">
+                    <div class="card-title">Системные логи</div>
+                    <div class="card-body">
+                        <div id="logs-content" class="logs-content">
+                            <div class="empty-state">
+                                <span class="empty-icon">📋</span>
+                                <span class="empty-text">Логов пока нет</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

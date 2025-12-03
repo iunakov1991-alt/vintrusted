@@ -6,7 +6,8 @@
   "scripts": {
     "vercel-build": "echo 'SEO pages are generated locally on Mac via Monster 7.0 dashboard. Skipping build-time generation.'",
     "seo-build": "node --expose-gc scripts/seo/seo-master-build.js",
-    "monster:start": "node monster-7.0/core/dashboard/server.js",
+        "monster:start": "node monster-7.0/core/dashboard/server.js",
+        "monster:start:7.1": "node monster-7.1/core/dashboard/server-7.1.js",
     "monster:check": "node monster-7.0/scripts/check-system.js",
     "monster:quick-start": "bash monster-7.0/scripts/quick-start.sh"
   },

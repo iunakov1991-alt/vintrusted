@@ -44,11 +44,33 @@ class SitemapEngine {
       }
     }
 
-    // Группировка по языкам
+    // Группировка по языкам с фильтрацией некорректных URL
     const byLang = {};
+    let filteredCount = 0;
     for (const p of pages) {
+      // Фильтруем страницы с "undefined" в URL или без корректного stateSlug
+      if (!p.url || p.url.includes('/undefined/') || p.url.includes('undefined')) {
+        filteredCount++;
+        log('SITEMAP', `Filtered out page with invalid URL: ${p.url}`);
+        continue;
+      }
+      
+      // Дополнительная проверка: если это VIN страница, stateSlug обязателен и не должен быть undefined
+      // SEO страницы (seo-pages) не требуют stateSlug
+      if (p.url && p.url.includes('/vin/')) {
+        if (p.stateSlug === 'undefined' || p.stateSlug === undefined || p.stateSlug === null || p.stateSlug === 'state') {
+          filteredCount++;
+          log('SITEMAP', `Filtered out VIN page with invalid stateSlug: ${p.url}`);
+          continue;
+        }
+      }
+      
       if (!byLang[p.lang]) byLang[p.lang] = [];
       byLang[p.lang].push(p);
+    }
+    
+    if (filteredCount > 0) {
+      log('SITEMAP', `Filtered out ${filteredCount} pages with invalid URLs`);
     }
 
     const indexEntries = [];
@@ -64,11 +86,28 @@ class SitemapEngine {
         const fileName = `sitemap-${lang}-${part}.xml`;
         
         // Вычисление приоритета на основе quality score
-        const locs = chunkPages.map((p) => {
+        // Дополнительная фильтрация на уровне чанка (на случай если что-то пропустили)
+        const validChunkPages = chunkPages.filter((p) => {
+          if (!p.url || p.url.includes('/undefined/') || p.url.includes('undefined')) {
+            return false;
+          }
+          // Для VIN страниц проверяем stateSlug, для SEO страниц - нет
+          if (p.url.includes('/vin/')) {
+            return p.stateSlug !== 'undefined' &&
+                   p.stateSlug !== undefined &&
+                   p.stateSlug !== null &&
+                   p.stateSlug !== 'state';
+          }
+          return true; // SEO страницы валидны без stateSlug
+        });
+        
+        const locs = validChunkPages.map((p) => {
           const priority = Math.min(1.0, (p.qualityScore || 0.5) + 0.3);
           const lastmod = new Date().toISOString().split('T')[0];
+          // Дополнительная проверка URL перед добавлением
+          const cleanUrl = p.url.replace(/\/undefined\//g, '/').replace(/undefined/g, '');
           return `<url>
-  <loc>https://vintrusted.com${p.url}</loc>
+  <loc>https://vintrusted.com${cleanUrl}</loc>
   <lastmod>${lastmod}</lastmod>
   <priority>${priority.toFixed(2)}</priority>
 </url>`;

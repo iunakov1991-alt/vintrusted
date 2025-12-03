@@ -18,6 +18,27 @@ class AIAugmentation {
     this.loadAITrainingStrategy();
     // Флаг для отключения Groq при достижении лимита
     this.groqRateLimited = false;
+    
+    // Локальный AI для MacBook M1 (условная загрузка)
+    // TRIZ: Разделение через feature flags для плавного перехода на M1
+    this.localAI = null;
+    this.useLocalAI = false;
+    
+    // Загружаем LocalAI только если feature flag включен И переменная окружения установлена
+    if (config.features?.localAI !== false && (process.env.USE_LOCAL_AI === '1' || process.env.USE_LOCAL_AI === 'true')) {
+      try {
+        const { LocalAIProvider } = require('../ai/local-ai-provider');
+        this.localAI = new LocalAIProvider(config);
+        this.useLocalAI = true;
+        log('AI', 'Local AI enabled and loaded');
+      } catch (e) {
+        // Graceful fallback: LocalAI не доступен, используем только API провайдеры
+        log('AI', `Local AI not available (${e.message}), using API providers only`);
+        this.useLocalAI = false;
+      }
+    } else {
+      log('AI', 'Local AI disabled (Pre-M1 mode or feature flag off)');
+    }
   }
 
   /**
@@ -336,11 +357,37 @@ class AIAugmentation {
       return this.cache.get(key);
     }
 
-    if (!effectiveAI) {
+    if (!effectiveAI && !this.useLocalAI) {
       log('AI', `AI disabled, using fallback for ${intent} in ${lang}`);
       const fallback = this.getFallbackText(intent, lang);
       this.appendCache(key, fallback);
       return fallback;
+    }
+
+    // НОВОЕ: Сначала пробуем локальный AI (если включен и доступен)
+    if (this.useLocalAI && this.localAI) {
+      try {
+        const isAvailable = await this.localAI.isAvailable();
+        if (isAvailable) {
+          log('AI', 'Trying local AI first...');
+          const localText = await this.localAI.generateText(enrichedPrompt || prompt, {
+            maxTokens: maxTokens || 400
+          });
+          
+          if (localText) {
+            log('AI', 'Local AI success, using it');
+            this.appendCache(key, localText);
+            return localText;
+          } else {
+            log('AI', 'Local AI failed, falling back to API');
+          }
+        } else {
+          log('AI', 'Local AI not available, using API');
+        }
+      } catch (e) {
+        // Graceful fallback: ошибка при использовании LocalAI, переключаемся на API
+        log('AI', `Local AI error: ${e.message}, falling back to API`);
+      }
     }
 
     // Пробуем провайдеры по порядку (DeepSeek первый для экономии Groq)

@@ -84,8 +84,8 @@ module.exports = async (req, res) => {
     // Если файл найден - читаем и отдаем
     if (filePath && foundPath) {
       try {
-        const html = fs.readFileSync(filePath, 'utf8');
-        
+    const html = fs.readFileSync(filePath, 'utf8');
+    
         // Проверяем, что HTML не пустой
         if (!html || html.trim().length === 0) {
           console.error('[SEO-VIN-PAGE] Empty HTML file:', filePath);
@@ -94,11 +94,11 @@ module.exports = async (req, res) => {
         }
         
         // Успешный ответ
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
         res.setHeader('X-Served-From', 'file-system');
         res.setHeader('X-File-Path', foundPath.replace(process.cwd(), ''));
-        res.status(200).send(html);
+    res.status(200).send(html);
         return;
       } catch (readError) {
         console.error('[SEO-VIN-PAGE] Error reading file:', readError.message, filePath);

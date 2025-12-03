@@ -1,0 +1,141 @@
+{
+  "version": "1.0",
+  "timestamp": "2025-12-02T23:21:34.235Z",
+  "targetPages": 100000,
+  "priorities": [],
+  "clusters": [],
+  "keywords": [],
+  "intents": [
+    {
+      "intent": "vin_check",
+      "currentPages": 0,
+      "targetPages": 10000,
+      "priority": "high",
+      "keywords": [
+        "vin",
+        "vehicle identification",
+        "vin number"
+      ]
+    },
+    {
+      "intent": "accident_check",
+      "currentPages": 0,
+      "targetPages": 10000,
+      "priority": "high",
+      "keywords": [
+        "accident",
+        "crash",
+        "collision",
+        "damage"
+      ]
+    },
+    {
+      "intent": "ownership_history",
+      "currentPages": 0,
+      "targetPages": 10000,
+      "priority": "high",
+      "keywords": [
+        "owner",
+        "ownership",
+        "previous owner"
+      ]
+    },
+    {
+      "intent": "market_value",
+      "currentPages": 0,
+      "targetPages": 10000,
+      "priority": "high",
+      "keywords": [
+        "value",
+        "price",
+        "worth",
+        "valuation"
+      ]
+    },
+    {
+      "intent": "dmv_records",
+      "currentPages": 0,
+      "targetPages": 10000,
+      "priority": "high",
+      "keywords": [
+        "dmv",
+        "registration",
+        "title"
+      ]
+    },
+    {
+      "intent": "title_brand",
+      "currentPages": 0,
+      "targetPages": 10000,
+      "priority": "high",
+      "keywords": [
+        "title",
+        "branded title",
+        "salvage"
+      ]
+    },
+    {
+      "intent": "odometer_rollback",
+      "currentPages": 0,
+      "targetPages": 10000,
+      "priority": "high",
+      "keywords": [
+        "odometer",
+        "mileage",
+        "rollback"
+      ]
+    },
+    {
+      "intent": "theft_records",
+      "currentPages": 0,
+      "targetPages": 10000,
+      "priority": "high",
+      "keywords": [
+        "theft",
+        "stolen",
+        "recovery"
+      ]
+    }
+  ],
+  "constraints": {
+    "memory": 6144,
+    "concurrency": 4,
+    "batchSize": 100,
+    "streaming": true,
+    "cacheEnabled": true
+  },
+  "distribution": {
+    "highPriority": 0.4,
+    "mediumPriority": 0.4,
+    "lowPriority": 0.2
+  },
+  "pageDistribution": {
+    "high": 40000,
+    "medium": 40000,
+    "low": 20000,
+    "clusters": {},
+    "intents": {
+      "vin_check": 10000,
+      "accident_check": 10000,
+      "ownership_history": 10000,
+      "market_value": 10000,
+      "dmv_records": 10000,
+      "title_brand": 10000,
+      "odometer_rollback": 10000,
+      "theft_records": 10000
+    }
+  },
+  "seoOptimizations": {
+    "contentDepth": "high",
+    "eEAT": true,
+    "structuredData": true,
+    "internalLinking": true,
+    "mobileFirst": true
+  },
+  "trizOptimizations": {
+    "separation": "Separate high/medium/low priority pages",
+    "mediator": "Use AI Knowledge Core as mediator",
+    "preliminaryAction": "Pre-generate templates",
+    "selfService": "Automated optimization"
+  }
+}

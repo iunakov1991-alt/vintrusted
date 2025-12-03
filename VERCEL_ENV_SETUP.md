@@ -1,59 +1,143 @@
-# Настройка переменных окружения в Vercel
+# 🔧 НАСТРОЙКА ПЕРЕМЕННЫХ ОКРУЖЕНИЯ ДЛЯ VERCEL
 
-## CLEARVIN_API_TOKEN
+## 📋 КАКИЕ ПЕРЕМЕННЫЕ НУЖНЫ
 
-### Что указать:
-```
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnZpcm9ubWVudCI6InRlc3QiLCJ1c2VyIjp7ImlkIjoyNjYyNDIsImVtYWlsIjoicmVkc3RlcGxlckBnbWFpbC5jb20ifSwidmVuZG9yIjp7ImlkIjo0MzAsInN0YXR1cyI6ImFjdGl2ZSJ9LCJpYXQiOjE3NjI5NjYxNzIsImV4cCI6MTc2NTU1ODE3Mn0.x9DK0eAie7Jo-PTgXabjeRPk7s-T21TRcp5d7CbHYo4
-```
-
-### Где добавить:
-
-1. **Откройте Vercel Dashboard:**
-   - Перейдите на https://vercel.com
-   - Войдите в свой аккаунт
-   - Выберите проект `vintrusted` (или ваш проект)
-
-2. **Перейдите в настройки:**
-   - В меню проекта нажмите **Settings** (Настройки)
-   - В левом меню выберите **Environment Variables** (Переменные окружения)
-
-3. **Добавьте переменную:**
-   - Нажмите кнопку **Add New** (Добавить новую)
-   - В поле **Name** (Имя) введите: `CLEARVIN_API_TOKEN`
-   - В поле **Value** (Значение) вставьте токен выше
-   - Выберите все окружения:
-     - ✅ Production
-     - ✅ Preview  
-     - ✅ Development
-   - Нажмите **Save** (Сохранить)
-
-4. **Передеплойте проект:**
-   - После добавления переменной нужно передеплоить проект
-   - Перейдите на вкладку **Deployments**
-   - Найдите последний деплой
-   - Нажмите на три точки (⋮) справа
-   - Выберите **Redeploy** (Передеплоить)
-   - Или просто сделайте новый коммит и пуш
-
-### Проверка:
-
-После деплоя проверьте, что переменная доступна:
-- Откройте функцию `/api/get-clearvin-report` в логах Vercel
-- Попробуйте сделать тестовый запрос с тестовым VIN
-
-### Важно:
-
-- ⚠️ Это **тестовый токен**, действителен до **12 декабря 2025**
-- ⚠️ Для продакшена нужно будет получить **production токен** от ClearVin
-- ⚠️ Токен работает только с тестовыми VIN из документации
-
-### Альтернативный способ (через CLI):
-
-Если используете Vercel CLI:
+### ЛОКАЛЬНО (MacBook M1):
 ```bash
-vercel env add CLEARVIN_API_TOKEN
-# Вставьте токен когда попросит
-# Выберите все окружения (production, preview, development)
+USE_LOCAL_AI=1          # Включает локальный AI
+LOCAL_AI_MODEL=phi3     # Модель для локального AI
+SEO_BUILD_CONCURRENCY=6 # Оптимально для M1
+AUTO_DEPLOY=1           # Автоматическая выгрузка
 ```
 
+### НА VERCEL:
+```bash
+SEO_BUILD_CONCURRENCY=25  # Для Vercel (больше ресурсов)
+# USE_LOCAL_AI - НЕ НУЖНО (на Vercel нет Ollama)
+# LOCAL_AI_MODEL - НЕ НУЖНО (на Vercel нет Ollama)
+# AUTO_DEPLOY - НЕ НУЖНО (Vercel сам деплоит)
+```
+
+---
+
+## 🎯 ЧТО ДОБАВИТЬ В VERCEL
+
+### Обязательно:
+- `SEO_BUILD_CONCURRENCY=25` (или другое значение для Vercel)
+
+### Опционально:
+- `SEO_ENABLE_AI=1` (если используешь API на Vercel)
+- `GROQ_API_KEY` (если используешь Groq)
+- `DEEPSEEK_API_KEY` (если используешь DeepSeek)
+
+### НЕ НУЖНО:
+- ❌ `USE_LOCAL_AI` - только для локального MacBook
+- ❌ `LOCAL_AI_MODEL` - только для локального MacBook
+- ❌ `AUTO_DEPLOY` - Vercel сам деплоит
+
+---
+
+## 🔧 КАК ДОБАВИТЬ В VERCEL
+
+### Вариант 1: Через веб-интерфейс (рекомендуется)
+
+1. Иди на https://vercel.com
+2. Выбери проект
+3. Settings → Environment Variables
+4. Добавь переменные:
+   - `SEO_BUILD_CONCURRENCY` = `25`
+   - `SEO_ENABLE_AI` = `1` (если используешь API)
+   - `GROQ_API_KEY` = твой ключ (если используешь)
+   - `DEEPSEEK_API_KEY` = твой ключ (если используешь)
+
+### Вариант 2: Через Vercel CLI
+
+```bash
+# Установи Vercel CLI (если еще нет)
+npm i -g vercel
+
+# Авторизуйся
+vercel login
+
+# Добавь переменные
+vercel env add SEO_BUILD_CONCURRENCY production
+# Введи значение: 25
+
+vercel env add SEO_ENABLE_AI production
+# Введи значение: 1
+```
+
+---
+
+## 📊 ЛОГИКА РАБОТЫ
+
+### На MacBook M1:
+```javascript
+// Код проверяет:
+if (USE_LOCAL_AI === '1') {
+  // Использует локальный AI (Ollama)
+} else {
+  // Использует API (DeepSeek/Groq)
+}
+```
+
+### На Vercel:
+```javascript
+// USE_LOCAL_AI не установлен или = '0'
+// Код автоматически использует API (DeepSeek/Groq)
+```
+
+**Вывод:** На Vercel локальный AI не используется, поэтому `USE_LOCAL_AI` не нужен.
+
+---
+
+## ✅ ИТОГОВАЯ РЕКОМЕНДАЦИЯ
+
+### В Vercel добавь только:
+```bash
+SEO_BUILD_CONCURRENCY=25
+SEO_ENABLE_AI=1
+GROQ_API_KEY=твой_ключ
+DEEPSEEK_API_KEY=твой_ключ
+```
+
+### В .env.local (локально):
+```bash
+USE_LOCAL_AI=1
+LOCAL_AI_MODEL=phi3
+SEO_BUILD_CONCURRENCY=6
+AUTO_DEPLOY=1
+```
+
+**Результат:**
+- На MacBook: локальный AI (быстро, бесплатно)
+- На Vercel: API (DeepSeek/Groq)
+
+---
+
+## 🔍 ПРОВЕРКА
+
+### Локально:
+```bash
+# Проверь .env.local
+cat .env.local | grep USE_LOCAL_AI
+# Должно быть: USE_LOCAL_AI=1
+```
+
+### На Vercel:
+```bash
+# Через Vercel CLI
+vercel env ls
+
+# Или через веб-интерфейс
+# Settings → Environment Variables
+```
+
+---
+
+## 📝 ПРИМЕЧАНИЯ
+
+1. **`.env.local` не попадает в git** - это правильно, он только локально
+2. **Vercel переменные** - настраиваются отдельно через веб или CLI
+3. **Разные значения** - нормально (6 для M1, 25 для Vercel)
+4. **Автоматическое определение** - код сам определяет, где запущен

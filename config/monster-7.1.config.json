@@ -1,0 +1,93 @@
+{
+  "version": "7.1",
+  "name": "Monster 7.1 (Phi-3 TRIZ Edition)",
+  "platform": "M1",
+  "domain": "vintrusted.com",
+  
+  "phi3Profile": {
+    "maxInputTokens": 500,
+    "maxOutputTokens": 1000,
+    "callsPerPage": 15,
+    "timeout": 60000
+  },
+  
+  "batches": {
+    "maxPagesPerRun": 20,
+    "pauseEnabled": true,
+    "resumeEnabled": true
+  },
+  
+  "m1Limits": {
+    "maxMemory": 6144,
+    "maxConcurrency": 2,
+    "memoryThreshold": 0.85
+  },
+  
+  "modules": {
+    "core": {
+      "semanticScanner": {
+        "enabled": true,
+        "simplified": true
+      },
+      "strategyGenerator": {
+        "enabled": true,
+        "basic": true,
+        "maxPages": 1000
+      },
+      "promptEngine": {
+        "enabled": true,
+        "phi3Optimized": true
+      },
+      "contentGenerator": {
+        "enabled": true,
+        "sectioned": true
+      },
+      "qualityScore": {
+        "enabled": true,
+        "minimal": true
+      },
+      "dashboard": {
+        "enabled": true
+      }
+    },
+    "extensions": {
+      "trizRepair": {
+        "enabled": false,
+        "light": true
+      },
+      "evolutionEngine": {
+        "enabled": false,
+        "light": true
+      },
+      "performanceLearner": {
+        "enabled": false,
+        "light": true
+      },
+      "libraryScanner": {
+        "enabled": false
+      }
+    },
+    "aiKnowledgeCore": {
+      "enabled": true,
+      "localAI": true,
+      "model": "phi3",
+      "light": true
+    }
+  },
+  
+  "dashboard": {
+    "port": 3000,
+    "uiPath": "/monster-ui",
+    "apiPath": "/api",
+    "websocket": true
+  },
+  
+  "paths": {
+    "knowledge": "./data/knowledge",
+    "strategies": "./data/strategies",
+    "performance": "./data/performance",
+    "feedback": "./data/feedback",
+    "output": "./public/seo-pages"
+  }
+}
+

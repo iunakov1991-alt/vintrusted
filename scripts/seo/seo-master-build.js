@@ -52,6 +52,30 @@ const { getErrorHandler } = require('./utils/error-handler');
  * Полная интеграция всех модулей
  */
 async function main() {
+  // M1 Optimizer для MacBook M1 (условная загрузка)
+  // TRIZ: Разделение через feature flags для плавного перехода на M1
+  let m1Optimizer = null;
+  if (config.features?.m1Optimization !== false) {
+    try {
+      const { M1Optimizer } = require('./utils/m1-optimizer');
+      m1Optimizer = new M1Optimizer();
+      
+      // Если на M1, используем оптимальное количество потоков
+      if (m1Optimizer.isM1) {
+        const optimalThreads = m1Optimizer.getOptimalThreads();
+        process.env.SEO_BUILD_CONCURRENCY = optimalThreads.toString();
+        log('M1-OPTIMIZER', `Detected MacBook M1. Setting optimal concurrency to ${optimalThreads}`);
+      } else {
+        log('M1-OPTIMIZER', 'M1 not detected, using default concurrency');
+      }
+    } catch (e) {
+      // Graceful fallback: M1 optimizer не доступен, используем стандартные настройки
+      log('M1-OPTIMIZER', `M1 optimizer not available (${e.message}), using default concurrency`);
+    }
+  } else {
+    log('M1-OPTIMIZER', 'M1 optimization disabled via feature flag (Pre-M1 mode)');
+  }
+  
   // Защита от множественных запусков на Vercel
   // Используем переменную окружения Vercel для однократного запуска
   const buildId = process.env.VERCEL || process.env.VERCEL_DEPLOYMENT_ID || 'local';
@@ -1195,6 +1219,22 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
     // Восстановление оригинального target
     if (result.originalTarget !== undefined) {
       config.targetPagesPerBuild = result.originalTarget;
+    }
+    
+    // M1: Очистка памяти после билда
+    if (m1Optimizer.isM1) {
+      await m1Optimizer.cleanupAfterBuild();
+    }
+    
+    // Автоматическая выгрузка на Vercel (если включена)
+    if (process.env.AUTO_DEPLOY === '1' || process.env.AUTO_DEPLOY === 'true') {
+      const { deployToVercel } = require('./utils/vercel-deploy');
+      try {
+        await deployToVercel();
+      } catch (e) {
+        error('MAIN', `Deployment error: ${e.message}`);
+        // Не прерываем процесс, если выгрузка не удалась
+      }
     }
 
     // Генерация дашборда
