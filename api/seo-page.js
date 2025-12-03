@@ -120,8 +120,21 @@ module.exports = async (req, res) => {
 
 /**
  * Генерация fallback страницы, если файл не найден
+ * Для vin-check-0 используем встроенный контент
  */
 function sendFallbackPage(res, pagePath) {
+  // Если это vin-check-0, используем встроенный контент
+  if (pagePath === 'vin-check-0' || pagePath.startsWith('vin-check-0')) {
+    const embeddedHTML = getEmbeddedPageContent();
+    if (embeddedHTML) {
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+      res.setHeader('X-Served-From', 'embedded');
+      res.status(200).send(embeddedHTML);
+      return;
+    }
+  }
+  
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,5 +152,21 @@ function sendFallbackPage(res, pagePath) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'no-cache');
   res.status(200).send(html);
+}
+
+/**
+ * Встроенный контент для vin-check-0 (временное решение)
+ */
+function getEmbeddedPageContent() {
+  // Читаем файл локально если доступен
+  try {
+    const filePath = path.join(process.cwd(), 'public', 'seo-pages', 'vin-check-0', 'index.html');
+    if (fs.existsSync(filePath)) {
+      return fs.readFileSync(filePath, 'utf8');
+    }
+  } catch (e) {
+    // Игнорируем ошибки
+  }
+  return null;
 }
 
