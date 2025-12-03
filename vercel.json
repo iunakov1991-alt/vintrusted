@@ -241,7 +241,7 @@
       },
       {
         "source": "/seo-pages/:path*",
-        "destination": "/api/seo-page"
+        "destination": "/api/seo-page.js?path=:path*"
       }
   ]
 }
