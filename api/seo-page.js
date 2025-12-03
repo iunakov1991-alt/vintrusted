@@ -6,6 +6,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// Встроенный контент для vin-check-0 (временное решение до исправления файловой системы)
+const EMBEDDED_VIN_CHECK_0 = require('./seo-page-vin-check-0-content.js');
+
 module.exports = async (req, res) => {
   try {
     // Извлекаем путь из query или URL
@@ -158,7 +161,14 @@ function sendFallbackPage(res, pagePath) {
  * Встроенный контент для vin-check-0 (временное решение)
  */
 function getEmbeddedPageContent() {
-  // Читаем файл локально если доступен
+  // Используем встроенный контент из модуля
+  try {
+    return EMBEDDED_VIN_CHECK_0;
+  } catch (e) {
+    console.error('[SEO-PAGE] Error loading embedded content:', e.message);
+  }
+  
+  // Fallback: читаем файл локально если доступен
   try {
     const filePath = path.join(process.cwd(), 'public', 'seo-pages', 'vin-check-0', 'index.html');
     if (fs.existsSync(filePath)) {
