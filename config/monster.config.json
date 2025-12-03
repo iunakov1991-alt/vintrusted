@@ -1,0 +1,72 @@
+{
+  "version": "7.0",
+  "name": "Monster 7.0",
+  "platform": "M1",
+  "domain": "vintrusted.com",
+  
+  "m1Limits": {
+    "maxMemory": 6144,
+    "maxConcurrency": 4,
+    "memoryThreshold": 0.85
+  },
+  
+  "modules": {
+    "semanticScanner": {
+      "enabled": true,
+      "cacheEnabled": true,
+      "incremental": true
+    },
+    "strategyGenerator": {
+      "enabled": true,
+      "maxPages": 1000000,
+      "streaming": true
+    },
+    "promptEngine": {
+      "enabled": true,
+      "cacheEnabled": true,
+      "trizEnrichment": true
+    },
+    "evolutionEngine": {
+      "enabled": true,
+      "incremental": true,
+      "updateInterval": 3600000
+    },
+    "trizRepair": {
+      "enabled": true,
+      "proactive": true,
+      "autoFix": true
+    },
+    "libraryScanner": {
+      "enabled": true,
+      "checkInterval": 86400000,
+      "autoUpdate": false
+    },
+    "aiKnowledgeCore": {
+      "enabled": true,
+      "localAI": true,
+      "model": "phi3",
+      "trainingEnabled": true
+    },
+    "performanceLearner": {
+      "enabled": true,
+      "incremental": true,
+      "updateInterval": 3600000
+    }
+  },
+  
+  "dashboard": {
+    "port": 3000,
+    "uiPath": "/monster-ui",
+    "apiPath": "/api",
+    "websocket": true
+  },
+  
+  "paths": {
+    "knowledge": "./data/knowledge",
+    "strategies": "./data/strategies",
+    "performance": "./data/performance",
+    "feedback": "./data/feedback",
+    "output": "./public/seo-pages"
+  }
+}
+
