@@ -111,8 +111,7 @@ module.exports = async (req, res) => {
   console.log('[SEO-PAGE] Request received:', {
     url: req.url,
     query: req.query,
-    method: req.method,
-    headers: req.headers
+    method: req.method
   });
   
   // Извлекаем путь из query или URL
@@ -142,18 +141,12 @@ module.exports = async (req, res) => {
     }
   }
   
-  if (!pagePath || pagePath === '') {
-    pagePath = 'vin-check-0';
-  }
-  
-  console.log('[SEO-PAGE] Extracted path:', pagePath);
-  
-  // Для vin-check-0 всегда используем встроенный контент
-  if (pagePath === 'vin-check-0' || pagePath.startsWith('vin-check-0')) {
+  // Если путь не указан или пустой, или это vin-check-0 - возвращаем встроенный контент
+  if (!pagePath || pagePath === '' || pagePath === 'vin-check-0' || pagePath.startsWith('vin-check-0')) {
     try {
       const embeddedHTML = getEmbeddedPageContent();
       if (embeddedHTML) {
-        console.log('[SEO-PAGE] Serving embedded content for:', pagePath);
+        console.log('[SEO-PAGE] Serving embedded content for:', pagePath || 'default');
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
         res.setHeader('Cache-Control', 'public, max-age=3600');
         res.setHeader('X-Served-From', 'embedded');
@@ -165,6 +158,8 @@ module.exports = async (req, res) => {
       // Продолжаем к fallback
     }
   }
+  
+  console.log('[SEO-PAGE] Extracted path:', pagePath);
   
   // Fallback на поиск файла в файловой системе
   try {
