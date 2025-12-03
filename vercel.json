@@ -66,6 +66,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/seo-page.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -234,6 +238,10 @@
       {
         "source": "/seo-dashboard",
         "destination": "/seo-dashboard.html"
+      },
+      {
+        "source": "/seo-pages/:path*",
+        "destination": "/api/seo-page.js?path=:path*"
       }
   ]
 }
