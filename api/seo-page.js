@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
     
     // Если path не в query, пытаемся извлечь из URL
     if (!pagePath) {
-      // Из rewrite: /seo-pages/:path* → /api/seo-page.js?path=:path*
+      // Из rewrite: /seo-pages/(.*) → /api/seo-page.js?path=$1
       // path может быть в req.url как /api/seo-page?path=vin-check-0
       const urlMatch = req.url.match(/[?&]path=([^&]+)/);
       if (urlMatch) {
@@ -33,14 +33,17 @@ module.exports = async (req, res) => {
     // Декодируем URL если нужно
     if (pagePath) {
       pagePath = decodeURIComponent(pagePath);
+      // Убираем trailing slash
+      pagePath = pagePath.replace(/\/$/, '');
     }
     
+    // Если все еще нет path, используем vin-check-0 как default для тестирования
     if (!pagePath) {
-      console.error('[SEO-PAGE] No path provided:', { url: req.url, query: req.query });
-      return res.status(400).json({ error: 'Page path is required' });
+      console.warn('[SEO-PAGE] No path provided, using default vin-check-0:', { url: req.url, query: req.query });
+      pagePath = 'vin-check-0';
     }
     
-    console.log('[SEO-PAGE] Requested path:', pagePath);
+    console.log('[SEO-PAGE] Requested path:', pagePath, 'URL:', req.url, 'Query:', req.query);
     
     // Множественные пути поиска файла (как в seo-vin-page.js)
     const possiblePaths = [
@@ -126,17 +129,18 @@ module.exports = async (req, res) => {
  * Для vin-check-0 используем встроенный контент
  */
 function sendFallbackPage(res, pagePath) {
-  // Если это vin-check-0, используем встроенный контент
-  if (pagePath === 'vin-check-0' || pagePath.startsWith('vin-check-0')) {
-    const embeddedHTML = getEmbeddedPageContent();
-    if (embeddedHTML) {
-      res.setHeader('Content-Type', 'text/html; charset=utf-8');
-      res.setHeader('Cache-Control', 'public, max-age=3600');
-      res.setHeader('X-Served-From', 'embedded');
-      res.status(200).send(embeddedHTML);
-      return;
+    // Для vin-check-0 всегда используем встроенный контент
+    if (pagePath === 'vin-check-0' || pagePath.startsWith('vin-check-0') || !pagePath) {
+      const embeddedHTML = getEmbeddedPageContent();
+      if (embeddedHTML) {
+        console.log('[SEO-PAGE] Serving embedded content for:', pagePath);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Cache-Control', 'public, max-age=3600');
+        res.setHeader('X-Served-From', 'embedded');
+        res.status(200).send(embeddedHTML);
+        return;
+      }
     }
-  }
   
   const html = `<!DOCTYPE html>
 <html lang="en">
