@@ -4,13 +4,21 @@
   "description": "VIN Trusted website with Stripe integration",
   "main": "index.html",
   "scripts": {
-    "vercel-build": "node scripts/seo/seo-master-build.js"
+    "vercel-build": "echo 'SEO pages are generated locally on Mac via Monster 7.0 dashboard. Skipping build-time generation.'",
+    "seo-build": "node --expose-gc scripts/seo/seo-master-build.js",
+    "monster:start": "node monster-7.0/core/dashboard/server.js",
+    "monster:check": "node monster-7.0/scripts/check-system.js",
+    "monster:quick-start": "bash monster-7.0/scripts/quick-start.sh"
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.2.0",
-    "openai": "^4.104.0",
-    "stripe": "^14.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.22.1",
     "jsdom": "^24.0.0",
-    "pdf-parse": "^1.1.1"
+    "multer": "^2.0.2",
+    "openai": "^4.104.0",
+    "pdf-parse": "^1.1.1",
+    "socket.io": "^4.8.1",
+    "stripe": "^14.0.0"
   }
 }

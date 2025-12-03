@@ -240,8 +240,8 @@
         "destination": "/seo-dashboard.html"
       },
       {
-        "source": "/seo-pages/:path*",
-        "destination": "/api/seo-page.js?path=:path*"
+        "source": "/seo-pages/(.*)",
+        "destination": "/api/seo-page.js?path=$1"
       }
   ]
 }

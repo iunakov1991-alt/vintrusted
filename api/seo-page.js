@@ -98,51 +98,76 @@ const EMBEDDED_VIN_CHECK_0_HTML = `<!DOCTYPE html>
 </body>
 </html>`;
 
+/**
+ * Встроенный контент для vin-check-0 (временное решение)
+ */
+function getEmbeddedPageContent() {
+  // Используем встроенный HTML контент
+  return EMBEDDED_VIN_CHECK_0_HTML;
+}
+
 module.exports = async (req, res) => {
-  // Сразу возвращаем встроенный контент для vin-check-0 (временное решение)
-  // Это гарантирует, что страница будет работать независимо от файловой системы
-  try {
-    const embeddedHTML = getEmbeddedPageContent();
-    if (embeddedHTML) {
-      console.log('[SEO-PAGE] Serving embedded content');
-      res.setHeader('Content-Type', 'text/html; charset=utf-8');
-      res.setHeader('Cache-Control', 'public, max-age=3600');
-      res.setHeader('X-Served-From', 'embedded');
-      res.status(200).send(embeddedHTML);
-      return;
-    }
-  } catch (e) {
-    console.error('[SEO-PAGE] Error serving embedded content:', e.message);
-  }
+  // Логируем все входящие данные для отладки
+  console.log('[SEO-PAGE] Request received:', {
+    url: req.url,
+    query: req.query,
+    method: req.method,
+    headers: req.headers
+  });
   
-  // Fallback на старую логику
-  try {
-    // Извлекаем путь из query или URL
-    let pagePath = req.query.path;
-    
-    // Если path не в query, пытаемся извлечь из URL
-    if (!pagePath) {
-      // Из rewrite: /seo-pages/(.*) → /api/seo-page.js?path=$1
-      const urlMatch = req.url.match(/[?&]path=([^&]+)/);
-      if (urlMatch) {
-        pagePath = decodeURIComponent(urlMatch[1]);
-      } else {
-        const pathMatch = req.url.match(/\/seo-pages\/(.+)/);
-        if (pathMatch) {
-          pagePath = pathMatch[1].split('?')[0].split('/')[0];
-        }
+  // Извлекаем путь из query или URL
+  let pagePath = req.query.path;
+  
+  // Если path не в query, пытаемся извлечь из URL
+  if (!pagePath) {
+    // Из rewrite: /seo-pages/(.*) → /api/seo-page.js?path=$1
+    const urlMatch = req.url.match(/[?&]path=([^&]+)/);
+    if (urlMatch) {
+      pagePath = decodeURIComponent(urlMatch[1]);
+    } else {
+      // Пытаемся извлечь из самого URL
+      const pathMatch = req.url.match(/\/seo-pages\/(.+)/);
+      if (pathMatch) {
+        pagePath = pathMatch[1].split('?')[0];
       }
     }
-    
-    if (pagePath) {
+  }
+  
+  if (pagePath) {
+    try {
       pagePath = decodeURIComponent(pagePath).replace(/\/$/, '');
+    } catch (e) {
+      // Если decodeURIComponent не работает, просто убираем trailing slash
+      pagePath = pagePath.replace(/\/$/, '');
     }
-    
-    if (!pagePath) {
-      pagePath = 'vin-check-0';
+  }
+  
+  if (!pagePath || pagePath === '') {
+    pagePath = 'vin-check-0';
+  }
+  
+  console.log('[SEO-PAGE] Extracted path:', pagePath);
+  
+  // Для vin-check-0 всегда используем встроенный контент
+  if (pagePath === 'vin-check-0' || pagePath.startsWith('vin-check-0')) {
+    try {
+      const embeddedHTML = getEmbeddedPageContent();
+      if (embeddedHTML) {
+        console.log('[SEO-PAGE] Serving embedded content for:', pagePath);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Cache-Control', 'public, max-age=3600');
+        res.setHeader('X-Served-From', 'embedded');
+        res.status(200).send(embeddedHTML);
+        return;
+      }
+    } catch (e) {
+      console.error('[SEO-PAGE] Error serving embedded content:', e.message);
+      // Продолжаем к fallback
     }
-    
-    console.log('[SEO-PAGE] Requested path:', pagePath, 'URL:', req.url, 'Query:', req.query);
+  }
+  
+  // Fallback на поиск файла в файловой системе
+  try {
     
     // Множественные пути поиска файла (как в seo-vin-page.js)
     const possiblePaths = [
@@ -258,13 +283,5 @@ function sendFallbackPage(res, pagePath) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'no-cache');
   res.status(200).send(html);
-}
-
-/**
- * Встроенный контент для vin-check-0 (временное решение)
- */
-function getEmbeddedPageContent() {
-  // Используем встроенный HTML контент
-  return EMBEDDED_VIN_CHECK_0_HTML;
 }
 
