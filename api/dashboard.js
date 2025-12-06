@@ -116,8 +116,17 @@ module.exports = async (req, res) => {
     return res.status(200).end();
   }
   
-  const { path: urlPath } = req.query;
+  // Получаем путь из query параметра или из URL
+  let urlPath = req.query.path || '';
+  // Если путь не передан, пытаемся извлечь из URL
+  if (!urlPath && req.url) {
+    const urlMatch = req.url.match(/\/dashboard\/(.*)$/);
+    if (urlMatch) urlPath = urlMatch[1];
+  }
+  
   const pathParts = urlPath ? urlPath.split('/').filter(Boolean) : [];
+  
+  console.log('[Dashboard API] Request:', req.method, req.url, 'path:', urlPath, 'parts:', pathParts);
   
   try {
     // Главная страница дашборда
@@ -135,8 +144,12 @@ module.exports = async (req, res) => {
     }
     
     // API endpoints
-    if (pathParts[0] === 'api') {
-      const endpoint = pathParts[1];
+    if (pathParts[0] === 'api' || urlPath.startsWith('api/')) {
+      // Нормализуем путь - убираем 'api' если есть
+      const apiParts = urlPath.startsWith('api/') 
+        ? urlPath.replace('api/', '').split('/').filter(Boolean)
+        : pathParts.slice(1);
+      const endpoint = apiParts[0];
       
       // GET /api/status
       if (endpoint === 'status' && req.method === 'GET') {
@@ -185,7 +198,7 @@ module.exports = async (req, res) => {
       }
       
       // GET /api/strategy/tree
-      if (endpoint === 'strategy' && pathParts[2] === 'tree' && req.method === 'GET') {
+      if ((endpoint === 'strategy' && pathParts[2] === 'tree') || pathParts.join('/') === 'api/strategy/tree' && req.method === 'GET') {
         try {
           const tree = buildStrategyTree();
           return res.json({
