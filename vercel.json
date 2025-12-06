@@ -70,6 +70,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/semantic-page.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -227,21 +231,40 @@
       "source": "/seo/sitemaps/:file*",
       "destination": "/api/seo-sitemap.js?file=:file*"
     },
-      {
-        "source": "/seo/images/clusters/:file*",
-        "destination": "/api/seo-image.js"
-      },
-      {
-        "source": "/api/seo-dashboard",
-        "destination": "/api/seo-dashboard.js"
-      },
-      {
-        "source": "/seo-dashboard",
-        "destination": "/seo-dashboard.html"
-      },
-      {
-        "source": "/seo-pages/(.*)",
-        "destination": "/api/seo-page.js?path=$1"
-      }
+    {
+      "source": "/seo/images/clusters/:file*",
+      "destination": "/api/seo-image.js"
+    },
+    {
+      "source": "/api/seo-dashboard",
+      "destination": "/api/seo-dashboard.js"
+    },
+    {
+      "source": "/seo-dashboard",
+      "destination": "/seo-dashboard.html"
+    },
+    {
+      "source": "/seo-pages/(.*)",
+      "destination": "/api/seo-page.js?path=$1"
+    },
+    {
+      "source": "/en/(.*)",
+      "destination": "/api/semantic-page.js?lang=en&path=$1"
+    },
+    {
+      "source": "/es/(.*)",
+      "destination": "/api/semantic-page.js?lang=es&path=$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/public/semantic-pages/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    }
   ]
 }
