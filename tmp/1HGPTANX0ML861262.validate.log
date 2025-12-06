@@ -1,0 +1,80 @@
+[SEO VALIDATE-PAGE] 2025-12-04T11:26:03.857Z - Validating page for VIN: 1HGPTANX0ML861262
+[SEO RULE-ENGINE] 2025-12-04T11:26:03.865Z - Loaded 18 rules from rules.json
+PAGE_INVALID 1HGPTANX0ML861262
+{
+  "vin": "1HGPTANX0ML861262",
+  "valid": false,
+  "reasons": [
+    "H2 \"## Market Value\" has insufficient content (less than 2 paragraphs)",
+    "H2 \"## Check Your VIN Now\" has insufficient content (less than 2 paragraphs)",
+    "VIN Decoder section lacks position table",
+    "Critical block failed: hero",
+    "Critical block failed: state_specific",
+    "Critical block failed: accident_intelligence",
+    "Critical block failed: buyer_guide",
+    "Critical block failed: faq"
+  ],
+  "warnings": [
+    "H2 may lack SEO keywords: \"Key Facts\"",
+    "H2 may lack SEO keywords: \"Nebraska-Specific Insights\"",
+    "H2 may lack SEO keywords: \"Frequently Asked Questions\"",
+    "Recommended block \"Data Layers\" may be missing or not clearly identified",
+    "VIN Decoder may not cover all 17 positions (found 1 mentions)",
+    "CTA does not follow canonical format: \"Check this {YEAR} {MAKE} {MODEL} VIN now\"",
+    "Article may have insufficient tables (found 0, recommended 3+)",
+    "Internal links count (0) should be 4-6",
+    "Deep Explanation section word count (206) should be 400-700 words",
+    "CTA section word count (78) should be 55-75 words",
+    "Total article word count (3213) should be 2000-2500 words",
+    "Section \"Key Facts\" is too short (148 words, minimum 200)",
+    "Section \"NMVTIS\" is too short (151 words, minimum 200)",
+    "Section \"Fraud Patterns\" is too short (148 words, minimum 200)",
+    "Section \"Market Value\" is too short (154 words, minimum 200)",
+    "Section \"Buyer Guide\" is too short (160 words, minimum 200)",
+    "Section \"Internal Links\" is too short (132 words, minimum 200)",
+    "Section \"CTA\" is too short (78 words, minimum 200)",
+    "Repeated concept detected (3 times): \"nebraska operates title-holding system, meaning...\" - consider merging or removing duplicates"
+  ],
+  "word_count": 3213,
+  "validated_at": "2025-12-04T11:26:03.907Z"
+}
+[SEO VALIDATE-PAGE] 2025-12-04T11:32:45.272Z - Validating page for VIN: 1HGPTANX0ML861262
+[SEO RULE-ENGINE] 2025-12-04T11:32:45.280Z - Loaded 18 rules from rules.json
+PAGE_INVALID 1HGPTANX0ML861262
+{
+  "vin": "1HGPTANX0ML861262",
+  "valid": false,
+  "reasons": [
+    "H2 \"## Market Value\" has insufficient content (less than 2 paragraphs)",
+    "H2 \"## Related VIN Check Guides\" has insufficient content (less than 2 paragraphs)",
+    "H2 \"## Check Your VIN Now\" has insufficient content (less than 2 paragraphs)",
+    "VIN Decoder section lacks position table",
+    "Missing required sections: Key Facts",
+    "Critical block failed: hero",
+    "Critical block failed: accident_intelligence",
+    "Critical block failed: state_specific",
+    "Critical block failed: buyer_guide",
+    "Critical block failed: faq"
+  ],
+  "warnings": [
+    "H2 may lack SEO keywords: \"Nebraska-Specific Insights\"",
+    "H2 may lack SEO keywords: \"Frequently Asked Questions\"",
+    "Recommended block \"Executive Summary\" may be missing or not clearly identified",
+    "Recommended block \"Data Layers\" may be missing or not clearly identified",
+    "VIN Decoder may not cover all 17 positions (found 0 mentions)",
+    "CTA does not follow canonical format: \"Check this {YEAR} {MAKE} {MODEL} VIN now\"",
+    "Article may have insufficient tables (found 0, recommended 3+)",
+    "Internal links count (0) should be 4-6",
+    "Deep Explanation section word count (391) should be 400-700 words",
+    "CTA section word count (88) should be 55-75 words",
+    "Total article word count (3304) should be 2000-2500 words",
+    "Section \"Market Value\" is too short (144 words, minimum 200)",
+    "Section \"Insurance Risk\" is too short (190 words, minimum 200)",
+    "Section \"Internal Links\" is too short (85 words, minimum 200)",
+    "Section \"CTA\" is too short (88 words, minimum 200)"
+  ],
+  "word_count": 3304,
+  "validated_at": "2025-12-04T11:32:45.323Z"
+}
+PAGE_OK {"severity":"MAJOR","fatal":[],"major":["Total word count too high: 38766"],"minor":[],"stats":{"words":38766,"vinCount":504},"vin":"1HGPTANX0ML861262"}
+SEVERITY:MAJOR;WORDCOUNT:45934;FATAL=0;MAJOR=1;MINOR=0;WEAK=

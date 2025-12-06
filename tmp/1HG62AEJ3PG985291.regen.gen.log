@@ -1,0 +1,8 @@
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:44:49.490Z - ERROR: Block accident_intelligence failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 190 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:44:49.491Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:01.940Z - ERROR: Article validation failed: 5 errors, 19 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:01.941Z - ERROR:   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:01.941Z - ERROR:   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:01.941Z - ERROR:   ERROR: Required block "State-Specific" is missing
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:01.941Z - ERROR:   ERROR: Incomplete sentence ending detected: \bThe\.\s*$ (1 occurrences)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:01.941Z - ERROR:   ERROR: Incomplete sentence ending detected: \bthe\.\s*$ (1 occurrences)

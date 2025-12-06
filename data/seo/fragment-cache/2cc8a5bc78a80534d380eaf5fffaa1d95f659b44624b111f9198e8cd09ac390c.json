@@ -1,0 +1,100 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Acura",
+    "model": "Integra Type S",
+    "year": "2017",
+    "stateSlug": "new-hampshire",
+    "stateLabel": "New Hampshire",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "19UPKNJS7HH429908",
+    "variationContext": {
+      "structuralVariant": "quick_verification",
+      "styleVariant": {
+        "name": "Market Economics",
+        "tone": "insurance, value, risk, depreciation",
+        "description": "Экономико-рыночный стиль с акцентом на стоимость и риски",
+        "characteristics": [
+          "Emphasizes risk assessment and actuarial factors",
+          "Uses insurance terminology and risk metrics",
+          "Focuses on loss history and premium implications",
+          "Market value analysis",
+          "Depreciation factors"
+        ],
+        "openingPhrases": [
+          "From an insurance risk perspective",
+          "Actuarial analysis indicates",
+          "Risk assessment reveals",
+          "Market valuation suggests",
+          "Economic factors demonstrate"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "19UPKNJS7HH429908",
+        "make": "Acura",
+        "model": "Integra Type S",
+        "year": 2017,
+        "state": "new-hampshire",
+        "generated_at": "2025-12-04T09:12:26.902Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "19U"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "New-hampshire DMV"
+          ],
+          "main_statutes": [
+            "New-hampshire Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: What specific data sources are used for a VIN check on a 2017 Acura Integra Type S in New Hampshire?**\nAnswer: A commercial VIN report aggregates data from standard state and federal data sources, including the National Motor Vehicle Title Information System (NMVTIS), which is mandated to include total loss and brand history from participating states, insurance carriers, and salvage yards.\n\n**Q2: Does a clean New Hampshire title guarantee this vehicle has no hidden damage history?**\nAnswer: No, a clean title from New Hampshire's title-holding system does not guarantee an absence of hidden damage, as unreported accidents or title washing from other jurisdictions can occur without being reflected on the current state title document.\n\n**Q3: What are the common title brands I might encounter for a vehicle registered in New Hampshire?**\nAnswer: The primary title brands recognized under the New Hampshire Vehicle Code include Salvage, Rebuilt, Flood, and Junk, each indicating a specific type of significant prior damage or condition that must be disclosed.\n\n**Q4: How can I verify there are no active liens on this Acura before purchase?**\nAnswer: You must conduct a lienholder search directly with the New Hampshire DMV, as a lien is a financial encumbrance that remains with the vehicle and prevents clear title transfer until the debt is satisfied and released.\n\n**Q5: Can environmental damage history be completely absent from a standard VIN report?**\nAnswer: Yes, regional environmental risks like flood damage may not appear if the incident was not officially reported to insurance or state agencies, necessitating a thorough physical inspection for corrosion, silt, or electrical malfunctions.\n\n**Q6: What is the role of the WMI '19U' in this VIN's structure?**\nAnswer: The WMI '19U' represents the World Manufacturer Identifier, specifically identifying the vehicle's manufacturer and country of origin, which is the first critical segment for authenticating the VIN's legitimacy.\n\n**Q7: How does New Hampshire's state-required vehicle inspection impact a vehicle's history?**\nAnswer: While the inspection ensures current roadworthiness for registration, it does not create a permanent historical record of past conditions or damage, so a passed inspection does not certify a clean vehicle history.\n\n**Q8: Is it possible for odometer fraud to go undetected in a VIN check?**\nAnswer: Yes, odometer rollback is a form of fraud that may not be captured in a report if previous readings were not reported to digital odometer databases, requiring verification against physical wear patterns and service records.\n\n**Q9: What is title washing and how does it affect risk assessment for this vehicle?**\nAnswer: Title.",
+  "timestamp": "2025-12-04T09:13:27.774Z",
+  "wordCount": 418
+}

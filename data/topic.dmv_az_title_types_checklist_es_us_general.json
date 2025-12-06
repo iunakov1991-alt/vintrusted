@@ -1,0 +1,22 @@
+{
+  "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+  "zone": "dmv_titles",
+  "type": "dmv_state_guide",
+  "language": "es",
+  "audience_segment": "us_mexican",
+  "dimensions": {
+    "state": "AZ",
+    "dmv_topic": "title_types",
+    "format_variant": "checklist",
+    "audience": "mx_us"
+  },
+  "must_include_terms": [
+    "California DMV",
+    "transfer",
+    "salvage",
+    "rebuilt",
+    "título",
+    "VIN"
+  ],
+  "title": "Guía completa de tipos de título del DMV de AZ"
+}

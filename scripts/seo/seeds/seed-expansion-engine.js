@@ -161,15 +161,12 @@ class SeedExpansionEngine {
    */
   analyzeResourceLimits() {
     const limits = {
-      groqDailyLimit: 200, // TPD лимит позволяет ~200 страниц
-      groqUsedToday: 0, // Будет обновляться из метрик
       deepseekAvailable: true,
       cacheHitRate: 0.5, // Предполагаем 50% кеша
       maxBuildTime: 240000 // 4 минуты на Vercel
     };
 
-    // TODO: Загружать реальные метрики использования Groq
-    // Пока используем консервативные значения
+    // Groq отключен, используем только DeepSeek
 
     return limits;
   }
@@ -190,7 +187,6 @@ BUILD HISTORY:
 - Trend: ${context.buildHistory.trend}
 
 RESOURCE LIMITS:
-- Groq daily limit: ${context.resourceLimits.groqDailyLimit} pages
 - Cache hit rate: ${(context.resourceLimits.cacheHitRate * 100).toFixed(0)}%
 
 YOUR TASK:
@@ -201,7 +197,7 @@ Analyze the gaps and recommend:
 
 Consider:
 - Quality over quantity
-- Resource constraints (Groq limits)
+- Resource constraints (DeepSeek API limits)
 - Learning from previous builds
 - Maximizing traffic potential
 
@@ -256,8 +252,7 @@ Output JSON with: recommended_volume (number), reasoning (string), priority_orde
       : 300; // Первый билд: консервативный объем
 
     // 3. Учет ограничений ресурсов
-    const maxVolumeFromResources = resourceLimits.groqDailyLimit + 
-      (resourceLimits.groqDailyLimit * 4); // Groq + DeepSeek (4x)
+    const maxVolumeFromResources = 1000; // DeepSeek API limits (Groq отключен)
 
     // 4. AI рекомендация
     const aiRecommendedVolume = aiAnalysis.recommended_volume;
@@ -306,18 +301,13 @@ Output JSON with: recommended_volume (number), reasoning (string), priority_orde
    */
   determineBuildStrategy(recommendedVolume, resourceLimits) {
     const strategy = {
-      groq_pages: 0,
       deepseek_pages: 0,
       cached_pages: 0,
       priority_order: []
     };
 
-    // Groq для топ-страниц (максимум 150 для безопасности)
-    const groqAvailable = resourceLimits.groqDailyLimit - resourceLimits.groqUsedToday;
-    strategy.groq_pages = Math.min(150, groqAvailable, Math.floor(recommendedVolume * 0.2));
-
-    // Остальное через DeepSeek
-    strategy.deepseek_pages = recommendedVolume - strategy.groq_pages;
+    // Все страницы через DeepSeek (Groq отключен)
+    strategy.deepseek_pages = recommendedVolume;
 
     // Учитываем кеш
     const cacheHitRate = resourceLimits.cacheHitRate;
@@ -339,7 +329,7 @@ Output JSON with: recommended_volume (number), reasoning (string), priority_orde
       expanded_seed_list: this.analyzer.loadSeeds(),
       reasoning: 'Fallback: using default seeds and conservative volume',
       build_strategy: {
-        groq_pages: 150,
+        // groq_pages удалено (Groq отключен)
         deepseek_pages: 150,
         cached_pages: 0,
         priority_order: ['missing_coverage']

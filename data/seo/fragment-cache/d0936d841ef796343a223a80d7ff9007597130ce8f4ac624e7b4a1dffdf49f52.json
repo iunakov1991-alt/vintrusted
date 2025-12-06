@@ -1,0 +1,101 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Smart",
+    "model": "EQ fortwo",
+    "year": "2023",
+    "stateSlug": "missouri",
+    "stateLabel": "Missouri",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HG62AEJ3PG985291",
+    "stage": "deep",
+    "variationContext": {
+      "structuralVariant": "state_regulations",
+      "styleVariant": {
+        "name": "Legal Academic",
+        "tone": "formal, statute-referenced, analytical",
+        "description": "Формальный академический стиль с ссылками на законодательство",
+        "characteristics": [
+          "Emphasizes legal compliance and regulatory frameworks",
+          "Uses formal terminology and statutory references",
+          "Focuses on documentation and verification processes",
+          "Academic citation style",
+          "Precise legal terminology"
+        ],
+        "openingPhrases": [
+          "A comprehensive legal and technical audit",
+          "From a regulatory compliance perspective",
+          "Under state and federal vehicle regulations",
+          "Per statutory requirements",
+          "In accordance with regulatory frameworks"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "1HG62AEJ3PG985291",
+        "make": "Smart",
+        "model": "EQ fortwo",
+        "year": 2023,
+        "state": "missouri",
+        "generated_at": "2025-12-04T10:40:18.733Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Missouri DMV"
+          ],
+          "main_statutes": [
+            "Missouri Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Missouri Regulatory Framework for Vehicle History Verification\n\nA VIN check for a 2023 Smart EQ fortwo in Missouri operates within a distinct legal and administrative ecosystem defined by state statute and agency protocol. The process is governed by the Missouri Vehicle Code, which mandates specific documentation and branding standards for vehicle titles. Missouri employs a title-holding system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most official transactions. The Missouri DMV serves as the central authority for title issuance, brand application, and record maintenance. This regulatory environment creates specific data points and verification requirements that are critical for an accurate vehicle history assessment.\n\nKey technical and legal considerations under Missouri law include:\n*   **Title Brand Authority:** The Missouri DMV can apply formal title brands, including Salvage, Rebuilt, Flood, or Junk, based on specific damage or loss criteria. These brands are permanent notations that follow the vehicle within the state's system.\n*   **Inspection Mandate:** Missouri requires a state-required vehicle inspection, which can serve as a procedural checkpoint where discrepancies in vehicle identification or condition are formally documented.\n*   **Data Sourcing:** A comprehensive report synthesizes information from the Missouri DMV and standard state and federal data sources to present a unified history.\n*   **Fraud Mitigation:** The 17-character VIN, beginning with a WMI candidate like \"1HG,\" provides a fixed identifier. Missouri's adherence to a single title-holding document reduces certain types of title fraud but necessitates rigorous verification of the physical title's authenticity against electronic records.\n\nThe convergence of these regulations means a Missouri-specific VIN check must cross-reference the immutable VIN data against the state's branded title records and inspection history. This process verifies legal standing and reveals any state-mandated designations affecting value and safety. The definitive legal status of a vehicle within Missouri is ultimately determined by its title history as maintained by the state agency.",
+  "timestamp": "2025-12-04T10:41:17.109Z",
+  "wordCount": 314
+}

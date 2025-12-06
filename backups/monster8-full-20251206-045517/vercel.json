@@ -1,0 +1,270 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/checkout.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/create-payment-intent.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/create-setup-intent.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/stripe-webhook.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/checkout-trial-then-two-charges.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/get-clearvin-report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/send-clearvin-report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/get-vin-from-setup-intent.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/get-checkout-session.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/send-receipt-and-report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/health.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-vin-page.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-sitemap.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-image.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-dashboard.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-page.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/semantic-page.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.jpg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.png",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.svg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.webp",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "css/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/seo/images/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "js/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.xml",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.txt",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/",
+      "destination": "/api/seo-vin-page.js?vin=:vin&state=:state"
+    },
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
+      "destination": "/api/seo-vin-page.js?vin=:vin&state=:state"
+    },
+    {
+      "source": "/api/checkout",
+      "destination": "/api/checkout.js"
+    },
+    {
+      "source": "/api/create-payment-intent",
+      "destination": "/api/create-payment-intent.js"
+    },
+    {
+      "source": "/api/create-setup-intent",
+      "destination": "/api/create-setup-intent.js"
+    },
+    {
+      "source": "/api/stripe-config",
+      "destination": "/api/stripe-webhook.js"
+    },
+    {
+      "source": "/api/stripe-webhook",
+      "destination": "/api/stripe-webhook.js"
+    },
+    {
+      "source": "/api/checkout-trial-then-two-charges",
+      "destination": "/api/checkout-trial-then-two-charges.js"
+    },
+    {
+      "source": "/api/get-clearvin-report",
+      "destination": "/api/get-clearvin-report.js"
+    },
+    {
+      "source": "/api/send-clearvin-report",
+      "destination": "/api/send-clearvin-report.js"
+    },
+    {
+      "source": "/api/get-vin-from-setup-intent",
+      "destination": "/api/get-vin-from-setup-intent.js"
+    },
+    {
+      "source": "/api/get-checkout-session",
+      "destination": "/api/get-checkout-session.js"
+    },
+    {
+      "source": "/api/send-receipt-and-report",
+      "destination": "/api/send-receipt-and-report.js"
+    },
+    {
+      "source": "/api/report",
+      "destination": "/api/report.js"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/health.js"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about-us.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/accident-history",
+      "destination": "/accident-history.html"
+    },
+    {
+      "source": "/title-records",
+      "destination": "/title-records.html"
+    },
+    {
+      "source": "/recall-information",
+      "destination": "/recall-information.html"
+    },
+    {
+      "source": "/sitemaps",
+      "destination": "/sitemaps.html"
+    },
+    {
+      "source": "/checkout",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/seo/sitemaps/:file*",
+      "destination": "/api/seo-sitemap.js?file=:file*"
+    },
+    {
+      "source": "/seo/images/clusters/:file*",
+      "destination": "/api/seo-image.js"
+    },
+    {
+      "source": "/api/seo-dashboard",
+      "destination": "/api/seo-dashboard.js"
+    },
+    {
+      "source": "/seo-dashboard",
+      "destination": "/seo-dashboard.html"
+    },
+    {
+      "source": "/seo-pages/(.*)",
+      "destination": "/api/seo-page.js?path=$1"
+    },
+    {
+      "source": "/en/(.*)",
+      "destination": "/api/semantic-page.js?lang=en&path=$1"
+    },
+    {
+      "source": "/es/(.*)",
+      "destination": "/api/semantic-page.js?lang=es&path=$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/public/semantic-pages/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    }
+  ]
+}

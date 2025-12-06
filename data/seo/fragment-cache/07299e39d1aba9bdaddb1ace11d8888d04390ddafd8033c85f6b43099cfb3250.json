@@ -1,0 +1,100 @@
+{
+  "fragmentType": "buyer_guide",
+  "context": {
+    "make": "Maserati",
+    "model": "Quattroporte",
+    "year": "2022",
+    "stateSlug": "virginia",
+    "stateLabel": "Virginia",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGYUN7K0NA726299",
+    "variationContext": {
+      "structuralVariant": "risk_evaluation",
+      "styleVariant": {
+        "name": "Consumer Practical",
+        "tone": "buying-guide, simple, clear instructions",
+        "description": "Практичный потребительский стиль с простыми инструкциями",
+        "characteristics": [
+          "Emphasizes practical advice and actionable steps",
+          "Uses accessible language and real-world scenarios",
+          "Focuses on buyer protection and decision-making",
+          "Step-by-step guidance",
+          "Clear, simple language"
+        ],
+        "openingPhrases": [
+          "When purchasing a used vehicle",
+          "For buyers seeking transparency",
+          "Practical considerations include",
+          "To protect yourself when buying",
+          "Here's what you need to know"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": {
+        "vin": "1HGYUN7K0NA726299",
+        "make": "Maserati",
+        "model": "Quattroporte",
+        "year": 2022,
+        "state": "virginia",
+        "generated_at": "2025-12-04T09:32:40.623Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Virginia DMV"
+          ],
+          "main_statutes": [
+            "Virginia Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Essential Pre-Purchase Checklist for a 2022 Maserati Quattroporte in Virginia\n\nBefore finalizing your purchase of a 2022 Maserati Quattroporte in Virginia, a systematic VIN check is your primary tool for uncovering critical history. This checklist provides a structured, technical approach to verifying the vehicle's status and protecting your investment. Follow each step in order for a comprehensive evaluation.\n\n**Step 1: Verify Core VIN Authenticity**\n*   Confirm the VIN `1HGYUN7K0NA726299` is exactly 17 characters long, as mandated by federal standards.\n*   Validate the World Manufacturer Identifier (WMI). The first three characters, `1HG`, identify the vehicle's origin and manufacturer.\n*   Check the VIN's check digit (position 9) and model year code (position 10) for internal consistency, which helps detect simple transcription errors or tampering.\n\n**Step 2: Scrutinize the Title History with the Virginia DMV**\n*   Obtain the vehicle's title history directly from the **Virginia DMV**, as Virginia is a title-holding state.\n*   Search for any official title brands applied under the **Virginia Vehicle Code**, including **Salvage.",
+  "timestamp": "2025-12-04T09:33:23.284Z",
+  "wordCount": 165
+}

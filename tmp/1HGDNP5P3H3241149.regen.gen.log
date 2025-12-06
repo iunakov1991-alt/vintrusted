@@ -1,0 +1,8 @@
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:52:55.422Z - ERROR: Block recalls_tsbs failed validation after 3 attempts: INVALID_PUNCTUATION_PATTERN: Dirty punctuation pattern detected
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:52:55.422Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:52:55.422Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:52:55.537Z - ERROR: Article validation failed: 4 errors, 13 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:52:55.537Z - ERROR:   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:52:55.537Z - ERROR:   ERROR: Required block "key_facts" is missing or too short
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:52:55.537Z - ERROR:   ERROR: Unbalanced parentheses in VIN Decoder section
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:52:55.537Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation

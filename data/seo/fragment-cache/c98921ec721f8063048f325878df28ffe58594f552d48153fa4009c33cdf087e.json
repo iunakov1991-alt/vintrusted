@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Maserati",
+    "model": "Quattroporte",
+    "year": "2022",
+    "stateSlug": "virginia",
+    "stateLabel": "Virginia",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGYUN7K0NA726299",
+    "variationContext": {
+      "structuralVariant": "risk_evaluation",
+      "styleVariant": {
+        "name": "Consumer Practical",
+        "tone": "buying-guide, simple, clear instructions",
+        "description": "Практичный потребительский стиль с простыми инструкциями",
+        "characteristics": [
+          "Emphasizes practical advice and actionable steps",
+          "Uses accessible language and real-world scenarios",
+          "Focuses on buyer protection and decision-making",
+          "Step-by-step guidance",
+          "Clear, simple language"
+        ],
+        "openingPhrases": [
+          "When purchasing a used vehicle",
+          "For buyers seeking transparency",
+          "Practical considerations include",
+          "To protect yourself when buying",
+          "Here's what you need to know"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": {
+        "vin": "1HGYUN7K0NA726299",
+        "make": "Maserati",
+        "model": "Quattroporte",
+        "year": 2022,
+        "state": "virginia",
+        "generated_at": "2025-12-04T09:32:40.623Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Virginia DMV"
+          ],
+          "main_statutes": [
+            "Virginia Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Virginia-Specific VIN Check Guide for a 2022 Maserati Quattroporte\n\nWhen verifying a 2022 Maserati Quattroporte in Virginia, understanding the state's specific legal and procedural framework is essential for a thorough vehicle history assessment. Virginia operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for registration and transfer. This system places significant importance on the title's condition and any brands it may carry. For a vehicle like the Quattroporte, a thorough check must cross-reference the VIN `1HGYUN7K0NA726299` against Virginia's official records to confirm its legal standing and uncover any hidden history that could affect its value or safety.\n\nKey state-specific factors to scrutinize include:\n\n*   **Title Brand Verification:** Always confirm the legal title record directly with the **Virginia DMV**. Virginia recognizes specific title brands, including **Salvage**, **Rebuilt**, **Flood**, and **Junk**. A brand is a permanent legal designation indicating severe past damage or a specific condition, and it remains with the vehicle even after repairs.\n*   **Mandatory Vehicle Inspection:** Virginia requires a **state-required vehicle inspection** for registration. While this inspection checks safety components, it is not a substitute for a comprehensive history report and does not guarantee the absence of prior structural or flood damage.\n*   **Legal and Environmental Risks:** Reviewing history under the **Virginia Vehicle Code** helps identify discrepancies. Be aware of **regional environmental risks**, such as potential flood exposure from coastal storms or inland flooding, which may not be immediately apparent but can cause persistent electrical and corrosion issues in luxury vehicles.\n\nA diligent VIN check for this vehicle must synthesize data from the title history, inspection records, and standard state and federal data sources.",
+  "timestamp": "2025-12-04T09:33:27.249Z",
+  "wordCount": 278
+}

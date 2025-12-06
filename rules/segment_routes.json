@@ -1,0 +1,15 @@
+{
+  "by_make": {
+    "Honda": ["fact_lock", "syntax", "semantic", "state_spec", "structure", "style"],
+    "Toyota": ["fact_lock", "syntax", "semantic", "state_spec", "structure"],
+    "Ford": ["fact_lock", "syntax", "semantic", "state_spec", "structure"]
+  },
+  "by_state": {
+    "Texas": ["state_spec", "syntax", "semantic", "structure"],
+    "California": ["state_spec", "syntax", "semantic", "structure", "seo"]
+  },
+  "default": ["syntax", "semantic", "structure"]
+}
+
+
+

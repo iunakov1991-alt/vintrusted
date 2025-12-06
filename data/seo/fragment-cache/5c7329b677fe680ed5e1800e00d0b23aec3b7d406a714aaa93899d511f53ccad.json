@@ -1,0 +1,135 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Ford",
+    "model": "F-150",
+    "year": "2020",
+    "stateSlug": "florida",
+    "stateLabel": "Florida",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1FTFW1ET1LFA12345",
+    "variationContext": {
+      "structuralVariant": "insurance_focused",
+      "styleVariant": {
+        "name": "Investigative",
+        "tone": "fraud-first, pattern detection, red flags",
+        "description": "Расследовательский стиль с фокусом на обнаружение мошенничества",
+        "characteristics": [
+          "Emphasizes fraud detection and pattern recognition",
+          "Uses investigative terminology and red flag indicators",
+          "Focuses on uncovering hidden issues",
+          "Pattern detection methodology",
+          "Risk identification"
+        ],
+        "openingPhrases": [
+          "Investigative analysis reveals",
+          "Red flags to watch for include",
+          "Fraud detection patterns indicate",
+          "Warning signs suggest",
+          "Investigation uncovers"
+        ]
+      },
+      "stateBoost": {
+        "uniqueRules": [
+          "Florida Statutes Chapter 319",
+          "Electronic lien system requirements",
+          "Rebuilt vehicle regulations",
+          "Salvage title regulations",
+          "Flood damage disclosure laws"
+        ],
+        "specificPractices": [
+          "Flood damage inspection",
+          "Hurricane-related damage tracking",
+          "Electronic title system",
+          "Rebuilt vehicle verification",
+          "Coastal corrosion assessment"
+        ],
+        "fraudPatterns": [
+          "Hurricane flood damage concealment",
+          "Electronic lien fraud",
+          "Rebuilt vehicle misrepresentation",
+          "Title washing from other states",
+          "Odometer fraud on rental fleet vehicles"
+        ],
+        "risks": [
+          "hurricane flood risk",
+          "coastal salt air corrosion",
+          "high humidity damage",
+          "hurricane-related damage tracking",
+          "tropical storm exposure",
+          "flood zone vehicle storage"
+        ],
+        "selectedRisks": [
+          "hurricane-related damage tracking",
+          "tropical storm exposure",
+          "flood zone vehicle storage"
+        ]
+      },
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "1FTFW1ET1LFA12345",
+        "make": "Ford",
+        "model": "F-150",
+        "year": 2020,
+        "state": "florida",
+        "generated_at": "2025-12-04T08:32:35.581Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1FT"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Florida DMV"
+          ],
+          "main_statutes": [
+            "Florida Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Florida-Specific VIN Analysis for a 2020 Ford F-150\n\nA VIN check for a 2020 Ford F-150 registered in Florida requires specialized analysis of the state's unique regulatory framework and environmental risks. The Florida DMV administers a title-holding system governed by the Florida Vehicle Code, which mandates specific disclosures and creates distinct patterns in a vehicle's recorded history. Investigators must cross-reference standard state and federal data sources against known fraud indicators prevalent in the region, with particular attention to title brands like Salvage, Rebuilt, Flood, and Junk.\n\nKey technical and legal considerations for a Florida-registered vehicle include:\n\n*   **Title System Verification:** Florida's electronic title-holding system requires lienholder information to be accurately recorded. A discrepancy between the physical document and the electronic record held by the Florida DMV is a primary red flag for title washing or fraud.\n*   **Environmental Risk Assessment:** The report must scrutinize history for indications of exposure to regional environmental risks, including tropical storm and hurricane-related damage. Vehicles stored in coastal flood zones require enhanced scrutiny for corrosion and latent electrical faults not immediately apparent.\n*   **Brand Disclosure Compliance:** State law enforces strict branding for severely damaged vehicles. A title brand of \"Rebuilt\" indicates a salvage vehicle that has passed a state-required vehicle inspection; however, the depth of this inspection varies, and a VIN check must trace the vehicle's status transitions to ensure the brand was applied correctly and never improperly removed.\n*   **Pattern Recognition for Fraud:** A common illicit pattern involves vehicles with flood damage in Florida being moved interstate in an attempt to obscure the \"Flood\" brand. A thorough investigation will trace the vehicle's registration timeline and look for gaps or rapid transfers following major storm events.\n\nTherefore, a comprehensive VIN analysis for this vehicle is not merely a data summary but a forensic audit.",
+  "timestamp": "2025-12-04T08:33:54.084Z",
+  "wordCount": 300
+}

@@ -38,10 +38,8 @@ scripts/seo/
 - Вариативный порядок блоков
 - Weighted distribution на основе метрик
 
-### 2. Мультипровайдерная AI
-- Groq (primary)
-- DeepSeek (fallback)
-- OpenAI (опционально)
+### 2. AI генерация контента
+- DeepSeek API (единственный провайдер)
 - Кеширование для производительности
 
 ### 3. Learning-to-Rank
@@ -75,8 +73,7 @@ scripts/seo/
 
 ### Переменные окружения
 - `SEO_ENABLE_AI=1` - включить AI
-- `GROQ_API_KEY=...` - ключ Groq
-- `DEEPSEEK_API_KEY=...` - ключ DeepSeek
+- `DEEPSEEK_API_KEY=...` - ключ DeepSeek (обязательно)
 - `SEO_BUILD_CONCURRENCY=8` - конкурентность генерации
 
 ## Запуск

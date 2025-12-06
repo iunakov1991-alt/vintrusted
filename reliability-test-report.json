@@ -1,0 +1,83 @@
+{
+  "total": 10,
+  "success": 0,
+  "errors": 10,
+  "articleErrors": [
+    {
+      "articleNum": 1,
+      "context": "2015 44 undefined in 31",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 2,
+      "context": "2023 51 undefined in 23",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 3,
+      "context": "2016 0 undefined in 28",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 4,
+      "context": "2022 10 undefined in 30",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 5,
+      "context": "2023 49 undefined in 17",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 6,
+      "context": "2022 30 undefined in 34",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 7,
+      "context": "2019 38 undefined in 27",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 8,
+      "context": "2021 7 undefined in 25",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 9,
+      "context": "2018 6 undefined in 11",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    },
+    {
+      "articleNum": 10,
+      "context": "2020 10 undefined in 40",
+      "errors": [
+        "Generation failed: article.blocks.forEach is not a function"
+      ]
+    }
+  ],
+  "summary": {
+    "emTagsFixed": 0,
+    "incompleteSentencesFixed": 0,
+    "tablesConverted": 0,
+    "blocksExpanded": 0
+  }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "vin": "1HGPTANX0ML861262",
+    "model": "Saab 900",
+    "year": "2021",
+    "state": "Nebraska"
+  },
+  {
+    "vin": "1HG62AEJ3PG985291",
+    "model": "Smart EQ fortwo",
+    "year": "2023",
+    "state": "Missouri"
+  },
+  {
+    "vin": "1D7J87MA7FE317453",
+    "model": "Ram 1500 SXT",
+    "year": "2015",
+    "state": "South Carolina"
+  },
+  {
+    "vin": "5XX8HTAJ2GZ975372",
+    "model": "Kia Telluride Hybrid",
+    "year": "2016",
+    "state": "Maine"
+  },
+  {
+    "vin": "1HGDNP5P3H3241149",
+    "model": "Genesis G80 Electrified",
+    "year": "2017",
+    "state": "Maryland"
+  }
+]

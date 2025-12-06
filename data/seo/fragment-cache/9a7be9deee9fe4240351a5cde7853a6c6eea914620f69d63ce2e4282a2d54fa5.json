@@ -1,0 +1,101 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Ram",
+    "model": "1500 SXT",
+    "year": "2015",
+    "stateSlug": "south-carolina",
+    "stateLabel": "South Carolina",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1D7J87MA7FE317453",
+    "stage": "deep",
+    "variationContext": {
+      "structuralVariant": "risk_focused",
+      "styleVariant": {
+        "name": "Forensic Engineer",
+        "tone": "mechanical, ADAS/body-structure emphasis, diagnostic",
+        "description": "Инженерно-форензический стиль с акцентом на механику",
+        "characteristics": [
+          "Emphasizes mechanical integrity and engineering analysis",
+          "Uses technical specifications and diagnostic terminology",
+          "Focuses on structural and mechanical assessment",
+          "ADAS system analysis",
+          "Body structure evaluation"
+        ],
+        "openingPhrases": [
+          "An engineering-grade analysis",
+          "From a mechanical integrity standpoint",
+          "Technical evaluation reveals",
+          "Forensic examination indicates",
+          "Structural assessment demonstrates"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "1D7J87MA7FE317453",
+        "make": "Ram",
+        "model": "1500 SXT",
+        "year": 2015,
+        "state": "south-carolina",
+        "generated_at": "2025-12-04T10:42:03.848Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1D7"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Multipurpose Passenger Vehicle (MPV)"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "South-carolina DMV"
+          ],
+          "main_statutes": [
+            "South-carolina Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2015 Ram 1500 SXT?**\nAnswer: No, a commercial VIN report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately or events not captured in these databases will not appear in the report.\n\n**Q2: Does a clean South Carolina title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean South Carolina title does not guarantee this, as title washing can occur. A vehicle declared salvage in another state may receive a clean title upon transfer to South Carolina, making an NMVTIS check essential for interstate brand verification.\n\n**Q3: How can I verify open safety recalls for this vehicle?**\nAnswer: You must check the NHTSA website (nhtsa.gov/recalls) using the full 17-character VIN and the manufacturer's official portal. Both sources must be consulted for a comprehensive and accurate recall status verification.\n\n**Q4: What is title washing and how does it work?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a branded title, such as \"Salvage\" or \"Flood,\" to states with different disclosure laws to obtain a clean title, before selling it in a state like South Carolina.\n\n**Q5: How can I detect VIN cloning on a used Ram 1500?**\nAnswer: Detect VIN cloning by physically verifying.",
+  "timestamp": "2025-12-04T10:43:14.173Z",
+  "wordCount": 222
+}

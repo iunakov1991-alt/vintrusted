@@ -1,0 +1,90 @@
+{
+  "type": "reference-article",
+  "quality_level": "mid-volume",
+  "search_intent": "mid-volume",
+  "target_query": "2015 Toyota Camry VIN decoder",
+  "training_notes": {
+    "goal": "vehicle-specific depth, engineering-grade clarity",
+    "depth": "1200-1700 words",
+    "uniqueness": "medium-high; no boilerplate allowed"
+  },
+  "title": "2015 Toyota Camry — Full VIN Decoder & Model-Specific Risk Profile",
+  "hero": "The 2015 Toyota Camry VIN reveals configuration, engine type, assembly plant, trim, and production sequence. This guide explains each character and highlights the mechanical and risk patterns unique to the 2015 generation.",
+  "key_facts": [
+    "Model generation: XV50 refresh",
+    "Known weak points: wheel bearings, torque converter judder",
+    "Recalls: power window switch, airbag sensors",
+    "Odometer range norms: 120k–180k miles",
+    "Hybrid variant differences"
+  ],
+  "structure": {
+    "vin_structure_explanation": {
+      "content": "Detailed breakdown of each VIN character position",
+      "positions": [
+        "1st character: region",
+        "2nd: manufacturer",
+        "3rd: division",
+        "4–8: body, engine, restraint system",
+        "9: check digit fraud indicator",
+        "10: model year",
+        "11: assembly plant",
+        "12–17: production sequence"
+      ]
+    },
+    "common_risks": {
+      "content": "2015 Camry known patterns:",
+      "risks": [
+        "hybrid battery degradation in hot climates",
+        "torque converter vibration",
+        "front suspension clunk",
+        "water pump seepage"
+      ]
+    },
+    "market_value": {
+      "content": "Expected range (national median, adjusted by mileage and region)"
+    },
+    "buyer_insights": {
+      "content": "Where Camrys fail inspection most often:",
+      "issues": [
+        "alignment drift",
+        "uneven tire wear",
+        "softened bushings",
+        "AC compressor noise"
+      ]
+    }
+  },
+  "why_blocks_here": {
+    "hero": "Hero establishes specific model focus immediately",
+    "key_facts": "Key facts provide quick model-specific context",
+    "vin_structure": "VIN structure explanation - core of decoder intent",
+    "common_risks": "Common risks - adds value beyond basic decoding",
+    "market_value": "Market value - practical buyer information",
+    "buyer_insights": "Buyer insights - actionable inspection guidance"
+  },
+  "good_headings": [
+    "2015 Toyota Camry — Full VIN Decoder & Model-Specific Risk Profile",
+    "VIN Structure Explanation",
+    "Common Risks",
+    "Market Value",
+    "Buyer Insights"
+  ],
+  "bad_headings": [
+    "Toyota Camry VIN",
+    "VIN Decoder",
+    "How to Decode VIN",
+    "Camry Information"
+  ],
+  "semantic_layers": {
+    "tier1": ["Toyota Camry", "2015", "VIN decoder"],
+    "tier2": ["XV50", "engine type", "assembly plant", "trim level"],
+    "tier3": ["wheel bearings", "torque converter", "recalls", "inspection issues"]
+  },
+  "e_e_a_t_score": "medium-high",
+  "word_count_target": "1200-1700",
+  "blocks_count": "6-8"
+}
+
+
+
+
+

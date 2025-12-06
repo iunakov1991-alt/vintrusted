@@ -1,0 +1,8 @@
+[
+  {
+    "vin": "1HGPTANX0ML861262",
+    "reason": "FATAL severity after regen",
+    "severity": "FATAL"
+  }
+]{"vin":"1HGPTANX0ML861262","stage":"stage1_regen","severity":"FATAL"}
+{"vin":"1HGPTANX0ML861262","stage":"stage1_regen","severity":"FATAL"}

@@ -23,11 +23,20 @@ class StaticArchitecture {
    * Одна страница на VIN+state, контент учитывает intent и lang через AI
    */
   getOutputPath(item) {
-    const vinDir = path.join(
-      this.outputRoot,
-      item.vin || 'vin',
-      item.stateSlug || 'state'
-    );
+    // Валидация: не создаем страницы с undefined или state
+    const vin = item.vin && item.vin !== 'undefined' ? item.vin : null;
+    const stateSlug = item.stateSlug && 
+                      item.stateSlug !== 'undefined' && 
+                      item.stateSlug !== 'state' && 
+                      item.stateSlug !== undefined && 
+                      item.stateSlug !== null 
+                      ? item.stateSlug : null;
+    
+    if (!vin || !stateSlug) {
+      throw new Error(`Invalid page data: vin=${vin}, stateSlug=${stateSlug}. Cannot create page with undefined or invalid state.`);
+    }
+    
+    const vinDir = path.join(this.outputRoot, vin, stateSlug);
     return path.join(vinDir, 'index.html');
   }
   
@@ -35,11 +44,20 @@ class StaticArchitecture {
    * Получить путь в public/ для совместимости
    */
   getPublicPath(item) {
-    const vinDir = path.join(
-      this.publicRoot,
-      item.vin || 'vin',
-      item.stateSlug || 'state'
-    );
+    // Валидация: не создаем страницы с undefined или state
+    const vin = item.vin && item.vin !== 'undefined' ? item.vin : null;
+    const stateSlug = item.stateSlug && 
+                      item.stateSlug !== 'undefined' && 
+                      item.stateSlug !== 'state' && 
+                      item.stateSlug !== undefined && 
+                      item.stateSlug !== null 
+                      ? item.stateSlug : null;
+    
+    if (!vin || !stateSlug) {
+      throw new Error(`Invalid page data: vin=${vin}, stateSlug=${stateSlug}. Cannot create page with undefined or invalid state.`);
+    }
+    
+    const vinDir = path.join(this.publicRoot, vin, stateSlug);
     return path.join(vinDir, 'index.html');
   }
 
@@ -82,7 +100,20 @@ class StaticArchitecture {
    * Получить URL для страницы
    */
   getUrl(item) {
-    return `/vin/${item.vin}/${item.stateSlug}/`;
+    // Валидация: не создаем URL с undefined или state
+    const vin = item.vin && item.vin !== 'undefined' ? item.vin : null;
+    const stateSlug = item.stateSlug && 
+                      item.stateSlug !== 'undefined' && 
+                      item.stateSlug !== 'state' && 
+                      item.stateSlug !== undefined && 
+                      item.stateSlug !== null 
+                      ? item.stateSlug : null;
+    
+    if (!vin || !stateSlug) {
+      throw new Error(`Invalid page data: vin=${vin}, stateSlug=${stateSlug}. Cannot create URL with undefined or invalid state.`);
+    }
+    
+    return `/vin/${vin}/${stateSlug}/`;
   }
 
   /**

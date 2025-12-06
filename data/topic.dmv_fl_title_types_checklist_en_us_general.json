@@ -1,0 +1,23 @@
+{
+  "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+  "zone": "dmv_titles",
+  "type": "dmv_state_guide",
+  "language": "en",
+  "audience_segment": "us_general",
+  "dimensions": {
+    "state": "FL",
+    "dmv_topic": "title_types",
+    "format_variant": "checklist",
+    "audience": "mx_us"
+  },
+  "must_include_terms": [
+    "Florida DMV",
+    "FLHSMV",
+    "title types",
+    "clean title",
+    "salvage title",
+    "rebuilt title",
+    "VIN"
+  ],
+  "title": "Complete Guide to Florida DMV Title Types"
+}

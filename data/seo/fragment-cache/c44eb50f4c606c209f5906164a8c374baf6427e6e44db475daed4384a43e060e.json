@@ -1,0 +1,41 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "0",
+    "year": "2016",
+    "stateSlug": "28",
+    "stateLabel": "28",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HG0KXYE0G2178522",
+    "variationContext": {
+      "structuralVariant": "risk_evaluation",
+      "styleVariant": {
+        "name": "Market Economics",
+        "tone": "insurance, value, risk, depreciation",
+        "description": "Экономико-рыночный стиль с акцентом на стоимость и риски",
+        "characteristics": [
+          "Emphasizes risk assessment and actuarial factors",
+          "Uses insurance terminology and risk metrics",
+          "Focuses on loss history and premium implications",
+          "Market value analysis",
+          "Depreciation factors"
+        ],
+        "openingPhrases": [
+          "From an insurance risk perspective",
+          "Actuarial analysis indicates",
+          "Risk assessment reveals",
+          "Market valuation suggests",
+          "Economic factors demonstrate"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": null
+    }
+  },
+  "content": "## Key Regulations for a 2016 Toyota Camry in California\n\nA vehicle history report for a 2016 Toyota Camry registered in California must be interpreted through the state's specific regulatory framework, which significantly influences risk assessment and legal status. California's Bureau of Automotive Repair (BAR) and Air Resources Board (CARB) enforce stringent requirements that directly impact vehicle history, value, and insurability. These regulations create unique data points and potential liabilities not found in less restrictive states, making a California-specific VIN check essential for accurate due diligence.\n\n*   **Smog Certification and Title Blocks:** California mandates biennial Smog Check inspections for most vehicles. A failed test or lack of certification can result in a registration hold, directly affecting transferability and market value. The vehicle history report should show a consistent chain of passing smog tests. Any gap may indicate the vehicle was registered out-of-state to bypass CARB requirements, a tactic sometimes used with vehicles that have modified or non-compliant emissions systems, which can lead to costly repairs and failed transfers.\n*   **Enhanced Salvage and Title Branding Protocols:** The California Department of Motor Vehicles (DMV) employs specific branding like \"Salvage,\" \"Junk,\" \"Non-Repairable,\" and \"Rebuilt.\" The \"Rebuilt\" designation requires a rigorous brake and lamp inspection and a verification of the vehicle identification number by the DMV or law enforcement before a new title is issued. A history report must clearly document this branded title history; a \"clean\" California title on a previously salvaged vehicle without the \"Rebuilt\" brand is a major red flag for title washing.\n*   **Lemon Law Buyback Disclosures:** California's robust Lemon Law (Song-Beverly Consumer Warranty Act) requires manufacturers to repurchase or replace vehicles with substantial, uncured defects. These \"Lemon Law Buybacks\" receive a specific title brand. A vehicle history report for a 2016 Camry must disclose this brand if applicable, as it significantly impacts resale value and future.",
+  "timestamp": "2025-12-04T10:02:28.973Z",
+  "wordCount": 307
+}

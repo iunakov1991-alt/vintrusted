@@ -1,0 +1,35 @@
+[BATCH] Processing 9 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue_10_unique.json
+[BATCH] Parallel workers: 10
+[BATCH] Mode: ensemble
+[BATCH] QA Mode: deepseek
+
+[BATCH] Processing batch 1 (9 pages in parallel)...
+[BATCH] [2/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [3/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [4/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_es_mx_us.json
+[BATCH] [5/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [6/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_es_mx_us.json
+[BATCH] [7/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] [8/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [9/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [10/9] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_es_mx_us.json
+[BATCH] [7/9] ❌ Failed (0.6s) → /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+
+[BATCH] [2/9] ❌ Failed (0.7s) → /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+
+[BATCH] [8/9] ❌ Failed (0.8s) → /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+
+[BATCH] [3/9] ✅ Completed in 107.7s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [6/9] ✅ Completed in 128.0s → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_es_mx_us.json
+[BATCH] [10/9] ✅ Completed in 140.6s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_es_mx_us.json
+[BATCH] [4/9] ✅ Completed in 141.5s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_es_mx_us.json
+[BATCH] [5/9] ✅ Completed in 194.7s → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [9/9] ✅ Completed in 199.6s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] Batch completed in 199.7s
+
+[BATCH] ========================================
+[BATCH] Completed in 199.7s
+[BATCH] Success: 6, Failed: 3
+[BATCH] Average page time: NaNs
+[BATCH] Speedup: 5.4x vs sequential
+[BATCH] ========================================

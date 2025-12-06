@@ -1,0 +1,21 @@
+{
+  "audience": {
+    "default": {
+      "language": "en",
+      "extra_context": ""
+    },
+    "us_mexican": {
+      "language": "es",
+      "extra_context": "Incluye contexto para compradores mexicanos y mexico-americanos: requisitos de importación, aduana, diferencias legales EE.UU.–México, riesgos con títulos salvage/rebuilt en frontera."
+    },
+    "us_spanish_general": {
+      "language": "es",
+      "extra_context": "Explicar procesos del DMV con terminología bilingüe. Mantener claridad legal y advertencias sobre fraudes de títulos."
+    },
+    "us_general": {
+      "language": "en",
+      "needs": ["DMV", "VIN", "used cars", "titles"],
+      "notes": ["expects official DMV terminology", "prefers practical checklists"]
+    }
+  }
+}

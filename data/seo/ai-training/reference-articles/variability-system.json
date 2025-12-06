@@ -1,0 +1,185 @@
+{
+  "type": "variability-system",
+  "purpose": "teach AI how to vary DOM + blocks + semantics across pages",
+  "goal": "prevent template detection, maximize uniqueness",
+  "layout_variants": {
+    "layout_a_dmv_style": {
+      "name": "DMV Style",
+      "order": [
+        "HERO",
+        "Key Facts",
+        "Specs",
+        "State Rules",
+        "Risk Patterns",
+        "FAQ",
+        "Internal Links"
+      ],
+      "tone": "official, regulatory, legal",
+      "use_case": "high-volume state-specific queries"
+    },
+    "layout_b_apple_style": {
+      "name": "Apple Style",
+      "order": [
+        "Hero",
+        "Clean Cards",
+        "Long Narrative",
+        "AI Block",
+        "Table",
+        "Comparison",
+        "FAQ"
+      ],
+      "tone": "clean, minimalist, premium",
+      "use_case": "mid-volume brand/model queries"
+    },
+    "layout_c_legal_style": {
+      "name": "Legal Style",
+      "order": [
+        "Title",
+        "Case-Like Summary",
+        "State Statutes",
+        "Compliance Requirements",
+        "Risks",
+        "FAQ"
+      ],
+      "tone": "legal, authoritative, compliance-focused",
+      "use_case": "regulatory, title-brand queries"
+    },
+    "layout_d_analytic_style": {
+      "name": "Analytic Style",
+      "order": [
+        "Hero",
+        "Market Data",
+        "Risk Matrix",
+        "Ownership Timeline",
+        "Inspection Logic",
+        "FAQ"
+      ],
+      "tone": "data-driven, analytical, expert",
+      "use_case": "market value, risk analysis queries"
+    },
+    "layout_e_hybrid_style": {
+      "name": "Hybrid Style",
+      "order": [
+        "Hero",
+        "Key Facts",
+        "Deep Analysis",
+        "Technical",
+        "Title Rules",
+        "Market Value",
+        "FAQ"
+      ],
+      "tone": "balanced, comprehensive",
+      "use_case": "general VIN check queries"
+    },
+    "layout_f_risk_style": {
+      "name": "Risk Style",
+      "order": [
+        "Hero",
+        "Red Flags",
+        "Fraud Patterns",
+        "Title Wash Analysis",
+        "Auction Intelligence",
+        "FAQ"
+      ],
+      "tone": "warning-focused, antifraud, investigative",
+      "use_case": "fraud detection, risk assessment queries"
+    }
+  },
+  "variability_rules": {
+    "heading_style": {
+      "variations": [
+        "H2 vs H3",
+        "question-style vs statement-style",
+        "short vs descriptive",
+        "action-oriented vs informational"
+      ],
+      "example_good": [
+        "What a VIN reveals in CA",
+        "State-Specific Insights (California)",
+        "How to Cross-Check Mileage",
+        "Red Flags"
+      ],
+      "example_bad": [
+        "VIN Information",
+        "Details",
+        "More Info",
+        "About"
+      ]
+    },
+    "paragraph_length": {
+      "range": "2-4 sentences",
+      "variation": "Mix short and long paragraphs",
+      "avoid": "All same length"
+    },
+    "tone_variations": [
+      "legal",
+      "technical",
+      "analytical",
+      "instructive",
+      "regulatory",
+      "investigative"
+    ],
+    "table_variations": [
+      "2 columns",
+      "3 columns",
+      "numeric comparison",
+      "risk matrix",
+      "timeline"
+    ],
+    "list_variations": [
+      "bullets",
+      "numbered",
+      "mixed",
+      "checklist style",
+      "definition style"
+    ],
+    "cta_styles": [
+      "button-like",
+      "textual",
+      "inline",
+      "card-based",
+      "minimal"
+    ],
+    "semantic_mix": {
+      "instruction": "Choose different Tier1/2/3 combinations per article",
+      "tier1_examples": ["VIN check", "California", "vehicle history", "title status"],
+      "tier2_examples": ["DMV records", "smog check", "salvage title", "odometer"],
+      "tier3_examples": ["title washing", "mileage rollback", "auction records", "fraud detection"]
+    },
+    "faq_count": {
+      "range": "3-12 questions",
+      "variation": "Vary by article depth and intent",
+      "high_volume": "6-12 questions",
+      "mid_volume": "4-8 questions",
+      "low_volume": "3-6 questions"
+    }
+  },
+  "anti_template_rules": {
+    "must_vary": [
+      "Block order between articles",
+      "Heading styles",
+      "Paragraph structure",
+      "Table formats",
+      "List styles",
+      "CTA placement and style",
+      "Semantic theme combinations",
+      "FAQ count and topics"
+    ],
+    "never_repeat": [
+      "Exact same structure twice",
+      "Same heading phrases",
+      "Same paragraph openings",
+      "Same CTA text",
+      "Same FAQ questions"
+    ]
+  },
+  "implementation_notes": {
+    "for_ai": "Each article must feel unique while maintaining quality standards. Use variability system to ensure no two articles follow identical patterns.",
+    "quality_check": "If two articles look too similar, increase variability in structure, headings, and semantic mix."
+  }
+}
+
+
+
+
+

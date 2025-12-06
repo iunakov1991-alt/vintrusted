@@ -1,0 +1,20 @@
+{
+  "Honda": {
+    "must_mention": ["unibody engineering", "Honda Sensing", "ACE body structure"]
+  },
+  "Toyota": {
+    "must_mention": ["Toyota Safety Sense", "hybrid battery integrity", "rust-resistant subframe"]
+  },
+  "Ford": {
+    "must_mention": ["ladder frame", "towing capacity", "EcoBoost thermal load"]
+  },
+  "Texas": {
+    "must_mention": ["hail belt", "I-35 theft corridor"]
+  },
+  "California": {
+    "must_mention": ["smog inspection", "wildfire salvage"]
+  }
+}
+
+
+

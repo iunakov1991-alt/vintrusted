@@ -1,0 +1,70 @@
+{
+  "type": "training-examples",
+  "purpose": "teach AI to avoid shallow, low-quality content",
+  "bad_sample": {
+    "title": "Check Your VIN Fast",
+    "content": "VIN checking is important. You can learn about the history of your car. Our site helps you check the VIN quickly. Just enter your number and get results. It is very simple and useful for everyone.",
+    "why_bad": [
+      "No structure",
+      "No expert tone",
+      "No regulatory context",
+      "No fraud or accident intelligence",
+      "No state-specific details",
+      "No semantic layers",
+      "No depth",
+      "No reasoning",
+      "Template-like, spam-like",
+      "Extremely low E-E-A-T",
+      "No Schema potential",
+      "Useless for RL learning"
+    ],
+    "word_count": "~50",
+    "e_e_a_t_score": "very low"
+  },
+  "mid_sample": {
+    "title": "California VIN Lookup Guide",
+    "content": "A VIN lookup in California allows you to see basic information about the car. You can check title status, mileage, accidents and ownership. California has smog checks, so you can find mileage records. You should also check if the car has salvage history. If you want to buy a used car, checking the VIN is a good idea. Look for inconsistent mileage and frequent ownership changes.",
+    "why_mid": [
+      "Has structure but too shallow",
+      "No engineering detail",
+      "No fraud analysis",
+      "No state-level breakdown",
+      "No accident pattern explanation",
+      "No buyer psychology",
+      "No insurance or mechanical logic",
+      "Reads like generic advice",
+      "Not enough semantic variety",
+      "Not enough expert vocabulary"
+    ],
+    "word_count": "~100",
+    "e_e_a_t_score": "low-medium",
+    "depth": "400-700 words (if expanded)"
+  },
+  "lessons": {
+    "avoid": [
+      "Generic statements without evidence",
+      "Lack of expert terminology",
+      "No state-specific details",
+      "No fraud/risk analysis",
+      "No technical depth",
+      "Template-like structure",
+      "Low semantic variety",
+      "Weak E-E-A-T signals"
+    ],
+    "require": [
+      "Expert-grade explanations",
+      "State-specific insights",
+      "Fraud pattern analysis",
+      "Technical depth",
+      "Semantic richness",
+      "Strong E-E-A-T signals",
+      "Unique structure per article",
+      "Engineering-level clarity"
+    ]
+  }
+}
+
+
+
+
+

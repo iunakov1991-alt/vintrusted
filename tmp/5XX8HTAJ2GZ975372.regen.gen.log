@@ -1,0 +1,19 @@
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:03.068Z - ERROR: Block nmvtis failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "verification"
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:03.068Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:03.068Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:14.246Z - ERROR: Block vin_decoder failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:14.247Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:14.247Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:53.601Z - ERROR: Block fraud_patterns failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 174 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:53.601Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:53.601Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:57.156Z - ERROR: Block insurance_risk failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:57.157Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:49:57.157Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:50:29.906Z - ERROR: Article validation failed: 6 errors, 16 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:50:29.907Z - ERROR:   ERROR: H2 "## Market Value" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:50:29.907Z - ERROR:   ERROR: Required block "key_facts" is missing or too short
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:50:29.907Z - ERROR:   ERROR: Incomplete sentence ending detected: \bThe\.\s*$ (1 occurrences)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:50:29.907Z - ERROR:   ERROR: Invalid bullet (too short): "*   **."
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:50:29.907Z - ERROR:   ERROR: Tiny paragraph detected (13 chars): "[[END_BLOCK:...."
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:50:29.907Z - ERROR:   ERROR: Missing required sections: Key Facts

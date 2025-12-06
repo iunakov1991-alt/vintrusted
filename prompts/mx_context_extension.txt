@@ -1,0 +1,7 @@
+When audience_segment=us_mexican:
+
+- Add MX import rules (SAT/SHCP).
+- Explain prohibitions on salvage/rebuilt imports.
+- Add bilingual clarity (Inglés/Español legal terms).
+- Mention border complications.
+- Include EPA/DOT processes for imports.

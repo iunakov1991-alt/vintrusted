@@ -443,3 +443,7 @@ async function deployToVercel() {
 3. Оптимизация на основе результатов
 
 
+
+
+
+

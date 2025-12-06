@@ -1,0 +1,101 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Genesis",
+    "model": "G80 Electrified",
+    "year": "2017",
+    "stateSlug": "maryland",
+    "stateLabel": "Maryland",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGDNP5P3H3241149",
+    "stage": "deep",
+    "variationContext": {
+      "structuralVariant": "quick_scan",
+      "styleVariant": {
+        "name": "Procedural",
+        "tone": "DMV process, step-by-step, compliance",
+        "description": "Процедурный стиль с пошаговыми инструкциями DMV",
+        "characteristics": [
+          "Emphasizes step-by-step DMV processes",
+          "Uses procedural terminology and compliance checklists",
+          "Focuses on regulatory compliance steps",
+          "Official process documentation",
+          "Compliance verification"
+        ],
+        "openingPhrases": [
+          "The DMV process requires",
+          "To comply with state regulations",
+          "Following official procedures",
+          "Per DMV requirements",
+          "The registration process involves"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": {
+        "vin": "1HGDNP5P3H3241149",
+        "make": "Genesis",
+        "model": "G80 Electrified",
+        "year": 2017,
+        "state": "maryland",
+        "generated_at": "2025-12-04T10:45:21.859Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Maryland DMV"
+          ],
+          "main_statutes": [
+            "Maryland Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2017 Genesis G80 Electrified?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately, unreported damage, or events not captured in the provider's databases will not appear in the report, necessitating a thorough physical inspection.\n\n**Q2: Does a clean Maryland title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean Maryland title does not guarantee the vehicle was never a total loss, as title washing can occur where vehicles declared salvage in other states receive clean Maryland titles. Always cross-reference the National Motor Vehicle Title Information System (NMVTIS) for interstate brand history to verify the vehicle's true status.\n\n**Q3: Can flood or water damage history be hidden from a VIN report?**\nAnswer: Yes, flood damage history can be hidden if the damage occurred in a state without mandatory branding or if repairs were conducted privately without an insurance claim. Detection requires an NMVTIS check combined with a meticulous visual inspection for corrosion, silt, mold, and electrical malfunctions.\n\n**Q4: What is title washing and how does it work?**\nAnswer: Title washing is the fraudulent practice of moving a branded vehicle, such as a salvage or flood car, through states with weaker disclosure laws to obtain a clean title, which is then used to sell the vehicle in Maryland. The NMVTIS database is designed to track these brands across state lines to combat this fraud.\n\n**Q5: How do I verify open safety recalls for a 2017 Genesis G80 Electrified?**\nAnswer: Verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and the manufacturer's official portal. Both sources must be consulted for comprehensive verification, as recall campaigns are administered separately.\n\n**Q6: How can I detect VIN cloning on a vehicle?**\nAnswer: Detect VIN cloning by physically verifying the VIN stampings at the dashboard, door jamb, and firewall for consistency. Check for signs of tampering like mismatched rivets or adhesive residue, and consult NMVTIS or law enforcement databases for records of duplicate VINs active in different locations.\n\n**Q7: What is odometer rollback and how is it detected?**\nAnswer: Odometer rollback is the fraudulent manipulation of a vehicle's mileage display, often via the vehicle's CAN-Bus system. Detection methods include inspecting physical wear on components like seats and pedals, verifying the mileage history chain in service records, and performing an electronic control unit (ECU) scan for stored true mileage.\n\n**Q8: How do I check for liens on a vehicle in Maryland?**\nAnswer: Check for liens by conducting a lienholder search through the Maryland DMV to verify no financial encumbrances exist before purchase. An active lien prevents legal title transfer until the debt is cleared by the seller, protecting the buyer from assuming unexpected financial obligations.\n\n**Q9: What is the process for a revived salvage vehicle in Maryland?**\nAnswer: The Maryland process for a revived salvage vehicle involves a state-required vehicle inspection, submission of proper documentation including a completed application form, and DMV approval for rebranding. Successful completion results in a permanent \"Rebuilt\" brand on the vehicle's title, indicating its salvage history.\n\n**Q10: How much does a comprehensive VIN check cost for this model?**\nAnswer: A comprehensive commercial VIN history report for a 2017 Genesis G80 Electrified typically costs between $25 and $50. NMVTIS data is accessible through authorized providers, while some basic checks like NHTSA recall.",
+  "timestamp": "2025-12-04T10:46:41.604Z",
+  "wordCount": 580
+}

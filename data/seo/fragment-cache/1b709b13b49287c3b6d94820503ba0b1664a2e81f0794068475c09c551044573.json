@@ -1,0 +1,137 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Pagani",
+    "model": "Utopia",
+    "year": "2023",
+    "stateSlug": "california",
+    "stateLabel": "California",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGGEGE12PC763654",
+    "variationContext": {
+      "structuralVariant": "insurance_focused",
+      "styleVariant": {
+        "name": "Procedural",
+        "tone": "DMV process, step-by-step, compliance",
+        "description": "Процедурный стиль с пошаговыми инструкциями DMV",
+        "characteristics": [
+          "Emphasizes step-by-step DMV processes",
+          "Uses procedural terminology and compliance checklists",
+          "Focuses on regulatory compliance steps",
+          "Official process documentation",
+          "Compliance verification"
+        ],
+        "openingPhrases": [
+          "The DMV process requires",
+          "To comply with state regulations",
+          "Following official procedures",
+          "Per DMV requirements",
+          "The registration process involves"
+        ]
+      },
+      "stateBoost": {
+        "uniqueRules": [
+          "California Vehicle Code",
+          "BAR inspection rules",
+          "Health and Safety Code §44011 (Smog Check)",
+          "Song-Beverly Consumer Warranty Act (Lemon Law)",
+          "Vehicle Code §16058 (Insurance reporting)"
+        ],
+        "specificPractices": [
+          "Biennial smog testing",
+          "Enhanced emission history tracking",
+          "Salvage to Rebuilt conversion process",
+          "Electronic lien and title (ELT) system",
+          "CHP vehicle verification"
+        ],
+        "fraudPatterns": [
+          "Title washing across jurisdictions",
+          "Odometer rollback on high-mileage models",
+          "Undisclosed flood damage from coastal areas",
+          "Smog check certificate fraud",
+          "Lemon law buyback concealment"
+        ],
+        "risks": [
+          "wildfire salvage",
+          "emissions compliance (BAR)",
+          "smog check fraud",
+          "lemon law repurchases",
+          "coastal salt air corrosion",
+          "earthquake damage",
+          "high-altitude operation impacts",
+          "urban theft patterns"
+        ],
+        "selectedRisks": [
+          "wildfire salvage",
+          "emissions compliance (BAR)",
+          "coastal salt air corrosion"
+        ]
+      },
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "1HGGEGE12PC763654",
+        "make": "Pagani",
+        "model": "Utopia",
+        "year": 2023,
+        "state": "california",
+        "generated_at": "2025-12-04T08:58:59.394Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "California DMV"
+          ],
+          "main_statutes": [
+            "California Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## California-Specific VIN Verification for the 2023 Pagani Utopia\n\nA VIN check for a vehicle registered in California, such as a 2023 Pagani Utopia, must account for the state's distinct regulatory framework and data collection practices. California operates a title-holding system, meaning the physical certificate of title is typically held by the lienholder until the loan is satisfied, with the California DMV maintaining the official electronic record. This system interfaces with stringent reporting requirements under the California Vehicle Code, creating a comprehensive data trail for high-value vehicles. The verification process for an exotic car like the Utopia involves cross-referencing this state data with national databases to identify discrepancies that could indicate fraud, title washing, or undisclosed damage.\n\nThe procedural verification for a California-registered vehicle follows a defined compliance checklist:\n*   **Title Brand Scrutiny:** The report will search for any California-specific title brands, including Salvage, Rebuilt, Flood, or Junk. A brand is a permanent designation applied by the California DMV following specific criteria, such as an insurance total loss declaration.\n*   **Emission and Inspection History:** California mandates biennial smog checks for most vehicles. A history report should reflect this compliance timeline. Furthermore, any change from a Salvage to a Rebuilt title requires a state-required vehicle inspection, which includes verification of the vehicle's identity and safety.\n*   **Lien and Ownership Verification:** Using the VIN, one must confirm the absence of active liens through the California DMV's electronic lien and title (ELT) system. For a Pagani Utopia, ensuring a clear title is paramount, as outstanding financial encumbrances can prevent legal transfer of ownership.\n*   **Regional Risk Assessment:** The report should contextualize data within known regional environmental risks. While not a direct legal brand, history from areas prone to specific hazards can inform a pre-purchase inspection strategy to check for correlated damage.\n\nA thorough VIN analysis decodes the World Manufacturer Identifier (WMI), with \"1HG\" being a candidate for this VIN, to confirm the reported make and model align with the vehicle in question. In California, a mismatch here can be a primary indicator of counterfeit VIN plating or vehicle cloning, serious frauds often associated with stolen high-end vehicles. The final step in a California-specific check involves synthesizing all gathered records—title history, brand disclosures, inspection results, and registration events—into a coherent timeline to validate the.",
+  "timestamp": "2025-12-04T09:00:09.847Z",
+  "wordCount": 380
+}

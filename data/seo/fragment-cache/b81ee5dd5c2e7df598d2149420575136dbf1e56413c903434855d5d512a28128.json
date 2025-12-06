@@ -1,0 +1,101 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Ram",
+    "model": "1500 SXT",
+    "year": "2015",
+    "stateSlug": "south-carolina",
+    "stateLabel": "South Carolina",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1D7J87MA7FE317453",
+    "stage": "deep",
+    "variationContext": {
+      "structuralVariant": "risk_focused",
+      "styleVariant": {
+        "name": "Forensic Engineer",
+        "tone": "mechanical, ADAS/body-structure emphasis, diagnostic",
+        "description": "Инженерно-форензический стиль с акцентом на механику",
+        "characteristics": [
+          "Emphasizes mechanical integrity and engineering analysis",
+          "Uses technical specifications and diagnostic terminology",
+          "Focuses on structural and mechanical assessment",
+          "ADAS system analysis",
+          "Body structure evaluation"
+        ],
+        "openingPhrases": [
+          "An engineering-grade analysis",
+          "From a mechanical integrity standpoint",
+          "Technical evaluation reveals",
+          "Forensic examination indicates",
+          "Structural assessment demonstrates"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "1D7J87MA7FE317453",
+        "make": "Ram",
+        "model": "1500 SXT",
+        "year": 2015,
+        "state": "south-carolina",
+        "generated_at": "2025-12-04T10:42:03.848Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1D7"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Multipurpose Passenger Vehicle (MPV)"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "South-carolina DMV"
+          ],
+          "main_statutes": [
+            "South-carolina Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## State-Specific Procedures for South Carolina\n\nA VIN check for a 2015 Ram 1500 SXT in South Carolina involves analyzing data from the state's specific regulatory framework and title-holding system. This process is critical for verifying the legal status and mechanical integrity of a vehicle, which is classified as a Multipurpose Passenger Vehicle (MPV) according to its VIN-decoded body type. South Carolina operates under a title-holding system, meaning the physical certificate of title is the primary legal document proving ownership and must be scrutinized for authenticity and brands. The state's vehicle code and administrative practices create a distinct data trail that a forensic VIN analysis must interpret.\n\nKey technical and legal considerations specific to South Carolina include:\n*   **Title Brand Examination:** The South Carolina DMV issues specific title brands, including Salvage, Rebuilt, Flood, and Junk. Each brand carries legal and engineering implications; for instance, a \"Rebuilt\" brand requires documented proof that a salvage vehicle was restored to a roadworthy condition, which should be verified against a structural assessment.\n*   **Mandatory Inspection:** South Carolina requires a state-required vehicle inspection. While the report uses standard state and federal data sources for history, a physical inspection is a separate, critical step to validate the vehicle's current operational and safety condition against its reported history.\n*   **Agency Verification:** Direct confirmation with the South Carolina DMV is the definitive method for verifying the current title status, lienholder information, and the accuracy of any recorded brands, as this agency maintains the official record.\n*   **Environmental Risk Assessment:** The report may flag regional environmental risks common to the area, which should prompt a detailed mechanical inspection for latent corrosion or electrical system damage not immediately apparent.\n\nFrom an engineering perspective, the analysis extends beyond the document check. For an MPV like the Ram 1500, particular attention should be paid to the integrity of the load-bearing.",
+  "timestamp": "2025-12-04T10:43:20.278Z",
+  "wordCount": 308
+}

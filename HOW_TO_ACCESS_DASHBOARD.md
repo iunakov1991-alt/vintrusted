@@ -14,7 +14,7 @@ npm run monster:start
 Или напрямую:
 
 ```bash
-node monster-7.0/core/dashboard/server.js
+node monster-7.1/core/dashboard/server-7.1.js
 ```
 
 ### Шаг 2: Открыть в браузере

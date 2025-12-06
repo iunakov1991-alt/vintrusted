@@ -1,0 +1,205 @@
+{
+  "mode": "article_blocks",
+  "topic": {
+    "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+    "zone": "dmv_titles",
+    "type": "dmv_state_guide",
+    "language": "es",
+    "audience_segment": "us_mexican",
+    "dimensions": {
+      "state": "CA",
+      "dmv_topic": "title_types",
+      "format_variant": "checklist",
+      "audience": "mx_us"
+    },
+    "must_include_terms": [
+      "California DMV",
+      "transfer",
+      "salvage",
+      "rebuilt",
+      "título",
+      "VIN"
+    ],
+    "title": "Guía completa de tipos de título del DMV de California"
+  },
+  "blocks": [
+    {
+      "id": "hero",
+      "role": "hero",
+      "length": {
+        "min": 260,
+        "max": 340
+      },
+      "style": "summary",
+      "intents": [
+        "scope",
+        "why_it_matters"
+      ],
+      "must_include_terms": [
+        "California DMV",
+        "transfer",
+        "salvage",
+        "rebuilt",
+        "título",
+        "VIN",
+        "dmv_titles",
+        "CA"
+      ],
+      "language": "es",
+      "notes": [
+        "highlight bilingual terminology",
+        "include import/export caveats"
+      ]
+    },
+    {
+      "id": "context_legal",
+      "role": "context",
+      "length": {
+        "min": 320,
+        "max": 420
+      },
+      "style": "tech_legal",
+      "intents": [
+        "legal_context",
+        "definitions"
+      ],
+      "must_include_terms": [
+        "California DMV",
+        "transfer",
+        "salvage",
+        "rebuilt",
+        "título",
+        "VIN",
+        "dmv_titles",
+        "CA"
+      ],
+      "language": "es",
+      "notes": [
+        "highlight bilingual terminology",
+        "include import/export caveats"
+      ]
+    },
+    {
+      "id": "step_by_step",
+      "role": "guide",
+      "length": {
+        "min": 340,
+        "max": 440
+      },
+      "style": "practical",
+      "intents": [
+        "steps",
+        "workflow"
+      ],
+      "must_include_terms": [
+        "California DMV",
+        "transfer",
+        "salvage",
+        "rebuilt",
+        "título",
+        "VIN",
+        "dmv_titles",
+        "CA"
+      ],
+      "language": "es",
+      "notes": [
+        "highlight bilingual terminology",
+        "include import/export caveats"
+      ]
+    },
+    {
+      "id": "mistakes",
+      "role": "guide",
+      "length": {
+        "min": 280,
+        "max": 360
+      },
+      "style": "practical",
+      "intents": [
+        "common_mistakes",
+        "warnings"
+      ],
+      "must_include_terms": [
+        "California DMV",
+        "transfer",
+        "salvage",
+        "rebuilt",
+        "título",
+        "VIN",
+        "dmv_titles",
+        "CA"
+      ],
+      "language": "es",
+      "notes": [
+        "highlight bilingual terminology",
+        "include import/export caveats"
+      ]
+    },
+    {
+      "id": "fees_taxes",
+      "role": "analytic",
+      "length": {
+        "min": 260,
+        "max": 340
+      },
+      "style": "analytic",
+      "intents": [
+        "fees",
+        "taxes",
+        "hidden_costs"
+      ],
+      "must_include_terms": [
+        "California DMV",
+        "transfer",
+        "salvage",
+        "rebuilt",
+        "título",
+        "VIN",
+        "dmv_titles",
+        "CA"
+      ],
+      "language": "es",
+      "notes": [
+        "highlight bilingual terminology",
+        "include import/export caveats"
+      ]
+    },
+    {
+      "id": "faq",
+      "role": "faq",
+      "length": {
+        "min": 260,
+        "max": 360
+      },
+      "style": "practical",
+      "intents": [
+        "user_questions"
+      ],
+      "must_include_terms": [
+        "California DMV",
+        "transfer",
+        "salvage",
+        "rebuilt",
+        "título",
+        "VIN",
+        "dmv_titles",
+        "CA"
+      ],
+      "language": "es",
+      "notes": [
+        "highlight bilingual terminology",
+        "include import/export caveats"
+      ]
+    }
+  ],
+  "output_format": "TEXT_WITH_DELIMS",
+  "delim": "\n\n===BLOCK_END===\n\n",
+  "meta": {
+    "article_type": "dmv_state_guide",
+    "zone": "dmv_titles",
+    "recommended_length": {
+      "min": 1800,
+      "max": 2400
+    }
+  }
+}

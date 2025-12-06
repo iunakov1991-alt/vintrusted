@@ -1,0 +1,100 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Kia",
+    "model": "Rio5",
+    "year": "2015",
+    "stateSlug": "alaska",
+    "stateLabel": "Alaska",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "5XXNEWYB2F2924067",
+    "variationContext": {
+      "structuralVariant": "value_focused",
+      "styleVariant": {
+        "name": "Market Economics",
+        "tone": "insurance, value, risk, depreciation",
+        "description": "Экономико-рыночный стиль с акцентом на стоимость и риски",
+        "characteristics": [
+          "Emphasizes risk assessment and actuarial factors",
+          "Uses insurance terminology and risk metrics",
+          "Focuses on loss history and premium implications",
+          "Market value analysis",
+          "Depreciation factors"
+        ],
+        "openingPhrases": [
+          "From an insurance risk perspective",
+          "Actuarial analysis indicates",
+          "Risk assessment reveals",
+          "Market valuation suggests",
+          "Economic factors demonstrate"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "5XXNEWYB2F2924067",
+        "make": "Kia",
+        "model": "Rio5",
+        "year": 2015,
+        "state": "alaska",
+        "generated_at": "2025-12-04T10:20:27.519Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "5XX"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Alaska DMV"
+          ],
+          "main_statutes": [
+            "Alaska Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report show all damage events for a 2015 Kia Rio5?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records, meaning unreported or privately repaired damage may not appear in the history.\n\n**Q2: Does a clean Alaska title guarantee this vehicle was never declared a total loss?**\nAnswer: No, title washing can occur where a vehicle declared Salvage or Junk in another state receives a clean Alaska title, so cross-referencing with the NMVTIS database is essential for identifying interstate brands.\n\n**Q3: How can flood or water damage history be hidden from a VIN report?**\nAnswer: Yes, if the damage occurred in a state without a mandatory Flood brand or repairs were conducted privately, detection requires both an NMVTIS check and a thorough physical inspection for corrosion and mold.\n\n**Q4: What is title washing and how does it work in Alaska's title-holding system?**\nAnswer: Title washing is the fraudulent practice of moving a branded vehicle to states with weaker disclosure laws to obtain a clean title before sale in Alaska, a risk mitigated by checking the permanent NMVTIS brand history.\n\n**Q5: How do I verify open safety recalls for this specific vehicle?**\nAnswer: Check the NHTSA website using the full 17-character VIN and the manufacturer's official portal, as both sources must be consulted for a comprehensive and current recall status.\n\n**Q6: How can I detect VIN cloning.",
+  "timestamp": "2025-12-04T10:21:52.742Z",
+  "wordCount": 242
+}

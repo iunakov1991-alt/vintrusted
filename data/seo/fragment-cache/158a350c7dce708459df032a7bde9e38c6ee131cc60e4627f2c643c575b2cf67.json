@@ -1,0 +1,100 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Land Rover",
+    "model": "Discovery Sport",
+    "year": "2020",
+    "stateSlug": "oklahoma",
+    "stateLabel": "Oklahoma",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGK8GZU8LF530522",
+    "variationContext": {
+      "structuralVariant": "market_value_first",
+      "styleVariant": {
+        "name": "Forensic Engineer",
+        "tone": "mechanical, ADAS/body-structure emphasis, diagnostic",
+        "description": "Инженерно-форензический стиль с акцентом на механику",
+        "characteristics": [
+          "Emphasizes mechanical integrity and engineering analysis",
+          "Uses technical specifications and diagnostic terminology",
+          "Focuses on structural and mechanical assessment",
+          "ADAS system analysis",
+          "Body structure evaluation"
+        ],
+        "openingPhrases": [
+          "An engineering-grade analysis",
+          "From a mechanical integrity standpoint",
+          "Technical evaluation reveals",
+          "Forensic examination indicates",
+          "Structural assessment demonstrates"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "1HGK8GZU8LF530522",
+        "make": "Land Rover",
+        "model": "Discovery Sport",
+        "year": 2020,
+        "state": "oklahoma",
+        "generated_at": "2025-12-04T08:51:23.986Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Oklahoma DMV"
+          ],
+          "main_statutes": [
+            "Oklahoma Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2020 Land Rover Discovery Sport?**\nAnswer: No, a commercial VIN report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately, unreported damage, or events not captured in these databases will not appear, requiring a thorough physical inspection for complete assessment.\n\n**Q2: Does a clean Oklahoma title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean Oklahoma title does not guarantee the vehicle was never a total loss. Title washing can occur where vehicles declared salvage or junk in other states receive a clean Oklahoma title upon transfer. Cross-referencing the National Motor Vehicle Title Information System (NMVTIS) is essential to identify interstate title brands.\n\n**Q3: How can flood or water damage history be hidden from a VIN report?**\nAnswer: Flood damage history can be hidden if the incident occurred in a state without mandatory branding for water damage, or if repairs were conducted privately without an insurance claim. Detection requires an NMVTIS check combined with a forensic inspection for corrosion, silt in crevices, musty odors, and electrical malfunctions.\n\n**Q4: What is title washing and how does it work?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a branded title, such as Salvage or Flood, to states with weaker disclosure laws to obtain a clean title, before selling it in a state like Oklahoma. The NMVTIS database is designed to track these brands across state lines to combat this fraud.\n\n**Q5: How do I verify open safety recalls for a 2020 Land Rover Discovery Sport?**\nAnswer: Verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and the manufacturer's official portal. Both sources must be consulted for comprehensive verification, as recall campaigns are administered separately.\n\n**Q6: How can I detect VIN cloning on a vehicle?**\nAnswer: Detect VIN cloning by physically verifying the VIN stampings on the dashboard, door jamb, and firewall for consistency. Look for signs of tampering like mismatched rivets, adhesive residue, or altered plates. An NMVTIS report may also flag duplicate VINs registered in different geographical locations.\n\n**Q7: What is odometer rollback and how is it detected?**\nAnswer: Odometer rollback is the fraudulent reduction of a vehicle's displayed mileage, often via CAN-Bus manipulation. Detection methods include inspecting for excessive physical wear on pedals, seats, and steering wheels, verifying the mileage history chain in service records, and performing an electronic control unit (ECU) scan for stored true mileage.\n\n**Q8: How do I check for liens on a vehicle in Oklahoma?**\nAnswer: Check for liens by conducting a lienholder search through the Oklahoma DMV. This verification is critical before purchase, as any existing financial encumbrances will prevent a clear title transfer until the lien is satisfied by the seller.\n\n**Q9: What are Oklahoma's common title brands and what do they mean?**\nAnswer: Oklahoma's common title brands include Salvage, Rebuilt, Flood, and Junk. A Salvage brand indicates a total loss payout by an insurer. A Rebuilt brand means a salvaged vehicle was repaired and passed a state inspection. Flood denotes water damage, and Junk means the vehicle is only fit for parts or scrap.\n\n**Q10: What is the purpose.",
+  "timestamp": "2025-12-04T08:52:54.632Z",
+  "wordCount": 545
+}

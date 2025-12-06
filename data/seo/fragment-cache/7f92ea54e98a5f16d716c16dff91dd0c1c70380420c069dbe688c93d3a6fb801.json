@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Kia",
+    "model": "Rio5",
+    "year": "2015",
+    "stateSlug": "alaska",
+    "stateLabel": "Alaska",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "5XXNEWYB2F2924067",
+    "variationContext": {
+      "structuralVariant": "value_focused",
+      "styleVariant": {
+        "name": "Market Economics",
+        "tone": "insurance, value, risk, depreciation",
+        "description": "Экономико-рыночный стиль с акцентом на стоимость и риски",
+        "characteristics": [
+          "Emphasizes risk assessment and actuarial factors",
+          "Uses insurance terminology and risk metrics",
+          "Focuses on loss history and premium implications",
+          "Market value analysis",
+          "Depreciation factors"
+        ],
+        "openingPhrases": [
+          "From an insurance risk perspective",
+          "Actuarial analysis indicates",
+          "Risk assessment reveals",
+          "Market valuation suggests",
+          "Economic factors demonstrate"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "5XXNEWYB2F2924067",
+        "make": "Kia",
+        "model": "Rio5",
+        "year": 2015,
+        "state": "alaska",
+        "generated_at": "2025-12-04T10:20:27.519Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "5XX"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Alaska DMV"
+          ],
+          "main_statutes": [
+            "Alaska Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Alaska-Specific Regulations for a 2015 Kia Rio5 VIN Check\n\nConducting a VIN check for a 2015 Kia Rio5 in Alaska requires understanding the state's unique regulatory framework, which directly impacts vehicle valuation, insurance risk, and legal title status. Alaska operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for registration. This system creates specific fraud vectors and due diligence requirements distinct from electronic lien or non-title states. The Alaska DMV administers these regulations under the authority of the **Alaska Vehicle Code**, which defines the legal parameters for title brands, transfers, and inspections. For a vehicle like the Rio5, its market value and insurability are heavily influenced by its history within this system, as any recorded event becomes a permanent actuarial factor.\n\nKey regulatory and risk-assessment points for an Alaska VIN check include:\n\n*   **Title Brand Adherence:** Alaska recognizes specific title brands, including **Salvage**, **Rebuilt**, **Flood**, and **Junk**. A brand is a permanent legal designation that cannot be removed by transferring the vehicle to another state. For insurers, a branded title significantly increases the assigned risk category, often leading to higher premiums or outright denial of comprehensive and collision coverage. The presence of a brand like \"Flood\" directly correlates with a higher probability of future electrical system failures, a critical depreciation factor.\n*   **Mandatory Inspection Protocol:** Alaska requires a **State-required vehicle inspection** for specific transactions, such as registering an out-of-state vehicle or one with a branded title. This inspection is a loss-mitigation tool designed to verify vehicle identity and roadworthiness. For a potential buyer, a passed inspection provides a measurable reduction in immediate mechanical risk, which can positively influence financing terms and residual value projections.\n*   **Environmental Risk Integration:** The state's official data sources account for **Regional environmental risks**. While a standard history report may show no branded title, evidence of registration or insurance claims originating from high-risk coastal areas can be used to adjust actuarial models for corrosion and long-term reliability, affecting total cost of ownership calculations.\n*   **WMI and VIN Validation:** The World Manufacturer Identifier (WMI) for this vehicle, derived from VIN positions 1-3, is **5XX**. In Alaska's title-holding context, verifying that the VIN on the dashboard, door jamb, and title all match this WMI and the full 17-character sequence is a fundamental antifraud step. Discrepancies can indicate title washing.",
+  "timestamp": "2025-12-04T10:21:26.947Z",
+  "wordCount": 394
+}

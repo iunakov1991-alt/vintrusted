@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Land Rover",
+    "model": "Discovery Sport",
+    "year": "2020",
+    "stateSlug": "oklahoma",
+    "stateLabel": "Oklahoma",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGK8GZU8LF530522",
+    "variationContext": {
+      "structuralVariant": "market_value_first",
+      "styleVariant": {
+        "name": "Forensic Engineer",
+        "tone": "mechanical, ADAS/body-structure emphasis, diagnostic",
+        "description": "Инженерно-форензический стиль с акцентом на механику",
+        "characteristics": [
+          "Emphasizes mechanical integrity and engineering analysis",
+          "Uses technical specifications and diagnostic terminology",
+          "Focuses on structural and mechanical assessment",
+          "ADAS system analysis",
+          "Body structure evaluation"
+        ],
+        "openingPhrases": [
+          "An engineering-grade analysis",
+          "From a mechanical integrity standpoint",
+          "Technical evaluation reveals",
+          "Forensic examination indicates",
+          "Structural assessment demonstrates"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "1HGK8GZU8LF530522",
+        "make": "Land Rover",
+        "model": "Discovery Sport",
+        "year": 2020,
+        "state": "oklahoma",
+        "generated_at": "2025-12-04T08:51:23.986Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Oklahoma DMV"
+          ],
+          "main_statutes": [
+            "Oklahoma Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Oklahoma-Specific VIN Verification Procedures\n\nFor a 2020 Land Rover Discovery Sport registered in Oklahoma, the state's title-holding system and specific legal framework create distinct verification requirements. Oklahoma operates under a title-holding system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most major transactions. This system places significant importance on the integrity of the title document itself, as any discrepancy between the VIN stamped on the vehicle and the VIN printed on the title is a major red flag for fraud. The Oklahoma DMV administers these rules under the authority of the Oklahoma Vehicle Code, which defines the state's procedures for titling, branding, and inspection.\n\nKey technical and legal considerations for an Oklahoma VIN check include:\n*   **Title Brand Scrutiny:** Oklahoma recognizes specific title brands, including Salvage, Rebuilt, Flood, and Junk. A vehicle history report for this state should be cross-referenced with the Oklahoma DMV's records to confirm the current brand status, as these designations are legally mandated indicators of a vehicle's past condition.\n*   **Mandatory Inspection:** Oklahoma requires a state-required vehicle inspection for certain title transactions. This inspection typically includes a physical verification that the VIN on the dashboard matches the VIN on the title and registration documents, serving as a frontline defense against VIN cloning or switching.\n*   **Structural and Environmental Assessment:** Given the potential for regional environmental risks, a forensic evaluation of a vehicle's history in Oklahoma should include a specific review for flood or water damage indicators, which may not always be immediately apparent but can compromise long-term electronic and structural integrity.\n\nFrom an engineering and antifraud perspective, verifying a vehicle in this state demands a multi-source approach. The VIN (1HGK8GZU8LF530522) itself provides a fixed data point; the WMI \"1HG\" identifies the manufacturer and region. In Oklahoma, one must reconcile the decoded vehicle information with the physical title held by the Oklahoma DMV, the results of any state-required inspections, and the vehicle's event history from standard state and federal data sources. This reconciliation is critical because discrepancies among these sources can indicate title washing, where a branded title from another jurisdiction is cleared through improper means. The legal and mechanical integrity of the vehicle depends on this consistent chain of evidence, ensuring the 2020 Land Rover Discovery Sport has not been reconstructed from salvage without proper designation or suffered damage that affects its safety systems.",
+  "timestamp": "2025-12-04T08:52:24.692Z",
+  "wordCount": 399
+}

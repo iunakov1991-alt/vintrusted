@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Suzuki",
+    "model": "XL-7",
+    "year": "2021",
+    "stateSlug": "alabama",
+    "stateLabel": "Alabama",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGX9E980MY355211",
+    "variationContext": {
+      "structuralVariant": "comprehensive_check",
+      "styleVariant": {
+        "name": "Legal Academic",
+        "tone": "formal, statute-referenced, analytical",
+        "description": "Формальный академический стиль с ссылками на законодательство",
+        "characteristics": [
+          "Emphasizes legal compliance and regulatory frameworks",
+          "Uses formal terminology and statutory references",
+          "Focuses on documentation and verification processes",
+          "Academic citation style",
+          "Precise legal terminology"
+        ],
+        "openingPhrases": [
+          "A comprehensive legal and technical audit",
+          "From a regulatory compliance perspective",
+          "Under state and federal vehicle regulations",
+          "Per statutory requirements",
+          "In accordance with regulatory frameworks"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": {
+        "vin": "1HGX9E980MY355211",
+        "make": "Suzuki",
+        "model": "XL-7",
+        "year": 2021,
+        "state": "alabama",
+        "generated_at": "2025-12-04T08:55:40.657Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Alabama DMV"
+          ],
+          "main_statutes": [
+            "Alabama Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Alabama-Specific VIN Verification for the 2021 Suzuki XL-7\n\nConducting a VIN check for a 2021 Suzuki XL-7 registered in Alabama requires an understanding of the state's specific legal and administrative framework. Alabama operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most major transactions. This system places significant importance on the integrity of the title document itself, as it is held by the vehicle owner or lienholder. The Alabama DMV serves as the central authority for maintaining these records and enforcing related statutes under the Alabama Vehicle Code. A comprehensive VIN history report for an Alabama-registered vehicle will cross-reference data from this agency with standard state and federal data sources to build a complete profile.\n\nKey regulatory and verification points specific to Alabama include:\n\n*   **Title Brand Scrutiny:** Alabama recognizes specific title brands that permanently annotate a vehicle's history. These legally defined brands include Salvage, Rebuilt, Flood, and Junk. A vehicle history report will search for the issuance of these brands, which indicate severe past damage or total loss. Under the title-holding system, these brands are physically marked on the title document and are carried with the vehicle through subsequent ownership changes.\n*   **Mandatory Inspection Protocol:** Alabama requires a state-required vehicle inspection for certain title transactions, particularly when a branded title is being cleared or a vehicle is entering the state. This inspection is a critical antifraud measure designed to verify the vehicle's identity against the VIN `1HGX9E980MY355211` and assess its roadworthiness and the legitimacy of major repairs.\n*   **Environmental Risk Assessment:** Regional environmental risks are a consideration in vehicle history. Reports may incorporate data related to these risks, which, when correlated with other records, can help identify potential undisclosed.",
+  "timestamp": "2025-12-04T08:55:58.998Z",
+  "wordCount": 294
+}

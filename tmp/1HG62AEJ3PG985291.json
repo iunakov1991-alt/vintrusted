@@ -1,0 +1,576 @@
+[SEO AI] 2025-12-04T19:29:30.190Z - Cache loaded: 2974 entries
+[SEO AI] 2025-12-04T19:29:30.196Z - AI training strategy loaded
+[SEO AI] 2025-12-04T19:29:30.197Z - Local AI disabled (Pre-M1 mode or feature flag off)
+[SEO REF-LOADER] 2025-12-04T19:29:30.200Z - Reference articles loaded and cached
+[SEO RULE-ENGINE] 2025-12-04T19:29:30.200Z - Loaded 5 rules from rules.json
+[SEO VARIATION-ENGINE] 2025-12-04T19:29:30.201Z - Loaded 43 structural schemes
+[SEO VARIATION-ENGINE] 2025-12-04T19:29:30.202Z - Loaded 6 style modes
+[SEO VARIATION-ENGINE] 2025-12-04T19:29:30.202Z - Loaded block depth configurations
+[SEO VARIATION-ENGINE] 2025-12-04T19:29:30.203Z - Loaded VIN specs for 3 models
+[SEO VARIATION-ENGINE] 2025-12-04T19:29:30.204Z - Loaded state risks for 4 states
+[SEO VARIATION-ENGINE] 2025-12-04T19:29:30.204Z - Loaded block variants for 8 block types
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.205Z - VIN canon template loaded
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.208Z - Block configuration loaded: 15 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.208Z - FACT-LOCK: Loaded 3 vehicle specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.209Z - FACT-LOCK: Loaded 51 state specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.209Z - FACT-LOCK: Loaded global invariants
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.209Z - FACT-LOCK: Prompt header loaded
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.210Z - Loading 15 canonical prompt files...
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.211Z - Loaded prompt for accident_intelligence
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.211Z - Loaded prompt for buyer_guide
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.212Z - Loaded prompt for cta
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.213Z - Loaded prompt for deep_explanation
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.213Z - Loaded prompt for faq
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.213Z - Loaded prompt for fraud_patterns
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.213Z - Loaded prompt for hero
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.213Z - Loaded prompt for insurance_risk
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.213Z - Loaded prompt for internal_links
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.214Z - Loaded prompt for key_facts
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.214Z - Loaded prompt for market_value
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.214Z - Loaded prompt for nmvtis
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.214Z - Loaded prompt for recalls_tsbs
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.214Z - Loaded prompt for state_specific
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:29:30.215Z - Loaded prompt for vin_decoder
+[SEO FRAGMENT-CACHE] 2025-12-04T19:29:30.215Z - Loading 74 cached fragments...
+[SEO FRAGMENT-CACHE] 2025-12-04T19:29:30.240Z - Loaded 74 fragments
+[SEO RULE-ENGINE] 2025-12-04T19:29:30.241Z - Loaded 5 rules from rules.json
+[SEO GEN-PAGE] 2025-12-04T19:29:30.241Z - Generating page: 2023 Smart EQ fortwo in Missouri (VIN: 1HG62AEJ3PG985291)
+[SEO GEN-PAGE] 2025-12-04T19:29:30.241Z - Analysis depth: deep, Max retries: 5
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.243Z - FACT-LOCK: Loaded existing FACT-SHEET for VIN 1HG62AEJ3PG985291
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.243Z - FACT-LOCK: FACT-SHEET ready for 2023 Smart EQ fortwo in missouri
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.243Z - Generating V6 article: 2023 Smart EQ fortwo in Missouri (15 blocks, parallel generation)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.243Z - Structural variant: regulatory_detailed, Style: Market Economics, Depth roll: 1
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.244Z - Block groups for parallel generation: 3 groups
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.244Z - Generating group 1/3 (6 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.249Z - Using canonical prompt from file for hero
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.249Z - Generating hero block (ollama, 87 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:29:30.255Z - Trying DeepSeek API for vin_check in en (prompt: 9339 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:30.257Z - Using compact strategy (9339 vs 9339 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.317Z - Using canonical prompt from file for nmvtis
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.317Z - Generating nmvtis block (ollama, 285 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:29:30.323Z - Trying DeepSeek API for vin_check in en (prompt: 9063 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:30.324Z - Using compact strategy (9063 vs 9063 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.327Z - Using canonical prompt from file for key_facts
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.327Z - Generating key_facts block (ollama, 323 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:29:30.329Z - Trying DeepSeek API for vin_check in en (prompt: 9361 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:30.330Z - Using compact strategy (9361 vs 9361 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.332Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.332Z - Generating vin_decoder block (ollama, 127 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:29:30.334Z - Trying DeepSeek API for vin_check in en (prompt: 11325 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:30.335Z - Using compact strategy (11325 vs 11325 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.336Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.336Z - Generating fraud_patterns block (deepseek, 126 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:29:30.338Z - Trying DeepSeek API for vin_check in en (prompt: 9305 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:30.340Z - Using compact strategy (9305 vs 9305 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.341Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:30.342Z - Generating accident_intelligence block (deepseek, 153 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:29:30.344Z - Trying DeepSeek API for vin_check in en (prompt: 9395 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:30.346Z - Using compact strategy (9395 vs 9395 chars)
+[SEO AI] 2025-12-04T19:29:37.486Z - DeepSeek API success (attempt 1): 908 chars, prompt: 9305 chars, timeout: 180000ms, tokens: 201
+[SEO AI] 2025-12-04T19:29:37.486Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:37.486Z - AI content generated by deepseek for vin_check in en (908 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:37.505Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:37.505Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:37.514Z - ⚠️  Block fraud_patterns is 71 words short (35.5%). Auto-expanding...
+[SEO AI] 2025-12-04T19:29:37.517Z - Trying DeepSeek API for vin_check in en (prompt: 2304 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:37.519Z - Using compact strategy (2304 vs 2304 chars)
+[SEO AI] 2025-12-04T19:29:37.525Z - DeepSeek API success (attempt 1): 909 chars, prompt: 11325 chars, timeout: 180000ms, tokens: 202
+[SEO AI] 2025-12-04T19:29:37.525Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:37.526Z - AI content generated by deepseek for vin_check in en (909 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:37.526Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:37.526Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:37.535Z - ⚠️  Block vin_decoder is 67 words short (33.5%). Auto-expanding...
+[SEO AI] 2025-12-04T19:29:37.537Z - Trying DeepSeek API for vin_check in en (prompt: 2305 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:37.539Z - Using compact strategy (2305 vs 2305 chars)
+[SEO AI] 2025-12-04T19:29:38.160Z - DeepSeek API success (attempt 1): 968 chars, prompt: 9339 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:29:38.161Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:38.161Z - AI content generated by deepseek for vin_check in en (968 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:38.186Z - ⚠️  Block hero missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:38.186Z - ⚠️  Block hero does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:38.191Z - Block hero validated successfully (138 words, marker and punctuation auto-added, 7946ms)
+[SEO AI] 2025-12-04T19:29:39.189Z - DeepSeek API success (attempt 1): 1249 chars, prompt: 9395 chars, timeout: 180000ms, tokens: 233
+[SEO AI] 2025-12-04T19:29:39.190Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:39.190Z - AI content generated by deepseek for vin_check in en (1249 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:39.207Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:39.207Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:39.209Z - ⚠️  Block accident_intelligence is 27 words short (13.5%). Auto-expanding...
+[SEO AI] 2025-12-04T19:29:39.213Z - Trying DeepSeek API for vin_check in en (prompt: 2645 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:39.215Z - Using compact strategy (2645 vs 2645 chars)
+[SEO AI] 2025-12-04T19:29:43.815Z - DeepSeek API success (attempt 1): 1933 chars, prompt: 9063 chars, timeout: 180000ms, tokens: 392
+[SEO AI] 2025-12-04T19:29:43.817Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:43.817Z - AI content generated by deepseek for vin_check in en (1933 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:43.839Z - ⚠️  Block nmvtis missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:43.839Z - ⚠️  Block nmvtis does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:43.844Z - Block nmvtis validated successfully (285 words, marker and punctuation auto-added, 13527ms)
+[SEO AI] 2025-12-04T19:29:44.557Z - DeepSeek API success (attempt 1): 847 chars, prompt: 2645 chars, timeout: 180000ms, tokens: 154
+[SEO AI] 2025-12-04T19:29:44.557Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:44.557Z - AI content generated by deepseek for vin_check in en (847 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.581Z - ⚠️  Auto-expanded block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.581Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 116 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.581Z - ⚠️  Block accident_intelligence has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:29:44.586Z - Trying DeepSeek API for vin_check in en (prompt: 2505 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:44.591Z - Using compact strategy (2505 vs 2505 chars)
+[SEO AI] 2025-12-04T19:29:44.924Z - DeepSeek API success (attempt 1): 2310 chars, prompt: 9361 chars, timeout: 180000ms, tokens: 437
+[SEO AI] 2025-12-04T19:29:44.924Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:44.924Z - AI content generated by deepseek for vin_check in en (2310 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.947Z - ⚠️  Block key_facts missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.947Z - ⚠️  Block key_facts does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.948Z - ⚠️  Block key_facts has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:29:44.952Z - Trying DeepSeek API for vin_check in en (prompt: 3566 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:44.956Z - Using compact strategy (3566 vs 3566 chars)
+[SEO AI] 2025-12-04T19:29:44.970Z - DeepSeek API success (attempt 1): 1051 chars, prompt: 2305 chars, timeout: 180000ms, tokens: 234
+[SEO AI] 2025-12-04T19:29:44.970Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:44.970Z - AI content generated by deepseek for vin_check in en (1051 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.971Z - ⚠️  Auto-expanded block vin_decoder still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.971Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 158 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.971Z - Block vin_decoder validation failed (attempt 1): TOO_SHORT_FOR_BLOCK_TYPE: 133 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.971Z - Retrying block vin_decoder...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.971Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:44.971Z - Generating vin_decoder block (ollama, 127 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:29:44.975Z - Trying DeepSeek API for vin_check in en (prompt: 11325 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:44.977Z - Using compact strategy (11325 vs 11325 chars)
+[SEO AI] 2025-12-04T19:29:45.296Z - DeepSeek API success (attempt 1): 1157 chars, prompt: 2304 chars, timeout: 180000ms, tokens: 242
+[SEO AI] 2025-12-04T19:29:45.296Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:45.296Z - AI content generated by deepseek for vin_check in en (1157 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:45.317Z - ⚠️  Auto-expanded block fraud_patterns still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:45.317Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 164 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:45.317Z - Block fraud_patterns validation failed (attempt 1): TOO_SHORT_FOR_BLOCK_TYPE: 129 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:45.317Z - Retrying block fraud_patterns...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:45.318Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:45.318Z - Generating fraud_patterns block (deepseek, 126 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:29:45.322Z - Trying DeepSeek API for vin_check in en (prompt: 9305 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:45.328Z - Using compact strategy (9305 vs 9305 chars)
+[SEO AI] 2025-12-04T19:29:51.002Z - DeepSeek API success (attempt 1): 1072 chars, prompt: 2505 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:29:51.004Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:51.005Z - AI content generated by deepseek for vin_check in en (1072 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.030Z - ⚠️  Auto-fixed block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.030Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 150 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.030Z - Block accident_intelligence validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 173 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.030Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.031Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.031Z - Generating accident_intelligence block (deepseek, 153 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:29:51.034Z - Trying DeepSeek API for vin_check in en (prompt: 9409 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:51.037Z - Using compact strategy (9409 vs 9409 chars)
+[SEO AI] 2025-12-04T19:29:51.620Z - DeepSeek API success (attempt 1): 942 chars, prompt: 3566 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:29:51.620Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:51.620Z - AI content generated by deepseek for vin_check in en (942 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.644Z - ⚠️  Auto-fixed block key_facts still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.644Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.645Z - Block key_facts validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_PUNCTUATION_PATTERN: Dirty punctuation pattern detected
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.645Z - Retrying block key_facts...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.646Z - Using canonical prompt from file for key_facts
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.646Z - Generating key_facts block (ollama, 323 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:29:51.650Z - Trying DeepSeek API for vin_check in en (prompt: 9349 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:51.654Z - Using compact strategy (9349 vs 9349 chars)
+[SEO AI] 2025-12-04T19:29:51.758Z - DeepSeek API success (attempt 1): 885 chars, prompt: 11325 chars, timeout: 180000ms, tokens: 202
+[SEO AI] 2025-12-04T19:29:51.758Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:51.758Z - AI content generated by deepseek for vin_check in en (885 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.777Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.777Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:51.779Z - ⚠️  Block vin_decoder is 57 words short (28.5%). Auto-expanding...
+[SEO AI] 2025-12-04T19:29:51.783Z - Trying DeepSeek API for vin_check in en (prompt: 2281 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:51.786Z - Using compact strategy (2281 vs 2281 chars)
+[SEO AI] 2025-12-04T19:29:52.392Z - DeepSeek API success (attempt 1): 931 chars, prompt: 9305 chars, timeout: 180000ms, tokens: 201
+[SEO AI] 2025-12-04T19:29:52.392Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:52.393Z - AI content generated by deepseek for vin_check in en (931 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:52.415Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:52.416Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:52.416Z - ⚠️  Block fraud_patterns is 63 words short (31.5%). Auto-expanding...
+[SEO AI] 2025-12-04T19:29:52.420Z - Trying DeepSeek API for vin_check in en (prompt: 2327 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:52.424Z - Using compact strategy (2327 vs 2327 chars)
+[SEO AI] 2025-12-04T19:29:59.118Z - DeepSeek API success (attempt 1): 958 chars, prompt: 2281 chars, timeout: 180000ms, tokens: 214
+[SEO AI] 2025-12-04T19:29:59.119Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:29:59.119Z - AI content generated by deepseek for vin_check in en (958 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:59.142Z - ⚠️  Auto-expanded block vin_decoder still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:59.142Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 152 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:59.143Z - Block vin_decoder validation failed (attempt 2): TOO_SHORT_FOR_BLOCK_TYPE: 143 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:59.143Z - Retrying block vin_decoder...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:59.144Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:59.144Z - Generating vin_decoder block (ollama, 127 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:29:59.148Z - Trying DeepSeek API for vin_check in en (prompt: 11326 chars, compact: true)
+[SEO AI] 2025-12-04T19:29:59.151Z - Using compact strategy (11326 vs 11326 chars)
+[SEO AI] 2025-12-04T19:30:00.547Z - DeepSeek API success (attempt 1): 1301 chars, prompt: 9409 chars, timeout: 180000ms, tokens: 233
+[SEO AI] 2025-12-04T19:30:00.547Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:00.547Z - AI content generated by deepseek for vin_check in en (1301 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:00.574Z - ⚠️  Block accident_intelligence is 22 words short (11.0%). Auto-expanding...
+[SEO AI] 2025-12-04T19:30:00.577Z - Trying DeepSeek API for vin_check in en (prompt: 2659 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:00.581Z - Using compact strategy (2659 vs 2659 chars)
+[SEO AI] 2025-12-04T19:30:00.818Z - DeepSeek API success (attempt 1): 1087 chars, prompt: 2327 chars, timeout: 180000ms, tokens: 226
+[SEO AI] 2025-12-04T19:30:00.818Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:00.818Z - AI content generated by deepseek for vin_check in en (1087 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:00.841Z - ⚠️  Auto-expanded block fraud_patterns still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:00.841Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 160 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:00.841Z - Block fraud_patterns validation failed (attempt 2): TOO_SHORT_FOR_BLOCK_TYPE: 137 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:00.841Z - Retrying block fraud_patterns...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:00.841Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:00.841Z - Generating fraud_patterns block (deepseek, 126 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:30:00.845Z - Trying DeepSeek API for vin_check in en (prompt: 9306 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:00.849Z - Using compact strategy (9306 vs 9306 chars)
+[SEO AI] 2025-12-04T19:30:05.886Z - DeepSeek API success (attempt 1): 855 chars, prompt: 2659 chars, timeout: 180000ms, tokens: 144
+[SEO AI] 2025-12-04T19:30:05.886Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:05.886Z - AI content generated by deepseek for vin_check in en (855 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:05.908Z - ⚠️  Auto-expanded block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:05.909Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 121 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:05.909Z - Block accident_intelligence validation failed (attempt 2): INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "information", TOO_SHORT_FOR_BLOCK_TYPE: 178 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:05.909Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:05.909Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:05.909Z - Generating accident_intelligence block (deepseek, 153 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:30:05.914Z - Trying DeepSeek API for vin_check in en (prompt: 9409 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:05.917Z - Using compact strategy (9409 vs 9409 chars)
+[SEO AI] 2025-12-04T19:30:06.537Z - DeepSeek API success (attempt 1): 904 chars, prompt: 11326 chars, timeout: 180000ms, tokens: 202
+[SEO AI] 2025-12-04T19:30:06.537Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:06.537Z - AI content generated by deepseek for vin_check in en (904 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:06.562Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:06.562Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO AI] 2025-12-04T19:30:06.825Z - DeepSeek API success (attempt 1): 2123 chars, prompt: 9349 chars, timeout: 180000ms, tokens: 437
+[SEO AI] 2025-12-04T19:30:06.825Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:06.825Z - AI content generated by deepseek for vin_check in en (2123 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:06.842Z - ⚠️  Block key_facts missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:06.843Z - ⚠️  Block key_facts does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:06.843Z - Block key_facts validated successfully (322 words, marker and punctuation auto-added, 36516ms)
+[SEO AI] 2025-12-04T19:30:08.105Z - DeepSeek API success (attempt 1): 1018 chars, prompt: 9306 chars, timeout: 180000ms, tokens: 201
+[SEO AI] 2025-12-04T19:30:08.105Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:08.105Z - AI content generated by deepseek for vin_check in en (1018 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:08.127Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:08.128Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO AI] 2025-12-04T19:30:14.579Z - DeepSeek API success (attempt 1): 1246 chars, prompt: 9409 chars, timeout: 180000ms, tokens: 233
+[SEO AI] 2025-12-04T19:30:14.580Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:14.580Z - AI content generated by deepseek for vin_check in en (1246 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.611Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.611Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.613Z - Group 1 completed in 44.4s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.613Z - Generating group 2/3 (1 blocks in parallel)...
+[SEO FRAGMENT-CACHE] 2025-12-04T19:30:14.617Z - Cache HIT for state_specific (missouri)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.618Z - Using cached fragment for state_specific
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.618Z - Group 2 completed in 0.0s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.618Z - Generating group 3/3 (7 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.619Z - Using canonical prompt from file for insurance_risk
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.619Z - Generating insurance_risk block (deepseek, 189 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:30:14.624Z - Trying DeepSeek API for vin_check in en (prompt: 9374 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:14.627Z - Using compact strategy (9374 vs 9374 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.629Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.629Z - Generating buyer_guide block (ollama, 244 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:30:14.632Z - Trying DeepSeek API for vin_check in en (prompt: 9225 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:14.634Z - Using compact strategy (9225 vs 9225 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.635Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.635Z - Generating market_value block (deepseek, 326 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:30:14.638Z - Trying DeepSeek API for vin_check in en (prompt: 9282 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:14.640Z - Using compact strategy (9282 vs 9282 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.641Z - Using canonical prompt from file for recalls_tsbs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.641Z - Generating recalls_tsbs block (deepseek, 244 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:30:14.644Z - Trying DeepSeek API for vin_check in en (prompt: 9105 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:14.646Z - Using compact strategy (9105 vs 9105 chars)
+[SEO FRAGMENT-CACHE] 2025-12-04T19:30:14.647Z - Cache HIT for faq (missouri)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.647Z - Using cached fragment for faq
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.647Z - Using canonical prompt from file for internal_links
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.648Z - Generating internal_links block (ollama, 52 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:30:14.650Z - Trying DeepSeek API for vin_check in en (prompt: 9116 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:14.652Z - Using compact strategy (9116 vs 9116 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.665Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.665Z - Generating cta block (ollama, 50 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:30:14.667Z - Trying DeepSeek API for vin_check in en (prompt: 9039 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:14.669Z - Using compact strategy (9039 vs 9039 chars)
+[SEO AI] 2025-12-04T19:30:18.666Z - DeepSeek API success (attempt 1): 453 chars, prompt: 9116 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:30:18.666Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:18.666Z - AI content generated by deepseek for vin_check in en (453 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:18.689Z - Block internal_links validated successfully (63 words, 4042ms)
+[SEO AI] 2025-12-04T19:30:22.399Z - DeepSeek API success (attempt 1): 1017 chars, prompt: 9039 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:30:22.399Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:22.399Z - AI content generated by deepseek for vin_check in en (1017 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:22.409Z - ⚠️  Block cta missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:22.410Z - ⚠️  Block cta does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:22.410Z - ⚠️  Block cta has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:30:22.412Z - Trying DeepSeek API for vin_check in en (prompt: 2273 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:22.414Z - Using compact strategy (2273 vs 2273 chars)
+[SEO AI] 2025-12-04T19:30:24.563Z - DeepSeek API success (attempt 1): 1476 chars, prompt: 9374 chars, timeout: 180000ms, tokens: 276
+[SEO AI] 2025-12-04T19:30:24.564Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:24.564Z - AI content generated by deepseek for vin_check in en (1476 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:24.586Z - ⚠️  Block insurance_risk missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:24.587Z - ⚠️  Block insurance_risk does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:24.587Z - ⚠️  Block insurance_risk has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:30:24.591Z - Trying DeepSeek API for vin_check in en (prompt: 2732 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:24.594Z - Using compact strategy (2732 vs 2732 chars)
+[SEO AI] 2025-12-04T19:30:26.805Z - DeepSeek API success (attempt 1): 1703 chars, prompt: 9225 chars, timeout: 180000ms, tokens: 342
+[SEO AI] 2025-12-04T19:30:26.805Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:26.805Z - AI content generated by deepseek for vin_check in en (1703 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:26.830Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:26.830Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:26.830Z - ⚠️  Block buyer_guide has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:30:26.834Z - Trying DeepSeek API for vin_check in en (prompt: 2959 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:26.838Z - Using compact strategy (2959 vs 2959 chars)
+[SEO AI] 2025-12-04T19:30:26.937Z - DeepSeek API success (attempt 1): 1880 chars, prompt: 9105 chars, timeout: 180000ms, tokens: 342
+[SEO AI] 2025-12-04T19:30:26.937Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:26.937Z - AI content generated by deepseek for vin_check in en (1880 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:26.953Z - ⚠️  Block recalls_tsbs missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:26.953Z - ⚠️  Block recalls_tsbs does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:26.954Z - ⚠️  Block recalls_tsbs has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:30:26.957Z - Trying DeepSeek API for vin_check in en (prompt: 3136 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:26.961Z - Using compact strategy (3136 vs 3136 chars)
+[SEO AI] 2025-12-04T19:30:29.263Z - DeepSeek API success (attempt 1): 1017 chars, prompt: 2273 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:30:29.263Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:29.264Z - AI content generated by deepseek for vin_check in en (1017 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:29.286Z - ⚠️  Auto-fixed block cta still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:29.286Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:29.286Z - Block cta validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:29.286Z - Retrying block cta...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:29.287Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:29.287Z - Generating cta block (ollama, 50 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:30:29.291Z - Trying DeepSeek API for vin_check in en (prompt: 9039 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:29.294Z - Using compact strategy (9039 vs 9039 chars)
+[SEO AI] 2025-12-04T19:30:30.509Z - DeepSeek API success (attempt 1): 2373 chars, prompt: 9282 chars, timeout: 180000ms, tokens: 441
+[SEO AI] 2025-12-04T19:30:30.510Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:30.510Z - AI content generated by deepseek for vin_check in en (2373 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:30.535Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:30.535Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:30.535Z - Block market_value validated successfully (340 words, marker and punctuation auto-added, 15900ms)
+[SEO AI] 2025-12-04T19:30:31.298Z - DeepSeek API success (attempt 1): 1010 chars, prompt: 2732 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:30:31.298Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:31.298Z - AI content generated by deepseek for vin_check in en (1010 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:31.320Z - ⚠️  Auto-fixed block insurance_risk still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:31.321Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:31.321Z - Block insurance_risk validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:31.321Z - Retrying block insurance_risk...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:31.321Z - Using canonical prompt from file for insurance_risk
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:31.321Z - Generating insurance_risk block (deepseek, 189 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:30:31.325Z - Trying DeepSeek API for vin_check in en (prompt: 9375 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:31.329Z - Using compact strategy (9375 vs 9375 chars)
+[SEO AI] 2025-12-04T19:30:33.667Z - DeepSeek API success (attempt 1): 963 chars, prompt: 2959 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:30:33.668Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:33.668Z - AI content generated by deepseek for vin_check in en (963 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.690Z - ⚠️  Auto-fixed block buyer_guide still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.691Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 149 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.691Z - Block buyer_guide validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.691Z - Retrying block buyer_guide...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.691Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.691Z - Generating buyer_guide block (ollama, 244 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:30:33.696Z - Trying DeepSeek API for vin_check in en (prompt: 9232 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:33.699Z - Using compact strategy (9232 vs 9232 chars)
+[SEO AI] 2025-12-04T19:30:33.798Z - DeepSeek API success (attempt 1): 1059 chars, prompt: 3136 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:30:33.799Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:33.799Z - AI content generated by deepseek for vin_check in en (1059 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.800Z - ⚠️  Auto-fixed block recalls_tsbs still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.800Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 158 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.800Z - Block recalls_tsbs validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.800Z - Retrying block recalls_tsbs...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.800Z - Using canonical prompt from file for recalls_tsbs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:33.800Z - Generating recalls_tsbs block (deepseek, 244 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:30:33.804Z - Trying DeepSeek API for vin_check in en (prompt: 9105 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:33.809Z - Using compact strategy (9105 vs 9105 chars)
+[SEO AI] 2025-12-04T19:30:36.568Z - DeepSeek API success (attempt 1): 1016 chars, prompt: 9039 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:30:36.568Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:36.569Z - AI content generated by deepseek for vin_check in en (1016 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:36.596Z - Block cta validated successfully (133 words, 21931ms)
+[SEO AI] 2025-12-04T19:30:41.551Z - DeepSeek API success (attempt 1): 1458 chars, prompt: 9375 chars, timeout: 180000ms, tokens: 276
+[SEO AI] 2025-12-04T19:30:41.552Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:41.552Z - AI content generated by deepseek for vin_check in en (1458 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:41.569Z - ⚠️  Block insurance_risk missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:41.569Z - ⚠️  Block insurance_risk does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:41.570Z - Block insurance_risk validated successfully (209 words, marker and punctuation auto-added, 26951ms)
+[SEO AI] 2025-12-04T19:30:46.206Z - DeepSeek API success (attempt 1): 1811 chars, prompt: 9232 chars, timeout: 180000ms, tokens: 342
+[SEO AI] 2025-12-04T19:30:46.206Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:46.206Z - AI content generated by deepseek for vin_check in en (1811 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:46.229Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:46.229Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:46.232Z - Block buyer_guide validated successfully (256 words, marker and punctuation auto-added, 31604ms)
+[SEO AI] 2025-12-04T19:30:46.233Z - DeepSeek API success (attempt 1): 1893 chars, prompt: 9105 chars, timeout: 180000ms, tokens: 342
+[SEO AI] 2025-12-04T19:30:46.233Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:46.233Z - AI content generated by deepseek for vin_check in en (1893 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:46.233Z - ⚠️  Block recalls_tsbs missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:46.233Z - ⚠️  Block recalls_tsbs does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:46.234Z - ⚠️  Block recalls_tsbs has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:30:46.239Z - Trying DeepSeek API for vin_check in en (prompt: 3149 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:46.244Z - Using compact strategy (3149 vs 3149 chars)
+[SEO AI] 2025-12-04T19:30:53.379Z - DeepSeek API success (attempt 1): 1102 chars, prompt: 3149 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:30:53.379Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:30:53.379Z - AI content generated by deepseek for vin_check in en (1102 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:53.430Z - ⚠️  Auto-fixed block recalls_tsbs still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:53.430Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 157 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:53.430Z - Block recalls_tsbs validation failed (attempt 2): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:53.430Z - Retrying block recalls_tsbs...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:53.430Z - Using canonical prompt from file for recalls_tsbs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:53.430Z - Generating recalls_tsbs block (deepseek, 244 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:30:53.434Z - Trying DeepSeek API for vin_check in en (prompt: 9105 chars, compact: true)
+[SEO AI] 2025-12-04T19:30:53.437Z - Using compact strategy (9105 vs 9105 chars)
+[SEO AI] 2025-12-04T19:31:05.780Z - DeepSeek API success (attempt 1): 1841 chars, prompt: 9105 chars, timeout: 180000ms, tokens: 342
+[SEO AI] 2025-12-04T19:31:05.782Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:31:05.782Z - AI content generated by deepseek for vin_check in en (1841 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.803Z - ⚠️  Block recalls_tsbs missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.804Z - ⚠️  Block recalls_tsbs does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.805Z - Block recalls_tsbs validated successfully (269 words, marker and punctuation auto-added, 51164ms)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.805Z - Group 3 completed in 51.2s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.805Z - All blocks generated in 95.6s (parallel mode)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.806Z -   WARNING: OVER_TARGET_LENGTH: 3168 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.806Z - Total article length: 3168 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.806Z - Running pre-validation with auto-repair...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.811Z - 🔧 Attempting to repair block vin_decoder (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:31:05.813Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:31:05.818Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.892Z - ⚠️  Block vin_decoder still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, TOO_SHORT_FOR_BLOCK_TYPE: 106 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.895Z - 🔧 Attempting to repair block fraud_patterns (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:31:05.896Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:31:05.897Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.956Z - ⚠️  Block fraud_patterns still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, TOO_SHORT_FOR_BLOCK_TYPE: 141 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.956Z - 🔧 Attempting to repair block accident_intelligence (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:31:05.956Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:31:05.957Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.971Z - ⚠️  Block accident_intelligence still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, TOO_SHORT_FOR_BLOCK_TYPE: 185 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.975Z - ⚠️  3 blocks still need post-processing:
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.975Z -   - vin_decoder (status: FAILED_VALIDATION): TOO_SHORT_FOR_BLOCK_TYPE: 144 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.975Z -   - fraud_patterns (status: FAILED_VALIDATION): TOO_SHORT_FOR_BLOCK_TYPE: 142 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.975Z -   - accident_intelligence (status: FAILED_VALIDATION): TOO_SHORT_FOR_BLOCK_TYPE: 186 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:05.976Z - Validating article...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: H2 may lack SEO keywords: "Key Facts"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: H2 may lack SEO keywords: "Missouri-Specific Insights"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: H2 may lack SEO keywords: "Frequently Asked Questions"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Recommended block "Executive Summary" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Recommended block "Data Layers" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: VIN Decoder may not cover all 17 positions (found 0 mentions)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: CTA does not follow canonical format: "Check this {YEAR} {MAKE} {MODEL} VIN now"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Internal links count (0) should be 4-6
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Key Facts section word count (312) should be 120-200 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: FAQ section word count (372) should be 400-600 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: CTA section word count (131) should be 55-75 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Total article word count (3109) should be 2000-2500 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Section "VIN Decoder" is too short (153 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Section "Accident Intelligence" is too short (181 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Section "Fraud Patterns" is too short (140 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Section "Insurance Risk" is too short (199 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Section "Internal Links" is too short (68 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z -   WARNING: Section "CTA" is too short (131 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.013Z - Attempting auto-fix...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.017Z - Running post-processing...
+[SEO POST-PROCESSOR] 2025-12-04T19:31:06.018Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:31:06.018Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.057Z - ⚠️  Article still has 5 errors after post-processing
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z -   ERROR: H2 "## Fraud Patterns" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z -   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z -   ERROR: Required block "State-Specific" is missing
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z -   ERROR: VIN Decoder section lacks position table
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z -   ERROR: Missing required sections: Deep Explanation
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z - Checking article uniqueness...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z - ✅ Article uniqueness score: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z - ✅ Article lexical variation: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z - Article generated: 3033 words, 14 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z - Circuit Breaker ollama: CLOSED, failure rate: 12.5%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.058Z - Circuit Breaker deepseek: CLOSED, failure rate: 20.0%
+[SEO GEN-PAGE] 2025-12-04T19:31:06.059Z - ✅ Article generated in 95.82s
+[SEO GEN-PAGE] 2025-12-04T19:31:06.059Z -    Words: 3033
+[SEO GEN-PAGE] 2025-12-04T19:31:06.059Z -    Blocks: 14
+{
+  "vin": "1HG62AEJ3PG985291",
+  "make": "Smart",
+  "model": "EQ fortwo",
+  "year": "2023",
+  "state": "missouri",
+  "stateLabel": "Missouri",
+  "article": {
+    "title": "VIN Check Guide for 2023 Smart EQ fortwo in Missouri",
+    "h1": "Complete VIN Check Guide: 2023 Smart EQ fortwo",
+    "content": "A Vehicle Identification Number (VIN) serves as a unique legal and engineering fingerprint for every automobile. For a 2023 Smart EQ fortwo registered in Missouri, a detailed VIN check is a critical risk assessment tool, analyzing actuarial factors like potential loss history and market value depreciation. The 17-character code, such as 1HG62AEJ3PG985291, is decoded using standard state and federal data sources to reveal its complete profile.\n\n*   **Structural Decoding:** The VIN's first three characters, the World Manufacturer Identifier (WMI), are critical for origin verification. For this vehicle, the WMI candidate is \"1HG\".\n*   **Legal Status Verification:** Missouri operates a title-holding system, meaning the physical certificate is a primary document. The state recognizes specific title brands, including Salvage, Rebuilt, Flood, and Junk, which directly impact insurance premiums.\n\n## NMVTIS: National Motor Vehicle Title Information System\n\nWhen reviewing a vehicle history report for a 2023 Smart EQ fortwo in Missouri, the National Motor Vehicle Title Information System (NMVTIS) serves as a foundational federal data source. This system aggregates information from state titling agencies, insurance carriers, and salvage yards to create a consolidated history, which is critical for assessing actuarial risk and potential loss history. For a vehicle identified by VIN `1HG62AEJ3PG985291`, the NMVTIS report provides verified data points that directly influence insurance premiums and residual market value. The report's integrity hinges on the 17-character VIN structure, where positions 1-3 (the WMI) for this vehicle include the code `1HG`, and the check digit at position 9 provides a mathematical validation against fraud.\n\nThe utility of an NMVTIS report lies in its standardized reporting of critical title events. In Missouri's title-holding system, the **Missouri DMV** is the primary agency recording these events according to the **Missouri Vehicle Code**. The report will explicitly list any title brands applied to the vehicle, which in Missouri are limited to the following designations: **Salvage**, **Rebuilt**, **Flood**, or **Junk**. Each brand carries significant implications for insurability, risk assessment, and depreciation. A \"Salvage\" or \"Flood\" brand, for instance, represents a substantial actuarial risk, often leading to higher premiums or outright coverage denial due to the potential for hidden structural or electrical failure. The presence of a brand is a permanent historical marker that impacts the vehicle's book value and future loss potential, as insurers use this data to model claim likelihood and severity.\n\nFor an electric vehicle like the 2023 Smart EQ fortwo, the NMVTIS data also provides a framework for evaluating specific risk metrics beyond collision.\n\n## Key Facts\n\nA VIN check for a 2023 Smart EQ fortwo, such as the example VIN 1HG62AEJ3PG985291, provides a structured analysis of the vehicle's identity and history within Missouri's specific regulatory framework. This process decodes the immutable 17-character identifier to verify the vehicle's origin and cross-references it against state and federal records for critical legal and financial disclosures. The assessment focuses on actuarial risk factors, title status, and market valuation implications, which are essential for insurance underwriting and investment protection.\n\n<table><tr><th>Fact Category</th><th>Specific Detail for Missouri</th><th>Risk &amp; Valuation Implication</th></tr><tr><td>**VIN Structure**</td><td>The WMI (positions 1-3) for this vehicle is one of the following: 1HG. The 9th digit is a mandatory Check Digit for validation, and the 10th digit encodes the Model Year.</td><td>A mismatch in these coded positions is a primary indicator of counterfeit VIN plates or major rebranding fraud, directly impacting insurability and total loss valuation.</td></tr><tr><td>**Title System**</td><td>Missouri operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership.</td><td>This system centralizes brand disclosure; any \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk\" brand assigned by the Missouri DMV remains a permanent part of the vehicle's title history, severely affecting residual value and insurance premiums.</td></tr><tr><td>**Legal Framework**</td><td>Vehicle titling and branding are governed by the **Missouri Vehicle Code**. The state mandates a **State-required vehicle inspection**.</td><td>Non-compliance with state statutes or inspection requirements can result in a vehicle being deemed unroadworthy, constituting a total financial loss for the owner and a liability for any subsequent buyer.</td></tr><tr><td>**History Sources**</td><td>The report synthesizes data from standard state and federal data sources.</td></tr></table> This comprehensive sourcing is designed to reveal prior loss events, ownership patterns, and other actuarial markers that directly influence risk.\n\n## VIN Decoder for 2023 Smart EQ fortwo\n\nA VIN decoder translates the unique 17-character identifier for a vehicle, such as the 2023 Smart EQ fortwo, into its core manufacturing and specification data. This technical breakdown is fundamental for verifying a vehicle's identity against its physical attributes and registration documents in Missouri, serving as a primary anti-fraud measure. The process reveals the vehicle's origin, model year, and production sequence, which are critical for accurate risk assessment and market valuation.\n\n<table><tr><th>Position</th><th>Range</th><th>Meaning</th></tr><tr><td>1-3</td><td>WMI</td><td>World Manufacturer Identifier: 1HG = United States, Honda, Unknown</td></tr><tr><td>-8</td><td>VDS</td><td>Vehicle Descriptor Section: Model-specific codes for 2023 Smart EQ fortwo (body style, trim, safety features, engine)</td></tr><tr><td>9</td><td>Check Digit</td><td>Mathematical validation digit (calculated via NHTSA algorithm)</td></tr><tr><td>10</td><td>Year</td><td>Model Year: P = 2023</td></tr><tr><td>11</td></tr></table>.\n\n## Fraud Patterns\n\nWhen reviewing a vehicle history report for a 2023 Smart EQ fortwo in Missouri, certain discrepancies serve as critical actuarial red flags, directly impacting risk assessment and market valuation. A primary warning sign is a mismatch between the decoded World Manufacturer Identifier (WMI), such as \"1HG\" for this VIN, and the vehicle's presented make and model, which can indicate a cloned VIN from a different vehicle. In Missouri's title-holding system, where the physical certificate denotes ownership, inconsistencies in the title history—such as a \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk\" brand appearing and then disappearing—suggest fraudulent title washing. Additionally, a lack of recorded \"State-required vehicle inspection\" entries against the VIN's timeline may signal attempts to conceal present condition or prior damage. These patterns elevate total loss probability and accelerate depreciation, materially affecting insurance premiums and residual value.\n\n## Accident Intelligence\n\nA comprehensive accident history review for a vehicle like the 2023 Smart EQ fortwo in Missouri involves analyzing data from multiple sources to assess past damage and its implications. This process is critical for evaluating both safety risks and financial exposure, as prior incidents can significantly alter a vehicle's structural integrity and market value. The analysis focuses on correlating reported events with potential title brands, such as Salvage or Rebuilt, which are formally recognized by the Missouri DMV under the Missouri Vehicle Code.\n\nKey technical and legal points for a buyer to verify include:\n*   Cross-referencing any accident reports with the official title history for brands like Salvage, Rebuilt, Flood, or Junk.\n*   Understanding that a State-required vehicle inspection in Missouri may not reveal previous structural or electrical damage from unreported incidents.\n*   Recognizing that undisclosed accidents directly impact total loss calculations and future insurance premiums based on actuarial risk models.\n*   Confirming that the vehicle identification number, with its WMI code of 1HG, has not been altered or cloned to conceal a severe loss history.\n\n## Missouri-Specific Insights\n\nA VIN check for a 2023 Smart EQ fortwo in Missouri operates within a distinct legal and administrative ecosystem defined by state statute and agency protocol. The process is governed by the Missouri Vehicle Code, which mandates specific documentation and branding standards for vehicle titles. Missouri employs a title-holding system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most official transactions. The Missouri DMV serves as the central authority for title issuance, brand application, and record maintenance. This regulatory environment creates specific data points and verification requirements that are critical for an accurate vehicle history assessment.\n\nKey technical and legal considerations under Missouri law include:\n*   **Title Brand Authority:** The Missouri DMV can apply formal title brands, including Salvage, Rebuilt, Flood, or Junk, based on specific damage or loss criteria. These brands are permanent notations that follow the vehicle within the state's system.\n*   **Inspection Mandate:** Missouri requires a state-required vehicle inspection, which can serve as a procedural checkpoint where discrepancies in vehicle identification or condition are formally documented.\n*   **Data Sourcing:** A comprehensive report synthesizes information from the Missouri DMV and standard state and federal data sources to present a unified history.\n*   **Fraud Mitigation:** The 17-character VIN, beginning with a WMI candidate like \"1HG,\" provides a fixed identifier. Missouri's adherence to a single title-holding document reduces certain types of title fraud but necessitates rigorous verification of the physical title's authenticity against electronic records.\n\nThe convergence of these regulations means a Missouri-specific VIN check must cross-reference the immutable VIN data against the state's branded title records and inspection history. This process verifies legal standing and reveals any state-mandated designations affecting value and safety. The definitive legal status of a vehicle within Missouri is ultimately determined by its title history as maintained by the state agency.\n\n## Insurance Risk\n\nA vehicle history report for VIN 1HG62AEJ3PG985291 provides critical actuarial data insurers use to calculate risk and set premiums for a 2023 Smart EQ fortwo in Missouri. Insurers analyze standardized reports to assess loss probability, which directly influences policy costs. Key factors derived from the history include the vehicle's title status, prior damage incidents, and odometer verification, all of which are weighted against regional risk models.\n\nPrimary insurance risk factors identified in a standard report include:\n*   **Title Brand History:** The presence of state-defined brands like Salvage, Rebuilt, Flood, or Junk from the Missouri title system is a severe risk multiplier, indicating past significant damage or total loss.\n*   **Loss History:** Any prior insurance claims for accidents, theft, or environmental damage (including Regional environmental risks) are factored into the vehicle's specific risk score.\n*   **Ownership & Use Patterns:** Frequent transfers or use in high-density areas can correlate with increased risk, affecting the underwriting model.\n*   **Market Value Verification:** The report helps establish an accurate actual cash value, which is fundamental for determining comprehensive and collision coverage limits and premiums.\n\nFor this specific model, insurers will also consider the vehicle's age, safety features, and repair cost.\n\n## Buyer Guide\n\nPurchasing a 2023 Smart EQ fortwo in Missouri requires a risk-focused evaluation beyond its basic specifications. A thorough VIN check, centered on the unique identifier 1HG62AEJ3PG985291, is an actuarial tool to assess potential financial and safety liabilities. Buyers should approach this process with specific, technical questions to uncover hidden loss history and accurately project total cost of ownership.\n\n**What is the vehicle's full title history and current brand status?**\nMissouri operates a title-holding system, meaning the physical certificate is a critical legal document. You must verify the title has never been branded with terms like **Salvage**, **Rebuilt**, **Flood**, or **Junk**. A branded title drastically alters the vehicle's actuarial risk profile, leading to higher insurance premiums and accelerated depreciation. Confirm the title's chain of custody through the **Missouri DMV** to ensure no fraudulent transfers have occurred.\n\n**Does the reported loss history align with the vehicle's condition?**\nCross-reference any incident reports against the vehicle's current state. For this Smart model, pay particular attention to the integrity of its high-voltage battery system and unibody structure, as damage here may not be immediately visible but constitutes a severe financial and safety risk. Inconsistencies between the history report and a physical inspection can indicate prior unrepaired damage or potential fraud.\n\n**How do environmental risk factors impact long-term value?**\nThe report may note **Regional environmental risks** pertinent to Missouri. For an electric vehicle like the EQ fortwo, this assessment is crucial for evaluating potential corrosion to electrical components and the battery pack, which.\n\n## Market Value\n\nDetermining the fair market value of a 2023 Smart EQ fortwo in Missouri requires a multi-faceted analysis that extends beyond its initial MSRP. As a modern electric vehicle, its valuation is influenced by a distinct set of actuarial and risk-based factors compared to internal combustion engine vehicles. A comprehensive VIN check synthesizes data from standard state and federal data sources to assess these variables, providing a grounded estimate that reflects both the vehicle's condition and the local market's risk tolerance. The underlying principle is that a vehicle's history directly correlates to its insurability and residual value, making transparency paramount.\n\nKey factors influencing the valuation of this vehicle include:\n\n*   **Title History and Branding:** Missouri operates a title-holding system, meaning the physical certificate of title is a central document. The presence of a title brand such as **Salvage**, **Rebuilt**, **Flood**, or **Junk**, as recorded by the **Missouri DMV**, is the single most significant depreciation factor. These brands, established under the **Missouri Vehicle Code**, indicate severe prior damage and drastically reduce market value due to heightened future repair costs and potential safety concerns.\n*   **Loss History and Event Verification:** The vehicle's claim history, including the number, severity, and type of prior incidents, is a critical actuarial input. A clean history supports a value near the top of the estimated range, while a record of collisions or other insured events triggers a depreciation adjustment based on the probable cost of latent repairs and compromised structural integrity.\n*   **Regional Market Dynamics:** Location-specific factors, including Missouri's **state-required vehicle inspection** mandate and awareness of **regional environmental risks**, influence buyer perception and value. A vehicle with a history consistent with local risk profiles may see less depreciation than one with a history atypical for the region.\n*   **Odometer Accuracy and Usage Patterns:** Anomalies in mileage accumulation or evidence of odometer tampering, as flagged during a VIN check, directly impact valuation. Lower, verifiable mileage typically supports higher value, but irregular patterns can indicate excessive wear or other undisclosed issues.\n\n## Recalls & Technical Service Bulletins\n\nA comprehensive VIN check for a 2023 Smart EQ fortwo in Missouri must include a rigorous review of recall and Technical Service Bulletin (TSB) data. For this model year, recall status is a critical actuarial factor, directly influencing insurance risk assessments and residual value projections. Open recalls on an electric vehicle like the EQ fortwo often pertain to high-voltage battery systems, charging components, or software-controlled safety features, representing significant latent liability. Insurers and underwriters quantify this as an elevated loss probability, which can affect premium calculations and total cost of ownership. Resolving recalls is not merely a maintenance item but a mandatory step to mitigate future claim exposure and preserve market value.\n\nFrom a legal and antifraud perspective, recall completion status is a verifiable data point. The Missouri DMV may reference unresolved safety recalls during its state-required vehicle inspection process. Furthermore, a vehicle with an open major safety recall may be more susceptible to being branded under the Missouri Vehicle Code if an incident related to the defect occurs. TSBs, while not safety mandates, provide a history of known engineering issues and recommended repairs. A pattern of unrepaired TSBs for a specific vehicle, as identified by its VIN, indicates potential deferred maintenance that accelerates depreciation and increases the risk of costly future failures.\n\n*   Review all recall campaigns issued for the 2023 Smart EQ fortwo model line, verifying completion status for VIN 1HG62AEJ3PG985291 through official manufacturer channels.\n*   Analyze Technical Service Bulletins to identify recurring engineering patterns or component failures that may not rise to the level.\n\n## Frequently Asked Questions\n\n**Q1: Will a VIN report for a 2023 Smart EQ fortwo show all accident history?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and the National Motor Vehicle Title Information System (NMVTIS) for total loss events. Incidents repaired privately, unreported damage, or events not captured in these databases will not appear on the report.\n\n**Q2: Does a clean Missouri title guarantee this vehicle was never declared a total loss?**\nAnswer: No, a clean Missouri title does not guarantee the vehicle was never a total loss. Title washing can occur when a vehicle with a Salvage or Junk brand from another state is moved to Missouri and receives a clean title. Cross-referencing with NMVTIS is essential to identify interstate brands.\n\n**Q3: Can flood or water damage history be hidden from a VIN report?**\nAnswer: Yes, flood damage history can be hidden if the damage occurred in a state that did not apply a Flood brand, or if repairs were conducted privately without an insurance claim. Detection requires an NMVTIS check combined with a thorough physical inspection for corrosion, silt, or mold.\n\n**Q4: How do I verify open safety recalls for this specific vehicle?**\nAnswer: Verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and the manufacturer's official portal. Both sources must be consulted for a comprehensive verification, as recall campaigns are administered separately.\n\n**Q5: What is title washing and how does it work?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a branded title, such as Salvage or Flood, to states with different disclosure laws to obtain a clean title. The vehicle may then be sold in Missouri without the brand disclosure. NMVTIS is designed to track these brands across state lines.\n\n**Q6: How can I detect VIN cloning on a 2023 Smart EQ fortwo?**\nAnswer: Detect VIN cloning by physically verifying the VIN stamp on the dashboard, door jamb, and firewall for consistency and signs of tampering, such as mismatched rivets or adhesive residue. An NMVTIS report may also flag a duplicate VIN registered in a different geographic location.\n\n**Q7: What is odometer rollback.\n\n## Related VIN Check Guides\n\nA VIN check for a 2023 Smart EQ fortwo in Missouri provides critical risk assessment data. The report analyzes loss history and market value depreciation using standard state and federal data sources. It cross-references records for title brands like Salvage or Rebuilt, which directly impact insurance premiums and residual value. This actuarial review is essential for accurate financial forecasting and fraud prevention.\n\n## Check Your VIN Now\n\nA comprehensive VIN history report for your 2023 Smart EQ fortwo provides critical actuarial data for risk assessment. This analysis examines loss history, market value depreciation, and title status to calculate potential premium implications. The report cross-references standard state and federal data sources against known fraud indicators.\n\n*   **Title Brand Analysis:** Scans for Missouri-recognized brands, including Salvage, Rebuilt, Flood, or Junk, which directly impact residual value and insurability.\n*   **Odometer Verification:** Confirms mileage consistency to assess accurate depreciation and exposure to wear-related failures.\n*   **Ownership History:** Reviews the chain of title within Missouri's title-holding system to identify frequent transfers that may suggest hidden financial or mechanical risk.\n\nThis due diligence establishes a factual basis for evaluating the vehicle's total cost of ownership and associated liability exposure.",
+    "wordCount": 3033,
+    "blocks": 14,
+    "blocksDetail": {
+      "hero": {
+        "provider": "ollama",
+        "wordCount": 138
+      },
+      "nmvtis": {
+        "provider": "ollama",
+        "wordCount": 285
+      },
+      "key_facts": {
+        "provider": "ollama",
+        "wordCount": 322
+      },
+      "vin_decoder": {
+        "provider": "ollama",
+        "wordCount": 144
+      },
+      "fraud_patterns": {
+        "provider": "deepseek",
+        "wordCount": 142
+      },
+      "accident_intelligence": {
+        "provider": "deepseek",
+        "wordCount": 186
+      },
+      "state_specific": {
+        "provider": "deepseek",
+        "wordCount": 314
+      },
+      "insurance_risk": {
+        "provider": "deepseek",
+        "wordCount": 209
+      },
+      "buyer_guide": {
+        "provider": "ollama",
+        "wordCount": 256
+      },
+      "market_value": {
+        "provider": "deepseek",
+        "wordCount": 340
+      },
+      "recalls_tsbs": {
+        "provider": "deepseek",
+        "wordCount": 269
+      },
+      "faq": {
+        "provider": "ollama",
+        "wordCount": 367
+      },
+      "internal_links": {
+        "provider": "ollama",
+        "wordCount": 63
+      },
+      "cta": {
+        "provider": "ollama",
+        "wordCount": 133
+      }
+    },
+    "timestamp": "2025-12-04T19:31:05.976Z",
+    "validationStats": {
+      "totalBlocks": 14,
+      "validBlocks": 14,
+      "failedBlocks": 3,
+      "autoAddedMarkers": 10,
+      "autoFixedEndings": 10
+    },
+    "uniquenessScore": 1,
+    "lexicalVariation": 1,
+    "structuralVariant": "regulatory_detailed",
+    "styleVariant": "Market Economics",
+    "performanceStats": {
+      "totalTime": 95816,
+      "averageBlockTime": 23420.64285714286,
+      "totalRetries": 12,
+      "cacheHitRate": 0.14285714285714285,
+      "providerStats": {
+        "ollama": {
+          "count": 7,
+          "totalTime": 151796,
+          "averageTime": 21685.14285714286,
+          "retries": 5,
+          "cacheHits": 0
+        },
+        "deepseek": {
+          "count": 5,
+          "totalTime": 176093,
+          "averageTime": 35218.6,
+          "retries": 7,
+          "cacheHits": 0
+        },
+        "fragment-cache": {
+          "count": 2,
+          "totalTime": 0,
+          "averageTime": 0,
+          "retries": 0,
+          "cacheHits": 2
+        }
+      }
+    },
+    "generationTime": 95816
+  },
+  "generated_at": "2025-12-04T19:31:06.059Z",
+  "generation_time": "95.82",
+  "analysis_depth": "deep"
+}

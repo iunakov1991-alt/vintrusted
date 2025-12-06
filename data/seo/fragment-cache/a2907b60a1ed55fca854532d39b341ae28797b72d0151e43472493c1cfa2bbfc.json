@@ -1,0 +1,41 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "0",
+    "year": "2016",
+    "stateSlug": "28",
+    "stateLabel": "28",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HG0KXYE0G2178522",
+    "variationContext": {
+      "structuralVariant": "risk_evaluation",
+      "styleVariant": {
+        "name": "Market Economics",
+        "tone": "insurance, value, risk, depreciation",
+        "description": "Экономико-рыночный стиль с акцентом на стоимость и риски",
+        "characteristics": [
+          "Emphasizes risk assessment and actuarial factors",
+          "Uses insurance terminology and risk metrics",
+          "Focuses on loss history and premium implications",
+          "Market value analysis",
+          "Depreciation factors"
+        ],
+        "openingPhrases": [
+          "From an insurance risk perspective",
+          "Actuarial analysis indicates",
+          "Risk assessment reveals",
+          "Market valuation suggests",
+          "Economic factors demonstrate"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": null
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2016 vehicle?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and total loss declarations. Incidents repaired privately, unreported damage, or events not captured in these databases will not appear on the report.\n\n**Q2: Does a clean California title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean California title does not guarantee the absence of a prior total loss declaration. Title washing can occur when a vehicle declared salvage in another state is re-titled in California without the brand, a process NMVTIS data is designed to help uncover.\n\n**Q3: How can flood or water damage history be hidden from a standard VIN report?**\nAnswer: Flood damage can be hidden if the incident was not reported to an insurance company, occurred in a jurisdiction without mandatory branding, or was repaired privately. Detection requires cross-referencing NMVTIS for brands and a meticulous physical inspection for corrosion, silt, or electrical malfunctions.\n\n**Q4: What is the process for verifying open safety recalls on a 2016 model?**\nAnswer: To verify open safety recalls, you must check the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN. Additionally, consult the manufacturer's official recall portal, as both systems must be queried for a comprehensive status verification.\n\n**Q5: How does title washing function as a form of vehicle fraud?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a branded title, such as salvage or flood, through states with differing disclosure laws to obtain a clean title. This obscures the vehicle's severe damage history prior to sale in a market like California.\n\n**Q6: What are the primary methods for detecting VIN cloning on a vehicle?**\nAnswer: Detection requires physically verifying the VIN plate on the dashboard matches the stamps on the door jamb and firewall. Inspect for tampering signs like mismatched rivets or adhesive residue, and cross-reference the VIN through NMVTIS to check for duplicate registrations in disparate locations.\n\n**Q7: What is odometer rollback and what techniques are used for its detection?**\nAnswer: Odometer rollback is the illegal alteration of a vehicle's mileage display, often via CAN-Bus manipulation. Detection involves inspecting for excessive physical wear inconsistent with the odometer reading, reviewing maintenance records for mileage chains, and performing an electronic control unit (ECU) scan for stored true mileage.\n\n**Q8: What is the correct procedure for checking a vehicle for liens in California?**\nAnswer: The definitive lien check is performed through the California Department of Motor Vehicles.",
+  "timestamp": "2025-12-04T10:02:46.057Z",
+  "wordCount": 427
+}

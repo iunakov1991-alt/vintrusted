@@ -1,0 +1,45 @@
+[SEO VALIDATE-PAGE] 2025-12-04T11:37:40.712Z - Validating page for VIN: 5XX8HTAJ2GZ975372
+[SEO RULE-ENGINE] 2025-12-04T11:37:40.719Z - Loaded 18 rules from rules.json
+PAGE_INVALID 5XX8HTAJ2GZ975372
+{
+  "vin": "5XX8HTAJ2GZ975372",
+  "valid": false,
+  "reasons": [
+    "H2 \"## Related VIN Check Guides\" has insufficient content (less than 2 paragraphs)",
+    "Required block \"State-Specific\" is missing",
+    "VIN Decoder section lacks position table",
+    "Article word count (1943) is below minimum (2000)",
+    "Article blocks (10) is below minimum (12)",
+    "Missing required sections: NMVTIS, Deep Explanation, Market Value, Insurance Risk, Recalls",
+    "Critical block failed: hero",
+    "Critical block failed: accident_intelligence",
+    "Critical block failed: state_specific",
+    "Critical block failed: buyer_guide",
+    "Critical block failed: faq",
+    "Page wordcount out of range: 1943"
+  ],
+  "warnings": [
+    "H2 may lack SEO keywords: \"Key Facts\"",
+    "H2 may lack SEO keywords: \"Maine-Specific Insights\"",
+    "H2 may lack SEO keywords: \"Frequently Asked Questions\"",
+    "Recommended block \"Data Layers\" may be missing or not clearly identified",
+    "VIN Decoder may not cover all 17 positions (found 0 mentions)",
+    "CTA does not follow canonical format: \"Check this {YEAR} {MAKE} {MODEL} VIN now\"",
+    "Article may have insufficient tables (found 0, recommended 3+)",
+    "Internal links count (0) should be 4-6",
+    "Key Facts section word count (118) should be 120-200 words",
+    "FAQ section word count (387) should be 400-600 words",
+    "CTA section word count (140) should be 55-75 words",
+    "Total article word count (1943) should be 2000-2500 words",
+    "Section \"Key Facts\" is too short (118 words, minimum 200)",
+    "Section \"VIN Decoder\" is too short (105 words, minimum 200)",
+    "Section \"Accident Intelligence\" is too short (170 words, minimum 200)",
+    "Section \"Internal Links\" is too short (99 words, minimum 200)",
+    "Section \"CTA\" is too short (140 words, minimum 200)",
+    "Repeated concept detected (3 times): \"maine operates title-holding system, meaning...\" - consider merging or removing duplicates"
+  ],
+  "word_count": 1943,
+  "validated_at": "2025-12-04T11:37:40.759Z"
+}
+PAGE_OK {"severity":"MAJOR","fatal":[],"major":["Total word count too high: 20180"],"minor":[],"stats":{"words":20180,"vinCount":330},"vin":"5XX8HTAJ2GZ975372"}
+SEVERITY:MAJOR;WORDCOUNT:37688;FATAL=0;MAJOR=1;MINOR=0;WEAK=

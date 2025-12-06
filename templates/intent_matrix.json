@@ -1,0 +1,39 @@
+{
+  "global_intents": {
+    "vehicle_identity": {
+      "required_terms": ["VIN", "Vehicle Identification Number"],
+      "allowed_blocks": ["hero", "vin_decoder", "nmvtis"]
+    },
+    "title_history": {
+      "required_terms": ["title brand", "salvage", "flood", "rebuilt"],
+      "allowed_blocks": ["state_specific", "nmvtis", "buyer_guide"]
+    },
+    "odometer_fraud": {
+      "required_terms": ["odometer", "rollback", "mileage"],
+      "allowed_blocks": ["state_specific", "nmvtis", "buyer_guide", "fraud_patterns"]
+    },
+    "accident_history": {
+      "required_terms": ["accident", "collision", "structural damage"],
+      "allowed_blocks": ["accident_intelligence", "buyer_guide", "insurance_risk"]
+    },
+    "theft_risk": {
+      "required_terms": ["theft", "stolen", "NICB"],
+      "allowed_blocks": ["fraud_patterns", "insurance_risk"]
+    },
+    "market_value": {
+      "required_terms": ["market value", "diminished value", "appraisal"],
+      "allowed_blocks": ["market_value", "insurance_risk"]
+    },
+    "recalls": {
+      "required_terms": ["recall", "NHTSA", "Technical Service Bulletin"],
+      "allowed_blocks": ["recalls_tsbs", "buyer_guide"]
+    },
+    "lien_status": {
+      "required_terms": ["lien", "secured interest", "clear title"],
+      "allowed_blocks": ["state_specific", "buyer_guide", "internal_links"]
+    }
+  }
+}
+
+
+

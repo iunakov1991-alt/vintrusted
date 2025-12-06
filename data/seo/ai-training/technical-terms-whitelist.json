@@ -1,0 +1,65 @@
+{
+  "2018": {
+    "Toyota": {
+      "Camry": {
+        "allowed_engines": [
+          "A25A-FKS",
+          "A25A-FXS",
+          "2GR-FKS"
+        ],
+        "engine_mappings": {
+          "A25A-FKS": {
+            "displacement": "2.5L",
+            "type": "4-cylinder",
+            "description": "2.5L A25A-FKS Dynamic Force 4-cylinder"
+          },
+          "A25A-FXS": {
+            "displacement": "2.5L",
+            "type": "4-cylinder Hybrid",
+            "description": "2.5L A25A-FXS Hybrid 4-cylinder"
+          },
+          "2GR-FKS": {
+            "displacement": "3.5L",
+            "type": "V6",
+            "description": "3.5L 2GR-FKS V6"
+          }
+        },
+        "forbidden_engines": [
+          "2AR-FXE",
+          "2AR-FE",
+          "1AR-FE",
+          "2AZ-FE"
+        ],
+        "forbidden_combinations": [
+          {
+            "pattern": "2.5L V6",
+            "reason": "2.5L engines are 4-cylinder, not V6"
+          },
+          {
+            "pattern": "2.5L.*2GR-FKS",
+            "reason": "2GR-FKS is 3.5L V6, not 2.5L"
+          },
+          {
+            "pattern": "2GR-FKS.*2.5L",
+            "reason": "2GR-FKS is 3.5L V6, not 2.5L"
+          }
+        ],
+        "vin_codes": {
+          "wmi": "4T1",
+          "model_year_code": "J",
+          "assembly_plants": ["J", "U"]
+        },
+        "trim_levels": [
+          "LE",
+          "SE",
+          "XLE",
+          "XSE",
+          "Hybrid LE",
+          "Hybrid SE",
+          "Hybrid XLE"
+        ]
+      }
+    }
+  }
+}
+

@@ -99,7 +99,7 @@ class SelfDiagnosis {
         });
       }
 
-      if (config.enableAI && !process.env.GROQ_API_KEY && !process.env.DEEPSEEK_API_KEY) {
+      if (config.enableAI && !process.env.DEEPSEEK_API_KEY) {
         warnings.push({
           type: 'configuration',
           severity: 'warning',

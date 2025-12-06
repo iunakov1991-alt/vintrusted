@@ -1,0 +1,41 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "10",
+    "year": "2022",
+    "stateSlug": "30",
+    "stateLabel": "30",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HG7E6J45NA358585",
+    "variationContext": {
+      "structuralVariant": "legal_framework",
+      "styleVariant": {
+        "name": "Forensic Engineer",
+        "tone": "mechanical, ADAS/body-structure emphasis, diagnostic",
+        "description": "Инженерно-форензический стиль с акцентом на механику",
+        "characteristics": [
+          "Emphasizes mechanical integrity and engineering analysis",
+          "Uses technical specifications and diagnostic terminology",
+          "Focuses on structural and mechanical assessment",
+          "ADAS system analysis",
+          "Body structure evaluation"
+        ],
+        "openingPhrases": [
+          "An engineering-grade analysis",
+          "From a mechanical integrity standpoint",
+          "Technical evaluation reveals",
+          "Forensic examination indicates",
+          "Structural assessment demonstrates"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": null
+    }
+  },
+  "content": "**Q1: What specific data sources are aggregated for a 2022 10  vehicle history report?**\nAnswer: Commercial reports compile data from insurance claim databases, police accident reports, state DMV title and registration records, the National Motor Vehicle Title Information System (NMVTIS), and auction announcements, but they do not access all possible sources.\n\n**Q2: How can I verify the structural integrity of a 2022 10  after a reported accident?**\nAnswer: You must obtain a detailed repair estimate or invoice specifying OEM versus aftermarket parts, seek a post-repair inspection by a certified technician focusing on unibody alignment and weld integrity, and cross-reference the damage location with known ADAS sensor placements.\n\n**Q3: Does a clean California title definitively prove a vehicle has no salvage history?**\nAnswer: No, a clean California title does not definitively prove an absence of salvage history, as title washing across state lines can obscure prior brands, necessitating a mandatory NMVTIS check for a national title brand history.\n\n**Q4: What technical indicators beyond a report suggest potential flood damage in a 2022 model?**\nAnswer: Technical indicators include corrosion on unpainted metal connectors under the dashboard, silt residue in seat track mechanisms or spare tire well, musty odor from HVAC evaporator cores, and mismatched module communication codes indicating replacement.\n\n**Q5: How do I conduct a comprehensive recall verification for a 2022 10 ?**\nAnswer.",
+  "timestamp": "2025-12-04T10:04:12.784Z",
+  "wordCount": 222
+}

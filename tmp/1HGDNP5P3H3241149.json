@@ -1,0 +1,430 @@
+[SEO AI] 2025-12-04T19:38:00.264Z - Cache loaded: 3113 entries
+[SEO AI] 2025-12-04T19:38:00.271Z - AI training strategy loaded
+[SEO AI] 2025-12-04T19:38:00.271Z - Local AI disabled (Pre-M1 mode or feature flag off)
+[SEO REF-LOADER] 2025-12-04T19:38:00.274Z - Reference articles loaded and cached
+[SEO RULE-ENGINE] 2025-12-04T19:38:00.275Z - Loaded 5 rules from rules.json
+[SEO VARIATION-ENGINE] 2025-12-04T19:38:00.276Z - Loaded 43 structural schemes
+[SEO VARIATION-ENGINE] 2025-12-04T19:38:00.276Z - Loaded 6 style modes
+[SEO VARIATION-ENGINE] 2025-12-04T19:38:00.277Z - Loaded block depth configurations
+[SEO VARIATION-ENGINE] 2025-12-04T19:38:00.277Z - Loaded VIN specs for 3 models
+[SEO VARIATION-ENGINE] 2025-12-04T19:38:00.279Z - Loaded state risks for 4 states
+[SEO VARIATION-ENGINE] 2025-12-04T19:38:00.282Z - Loaded block variants for 8 block types
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.283Z - VIN canon template loaded
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.284Z - Block configuration loaded: 15 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.284Z - FACT-LOCK: Loaded 3 vehicle specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.284Z - FACT-LOCK: Loaded 51 state specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.285Z - FACT-LOCK: Loaded global invariants
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.285Z - FACT-LOCK: Prompt header loaded
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.286Z - Loading 15 canonical prompt files...
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.286Z - Loaded prompt for accident_intelligence
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.288Z - Loaded prompt for buyer_guide
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.288Z - Loaded prompt for cta
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.289Z - Loaded prompt for deep_explanation
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.289Z - Loaded prompt for faq
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.289Z - Loaded prompt for fraud_patterns
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.289Z - Loaded prompt for hero
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.289Z - Loaded prompt for insurance_risk
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.289Z - Loaded prompt for internal_links
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.290Z - Loaded prompt for key_facts
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.290Z - Loaded prompt for market_value
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.290Z - Loaded prompt for nmvtis
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.290Z - Loaded prompt for recalls_tsbs
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.290Z - Loaded prompt for state_specific
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:38:00.291Z - Loaded prompt for vin_decoder
+[SEO FRAGMENT-CACHE] 2025-12-04T19:38:00.292Z - Loading 74 cached fragments...
+[SEO FRAGMENT-CACHE] 2025-12-04T19:38:00.318Z - Loaded 74 fragments
+[SEO RULE-ENGINE] 2025-12-04T19:38:00.318Z - Loaded 5 rules from rules.json
+[SEO GEN-PAGE] 2025-12-04T19:38:00.319Z - Generating page: 2017 Genesis G80 Electrified in Maryland (VIN: 1HGDNP5P3H3241149)
+[SEO GEN-PAGE] 2025-12-04T19:38:00.319Z - Analysis depth: deep, Max retries: 5
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.320Z - FACT-LOCK: Loaded existing FACT-SHEET for VIN 1HGDNP5P3H3241149
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.320Z - FACT-LOCK: FACT-SHEET ready for 2017 Genesis G80 Electrified in maryland
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.320Z - Generating V6 article: 2017 Genesis G80 Electrified in Maryland (15 blocks, parallel generation)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.320Z - Structural variant: risk_assessment, Style: Procedural, Depth roll: 0
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.321Z - Block groups for parallel generation: 2 groups
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.321Z - Generating group 1/2 (3 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.325Z - Using canonical prompt from file for hero
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.326Z - Generating hero block (ollama, 154 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:00.331Z - Trying DeepSeek API for vin_check in en (prompt: 9369 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:00.333Z - Using compact strategy (9369 vs 9369 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.392Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.392Z - Generating vin_decoder block (ollama, 211 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:00.397Z - Trying DeepSeek API for vin_check in en (prompt: 11363 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:00.399Z - Using compact strategy (11363 vs 11363 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.401Z - Using canonical prompt from file for nmvtis
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:00.402Z - Generating nmvtis block (ollama, 356 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:00.403Z - Trying DeepSeek API for vin_check in en (prompt: 9090 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:00.405Z - Using compact strategy (9090 vs 9090 chars)
+[SEO AI] 2025-12-04T19:38:09.411Z - DeepSeek API success (attempt 1): 1157 chars, prompt: 9369 chars, timeout: 180000ms, tokens: 234
+[SEO AI] 2025-12-04T19:38:09.413Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:09.414Z - AI content generated by deepseek for vin_check in en (1157 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:09.432Z - ⚠️  Block hero missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:09.432Z - ⚠️  Block hero does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:09.446Z - Block hero validated successfully (155 words, marker and punctuation auto-added, 9124ms)
+[SEO AI] 2025-12-04T19:38:11.298Z - DeepSeek API success (attempt 1): 1284 chars, prompt: 11363 chars, timeout: 180000ms, tokens: 303
+[SEO AI] 2025-12-04T19:38:11.299Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:11.299Z - AI content generated by deepseek for vin_check in en (1284 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:11.323Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:11.324Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:11.330Z - Block vin_decoder validated successfully (200 words, marker and punctuation auto-added, 10938ms)
+[SEO AI] 2025-12-04T19:38:16.238Z - DeepSeek API success (attempt 1): 2364 chars, prompt: 9090 chars, timeout: 180000ms, tokens: 477
+[SEO AI] 2025-12-04T19:38:16.238Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:16.238Z - AI content generated by deepseek for vin_check in en (2364 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:16.261Z - ⚠️  Block nmvtis missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:16.261Z - ⚠️  Block nmvtis does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:16.263Z - ⚠️  Block nmvtis has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:38:16.271Z - Trying DeepSeek API for vin_check in en (prompt: 3620 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:16.276Z - Using compact strategy (3620 vs 3620 chars)
+[SEO AI] 2025-12-04T19:38:18.674Z - DeepSeek API success (attempt 1): 171 chars, prompt: 3620 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:38:18.675Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:18.675Z - AI content generated by deepseek for vin_check in en (171 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:18.699Z - ⚠️  Auto-fixed block nmvtis still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:18.699Z -    Remaining errors: TOO_SHORT_FOR_BLOCK_TYPE: 26 words (minimum 150)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:18.699Z - Block nmvtis validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_PUNCTUATION_PATTERN: Dirty punctuation pattern detected
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:18.699Z - Retrying block nmvtis...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:18.700Z - Using canonical prompt from file for nmvtis
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:18.700Z - Generating nmvtis block (ollama, 356 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:38:18.704Z - Trying DeepSeek API for vin_check in en (prompt: 9090 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:18.707Z - Using compact strategy (9090 vs 9090 chars)
+[SEO AI] 2025-12-04T19:38:34.717Z - DeepSeek API success (attempt 1): 2335 chars, prompt: 9090 chars, timeout: 180000ms, tokens: 477
+[SEO AI] 2025-12-04T19:38:34.717Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:34.717Z - AI content generated by deepseek for vin_check in en (2335 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.736Z - ⚠️  Block nmvtis missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.736Z - ⚠️  Block nmvtis does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.745Z - Block nmvtis validated successfully (361 words, marker and punctuation auto-added, 34344ms)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.746Z - Group 1 completed in 34.4s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.746Z - Generating group 2/2 (10 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.747Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.747Z - Generating accident_intelligence block (deepseek, 274 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:34.751Z - Trying DeepSeek API for vin_check in en (prompt: 9436 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:34.754Z - Using compact strategy (9436 vs 9436 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.758Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.758Z - Generating fraud_patterns block (deepseek, 228 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:34.760Z - Trying DeepSeek API for vin_check in en (prompt: 9333 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:34.763Z - Using compact strategy (9333 vs 9333 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.764Z - Using canonical prompt from file for insurance_risk
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.764Z - Generating insurance_risk block (deepseek, 204 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:34.766Z - Trying DeepSeek API for vin_check in en (prompt: 9395 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:34.768Z - Using compact strategy (9395 vs 9395 chars)
+[SEO FRAGMENT-CACHE] 2025-12-04T19:38:34.770Z - Cache HIT for state_specific (maryland)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.770Z - Using cached fragment for state_specific
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.771Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.771Z - Generating market_value block (deepseek, 117 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:34.773Z - Trying DeepSeek API for vin_check in en (prompt: 9309 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:34.775Z - Using compact strategy (9309 vs 9309 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.776Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.776Z - Generating buyer_guide block (ollama, 229 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:34.779Z - Trying DeepSeek API for vin_check in en (prompt: 9259 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:34.782Z - Using compact strategy (9259 vs 9259 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.796Z - Using canonical prompt from file for recalls_tsbs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:34.797Z - Generating recalls_tsbs block (deepseek, 223 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:34.799Z - Trying DeepSeek API for vin_check in en (prompt: 9132 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:34.800Z - Using compact strategy (9132 vs 9132 chars)
+[SEO AI] 2025-12-04T19:38:42.705Z - DeepSeek API success (attempt 1): 903 chars, prompt: 9309 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:38:42.706Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:42.706Z - AI content generated by deepseek for vin_check in en (903 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:42.729Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:42.729Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:42.730Z - ⚠️  Block market_value has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:38:42.734Z - Trying DeepSeek API for vin_check in en (prompt: 2159 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:42.737Z - Using compact strategy (2159 vs 2159 chars)
+[SEO AI] 2025-12-04T19:38:45.917Z - DeepSeek API success (attempt 1): 1590 chars, prompt: 9395 chars, timeout: 180000ms, tokens: 294
+[SEO AI] 2025-12-04T19:38:45.920Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:45.920Z - AI content generated by deepseek for vin_check in en (1590 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:45.947Z - ⚠️  Block insurance_risk missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:45.947Z - ⚠️  Block insurance_risk does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:45.948Z - ⚠️  Block insurance_risk has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:38:45.952Z - Trying DeepSeek API for vin_check in en (prompt: 2846 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:45.956Z - Using compact strategy (2846 vs 2846 chars)
+[SEO AI] 2025-12-04T19:38:46.497Z - DeepSeek API success (attempt 1): 1661 chars, prompt: 9132 chars, timeout: 180000ms, tokens: 317
+[SEO AI] 2025-12-04T19:38:46.498Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:46.499Z - AI content generated by deepseek for vin_check in en (1661 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.514Z - ⚠️  Block recalls_tsbs missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.514Z - ⚠️  Block recalls_tsbs does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.517Z - Block recalls_tsbs validated successfully (243 words, marker and punctuation auto-added, 11721ms)
+[SEO FRAGMENT-CACHE] 2025-12-04T19:38:46.517Z - Cache HIT for faq (maryland)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.517Z - Using cached fragment for faq
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.520Z - Using canonical prompt from file for internal_links
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.520Z - Generating internal_links block (ollama, 50 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:46.524Z - Using cached AI response for vin_check in en
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.524Z - Block internal_links validated successfully (72 words, 4ms)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.524Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.524Z - Generating cta block (ollama, 51 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:38:46.527Z - Trying DeepSeek API for vin_check in en (prompt: 9066 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:46.529Z - Using compact strategy (9066 vs 9066 chars)
+[SEO AI] 2025-12-04T19:38:46.545Z - DeepSeek API success (attempt 1): 1642 chars, prompt: 9259 chars, timeout: 180000ms, tokens: 324
+[SEO AI] 2025-12-04T19:38:46.545Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:46.545Z - AI content generated by deepseek for vin_check in en (1642 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.546Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.546Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.546Z - Block buyer_guide validated successfully (235 words, marker and punctuation auto-added, 11770ms)
+[SEO AI] 2025-12-04T19:38:46.732Z - DeepSeek API success (attempt 1): 1610 chars, prompt: 9333 chars, timeout: 180000ms, tokens: 323
+[SEO AI] 2025-12-04T19:38:46.732Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:46.732Z - AI content generated by deepseek for vin_check in en (1610 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.745Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.745Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:46.745Z - Block fraud_patterns validated successfully (236 words, marker and punctuation auto-added, 11987ms)
+[SEO AI] 2025-12-04T19:38:48.399Z - DeepSeek API success (attempt 1): 1909 chars, prompt: 9436 chars, timeout: 180000ms, tokens: 378
+[SEO AI] 2025-12-04T19:38:48.399Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:48.399Z - AI content generated by deepseek for vin_check in en (1909 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:48.422Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:48.423Z - ⚠️  Block accident_intelligence has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:38:48.427Z - Trying DeepSeek API for vin_check in en (prompt: 3164 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:48.430Z - Using compact strategy (3164 vs 3164 chars)
+[SEO AI] 2025-12-04T19:38:49.267Z - DeepSeek API success (attempt 1): 903 chars, prompt: 2159 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:38:49.268Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:49.268Z - AI content generated by deepseek for vin_check in en (903 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:49.292Z - ⚠️  Auto-fixed block market_value still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:49.292Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:49.292Z - Block market_value validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:49.292Z - Retrying block market_value...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:49.292Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:49.292Z - Generating market_value block (deepseek, 117 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:38:49.296Z - Trying DeepSeek API for vin_check in en (prompt: 9309 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:49.299Z - Using compact strategy (9309 vs 9309 chars)
+[SEO AI] 2025-12-04T19:38:50.675Z - DeepSeek API success (attempt 1): 218 chars, prompt: 3164 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:38:50.676Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:50.676Z - AI content generated by deepseek for vin_check in en (218 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:50.716Z - ⚠️  Auto-fixed block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:50.717Z -    Remaining errors: TOO_SHORT_FOR_BLOCK_TYPE: 32 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:50.717Z - Block accident_intelligence validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:50.717Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:50.717Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:50.718Z - Generating accident_intelligence block (deepseek, 274 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:38:50.722Z - Trying DeepSeek API for vin_check in en (prompt: 9436 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:50.726Z - Using compact strategy (9436 vs 9436 chars)
+[SEO AI] 2025-12-04T19:38:51.036Z - DeepSeek API success (attempt 1): 485 chars, prompt: 9066 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:38:51.036Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:51.036Z - AI content generated by deepseek for vin_check in en (485 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:51.055Z - ⚠️  Block cta has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:38:51.060Z - Trying DeepSeek API for vin_check in en (prompt: 1721 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:51.064Z - Using compact strategy (1721 vs 1721 chars)
+[SEO AI] 2025-12-04T19:38:52.606Z - DeepSeek API success (attempt 1): 1043 chars, prompt: 2846 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:38:52.606Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:52.606Z - AI content generated by deepseek for vin_check in en (1043 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:52.628Z - ⚠️  Auto-fixed block insurance_risk still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:52.628Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:52.628Z - Block insurance_risk validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "vehicle"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:52.628Z - Retrying block insurance_risk...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:52.630Z - Using canonical prompt from file for insurance_risk
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:52.630Z - Generating insurance_risk block (deepseek, 204 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:38:52.634Z - Trying DeepSeek API for vin_check in en (prompt: 9395 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:52.637Z - Using compact strategy (9395 vs 9395 chars)
+[SEO AI] 2025-12-04T19:38:55.635Z - DeepSeek API success (attempt 1): 486 chars, prompt: 1721 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:38:55.636Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:55.636Z - AI content generated by deepseek for vin_check in en (486 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:55.659Z - ⚠️  Auto-fixed block cta still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:55.660Z -    Remaining errors: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:55.660Z - Block cta validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:55.660Z - Retrying block cta...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:55.660Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:55.660Z - Generating cta block (ollama, 51 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:38:55.664Z - Trying DeepSeek API for vin_check in en (prompt: 9066 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:55.668Z - Using compact strategy (9066 vs 9066 chars)
+[SEO AI] 2025-12-04T19:38:56.298Z - DeepSeek API success (attempt 1): 985 chars, prompt: 9309 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:38:56.299Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:38:56.299Z - AI content generated by deepseek for vin_check in en (985 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:56.312Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:56.312Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:56.312Z - Block market_value validation failed (attempt 2): INCOMPLETE_SENTENCE: Incomplete sentence detected (ends with incomplete phrase)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:56.312Z - Retrying block market_value...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:56.312Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:38:56.312Z - Generating market_value block (deepseek, 117 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:38:56.315Z - Trying DeepSeek API for vin_check in en (prompt: 9298 chars, compact: true)
+[SEO AI] 2025-12-04T19:38:56.317Z - Using compact strategy (9298 vs 9298 chars)
+[SEO AI] 2025-12-04T19:39:02.134Z - DeepSeek API success (attempt 1): 641 chars, prompt: 9066 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:39:02.135Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:39:02.135Z - AI content generated by deepseek for vin_check in en (641 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:02.159Z - Block cta validated successfully (89 words, 15635ms)
+[SEO AI] 2025-12-04T19:39:03.174Z - DeepSeek API success (attempt 1): 992 chars, prompt: 9298 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:39:03.175Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:39:03.175Z - AI content generated by deepseek for vin_check in en (992 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.198Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.198Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO AI] 2025-12-04T19:39:03.709Z - DeepSeek API success (attempt 1): 1612 chars, prompt: 9395 chars, timeout: 180000ms, tokens: 294
+[SEO AI] 2025-12-04T19:39:03.710Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:39:03.710Z - AI content generated by deepseek for vin_check in en (1612 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.735Z - ⚠️  Block insurance_risk missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.735Z - ⚠️  Block insurance_risk does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.735Z - Block insurance_risk validated successfully (223 words, marker and punctuation auto-added, 28972ms)
+[SEO AI] 2025-12-04T19:39:03.778Z - DeepSeek API success (attempt 1): 2014 chars, prompt: 9436 chars, timeout: 180000ms, tokens: 378
+[SEO AI] 2025-12-04T19:39:03.778Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:39:03.778Z - AI content generated by deepseek for vin_check in en (2014 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.779Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.779Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.779Z - ⚠️  Block accident_intelligence has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:39:03.784Z - Trying DeepSeek API for vin_check in en (prompt: 3270 chars, compact: true)
+[SEO AI] 2025-12-04T19:39:03.788Z - Using compact strategy (3270 vs 3270 chars)
+[SEO AI] 2025-12-04T19:39:10.660Z - DeepSeek API success (attempt 1): 1113 chars, prompt: 3270 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:39:10.660Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:39:10.661Z - AI content generated by deepseek for vin_check in en (1113 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:10.680Z - ⚠️  Auto-fixed block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:10.681Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 151 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:10.681Z - Block accident_intelligence validation failed (attempt 2): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:10.681Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:10.682Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:10.682Z - Generating accident_intelligence block (deepseek, 274 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:39:10.685Z - Trying DeepSeek API for vin_check in en (prompt: 9436 chars, compact: true)
+[SEO AI] 2025-12-04T19:39:10.689Z - Using compact strategy (9436 vs 9436 chars)
+[SEO AI] 2025-12-04T19:39:23.523Z - DeepSeek API success (attempt 1): 1920 chars, prompt: 9436 chars, timeout: 180000ms, tokens: 378
+[SEO AI] 2025-12-04T19:39:23.523Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:39:23.523Z - AI content generated by deepseek for vin_check in en (1920 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.547Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.548Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.548Z - Block accident_intelligence validated successfully (270 words, marker and punctuation auto-added, 48801ms)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.548Z - Group 2 completed in 48.8s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.549Z - All blocks generated in 83.2s (parallel mode)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.549Z -   WARNING: OVER_TARGET_LENGTH: 3197 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.549Z - Total article length: 3197 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.549Z - Running pre-validation with auto-repair...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.552Z - 🔧 Attempting to repair block market_value (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:39:23.553Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:39:23.558Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.634Z - ⚠️  Block market_value still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, INVALID_PUNCTUATION_PATTERN: Dirty punctuation pattern detected
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.635Z - ⚠️  1 blocks still need post-processing:
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.636Z -   - market_value (status: FAILED_VALIDATION): INVALID_PUNCTUATION_PATTERN: Dirty punctuation pattern detected
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.637Z - Validating article...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: H2 may lack SEO keywords: "Maryland-Specific Insights"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: H2 may lack SEO keywords: "Frequently Asked Questions"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: Recommended block "Executive Summary" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: Recommended block "Data Layers" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: VIN Decoder may not cover all 17 positions (found 0 mentions)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: CTA does not follow canonical format: "Check this {YEAR} {MAKE} {MODEL} VIN now"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: Internal links count (0) should be 4-6
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: CTA section word count (93) should be 55-75 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: Total article word count (3129) should be 2000-2500 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: Section "VIN Decoder" is too short (196 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: Section "Market Value" is too short (138 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: Section "Internal Links" is too short (71 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z -   WARNING: Section "CTA" is too short (93 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z - Attempting auto-fix...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.671Z - Running post-processing...
+[SEO POST-PROCESSOR] 2025-12-04T19:39:23.671Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:39:23.671Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.706Z - ⚠️  Article still has 4 errors after post-processing
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.707Z -   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.707Z -   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.707Z -   ERROR: VIN Decoder section lacks position table
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.707Z -   ERROR: Missing required sections: Key Facts, Deep Explanation
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.707Z - Checking article uniqueness...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.707Z - ✅ Article uniqueness score: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.707Z - ✅ Article lexical variation: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.707Z - Article generated: 3082 words, 13 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.708Z - Circuit Breaker ollama: CLOSED, failure rate: 0.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.708Z - Circuit Breaker deepseek: CLOSED, failure rate: 9.1%
+[SEO GEN-PAGE] 2025-12-04T19:39:23.708Z - ✅ Article generated in 83.39s
+[SEO GEN-PAGE] 2025-12-04T19:39:23.708Z -    Words: 3082
+[SEO GEN-PAGE] 2025-12-04T19:39:23.708Z -    Blocks: 13
+{
+  "vin": "1HGDNP5P3H3241149",
+  "make": "Genesis",
+  "model": "G80 Electrified",
+  "year": "2017",
+  "state": "maryland",
+  "stateLabel": "Maryland",
+  "article": {
+    "title": "VIN Check Guide for 2017 Genesis G80 Electrified in Maryland",
+    "h1": "Complete VIN Check Guide: 2017 Genesis G80 Electrified",
+    "content": "A Vehicle Identification Number (VIN) serves as a unique legal and technical fingerprint for every automobile. For a 2017 Genesis G80 Electrified registered in Maryland, a meticulous VIN check is a critical antifraud procedure that cross-references engineering data with state title records. This process verifies the vehicle's identity against manufacturer specifications and Maryland DMV documentation to uncover discrepancies that may indicate fraud, previous significant damage, or improper titling. The 17-character VIN `1HGDNP5P3H3241149` is decoded by segment to extract specific identifiers, beginning with the World Manufacturer Identifier (WMI) `1HG`.\n\n*   **Regulatory Compliance Verification:** The check confirms alignment with the **Maryland Vehicle Code**, ensuring the title history reflects accurate branding, such as **Salvage**, **Rebuilt**, **Flood**, or **Junk**, which are permanently recorded in this title-holding state.\n*   **Structural and Safety Data Correlation:** While specific platform data for this model is not detailed in standard reports, the vehicle history.\n\n## VIN Decoder for 2017 Genesis G80 Electrified\n\nA Vehicle Identification Number (VIN) is a unique 17-character code that serves as a legal and technical fingerprint for a vehicle. For a 2017 Genesis G80 Electrified registered in Maryland, decoding this VIN provides the foundational data for verifying the vehicle's specifications and origin against official records. This process is a critical first step in any comprehensive vehicle history check, enabling you to confirm core manufacturing details before investigating title status, accident history, or odometer readings through standard state and federal data sources.\n\n<table><tr><th>Position</th><th>Range</th><th>Meaning</th></tr><tr><td>1-3</td><td>WMI</td><td>World Manufacturer Identifier: 1HG = United States, Honda, Unknown</td></tr><tr><td>4-8</td><td>VDS</td><td>Vehicle Descriptor Section: Model-specific codes for 2017 Genesis G80 Electrified (body style, trim, safety features, engine)</td></tr><tr><td>9</td><td>Check Digit</td><td>Mathematical validation digit (calculated via NHTSA algorithm)</td></tr><tr><td>10</td><td>Year</td><td>Model Year: H = 2017</td></tr><tr><td>11</td><td>Plant</td><td>Assembly Plant: [varies by Genesis manufacturing facility]</td></tr><tr><td>12-17</td><td>Serial</td><td>Production Sequence: Unique serial number (from example VIN 1HGDNP5P3H3241149)</td></tr></table>\n\n*   **WMI (Positions 1-3):** The code.\n\n## NMVTIS: National Motor Vehicle Title Information System\n\nA vehicle history report for a 2017 Genesis G80 Electrified in Maryland relies heavily on data from the National Motor Vehicle Title Information System (NMVTIS). This federally mandated system is designed to prevent fraud and protect consumers by creating a centralized record of a vehicle's title history. For a vehicle like the Genesis G80 Electrified, NMVTIS provides a crucial, government-verified audit trail that supplements a standard VIN check. The system aggregates data from mandatory reporting by state titling agencies, insurance carriers, and salvage and junk yards, creating a foundational layer of information that is critical for assessing a vehicle's legal and structural status.\n\nThe procedural value of an NMVTIS report lies in its standardized data points, which allow for systematic verification. When reviewing a report, you should methodically check for the following key entries, which are mandated for reporting to the system:\n\n*   **Title Brand History:** This is the core anti-fraud component. The report will list any brands applied to the vehicle's title according to the **Maryland DMV**. Permissible brands in Maryland include **Salvage**, **Rebuilt**, **Flood**, and **Junk**. A brand is a permanent legal designation of significant past condition.\n*   **Odometer Readings:** NMVTIS requires the disclosure of odometer readings from each title transaction. A discrepancy or rollback in this sequential data is a direct indicator of potential fraud.\n*   **Theft Records:** The system includes data on whether the vehicle has ever been reported as stolen to law enforcement and if that status has been cleared.\n*   **Salvage and Junk Yard Entries:** If the vehicle was ever declared a total loss by an insurance company and sent to a salvage pool, or if it was reported by a junk yard as being dismantled, this event must be recorded in NMVTIS.\n\nFor Maryland residents, it is essential to understand that Maryland operates a **title-holding** system. This means the physical certificate of title is a controlled document held by the lienholder when a loan is active or by the owner if the vehicle is owned outright. The NMVTIS data reflects the official titling actions processed through the **Maryland DMV** under the **Mary.\n\n## Accident Intelligence\n\nA vehicle history report for a 2017 Genesis G80 Electrified in Maryland synthesizes data from standard state and federal data sources to provide a structured assessment of accident-related events. This intelligence is critical for evaluating safety, value, and legal title status, particularly for an electrified vehicle where high-voltage system integrity is paramount. The analysis follows a procedural checklist to identify discrepancies and potential fraud.\n\n*   **Event Categorization:** Reported incidents are classified by severity and type, such as collisions, fire, or hail damage. Each event record is cross-referenced with the vehicle's VIN, `1HGDNP5P3H3241149`, to ensure it pertains specifically to this Genesis. The absence of an event in a report does not guarantee a vehicle is accident-free, as not all incidents are universally reported.\n*   **Title Brand Analysis:** Under the **Maryland Vehicle Code**, the Maryland DMV assigns permanent title brands like **Salvage**, **Rebuilt**, **Flood**, or **Junk** to vehicles that have sustained significant damage. A **Rebuilt** brand indicates a salvaged vehicle was repaired and passed a **State-required vehicle inspection**. These brands are a primary legal indicator of past severe damage and follow the vehicle in Maryland's **title-holding** system.\n*   **Structural and System Verification:** For any vehicle with a reported incident, verifying repair quality is essential. This involves checking for alignment of structural components and the proper function of all safety systems. For the G80 Electrified, special attention must be paid to the high-voltage battery pack and associated electrical systems, as improper repair after a collision can pose serious safety risks.\n*   **Fraud Detection Protocols:** Analysts scrutinize records for inconsistencies that may indicate **VIN fraud.\n\n## Fraud Patterns\n\nWhen reviewing a vehicle history report for a 2017 Genesis G80 Electrified in Maryland, certain discrepancies can serve as critical red flags for potential fraud. Maryland operates a title-holding system, meaning the physical title is typically held by a lienholder until the loan is satisfied, which introduces specific verification steps. A procedural review should focus on inconsistencies between the VIN, documentation, and the vehicle's physical state.\n\nKey technical and administrative warning signs include:\n- **VIN Plate Irregularities**: Examine the VIN plate on the dashboard for signs of tampering, such as mismatched rivets, scratches, or misalignment. The VIN `1HGDNP5P3H3241149` contains a standard check digit at position 9 for validation.\n- **Title Brand Mismatches**: Cross-reference the current title against the report for any state-issued brands like Salvage, Rebuilt, Flood, or Junk. An unbranded title on a vehicle with a history of severe damage is a major red flag.\n- **Inconsistent Source Data**: Be wary of reports with gaps in registration history or entries that conflict with known data from the Maryland DMV. All records should align chronologically and geographically.\n- **Physical vs. Decoded Data**: Verify that the vehicle's actual features match the descriptors encoded in its VIN. While specific engine or body data for this model may not be detailed in public decoders, obvious physical contradictions warrant investigation.\n- **Inspection Certificate Validity**: Confirm that any required state vehicle inspection documentation.\n\n## Insurance Risk\n\nA comprehensive VIN check for a 2017 Genesis G80 Electrified in Maryland provides critical data for insurance underwriting and risk assessment. Insurers analyze decoded VIN information and state title history to evaluate the likelihood of future claims, directly influencing premium calculations and coverage eligibility. The process involves verifying the vehicle's legal status and past incidents against Maryland's specific regulatory framework.\n\nKey technical and procedural factors examined in a coverage analysis include:\n- **Title Brand Verification:** Confirming the absence of state-mandated brands such as Salvage, Rebuilt, Flood, or Junk, which denote severe prior damage and significantly elevate risk.\n- **Structural & Legal Integrity:** In Maryland's title-holding system, the physical certificate of title is retained by the lienholder until the loan is satisfied, requiring verification of proper lien status to avoid ownership disputes.\n- **Compliance Checks:** Ensuring the vehicle has passed the state-required vehicle inspection, which is a baseline indicator of roadworthiness and safety compliance.\n- **Data Source Correlation:** Cross-referencing the VIN's unique identifier, beginning with WMI \"1HG\", against standard state and federal data sources for accident history, theft records, and odometer readings to build a complete risk profile.\n\nThis analytical process allows insurers to accurately classify vehicle risk, preventing fraud and ensuring policies are written on vehicles with a verifiable.\n\n## Maryland-Specific Insights\n\nWhen conducting a VIN check for a 2017 Genesis G80 Electrified in Maryland, understanding the state's specific legal framework and environmental risks is crucial for a complete assessment. Maryland operates as a title-holding state, meaning the physical certificate of title is the primary legal document proving vehicle ownership and must be presented during registration and transfer. This system creates a clear chain of custody that a thorough VIN check will trace, verifying that the seller is the legitimate title holder. The state's procedures, governed by the Maryland Vehicle Code, are designed to protect buyers but require diligent verification to navigate effectively. For an electric vehicle like the G80 Electrified, this due diligence includes confirming the title history is free of problematic brands that could affect both value and legality.\n\nKey state-specific factors for your VIN investigation include:\n\n*   **Title Brand Scrutiny:** The Maryland DMV recognizes specific title brands that permanently annotate a vehicle's history. A VIN check must specifically screen for the brands of Salvage, Rebuilt, Flood, and Junk. Discovering any of these brands on a Maryland title is a definitive red flag indicating severe past damage or a total loss declaration by an insurance company.\n*   **Mandatory Inspection Protocol:** Maryland enforces a state-required vehicle inspection for most title transfers and registrations. While a VIN check provides historical data, this in-person inspection is a separate, critical step to verify the vehicle's current roadworthiness and to ensure its physical condition matches the reported history. Discrepancies between the report and the inspection findings can indicate fraud or unrepaired damage.\n*   **Environmental Risk Considerations:** The VIN check should contextualize findings within Maryland's regional environmental risks. While the report itself uses standard state and federal data sources, understanding that the vehicle has been registered in an area prone to certain conditions helps you ask targeted questions about potential flood exposure or corrosion, even if a \"Flood\" brand is not present on the title.\n\nA comprehensive VIN check for a Maryland vehicle cross-references the decoded information from positions like the WMI (e.g., 1HG) with the official title history from the Maryland DMV. This process confirms the vehicle's identity and reveals if it has been branded due to major incidents. The legal permanence of these brands in a title-holding state makes pre-purchase verification the most effective.\n\n## Market Value\n\nA vehicle history report provides critical data for assessing the fair market value of a specific car, such as a 2017 Genesis G80 Electrified in Maryland. The value is not determined by the report itself but by the historical facts it reveals, which are weighed against regional market conditions. Key factors influencing valuation include the vehicle's title history, accident records, and service history, all of which must be verified against standard state and federal data sources.\n\n*   **Title Status Impact:** A clean title from the Maryland DMV supports maximum value, while brands like **Salvage**, **Rebuilt**, **Flood**, or **Junk** documented in the report will cause a significant depreciation.\n*   **Regulatory Compliance:** The state's **title-holding** system means the physical certificate is held as a security interest, and a **State-required vehicle inspection** may be necessary for registration,.\n\n## Buyer Guide\n\nA thorough vehicle history review for a 2017 Genesis G80 Electrified in Maryland requires a methodical, question-based approach to uncover technical and legal history. This process focuses on verifying documentation integrity and cross-referencing data points against official records. Buyers should systematically seek answers to the following procedural questions to ensure compliance and identify potential discrepancies.\n\n*   **What is the complete title history and current status according to the Maryland DMV?** In Maryland's title-holding system, the physical certificate is held by the lienholder until the loan is satisfied. A VIN check must confirm the title is free of the state's recognized brands, which include Salvage, Rebuilt, Flood, and Junk. Any gap in the title chain requires explanation.\n*   **Has the vehicle passed all required state inspections?** Maryland mandates a state-required vehicle inspection. The report should confirm this compliance, as an inspection can identify safety issues that may not be evident in a purely digital history.\n*   **Are the decoded VIN characteristics consistent with the physical vehicle?** For VIN 1HGDNP5P3H3241149, the World Manufacturer Identifier (WMI) should begin with \"1HG\". You must physically verify that the VIN plate matches the dashboard VIN and any secondary labels, ensuring no evidence of tampering or alteration.\n*   **What is the full operational history, including registration patterns?** Review the timeline for consistent registration in Maryland or other jurisdictions. Abrupt.\n\n## Recalls & Technical Service Bulletins\n\nA comprehensive VIN check for a 2017 Genesis G80 Electrified in Maryland must include a thorough review of recall and Technical Service Bulletin (TSB) data. This process is distinct from checking for title brands, as it focuses on manufacturer-issued safety and compliance notices rather than a vehicle's legal status. For Maryland residents, verifying this history is a critical step in the pre-purchase inspection process, complementing the state's required vehicle inspection. Recalls address defects posing safety risks, while TSBs guide technicians on repairs for common operational issues. Both types of records are essential for understanding the vehicle's maintenance history and any outstanding repair obligations that may transfer to a new owner.\n\nThe procedural verification involves several key compliance steps. First, cross-reference the vehicle's unique 17-character VIN, beginning with the WMI \"1HG\", against the manufacturer's official recall database. Second, review any associated TSBs that apply to the model year and specific build parameters of the vehicle. Third, confirm the completion status of any open recalls by obtaining official repair documentation from a franchised dealership. Finally, integrate this recall status with the vehicle's full history report, which draws from standard state and federal data sources, to create a complete ownership risk profile.\n\n*   **Recall Compliance:** An open safety recall on a vehicle like the 2017 Genesis G80 Electrified must be remedied by an authorized dealer at no cost to the owner, regardless.\n\n## Frequently Asked Questions\n\n**Q1: Will a VIN report show all accident history for a 2017 Genesis G80 Electrified?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately, unreported damage, or events not captured in the provider's databases will not appear in the report, necessitating a thorough physical inspection.\n\n**Q2: Does a clean Maryland title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean Maryland title does not guarantee the vehicle was never a total loss, as title washing can occur where vehicles declared salvage in other states receive clean Maryland titles. Always cross-reference the National Motor Vehicle Title Information System (NMVTIS) for interstate brand history to verify the vehicle's true status.\n\n**Q3: Can flood or water damage history be hidden from a VIN report?**\nAnswer: Yes, flood damage history can be hidden if the damage occurred in a state without mandatory branding or if repairs were conducted privately without an insurance claim. Detection requires an NMVTIS check combined with a meticulous visual inspection for corrosion, silt, mold, and electrical malfunctions.\n\n**Q4: What is title washing and how does it work?**\nAnswer: Title washing is the fraudulent practice of moving a branded vehicle, such as a salvage or flood car, through states with weaker disclosure laws to obtain a clean title, which is then used to sell the vehicle in Maryland. The NMVTIS database is designed to track these brands across state lines to combat this fraud.\n\n**Q5: How do I verify open safety recalls for a 2017 Genesis G80 Electrified?**\nAnswer: Verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and the manufacturer's official portal. Both sources must be consulted for comprehensive verification, as recall campaigns are administered separately.\n\n**Q6: How can I detect VIN cloning on a vehicle?**\nAnswer: Detect VIN cloning by physically verifying the VIN stampings at the dashboard, door jamb, and firewall for consistency. Check for signs of tampering like mismatched rivets or adhesive residue, and consult NMVTIS or law enforcement databases for records of duplicate VINs active in different locations.\n\n**Q7: What is odometer rollback and how is it detected?**\nAnswer: Odometer rollback is the fraudulent manipulation of a vehicle's mileage display, often via the vehicle's CAN-Bus system. Detection methods include inspecting physical wear on components like seats and pedals, verifying the mileage history chain in service records, and performing an electronic control unit (ECU) scan for stored true mileage.\n\n**Q8: How do I check for liens on a vehicle in Maryland?**\nAnswer: Check for liens by conducting a lienholder search through the Maryland DMV to verify no financial encumbrances exist before purchase. An active lien prevents legal title transfer until the debt is cleared by the seller, protecting the buyer from assuming unexpected financial obligations.\n\n**Q9: What is the process for a revived salvage vehicle in Maryland?**\nAnswer: The Maryland process for a revived salvage vehicle involves a state-required vehicle inspection, submission of proper documentation including a completed application form, and DMV approval for rebranding. Successful completion results in a permanent \"Rebuilt\" brand on the vehicle's title, indicating its salvage history.\n\n**Q10: How much does a comprehensive VIN check cost for this model?**\nAnswer: A comprehensive commercial VIN history report for a 2017 Genesis G80 Electrified typically costs between $25 and $50. NMVTIS data is accessible through authorized providers, while some basic checks like NHTSA recall.\n\n## Related VIN Check Guides\n\nFor a 2017 Genesis G80 Electrified in Maryland, a thorough VIN check involves cross-referencing multiple data points. The VIN's WMI code \"1HG\" identifies the manufacturer and region. You must verify the title status directly with the Maryland DMV, as Maryland is a title-holding state, and check for state-recognized brands like Salvage or Flood. This process confirms legal standing and uncovers undisclosed environmental or structural risks.\n\n## Check Your VIN Now\n\nA comprehensive VIN check is a critical procedural step for verifying the history of a 2017 Genesis G80 Electrified in Maryland. This process cross-references the 17-character identifier, beginning with WMI '1HG', against Maryland DMV records and standard state and federal data sources to confirm title status and identify any applicable brands such as Salvage or Rebuilt. The check validates the vehicle's legal standing and undisclosed environmental risks, providing essential documentation for compliance and fraud prevention. Always obtain a full report before finalizing any purchase to ensure complete transparency.",
+    "wordCount": 3082,
+    "blocks": 13,
+    "blocksDetail": {
+      "hero": {
+        "provider": "ollama",
+        "wordCount": 155
+      },
+      "vin_decoder": {
+        "provider": "ollama",
+        "wordCount": 200
+      },
+      "nmvtis": {
+        "provider": "ollama",
+        "wordCount": 361
+      },
+      "accident_intelligence": {
+        "provider": "deepseek",
+        "wordCount": 270
+      },
+      "fraud_patterns": {
+        "provider": "deepseek",
+        "wordCount": 236
+      },
+      "insurance_risk": {
+        "provider": "deepseek",
+        "wordCount": 223
+      },
+      "state_specific": {
+        "provider": "deepseek",
+        "wordCount": 387
+      },
+      "market_value": {
+        "provider": "deepseek",
+        "wordCount": 146
+      },
+      "buyer_guide": {
+        "provider": "ollama",
+        "wordCount": 235
+      },
+      "recalls_tsbs": {
+        "provider": "deepseek",
+        "wordCount": 243
+      },
+      "faq": {
+        "provider": "ollama",
+        "wordCount": 580
+      },
+      "internal_links": {
+        "provider": "ollama",
+        "wordCount": 72
+      },
+      "cta": {
+        "provider": "ollama",
+        "wordCount": 89
+      }
+    },
+    "timestamp": "2025-12-04T19:39:23.637Z",
+    "validationStats": {
+      "totalBlocks": 13,
+      "validBlocks": 13,
+      "failedBlocks": 1,
+      "autoAddedMarkers": 9,
+      "autoFixedEndings": 9
+    },
+    "uniquenessScore": 1,
+    "lexicalVariation": 1,
+    "structuralVariant": "risk_assessment",
+    "styleVariant": "Procedural",
+    "performanceStats": {
+      "totalTime": 83387,
+      "averageBlockTime": 16286.461538461539,
+      "totalRetries": 7,
+      "cacheHitRate": 0.15384615384615385,
+      "providerStats": {
+        "ollama": {
+          "count": 6,
+          "totalTime": 81815,
+          "averageTime": 13635.833333333334,
+          "retries": 2,
+          "cacheHits": 0
+        },
+        "deepseek": {
+          "count": 5,
+          "totalTime": 129909,
+          "averageTime": 25981.8,
+          "retries": 5,
+          "cacheHits": 0
+        },
+        "fragment-cache": {
+          "count": 2,
+          "totalTime": 0,
+          "averageTime": 0,
+          "retries": 0,
+          "cacheHits": 2
+        }
+      }
+    },
+    "generationTime": 83387
+  },
+  "generated_at": "2025-12-04T19:39:23.708Z",
+  "generation_time": "83.39",
+  "analysis_depth": "deep"
+}

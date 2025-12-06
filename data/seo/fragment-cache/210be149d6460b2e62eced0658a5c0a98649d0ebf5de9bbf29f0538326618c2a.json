@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Bentley",
+    "model": "Continental GT",
+    "year": "2023",
+    "stateSlug": "connecticut",
+    "stateLabel": "Connecticut",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGLF77X3PR784510",
+    "variationContext": {
+      "structuralVariant": "risk_analysis",
+      "styleVariant": {
+        "name": "Procedural",
+        "tone": "DMV process, step-by-step, compliance",
+        "description": "Процедурный стиль с пошаговыми инструкциями DMV",
+        "characteristics": [
+          "Emphasizes step-by-step DMV processes",
+          "Uses procedural terminology and compliance checklists",
+          "Focuses on regulatory compliance steps",
+          "Official process documentation",
+          "Compliance verification"
+        ],
+        "openingPhrases": [
+          "The DMV process requires",
+          "To comply with state regulations",
+          "Following official procedures",
+          "Per DMV requirements",
+          "The registration process involves"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "1HGLF77X3PR784510",
+        "make": "Bentley",
+        "model": "Continental GT",
+        "year": 2023,
+        "state": "connecticut",
+        "generated_at": "2025-12-04T09:50:33.485Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Connecticut DMV"
+          ],
+          "main_statutes": [
+            "Connecticut Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Connecticut Title-Holding System and Verification Procedures for a 2023 Bentley Continental GT\n\nFor a 2023 Bentley Continental GT registered in Connecticut, the state's title-holding system presents specific verification requirements and antifraud considerations. Connecticut operates as a title-holding state, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most official transactions. This system necessitates rigorous procedural checks when conducting a VIN history review for a high-value vehicle like the Bentley Continental GT. The Connecticut DMV serves as the central authority for title records, brand assignments, and registration data, making its records a critical component of any comprehensive vehicle history report. Verification steps must account for Connecticut's specific legal framework, including adherence to the Connecticut Vehicle Code, which governs vehicle titling, branding, and fraud prevention.\n\nThe procedural checklist for a Connecticut-specific VIN analysis should include the following mandated compliance steps:\n*   **Title Status Verification:** Confirm the current title status directly with the Connecticut DMV to establish legal ownership and identify any active liens or encumbrances.\n*   **Brand History Examination:** Scrutinize the title for any state-assigned brands, which in Connecticut include Salvage, Rebuilt, Flood, and Junk. Each brand carries specific legal and safety implications that must be disclosed.\n*   **Inspection Compliance:** Verify completion of any state-required vehicle inspection, which may be mandated for branded vehicles or upon transfer, to ensure the vehicle meets safety and emissions standards.\n*   **Environmental Risk Assessment:** Review the vehicle's history for exposure to regional environmental risks, as such factors can affect vehicle integrity and value over time.\n*   **VIN Authenticity Audit:** Physically inspect the VIN `1HGLF77X3PR784510` on the vehicle's dashboard and door jamb, cross-referencing it with the title and registration documents to detect tampering or cloning attempts.\n\nA critical antifraud measure involves decoding the VIN's World Manufacturer Identifier (WMI). For this vehicle, the WMI candidates include \"1HG\". This code, assigned by the Society of Automotive Engineers, identifies the manufacturer and country of origin. Discrepancies between the decoded WMI and the vehicle's presented make (Bentley) would immediately indicate potential fraud, such as VIN cloning from a different manufacturer's vehicle. The full 17-character VIN should be validated against its standardized positions, including the check digit at position 9 and the model year code at position 10, to ensure mathematical and logical consistency. All data must be sourced from standard state and federal data sources to ensure accuracy and completeness. The final step in the Connecticut verification process is a conclusive reconciliation of all physical documents, DMV records, and decoded VIN data to confirm the vehicle's legitimate history.",
+  "timestamp": "2025-12-04T09:51:20.607Z",
+  "wordCount": 427
+}

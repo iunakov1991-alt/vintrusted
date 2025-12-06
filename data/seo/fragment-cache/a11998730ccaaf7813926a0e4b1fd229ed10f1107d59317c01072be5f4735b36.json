@@ -1,0 +1,100 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Fiat",
+    "model": "500",
+    "year": "2019",
+    "stateSlug": "new-jersey",
+    "stateLabel": "New Jersey",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HG3SC8G2KZ507454",
+    "variationContext": {
+      "structuralVariant": "forensic_detailed",
+      "styleVariant": {
+        "name": "Consumer Practical",
+        "tone": "buying-guide, simple, clear instructions",
+        "description": "Практичный потребительский стиль с простыми инструкциями",
+        "characteristics": [
+          "Emphasizes practical advice and actionable steps",
+          "Uses accessible language and real-world scenarios",
+          "Focuses on buyer protection and decision-making",
+          "Step-by-step guidance",
+          "Clear, simple language"
+        ],
+        "openingPhrases": [
+          "When purchasing a used vehicle",
+          "For buyers seeking transparency",
+          "Practical considerations include",
+          "To protect yourself when buying",
+          "Here's what you need to know"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "1HG3SC8G2KZ507454",
+        "make": "Fiat",
+        "model": "500",
+        "year": 2019,
+        "state": "new-jersey",
+        "generated_at": "2025-12-04T09:27:38.045Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "New-jersey DMV"
+          ],
+          "main_statutes": [
+            "New-jersey Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2019 Fiat 500?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and the National Motor Vehicle Title Information System (NMVTIS) for total loss declarations. Minor incidents repaired privately, unreported damage, or events not captured in these databases will not appear on the report, necessitating a thorough pre-purchase inspection.\n\n**Q2: Does a clean New Jersey title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean New Jersey title does not guarantee a vehicle was never a total loss, due to the risk of title washing. A vehicle declared \"Salvage\" or \"Junk\" in another state may receive a clean title upon transfer to New Jersey if branding laws differ. Cross-referencing with a NMVTIS report is essential to check for interstate title brands.\n\n**Q3: How can flood or water damage history be hidden from a VIN report?**\nAnswer: Flood damage can be hidden if the incident was not reported to an insurance company or state agency, or if repairs were conducted privately. A vehicle may also have been titled in a state that did not apply a \"Flood\" brand. Detection requires checking the NMVTIS report and a meticulous physical inspection for corrosion, silt, or mold in concealed areas.\n\n**Q4: What is title washing and how does it work?**\nAnswer: Title washing is a fraudulent practice where a vehicle with a severe title brand, such as \"Salvage\" or \"Flood,\" is moved to a state with weaker disclosure laws to obtain a clean title. The vehicle is then often sold in another state like New Jersey without the brand being disclosed. The NMVTIS system is designed to track these brands across state lines.\n\n**Q5: How do I verify open safety recalls for a 2019 Fiat 500?**\nAnswer: You must check two primary sources using the full 17-character VIN, such as 1HG3SC8G2KZ507454. First, visit the National Highway Traffic Safety Administration (NHTSA) website at nhtsa.gov/recalls. Second, check the official Fiat owner portal or contact a Fiat dealership. Both checks are necessary for comprehensive recall verification.\n\n**Q6: How can I detect VIN cloning on a used vehicle?**\nAnswer: Detect VIN cloning by physically verifying the VIN plate on the dashboard matches the stamps on the door jamb and firewall. Look for signs of tampering like mismatched rivets, adhesive residue, or altered surfaces. A NMVTIS report may also reveal duplicate VINs registered in different geographic locations, which is a strong indicator of cloning.\n\n**Q7: What is odometer rollback and how is it detected?**\nAnswer: Odometer rollback is the illegal practice of reducing the displayed mileage, often via CAN-Bus manipulation. Detection methods include inspecting the vehicle for physical wear inconsistent with the odometer reading on seats, pedals, and the steering wheel, verifying the mileage history chain in service records, and performing an electronic control unit (ECU) scan for stored true mileage.\n\n**Q8: How do I check for liens on a vehicle in New Jersey?**\nAnswer: To check for liens, you must conduct a lienholder search through the New Jersey DMV. A lien is a financial encumbrance that prevents clear title transfer until the debt is satisfied. Verifying a lien-free status is a critical step before purchasing any used vehicle to ensure you can obtain a clean title.\n\n**Q9: What are the common title brands in New Jersey?**\nAnswer: Common title brands in New Jersey, as defined by the New Jersey Vehicle Code, include \"Salvage,\" \"Rebuilt,\" \"Flood,\" and \"Junk.\" These brands are permanent designations that indicate a severe history affecting the vehicle's value and safety, and they are recorded on the title and in the NMVTIS database.\n\n**Q.",
+  "timestamp": "2025-12-04T09:28:55.704Z",
+  "wordCount": 611
+}

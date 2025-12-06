@@ -1,0 +1,984 @@
+{
+  "Alabama": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Alabama DMV"
+    ],
+    "main_statutes": [
+      "Alabama Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Alaska": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Alaska DMV"
+    ],
+    "main_statutes": [
+      "Alaska Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Arizona": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Arizona DMV"
+    ],
+    "main_statutes": [
+      "Arizona Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Arkansas": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Arkansas DMV"
+    ],
+    "main_statutes": [
+      "Arkansas Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "California": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "California DMV",
+      "BAR",
+      "CHP"
+    ],
+    "main_statutes": [
+      "California Vehicle Code",
+      "Health & Safety Code §44011"
+    ],
+    "brands": [
+      "Salvage",
+      "Junk",
+      "Lemon Law Buyback",
+      "Non-Repairable"
+    ],
+    "inspection": "Biennial smog check (BAR), no general safety inspection for most vehicles",
+    "env_risks": [
+      "wildfires",
+      "coastal flooding",
+      "earthquake-related damage"
+    ]
+  },
+  "Colorado": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Colorado DMV"
+    ],
+    "main_statutes": [
+      "Colorado Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Connecticut": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Connecticut DMV"
+    ],
+    "main_statutes": [
+      "Connecticut Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Delaware": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Delaware DMV"
+    ],
+    "main_statutes": [
+      "Delaware Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Florida": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Florida DMV",
+      "FDLE"
+    ],
+    "main_statutes": [
+      "Florida Statutes Chapter 319"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "No general safety inspection required",
+    "env_risks": [
+      "hurricane flooding",
+      "coastal salt air corrosion",
+      "high humidity damage"
+    ]
+  },
+  "Georgia": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Georgia DMV"
+    ],
+    "main_statutes": [
+      "Georgia Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Hawaii": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Hawaii DMV"
+    ],
+    "main_statutes": [
+      "Hawaii Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Idaho": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Idaho DMV"
+    ],
+    "main_statutes": [
+      "Idaho Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Illinois": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Illinois DMV"
+    ],
+    "main_statutes": [
+      "Illinois Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Indiana": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Indiana DMV"
+    ],
+    "main_statutes": [
+      "Indiana Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Iowa": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Iowa DMV"
+    ],
+    "main_statutes": [
+      "Iowa Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Kansas": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Kansas DMV"
+    ],
+    "main_statutes": [
+      "Kansas Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Kentucky": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Kentucky DMV"
+    ],
+    "main_statutes": [
+      "Kentucky Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Louisiana": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Louisiana DMV"
+    ],
+    "main_statutes": [
+      "Louisiana Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Maine": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Maine DMV"
+    ],
+    "main_statutes": [
+      "Maine Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Maryland": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Maryland DMV"
+    ],
+    "main_statutes": [
+      "Maryland Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Massachusetts": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Massachusetts DMV"
+    ],
+    "main_statutes": [
+      "Massachusetts Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Michigan": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Michigan DMV"
+    ],
+    "main_statutes": [
+      "Michigan Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Minnesota": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Minnesota DMV"
+    ],
+    "main_statutes": [
+      "Minnesota Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Mississippi": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Mississippi DMV"
+    ],
+    "main_statutes": [
+      "Mississippi Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Missouri": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Missouri DMV"
+    ],
+    "main_statutes": [
+      "Missouri Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Montana": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Montana DMV"
+    ],
+    "main_statutes": [
+      "Montana Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Nebraska": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Nebraska DMV"
+    ],
+    "main_statutes": [
+      "Nebraska Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Nevada": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Nevada DMV"
+    ],
+    "main_statutes": [
+      "Nevada Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "New-hampshire": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "New Hampshire DMV"
+    ],
+    "main_statutes": [
+      "New Hampshire Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "New-jersey": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "New Jersey DMV"
+    ],
+    "main_statutes": [
+      "New Jersey Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "New-mexico": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "New Mexico DMV"
+    ],
+    "main_statutes": [
+      "New Mexico Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "New-york": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "New York DMV"
+    ],
+    "main_statutes": [
+      "New York Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "North-carolina": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "North Carolina DMV"
+    ],
+    "main_statutes": [
+      "North Carolina Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "North-dakota": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "North Dakota DMV"
+    ],
+    "main_statutes": [
+      "North Dakota Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Ohio": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Ohio DMV"
+    ],
+    "main_statutes": [
+      "Ohio Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Oklahoma": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Oklahoma DMV"
+    ],
+    "main_statutes": [
+      "Oklahoma Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Oregon": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Oregon DMV"
+    ],
+    "main_statutes": [
+      "Oregon Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Pennsylvania": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Pennsylvania DMV"
+    ],
+    "main_statutes": [
+      "Pennsylvania Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Rhode-island": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Rhode Island DMV"
+    ],
+    "main_statutes": [
+      "Rhode Island Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "South-carolina": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "South Carolina DMV"
+    ],
+    "main_statutes": [
+      "South Carolina Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "South-dakota": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "South Dakota DMV"
+    ],
+    "main_statutes": [
+      "South Dakota Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Tennessee": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Tennessee DMV"
+    ],
+    "main_statutes": [
+      "Tennessee Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Texas": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "TxDMV",
+      "Texas DPS",
+      "TDI"
+    ],
+    "main_statutes": [
+      "Texas Transportation Code Chapter 501"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Nonrepairable"
+    ],
+    "inspection": "Annual safety inspection is required",
+    "env_risks": [
+      "hail belt",
+      "Gulf Coast flooding",
+      "high theft corridors on I-45 and I-35"
+    ]
+  },
+  "Utah": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Utah DMV"
+    ],
+    "main_statutes": [
+      "Utah Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Vermont": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Vermont DMV"
+    ],
+    "main_statutes": [
+      "Vermont Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Virginia": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Virginia DMV"
+    ],
+    "main_statutes": [
+      "Virginia Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Washington": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Washington DMV"
+    ],
+    "main_statutes": [
+      "Washington Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "West-virginia": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "West Virginia DMV"
+    ],
+    "main_statutes": [
+      "West Virginia Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Wisconsin": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Wisconsin DMV"
+    ],
+    "main_statutes": [
+      "Wisconsin Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "Wyoming": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "Wyoming DMV"
+    ],
+    "main_statutes": [
+      "Wyoming Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "District-of-columbia": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "District of Columbia DMV"
+    ],
+    "main_statutes": [
+      "District of Columbia Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  }
+}
+

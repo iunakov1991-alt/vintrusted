@@ -85,18 +85,30 @@ class MonsterOrchestratorCore extends EventEmitter {
 
       // НАДСТРОЙКИ (опционально)
       if (this.config.modules.extensions.trizRepair.enabled) {
-        const TRIZRepair = require('./modules/triz-repair-light');
-        this.modules.trizRepair = new TRIZRepair(this.config);
+        try {
+          const TRIZRepair = require('./modules/triz-repair-light');
+          this.modules.trizRepair = new TRIZRepair(this.config);
+        } catch (error) {
+          console.warn('[ORCHESTRATOR] TRIZ Repair module not available:', error.message);
+        }
       }
 
       if (this.config.modules.extensions.evolutionEngine.enabled) {
-        const EvolutionEngine = require('./modules/evolution-engine-light');
-        this.modules.evolutionEngine = new EvolutionEngine(this.config);
+        try {
+          const EvolutionEngine = require('./modules/evolution-engine-light');
+          this.modules.evolutionEngine = new EvolutionEngine(this.config);
+        } catch (error) {
+          console.warn('[ORCHESTRATOR] Evolution Engine module not available:', error.message);
+        }
       }
 
       if (this.config.modules.extensions.performanceLearner.enabled) {
-        const PerformanceLearner = require('./modules/performance-learner-light');
-        this.modules.performanceLearner = new PerformanceLearner(this.config);
+        try {
+          const PerformanceLearner = require('./modules/performance-learner-light');
+          this.modules.performanceLearner = new PerformanceLearner(this.config);
+        } catch (error) {
+          console.warn('[ORCHESTRATOR] Performance Learner module not available:', error.message);
+        }
       }
 
       this.emit('initialized');
@@ -134,6 +146,22 @@ class MonsterOrchestratorCore extends EventEmitter {
 
     this.taskQueue.on('queue:paused', (data) => {
       this.emit('queue:paused', data);
+    });
+
+    this.taskQueue.on('queue:resumed', (data) => {
+      this.emit('queue:resumed', data);
+    });
+
+    this.taskQueue.on('queue:stopped', (data) => {
+      this.emit('queue:stopped', data);
+    });
+
+    this.taskQueue.on('queue:cleared', () => {
+      this.emit('queue:cleared');
+    });
+
+    this.taskQueue.on('batch:added', (data) => {
+      this.emit('batch:added', data);
     });
   }
 

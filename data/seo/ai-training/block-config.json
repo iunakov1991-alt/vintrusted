@@ -1,0 +1,115 @@
+{
+  "blocks": {
+    "hero": {
+      "wordCount": 150,
+      "provider": "ollama",
+      "priority": 1,
+      "dependencies": [],
+      "group": "independent"
+    },
+    "key_facts": {
+      "wordCount": 180,
+      "provider": "ollama",
+      "priority": 1,
+      "dependencies": [],
+      "group": "independent"
+    },
+    "vin_decoder": {
+      "wordCount": 220,
+      "provider": "ollama",
+      "priority": 1,
+      "dependencies": [],
+      "group": "independent"
+    },
+    "nmvtis": {
+      "wordCount": 180,
+      "provider": "ollama",
+      "priority": 1,
+      "dependencies": [],
+      "group": "independent"
+    },
+    "deep_explanation": {
+      "wordCount": 220,
+      "provider": "deepseek",
+      "priority": 2,
+      "dependencies": ["hero", "key_facts"],
+      "group": "dependent-1"
+    },
+    "state_specific": {
+      "wordCount": 220,
+      "provider": "deepseek",
+      "priority": 2,
+      "dependencies": ["hero", "key_facts"],
+      "group": "dependent-1"
+    },
+    "accident_intelligence": {
+      "wordCount": 200,
+      "provider": "deepseek",
+      "priority": 2,
+      "dependencies": ["hero", "key_facts"],
+      "group": "dependent-1"
+    },
+    "fraud_patterns": {
+      "wordCount": 200,
+      "provider": "deepseek",
+      "priority": 2,
+      "dependencies": ["hero", "key_facts"],
+      "group": "dependent-1"
+    },
+    "market_value": {
+      "wordCount": 180,
+      "provider": "deepseek",
+      "priority": 3,
+      "dependencies": ["deep_explanation"],
+      "group": "dependent-2"
+    },
+    "insurance_risk": {
+      "wordCount": 180,
+      "provider": "deepseek",
+      "priority": 3,
+      "dependencies": ["deep_explanation"],
+      "group": "dependent-2"
+    },
+    "buyer_guide": {
+      "wordCount": 200,
+      "provider": "ollama",
+      "priority": 3,
+      "dependencies": ["deep_explanation"],
+      "group": "dependent-2"
+    },
+    "recalls_tsbs": {
+      "wordCount": 180,
+      "provider": "deepseek",
+      "priority": 3,
+      "dependencies": ["deep_explanation"],
+      "group": "dependent-2"
+    },
+    "faq": {
+      "wordCount": 400,
+      "provider": "ollama",
+      "priority": 4,
+      "dependencies": ["buyer_guide", "recalls_tsbs"],
+      "group": "dependent-3"
+    },
+    "internal_links": {
+      "wordCount": 150,
+      "provider": "ollama",
+      "priority": 5,
+      "dependencies": ["faq"],
+      "group": "dependent-4"
+    },
+    "cta": {
+      "wordCount": 70,
+      "provider": "ollama",
+      "priority": 5,
+      "dependencies": ["internal_links"],
+      "group": "dependent-4"
+    }
+  },
+  "targetLength": {
+    "min": 2000,
+    "max": 2500,
+    "average": 2250
+  }
+}
+

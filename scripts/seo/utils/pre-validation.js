@@ -150,15 +150,13 @@ class PreValidationEngine {
    * Проверка наличия API ключей
    */
   checkAPIKeys() {
-    const hasGroq = !!process.env.GROQ_API_KEY;
     const hasDeepSeek = !!process.env.DEEPSEEK_API_KEY;
     const hasOpenAI = !!process.env.OPENAI_API_KEY;
 
-    const hasAny = hasGroq || hasDeepSeek || hasOpenAI;
+    const hasAny = hasDeepSeek || hasOpenAI;
 
     return {
       valid: hasAny,
-      hasGroq,
       hasDeepSeek,
       hasOpenAI,
       message: hasAny 

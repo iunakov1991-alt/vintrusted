@@ -1,0 +1,78 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Rolls-Royce",
+    "model": "Dawn",
+    "year": "2019",
+    "stateSlug": "texas",
+    "stateLabel": "Texas",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGZDNW54Kundefined194949",
+    "variationContext": {
+      "structuralVariant": "state_priority",
+      "styleVariant": {
+        "name": "Legal Academic",
+        "tone": "formal, statute-referenced, analytical",
+        "description": "Формальный академический стиль с ссылками на законодательство",
+        "characteristics": [
+          "Emphasizes legal compliance and regulatory frameworks",
+          "Uses formal terminology and statutory references",
+          "Focuses on documentation and verification processes",
+          "Academic citation style",
+          "Precise legal terminology"
+        ],
+        "openingPhrases": [
+          "A comprehensive legal and technical audit",
+          "From a regulatory compliance perspective",
+          "Under state and federal vehicle regulations",
+          "Per statutory requirements",
+          "In accordance with regulatory frameworks"
+        ]
+      },
+      "stateBoost": {
+        "uniqueRules": [
+          "Texas Transportation Code 501",
+          "TxDMV salvage regulations",
+          "DPS rebuilt inspection requirements",
+          "Texas Certificate of Title Act",
+          "Odometer disclosure requirements"
+        ],
+        "specificPractices": [
+          "Annual vehicle inspection",
+          "Flood damage documentation",
+          "Hail damage reporting",
+          "Title brand verification",
+          "Rebuilt vehicle inspection process"
+        ],
+        "fraudPatterns": [
+          "Flood damage concealment",
+          "Hail damage misrepresentation",
+          "Title washing from other states",
+          "Odometer rollback on high-mileage vehicles",
+          "Salvage title loopholes"
+        ],
+        "risks": [
+          "hail belt exposure",
+          "Gulf Coast flood incidents",
+          "high theft corridors I-45/I-35",
+          "non-title-holding lien rules",
+          "coastal corrosion risks",
+          "hurricane damage patterns",
+          "drought-related vehicle storage",
+          "border state title washing"
+        ],
+        "selectedRisks": [
+          "border state title washing",
+          "hail belt exposure"
+        ]
+      },
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": null
+    }
+  },
+  "content": "**Q1: What specific data sources are used for a 2019 Rolls-Royce Dawn VIN report in Texas?**\nAnswer: Commercial reports aggregate data from the National Motor Vehicle Title Information System (NMVTIS), insurance claim databases, police accident reports, and state DMV title/registration records, but they do not access proprietary manufacturer service logs.\n\n**Q2: Does a clean Texas title guarantee a 2019 Dawn was never a salvage vehicle?**\nAnswer: No, a clean Texas title does not guarantee this, as title washing can occur when a vehicle branded in another jurisdiction is re-titled in Texas without the brand, a process NMVTIS is designed to help uncover.\n\n**Q3: How can I verify the authenticity of a Rolls-Royce VIN to prevent cloning?**\nAnswer: Verify the VIN plate on the dashboard matches the stampings on the chassis and engine block, and check for signs of tampering such as mismatched rivets or altered labels, which are red flags for VIN cloning fraud.\n\n**Q4: What is the process for a Revived Salvage brand in Texas?**\nAnswer: The Texas process requires a salvage vehicle to pass a structural inspection by the Texas Department of Motor Vehicles or an authorized agent, along with a brake and lamp inspection, before a \"Revived Salvage\" brand is permanently applied to its title.\n\n**Q5: Can a VIN report show all previous service and maintenance history?**\nAnswer: No, a standard VIN report will not show comprehensive service history, as this data is typically held in.",
+  "timestamp": "2025-12-04T08:46:15.487Z",
+  "wordCount": 239
+}

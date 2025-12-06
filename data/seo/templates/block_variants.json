@@ -1,0 +1,74 @@
+{
+  "vin_decoder": {
+    "variants": ["table", "bullet_list", "dense_text", "structured_sections"],
+    "descriptions": {
+      "table": "Present VIN decoder information in a structured table format with columns for Position, Range, and Meaning",
+      "bullet_list": "Present VIN decoder information as a detailed bulleted list with clear sections",
+      "dense_text": "Present VIN decoder information as flowing narrative text with embedded details",
+      "structured_sections": "Present VIN decoder information in clearly marked sections (WMI, VDS, VIS)"
+    }
+  },
+  "accident_intelligence": {
+    "variants": ["bullets", "case_study", "narrative", "risk_matrix"],
+    "descriptions": {
+      "bullets": "Present accident intelligence as structured bullet points with key findings",
+      "case_study": "Present accident intelligence as a detailed case study analysis",
+      "narrative": "Present accident intelligence as flowing narrative with embedded analysis",
+      "risk_matrix": "Present accident intelligence as a risk assessment matrix"
+    }
+  },
+  "buyer_guide": {
+    "variants": ["steps", "questions", "risks_list", "checklist"],
+    "descriptions": {
+      "steps": "Present buyer guide as numbered step-by-step instructions",
+      "questions": "Present buyer guide as a series of questions buyers should ask",
+      "risks_list": "Present buyer guide as a list of risks to avoid",
+      "checklist": "Present buyer guide as a comprehensive checklist format"
+    }
+  },
+  "fraud_patterns": {
+    "variants": ["red_flags", "case_examples", "pattern_analysis", "warning_signs"],
+    "descriptions": {
+      "red_flags": "Present fraud patterns as a list of red flag indicators",
+      "case_examples": "Present fraud patterns through detailed case examples",
+      "pattern_analysis": "Present fraud patterns as analytical pattern breakdown",
+      "warning_signs": "Present fraud patterns as warning signs to watch for"
+    }
+  },
+  "key_facts": {
+    "variants": ["bullets", "table", "summary_paragraphs"],
+    "descriptions": {
+      "bullets": "Present key facts as structured bullet points",
+      "table": "Present key facts in a table format",
+      "summary_paragraphs": "Present key facts as summary paragraphs"
+    }
+  },
+  "state_specific": {
+    "variants": ["regulations_focus", "risks_focus", "practices_focus", "comprehensive"],
+    "descriptions": {
+      "regulations_focus": "Focus on state-specific regulations and legal requirements",
+      "risks_focus": "Focus on state-specific risks and environmental factors",
+      "practices_focus": "Focus on state-specific practices and procedures",
+      "comprehensive": "Comprehensive coverage of regulations, risks, and practices"
+    }
+  },
+  "market_value": {
+    "variants": ["analysis", "comparison_table", "factors_list"],
+    "descriptions": {
+      "analysis": "Present market value as analytical narrative",
+      "comparison_table": "Present market value in comparison table format",
+      "factors_list": "Present market value as a list of valuation factors"
+    }
+  },
+  "insurance_risk": {
+    "variants": ["risk_assessment", "premium_factors", "coverage_analysis"],
+    "descriptions": {
+      "risk_assessment": "Present insurance risk as risk assessment narrative",
+      "premium_factors": "Present insurance risk as factors affecting premiums",
+      "coverage_analysis": "Present insurance risk as coverage analysis"
+    }
+  }
+}
+
+
+

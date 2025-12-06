@@ -1,0 +1,72 @@
+{
+  "pagePath": "public/semantic-pages/en/dmv-titles/az/title-types/checklist/index.html",
+  "url": "https://vintrusted.com/en/dmv-titles/az/title-types/checklist/",
+  "analyzedAt": "2025-12-06T13:29:56.770Z",
+  "quality": {
+    "overallScore": 0.9149999999999999,
+    "content": {
+      "wordCount": 2063,
+      "targetWordCount": 2000,
+      "wordCountScore": 1,
+      "structureScore": 1
+    },
+    "keywords": {
+      "scores": {
+        "state": 1,
+        "dmv": 1,
+        "types": 0.75,
+        "vin": 1,
+        "legal": 0.75
+      },
+      "overallScore": 0.9
+    },
+    "seo": {
+      "title": false,
+      "description": true,
+      "canonical": true,
+      "ogTags": true,
+      "twitterCard": true,
+      "schemaCount": 6,
+      "hasWebPageSchema": true,
+      "hasOrganizationSchema": true,
+      "hasSearchAction": true,
+      "seoScore": 0.8999999999999999
+    },
+    "links": {
+      "internalLinks": 21,
+      "targetLinks": 4,
+      "linksScore": 1
+    },
+    "faq": {
+      "count": 0,
+      "targetCount": 5,
+      "faqScore": 0
+    }
+  },
+  "metrics": {
+    "wordCount": 2063,
+    "h1Count": 1,
+    "h2Count": 4,
+    "h3Count": 5,
+    "listCount": 3,
+    "tableCount": 1,
+    "paragraphCount": 10,
+    "internalLinks": 21,
+    "faqCount": 0,
+    "schemaCount": 6,
+    "titleLength": 48,
+    "descLength": 150
+  },
+  "recommendations": [
+    {
+      "type": "faq",
+      "severity": "major",
+      "message": "Only 0 FAQ items found. Target: 5+ questions for better coverage."
+    },
+    {
+      "type": "seo",
+      "severity": "major",
+      "message": "Title length (48) is not optimal. Target: 50-60 characters."
+    }
+  ]
+}

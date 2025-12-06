@@ -1,0 +1,74 @@
+{
+  "Honda Accord 2019": {
+    "wmi": ["1HG", "19U"],
+    "wmi_description": "1HG = United States, Honda, Passenger Car; 19U = United States, Honda, Passenger Car (alternative)",
+    "engine_codes": ["K20C4", "2.0T", "1.5T", "L15B7"],
+    "engine_descriptions": {
+      "K20C4": "2.0L Turbocharged 4-cylinder",
+      "1.5T": "1.5L Turbocharged 4-cylinder",
+      "L15B7": "1.5L Turbocharged VTEC"
+    },
+    "safety": "Honda Sensing",
+    "safety_features": ["Collision Mitigation Braking", "Road Departure Mitigation", "Adaptive Cruise Control", "Lane Keeping Assist"],
+    "body": ["Sedan", "Coupe"],
+    "plant": ["Marysville, Ohio", "Sayama, Japan"],
+    "model_year_code": "K",
+    "vin_positions": {
+      "1-3": "WMI: 1HG or 19U (United States, Honda)",
+      "4-8": "VDS: Model-specific codes for 2019 Accord (body style, trim, safety features, engine)",
+      "9": "Check Digit: Mathematical validation",
+      "10": "Model Year: K = 2019",
+      "11": "Plant: Varies by Honda manufacturing facility",
+      "12-17": "Serial: Unique production sequence"
+    }
+  },
+  "Toyota Camry 2019": {
+    "wmi": ["4T1"],
+    "wmi_description": "4T1 = United States, Toyota, Passenger Car",
+    "engine_codes": ["A25A-FKS", "2GR-FKS", "A25A-FXS"],
+    "engine_descriptions": {
+      "A25A-FKS": "2.5L Dynamic Force 4-cylinder",
+      "2GR-FKS": "3.5L V6",
+      "A25A-FXS": "2.5L Hybrid"
+    },
+    "safety": "Toyota Safety Sense 2.0",
+    "safety_features": ["Pre-Collision System", "Lane Departure Alert", "Dynamic Radar Cruise Control", "Automatic High Beams"],
+    "body": ["Sedan"],
+    "plant": ["Georgetown, Kentucky", "Tsutsumi, Japan"],
+    "model_year_code": "K",
+    "vin_positions": {
+      "1-3": "WMI: 4T1 (United States, Toyota)",
+      "4-8": "VDS: Model-specific codes for 2019 Camry (body style, trim, safety features, engine)",
+      "9": "Check Digit: Mathematical validation",
+      "10": "Model Year: K = 2019",
+      "11": "Plant: Georgetown, KY or Tsutsumi, Japan",
+      "12-17": "Serial: Unique production sequence"
+    }
+  },
+  "Toyota Camry 2018": {
+    "wmi": ["4T1"],
+    "wmi_description": "4T1 = United States, Toyota, Passenger Car",
+    "engine_codes": ["A25A-FKS", "2GR-FKS", "A25A-FXS"],
+    "engine_descriptions": {
+      "A25A-FKS": "2.5L Dynamic Force 4-cylinder",
+      "2GR-FKS": "3.5L V6",
+      "A25A-FXS": "2.5L Hybrid"
+    },
+    "safety": "Toyota Safety Sense P",
+    "safety_features": ["Pre-Collision System", "Lane Departure Alert", "Dynamic Radar Cruise Control", "Automatic High Beams"],
+    "body": ["Sedan"],
+    "plant": ["Georgetown, Kentucky", "Tsutsumi, Japan"],
+    "model_year_code": "J",
+    "vin_positions": {
+      "1-3": "WMI: 4T1 (United States, Toyota)",
+      "4-8": "VDS: Model-specific codes for 2018 Camry (body style, trim, safety features, engine)",
+      "9": "Check Digit: Mathematical validation",
+      "10": "Model Year: J = 2018",
+      "11": "Plant: Georgetown, KY or Tsutsumi, Japan",
+      "12-17": "Serial: Unique production sequence"
+    }
+  }
+}
+
+
+

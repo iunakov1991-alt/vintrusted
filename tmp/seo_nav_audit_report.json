@@ -1,0 +1,40 @@
+[
+  {
+    "path": "/Users/dmitrii/Desktop/website/public/semantic-pages/en/dmv-titles/ca/title-types/checklist/index.html",
+    "has_header_nav": true,
+    "has_footer_nav": true,
+    "has_related_links": true,
+    "has_toc": true,
+    "has_breadcrumbs": true,
+    "has_schema_webpage": true,
+    "has_schema_faq": true,
+    "has_schema_breadcrumb": true,
+    "has_hreflang": true,
+    "has_canonical": true,
+    "has_og_tags": true,
+    "has_anchors": true,
+    "h1_count": 1,
+    "h2_count": 4,
+    "internal_links_count": 7,
+    "errors": []
+  },
+  {
+    "path": "/Users/dmitrii/Desktop/website/public/semantic-pages/es/dmv-titles/ca/title-types/checklist/index.html",
+    "has_header_nav": false,
+    "has_footer_nav": false,
+    "has_related_links": true,
+    "has_toc": false,
+    "has_breadcrumbs": false,
+    "has_schema_webpage": true,
+    "has_schema_faq": true,
+    "has_schema_breadcrumb": false,
+    "has_hreflang": false,
+    "has_canonical": true,
+    "has_og_tags": false,
+    "has_anchors": false,
+    "h1_count": 1,
+    "h2_count": 6,
+    "internal_links_count": 2,
+    "errors": []
+  }
+]

@@ -1,0 +1,848 @@
+{
+  "updated_at": "2025-12-06T13:30:08.998Z",
+  "last_ingest_count": 150,
+  "metrics": {
+    "total_errors": 150,
+    "fatal_count": 46,
+    "major_count": 102,
+    "error_rate": 0.9866666666666667,
+    "aggregates": {
+      "zones": {
+        "dmv_titles": {
+          "total": 150,
+          "fatal": 46,
+          "major": 102
+        }
+      },
+      "article_types": {
+        "dmv_state_guide": {
+          "total": 150,
+          "fatal": 46,
+          "major": 102
+        }
+      },
+      "audience_segments": {
+        "us_general": {
+          "total": 102,
+          "fatal": 22,
+          "major": 78
+        },
+        "us_mexican": {
+          "total": 48,
+          "fatal": 24,
+          "major": 24
+        }
+      },
+      "languages": {
+        "en": {
+          "total": 102,
+          "fatal": 22,
+          "major": 78
+        },
+        "es": {
+          "total": 48,
+          "fatal": 24,
+          "major": 24
+        }
+      },
+      "blocks": {
+        "comparison_table": {
+          "total": 65,
+          "fatal": 19,
+          "major": 44
+        },
+        "vin_section": {
+          "total": 44,
+          "fatal": 3,
+          "major": 41
+        },
+        "hero": {
+          "total": 20,
+          "fatal": 3,
+          "major": 17
+        },
+        "context_legal": {
+          "total": 3,
+          "fatal": 3,
+          "major": 0
+        },
+        "step_by_step": {
+          "total": 3,
+          "fatal": 3,
+          "major": 0
+        },
+        "checklist": {
+          "total": 3,
+          "fatal": 3,
+          "major": 0
+        },
+        "common_errors": {
+          "total": 3,
+          "fatal": 3,
+          "major": 0
+        },
+        "fees_taxes": {
+          "total": 3,
+          "fatal": 3,
+          "major": 0
+        },
+        "faq": {
+          "total": 3,
+          "fatal": 3,
+          "major": 0
+        },
+        "total": {
+          "total": 3,
+          "fatal": 3,
+          "major": 0
+        }
+      },
+      "states": {}
+    }
+  },
+  "aggregates": {
+    "zones": {
+      "dmv_titles": {
+        "total": 150,
+        "fatal": 46,
+        "major": 102
+      }
+    },
+    "article_types": {
+      "dmv_state_guide": {
+        "total": 150,
+        "fatal": 46,
+        "major": 102
+      }
+    },
+    "audience_segments": {
+      "us_general": {
+        "total": 102,
+        "fatal": 22,
+        "major": 78
+      },
+      "us_mexican": {
+        "total": 48,
+        "fatal": 24,
+        "major": 24
+      }
+    },
+    "languages": {
+      "en": {
+        "total": 102,
+        "fatal": 22,
+        "major": 78
+      },
+      "es": {
+        "total": 48,
+        "fatal": 24,
+        "major": 24
+      }
+    },
+    "blocks": {
+      "comparison_table": {
+        "total": 65,
+        "fatal": 19,
+        "major": 44
+      },
+      "vin_section": {
+        "total": 44,
+        "fatal": 3,
+        "major": 41
+      },
+      "hero": {
+        "total": 20,
+        "fatal": 3,
+        "major": 17
+      },
+      "context_legal": {
+        "total": 3,
+        "fatal": 3,
+        "major": 0
+      },
+      "step_by_step": {
+        "total": 3,
+        "fatal": 3,
+        "major": 0
+      },
+      "checklist": {
+        "total": 3,
+        "fatal": 3,
+        "major": 0
+      },
+      "common_errors": {
+        "total": 3,
+        "fatal": 3,
+        "major": 0
+      },
+      "fees_taxes": {
+        "total": 3,
+        "fatal": 3,
+        "major": 0
+      },
+      "faq": {
+        "total": 3,
+        "fatal": 3,
+        "major": 0
+      },
+      "total": {
+        "total": 3,
+        "fatal": 3,
+        "major": 0
+      }
+    },
+    "states": {}
+  },
+  "recent_errors": [
+    {
+      "timestamp": "2025-12-06T08:32:05.339Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "hero",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.351Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "context_legal",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.352Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "step_by_step",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.352Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "checklist",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.353Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "common_errors",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.354Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.354Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "fees_taxes",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.354Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "vin_section",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.354Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "faq",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:05.355Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "total",
+      "error": "Total word count too low (252)",
+      "severity": "FATAL",
+      "wordcount": 252,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.647Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "hero",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.650Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "context_legal",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.650Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "step_by_step",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.651Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "checklist",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.651Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "common_errors",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.652Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "comparison_table",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.652Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "fees_taxes",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.652Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "vin_section",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.652Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "faq",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:32:06.652Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "total",
+      "error": "Total word count too low (252)",
+      "severity": "FATAL",
+      "wordcount": 252,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.133Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "hero",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.143Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "context_legal",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.143Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "step_by_step",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.143Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "checklist",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.144Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "common_errors",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.144Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "comparison_table",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.144Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "fees_taxes",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.144Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "vin_section",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.144Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "faq",
+      "error": "Block too short (28 words)",
+      "severity": "FATAL",
+      "wordcount": 28,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:33:38.144Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "total",
+      "error": "Total word count too low (252)",
+      "severity": "FATAL",
+      "wordcount": 252,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.245Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block too short (70 words)",
+      "severity": "FATAL",
+      "wordcount": 70,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.239Z",
+      "topic_id": "dmv_az_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block weak (92 words)",
+      "severity": "MAJOR",
+      "wordcount": 92,
+      "state": "AZ"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.238Z",
+      "topic_id": "dmv_tx_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "hero",
+      "error": "Block weak (138 words)",
+      "severity": "MAJOR",
+      "wordcount": 138,
+      "state": "TX"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.243Z",
+      "topic_id": "dmv_ny_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block too short (55 words)",
+      "severity": "FATAL",
+      "wordcount": 55,
+      "state": "NY"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.248Z",
+      "topic_id": "dmv_az_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "vin_section",
+      "error": "Block weak (125 words)",
+      "severity": "MAJOR",
+      "wordcount": 125,
+      "state": "AZ"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.249Z",
+      "topic_id": "dmv_ny_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "vin_section",
+      "error": "Block weak (137 words)",
+      "severity": "MAJOR",
+      "wordcount": 137,
+      "state": "NY"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.249Z",
+      "topic_id": "dmv_tx_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block too short (78 words)",
+      "severity": "FATAL",
+      "wordcount": 78,
+      "state": "TX"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.250Z",
+      "topic_id": "dmv_tx_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "vin_section",
+      "error": "Block weak (129 words)",
+      "severity": "MAJOR",
+      "wordcount": 129,
+      "state": "TX"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.258Z",
+      "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "comparison_table",
+      "error": "Block weak (104 words)",
+      "severity": "MAJOR",
+      "wordcount": 104,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:15.261Z",
+      "topic_id": "dmv_ca_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block weak (94 words)",
+      "severity": "MAJOR",
+      "wordcount": 94,
+      "state": "CA"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:17.888Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "comparison_table",
+      "error": "Block too short (78 words)",
+      "severity": "FATAL",
+      "wordcount": 78,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:17.890Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "vin_section",
+      "error": "Block weak (136 words)",
+      "severity": "MAJOR",
+      "wordcount": 136,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:35:21.386Z",
+      "topic_id": "dmv_tx_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "es",
+      "audience_segment": "us_mexican",
+      "block_id": "vin_section",
+      "error": "Block weak (137 words)",
+      "severity": "MAJOR",
+      "wordcount": 137,
+      "state": "TX"
+    },
+    {
+      "timestamp": "2025-12-06T08:36:45.840Z",
+      "topic_id": "dmv_ny_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block weak (129 words)",
+      "severity": "MAJOR",
+      "wordcount": 129,
+      "state": "NY"
+    },
+    {
+      "timestamp": "2025-12-06T08:36:45.838Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block too short (57 words)",
+      "severity": "FATAL",
+      "wordcount": 57,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:36:45.849Z",
+      "topic_id": "dmv_ny_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "vin_section",
+      "error": "Block weak (132 words)",
+      "severity": "MAJOR",
+      "wordcount": 132,
+      "state": "NY"
+    },
+    {
+      "timestamp": "2025-12-06T08:36:45.850Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "vin_section",
+      "error": "Block weak (121 words)",
+      "severity": "MAJOR",
+      "wordcount": 121,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:36:46.207Z",
+      "topic_id": "dmv_tx_title_types_checklist_en_us_general",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "vin_section",
+      "error": "Block weak (113 words)",
+      "severity": "MAJOR",
+      "wordcount": 113,
+      "state": "TX"
+    },
+    {
+      "timestamp": "2025-12-06T08:38:16.326Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "comparison_table",
+      "error": "Block weak (108 words)",
+      "severity": "MAJOR",
+      "wordcount": 108,
+      "state": "FL"
+    },
+    {
+      "timestamp": "2025-12-06T08:38:16.334Z",
+      "topic_id": "dmv_fl_title_types_checklist_es_mx_us",
+      "article_type": "dmv_state_guide",
+      "zone": "dmv_titles",
+      "language": "en",
+      "audience_segment": "us_general",
+      "block_id": "vin_section",
+      "error": "Block weak (126 words)",
+      "severity": "MAJOR",
+      "wordcount": 126,
+      "state": "FL"
+    }
+  ]
+}

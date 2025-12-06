@@ -1,0 +1,488 @@
+[SEO AI] 2025-12-04T19:26:46.137Z - Cache loaded: 2926 entries
+[SEO AI] 2025-12-04T19:26:46.144Z - AI training strategy loaded
+[SEO AI] 2025-12-04T19:26:46.144Z - Local AI disabled (Pre-M1 mode or feature flag off)
+[SEO REF-LOADER] 2025-12-04T19:26:46.146Z - Reference articles loaded and cached
+[SEO RULE-ENGINE] 2025-12-04T19:26:46.147Z - Loaded 5 rules from rules.json
+[SEO VARIATION-ENGINE] 2025-12-04T19:26:46.149Z - Loaded 43 structural schemes
+[SEO VARIATION-ENGINE] 2025-12-04T19:26:46.149Z - Loaded 6 style modes
+[SEO VARIATION-ENGINE] 2025-12-04T19:26:46.149Z - Loaded block depth configurations
+[SEO VARIATION-ENGINE] 2025-12-04T19:26:46.149Z - Loaded VIN specs for 3 models
+[SEO VARIATION-ENGINE] 2025-12-04T19:26:46.151Z - Loaded state risks for 4 states
+[SEO VARIATION-ENGINE] 2025-12-04T19:26:46.153Z - Loaded block variants for 8 block types
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.155Z - VIN canon template loaded
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.155Z - Block configuration loaded: 15 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.156Z - FACT-LOCK: Loaded 3 vehicle specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.156Z - FACT-LOCK: Loaded 51 state specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.156Z - FACT-LOCK: Loaded global invariants
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.157Z - FACT-LOCK: Prompt header loaded
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.158Z - Loading 15 canonical prompt files...
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.158Z - Loaded prompt for accident_intelligence
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.159Z - Loaded prompt for buyer_guide
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.159Z - Loaded prompt for cta
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.161Z - Loaded prompt for deep_explanation
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.161Z - Loaded prompt for faq
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.161Z - Loaded prompt for fraud_patterns
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.161Z - Loaded prompt for hero
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.161Z - Loaded prompt for insurance_risk
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.161Z - Loaded prompt for internal_links
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.161Z - Loaded prompt for key_facts
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.162Z - Loaded prompt for market_value
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.162Z - Loaded prompt for nmvtis
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.162Z - Loaded prompt for recalls_tsbs
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.162Z - Loaded prompt for state_specific
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:26:46.162Z - Loaded prompt for vin_decoder
+[SEO FRAGMENT-CACHE] 2025-12-04T19:26:46.165Z - Loading 74 cached fragments...
+[SEO FRAGMENT-CACHE] 2025-12-04T19:26:46.187Z - Loaded 74 fragments
+[SEO RULE-ENGINE] 2025-12-04T19:26:46.187Z - Loaded 5 rules from rules.json
+[SEO GEN-PAGE] 2025-12-04T19:26:46.188Z - Generating page: 2021 Saab 900 in Nebraska (VIN: 1HGPTANX0ML861262)
+[SEO GEN-PAGE] 2025-12-04T19:26:46.189Z - Analysis depth: deep, Max retries: 5
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.190Z - FACT-LOCK: Loaded existing FACT-SHEET for VIN 1HGPTANX0ML861262
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.190Z - FACT-LOCK: FACT-SHEET ready for 2021 Saab 900 in nebraska
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.191Z - Generating V6 article: 2021 Saab 900 in Nebraska (15 blocks, parallel generation)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.191Z - Structural variant: value_analysis, Style: Market Economics, Depth roll: 1
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.192Z - Block groups for parallel generation: 2 groups
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.192Z - Generating group 1/2 (3 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.199Z - Using canonical prompt from file for hero
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.199Z - Generating hero block (ollama, 268 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:26:46.208Z - Trying DeepSeek API for vin_check in en (prompt: 9314 chars, compact: true)
+[SEO AI] 2025-12-04T19:26:46.210Z - Using compact strategy (9314 vs 9314 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.275Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.275Z - Generating vin_decoder block (ollama, 232 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:26:46.281Z - Trying DeepSeek API for vin_check in en (prompt: 11311 chars, compact: true)
+[SEO AI] 2025-12-04T19:26:46.282Z - Using compact strategy (11311 vs 11311 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.284Z - Using canonical prompt from file for nmvtis
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:46.284Z - Generating nmvtis block (ollama, 256 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:26:46.286Z - Trying DeepSeek API for vin_check in en (prompt: 9035 chars, compact: true)
+[SEO AI] 2025-12-04T19:26:46.287Z - Using compact strategy (9035 vs 9035 chars)
+[SEO AI] 2025-12-04T19:26:57.239Z - DeepSeek API success (attempt 1): 1407 chars, prompt: 11311 chars, timeout: 180000ms, tokens: 328
+[SEO AI] 2025-12-04T19:26:57.243Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:26:57.243Z - AI content generated by deepseek for vin_check in en (1407 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:57.284Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:57.284Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:57.297Z - ⚠️  Block vin_decoder has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:26:57.300Z - Trying DeepSeek API for vin_check in en (prompt: 2663 chars, compact: true)
+[SEO AI] 2025-12-04T19:26:57.301Z - Using compact strategy (2663 vs 2663 chars)
+[SEO AI] 2025-12-04T19:26:59.040Z - DeepSeek API success (attempt 1): 1850 chars, prompt: 9035 chars, timeout: 180000ms, tokens: 357
+[SEO AI] 2025-12-04T19:26:59.041Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:26:59.041Z - AI content generated by deepseek for vin_check in en (1850 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.057Z - ⚠️  Block nmvtis missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.057Z - ⚠️  Block nmvtis does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.062Z - Block nmvtis validated successfully (263 words, marker and punctuation auto-added, 12778ms)
+[SEO AI] 2025-12-04T19:26:59.469Z - DeepSeek API success (attempt 1): 1906 chars, prompt: 9314 chars, timeout: 180000ms, tokens: 371
+[SEO AI] 2025-12-04T19:26:59.470Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:26:59.470Z - AI content generated by deepseek for vin_check in en (1906 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.480Z - ⚠️  Block hero missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.480Z - ⚠️  Block hero does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.481Z - Block hero validation failed (attempt 1): INCOMPLETE_SENTENCE: Incomplete sentence detected (ends with incomplete phrase)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.481Z - Retrying block hero...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.481Z - Using canonical prompt from file for hero
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:26:59.481Z - Generating hero block (ollama, 268 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:26:59.484Z - Trying DeepSeek API for vin_check in en (prompt: 9314 chars, compact: true)
+[SEO AI] 2025-12-04T19:26:59.486Z - Using compact strategy (9314 vs 9314 chars)
+[SEO AI] 2025-12-04T19:27:04.536Z - DeepSeek API success (attempt 1): 888 chars, prompt: 2663 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:27:04.537Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:04.537Z - AI content generated by deepseek for vin_check in en (888 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:04.553Z - ⚠️  Auto-fixed block vin_decoder still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:04.553Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 136 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:04.553Z - Block vin_decoder validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:04.553Z - Retrying block vin_decoder...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:04.553Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:04.553Z - Generating vin_decoder block (ollama, 232 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:27:04.556Z - Trying DeepSeek API for vin_check in en (prompt: 11289 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:04.559Z - Using compact strategy (11289 vs 11289 chars)
+[SEO AI] 2025-12-04T19:27:11.697Z - DeepSeek API success (attempt 1): 1938 chars, prompt: 9314 chars, timeout: 180000ms, tokens: 371
+[SEO AI] 2025-12-04T19:27:11.699Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:11.699Z - AI content generated by deepseek for vin_check in en (1938 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:11.719Z - ⚠️  Block hero missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:11.720Z - ⚠️  Block hero does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:11.724Z - Block hero validated successfully (274 words, marker and punctuation auto-added, 25529ms)
+[SEO AI] 2025-12-04T19:27:15.185Z - DeepSeek API success (attempt 1): 1437 chars, prompt: 11289 chars, timeout: 180000ms, tokens: 328
+[SEO AI] 2025-12-04T19:27:15.186Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:15.186Z - AI content generated by deepseek for vin_check in en (1437 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.197Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.197Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.197Z - Block vin_decoder validated successfully (226 words, marker and punctuation auto-added, 28923ms)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.198Z - Group 1 completed in 29.0s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.198Z - Generating group 2/2 (10 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.199Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.199Z - Generating market_value block (deepseek, 199 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:27:15.204Z - Trying DeepSeek API for vin_check in en (prompt: 9254 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:15.206Z - Using compact strategy (9254 vs 9254 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.208Z - Using canonical prompt from file for insurance_risk
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.208Z - Generating insurance_risk block (deepseek, 218 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:27:15.211Z - Trying DeepSeek API for vin_check in en (prompt: 9346 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:15.212Z - Using compact strategy (9346 vs 9346 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.213Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.213Z - Generating accident_intelligence block (deepseek, 136 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:27:15.215Z - Trying DeepSeek API for vin_check in en (prompt: 9381 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:15.217Z - Using compact strategy (9381 vs 9381 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.218Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.218Z - Generating fraud_patterns block (deepseek, 199 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:27:15.220Z - Trying DeepSeek API for vin_check in en (prompt: 9279 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:15.222Z - Using compact strategy (9279 vs 9279 chars)
+[SEO FRAGMENT-CACHE] 2025-12-04T19:27:15.226Z - Cache HIT for state_specific (nebraska)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.227Z - Using cached fragment for state_specific
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.227Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.227Z - Generating buyer_guide block (ollama, 261 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:27:15.229Z - Trying DeepSeek API for vin_check in en (prompt: 9190 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:15.231Z - Using compact strategy (9190 vs 9190 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.237Z - Using canonical prompt from file for recalls_tsbs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:15.241Z - Generating recalls_tsbs block (deepseek, 251 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:27:15.243Z - Trying DeepSeek API for vin_check in en (prompt: 9077 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:15.244Z - Using compact strategy (9077 vs 9077 chars)
+[SEO AI] 2025-12-04T19:27:23.404Z - DeepSeek API success (attempt 1): 1152 chars, prompt: 9381 chars, timeout: 180000ms, tokens: 213
+[SEO AI] 2025-12-04T19:27:23.405Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:23.405Z - AI content generated by deepseek for vin_check in en (1152 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:23.429Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:23.430Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:23.431Z - ⚠️  Block accident_intelligence is 44 words short (22.0%). Auto-expanding...
+[SEO AI] 2025-12-04T19:27:23.435Z - Trying DeepSeek API for vin_check in en (prompt: 2548 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:23.438Z - Using compact strategy (2548 vs 2548 chars)
+[SEO AI] 2025-12-04T19:27:25.297Z - DeepSeek API success (attempt 1): 1536 chars, prompt: 9254 chars, timeout: 180000ms, tokens: 288
+[SEO AI] 2025-12-04T19:27:25.297Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:25.297Z - AI content generated by deepseek for vin_check in en (1536 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.308Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.308Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.308Z - Block market_value validation failed (attempt 1): INCOMPLETE_SENTENCE: Incomplete sentence detected (ends with incomplete phrase)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.308Z - Retrying block market_value...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.309Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.309Z - Generating market_value block (deepseek, 199 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:27:25.311Z - Trying DeepSeek API for vin_check in en (prompt: 9254 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:25.313Z - Using compact strategy (9254 vs 9254 chars)
+[SEO AI] 2025-12-04T19:27:25.389Z - DeepSeek API success (attempt 1): 1507 chars, prompt: 9279 chars, timeout: 180000ms, tokens: 288
+[SEO AI] 2025-12-04T19:27:25.389Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:25.389Z - AI content generated by deepseek for vin_check in en (1507 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.390Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.390Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.390Z - ⚠️  Block fraud_patterns has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:27:25.393Z - Trying DeepSeek API for vin_check in en (prompt: 2763 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:25.396Z - Using compact strategy (2763 vs 2763 chars)
+[SEO AI] 2025-12-04T19:27:25.650Z - DeepSeek API success (attempt 1): 1671 chars, prompt: 9346 chars, timeout: 180000ms, tokens: 311
+[SEO AI] 2025-12-04T19:27:25.650Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:25.651Z - AI content generated by deepseek for vin_check in en (1671 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.670Z - ⚠️  Block insurance_risk missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.670Z - ⚠️  Block insurance_risk does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:25.670Z - ⚠️  Block insurance_risk has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:27:25.674Z - Trying DeepSeek API for vin_check in en (prompt: 2927 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:25.678Z - Using compact strategy (2927 vs 2927 chars)
+[SEO AI] 2025-12-04T19:27:27.360Z - DeepSeek API success (attempt 1): 1774 chars, prompt: 9077 chars, timeout: 180000ms, tokens: 351
+[SEO AI] 2025-12-04T19:27:27.361Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:27.361Z - AI content generated by deepseek for vin_check in en (1774 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.384Z - ⚠️  Block recalls_tsbs missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.385Z - ⚠️  Block recalls_tsbs does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.401Z - Block recalls_tsbs validated successfully (242 words, marker and punctuation auto-added, 12164ms)
+[SEO FRAGMENT-CACHE] 2025-12-04T19:27:27.401Z - Cache HIT for faq (nebraska)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.402Z - Using cached fragment for faq
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.405Z - Using canonical prompt from file for internal_links
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.405Z - Generating internal_links block (ollama, 84 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:27:27.408Z - Trying DeepSeek API for vin_check in en (prompt: 9088 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:27.411Z - Using compact strategy (9088 vs 9088 chars)
+[SEO AI] 2025-12-04T19:27:27.513Z - DeepSeek API success (attempt 1): 1871 chars, prompt: 9190 chars, timeout: 180000ms, tokens: 363
+[SEO AI] 2025-12-04T19:27:27.513Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:27.513Z - AI content generated by deepseek for vin_check in en (1871 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.522Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.522Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.523Z - Block buyer_guide validation failed (attempt 1): INVALID_TRAILING_WORD: Block ends with forbidden word "as"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.523Z - Retrying block buyer_guide...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.523Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:27.523Z - Generating buyer_guide block (ollama, 261 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:27:27.526Z - Trying DeepSeek API for vin_check in en (prompt: 9204 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:27.528Z - Using compact strategy (9204 vs 9204 chars)
+[SEO AI] 2025-12-04T19:27:29.966Z - DeepSeek API success (attempt 1): 1054 chars, prompt: 2548 chars, timeout: 180000ms, tokens: 188
+[SEO AI] 2025-12-04T19:27:29.966Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:29.966Z - AI content generated by deepseek for vin_check in en (1054 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:29.982Z - ⚠️  Auto-expanded block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:29.982Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 142 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:29.982Z - ⚠️  Block accident_intelligence has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:27:29.985Z - Trying DeepSeek API for vin_check in en (prompt: 2408 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:29.987Z - Using compact strategy (2408 vs 2408 chars)
+[SEO AI] 2025-12-04T19:27:31.610Z - DeepSeek API success (attempt 1): 1020 chars, prompt: 2763 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:27:31.610Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:31.610Z - AI content generated by deepseek for vin_check in en (1020 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:31.636Z - ⚠️  Auto-fixed block fraud_patterns still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:31.636Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 152 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:31.636Z - Block fraud_patterns validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:31.636Z - Retrying block fraud_patterns...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:31.637Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:31.637Z - Generating fraud_patterns block (deepseek, 199 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:27:31.641Z - Trying DeepSeek API for vin_check in en (prompt: 9277 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:31.645Z - Using compact strategy (9277 vs 9277 chars)
+[SEO AI] 2025-12-04T19:27:31.974Z - DeepSeek API success (attempt 1): 1054 chars, prompt: 2927 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:27:31.975Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:31.976Z - AI content generated by deepseek for vin_check in en (1054 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.001Z - ⚠️  Auto-fixed block insurance_risk still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.001Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.001Z - Block insurance_risk validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.001Z - Retrying block insurance_risk...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.001Z - Using canonical prompt from file for insurance_risk
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.002Z - Generating insurance_risk block (deepseek, 218 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:27:32.006Z - Trying DeepSeek API for vin_check in en (prompt: 9340 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:32.009Z - Using compact strategy (9340 vs 9340 chars)
+[SEO AI] 2025-12-04T19:27:32.378Z - DeepSeek API success (attempt 1): 692 chars, prompt: 9088 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:27:32.378Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:32.378Z - AI content generated by deepseek for vin_check in en (692 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.423Z - Block internal_links validated successfully (97 words, 5019ms)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.423Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.423Z - Generating cta block (ollama, 50 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:27:32.426Z - Using cached AI response for vin_check in en
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:32.428Z - Block cta validated successfully (71 words, 5ms)
+[SEO AI] 2025-12-04T19:27:35.027Z - DeepSeek API success (attempt 1): 1523 chars, prompt: 9254 chars, timeout: 180000ms, tokens: 288
+[SEO AI] 2025-12-04T19:27:35.028Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:35.028Z - AI content generated by deepseek for vin_check in en (1523 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:35.039Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:35.040Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:35.040Z - ⚠️  Block market_value has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:27:35.042Z - Trying DeepSeek API for vin_check in en (prompt: 2779 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:35.044Z - Using compact strategy (2779 vs 2779 chars)
+[SEO AI] 2025-12-04T19:27:36.371Z - DeepSeek API success (attempt 1): 1116 chars, prompt: 2408 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:27:36.372Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:36.372Z - AI content generated by deepseek for vin_check in en (1116 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:36.394Z - ⚠️  Auto-fixed block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:36.394Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 152 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:36.394Z - Block accident_intelligence validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 156 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:36.394Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:36.395Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:36.395Z - Generating accident_intelligence block (deepseek, 136 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:27:36.398Z - Trying DeepSeek API for vin_check in en (prompt: 9381 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:36.402Z - Using compact strategy (9381 vs 9381 chars)
+[SEO AI] 2025-12-04T19:27:39.901Z - DeepSeek API success (attempt 1): 1780 chars, prompt: 9204 chars, timeout: 180000ms, tokens: 363
+[SEO AI] 2025-12-04T19:27:39.902Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:39.902Z - AI content generated by deepseek for vin_check in en (1780 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:39.911Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:39.911Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:39.912Z - Block buyer_guide validated successfully (265 words, marker and punctuation auto-added, 24685ms)
+[SEO AI] 2025-12-04T19:27:41.316Z - DeepSeek API success (attempt 1): 1038 chars, prompt: 2779 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:27:41.317Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:41.318Z - AI content generated by deepseek for vin_check in en (1038 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.343Z - ⚠️  Auto-fixed block market_value still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.343Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.343Z - Block market_value validation failed (attempt 2): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.343Z - Retrying block market_value...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.344Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.344Z - Generating market_value block (deepseek, 199 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:27:41.350Z - Trying DeepSeek API for vin_check in en (prompt: 9243 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:41.356Z - Using compact strategy (9243 vs 9243 chars)
+[SEO AI] 2025-12-04T19:27:41.360Z - DeepSeek API success (attempt 1): 1375 chars, prompt: 9277 chars, timeout: 180000ms, tokens: 288
+[SEO AI] 2025-12-04T19:27:41.360Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:41.360Z - AI content generated by deepseek for vin_check in en (1375 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.361Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.361Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:41.361Z - ⚠️  Block fraud_patterns has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:27:41.364Z - Trying DeepSeek API for vin_check in en (prompt: 2631 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:41.366Z - Using compact strategy (2631 vs 2631 chars)
+[SEO AI] 2025-12-04T19:27:43.580Z - DeepSeek API success (attempt 1): 1743 chars, prompt: 9340 chars, timeout: 180000ms, tokens: 311
+[SEO AI] 2025-12-04T19:27:43.582Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:43.582Z - AI content generated by deepseek for vin_check in en (1743 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:43.606Z - ⚠️  Block insurance_risk missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:43.606Z - ⚠️  Block insurance_risk does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:43.608Z - Block insurance_risk validated successfully (231 words, marker and punctuation auto-added, 28401ms)
+[SEO AI] 2025-12-04T19:27:44.181Z - DeepSeek API success (attempt 1): 1155 chars, prompt: 9381 chars, timeout: 180000ms, tokens: 213
+[SEO AI] 2025-12-04T19:27:44.182Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:44.182Z - AI content generated by deepseek for vin_check in en (1155 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:44.203Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:44.203Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:44.205Z - ⚠️  Block accident_intelligence is 38 words short (19.0%). Auto-expanding...
+[SEO AI] 2025-12-04T19:27:44.210Z - Trying DeepSeek API for vin_check in en (prompt: 2551 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:44.213Z - Using compact strategy (2551 vs 2551 chars)
+[SEO AI] 2025-12-04T19:27:47.891Z - DeepSeek API success (attempt 1): 989 chars, prompt: 2631 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:27:47.893Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:47.893Z - AI content generated by deepseek for vin_check in en (989 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:47.917Z - ⚠️  Auto-fixed block fraud_patterns still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:47.917Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 145 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:47.917Z - Block fraud_patterns validation failed (attempt 2): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:47.917Z - Retrying block fraud_patterns...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:47.918Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:47.918Z - Generating fraud_patterns block (deepseek, 199 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:27:47.922Z - Trying DeepSeek API for vin_check in en (prompt: 9283 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:47.924Z - Using compact strategy (9283 vs 9283 chars)
+[SEO AI] 2025-12-04T19:27:49.863Z - DeepSeek API success (attempt 1): 950 chars, prompt: 2551 chars, timeout: 180000ms, tokens: 176
+[SEO AI] 2025-12-04T19:27:49.864Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:49.864Z - AI content generated by deepseek for vin_check in en (950 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:49.885Z - ⚠️  Auto-expanded block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:49.885Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 132 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:49.886Z - Block accident_intelligence validation failed (attempt 2): TOO_SHORT_FOR_BLOCK_TYPE: 162 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:49.886Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:49.886Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:49.886Z - Generating accident_intelligence block (deepseek, 136 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:27:49.890Z - Trying DeepSeek API for vin_check in en (prompt: 9381 chars, compact: true)
+[SEO AI] 2025-12-04T19:27:49.893Z - Using compact strategy (9381 vs 9381 chars)
+[SEO AI] 2025-12-04T19:27:50.947Z - DeepSeek API success (attempt 1): 1532 chars, prompt: 9243 chars, timeout: 180000ms, tokens: 288
+[SEO AI] 2025-12-04T19:27:50.948Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:50.948Z - AI content generated by deepseek for vin_check in en (1532 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:50.972Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:50.972Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO AI] 2025-12-04T19:27:57.945Z - DeepSeek API success (attempt 1): 1134 chars, prompt: 9381 chars, timeout: 180000ms, tokens: 213
+[SEO AI] 2025-12-04T19:27:57.946Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:57.947Z - AI content generated by deepseek for vin_check in en (1134 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.969Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.969Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO AI] 2025-12-04T19:27:57.972Z - DeepSeek API success (attempt 1): 1475 chars, prompt: 9283 chars, timeout: 180000ms, tokens: 288
+[SEO AI] 2025-12-04T19:27:57.973Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:27:57.973Z - AI content generated by deepseek for vin_check in en (1475 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.973Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.973Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.975Z - Group 2 completed in 42.8s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.975Z - All blocks generated in 71.8s (parallel mode)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.976Z -   WARNING: OVER_TARGET_LENGTH: 2950 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.976Z - Total article length: 2950 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.976Z - Running pre-validation with auto-repair...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.977Z - 🔧 Attempting to repair block market_value (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:27:57.978Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:27:57.984Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.057Z - ⚠️  Block market_value still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.057Z - 🔧 Attempting to repair block accident_intelligence (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:27:58.058Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:27:58.058Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.071Z - ⚠️  Block accident_intelligence still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 157 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.071Z - 🔧 Attempting to repair block fraud_patterns (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:27:58.071Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:27:58.072Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.073Z - ⚠️  Block fraud_patterns still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.077Z - ⚠️  3 blocks still need post-processing:
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.077Z -   - market_value (status: FAILED_VALIDATION): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "for"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.077Z -   - accident_intelligence (status: FAILED_VALIDATION): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 157 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.077Z -   - fraud_patterns (status: FAILED_VALIDATION): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.079Z - Validating article...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: H2 may lack SEO keywords: "Nebraska-Specific Insights"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: H2 may lack SEO keywords: "Frequently Asked Questions"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: Recommended block "Executive Summary" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: Recommended block "Data Layers" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: VIN Decoder may not cover all 17 positions (found 0 mentions)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: CTA does not follow canonical format: "Check this {YEAR} {MAKE} {MODEL} VIN now"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: Internal links count (0) should be 4-6
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: Total article word count (2890) should be 2000-2500 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: Section "Accident Intelligence" is too short (155 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: Section "Internal Links" is too short (102 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z -   WARNING: Section "CTA" is too short (75 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z - Attempting auto-fix...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.120Z - Running post-processing...
+[SEO POST-PROCESSOR] 2025-12-04T19:27:58.121Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:27:58.122Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.192Z - ⚠️  Article still has 4 errors after post-processing
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.192Z -   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.192Z -   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.192Z -   ERROR: VIN Decoder section lacks position table
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.192Z -   ERROR: Missing required sections: Key Facts, Deep Explanation
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.192Z - Checking article uniqueness...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.193Z - ✅ Article uniqueness score: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.193Z - ✅ Article lexical variation: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.193Z - Article generated: 2844 words, 13 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.194Z - Circuit Breaker ollama: CLOSED, failure rate: 0.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.194Z - Circuit Breaker deepseek: CLOSED, failure rate: 20.0%
+[SEO GEN-PAGE] 2025-12-04T19:27:58.194Z - ✅ Article generated in 72.00s
+[SEO GEN-PAGE] 2025-12-04T19:27:58.194Z -    Words: 2844
+[SEO GEN-PAGE] 2025-12-04T19:27:58.194Z -    Blocks: 13
+{
+  "vin": "1HGPTANX0ML861262",
+  "make": "Saab",
+  "model": "900",
+  "year": "2021",
+  "state": "nebraska",
+  "stateLabel": "Nebraska",
+  "article": {
+    "title": "VIN Check Guide for 2021 Saab 900 in Nebraska",
+    "h1": "Complete VIN Check Guide: 2021 Saab 900",
+    "content": "A Vehicle Identification Number (VIN) check for a 2021 Saab 900 registered in Nebraska serves as a critical actuarial tool for assessing ownership risk and residual market value. The 17-character VIN, such as the example `1HGPTANX0ML861262`, functions as a unique financial and legal identifier, encoding data points essential for loss history verification and premium calculation. In Nebraska's title-holding system, the physical certificate of title is a primary asset document, and its associated history directly influences depreciation curves and total cost of ownership. This analysis decodes the VIN structure to highlight fraud vectors and value implications specific to this vehicle and jurisdiction.\n\nThe VIN's segments each correlate to specific risk metrics. The World Manufacturer Identifier (WMI), represented by the first three characters (e.g., `1HG`), identifies the manufacturer and region of origin, a foundational data point for parts sourcing and recall compliance which affects repair costs. Positions four through eight form the Vehicle Descriptor Section (VDS), detailing model-specific attributes, though the specific engine codes for this vehicle are not detailed in the provided data. The 9th character is a mandatory check digit, a mathematical fraud deterrent. The 10th character specifies the model year (2021), a key variable for depreciation schedules. The 11th character identifies the assembly plant, influencing build quality assessments. Finally, the serial number (positions 12-17) provides the unique production sequence, necessary for matching against theft databases and total loss records.\n\n*   **Title Brand Scrutiny:** Nebraska recognizes specific title brands including Salvage, Rebuilt, Flood, and Junk. A vehicle carrying one of these brands represents a significantly elevated financial risk, often leading to higher insurance.\n\n## VIN Decoder for 2021 Saab 900\n\nA Vehicle Identification Number (VIN) is a unique 17-character code that serves as a legal and technical fingerprint for a vehicle, such as a 2021 Saab 900 registered in Nebraska. Decoding this sequence is a fundamental antifraud measure, providing actuarial data critical for risk assessment, insurance underwriting, and market valuation. Each segment of the VIN, from the World Manufacturer Identifier to the serial number, contains encoded information verified against state and federal databases to confirm a vehicle's provenance and specifications, directly influencing its depreciation curve and loss history potential.\n\n<table><tr><th>Position</th><th>Range</th><th>Meaning</th></tr><tr><td>1-3</td><td>WMI</td><td>World Manufacturer Identifier: 1HG = United States, Honda, Unknown</td></tr><tr><td>4-8</td><td>VDS</td><td>Vehicle Descriptor Section: Model-specific codes for 2021 Saab 900 (body style, trim, safety features, engine)</td></tr><tr><td>9</td><td>Check Digit</td><td>Mathematical validation digit (calculated via NHTSA algorithm)</td></tr><tr><td>10</td><td>Year</td><td>Model Year: M = 2021</td></tr><tr><td>11</td><td>Plant</td><td>Assembly Plant: [varies by Saab manufacturing facility]</td></tr><tr><td>12-17</td><td>Serial</td><td>Production Sequence: Unique serial number (from example VIN 1HGPTANX0ML861262)</td></tr></table>\n\nThe WMI \"1HG\" specifically identifies the manufacturer's country and parent entity, which in this case points to a Honda facility in the United States. This detail.\n\n## NMVTIS: National Motor Vehicle Title Information System\n\nA vehicle history report for a 2021 Saab 900 in Nebraska relies heavily on data from the National Motor Vehicle Title Information System (NMVTIS). This federally authorized system aggregates title, brand, and theft information from participating state agencies, including the Nebraska DMV, and other sources to create a consolidated history. For a buyer or insurer, this data forms an actuarial foundation for assessing inherent risk, potential loss history, and ultimate market valuation. The VIN 1HGPTANX0ML861262 serves as the unique key to querying this database, where its 17-character structure, beginning with a WMI candidate like \"1HG\", is validated against national records to prevent cloning or fraud.\n\nFrom a risk assessment perspective, NMVTIS provides critical metrics for calculating potential premium implications and depreciation factors. The system's primary value lies in its recording of definitive title events as governed by the Nebraska Vehicle Code within its title-holding system.\n\n*   **Title Brand Verification:** NMVTIS records state-issued title brands such as Salvage, Rebuilt, Flood, or Junk. These designations are permanent financial markers that directly correlate to severe depreciation and elevated insurance risk, affecting total loss thresholds and residual value.\n*   **Odometer Reading Analysis:** The system includes odometer readings reported during title transfers. Discrepancies in this mileage history can indicate tampering, which actuarial models treat as a significant fraud risk factor that impacts projected maintenance costs and vehicle longevity.\n*   **Theft and Recovery Status:** NMVTIS data includes theft records from law enforcement. A vehicle listed as unrecovered stolen is a total loss for insurance purposes, while a recovery.\n\n## Market Value\n\nDetermining the fair market value of a 2021 Saab 900 in Nebraska requires a technical assessment that extends beyond basic make, model, and year. The valuation is fundamentally an actuarial exercise, weighing verified vehicle history against statistical risk models used by insurers and financial institutions. A VIN-specific history report provides the critical data points necessary for this analysis, directly influencing the vehicle's risk profile and resultant monetary worth.\n\nKey technical and legal factors derived from a Nebraska VIN check that impact market value include:\n*   **Title Brand History:** The presence of a state-issued brand such as \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk\" is a primary actuarial determinant. These brands, recorded by the Nebraska DMV under the Nebraska Vehicle Code, signal a high-probability loss event and permanently alter the vehicle's risk classification, leading to significant depreciation.\n*   **Inspection Records:** Documentation of the state-required vehicle inspection provides a verifiable point of condition assessment, which can mitigate uncertainty in the valuation model if the inspection was passed without major findings.\n*   **Ownership Chain:** A clear, sequential history of ownership within Nebraska's title-holding system reduces transactional risk and supports a stronger valuation by demonstrating a stable, documented lifecycle.\n*   **Regional Environmental Risk Exposure:** The report's assessment for potential fraud indicators.\n\n## Insurance Risk\n\nA VIN check for a 2021 Saab 900 in Nebraska provides critical actuarial data for insurance risk assessment and premium calculation. Insurers analyze decoded VIN information alongside state-specific title history to evaluate loss probability and determine appropriate coverage tiers. The 17-character identifier, beginning with a WMI candidate like \"1HG,\" establishes the vehicle's manufacturing origin, which is a foundational element in its risk profile. In Nebraska's title-holding system, where the physical certificate is retained by the lienholder until loan satisfaction, verifying a clear title history is paramount for confirming legal ownership and insurable interest.\n\nKey technical and legal factors influencing coverage analysis include:\n*   **Title Brand History:** Nebraska recognizes specific title brands, including Salvage, Rebuilt, Flood, and Junk. A vehicle history report revealing any such brand directly impacts its insurability, residual value, and comprehensive/collision premium costs.\n*   **State Compliance:** Nebraska mandates a state-required vehicle inspection. A lapse in this compliance can indicate deferred maintenance or undisclosed damage, elevating mechanical risk.\n*   **Environmental Risk Exposure:** The vehicle's history is screened for regional environmental risks, which are factored into long-term durability assessments and potential for corrosion-related claims.\n*   **Odometer Verification:** Consistent mileage reporting across registrations is essential for accurate vehicle valuation and identifying potential fraud that voids coverage.\n\nThe absence of a branded title in Nebraska's system does not conclusively indicate.\n\n## Accident Intelligence\n\nA vehicle history report for a 2021 Saab 900 in Nebraska provides critical actuarial data for evaluating loss history and calculating insurance risk. This intelligence is compiled from standard state and federal data sources, focusing on events that impact residual market value and future premium implications.\n\n*   **Loss History Analysis:** The report cross-references records to identify reported accidents, which directly influence the vehicle's actuarial risk profile and potential for future claims.\n*   **Title Brand Scrutiny:** Nebraska title brands, such as Salvage, Rebuilt, Flood, or Junk, are severe risk indicators. These designations, governed by the Nebraska Vehicle Code, signal a high-probability loss event and trigger significant depreciation.\n*   **Structural Integrity Indicators:** While specific platform data for this VIN is unavailable, reported collision severity is assessed for potential impact on the unibody structure, a primary factor in safety and repair cost valuation.\n*   **Fraud Prevention Metrics:** Discrepancies between the vehicle's history and its.\n\n## Fraud Patterns\n\nA VIN check for a vehicle like the 2021 Saab 900 in Nebraska serves as a critical actuarial tool, quantifying ownership and damage risks that directly influence market value and insurance premiums. The 17-character identifier, beginning with a WMI like \"1HG\", provides a unique fingerprint for tracking a vehicle's history against state and federal data sources. In Nebraska's title-holding system, where the physical certificate is a primary asset document, discrepancies in this history signal elevated financial risk.\n\nCommon fraud patterns manifest as attempts to obscure a vehicle's loss history, which insurers and appraisers heavily weight. These patterns include title washing, where a vehicle with a severe brand like \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk\" is moved between jurisdictions to clear its record, artificially inflating its market value. Another scheme involves VIN cloning, where the legitimate VIN from a clean vehicle is replicated onto a stolen or totaled one, creating a false identity that can bypass initial checks. Odometer fraud remains a persistent threat, rolling back mileage to hide wear and reduce the actuarial depreciation calculation, misleading buyers on the asset's remaining useful life.\n\nFor a buyer, these manipulations represent a direct financial hazard, often resulting in overpayment, denied insurance claims, and costly repairs for undisclosed damage. A thorough V.\n\n## Nebraska-Specific Insights\n\nWhen conducting a VIN check for a 2021 Saab 900 in Nebraska, understanding the state's specific legal and procedural framework is critical for fraud detection. Nebraska operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most official transactions. This system creates specific verification points; the title's security features, issuer (the Nebraska DMV), and any recorded brands must be meticulously cross-referenced against database records. The VIN `1HGPTANX0ML861262` itself provides the first layer of technical verification. The World Manufacturer Identifier (WMI) `1HG` is a key data point for establishing the vehicle's origin, and any discrepancy between this decoded origin and the title's history should be treated as a major red flag. Nebraska's legal environment, governed by the **Nebraska Vehicle Code**, defines specific title brands used to categorize severely compromised vehicles.\n\nInvestigative analysis for this vehicle must focus on several state-specific risk vectors and verification protocols:\n\n*   **Title Brand Scrutiny:** Nebraska recognizes specific title brands, including **Salvage**, **Rebuilt**, **Flood**, and **Junk**. A vehicle history report must be examined for the issuance and, crucially, the *persistence* of these brands. Fraud patterns often involve attempting to obscure a brand's history, but in a title-holding state like Nebraska, the physical document and the electronic record must align perfectly.\n*   **Inspection as a Fraud Control:** Nebraska mandates a **State-required vehicle inspection**. This process is not merely administrative; it serves as a vital fraud control point where a physical examination of the VIN, vehicle components, and safety features can uncover discrepancies not visible in digital.\n\n## Buyer Guide\n\nA VIN check for a vehicle like the 2021 Saab 900 in Nebraska is a critical risk assessment tool. Buyers should approach this report as an actuarial document, analyzing historical data to forecast future liabilities and total cost of ownership. The following questions are designed to uncover financial and safety exposures that may not be apparent from a physical inspection alone.\n\n**What is the title history and current brand status?**\nNebraska operates a title-holding system, meaning the physical certificate of title is a primary legal document. You must confirm the title has not been branded with terms like \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk\" by the Nebraska DMV. A branded title significantly increases insurance risk and accelerates depreciation, as it indicates a prior total loss event. Cross-reference the title brand with the vehicle's repair history to assess the quality of reconstruction and residual structural risk.\n\n**How does the vehicle's identification decode, and what does it confirm?**\nThe VIN 1HGPTANX0ML861262 is a 17-character code. Positions 1-3 represent the World Manufacturer Identifier (WMI), with \"1HG\" being a candidate code for this vehicle. Position 10 decodes to the model year, which should correspond to the 2021 model year. Verifying that all VIN-derived data matches the vehicle's physical plates and documentation is a fundamental antifraud step. Any discrepancy can indicate VIN cloning or tampering, which voids insurance coverage and constitutes fraud.\n\n**What are the potential environmental and inspection liabilities?**\nThe report may note regional environmental risks, which for a 2021 vehicle could include exposure to corrosive agents. Furthermore, Nebraska.\n\n## Recalls & Technical Service Bulletins\n\nA comprehensive VIN check for a 2021 Saab 900 in Nebraska must include a thorough review of recall and Technical Service Bulletin (TSB) history, as these records directly impact safety, reliability, and long-term ownership costs. Recalls are federally mandated repairs for safety defects, while TSBs are manufacturer-issued guidelines for addressing common mechanical problems. For a vehicle like the Saab 900, understanding this history is a critical component of risk assessment, as unresolved issues can lead to accelerated depreciation, unexpected repair expenses, and potential safety liabilities that affect insurability and market value.\n\nKey technical and legal considerations include:\n*   **Recall Verification:** Federal law requires manufacturers to remedy safety recalls at no cost to the vehicle owner. A VIN-specific search confirms which campaigns apply to the specific 2021 Saab 900 with VIN 1HGPTANX0ML861262, distinguishing it from broader model-year campaigns.\n*   **TSB Analysis:** Technical Service Bulletins document known patterns of non-safety-related failures, such as electrical gremlins or premature component wear. A history of multiple related TSBs can signal a higher probability of future mechanical claims, influencing actuarial risk models used by insurers and impacting projected maintenance costs.\n*   **Compliance and Title Implications:** In Nebraska, a **state-required vehicle inspection** may check for open safety recalls. While Nebraska's title brands—**Salvage**, **Rebuilt**, **Flood**, and **Junk**—are not directly applied for open recalls, a vehicle with an unresolved critical safety recall may fail inspection, preventing registration and severely diminishing.\n\n## Frequently Asked Questions\n\n**Q1: Will a VIN report show all accident history for a 2021 Saab 900?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately, unreported damage, or events not captured in the provider's databases will not appear in the report.\n\n**Q2: Does a clean Nebraska title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean Nebraska title does not guarantee the vehicle was never a total loss. Title washing can occur where vehicles declared Salvage or Junk in other states receive a clean title upon transfer to Nebraska. Cross-referencing with the National Motor Vehicle Title Information System (NMVTIS) is essential to check for interstate brands.\n\n**Q3: Can flood or water damage history be hidden from a VIN report?**\nAnswer: Yes, Flood damage history can be hidden if the incident occurred in a state without mandatory branding, or if repairs were conducted privately without an insurance claim. Detection requires an NMVTIS check combined with a thorough physical inspection for corrosion, silt, or mold in hidden compartments.\n\n**Q4: How do I verify open safety recalls for a 2021 Saab 900?**\nAnswer: Verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN. Additionally, consult any official manufacturer portals for the most comprehensive and up-to-date recall information.\n\n**Q5: What is title washing and how does it work?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a branded title, such as Salvage or Flood, to states with weaker disclosure laws to obtain a clean title. The vehicle is then often sold in states like Nebraska, where the new title does not reflect the prior brand, misleading buyers.\n\n**Q6: How can I detect VIN cloning on a vehicle?**\nAnswer: Detect VIN cloning by physically verifying the VIN plate on the dashboard matches the stamps on the door jamb and firewall. Look for signs of tampering like mismatched rivets, adhesive residue, or altered stampings. An NMVTIS report may also flag duplicate VINs registered in different geographical locations.\n\n**Q7: What is odometer rollback and how is it detected?**\nAnswer: Odometer rollback is the illegal practice of reducing the displayed mileage, often via CAN-Bus manipulation. Detection methods include inspecting physical wear on the driver's seat, pedals, and steering wheel, verifying the mileage history chain in service records, and performing an electronic control unit (ECU) scan for true mileage data.\n\n**Q8: How do I check for liens.\n\n## Related VIN Check Guides\n\nA VIN check for a 2021 Saab 900 in Nebraska provides critical actuarial data for risk assessment and market valuation. The report analyzes loss history and title brands, such as Salvage or Flood, which directly influence insurance premiums and residual value. Nebraska's title-holding system means the physical certificate is retained by the lienholder until loan satisfaction, a key factor in ownership verification. The WMI code 1HG identifies the vehicle's world manufacturer, forming the basis for decoding its full descriptor. This technical and legal analysis is essential for calculating accurate depreciation and exposure to regional environmental risks.\n\n## Check Your VIN Now\n\nA comprehensive VIN check for a 2021 Saab 900 in Nebraska provides critical actuarial data for risk assessment and market valuation. This report analyzes loss history and title status, which directly influences insurance premiums and residual value. Key factors include the presence of state-recognized title brands and verification against standard state and federal data sources. This due diligence is essential for an accurate financial appraisal and understanding long-term ownership costs.",
+    "wordCount": 2844,
+    "blocks": 13,
+    "blocksDetail": {
+      "hero": {
+        "provider": "ollama",
+        "wordCount": 274
+      },
+      "vin_decoder": {
+        "provider": "ollama",
+        "wordCount": 226
+      },
+      "nmvtis": {
+        "provider": "ollama",
+        "wordCount": 263
+      },
+      "market_value": {
+        "provider": "deepseek",
+        "wordCount": 213
+      },
+      "insurance_risk": {
+        "provider": "deepseek",
+        "wordCount": 231
+      },
+      "accident_intelligence": {
+        "provider": "deepseek",
+        "wordCount": 157
+      },
+      "fraud_patterns": {
+        "provider": "deepseek",
+        "wordCount": 219
+      },
+      "state_specific": {
+        "provider": "deepseek",
+        "wordCount": 272
+      },
+      "buyer_guide": {
+        "provider": "ollama",
+        "wordCount": 265
+      },
+      "recalls_tsbs": {
+        "provider": "deepseek",
+        "wordCount": 242
+      },
+      "faq": {
+        "provider": "ollama",
+        "wordCount": 420
+      },
+      "internal_links": {
+        "provider": "ollama",
+        "wordCount": 97
+      },
+      "cta": {
+        "provider": "ollama",
+        "wordCount": 71
+      }
+    },
+    "timestamp": "2025-12-04T19:27:58.078Z",
+    "validationStats": {
+      "totalBlocks": 13,
+      "validBlocks": 13,
+      "failedBlocks": 3,
+      "autoAddedMarkers": 9,
+      "autoFixedEndings": 9
+    },
+    "uniquenessScore": 1,
+    "lexicalVariation": 1,
+    "structuralVariant": "value_analysis",
+    "styleVariant": "Market Economics",
+    "performanceStats": {
+      "totalTime": 72003,
+      "averageBlockTime": 19906.846153846152,
+      "totalRetries": 10,
+      "cacheHitRate": 0.15384615384615385,
+      "providerStats": {
+        "ollama": {
+          "count": 6,
+          "totalTime": 96939,
+          "averageTime": 16156.5,
+          "retries": 3,
+          "cacheHits": 0
+        },
+        "deepseek": {
+          "count": 5,
+          "totalTime": 161850,
+          "averageTime": 32370,
+          "retries": 7,
+          "cacheHits": 0
+        },
+        "fragment-cache": {
+          "count": 2,
+          "totalTime": 0,
+          "averageTime": 0,
+          "retries": 0,
+          "cacheHits": 2
+        }
+      }
+    },
+    "generationTime": 72003
+  },
+  "generated_at": "2025-12-04T19:27:58.194Z",
+  "generation_time": "72.00",
+  "analysis_depth": "deep"
+}

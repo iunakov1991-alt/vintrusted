@@ -1,0 +1,36 @@
+{
+  "Honda Accord 2019": {
+    "wmi": ["1HG", "19U"],
+    "body": ["Sedan"],
+    "engines": [
+      {"code": "L15BE", "name": "1.5L turbo"},
+      {"code": "K20C4", "name": "2.0L turbo"}
+    ],
+    "safety_package": "Honda Sensing",
+    "unibody_name": "ACE body structure"
+  },
+  "Toyota Camry 2018": {
+    "wmi": ["4T1"],
+    "body": ["Sedan"],
+    "engines": [
+      {"code": "A25A-FKS", "name": "2.5L I4"},
+      {"code": "2GR-FKS", "name": "3.5L V6"}
+    ],
+    "safety_package": "Toyota Safety Sense",
+    "unibody_name": "TNGA-K platform"
+  },
+  "Toyota Camry 2019": {
+    "wmi": ["4T1"],
+    "body": ["Sedan"],
+    "engines": [
+      {"code": "A25A-FKS", "name": "2.5L I4"},
+      {"code": "2GR-FKS", "name": "3.5L V6"},
+      {"code": "A25A-FXS", "name": "2.5L Hybrid"}
+    ],
+    "safety_package": "Toyota Safety Sense 2.0",
+    "unibody_name": "TNGA-K platform"
+  }
+}
+
+
+

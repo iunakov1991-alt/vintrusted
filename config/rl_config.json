@@ -1,0 +1,1 @@
+{"version":"1.0","metrics_sources":["ga4","gsc","server_logs","stripe"],"learning_targets":{"wordcount":{"min":1400,"max":2600},"bounce_rate":{"target":0.35},"avg_scroll_depth":{"target":0.6},"conversion_rate":{"target":0.02}},"update_intervals":{"strategy_minutes":60,"topic_queue_minutes":30},"weights":{"ga4":0.4,"gsc":0.3,"server_logs":0.2,"stripe":0.1}}

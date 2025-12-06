@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "updated_at": "2025-12-06T13:22:52.860Z",
+  "article_type_weights": {
+    "dmv_state_guide": 0.06871947673600004
+  },
+  "audience_weights": {
+    "us_general": 0.06871947673600004,
+    "us_mexican": 0.06871947673600004
+  },
+  "language_weights": {
+    "en": 0.06871947673600004,
+    "es": 0.06871947673600004
+  },
+  "zone_priority": {
+    "dmv_titles": 0.06871947673600004
+  },
+  "block_weights": {
+    "comparison_table": 0.06871947673600004,
+    "vin_section": 0.06871947673600004,
+    "hero": 0.06871947673600004,
+    "context_legal": 0.08589934592000005,
+    "step_by_step": 0.08589934592000005,
+    "checklist": 0.08589934592000005,
+    "common_errors": 0.08589934592000005,
+    "fees_taxes": 0.08589934592000005,
+    "faq": 0.08589934592000005,
+    "total": 0.08589934592000005
+  },
+  "last_update_source": "quality_errors",
+  "notes": "Updated from quality error analysis"
+}

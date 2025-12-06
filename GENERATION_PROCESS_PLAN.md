@@ -222,3 +222,7 @@ tail -f /tmp/monster-dashboard.log
 **Версия**: Monster 7.0
 **Платформа**: MacBook Air M1 8GB
 
+
+
+
+

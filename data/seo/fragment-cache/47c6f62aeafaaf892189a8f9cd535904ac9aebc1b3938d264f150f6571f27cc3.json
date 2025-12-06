@@ -1,0 +1,137 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Pagani",
+    "model": "Utopia",
+    "year": "2023",
+    "stateSlug": "california",
+    "stateLabel": "California",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGGEGE12PC763654",
+    "variationContext": {
+      "structuralVariant": "insurance_focused",
+      "styleVariant": {
+        "name": "Procedural",
+        "tone": "DMV process, step-by-step, compliance",
+        "description": "Процедурный стиль с пошаговыми инструкциями DMV",
+        "characteristics": [
+          "Emphasizes step-by-step DMV processes",
+          "Uses procedural terminology and compliance checklists",
+          "Focuses on regulatory compliance steps",
+          "Official process documentation",
+          "Compliance verification"
+        ],
+        "openingPhrases": [
+          "The DMV process requires",
+          "To comply with state regulations",
+          "Following official procedures",
+          "Per DMV requirements",
+          "The registration process involves"
+        ]
+      },
+      "stateBoost": {
+        "uniqueRules": [
+          "California Vehicle Code",
+          "BAR inspection rules",
+          "Health and Safety Code §44011 (Smog Check)",
+          "Song-Beverly Consumer Warranty Act (Lemon Law)",
+          "Vehicle Code §16058 (Insurance reporting)"
+        ],
+        "specificPractices": [
+          "Biennial smog testing",
+          "Enhanced emission history tracking",
+          "Salvage to Rebuilt conversion process",
+          "Electronic lien and title (ELT) system",
+          "CHP vehicle verification"
+        ],
+        "fraudPatterns": [
+          "Title washing across jurisdictions",
+          "Odometer rollback on high-mileage models",
+          "Undisclosed flood damage from coastal areas",
+          "Smog check certificate fraud",
+          "Lemon law buyback concealment"
+        ],
+        "risks": [
+          "wildfire salvage",
+          "emissions compliance (BAR)",
+          "smog check fraud",
+          "lemon law repurchases",
+          "coastal salt air corrosion",
+          "earthquake damage",
+          "high-altitude operation impacts",
+          "urban theft patterns"
+        ],
+        "selectedRisks": [
+          "wildfire salvage",
+          "emissions compliance (BAR)",
+          "coastal salt air corrosion"
+        ]
+      },
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "1HGGEGE12PC763654",
+        "make": "Pagani",
+        "model": "Utopia",
+        "year": 2023,
+        "state": "california",
+        "generated_at": "2025-12-04T08:58:59.394Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "California DMV"
+          ],
+          "main_statutes": [
+            "California Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report for a 2023 Pagani Utopia show all accident history?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and the National Motor Vehicle Title Information System (NMVTIS) for total loss declarations. Incidents repaired privately, unreported damage, or events not captured in these databases will not appear on the report, necessitating a thorough pre-purchase inspection.\n\n**Q2: Does a clean California title guarantee a vehicle was never declared salvage or rebuilt?**\nAnswer: No, a clean California title does not guarantee a vehicle was never declared a total loss. Title washing can occur when a vehicle with a salvage or rebuilt brand from another state is moved to California and receives a clean title, as the state operates a title-holding system. Cross-referencing with NMVTIS is essential to identify interstate brands.\n\n**Q3: How can I verify open safety recalls for a 2023 Pagani Utopia?**\nAnswer: You must check two primary sources using the full 17-character VIN. First, visit the National Highway Traffic Safety Administration (NHTSA) website at nhtsa.gov/recalls. Second, consult Pagani's official manufacturer portal or contact an authorized dealer, as some recalls may be administered directly by the manufacturer and not immediately reflected in federal databases.\n\n**Q4: What is title washing and how can it affect a vehicle in California?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a severe brand, such as Salvage, Rebuilt, Flood, or Junk, from a state with strict disclosure laws to a state with weaker laws to obtain a clean title, before selling it in a market like California. The NMVTIS database is designed to track these brands across state lines to help prevent this fraud.\n\n**Q5: How do I check for active liens on a vehicle registered in California?**\nAnswer: You must conduct a lienholder search directly with the California DMV. This process verifies whether any financial institution holds a security interest on the vehicle, which would prevent a clear title transfer until the debt is satisfied. Purchasing a vehicle with an undisclosed lien can result in the loss of both the vehicle and your payment.\n\n**Q6: What is the process for a Revived Salvage vehicle in California?**\nAnswer: The California process for a Revived Salvage vehicle requires several steps: a California Highway Patrol (CHP) inspection to verify the vehicle's identity and parts, a brake and lamp inspection, a smog check, completion of the REG-343 form, and final approval from the DMV. Upon successful completion, the vehicle receives a permanent \"Revived Salvage\" brand on its title.\n\n**Q7: Can flood or water damage history be hidden from a standard VIN report?**\nAnswer: Yes, flood damage history can be hidden if the damage occurred in a region without mandatory branding, if repairs were conducted privately without an insurance claim, or if the vehicle has not yet been processed through NMVTIS. Detection requires combining an NMVTIS check with a meticulous physical inspection for corrosion, silt, mold, and electrical malfunctions.\n\n**Q8: How is odometer fraud typically committed and detected?**\nAnswer: Odometer fraud, or rollback, is often committed by manipulating the vehicle's digital odometer via the CAN-Bus network or replacing instrument clusters. Detection methods include inspecting for excessive physical wear on pedals, seats, and steering wheels inconsistent with the displayed mileage, verifying the mileage history chain in service records, and performing a diagnostic scan of the Engine Control Unit (ECU) for stored true mileage.\n\n**Q9: What are the steps to detect potential VIN cloning on a high-value vehicle?**\nAnswer: Detection requires a multi-point physical verification: compare the VIN stamped on the dashboard (visible through the.",
+  "timestamp": "2025-12-04T09:00:36.721Z",
+  "wordCount": 599
+}

@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Aston Martin",
+    "model": "Vantage",
+    "year": "2022",
+    "stateSlug": "district-of-columbia",
+    "stateLabel": "District Of Columbia",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HG4GS445NL086485",
+    "variationContext": {
+      "structuralVariant": "regulatory_detailed",
+      "styleVariant": {
+        "name": "Consumer Practical",
+        "tone": "buying-guide, simple, clear instructions",
+        "description": "Практичный потребительский стиль с простыми инструкциями",
+        "characteristics": [
+          "Emphasizes practical advice and actionable steps",
+          "Uses accessible language and real-world scenarios",
+          "Focuses on buyer protection and decision-making",
+          "Step-by-step guidance",
+          "Clear, simple language"
+        ],
+        "openingPhrases": [
+          "When purchasing a used vehicle",
+          "For buyers seeking transparency",
+          "Practical considerations include",
+          "To protect yourself when buying",
+          "Here's what you need to know"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": {
+        "vin": "1HG4GS445NL086485",
+        "make": "Aston Martin",
+        "model": "Vantage",
+        "year": 2022,
+        "state": "district-of-columbia",
+        "generated_at": "2025-12-04T09:18:55.689Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "District-of-columbia DMV"
+          ],
+          "main_statutes": [
+            "District-of-columbia Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## District of Columbia Vehicle History & Title Procedures\n\nFor a 2022 Aston Martin Vantage registered in the District of Columbia, understanding the local title system and inspection requirements is crucial for verifying the vehicle's legal standing and condition. The District operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most official transactions. This system places significant importance on the title's integrity, as it is the definitive record of the vehicle's legal status and any past incidents that have been formally documented by the **District-of-columbia DMV**. A VIN check for this vehicle should be cross-referenced directly with DMV records to confirm the title history aligns with the report.\n\nKey state-specific procedures and risks for District of Columbia include:\n\n*   **Mandatory Title Brands**: The District-of-columbia DMV assigns formal title brands to categorize a vehicle's history. The recognized brands are **Salvage**, **Rebuilt**, **Flood**, and **Junk**. A brand is a permanent designation that remains on the title unless specifically revised by the DMV through a rigorous, state-defined process. It is a critical legal descriptor of the vehicle's condition.\n*   **State-Required Vehicle Inspection**: All vehicles must pass a **State-required vehicle inspection** for registration. This inspection can serve as an independent checkpoint for a vehicle's roadworthiness, potentially identifying issues that a history report might not detail, such as current mechanical faults or recent, unrepaired damage.\n*   **Legal Framework**: All titling and branding actions are governed by the **District-of-columbia Vehicle Code**. This statute defines the procedures for branding a vehicle, applying for a rebuilt title, and the legal implications of each brand. Understanding this code helps a buyer comprehend the permanence and meaning of any title brand.\n*   **.",
+  "timestamp": "2025-12-04T09:20:34.514Z",
+  "wordCount": 286
+}

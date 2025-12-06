@@ -1,0 +1,101 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Genesis",
+    "model": "G80 Electrified",
+    "year": "2017",
+    "stateSlug": "maryland",
+    "stateLabel": "Maryland",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGDNP5P3H3241149",
+    "stage": "deep",
+    "variationContext": {
+      "structuralVariant": "comprehensive_analysis",
+      "styleVariant": {
+        "name": "Consumer Practical",
+        "tone": "buying-guide, simple, clear instructions",
+        "description": "Практичный потребительский стиль с простыми инструкциями",
+        "characteristics": [
+          "Emphasizes practical advice and actionable steps",
+          "Uses accessible language and real-world scenarios",
+          "Focuses on buyer protection and decision-making",
+          "Step-by-step guidance",
+          "Clear, simple language"
+        ],
+        "openingPhrases": [
+          "When purchasing a used vehicle",
+          "For buyers seeking transparency",
+          "Practical considerations include",
+          "To protect yourself when buying",
+          "Here's what you need to know"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": {
+        "vin": "1HGDNP5P3H3241149",
+        "make": "Genesis",
+        "model": "G80 Electrified",
+        "year": 2017,
+        "state": "maryland",
+        "generated_at": "2025-12-04T10:45:21.859Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Maryland DMV"
+          ],
+          "main_statutes": [
+            "Maryland Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## State-Specific Risks and Requirements for Maryland\n\nWhen conducting a VIN check for a 2017 Genesis G80 Electrified in Maryland, understanding the state's specific legal framework and environmental risks is crucial for a complete assessment. Maryland operates as a title-holding state, meaning the physical certificate of title is the primary legal document proving vehicle ownership and must be presented during registration and transfer. This system creates a clear chain of custody that a thorough VIN check will trace, verifying that the seller is the legitimate title holder. The state's procedures, governed by the Maryland Vehicle Code, are designed to protect buyers but require diligent verification to navigate effectively. For an electric vehicle like the G80 Electrified, this due diligence includes confirming the title history is free of problematic brands that could affect both value and legality.\n\nKey state-specific factors for your VIN investigation include:\n\n*   **Title Brand Scrutiny:** The Maryland DMV recognizes specific title brands that permanently annotate a vehicle's history. A VIN check must specifically screen for the brands of Salvage, Rebuilt, Flood, and Junk. Discovering any of these brands on a Maryland title is a definitive red flag indicating severe past damage or a total loss declaration by an insurance company.\n*   **Mandatory Inspection Protocol:** Maryland enforces a state-required vehicle inspection for most title transfers and registrations. While a VIN check provides historical data, this in-person inspection is a separate, critical step to verify the vehicle's current roadworthiness and to ensure its physical condition matches the reported history. Discrepancies between the report and the inspection findings can indicate fraud or unrepaired damage.\n*   **Environmental Risk Considerations:** The VIN check should contextualize findings within Maryland's regional environmental risks. While the report itself uses standard state and federal data sources, understanding that the vehicle has been registered in an area prone to certain conditions helps you ask targeted questions about potential flood exposure or corrosion, even if a \"Flood\" brand is not present on the title.\n\nA comprehensive VIN check for a Maryland vehicle cross-references the decoded information from positions like the WMI (e.g., 1HG) with the official title history from the Maryland DMV. This process confirms the vehicle's identity and reveals if it has been branded due to major incidents. The legal permanence of these brands in a title-holding state makes pre-purchase verification the most effective.",
+  "timestamp": "2025-12-04T11:03:32.004Z",
+  "wordCount": 387
+}

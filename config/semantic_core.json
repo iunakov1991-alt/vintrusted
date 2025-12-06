@@ -1,0 +1,46 @@
+{ "version":"8.0",
+  "zones":[
+    {"id":"vin_identity","label":"VIN / Vehicle Identity","description":"VIN structure, WMI, plant codes, VIN fraud detection, VIN vs chassis. Используется как справочная зона, не как посадочные под каждый VIN."},
+    {"id":"dmv_titles","label":"DMV / Titles / Registration","description":"State-by-state правила: типы тайтлов, регистрация, salvage → rebuilt, emissions, odometer law, title washing."},
+    {"id":"auctions","label":"Auctions / Salvage buying","description":"Copart, IAAI, Manheim и др.: категории, повреждения, bidding, inspection, fees, fraud."},
+    {"id":"used_fraud","label":"Used cars / Inspection / Fraud","description":"Типовые мошенничества, проверки, чеклисты, lemon law, flood/frame/airbag fraud."},
+    {"id":"brand_model","label":"Brands / Models / Generations / Issues","description":"История марок и моделей, поколения, типичные проблемы по годам, расходы, страхование, депреция."},
+    {"id":"tech_insurance","label":"Technical & Insurance blocks","description":"Recalls, TSBs, safety ratings, crashworthiness, theft rates, insurance and market value analytics."}
+  ],
+  "superclusters": {
+    "vin_supercluster":{"zone":"vin_identity","topics":["vin_structure","vin_country_origins","brand_vin_patterns","plant_codes","vin_fraud_detection","vin_for_evs","vin_vs_chassis","vin_decoder_per_brand","vin_decoder_per_region","wmi_catalog"]},
+    "dmv_supercluster":{"zone":"dmv_titles","topics":["state_title_types","state_transfer_rules","state_registration_steps","state_salvage_conversion","state_rebuilt_inspection","odometer_disclosure_laws","title_washing_schemes","emissions_laws","lien_release_rules"]},
+    "auction_supercluster":{"zone":"auctions","topics":["copart_categories_damages","iaai_categories","manheim_processes","acv_auctions_overview","insurance_auto_auctions","how_to_bid_salvage","how_to_inspect_salvage","seller_types_insurer_fleet_dealer","damage_category_encyclopedia","auction_fraud_patterns"]},
+    "used_fraud_supercluster":{"zone":"used_fraud","topics":["odometer_rollbacks","frame_damage_detection","flood_car_detection","fire_damage","airbag_fraud","off_books_repairs","dealer_scam_patterns","state_to_state_flipping_risks","inspection_checklists","how_to_read_condition_reports"]},
+    "brand_model_supercluster":{"zone":"brand_model","topics":["brand_encyclopedia","models_by_popularity","known_issues_by_year","problems_by_generation","recall_patterns","maintenance_cost","depreciation_curves","era_motifs_toyota_2005_2015","era_motifs_honda_k_series"]},
+    "tech_insurance_supercluster":{"zone":"tech_insurance","topics":["recalls","tsbs","insurance_risk","theft_rates_per_brand","market_value_depreciation","safety_ratings","crashworthiness"]}
+  },
+  "dimensions": {
+    "geo":{"countries_for_vin":["USA","Canada","Mexico","Japan","Germany","Korea","China","EU"],"usa_states":"see config/states_us.json"},
+    "vehicle":{"brands_models":"see config/brands_models.json","body_types":["sedan","hatchback","wagon","coupe","convertible","suv","crossover","pickup","van","minivan","motorcycle","truck_heavy","trailer","ev","hybrid"],"damage_types":["front_end","rear_end","side","rollover","flood","hail","fire","theft_recovery","vandalism","mechanical","frame","airbag_deployed","biohazard"]},
+    "auctions":{"platforms":["copart","iaai","manheim","acv","other_dealer_only"]},
+    "dmv":{"title_topics_per_state":["title_types","transfer","registration","salvage_to_rebuilt","emissions","insurance_requirements","odometer_law","flood_branding_rules","tax_fee_structures","dealer_requirements","private_party_sale","bill_of_sale_law"]},
+    "audience_segments":["us_general","mx_us","dealer_pro","auction_flipper"],
+    "languages":["en","es"]
+  },
+  "article_types_ref":"see config/article_types.json",
+  "combinatorics_rules":{
+    "vin":{"wmi_topics":{"description":"WMI (~8000) × 10 подтем → 80,000 статей без выгорания.","dimensions":["wmi","country","brand","body_type"]}},
+    "dmv":{"state_topics":{"description":"50 штатов × 12 тем × 3–4 формата (guide/checklist/mistakes/comparison).","dimensions":["state","dmv_topic","format_variant"]}},
+    "auction":{"platform_topics":{"description":"10 аукционов × 30 подтем × формат (guide/fraud/checklist/photos).","dimensions":["platform","auction_topic","format_variant"]}},
+    "brand_model":{"brand_model_topics":{"description":"40+ брендов × все модели (кроме китайских/суперкаров) × поколение/декада/issue.","dimensions":["brand","model","generation","year_range","issue_type"]}},
+    "fraud_damage":{"damage_fraud_topics":{"description":"50 типов повреждений/мошенничеств × 20 аспектов (state, brand, body_type, auction).","dimensions":["damage_type","state","brand","body_type","auction"]}},
+    "variation_formats":["comparison","step_by_step","checklist","mistakes","buyer_guide","legal_implications"]
+  },
+  "mechanics":{
+    "topic_object":{"example":{"topic_id":"dmv_ca_title_types_checklist_en_us_general","zone":"dmv_titles","supercluster":"dmv_supercluster","type":"dmv_state_guide","dimensions":{"state":"CA","dmv_topic":"title_types","format_variant":"checklist","language":"en","audience_segment":"us_general"}}},
+    "pipeline":[
+      "1. TopicSelector выбирает следующий topic_id из очереди семантического графа.",
+      "2. build_article_spec.js создаёт ArticleSpec: zone, article_type, BlockSpec, intents, must_terms, с учётом learned_strategy.",
+      "3. gen_article_blocks.js вызывает LLM по core_prompt_blocks.txt + ArticleSpec.",
+      "4. QA / validate / severity работают поверх блоков.",
+      "5. Отдельный модуль вставляет VIN-CTA блок в статью (randomized position между блоками) без превращения её в VIN-landing.",
+      "6. rl_ingest_metrics.js и rl_update_strategy.js обновляют learned_strategy по реальным метрикам."
+    ]
+  }
+}

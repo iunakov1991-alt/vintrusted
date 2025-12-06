@@ -1,0 +1,113 @@
+# CANONICAL TEMPLATE FOR BLOCK: faq
+
+# ОПИСАНИЕ:
+#   Здесь ты можешь редактировать промпт для блока "faq"
+#   без изменения кода.
+#
+#   Используй переменные:
+#     {MAKE}  — марка (например, Toyota)
+#     {MODEL} — модель (например, Camry)
+#     {YEAR}  — год (например, 2018)
+#     {STATE} — штат (например, California)
+#     {STATE_SLUG} — slug штата (например, california)
+#     {VIN}   — пример VIN (например, 4T1B11HK3JU123456)
+#     {WORD_COUNT} — целевое количество слов
+#
+# ТРЕБОВАНИЯ:
+#   - Техно-аналитика, понятная нормальному человеку.
+#   - Избегай воды.
+#   - Объём: между {WORD_COUNT} словами (с небольшим допуском).
+#   - Не используй дословно клише из отдельного списка.
+#
+# ВАЖНО:
+#   В конце блока ОБЯЗАТЕЛЬНО поставить маркер конца:
+#       [[END_BLOCK:faq]]
+#
+# Пример структуры:
+#
+# H2 заголовок
+# Вопросы и ответы в формате Q&A (см. ниже)
+# В самом конце — маркер [[END_BLOCK:faq]] на последней строке.
+
+Write a faq block for a VIN check guide for {YEAR} {MAKE} {MODEL} in {STATE}.
+
+Style: DMV-grade, legal, antifraud, engineering-level explanation.
+Word count: {WORD_COUNT} words.
+Use FACTUAL, TECHNICAL style (no literary flourishes).
+
+🚨🚨🚨🚨🚨 CRITICAL: FAQ FORMAT IS MANDATORY - YOUR RESPONSE WILL BE REJECTED WITHOUT IT 🚨🚨🚨🚨🚨
+
+⚠️⚠️⚠️ YOUR RESPONSE WILL BE COMPLETELY REJECTED IF YOU DO NOT FOLLOW THIS FORMAT ⚠️⚠️⚠️
+
+YOU MUST FORMAT QUESTIONS USING ONE OF THESE EXACT FORMATS. VALIDATION CHECKS FOR QUESTIONS AND WILL REJECT YOUR RESPONSE IF THEY'RE NOT FOUND.
+
+VALIDATION LOOKS FOR: "**Q1:", "1.", or "Q1:" patterns. If none are found, validation FAILS AND YOUR ENTIRE RESPONSE WILL BE DISCARDED.
+
+🚨 DO NOT WRITE PARAGRAPHS. DO NOT WRITE GENERAL TEXT. YOU MUST WRITE QUESTIONS AND ANSWERS IN THE EXACT FORMAT BELOW. 🚨
+
+REQUIRED FORMAT OPTION 1 (PREFERRED - USE THIS):
+**Q1: Will a VIN report show all accident history?**
+Answer: No, commercial vehicle history reports aggregate data from specific sources (insurance claims, police reports, NMVTIS total loss). Minor incidents repaired privately, unreported damage, or events not in provider databases will not appear. Complete explanation.
+
+**Q2: Will a VIN report show complete BAR smog check logs?**
+Answer: No, commercial VIN reports do NOT provide full BAR smog history. They may show indirect registration data, but full smog logs (test results, station numbers, inspector notes) are available only through BAR website or physical certificates. Complete explanation.
+
+**Q3: Does a clean {STATE} title guarantee the vehicle was never declared a total loss?**
+Answer: No, title washing can occur where vehicles declared salvage in other states receive clean {STATE} titles. Always cross-reference NMVTIS for interstate brands. Complete explanation.
+
+**Q4: Can flood or water damage history be hidden from a VIN report?**
+Answer: Yes, if damage occurred in another state without branding, or repairs were done privately. Detection requires NMVTIS check plus visual inspection for corrosion, silt, mold. Complete explanation.
+
+**Q5: How do I verify open safety recalls for a {YEAR} {MAKE} {MODEL}?**
+Answer: Check NHTSA website (nhtsa.gov/recalls) using full VIN, and {MAKE} official portal. Both sources must be checked for comprehensive verification. Complete step-by-step process.
+
+**Q6: What is title washing and how does it work?**
+Answer: Title washing is the practice of moving a branded vehicle (salvage, flood) to states with weaker disclosure laws, receiving a clean title, then selling in {STATE}. NMVTIS tracks brands across states. Complete explanation.
+
+**Q7: How can I detect VIN cloning?**
+Answer: Verify VIN at dashboard, door jamb, and firewall. Check for tampering signs (mismatched rivets, adhesive residue). NMVTIS may show duplicate VINs in different locations. Complete detection process.
+
+**Q8: What is odometer rollback and how is it detected?**
+Answer: CAN-Bus manipulation to reduce displayed mileage. Detection: Physical wear inspection (seat, pedals, steering), mileage chain verification, ECU scanning for true mileage. Complete detection methods.
+
+**Q9: How do I check for liens on a vehicle in {STATE}?**
+Answer: {STATE} DMV lienholder search, verify no financial encumbrances before purchase. Liens prevent title transfer until cleared. Complete verification process.
+
+**Q10: What is Revived Salvage and what is the {STATE} process?**
+Answer: {STATE} process for rebuilding salvage vehicles: CHP inspection, brake & lamp inspection, smog check, REG-343 form, DMV approval. Permanent "Revived Salvage" brand. Complete process explanation.
+
+**Q11: How much does a VIN check cost for a {YEAR} {MAKE} {MODEL}?**
+Answer: Commercial reports range from $25-$50. NMVTIS direct access through authorized providers. Some basic checks available for free through NHTSA recalls. Complete cost breakdown.
+
+**Q12: Can I check a {YEAR} {MODEL} VIN for free?**
+Answer: Partial free checks available: NHTSA recalls, some basic NICB data. Full comprehensive reports require paid service. Complete explanation of free vs paid options.
+
+🚨🚨🚨 MANDATORY REQUIREMENT 🚨🚨🚨
+YOU MUST INCLUDE AT LEAST 12 QUESTIONS IN THIS EXACT FORMAT. 
+DO NOT WRITE PARAGRAPHS. 
+DO NOT WRITE GENERAL TEXT. 
+DO NOT WRITE INTRODUCTORY PARAGRAPHS BEFORE QUESTIONS.
+START DIRECTLY WITH **Q1:** OR 1. OR Q1:
+WRITE ONLY QUESTIONS AND ANSWERS IN THE FORMAT SHOWN ABOVE.
+
+IF YOU WRITE ANYTHING OTHER THAN QUESTIONS AND ANSWERS IN THE FORMAT ABOVE, YOUR RESPONSE WILL BE REJECTED.
+🚨🚨🚨 END OF MANDATORY REQUIREMENT 🚨🚨🚨
+
+CRITICAL REQUIREMENTS - NO EXCEPTIONS:
+- Complete ALL sentences fully - NO truncated text ending with "and", "or", "(", "[", "|"
+- Finish ALL bullet points completely - NO incomplete bullets
+- Ensure ALL sections have proper conclusions - NO abrupt endings
+- NO text breaks before headings (##) - finish the sentence, then add heading
+- NO incomplete thoughts or cut-off phrases
+- Every paragraph must have a complete thought
+- Every list item must be a complete sentence or phrase
+
+VALIDATION RULES:
+- If you start a sentence, you MUST finish it
+- If you start a list, you MUST complete all items
+- If you mention a concept, you MUST explain it fully
+
+You MUST end your response with exactly this marker on a new line:
+[[END_BLOCK:faq]]
+
+After the marker, there must be NO additional text, spaces, or content.

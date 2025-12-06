@@ -1,0 +1,100 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Tesla",
+    "model": "Model S Plaid",
+    "year": "2019",
+    "stateSlug": "new-york",
+    "stateLabel": "New York",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "5YJGPEPV8KK069677",
+    "variationContext": {
+      "structuralVariant": "comprehensive_review",
+      "styleVariant": {
+        "name": "Investigative",
+        "tone": "fraud-first, pattern detection, red flags",
+        "description": "Расследовательский стиль с фокусом на обнаружение мошенничества",
+        "characteristics": [
+          "Emphasizes fraud detection and pattern recognition",
+          "Uses investigative terminology and red flag indicators",
+          "Focuses on uncovering hidden issues",
+          "Pattern detection methodology",
+          "Risk identification"
+        ],
+        "openingPhrases": [
+          "Investigative analysis reveals",
+          "Red flags to watch for include",
+          "Fraud detection patterns indicate",
+          "Warning signs suggest",
+          "Investigation uncovers"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "5YJGPEPV8KK069677",
+        "make": "Tesla",
+        "model": "Model S Plaid",
+        "year": 2019,
+        "state": "new-york",
+        "generated_at": "2025-12-04T09:21:31.518Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "5YJ"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "New-york DMV"
+          ],
+          "main_statutes": [
+            "New-york Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2019 Tesla Model S Plaid?**\nAnswer: No, a commercial VIN report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Incidents repaired privately, unreported damage, or events not captured in these databases will not appear in the report, necessitating a thorough physical inspection.\n\n**Q2: Does a clean New York title guarantee this Tesla was never a total loss?**\nAnswer: No, a clean New York title does not guarantee the vehicle was never declared a total loss elsewhere. Title washing can occur when a vehicle with a salvage or other brand from another state is moved to New York and receives a clean title, masking its prior status.\n\n**Q3: How can flood damage history be hidden from a VIN report?**\nAnswer: Flood or water damage history can be hidden if the damage occurred in a jurisdiction without mandatory branding, or if repairs were conducted privately without an insurance claim. Detection requires checking the NMVTIS for interstate brands and a meticulous physical inspection for corrosion, silt, or mold.\n\n**Q4: What is title washing and how does it work?**\nAnswer: Title washing is a fraudulent practice where a vehicle with a branded title, such as salvage or flood, is moved through states with differing disclosure laws to obtain a clean title. The NMVTIS database is designed to track these brands across state lines to help prevent this deception.\n\n**Q5: How do I verify open safety recalls for this specific vehicle?**\nAnswer: You must verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and by consulting Tesla's official vehicle portal, as both sources must be cross-referenced for a complete and accurate status.\n\n**Q6: How can I detect VIN cloning on a Tesla Model S Plaid?**\nAnswer: Detect VIN cloning by physically verifying the VIN stamp matches on the dashboard, door jamb, and firewall, checking for signs of tampering like mismatched rivets or adhesive residue, and reviewing the NMVTIS report for any records of duplicate VINs in different geographic locations.\n\n**Q7: What is odometer rollback and how is it detected?**\nAnswer: Odometer rollback involves manipulating the vehicle's computer system to fraudulently lower the displayed mileage.",
+  "timestamp": "2025-12-04T09:22:47.241Z",
+  "wordCount": 377
+}

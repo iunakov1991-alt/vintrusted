@@ -1,0 +1,486 @@
+[SEO AI] 2025-12-04T19:32:29.644Z - Cache loaded: 3021 entries
+[SEO AI] 2025-12-04T19:32:29.651Z - AI training strategy loaded
+[SEO AI] 2025-12-04T19:32:29.651Z - Local AI disabled (Pre-M1 mode or feature flag off)
+[SEO REF-LOADER] 2025-12-04T19:32:29.654Z - Reference articles loaded and cached
+[SEO RULE-ENGINE] 2025-12-04T19:32:29.655Z - Loaded 5 rules from rules.json
+[SEO VARIATION-ENGINE] 2025-12-04T19:32:29.656Z - Loaded 43 structural schemes
+[SEO VARIATION-ENGINE] 2025-12-04T19:32:29.656Z - Loaded 6 style modes
+[SEO VARIATION-ENGINE] 2025-12-04T19:32:29.657Z - Loaded block depth configurations
+[SEO VARIATION-ENGINE] 2025-12-04T19:32:29.657Z - Loaded VIN specs for 3 models
+[SEO VARIATION-ENGINE] 2025-12-04T19:32:29.658Z - Loaded state risks for 4 states
+[SEO VARIATION-ENGINE] 2025-12-04T19:32:29.662Z - Loaded block variants for 8 block types
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.663Z - VIN canon template loaded
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.663Z - Block configuration loaded: 15 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.664Z - FACT-LOCK: Loaded 3 vehicle specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.664Z - FACT-LOCK: Loaded 51 state specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.664Z - FACT-LOCK: Loaded global invariants
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.664Z - FACT-LOCK: Prompt header loaded
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.665Z - Loading 15 canonical prompt files...
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.666Z - Loaded prompt for accident_intelligence
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.666Z - Loaded prompt for buyer_guide
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.667Z - Loaded prompt for cta
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.667Z - Loaded prompt for deep_explanation
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.667Z - Loaded prompt for faq
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.667Z - Loaded prompt for fraud_patterns
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.668Z - Loaded prompt for hero
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.668Z - Loaded prompt for insurance_risk
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.668Z - Loaded prompt for internal_links
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.668Z - Loaded prompt for key_facts
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.668Z - Loaded prompt for market_value
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.668Z - Loaded prompt for nmvtis
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.668Z - Loaded prompt for recalls_tsbs
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.668Z - Loaded prompt for state_specific
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:32:29.669Z - Loaded prompt for vin_decoder
+[SEO FRAGMENT-CACHE] 2025-12-04T19:32:29.669Z - Loading 74 cached fragments...
+[SEO FRAGMENT-CACHE] 2025-12-04T19:32:29.695Z - Loaded 74 fragments
+[SEO RULE-ENGINE] 2025-12-04T19:32:29.695Z - Loaded 5 rules from rules.json
+[SEO GEN-PAGE] 2025-12-04T19:32:29.697Z - Generating page: 2015 Ram 1500 SXT in South Carolina (VIN: 1D7J87MA7FE317453)
+[SEO GEN-PAGE] 2025-12-04T19:32:29.697Z - Analysis depth: deep, Max retries: 5
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.698Z - FACT-LOCK: Loaded existing FACT-SHEET for VIN 1D7J87MA7FE317453
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.698Z - FACT-LOCK: FACT-SHEET ready for 2015 Ram 1500 SXT in south-carolina
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.698Z - Generating V6 article: 2015 Ram 1500 SXT in South Carolina (15 blocks, parallel generation)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.698Z - Structural variant: regulatory_compliance, Style: Forensic Engineer, Depth roll: 1
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.699Z - Block groups for parallel generation: 3 groups
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.699Z - Generating group 1/3 (6 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.704Z - Using canonical prompt from file for hero
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.704Z - Generating hero block (ollama, 149 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:32:29.710Z - Trying DeepSeek API for vin_check in en (prompt: 9426 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:29.712Z - Using compact strategy (9426 vs 9426 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.750Z - Using canonical prompt from file for nmvtis
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.750Z - Generating nmvtis block (ollama, 375 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:32:29.754Z - Trying DeepSeek API for vin_check in en (prompt: 9147 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:29.756Z - Using compact strategy (9147 vs 9147 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.758Z - Using canonical prompt from file for key_facts
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.758Z - Generating key_facts block (ollama, 216 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:32:29.760Z - Trying DeepSeek API for vin_check in en (prompt: 9445 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:29.762Z - Using compact strategy (9445 vs 9445 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.764Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.764Z - Generating vin_decoder block (ollama, 234 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:32:29.766Z - Trying DeepSeek API for vin_check in en (prompt: 11507 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:29.767Z - Using compact strategy (11507 vs 11507 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.769Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.769Z - Generating fraud_patterns block (deepseek, 215 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:32:29.770Z - Trying DeepSeek API for vin_check in en (prompt: 9391 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:29.772Z - Using compact strategy (9391 vs 9391 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.773Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:29.773Z - Generating accident_intelligence block (deepseek, 147 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:32:29.775Z - Trying DeepSeek API for vin_check in en (prompt: 9479 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:29.776Z - Using compact strategy (9479 vs 9479 chars)
+[SEO AI] 2025-12-04T19:32:38.165Z - DeepSeek API success (attempt 1): 1057 chars, prompt: 9426 chars, timeout: 180000ms, tokens: 228
+[SEO AI] 2025-12-04T19:32:38.167Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:38.167Z - AI content generated by deepseek for vin_check in en (1057 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.178Z - ⚠️  Block hero missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.178Z - ⚠️  Block hero does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.185Z - Block hero validation failed (attempt 1): INCOMPLETE_SENTENCE: Incomplete sentence detected (ends with incomplete phrase)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.185Z - Retrying block hero...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.185Z - Using canonical prompt from file for hero
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.185Z - Generating hero block (ollama, 149 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:32:38.189Z - Trying DeepSeek API for vin_check in en (prompt: 9426 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:38.190Z - Using compact strategy (9426 vs 9426 chars)
+[SEO AI] 2025-12-04T19:32:38.337Z - DeepSeek API success (attempt 1): 1215 chars, prompt: 9479 chars, timeout: 180000ms, tokens: 226
+[SEO AI] 2025-12-04T19:32:38.337Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:38.337Z - AI content generated by deepseek for vin_check in en (1215 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.361Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.362Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:38.369Z - ⚠️  Block accident_intelligence is 27 words short (13.5%). Auto-expanding...
+[SEO AI] 2025-12-04T19:32:38.372Z - Trying DeepSeek API for vin_check in en (prompt: 2611 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:38.374Z - Using compact strategy (2611 vs 2611 chars)
+[SEO AI] 2025-12-04T19:32:41.080Z - DeepSeek API success (attempt 1): 1506 chars, prompt: 9391 chars, timeout: 180000ms, tokens: 308
+[SEO AI] 2025-12-04T19:32:41.080Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:41.080Z - AI content generated by deepseek for vin_check in en (1506 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.095Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.096Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.108Z - ⚠️  Block fraud_patterns has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:32:41.137Z - Trying DeepSeek API for vin_check in en (prompt: 2762 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:41.139Z - Using compact strategy (2762 vs 2762 chars)
+[SEO AI] 2025-12-04T19:32:41.224Z - DeepSeek API success (attempt 1): 1356 chars, prompt: 11507 chars, timeout: 180000ms, tokens: 330
+[SEO AI] 2025-12-04T19:32:41.224Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:41.225Z - AI content generated by deepseek for vin_check in en (1356 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.231Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.231Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.232Z - ⚠️  Block vin_decoder has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:32:41.236Z - Trying DeepSeek API for vin_check in en (prompt: 2612 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:41.237Z - Using compact strategy (2612 vs 2612 chars)
+[SEO AI] 2025-12-04T19:32:41.408Z - DeepSeek API success (attempt 1): 1435 chars, prompt: 9445 chars, timeout: 180000ms, tokens: 309
+[SEO AI] 2025-12-04T19:32:41.408Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:41.408Z - AI content generated by deepseek for vin_check in en (1435 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.415Z - ⚠️  Block key_facts missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.415Z - ⚠️  Block key_facts does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:41.416Z - Block key_facts validated successfully (213 words, marker and punctuation auto-added, 11658ms)
+[SEO AI] 2025-12-04T19:32:44.018Z - DeepSeek API success (attempt 1): 926 chars, prompt: 2611 chars, timeout: 180000ms, tokens: 154
+[SEO AI] 2025-12-04T19:32:44.023Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:44.023Z - AI content generated by deepseek for vin_check in en (926 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:44.046Z - ⚠️  Auto-expanded block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:44.046Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 130 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:44.046Z - Block accident_intelligence validation failed (attempt 1): TOO_SHORT_FOR_BLOCK_TYPE: 173 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:44.046Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:44.046Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:44.047Z - Generating accident_intelligence block (deepseek, 147 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:32:44.051Z - Trying DeepSeek API for vin_check in en (prompt: 9484 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:44.054Z - Using compact strategy (9484 vs 9484 chars)
+[SEO AI] 2025-12-04T19:32:46.491Z - DeepSeek API success (attempt 1): 1068 chars, prompt: 9426 chars, timeout: 180000ms, tokens: 228
+[SEO AI] 2025-12-04T19:32:46.491Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:46.491Z - AI content generated by deepseek for vin_check in en (1068 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.505Z - ⚠️  Block hero missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.506Z - ⚠️  Block hero does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.506Z - Block hero validation failed (attempt 2): INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "system", INVALID_PUNCTUATION_PATTERN: Dirty punctuation pattern detected
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.506Z - Retrying block hero...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.506Z - Using canonical prompt from file for hero
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.506Z - Generating hero block (ollama, 149 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:32:46.508Z - Trying DeepSeek API for vin_check in en (prompt: 9426 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:46.510Z - Using compact strategy (9426 vs 9426 chars)
+[SEO AI] 2025-12-04T19:32:46.621Z - DeepSeek API success (attempt 1): 2415 chars, prompt: 9147 chars, timeout: 180000ms, tokens: 500
+[SEO AI] 2025-12-04T19:32:46.621Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:46.621Z - AI content generated by deepseek for vin_check in en (2415 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.639Z - ⚠️  Block nmvtis missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.639Z - ⚠️  Block nmvtis does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:46.647Z - Block nmvtis validated successfully (358 words, marker and punctuation auto-added, 16898ms)
+[SEO AI] 2025-12-04T19:32:47.854Z - DeepSeek API success (attempt 1): 966 chars, prompt: 2762 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:32:47.854Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:47.854Z - AI content generated by deepseek for vin_check in en (966 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:47.868Z - ⚠️  Auto-fixed block fraud_patterns still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:47.868Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 144 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:47.868Z - Block fraud_patterns validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_TRAILING_WORD: Block ends with forbidden word "as"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:47.868Z - Retrying block fraud_patterns...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:47.869Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:47.869Z - Generating fraud_patterns block (deepseek, 215 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:32:47.872Z - Trying DeepSeek API for vin_check in en (prompt: 9390 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:47.873Z - Using compact strategy (9390 vs 9390 chars)
+[SEO AI] 2025-12-04T19:32:48.509Z - DeepSeek API success (attempt 1): 845 chars, prompt: 2612 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:32:48.510Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:48.510Z - AI content generated by deepseek for vin_check in en (845 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:48.539Z - ⚠️  Auto-fixed block vin_decoder still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:48.539Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 122 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:48.539Z - Block vin_decoder validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:48.539Z - Retrying block vin_decoder...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:48.540Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:48.543Z - Generating vin_decoder block (ollama, 234 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:32:48.549Z - Trying DeepSeek API for vin_check in en (prompt: 11507 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:48.553Z - Using compact strategy (11507 vs 11507 chars)
+[SEO AI] 2025-12-04T19:32:52.448Z - DeepSeek API success (attempt 1): 1166 chars, prompt: 9484 chars, timeout: 180000ms, tokens: 226
+[SEO AI] 2025-12-04T19:32:52.449Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:52.449Z - AI content generated by deepseek for vin_check in en (1166 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:52.472Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:52.472Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:52.474Z - ⚠️  Block accident_intelligence is 42 words short (21.0%). Auto-expanding...
+[SEO AI] 2025-12-04T19:32:52.478Z - Trying DeepSeek API for vin_check in en (prompt: 2562 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:52.481Z - Using compact strategy (2562 vs 2562 chars)
+[SEO AI] 2025-12-04T19:32:55.023Z - DeepSeek API success (attempt 1): 1015 chars, prompt: 9426 chars, timeout: 180000ms, tokens: 228
+[SEO AI] 2025-12-04T19:32:55.025Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:55.025Z - AI content generated by deepseek for vin_check in en (1015 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:55.040Z - ⚠️  Block hero missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:55.040Z - ⚠️  Block hero does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:55.047Z - Block hero validated successfully (148 words, marker and punctuation auto-added, 25346ms)
+[SEO AI] 2025-12-04T19:32:59.157Z - DeepSeek API success (attempt 1): 932 chars, prompt: 2562 chars, timeout: 180000ms, tokens: 184
+[SEO AI] 2025-12-04T19:32:59.158Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:59.158Z - AI content generated by deepseek for vin_check in en (932 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.182Z - ⚠️  Auto-expanded block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.182Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 129 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.182Z - ⚠️  Block accident_intelligence has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:32:59.188Z - Trying DeepSeek API for vin_check in en (prompt: 2422 chars, compact: true)
+[SEO AI] 2025-12-04T19:32:59.191Z - Using compact strategy (2422 vs 2422 chars)
+[SEO AI] 2025-12-04T19:32:59.210Z - DeepSeek API success (attempt 1): 1450 chars, prompt: 9390 chars, timeout: 180000ms, tokens: 308
+[SEO AI] 2025-12-04T19:32:59.210Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:59.210Z - AI content generated by deepseek for vin_check in en (1450 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.210Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.211Z - ⚠️  Block fraud_patterns does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.211Z - Block fraud_patterns validated successfully (217 words, marker and punctuation auto-added, 29443ms)
+[SEO AI] 2025-12-04T19:32:59.588Z - DeepSeek API success (attempt 1): 1403 chars, prompt: 11507 chars, timeout: 180000ms, tokens: 330
+[SEO AI] 2025-12-04T19:32:59.588Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:32:59.588Z - AI content generated by deepseek for vin_check in en (1403 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.624Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.624Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:59.624Z - Block vin_decoder validated successfully (218 words, marker and punctuation auto-added, 29860ms)
+[SEO AI] 2025-12-04T19:33:05.737Z - DeepSeek API success (attempt 1): 1011 chars, prompt: 2422 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:33:05.738Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:05.738Z - AI content generated by deepseek for vin_check in en (1011 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:05.750Z - ⚠️  Auto-fixed block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:05.750Z -    Remaining errors: TOO_SHORT_FOR_BLOCK_TYPE: 139 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:05.750Z - Block accident_intelligence validation failed (attempt 2): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INCOMPLETE_SENTENCE: Incomplete sentence detected (ends with incomplete phrase), TOO_SHORT_FOR_BLOCK_TYPE: 158 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:05.750Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:05.751Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:05.751Z - Generating accident_intelligence block (deepseek, 147 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:33:05.754Z - Trying DeepSeek API for vin_check in en (prompt: 9479 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:05.756Z - Using compact strategy (9479 vs 9479 chars)
+[SEO AI] 2025-12-04T19:33:13.945Z - DeepSeek API success (attempt 1): 1122 chars, prompt: 9479 chars, timeout: 180000ms, tokens: 226
+[SEO AI] 2025-12-04T19:33:13.946Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:13.946Z - AI content generated by deepseek for vin_check in en (1122 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.969Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.969Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.972Z - Group 1 completed in 44.3s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.972Z - Generating group 2/3 (1 blocks in parallel)...
+[SEO FRAGMENT-CACHE] 2025-12-04T19:33:13.973Z - Cache HIT for state_specific (south-carolina)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.974Z - Using cached fragment for state_specific
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.974Z - Group 2 completed in 0.0s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.974Z - Generating group 3/3 (7 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.976Z - Using canonical prompt from file for insurance_risk
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.976Z - Generating insurance_risk block (deepseek, 211 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:33:13.981Z - Trying DeepSeek API for vin_check in en (prompt: 9452 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:13.985Z - Using compact strategy (9452 vs 9452 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.987Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.987Z - Generating buyer_guide block (ollama, 152 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:33:13.990Z - Trying DeepSeek API for vin_check in en (prompt: 9309 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:13.992Z - Using compact strategy (9309 vs 9309 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.993Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.993Z - Generating market_value block (deepseek, 207 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:33:13.995Z - Trying DeepSeek API for vin_check in en (prompt: 9366 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:13.997Z - Using compact strategy (9366 vs 9366 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.998Z - Using canonical prompt from file for recalls_tsbs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.998Z - Generating recalls_tsbs block (deepseek, 333 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:33:14.000Z - Trying DeepSeek API for vin_check in en (prompt: 9189 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:14.002Z - Using compact strategy (9189 vs 9189 chars)
+[SEO FRAGMENT-CACHE] 2025-12-04T19:33:14.002Z - Cache HIT for faq (south-carolina)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:14.002Z - Using cached fragment for faq
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:14.005Z - Using canonical prompt from file for internal_links
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:14.005Z - Generating internal_links block (ollama, 78 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:33:14.007Z - Trying DeepSeek API for vin_check in en (prompt: 9200 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:14.009Z - Using compact strategy (9200 vs 9200 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:14.019Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:14.019Z - Generating cta block (ollama, 51 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:33:14.021Z - Using cached AI response for vin_check in en
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:14.023Z - Block cta validated successfully (103 words, 4ms)
+[SEO AI] 2025-12-04T19:33:21.950Z - DeepSeek API success (attempt 1): 993 chars, prompt: 9200 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:33:21.951Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:21.951Z - AI content generated by deepseek for vin_check in en (993 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:21.985Z - ⚠️  Block internal_links missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:21.985Z - ⚠️  Block internal_links does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:21.985Z - Block internal_links validated successfully (132 words, marker and punctuation auto-added, 7981ms)
+[SEO AI] 2025-12-04T19:33:22.495Z - DeepSeek API success (attempt 1): 1076 chars, prompt: 9309 chars, timeout: 180000ms, tokens: 232
+[SEO AI] 2025-12-04T19:33:22.495Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:22.495Z - AI content generated by deepseek for vin_check in en (1076 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:22.520Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:22.520Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:22.520Z - ⚠️  Block buyer_guide has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:33:22.524Z - Trying DeepSeek API for vin_check in en (prompt: 2332 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:22.526Z - Using compact strategy (2332 vs 2332 chars)
+[SEO AI] 2025-12-04T19:33:24.247Z - DeepSeek API success (attempt 1): 1287 chars, prompt: 9366 chars, timeout: 180000ms, tokens: 298
+[SEO AI] 2025-12-04T19:33:24.247Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:24.247Z - AI content generated by deepseek for vin_check in en (1287 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:24.272Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:24.272Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:24.282Z - Block market_value validated successfully (202 words, marker and punctuation auto-added, 10289ms)
+[SEO AI] 2025-12-04T19:33:24.752Z - DeepSeek API success (attempt 1): 1570 chars, prompt: 9452 chars, timeout: 180000ms, tokens: 303
+[SEO AI] 2025-12-04T19:33:24.755Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:24.755Z - AI content generated by deepseek for vin_check in en (1570 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:24.772Z - ⚠️  Block insurance_risk missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:24.772Z - ⚠️  Block insurance_risk does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:24.773Z - Block insurance_risk validated successfully (221 words, marker and punctuation auto-added, 10797ms)
+[SEO AI] 2025-12-04T19:33:29.503Z - DeepSeek API success (attempt 1): 933 chars, prompt: 2332 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:33:29.503Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:29.503Z - AI content generated by deepseek for vin_check in en (933 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.525Z - ⚠️  Auto-fixed block buyer_guide still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.525Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 140 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.525Z - Block buyer_guide validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.526Z - Retrying block buyer_guide...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.526Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.526Z - Generating buyer_guide block (ollama, 152 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:33:29.529Z - Trying DeepSeek API for vin_check in en (prompt: 9309 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:29.532Z - Using compact strategy (9309 vs 9309 chars)
+[SEO AI] 2025-12-04T19:33:29.691Z - DeepSeek API success (attempt 1): 2312 chars, prompt: 9189 chars, timeout: 180000ms, tokens: 449
+[SEO AI] 2025-12-04T19:33:29.692Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:29.692Z - AI content generated by deepseek for vin_check in en (2312 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.716Z - ⚠️  Block recalls_tsbs missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.716Z - ⚠️  Block recalls_tsbs does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:29.717Z - Block recalls_tsbs validated successfully (324 words, marker and punctuation auto-added, 15720ms)
+[SEO AI] 2025-12-04T19:33:38.116Z - DeepSeek API success (attempt 1): 1087 chars, prompt: 9309 chars, timeout: 180000ms, tokens: 232
+[SEO AI] 2025-12-04T19:33:38.117Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:38.117Z - AI content generated by deepseek for vin_check in en (1087 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:38.139Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:38.139Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:38.140Z - ⚠️  Block buyer_guide is 1 words short (0.6%). Auto-expanding...
+[SEO AI] 2025-12-04T19:33:38.145Z - Trying DeepSeek API for vin_check in en (prompt: 2482 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:38.149Z - Using compact strategy (2482 vs 2482 chars)
+[SEO AI] 2025-12-04T19:33:41.942Z - DeepSeek API success (attempt 1): 491 chars, prompt: 2482 chars, timeout: 180000ms, tokens: 102
+[SEO AI] 2025-12-04T19:33:41.944Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:41.944Z - AI content generated by deepseek for vin_check in en (491 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:41.959Z - ⚠️  Auto-expanded block buyer_guide still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:41.959Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 78 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:41.959Z - ⚠️  Block buyer_guide has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:33:41.961Z - Trying DeepSeek API for vin_check in en (prompt: 2343 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:41.963Z - Using compact strategy (2343 vs 2343 chars)
+[SEO AI] 2025-12-04T19:33:50.110Z - DeepSeek API success (attempt 1): 956 chars, prompt: 2343 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:33:50.110Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:50.110Z - AI content generated by deepseek for vin_check in en (956 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:50.135Z - ⚠️  Auto-fixed block buyer_guide still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:50.136Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 141 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:50.136Z - Block buyer_guide validation failed (attempt 2): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 159 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:50.136Z - Retrying block buyer_guide...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:50.136Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:50.136Z - Generating buyer_guide block (ollama, 152 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:33:50.140Z - Trying DeepSeek API for vin_check in en (prompt: 9302 chars, compact: true)
+[SEO AI] 2025-12-04T19:33:50.144Z - Using compact strategy (9302 vs 9302 chars)
+[SEO AI] 2025-12-04T19:33:58.251Z - DeepSeek API success (attempt 1): 1073 chars, prompt: 9302 chars, timeout: 180000ms, tokens: 232
+[SEO AI] 2025-12-04T19:33:58.252Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:33:58.252Z - AI content generated by deepseek for vin_check in en (1073 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.278Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.278Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.281Z - Group 3 completed in 44.3s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.281Z - All blocks generated in 88.6s (parallel mode)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.282Z -   WARNING: OVER_TARGET_LENGTH: 2986 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.282Z - Total article length: 2986 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.282Z - Running pre-validation with auto-repair...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.285Z - 🔧 Attempting to repair block accident_intelligence (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:33:58.286Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:33:58.291Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.370Z - ⚠️  Block accident_intelligence still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 131 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.370Z - 🔧 Attempting to repair block buyer_guide (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:33:58.370Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:33:58.371Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.383Z - ⚠️  Block buyer_guide still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, TOO_SHORT_FOR_BLOCK_TYPE: 157 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.384Z - ⚠️  2 blocks still need post-processing:
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.384Z -   - accident_intelligence (status: FAILED_VALIDATION): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 161 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.384Z -   - buyer_guide (status: FAILED_VALIDATION): TOO_SHORT_FOR_BLOCK_TYPE: 159 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.386Z - Validating article...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: H2 may lack SEO keywords: "Key Facts"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: H2 may lack SEO keywords: "South Carolina-Specific Insights"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: H2 may lack SEO keywords: "Frequently Asked Questions"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Recommended block "Executive Summary" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: VIN Decoder may not cover all 17 positions (found 0 mentions)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: CTA does not follow canonical format: "Check this {YEAR} {MAKE} {MODEL} VIN now"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Key Facts bullet 1 does not follow format "* **LABEL:** description"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Key Facts bullet 2 does not follow format "* **LABEL:** description"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Internal links count (0) should be 4-6
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Key Facts section word count (202) should be 120-200 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: FAQ section word count (227) should be 400-600 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: CTA section word count (107) should be 55-75 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Total article word count (2914) should be 2000-2500 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Section "Accident Intelligence" is too short (158 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Section "Market Value" is too short (193 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Section "Buyer Guide" is too short (150 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Section "Internal Links" is too short (132 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z -   WARNING: Section "CTA" is too short (107 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z - Attempting auto-fix...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.431Z - Running post-processing...
+[SEO POST-PROCESSOR] 2025-12-04T19:33:58.432Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:33:58.433Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.501Z - ⚠️  Article still has 3 errors after post-processing
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.501Z -   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.501Z -   ERROR: VIN Decoder section lacks position table
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.501Z -   ERROR: Missing required sections: Deep Explanation, State-Specific
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.501Z - Checking article uniqueness...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.502Z - ✅ Article uniqueness score: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.502Z - ✅ Article lexical variation: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.502Z - Article generated: 2822 words, 14 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.503Z - Circuit Breaker ollama: CLOSED, failure rate: 14.3%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.503Z - Circuit Breaker deepseek: CLOSED, failure rate: 16.7%
+[SEO GEN-PAGE] 2025-12-04T19:33:58.503Z - ✅ Article generated in 88.81s
+[SEO GEN-PAGE] 2025-12-04T19:33:58.503Z -    Words: 2822
+[SEO GEN-PAGE] 2025-12-04T19:33:58.503Z -    Blocks: 14
+{
+  "vin": "1D7J87MA7FE317453",
+  "make": "Ram",
+  "model": "1500 SXT",
+  "year": "2015",
+  "state": "south-carolina",
+  "stateLabel": "South Carolina",
+  "article": {
+    "title": "VIN Check Guide for 2015 Ram 1500 SXT in South Carolina",
+    "h1": "Complete VIN Check Guide: 2015 Ram 1500 SXT",
+    "content": "A Vehicle Identification Number (VIN) is a forensic tool for assessing a vehicle's legal and mechanical history. For a 2015 Ram 1500 SXT registered in South Carolina, a title-holding state, the VIN `1D7J87MA7FE317453` provides a structured data set for antifraud analysis and engineering evaluation. The 17-character sequence is mandated by federal standards, with each segment encoding specific manufacturer and vehicle data.\n\nKey technical and legal points derived from the VIN and state framework include:\n*   The first three characters, the World Manufacturer Identifier (WMI), are `1D7`, identifying the vehicle's origin.\n*   The VIN decodes this vehicle's body type as a Multipurpose Passenger Vehicle (MPV), which informs structural assessment parameters.\n*   South Carolina's title-holding system means the physical certificate is a primary legal document, and brands like \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk\" are permanently recorded by the South.\n\n## NMVTIS: National Motor Vehicle Title Information System\n\nA report from the National Motor Vehicle Title Information System (NMVTIS) provides a foundational, government-verified history for a vehicle like a 2015 Ram 1500 SXT registered in South Carolina. Unlike commercial compilations, NMVTIS data is sourced directly from mandatory reporting by state titling agencies, insurance carriers, and salvage and junk yards. For a buyer in South Carolina, this report acts as a critical antifraud tool, cross-referencing the vehicle's unique identifier—VIN 1D7J87MA7FE317453—against state and federal records to confirm its legal standing and past designations. The system's authority stems from its role as a centralized data clearinghouse designed to prevent title fraud and consumer deception.\n\nFrom an engineering and legal perspective, the NMVTIS report for this Ram 1500 SXT offers several key data points that require careful analysis:\n\n*   **Title Brand History:** The report will list any title brands applied throughout the vehicle's life. In South Carolina, these official designations include **Salvage**, **Rebuilt**, **Flood**, and **Junk**. A brand is a permanent legal marker of a severe event. South Carolina operates a **title-holding** system, meaning the physical certificate of title is held as the primary proof of ownership, and any brands are recorded directly on it by the **South Carolina DMV**.\n*   **Junk and Salvage Yard Reporting:** NMVTIS includes entries from salvage yards and junking facilities, which are required by law to report vehicles they acquire. An entry here definitively indicates the vehicle was sold for parts or destruction, making its return to the road a significant red flag requiring intense scrutiny of its subsequent **Rebuilt** inspection process.\n*   **Odometer Reading History:** The report provides a timeline of odometer readings submitted during major title events. A forensic review looks for inconsistencies, gaps, or illogical rollbacks in this mileage history, which can indicate odometer fraud.\n*   **Theft Records:** The data will indicate if the vehicle was ever reported as stolen to law enforcement and if that status has been recovered. This verification is essential to ensure you are not purchasing stolen property.\n\nFor a Multipurpose Passenger Vehicle (MPV) like this Ram 1500, structural integrity is paramount. A **Salvage.\n\n## Key Facts\n\nA VIN check for a 2015 Ram 1500 SXT, such as VIN `1D7J87MA7FE317453`, provides a forensic-level analysis of the vehicle's identity, legal status, and structural profile. This process is critical for verifying the integrity of a vehicle registered under South Carolina's specific legal framework. The check cross-references technical data encoded in the VIN with state and federal records to identify discrepancies that could indicate fraud, prior significant damage, or title issues.\n\n*   **VIN Structure and Forensic Decoding:** The 17-character VIN is a unique identifier. For this Ram, the first three characters (`1D7`) represent the World Manufacturer Identifier (WMI). Position 9 is a mandatory check digit used by computer systems to validate the VIN's authenticity, while position 10 decodes to the 2015 model year. The Vehicle Descriptor Section (positions 4-8) and the final six-digit serial number (positions 12-17) provide the vehicle's specific configuration and production sequence.\n*   **South Carolina Title and Branding System:** South Carolina operates a title-holding system, meaning the physical certificate of title is the primary legal document proving ownership. The South Carolina DMV administers this system under the South Carolina Vehicle Code. Key title brands to identify include Salvage, Rebuilt, Flood, and Junk, each denoting a comprehensive investigation.\n\n## VIN Decoder for 2015 Ram 1500 SXT\n\nA Vehicle Identification Number (VIN) is a unique 17-character code serving as a vehicle's legal and mechanical fingerprint. For a 2015 Ram 1500 SXT registered in South Carolina, decoding the VIN provides the foundational data for any forensic vehicle history analysis, establishing manufacturer origin, model year, and production sequence. This technical breakdown is essential for verifying a vehicle's identity against records from the South Carolina DMV and other standard state and federal data sources, forming the first line of defense against title fraud and misrepresentation.\n\n<table><tr><th>Position</th><th>Range</th><th>Meaning</th></tr><tr><td>1-3</td><td>WMI</td><td>World Manufacturer Identifier: 1D7 = United States, Ram, Multipurpose Passenger Vehicle (MPV)</td></tr><tr><td>4-8</td><td>VDS</td><td>Vehicle Descriptor Section: Model-specific codes for 2015 Ram 1500 SXT (body style, trim, safety features, engine)</td></tr><tr><td>9</td><td>Check Digit</td><td>Mathematical validation digit (calculated via NHTSA algorithm)</td></tr><tr><td>10</td><td>Year</td><td>Model Year: F = 2015</td></tr><tr><td>11</td><td>Plant</td><td>Assembly Plant: [varies by Ram manufacturing facility]</td></tr><tr><td>12-17</td><td>Serial</td><td>Production Sequence: Unique serial number (from example VIN 1D7J87MA7FE317453)</td></tr></table>\n\nThe World Manufacturer Identifier (WMI), represented by the first three characters \"1D7,\" confirms this vehicle was manufactured in the United States by Ram and is the illegal practice of altering the vehicle's mileage display to show a lower number, often via CAN-Bus manipulation.\n\n## Fraud Patterns\n\nA vehicle history report for a 2015 Ram 1500 SXT in South Carolina serves as a critical forensic tool to identify discrepancies that may indicate fraud. Given South Carolina's title-holding system, where the state retains the electronic title record, particular vigilance is required against schemes targeting physical documentation and vehicle identity. The 17-character VIN, beginning with the WMI \"1D7\", provides a fixed fingerprint for this Multipurpose Passenger Vehicle (MPV) that fraudsters may attempt to alter or clone.\n\nKey technical and legal warning signs specific to this context include:\n\n*   **VIN Inconsistency:** Verify the VIN stamped on the dashboard, door jamb, and frame rail matches the VIN on the report and any physical documents. Any variation, misalignment, or signs of tampering around these locations is a primary red flag for VIN switching or cloning.\n*   **Title Brand Discrepancies:** Cross-reference the report's title history with the South-carolina DMV. Be alert for unexplained gaps, out-of-state transfers that might precede a brand, or attempts to obscure brands like \"Salvage\", \"Rebuilt\", \"Flood\", or \"Junk\" listed under South Carolina statutes. A clean current title in a title-holding state does not erase historically issued brands.\n*   **Structural & Diagnostic Mismatches:** For a vehicle of this age and class, a forensic engineering assessment.\n\n## Accident Intelligence\n\nFor a 2015 Ram 1500 SXT registered in South Carolina, accident intelligence extends beyond a simple damage report to a forensic assessment of structural integrity and residual risk. As a Multipurpose Passenger Vehicle (MPV), its frame and occupant safety systems require specific evaluation following any impact. A comprehensive VIN check cross-references standard state and federal data sources to identify reported incidents, which are then analyzed for their engineering implications.\n\n**Risk Assessment Matrix for Post-Accident Evaluation**\n\n<table><tr><th>Risk Dimension</th><th>Technical &amp; Legal Indicators</th><th>Potential Consequence</th></tr><tr><td>**Structural Integrity**</td><td>Unibody/frame alignment data; repair records from body shops.</td><td>Compromised crashworthiness and potential handling issues.</td></tr><tr><td>**Title Brand History**</td><td>Presence of a **Salvage**, **Rebuilt**, **Flood**, or **Junk** brand from the South-carolina DMV.</td><td>Severely diminished value and possible hidden safety defects.</td></tr><tr><td>**Safety System Status**</td></tr></table> Deployment records for airbags and seatbelt pre-t.\n\n## South Carolina-Specific Insights\n\nA VIN check for a 2015 Ram 1500 SXT in South Carolina involves analyzing data from the state's specific regulatory framework and title-holding system. This process is critical for verifying the legal status and mechanical integrity of a vehicle, which is classified as a Multipurpose Passenger Vehicle (MPV) according to its VIN-decoded body type. South Carolina operates under a title-holding system, meaning the physical certificate of title is the primary legal document proving ownership and must be scrutinized for authenticity and brands. The state's vehicle code and administrative practices create a distinct data trail that a forensic VIN analysis must interpret.\n\nKey technical and legal considerations specific to South Carolina include:\n*   **Title Brand Examination:** The South Carolina DMV issues specific title brands, including Salvage, Rebuilt, Flood, and Junk. Each brand carries legal and engineering implications; for instance, a \"Rebuilt\" brand requires documented proof that a salvage vehicle was restored to a roadworthy condition, which should be verified against a structural assessment.\n*   **Mandatory Inspection:** South Carolina requires a state-required vehicle inspection. While the report uses standard state and federal data sources for history, a physical inspection is a separate, critical step to validate the vehicle's current operational and safety condition against its reported history.\n*   **Agency Verification:** Direct confirmation with the South Carolina DMV is the definitive method for verifying the current title status, lienholder information, and the accuracy of any recorded brands, as this agency maintains the official record.\n*   **Environmental Risk Assessment:** The report may flag regional environmental risks common to the area, which should prompt a detailed mechanical inspection for latent corrosion or electrical system damage not immediately apparent.\n\nFrom an engineering perspective, the analysis extends beyond the document check. For an MPV like the Ram 1500, particular attention should be paid to the integrity of the load-bearing.\n\n## Insurance Risk\n\nA VIN check for a 2015 Ram 1500 SXT in South Carolina provides critical data for insurance risk assessment, moving beyond simple pricing to analyze coverage viability and long-term liability. Insurers and buyers evaluate the vehicle's insurability based on its history, structural integrity, and legal status, which directly impacts premium calculations and policy terms. For this Ram, identified by VIN `1D7J87MA7FE317453`, the analysis hinges on decoded data and state-specific records.\n\nKey technical and legal factors influencing coverage include:\n*   **Title Brand History:** The presence of a title brand like \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk,\" as defined by South Carolina law, fundamentally alters risk. A branded title often indicates prior significant damage that can compromise the vehicle's safety systems and structural performance, leading to higher premiums or outright denial of comprehensive and collision coverage.\n*   **Structural Integrity Verification:** The vehicle's decoded body type, Multipurpose Passenger Vehicle (MPV), informs expectations for its unibody or frame construction. A history report must cross-reference accident data with this engineering specification to assess the quality and completeness of any repairs, as improper fixes can create persistent safety vulnerabilities.\n*   **Legal Title Status:** South Carolina operates a title-holding system, meaning the physical certificate is retained by the lienholder until the loan is satisfied.\n\n## Buyer Guide\n\nA VIN check for a 2015 Ram 1500 SXT in South Carolina is a critical engineering and legal audit. The 17-character VIN, beginning with a WMI of \"1D7,\" decodes to a Multipurpose Passenger Vehicle (MPV). In South Carolina's title-holding system, the physical certificate is crucial for establishing legal ownership and must be scrutinized for any discrepancies against the VIN plate.\n\nKey risks to investigate include:\n*   **Title Brand Verification:** Confirm the absence of state-recognized brands such as Salvage, Rebuilt, Flood, or Junk, which indicate severe prior damage and impact both safety and value.\n*   **Structural Integrity Analysis:** For an MPV, a forensic review of repair records is necessary to assess unibody or frame alignment, ensuring no compromised structural sections exist from prior incidents.\n*   **Odometer Fraud Screening:** Correlate mileage readings across all service entries and title transfers to identify any illogical rollbacks or inconsistencies.\n\n## Market Value\n\nA vehicle's market value is not solely determined by its year, make, and model. For a 2015 Ram 1500 SXT in South Carolina, its true market position is a direct function of its verified history and current mechanical state, as uncovered by a forensic VIN check. The VIN `1D7J87MA7FE317453` decodes to a Multipurpose Passenger Vehicle (MPV), a classification that influences insurance and valuation frameworks. In South Carolina's title-holding system, the physical certificate of title is a critical asset, and its status—clean or branded—is the primary legal determinant of resale value. The following comparison table outlines how key history factors directly impact the valuation spread for this vehicle.\n\n<table><tr><th>Valuation Factor</th><th>High-Value Scenario (Clean History)</th><th>Low-Value Scenario (Branded/Issue History)</th><th>Impact on Price</th></tr><tr><td>**Title Brand**</td><td>Clean title with no brands from the South Carolina DMV.</td><td>Title branded as **Salvage**, **Rebuilt**, **Flood**, or **Junk** per state law.</td><td>Severe depreciation, often 40-60% or more.</td></tr><tr><td>**Accident History**</td><td>No structural damage reported; repairs documented with OEM parts.</td></tr></table> Unreported frame damage or substandard repair compromising.\n\n## Recalls & Technical Service Bulletins\n\nFor a 2015 Ram 1500 SXT registered in South Carolina, analyzing recall and Technical Service Bulletin (TSB) data is a forensic engineering process distinct from checking for title brands like \"Salvage\" or \"Rebuilt.\" While the South-carolina DMV manages title history under the South-carolina Vehicle Code, recall authority rests with the National Highway Traffic Safety Administration (NHTSA). A comprehensive VIN check must cross-reference these separate data streams to assess both legal status and mechanical integrity. This analysis is crucial for a Multipurpose Passenger Vehicle (MPV), where unresolved safety defects can compromise occupant protection systems and vehicle dynamics.\n\nFrom an engineering perspective, recalls address failures in safety-critical systems that pose an unreasonable risk. For any 2015 model, common focus areas include airbag control modules, seatbelt pretensioners, and electronic stability control software—systems where a latent defect may not be apparent during a standard test drive. Technical Service Bulletins (TSBs), conversely, document manufacturer-recommended repairs for known patterns of non-safety-related failures, such as specific driveline vibrations or persistent electronic control unit (ECU) fault codes. These TSBs provide a diagnostic roadmap; finding that multiple related TSBs apply to a specific VIN can indicate a vehicle with a chronic, unaddressed fault pattern that affects long-term reliability and cost of ownership.\n\n*   **Recall Compliance Verification:** An open recall signifies a mandatory, no-cost repair. For a vehicle in a title-holding state like South Carolina, confirming recall closure is essential, as a safety defect is independent of a clean title.\n*   **TSB Analysis as a Diagnostic Tool:** The presence of applicable TSBs allows a pre-purchase inspection to target known failure points for the 2015 model year, moving beyond generic checks to a focused engineering assessment.\n*   **Cross-Referencing Data Sources:** A robust report synthesizes NHTSA recall status, manufacturer TSB archives, and title data from standard state and federal data sources to present a complete risk profile.\n*   **Impact on Vehicle Systems:** Unaddressed recalls can affect.\n\n## Frequently Asked Questions\n\n**Q1: Will a VIN report show all accident history for a 2015 Ram 1500 SXT?**\nAnswer: No, a commercial VIN report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately or events not captured in these databases will not appear in the report.\n\n**Q2: Does a clean South Carolina title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean South Carolina title does not guarantee this, as title washing can occur. A vehicle declared salvage in another state may receive a clean title upon transfer to South Carolina, making an NMVTIS check essential for interstate brand verification.\n\n**Q3: How can I verify open safety recalls for this vehicle?**\nAnswer: You must check the NHTSA website (nhtsa.gov/recalls) using the full 17-character VIN and the manufacturer's official portal. Both sources must be consulted for a comprehensive and accurate recall status verification.\n\n**Q4: What is title washing and how does it work?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a branded title, such as \"Salvage\" or \"Flood,\" to states with different disclosure laws to obtain a clean title, before selling it in a state like South Carolina.\n\n**Q5: How can I detect VIN cloning on a used Ram 1500?**\nAnswer: Detect VIN cloning by physically verifying.\n\n## Related VIN Check Guides\n\nA comprehensive VIN check for a 2015 Ram 1500 SXT in South Carolina integrates engineering data with state-specific legal records. The 17-character VIN, beginning with WMI '1D7', decodes to a Multipurpose Passenger Vehicle (MPV) body type. This technical descriptor forms the basis for cross-referencing physical inspections against database records for inconsistencies.\n\nKey verification points include:\n-   **Title Brand Analysis:** Scrutinizing for state-recognized brands like Salvage, Rebuilt, Flood, or Junk as defined by the South-carolina Vehicle Code.\n-   **Structural Integrity Review:** Aligning the reported body type with physical condition to identify unibody or frame damage.\n-   **Administrative Verification:** Confirming the title-holding system's records through the South-carolina DMV to ensure no fraudulent transfers or washing of brands.\n\nThis multi-source validation is essential for confirming the vehicle's legal standing.\n\n## Check Your VIN Now\n\nA forensic VIN analysis for a 2015 Ram 1500 SXT in South Carolina requires examining both its encoded engineering data and state title history. The 17-character VIN, beginning with WMI \"1D7\", decodes to a Multipurpose Passenger Vehicle (MPV). South Carolina is a title-holding state, meaning the physical certificate is retained by the lienholder until loan satisfaction, and title brands like Salvage or Flood are permanently recorded by the South-carolina DMV under the South-carolina Vehicle Code. A comprehensive check cross-references this encoded data against state records and national databases to verify structural integrity and legal status, providing a complete mechanical and ownership assessment.",
+    "wordCount": 2822,
+    "blocks": 14,
+    "blocksDetail": {
+      "hero": {
+        "provider": "ollama",
+        "wordCount": 148
+      },
+      "nmvtis": {
+        "provider": "ollama",
+        "wordCount": 358
+      },
+      "key_facts": {
+        "provider": "ollama",
+        "wordCount": 213
+      },
+      "vin_decoder": {
+        "provider": "ollama",
+        "wordCount": 218
+      },
+      "fraud_patterns": {
+        "provider": "deepseek",
+        "wordCount": 217
+      },
+      "accident_intelligence": {
+        "provider": "deepseek",
+        "wordCount": 161
+      },
+      "state_specific": {
+        "provider": "deepseek",
+        "wordCount": 308
+      },
+      "insurance_risk": {
+        "provider": "deepseek",
+        "wordCount": 221
+      },
+      "buyer_guide": {
+        "provider": "ollama",
+        "wordCount": 159
+      },
+      "market_value": {
+        "provider": "deepseek",
+        "wordCount": 202
+      },
+      "recalls_tsbs": {
+        "provider": "deepseek",
+        "wordCount": 324
+      },
+      "faq": {
+        "provider": "ollama",
+        "wordCount": 222
+      },
+      "internal_links": {
+        "provider": "ollama",
+        "wordCount": 132
+      },
+      "cta": {
+        "provider": "ollama",
+        "wordCount": 103
+      }
+    },
+    "timestamp": "2025-12-04T19:33:58.386Z",
+    "validationStats": {
+      "totalBlocks": 14,
+      "validBlocks": 14,
+      "failedBlocks": 2,
+      "autoAddedMarkers": 11,
+      "autoFixedEndings": 11
+    },
+    "uniquenessScore": 1,
+    "lexicalVariation": 1,
+    "structuralVariant": "regulatory_compliance",
+    "styleVariant": "Forensic Engineer",
+    "performanceStats": {
+      "totalTime": 88804,
+      "averageBlockTime": 17606.071428571428,
+      "totalRetries": 8,
+      "cacheHitRate": 0.14285714285714285,
+      "providerStats": {
+        "ollama": {
+          "count": 7,
+          "totalTime": 136039,
+          "averageTime": 19434.14285714286,
+          "retries": 5,
+          "cacheHits": 0
+        },
+        "deepseek": {
+          "count": 5,
+          "totalTime": 110446,
+          "averageTime": 22089.2,
+          "retries": 3,
+          "cacheHits": 0
+        },
+        "fragment-cache": {
+          "count": 2,
+          "totalTime": 0,
+          "averageTime": 0,
+          "retries": 0,
+          "cacheHits": 2
+        }
+      }
+    },
+    "generationTime": 88804
+  },
+  "generated_at": "2025-12-04T19:33:58.503Z",
+  "generation_time": "88.81",
+  "analysis_depth": "deep"
+}

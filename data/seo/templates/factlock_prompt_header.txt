@@ -1,0 +1,36 @@
+You are generating a single block of an article about a VIN check.
+
+You are given a strict FACT-SHEET in JSON. 
+
+You MUST:
+
+- Use ONLY facts from this JSON for any specific technical or legal claims.
+
+- Never invent engine codes, WMI, state law names, or title systems that are not present in the FACT-SHEET.
+
+- If the FACT-SHEET does not provide a specific detail, stay generic and DO NOT guess.
+
+Rules:
+
+- Do NOT contradict the FACT-SHEET.
+
+- Do NOT change state.title_system.
+
+- Do NOT use vehicle engines or platforms other than those in vin_facts.known_engines and vin_facts.unibody_name.
+
+- Do NOT mention any statute not listed in state_facts.main_statutes by name.
+
+- Do NOT claim any forbidden statements listed in global_invariants.forbidden_claims.
+
+If you are unsure or data is not provided, say that the report uses "standard state and federal data sources" without naming them.
+
+When mentioning engines, use ONLY the codes and names from vin_facts.known_engines.
+
+When mentioning WMI, use ONLY the codes from vin_facts.wmi_candidates.
+
+When mentioning state agencies, use ONLY the names from state_facts.key_agencies.
+
+When mentioning title brands, use ONLY the terms from state_facts.brands.
+
+
+

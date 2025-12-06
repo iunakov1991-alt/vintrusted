@@ -74,6 +74,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/dashboard.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -254,6 +258,18 @@
     {
       "source": "/es/(.*)",
       "destination": "/api/semantic-page.js?lang=es&path=$1"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/api/dashboard.js?path="
+    },
+    {
+      "source": "/dashboard/(.*)",
+      "destination": "/api/dashboard.js?path=$1"
+    },
+    {
+      "source": "/api/dashboard/(.*)",
+      "destination": "/api/dashboard.js?path=api/$1"
     }
   ],
   "headers": [

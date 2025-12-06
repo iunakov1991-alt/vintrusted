@@ -1,0 +1,41 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "7",
+    "year": "2021",
+    "stateSlug": "25",
+    "stateLabel": "25",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGPRHA90ME828928",
+    "variationContext": {
+      "structuralVariant": "analytic_tx",
+      "styleVariant": {
+        "name": "Forensic Engineer",
+        "tone": "mechanical, ADAS/body-structure emphasis, diagnostic",
+        "description": "Инженерно-форензический стиль с акцентом на механику",
+        "characteristics": [
+          "Emphasizes mechanical integrity and engineering analysis",
+          "Uses technical specifications and diagnostic terminology",
+          "Focuses on structural and mechanical assessment",
+          "ADAS system analysis",
+          "Body structure evaluation"
+        ],
+        "openingPhrases": [
+          "An engineering-grade analysis",
+          "From a mechanical integrity standpoint",
+          "Technical evaluation reveals",
+          "Forensic examination indicates",
+          "Structural assessment demonstrates"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": null
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2021 vehicle?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Incidents repaired privately, unreported damage, or events not captured in these databases will not appear on the report.\n\n**Q2: Does a clean California title guarantee a vehicle was never declared a total loss?**\nAnswer: No, a clean California title does not guarantee the absence of a prior total loss declaration. Title washing can occur when a vehicle with a salvage brand from another state is re-titled in California, receiving a clean designation. Cross-referencing the National Motor Vehicle Title Information System (NMVTIS) is essential to identify interstate brands.\n\n**Q3: Can flood or water damage history be hidden from a standard VIN check?**\nAnswer: Yes, flood damage can be concealed if the incident occurred in a state without mandatory branding, or if repairs were conducted privately without an insurance claim. Detection requires an NMVTIS check combined with a forensic inspection for corrosion, silt deposits, mold, and electrical malfunctions.\n\n**Q4: How do I verify open safety recalls for a 2021 vehicle?**\nAnswer: Verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN. Additionally, consult the manufacturer's official owner portal for any service campaigns not listed by the NHTSA, as both sources are necessary for comprehensive verification.\n\n**Q5: What is title washing and how does the process function?**\nAnswer: Title washing is a fraudulent practice where a vehicle with a branded title, such as salvage or flood, is moved through states with differing disclosure laws to obtain a clean title. The process exploits gaps in state titling systems, though NMVTIS is designed to track these brands across state lines.\n\n**Q6: How can I detect VIN cloning on a used vehicle?**\nAnswer: Detect VIN cloning by physically verifying the VIN stampings on the dashboard, door jamb, and engine firewall for consistency. Inspect for signs of tampering, such as mismatched rivets or adhesive residue. An NMVTIS report may also flag duplicate VINs registered in different geographical locations.\n\n**Q7: What is odometer rollback and how is it identified?**\nAnswer: Odometer rollback is the fraudulent reduction of a vehicle's displayed mileage, often via CAN-Bus manipulation. Identification involves inspecting.",
+  "timestamp": "2025-12-04T10:11:28.517Z",
+  "wordCount": 384
+}

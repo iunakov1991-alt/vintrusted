@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "description": "Приоритеты тем для MONSTER 8.0 - сортировка по горячести для ниши",
+  "state_priority": {
+    "CA": 10,
+    "TX": 9,
+    "FL": 9,
+    "NY": 8,
+    "AZ": 7,
+    "NV": 7,
+    "GA": 6,
+    "NC": 6,
+    "PA": 6,
+    "IL": 5,
+    "OH": 5,
+    "MI": 5,
+    "NJ": 5,
+    "VA": 5,
+    "WA": 5
+  },
+  "zone_priority": {
+    "dmv_titles": 10,
+    "vin_identity": 9,
+    "dmv_registration": 8,
+    "dmv_insurance": 7,
+    "auctions": 6,
+    "dmv_licenses": 5
+  },
+  "type_priority": {
+    "dmv_state_guide": 10,
+    "dmv_checklist": 9,
+    "dmv_legal_article": 8,
+    "dmv_faq": 7,
+    "vin_decoder": 6
+  },
+  "format_variant_priority": {
+    "checklist": 10,
+    "guide": 9,
+    "faq": 8,
+    "step_by_step": 7
+  },
+  "language_priority": {
+    "en": 10,
+    "es": 8
+  },
+  "audience_priority": {
+    "us_general": 10,
+    "us_mexican": 8,
+    "us_spanish": 7
+  }
+}
+

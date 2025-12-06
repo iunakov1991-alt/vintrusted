@@ -1,0 +1,118 @@
+{
+  "blocks": {
+    "hero": {
+      "role": "hero",
+      "length": { "min": 160, "max": 220 },
+      "style": "summary",
+      "default_intents": ["scope", "why_it_matters"],
+      "requirements": [
+        "1 strong definitional sentence",
+        "Geographic anchor (FLHSMV / CA DMV / TX DMV)",
+        "VIN CTA natural mention",
+        "Bilingual clarity when language=es"
+      ]
+    },
+    "context_legal": {
+      "role": "context",
+      "length": { "min": 250, "max": 350 },
+      "style": "tech_legal",
+      "default_intents": ["legal_context", "definitions"],
+      "requirements": [
+        "Repeat DMV authority name 3+ times",
+        "Explain legal classification differences",
+        "Insert MX-specific legal contrast when audience_segment=us_mexican",
+        "Strong semantic signals for: salvage, rebuilt, clean"
+      ]
+    },
+    "step_by_step": {
+      "role": "guide",
+      "length": { "min": 250, "max": 350 },
+      "style": "practical",
+      "default_intents": ["steps", "workflow"],
+      "requirements": [
+        "Sequential actionable steps",
+        "Forms names (HSMV 82040, HSMV 82050, REG 343 etc.)",
+        "VIN inspection logic explained explicitly"
+      ]
+    },
+    "checklist": {
+      "role": "guide",
+      "length": { "min": 200, "max": 300 },
+      "style": "practical",
+      "default_intents": ["checklist", "action_items"],
+      "requirements": [
+        "10–16 checklist items",
+        "At least 1 MX-specific point when es",
+        "1 item about liens, 1 about odometer, 1 about VIN mismatch risk"
+      ]
+    },
+    "common_errors": {
+      "role": "guide",
+      "length": { "min": 220, "max": 300 },
+      "style": "practical",
+      "default_intents": ["common_mistakes", "warnings"],
+      "requirements": [
+        "Title washing warning",
+        "Insurance implications",
+        "Fraud indicators",
+        "Importation issues for MX"
+      ]
+    },
+    "mistakes": {
+      "role": "guide",
+      "length": { "min": 220, "max": 300 },
+      "style": "practical",
+      "default_intents": ["common_mistakes", "warnings"]
+    },
+    "fees_taxes": {
+      "role": "analytic",
+      "length": { "min": 200, "max": 300 },
+      "style": "analytic",
+      "default_intents": ["fees", "taxes", "hidden_costs"],
+      "requirements": [
+        "Clear dollar amounts",
+        "Tax %, title fee, inspection fee",
+        "Insurance cost implications"
+      ]
+    },
+    "vin_section": {
+      "role": "cta",
+      "length": { "min": 120, "max": 180 },
+      "style": "practical",
+      "default_intents": ["vin_verification", "cta"],
+      "requirements": [
+        "Define VIN check value",
+        "Explain cross-state salvage mismatch",
+        "Direct CTA to VIN service"
+      ]
+    },
+    "vin_verification_mini": {
+      "role": "cta",
+      "length": { "min": 120, "max": 180 },
+      "style": "practical",
+      "default_intents": ["vin_verification", "cta"]
+    },
+    "faq": {
+      "role": "faq",
+      "length": { "min": 150, "max": 220 },
+      "style": "practical",
+      "default_intents": ["user_questions"],
+      "requirements": [
+        "4–6 deep Q/A pairs",
+        "1 question must mention VIN explicitly",
+        "1 must mention import/export",
+        "Structured as <h3> + <p>"
+      ]
+    },
+    "comparison_table": {
+      "role": "comparison",
+      "length": { "min": 60, "max": 80 },
+      "style": "encyclopedia",
+      "default_intents": ["comparison"],
+      "requirements": [
+        "3-column table: Clean / Salvage / Rebuilt",
+        "Must mention registration, insurance, inspection"
+      ]
+    }
+  }
+}

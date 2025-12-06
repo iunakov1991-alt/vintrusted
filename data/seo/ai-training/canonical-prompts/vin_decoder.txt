@@ -1,0 +1,93 @@
+# CANONICAL TEMPLATE FOR BLOCK: vin_decoder
+
+# ОПИСАНИЕ:
+#   Здесь ты можешь редактировать промпт для блока "vin_decoder"
+#   без изменения кода.
+#
+#   Используй переменные:
+#     {MAKE}  — марка (например, Toyota, Honda, Ford)
+#     {MODEL} — модель (например, Camry, Accord, F-150)
+#     {YEAR}  — год (например, 2018, 2019, 2020)
+#     {STATE} — штат (например, California, Texas, Florida)
+#     {STATE_SLUG} — slug штата (например, california, texas, florida)
+#     {VIN}   — пример VIN (например, 4T1B11HK3JU123456 или 19UUB2F50KA123456)
+#     {WORD_COUNT} — целевое количество слов
+#     {WMI} — World Manufacturer Identifier (первые 3 символа VIN, например 4T1, 19U, 1FA)
+#     {MANUFACTURER_NAME} — название производителя из WMI (например, Toyota, Honda, Ford)
+#     {COUNTRY} — страна производства из WMI (например, United States, Japan)
+#     {VEHICLE_TYPE} — тип транспортного средства (например, Passenger Car, Truck)
+#     {YEAR_CODE} — код года из позиции 10 VIN (например, J=2018, K=2019)
+#     {POSITION1}, {POSITION2}, {POSITION3} — отдельные позиции WMI
+#
+# ТРЕБОВАНИЯ:
+#   - Техно-аналитика, понятная нормальному человеку.
+#   - Избегай воды.
+#   - Объём: между {WORD_COUNT} словами (с небольшим допуском).
+#   - Не используй дословно клише из отдельного списка.
+#
+# ВАЖНО:
+#   В конце блока ОБЯЗАТЕЛЬНО поставить маркер конца:
+#       [[END_BLOCK:vin_decoder]]
+#
+# Пример структуры:
+#
+# H2 заголовок
+# 1–2 абзаца вводки с привязкой к {YEAR} {MAKE} {MODEL} в {STATE}.
+# ОБЯЗАТЕЛЬНАЯ ТАБЛИЦА VIN ПОЗИЦИЙ (см. ниже)
+# Буллеты с ключевыми техническими/правовыми моментами.
+# Короткий вывод, который логически завершает мысль.
+# В самом конце — маркер [[END_BLOCK:vin_decoder]] на последней строке.
+
+Write a vin_decoder block for a VIN check guide for {YEAR} {MAKE} {MODEL} in {STATE}.
+
+Style: DMV-grade, legal, antifraud, engineering-level explanation.
+Word count: {WORD_COUNT} words.
+Use FACTUAL, TECHNICAL style (no literary flourishes).
+
+🚨🚨🚨🚨🚨 CRITICAL: TABLE IS MANDATORY - YOUR RESPONSE WILL BE REJECTED WITHOUT IT 🚨🚨🚨🚨🚨
+
+YOU MUST INCLUDE A VIN POSITION TABLE. THIS IS NOT OPTIONAL. VALIDATION CHECKS FOR THIS TABLE AND WILL REJECT YOUR RESPONSE IF IT'S MISSING.
+
+STEP 1: Write your introductory paragraph about VIN decoding.
+
+STEP 2: IMMEDIATELY AFTER the introduction, you MUST include a table with this EXACT format (use the ACTUAL VIN data):
+
+| Position | Range | Meaning |
+|---------|-------|---------|
+| 1-3 | WMI | World Manufacturer Identifier: {WMI} = {COUNTRY}, {MANUFACTURER_NAME}, {VEHICLE_TYPE} |
+| 4-8 | VDS | Vehicle Descriptor Section: Model-specific codes for {YEAR} {MAKE} {MODEL} (body style, trim, safety features, engine) |
+| 9 | Check Digit | Mathematical validation digit (calculated via NHTSA algorithm) |
+| 10 | Year | Model Year: {YEAR_CODE} = {YEAR} |
+| 11 | Plant | Assembly Plant: [varies by {MAKE} manufacturing facility] |
+| 12-17 | Serial | Production Sequence: Unique serial number (from example VIN {VIN}) |
+
+CRITICAL: You MUST use the ACTUAL WMI ({WMI}) decoded from the VIN {VIN}. The WMI {WMI} means {COUNTRY}, {MANUFACTURER_NAME}, {VEHICLE_TYPE}. Do NOT use examples from other manufacturers - use the actual decoded data for this specific VIN.
+
+STEP 3: After the table, continue with detailed explanations.
+
+VALIDATION CHECK: The validator looks for "| Position |" in your response. If it's not found, your response FAILS validation.
+
+DO NOT SKIP THE TABLE. DO NOT FORGET THE TABLE. THE TABLE IS REQUIRED.
+
+🚨🚨🚨🚨🚨 END OF CRITICAL TABLE REQUIREMENT 🚨🚨🚨🚨🚨
+
+CRITICAL REQUIREMENTS - NO EXCEPTIONS:
+- Complete ALL sentences fully - NO truncated text ending with "and", "or", "(", "[", "|"
+- Finish ALL bullet points completely - NO incomplete bullets
+- Complete ALL tables with ALL rows - NO partial tables
+- Ensure ALL sections have proper conclusions - NO abrupt endings
+- NO text breaks before headings (##) - finish the sentence, then add heading
+- NO incomplete thoughts or cut-off phrases
+- Every paragraph must have a complete thought
+- Every list item must be a complete sentence or phrase
+
+VALIDATION RULES:
+- If you start a sentence, you MUST finish it
+- If you start a table, you MUST complete all rows
+- If you start a list, you MUST complete all items
+- If you mention a concept, you MUST explain it fully
+
+You MUST end your response with exactly this marker on a new line:
+[[END_BLOCK:vin_decoder]]
+
+After the marker, there must be NO additional text, spaces, or content.

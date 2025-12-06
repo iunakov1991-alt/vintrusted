@@ -352,3 +352,7 @@ async generateSectionWithStreaming(sectionType, sectionIndex, context) {
 **Версия:** Monster 7.1 (Phi-3 TRIZ Edition)  
 **Методология:** ТРИЗ (Теория решения изобретательских задач)
 
+
+
+
+

@@ -1,0 +1,66 @@
+SEMANTIC TIER 1 — PRIMARY EXPERT THEMES (3–5 per article)
+
+
+
+1. Vehicle Engineering & Year-Specific Data
+
+   - Model lineage
+
+   - Engine generation specifics
+
+   - Transmission behaviors
+
+   - Known recalls and TSB patterns
+
+
+
+2. Accident & Structural Damage Intelligence
+
+   - Hidden damage zones
+
+   - Airbag logic
+
+   - Salvage/rebuilt differentiation
+
+   - State inspection logic
+
+
+
+3. Ownership Risk Logic
+
+   - High-risk ownership cycles
+
+   - Fleet/rental patterns
+
+   - Odometer fraud probability
+
+   - Insurance-risk cues
+
+
+
+4. State-Specific Law
+
+   - Title transfer rules
+
+   - Smog/emissions specifics
+
+   - Flood zone risks
+
+   - Transparency level
+
+
+
+5. Fraud Prevention
+
+   - VIN cloning
+
+   - Auction manipulation
+
+   - Rollback indicators
+
+   - Curbstoning
+
+
+
+
+

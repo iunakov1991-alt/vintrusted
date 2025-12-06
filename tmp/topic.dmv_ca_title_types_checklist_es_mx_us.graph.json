@@ -1,0 +1,142 @@
+{
+  "topic": "dmv_ca_title_types_checklist_es_mx_us",
+  "nodes": [
+    {
+      "id": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "label": "Topic",
+      "title": "Guía completa de tipos de título del DMV de California"
+    },
+    {
+      "id": "zone:dmv_titles",
+      "label": "Zone",
+      "zone": "dmv_titles"
+    },
+    {
+      "id": "type:dmv_state_guide",
+      "label": "ArticleType",
+      "type": "dmv_state_guide"
+    },
+    {
+      "id": "dim:state:CA",
+      "label": "Dimension:state",
+      "value": "CA"
+    },
+    {
+      "id": "state:CA",
+      "label": "State",
+      "state": "CA"
+    },
+    {
+      "id": "dim:dmv_topic:title_types",
+      "label": "Dimension:dmv_topic",
+      "value": "title_types"
+    },
+    {
+      "id": "dim:format_variant:checklist",
+      "label": "Dimension:format_variant",
+      "value": "checklist"
+    },
+    {
+      "id": "dim:audience:mx_us",
+      "label": "Dimension:audience",
+      "value": "mx_us"
+    },
+    {
+      "id": "term:california dmv",
+      "label": "MustIncludeTerm",
+      "term": "California DMV"
+    },
+    {
+      "id": "term:transfer",
+      "label": "MustIncludeTerm",
+      "term": "transfer"
+    },
+    {
+      "id": "term:salvage",
+      "label": "MustIncludeTerm",
+      "term": "salvage"
+    },
+    {
+      "id": "term:rebuilt",
+      "label": "MustIncludeTerm",
+      "term": "rebuilt"
+    },
+    {
+      "id": "term:título",
+      "label": "MustIncludeTerm",
+      "term": "título"
+    },
+    {
+      "id": "term:vin",
+      "label": "MustIncludeTerm",
+      "term": "VIN"
+    }
+  ],
+  "edges": [
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "zone:dmv_titles",
+      "label": "IN_ZONE"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "type:dmv_state_guide",
+      "label": "HAS_TYPE"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "dim:state:CA",
+      "label": "USES_DIMENSION"
+    },
+    {
+      "from": "dim:state:CA",
+      "to": "state:CA",
+      "label": "MATCHES_STATE"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "dim:dmv_topic:title_types",
+      "label": "USES_DIMENSION"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "dim:format_variant:checklist",
+      "label": "USES_DIMENSION"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "dim:audience:mx_us",
+      "label": "USES_DIMENSION"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "term:california dmv",
+      "label": "MUST_INCLUDE"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "term:transfer",
+      "label": "MUST_INCLUDE"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "term:salvage",
+      "label": "MUST_INCLUDE"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "term:rebuilt",
+      "label": "MUST_INCLUDE"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "term:título",
+      "label": "MUST_INCLUDE"
+    },
+    {
+      "from": "topic:dmv_ca_title_types_checklist_es_mx_us",
+      "to": "term:vin",
+      "label": "MUST_INCLUDE"
+    }
+  ]
+}

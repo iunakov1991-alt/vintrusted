@@ -1,0 +1,23 @@
+{
+  "topic": {
+    "topic_id": "dmv_ca_title_types_checklist_es_mx_us",
+    "zone": "dmv_titles",
+    "supercluster": "dmv_supercluster",
+    "type": "dmv_state_guide",
+    "dimensions": {
+      "state": "CA",
+      "dmv_topic": "title_types",
+      "format_variant": "checklist",
+      "language": "es",
+      "audience_segment": "mx_us"
+    }
+  },
+  "blocks": {
+    "hero": "STUB BLOCK 1 (hero / hero) for topic dmv_ca_title_types_checklist_es_mx_us.\nThis is offline placeholder text to keep the MONSTER 8.0 pipeline working without a real LLM.\nWhen you provide DEEPSEEK_API_KEY or enable USE_LOCAL_AI, this stub will be replaced by real article content.",
+    "context_legal": "STUB BLOCK 2 (context_legal / context) for topic dmv_ca_title_types_checklist_es_mx_us.\nThis is offline placeholder text to keep the MONSTER 8.0 pipeline working without a real LLM.\nWhen you provide DEEPSEEK_API_KEY or enable USE_LOCAL_AI, this stub will be replaced by real article content.",
+    "step_by_step": "STUB BLOCK 3 (step_by_step / guide) for topic dmv_ca_title_types_checklist_es_mx_us.\nThis is offline placeholder text to keep the MONSTER 8.0 pipeline working without a real LLM.\nWhen you provide DEEPSEEK_API_KEY or enable USE_LOCAL_AI, this stub will be replaced by real article content.",
+    "mistakes": "STUB BLOCK 4 (mistakes / guide) for topic dmv_ca_title_types_checklist_es_mx_us.\nThis is offline placeholder text to keep the MONSTER 8.0 pipeline working without a real LLM.\nWhen you provide DEEPSEEK_API_KEY or enable USE_LOCAL_AI, this stub will be replaced by real article content.",
+    "fees_taxes": "STUB BLOCK 5 (fees_taxes / analytics) for topic dmv_ca_title_types_checklist_es_mx_us.\nThis is offline placeholder text to keep the MONSTER 8.0 pipeline working without a real LLM.\nWhen you provide DEEPSEEK_API_KEY or enable USE_LOCAL_AI, this stub will be replaced by real article content.",
+    "faq": "STUB BLOCK 6 (faq / faq) for topic dmv_ca_title_types_checklist_es_mx_us.\nThis is offline placeholder text to keep the MONSTER 8.0 pipeline working without a real LLM.\nWhen you provide DEEPSEEK_API_KEY or enable USE_LOCAL_AI, this stub will be replaced by real article content."
+  }
+}

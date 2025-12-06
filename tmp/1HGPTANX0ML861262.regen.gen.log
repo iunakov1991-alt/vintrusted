@@ -1,0 +1,8 @@
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:43:09.747Z - ERROR: Block vin_decoder failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 137 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:43:09.748Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:43:09.748Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:43:44.511Z - ERROR: Article validation failed: 4 errors, 15 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:43:44.512Z - ERROR:   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:43:44.512Z - ERROR:   ERROR: Required block "key_facts" is missing or too short
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:43:44.512Z - ERROR:   ERROR: Incomplete sentence ending detected: \bthe\.\s*$ (1 occurrences)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:43:44.512Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation

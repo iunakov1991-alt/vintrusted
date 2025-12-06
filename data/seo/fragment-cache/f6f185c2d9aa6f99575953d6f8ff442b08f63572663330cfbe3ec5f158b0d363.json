@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Chevrolet",
+    "model": "Express",
+    "year": "2019",
+    "stateSlug": "missouri",
+    "stateLabel": "Missouri",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1GC5D1T71KL036924",
+    "variationContext": {
+      "structuralVariant": "quick_scan",
+      "styleVariant": {
+        "name": "Procedural",
+        "tone": "DMV process, step-by-step, compliance",
+        "description": "Процедурный стиль с пошаговыми инструкциями DMV",
+        "characteristics": [
+          "Emphasizes step-by-step DMV processes",
+          "Uses procedural terminology and compliance checklists",
+          "Focuses on regulatory compliance steps",
+          "Official process documentation",
+          "Compliance verification"
+        ],
+        "openingPhrases": [
+          "The DMV process requires",
+          "To comply with state regulations",
+          "Following official procedures",
+          "Per DMV requirements",
+          "The registration process involves"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "1GC5D1T71KL036924",
+        "make": "Chevrolet",
+        "model": "Express",
+        "year": 2019,
+        "state": "missouri",
+        "generated_at": "2025-12-04T09:06:44.601Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1GC"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Missouri DMV"
+          ],
+          "main_statutes": [
+            "Missouri Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Missouri-Specific VIN Verification Protocol for a 2019 Chevrolet Express\n\nA VIN check for a 2019 Chevrolet Express registered in Missouri involves distinct procedures governed by the state's title-holding system and specific legal statutes. Missouri operates as a title-holding state, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most official transactions. This system creates a critical paper trail that a VIN history report cross-references to detect inconsistencies. The process for verifying this vehicle's history relies on data from the Missouri DMV and other standard state and federal data sources, analyzed against the framework established by the Missouri Vehicle Code. Understanding Missouri's specific requirements is essential for identifying potential fraud or undisclosed issues with this commercial van.\n\nThe verification process for Missouri-registered vehicles follows several key compliance steps:\n*   **Title Brand Scrutiny:** Missouri recognizes specific title brands, including Salvage, Rebuilt, Flood, and Junk. A comprehensive report will search for the application of these brands to the vehicle's history, as they indicate severe past damage or total loss declarations that significantly impact value and safety.\n*   **Mandatory Inspection Compliance:** Missouri requires a state-required vehicle inspection for most vehicles. A history report should indicate whether this mandatory inspection was passed, as a lapse or failure can be a red flag for underlying condition issues.\n*   **Agency Data Correlation:** Official records from the Missouri DMV form the backbone of the report. Discrepancies between the VIN-decoded information—such as the manufacturer identifier (WMI) \"1GC\" for General Motors—and the titling data held by the state agency can be a primary indicator of VIN fraud or clerical error.\n*   **Environmental Risk Assessment:** The report will account for regional environmental risks common to Missouri, which can contribute to corrosion or other long-term damage not immediately apparent during a visual inspection.\n\nTherefore, a Missouri-specific VIN analysis for this Chevrolet Express is.",
+  "timestamp": "2025-12-04T09:07:02.606Z",
+  "wordCount": 311
+}

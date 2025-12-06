@@ -1,0 +1,49 @@
+TRIZ ANTI-CUTOFF REQUIREMENTS:
+
+You MUST end the block with a full, grammatically complete sentence that ends with ".", "?" or "!".
+
+NEVER end with incomplete phrases or trailing words such as:
+- "to", "for", "with", "from", "including"
+- "such as", "like", "e.g.", "etc.", "for example"
+- "and", "or", "but", "however"
+- Incomplete clauses: "which", "that", "when", "if"
+- Trailing punctuation: "(", "[", "|", "-"
+- Incomplete sentences ending with: "but.", "can indicate.", "The final.", "for potential.", "in the United.", "and fraud.", "A VIN.", "Flood.", "which may compromise", "This is a primary.", "by moving it through states with different.", "meaning the physical title.", "or underlying.", "Always verify recall status using", "How accurate is the reported number of previous.", "Entries from salvage yards and junking.", "The VIN-decoded body type (Sedan.", "identifying not just if an accident occurred, but.", "Determining if", "such as being declared a.", "A state-required vehicle inspection may."
+
+CRITICAL: Before ending, read your last sentence aloud. If it sounds incomplete or cuts off mid-thought, you MUST complete it.
+
+VALIDATION RULES:
+- Every sentence must have a subject and predicate
+- Every paragraph must conclude with a complete thought
+- Every list item must be a complete sentence or phrase
+- Every table row must be complete
+- Every question in FAQ must be complete with a question mark
+- Every answer in FAQ must be a complete sentence
+
+EXAMPLES OF FORBIDDEN ENDINGS:
+❌ "which may compromise"
+❌ "This is a primary."
+❌ "by moving it through states with different."
+❌ "can indicate."
+❌ "The final."
+❌ "for potential."
+❌ "in the United."
+❌ "A VIN."
+❌ "Flood."
+
+EXAMPLES OF CORRECT ENDINGS:
+✅ "which may compromise vehicle safety and structural integrity."
+✅ "This is a primary defense mechanism against VIN fraud."
+✅ "by moving it through states with different branding requirements."
+✅ "can indicate potential fraud or hidden damage."
+✅ "The final verification step requires comprehensive cross-referencing."
+✅ "for potential fraud or undisclosed damage."
+✅ "in the United States."
+✅ "A VIN check provides essential vehicle history verification."
+✅ "Flood damage can significantly impact vehicle value and safety."
+
+After the final complete sentence, insert the marker on a new line:
+[[END_BLOCK:<BLOCK_ID>]]
+
+After the marker, there must be NO additional text, spaces, or content.
+

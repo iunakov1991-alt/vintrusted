@@ -1,0 +1,74 @@
+{
+  "type": "reference-article",
+  "quality_level": "low-volume",
+  "search_intent": "low-volume educational",
+  "target_query": "How to verify odometer from smog check logs",
+  "training_notes": {
+    "goal": "maximize informational depth, reduce SEO template risk",
+    "depth": "800-1100 words",
+    "style": "instructive, technical"
+  },
+  "title": "How to Verify Odometer Accuracy Using Smog Check Logs",
+  "overview": "Smog check logs are one of the most reliable ways to detect mileage inconsistencies, especially in California. Unlike handwritten service sheets, smog test records are timestamped, digital, and tied to state databases.",
+  "structure": {
+    "why_smog_data_matters": {
+      "content": "Smog stations record:",
+      "data_points": [
+        "VIN",
+        "timestamp",
+        "mileage",
+        "test outcome",
+        "emission anomalies"
+      ]
+    },
+    "how_to_cross_check_mileage": {
+      "content": "Step-by-step verification process",
+      "steps": [
+        "Compare chronological order",
+        "Check annual mileage growth",
+        "Detect plate-swap inconsistencies",
+        "Look for sudden drops or resets"
+      ]
+    },
+    "red_flags": {
+      "content": "Warning signs of odometer manipulation:",
+      "flags": [
+        "mileage decrease between tests",
+        "unrealistic annual mileage",
+        "out-of-state smog absence after title transfer",
+        "hybrid/EV odometer manipulation"
+      ]
+    }
+  },
+  "why_blocks_here": {
+    "overview": "Overview first - establishes topic and California context",
+    "why_smog_data_matters": "Why smog data matters - explains authority of source",
+    "how_to_cross_check": "How-to section - core instructional content",
+    "red_flags": "Red flags - practical warning signs for users"
+  },
+  "good_headings": [
+    "How to Verify Odometer Accuracy Using Smog Check Logs",
+    "Why Smog Data Matters",
+    "How to Cross-Check Mileage",
+    "Red Flags"
+  ],
+  "bad_headings": [
+    "Odometer Check",
+    "Smog Check Info",
+    "How to Check Mileage",
+    "Vehicle Mileage"
+  ],
+  "semantic_layers": {
+    "tier1": ["odometer verification", "smog check", "mileage accuracy"],
+    "tier2": ["California smog", "odometer rollback", "mileage fraud"],
+    "tier3": ["chronological verification", "plate swap", "hybrid manipulation"]
+  },
+  "e_e_a_t_score": "high",
+  "word_count_target": "800-1100",
+  "blocks_count": "4-6"
+}
+
+
+
+
+

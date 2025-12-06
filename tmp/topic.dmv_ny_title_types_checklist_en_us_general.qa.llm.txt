@@ -1,0 +1,22 @@
+[SUMMARY]
+This is a strong, comprehensive guide that effectively covers the NY DMV title types for a general US audience. It provides clear definitions, practical steps, a detailed checklist, and manages legal risks appropriately by emphasizing due diligence and official processes. The content is informative, avoids filler, and logically flows from explanation to actionable advice.
+
+[BLOCKS]
+hero: OK
+context_legal: OK
+step_by_step: OK
+checklist: OK
+common_errors: OK
+comparison_table: WEAK
+- Recommendation 1: The table is very short (only 5 rows) and lacks depth. Consider adding a row for "Typical Use Case" (e.g., "Primary daily driver" for clean, "Parts/restoration" for salvage, "Budget-conscious driver" for rebuilt).
+- Recommendation 2: The "Insurance" row for "Salvage" is vague ("liability-only 'salvage' insurance"). Clarify that obtaining *any* insurance for an un-repaired salvage vehicle is extremely difficult.
+- Recommendation 3: Ensure the table explicitly states that all types require disclosure upon sale in NY, not just salvage and rebuilt (though clean has "no special" requirements, it's still a key point of comparison).
+fees_taxes: OK
+vin_section: OK
+faq: OK
+
+[LEGAL / FACTUAL RISK]
+No obvious legal/factual risks detected. The article correctly frames NY DMV processes, avoids making guarantees, and warns of common frauds like title washing. The statement about insurance for salvage vehicles being "extremely difficult to obtain" is more accurate than the current "liability-only" description in the table, but the body text handles this appropriately.
+
+[VIN / CTA]
+VIN usage is correctly framed as a critical due-diligence tool to uncover hidden history, confirm title brands, and prevent fraud. The CTA is neutral and practical, advising readers to "run a comprehensive VIN report before any transaction" to make an informed decision, which aligns with the guide's educational purpose.

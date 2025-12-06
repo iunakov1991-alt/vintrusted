@@ -1,0 +1,352 @@
+[stage1][1/10] 1HGPTANX0ML861262 Saab 900 2021 Nebraska
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:50.973Z - ERROR: Block market_value failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "for"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:50.974Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:50.975Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.970Z - ERROR: Block accident_intelligence failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 157 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.971Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.971Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.973Z - ERROR: Block fraud_patterns failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.973Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:57.973Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z - ERROR: Article validation failed: 3 errors, 11 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z - ERROR:   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z - ERROR:   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:27:58.113Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation
+[QA][ERROR] Failed to load JSON from tmp/1HGPTANX0ML861262.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=1HGPTANX0ML861262 STAGE=stage1 DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/1HGPTANX0ML861262.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:26:46.137Z - Cache loaded: 2926 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE][1HGPTANX0ML861262] SEVERITY:MAJOR;WORDCOUNT:45934;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 1HGPTANX0ML861262 (stage1) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[MAJOR][stage1] 1HGPTANX0ML861262 → regen attempt...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:28:31.422Z - ERROR: Block hero failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:28:31.422Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:28:31.422Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:28:34.513Z - ERROR: Block vin_decoder failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 143 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:28:34.513Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:28:34.513Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:28.401Z - ERROR: Article validation failed: 3 errors, 14 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:28.401Z - ERROR:   ERROR: Invalid bullet (too short): "*   **O."
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:28.401Z - ERROR:   ERROR: Unbalanced parentheses in VIN Decoder section
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:29:28.402Z - ERROR:   ERROR: Missing required sections: NMVTIS, Deep Explanation
+[QA][ERROR] Failed to load JSON from tmp/1HGPTANX0ML861262.regen.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=1HGPTANX0ML861262 STAGE=stage1_regen DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/1HGPTANX0ML861262.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:27:59.100Z - Cache loaded: 2951 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE-REGEN][1HGPTANX0ML861262] SEVERITY:FATAL;WORDCOUNT:36257;FATAL=10;MAJOR=2;MINOR=0;WEAK=
+[ANALYTICS] Logged 1HGPTANX0ML861262 (stage1_regen) severity=FATAL to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[FATAL-REGEN][stage1] 1HGPTANX0ML861262 blocked after regen
+[stage1][2/10] 1HG62AEJ3PG985291 Smart EQ fortwo 2023 Missouri
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:06.562Z - ERROR: Block vin_decoder failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 144 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:06.563Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:06.563Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:08.143Z - ERROR: Block fraud_patterns failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 142 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:08.143Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:08.143Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.612Z - ERROR: Block accident_intelligence failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 186 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.612Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:30:14.612Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.011Z - ERROR: Article validation failed: 6 errors, 18 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z - ERROR:   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z - ERROR:   ERROR: Required block "State-Specific" is missing
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z - ERROR:   ERROR: Incomplete sentence ending detected: \bThe\.\s*$ (1 occurrences)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z - ERROR:   ERROR: Tiny paragraph detected (13 chars): "[[END_BLOCK:...."
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z - ERROR:   ERROR: Tiny paragraph detected (4 chars): "The...."
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:31:06.012Z - ERROR:   ERROR: Missing required sections: Deep Explanation
+[QA][ERROR] Failed to load JSON from tmp/1HG62AEJ3PG985291.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=1HG62AEJ3PG985291 STAGE=stage1 DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/1HG62AEJ3PG985291.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:29:30.190Z - Cache loaded: 2974 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE][1HG62AEJ3PG985291] SEVERITY:MAJOR;WORDCOUNT:52140;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 1HG62AEJ3PG985291 (stage1) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[MAJOR][stage1] 1HG62AEJ3PG985291 → regen attempt...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:28.651Z - ERROR: Article validation failed: 4 errors, 14 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:28.652Z - ERROR:   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:28.652Z - ERROR:   ERROR: Incomplete sentence ending detected: \bThe\.\s*$ (1 occurrences)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:28.652Z - ERROR:   ERROR: Incomplete sentence ending detected: \bthe\.\s*$ (1 occurrences)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:32:28.652Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation
+[QA][ERROR] Failed to load JSON from tmp/1HG62AEJ3PG985291.regen.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=1HG62AEJ3PG985291 STAGE=stage1_regen DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/1HG62AEJ3PG985291.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:31:07.657Z - Cache loaded: 3005 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE-REGEN][1HG62AEJ3PG985291] SEVERITY:MAJOR;WORDCOUNT:42975;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 1HG62AEJ3PG985291 (stage1_regen) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[PUBLISHED-REGEN][stage1] 1HG62AEJ3PG985291 severity=MAJOR
+[stage1][3/10] 1D7J87MA7FE317453 Ram 1500 SXT 2015 South Carolina
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.971Z - ERROR: Block accident_intelligence failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 161 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.971Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:13.971Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.279Z - ERROR: Block buyer_guide failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 159 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.280Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.280Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z - ERROR: Article validation failed: 3 errors, 18 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z - ERROR:   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z - ERROR:   ERROR: Invalid bullet (too short): "*   **Lien."
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:33:58.424Z - ERROR:   ERROR: Missing required sections: Deep Explanation, State-Specific
+[QA][ERROR] Failed to load JSON from tmp/1D7J87MA7FE317453.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=1D7J87MA7FE317453 STAGE=stage1 DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/1D7J87MA7FE317453.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:32:29.644Z - Cache loaded: 3021 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE][1D7J87MA7FE317453] SEVERITY:MAJOR;WORDCOUNT:33267;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 1D7J87MA7FE317453 (stage1) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[MAJOR][stage1] 1D7J87MA7FE317453 → regen attempt...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:34:39.071Z - ERROR: Block vin_decoder failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 137 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:34:39.072Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:34:39.072Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.196Z - ERROR: Block fraud_patterns failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.196Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.196Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.305Z - ERROR: Article validation failed: 6 errors, 14 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.305Z - ERROR:   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.305Z - ERROR:   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.305Z - ERROR:   ERROR: Incomplete sentence ending detected: \bfrom an\.\s*$ (1 occurrences)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.305Z - ERROR:   ERROR: Invalid bullet (too short): "*   **Lien."
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.305Z - ERROR:   ERROR: Unbalanced parentheses in VIN Decoder section
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:35:26.305Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation, State-Specific
+[QA][ERROR] Failed to load JSON from tmp/1D7J87MA7FE317453.regen.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=1D7J87MA7FE317453 STAGE=stage1_regen DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/1D7J87MA7FE317453.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:34:00.165Z - Cache loaded: 3043 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE-REGEN][1D7J87MA7FE317453] SEVERITY:MAJOR;WORDCOUNT:47460;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 1D7J87MA7FE317453 (stage1_regen) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[PUBLISHED-REGEN][stage1] 1D7J87MA7FE317453 severity=MAJOR
+[stage1][4/10] 5XX8HTAJ2GZ975372 Kia Telluride Hybrid 2016 Maine
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:20.607Z - ERROR: Block buyer_guide failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "to"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:20.608Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:20.609Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:26.501Z - ERROR: Block fraud_patterns failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 148 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:26.501Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:26.502Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:26.644Z - ERROR: Article validation failed: 3 errors, 19 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:26.644Z - ERROR:   ERROR: Required block "State-Specific" is missing
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:26.644Z - ERROR:   ERROR: Tiny paragraph detected (13 chars): "[[END_BLOCK:...."
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:26.644Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation
+[QA][ERROR] Failed to load JSON from tmp/5XX8HTAJ2GZ975372.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=5XX8HTAJ2GZ975372 STAGE=stage1 DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/5XX8HTAJ2GZ975372.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:35:27.889Z - Cache loaded: 3068 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE][5XX8HTAJ2GZ975372] SEVERITY:MAJOR;WORDCOUNT:37688;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 5XX8HTAJ2GZ975372 (stage1) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[MAJOR][stage1] 5XX8HTAJ2GZ975372 → regen attempt...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:05.221Z - ERROR: Block vin_decoder failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 144 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:05.222Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:05.222Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:47.053Z - ERROR: Block cta failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:47.054Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:47.054Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.446Z - ERROR: Block accident_intelligence failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 171 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.446Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.446Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z - ERROR: Article validation failed: 2 errors, 16 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z - ERROR:   ERROR: Tiny paragraph detected (13 chars): "[[END_BLOCK:...."
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation
+[QA][ERROR] Failed to load JSON from tmp/5XX8HTAJ2GZ975372.regen.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=5XX8HTAJ2GZ975372 STAGE=stage1_regen DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/5XX8HTAJ2GZ975372.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:36:28.230Z - Cache loaded: 3091 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE-REGEN][5XX8HTAJ2GZ975372] SEVERITY:MAJOR;WORDCOUNT:44842;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 5XX8HTAJ2GZ975372 (stage1_regen) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[PUBLISHED-REGEN][stage1] 5XX8HTAJ2GZ975372 severity=MAJOR
+[stage1][5/10] 1HGDNP5P3H3241149 Genesis G80 Electrified 2017 Maryland
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.199Z - ERROR: Block market_value failed validation after 3 attempts: INVALID_PUNCTUATION_PATTERN: Dirty punctuation pattern detected
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.199Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:03.200Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z - ERROR: Article validation failed: 4 errors, 13 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z - ERROR:   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z - ERROR:   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z - ERROR:   ERROR: Incomplete sentence ending detected: \bthe\.\s*$ (1 occurrences)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:39:23.667Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation
+[QA][ERROR] Failed to load JSON from tmp/1HGDNP5P3H3241149.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=1HGDNP5P3H3241149 STAGE=stage1 DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/1HGDNP5P3H3241149.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:38:00.264Z - Cache loaded: 3113 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE][1HGDNP5P3H3241149] SEVERITY:MAJOR;WORDCOUNT:41171;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 1HGDNP5P3H3241149 (stage1) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[MAJOR][stage1] 1HGDNP5P3H3241149 → regen attempt...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:03.291Z - ERROR: Block vin_decoder failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 136 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:03.292Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:03.292Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:41.442Z - ERROR: Block accident_intelligence failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 150 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:41.443Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:41.443Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:51.026Z - ERROR: Block market_value failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, INVALID_PUNCTUATION_PATTERN: Dirty punctuation pattern detected
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:51.027Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:51.027Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:51.163Z - ERROR: Article validation failed: 3 errors, 14 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:51.164Z - ERROR:   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:51.164Z - ERROR:   ERROR: Unbalanced parentheses in VIN Decoder section
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:40:51.164Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation
+[QA][ERROR] Failed to load JSON from tmp/1HGDNP5P3H3241149.regen.json: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+[QA][INIT] VIN=1HGDNP5P3H3241149 STAGE=stage1_regen DEPTH=deep RULES=5
+[QA][OUT] Written QA JSON to /tmp/1HGDNP5P3H3241149.qa.json
+<anonymous_script>:1
+[SEO AI] 2025-12-04T19:39:25.248Z - Cache loaded: 3132 entries
+ ^
+
+SyntaxError: Unexpected token 'S', "[SEO AI] 20"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at fixEndings (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:46:25)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/fix_endings.js:91:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+[VALIDATE-REGEN][1HGDNP5P3H3241149] SEVERITY:MAJOR;WORDCOUNT:42081;FATAL=0;MAJOR=1;MINOR=0;WEAK=
+[ANALYTICS] Logged 1HGDNP5P3H3241149 (stage1_regen) severity=MAJOR to /Users/dmitrii/Desktop/website/logs/pages_analytics.log
+[PUBLISHED-REGEN][stage1] 1HGDNP5P3H3241149 severity=MAJOR
+=== STAGE SUMMARY: stage1 ===
+Processed: 5
+Published: 4
+FATAL:     0
+MAJOR:     5
+MINOR:     0
+OK:        0

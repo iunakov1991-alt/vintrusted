@@ -1,0 +1,12 @@
+[
+  {
+    "topic_file": "data/topic.dmv_ca_title_types_checklist_es_mx_us.json"
+  },
+  {
+    "topic_file": "data/topic.dmv_tx_title_types_checklist_es_mx_us.json"
+  },
+  {
+    "topic_file": "data/topic.dmv_fl_title_types_checklist_es_mx_us.json"
+  }
+]
+

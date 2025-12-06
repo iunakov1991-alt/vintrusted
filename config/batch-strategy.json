@@ -1,0 +1,8 @@
+{
+  "minIntervalHours": 24,
+  "maxPagesPerBatch": 100,
+  "preferredTimes": ["09:00", "15:00", "21:00"],
+  "batchSizeStrategy": "adaptive",
+  "workingDaysOnly": false,
+  "timezone": "America/New_York"
+}

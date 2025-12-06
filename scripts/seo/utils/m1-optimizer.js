@@ -94,13 +94,7 @@ class M1Optimizer {
     log('M1-OPTIMIZER', 'Cleaning up memory after build...');
     
     try {
-      // 1. Очистка процессов Ollama (если используются)
-      try {
-        await execAsync('pkill -f ollama', { timeout: 5000 }).catch(() => {});
-        log('M1-OPTIMIZER', 'Ollama processes cleaned');
-      } catch (e) {
-        // Игнорируем ошибки
-      }
+      // 1. Очистка процессов (Ollama отключен, больше не используется)
       
       // 2. Принудительная сборка мусора Node.js
       if (global.gc) {

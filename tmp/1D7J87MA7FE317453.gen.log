@@ -1,0 +1,12 @@
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:40.484Z - ERROR: Block vin_decoder failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 131 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:40.484Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:45:40.485Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.318Z - ERROR: Block market_value failed validation after 3 attempts: INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.318Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.318Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.448Z - ERROR: Article validation failed: 5 errors, 17 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.448Z - ERROR:   ERROR: Required block "key_facts" is missing or too short
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.448Z - ERROR:   ERROR: Required block "State-Specific" is missing
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.448Z - ERROR:   ERROR: Invalid bullet (too short): "*   **."
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.448Z - ERROR:   ERROR: Tiny paragraph detected (3 chars): "[[...."
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:46:26.449Z - ERROR:   ERROR: Missing required sections: Key Facts, Deep Explanation, State-Specific

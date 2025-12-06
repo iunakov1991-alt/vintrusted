@@ -1,0 +1,129 @@
+{
+  "Texas": {
+    "risks": [
+      "hail belt exposure",
+      "Gulf Coast flood incidents",
+      "high theft corridors I-45/I-35",
+      "non-title-holding lien rules",
+      "coastal corrosion risks",
+      "hurricane damage patterns",
+      "drought-related vehicle storage",
+      "border state title washing"
+    ],
+    "laws": [
+      "Texas Transportation Code 501",
+      "TxDMV salvage regulations",
+      "DPS rebuilt inspection requirements",
+      "Texas Certificate of Title Act",
+      "Odometer disclosure requirements"
+    ],
+    "specific_practices": [
+      "Annual vehicle inspection",
+      "Flood damage documentation",
+      "Hail damage reporting",
+      "Title brand verification",
+      "Rebuilt vehicle inspection process"
+    ],
+    "fraud_patterns": [
+      "Flood damage concealment",
+      "Hail damage misrepresentation",
+      "Title washing from other states",
+      "Odometer rollback on high-mileage vehicles",
+      "Salvage title loopholes"
+    ]
+  },
+  "California": {
+    "risks": [
+      "wildfire salvage",
+      "emissions compliance (BAR)",
+      "smog check fraud",
+      "lemon law repurchases",
+      "coastal salt air corrosion",
+      "earthquake damage",
+      "high-altitude operation impacts",
+      "urban theft patterns"
+    ],
+    "laws": [
+      "California Vehicle Code",
+      "BAR inspection rules",
+      "Health and Safety Code §44011 (Smog Check)",
+      "Song-Beverly Consumer Warranty Act (Lemon Law)",
+      "Vehicle Code §16058 (Insurance reporting)"
+    ],
+    "specific_practices": [
+      "Biennial smog testing",
+      "Enhanced emission history tracking",
+      "Salvage to Rebuilt conversion process",
+      "Electronic lien and title (ELT) system",
+      "CHP vehicle verification"
+    ],
+    "fraud_patterns": [
+      "Title washing across jurisdictions",
+      "Odometer rollback on high-mileage models",
+      "Undisclosed flood damage from coastal areas",
+      "Smog check certificate fraud",
+      "Lemon law buyback concealment"
+    ]
+  },
+  "Florida": {
+    "risks": [
+      "hurricane flood risk",
+      "coastal salt air corrosion",
+      "high humidity damage",
+      "hurricane-related damage tracking",
+      "tropical storm exposure",
+      "flood zone vehicle storage"
+    ],
+    "laws": [
+      "Florida Statutes Chapter 319",
+      "Electronic lien system requirements",
+      "Rebuilt vehicle regulations",
+      "Salvage title regulations",
+      "Flood damage disclosure laws"
+    ],
+    "specific_practices": [
+      "Flood damage inspection",
+      "Hurricane-related damage tracking",
+      "Electronic title system",
+      "Rebuilt vehicle verification",
+      "Coastal corrosion assessment"
+    ],
+    "fraud_patterns": [
+      "Hurricane flood damage concealment",
+      "Electronic lien fraud",
+      "Rebuilt vehicle misrepresentation",
+      "Title washing from other states",
+      "Odometer fraud on rental fleet vehicles"
+    ]
+  },
+  "New York": {
+    "risks": [
+      "road salt corrosion",
+      "winter damage patterns",
+      "urban theft patterns",
+      "flood damage from storms",
+      "high mileage from city driving"
+    ],
+    "laws": [
+      "New York Vehicle and Traffic Law",
+      "Salvage vehicle regulations",
+      "Odometer disclosure requirements",
+      "Title brand requirements"
+    ],
+    "specific_practices": [
+      "Annual safety inspection",
+      "Emissions testing requirements",
+      "Salvage vehicle inspection",
+      "Title brand verification"
+    ],
+    "fraud_patterns": [
+      "Odometer rollback on high-mileage vehicles",
+      "Title washing from other states",
+      "Salvage title concealment",
+      "Flood damage misrepresentation"
+    ]
+  }
+}
+
+
+

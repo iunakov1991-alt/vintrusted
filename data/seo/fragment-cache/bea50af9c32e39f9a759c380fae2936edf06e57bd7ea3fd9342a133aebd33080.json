@@ -1,0 +1,41 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "10",
+    "year": "2020",
+    "stateSlug": "40",
+    "stateLabel": "40",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HG3PXRA9L7712053",
+    "variationContext": {
+      "structuralVariant": "dmv_official",
+      "styleVariant": {
+        "name": "Market Economics",
+        "tone": "insurance, value, risk, depreciation",
+        "description": "Экономико-рыночный стиль с акцентом на стоимость и риски",
+        "characteristics": [
+          "Emphasizes risk assessment and actuarial factors",
+          "Uses insurance terminology and risk metrics",
+          "Focuses on loss history and premium implications",
+          "Market value analysis",
+          "Depreciation factors"
+        ],
+        "openingPhrases": [
+          "From an insurance risk perspective",
+          "Actuarial analysis indicates",
+          "Risk assessment reveals",
+          "Market valuation suggests",
+          "Economic factors demonstrate"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": null
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2020 Toyota?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately, unreported damage, or events not captured in these databases will not appear on the report.\n\n**Q2: How accurate is the reported number of previous owners on a VIN report?**\nAnswer: The reported owner count is derived from state title transfers recorded in the NMVTIS and other databases. It is generally reliable but may not capture informal transfers, lease-to-lease changes, or certain fleet registrations, leading to potential undercounting.\n\n**Q3: Does a clean California title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean California title does not guarantee the vehicle was never a total loss. Title washing can occur where a vehicle declared salvage in another state receives a clean title upon transfer to California. Cross-referencing the NMVTIS report is essential to check for interstate brands.\n\n**Q4: Can flood or water damage history be hidden from a VIN report?**\nAnswer: Yes, flood damage can be hidden if the incident was not reported to an insurance company, occurred in a state without mandatory flood branding, or was repaired privately. Detection requires an NMVTIS check combined with a thorough physical inspection for corrosion, silt, and mold.\n\n**Q5: How do I verify open safety recalls for a 2020 Toyota?**\nAnswer: Verify open recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and the Toyota official owner portal. Both sources must be consulted for a comprehensive verification, as they may have differing update cycles.\n\n**Q6: What is title washing and how does it work?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a branded title (e.g., salvage, flood) through states with weaker disclosure laws to obtain a clean title, which is then used to sell the vehicle in a state like California at an inflated price.\n\n**Q7: How can I detect VIN cloning on a used vehicle?**\nAnswer: Detect VIN cloning by physically verifying the VIN plate on the dashboard matches the stamps on the door jamb and firewall. Check for signs of tampering like mismatched rivets or adhesive residue, and use an NMVTIS report to identify duplicate VINs registered in different locations.\n\n**Q8: What is odometer rollback and how is it detected?**\nAnswer: Odometer rollback is the illegal alteration of a vehicle's mileage display, often via CAN-Bus manipulation. Detection methods include inspecting for excessive physical wear on pedals and seats, verifying the mileage history chain in the vehicle report, and performing an electronic control unit (ECU) scan.\n\n**Q9: How do I check for liens on a vehicle in California?**\nAnswer: Check for liens by requesting a vehicle record from the California DMV, which will list any active lienholders. A lien is a financial encumbrance that must be cleared by the seller before a clean title can be transferred to a new owner.\n\n**Q10: What is the \"Revived Salvage\" brand and what is the California process?**\nAnswer: \"Revived Salvage\" is a permanent brand applied in California to a previously salvaged vehicle that has passed a rigorous rebuild inspection. The process includes a California Highway Patrol inspection, brake and lamp inspection, smog check, submission of REG-343 forms, and final DMV approval.\n\n**Q11: How much does a comprehensive VIN check cost for a 2020 Toyota?**\nAnswer: A comprehensive commercial vehicle history report typically costs between $25 and $50. Direct NMVTIS reports are available through authorized providers for a similar fee, while basic recall checks via NHTSA are offered at no cost.",
+  "timestamp": "2025-12-04T10:14:13.984Z",
+  "wordCount": 608
+}

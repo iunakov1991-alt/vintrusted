@@ -1,0 +1,18 @@
+{
+  "en": {
+    "created": 7,
+    "deployed": 1,
+    "pending": 6
+  },
+  "es": {
+    "created": 3,
+    "deployed": 0,
+    "pending": 3
+  },
+  "total": {
+    "created": 10,
+    "deployed": 1,
+    "pending": 9
+  },
+  "lastUpdate": 1765029283852
+}

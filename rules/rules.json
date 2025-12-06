@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "id": "syntax_incomplete_tail_common",
+      "type": "syntax",
+      "scope": "block",
+      "priority": 3,
+      "on_fail_severity": "MAJOR",
+      "pattern": "(which may$|which may compromise$|for potential$|This is a primary$|by moving it through states with different$|meaning the physical title$|How accurate is the reported number of previous$)",
+      "action": "regenerate_tail",
+      "applies_to": ["hero","state_specific","accident_intelligence","buyer_guide","faq","recalls_tsbs"],
+      "meta": {
+        "description": "Обрыв типичных хвостов предложений в конце блока",
+        "stage_min": "deep",
+        "stage_max": "prod"
+      }
+    },
+    {
+      "id": "semantic_unfinished_question_faq",
+      "type": "semantic",
+      "scope": "block",
+      "priority": 4,
+      "on_fail_severity": "MAJOR",
+      "pattern": "(How|What|Why|Can|Does).*\\?$",
+      "action": "regenerate_tail",
+      "applies_to": ["faq"],
+      "meta": {
+        "description": "Незавершённый вопрос в FAQ",
+        "stage_min": "deep",
+        "stage_max": "light"
+      }
+    },
+    {
+      "id": "factlock_vin_honda_accord_2019",
+      "type": "fact_lock",
+      "scope": "block",
+      "priority": 4,
+      "on_fail_severity": "FATAL",
+      "pattern": "Honda Accord 2019",
+      "action": "check_fact_bundle",
+      "applies_to": ["vin_decoder","hero","key_facts"],
+      "meta": {
+        "description": "Проверка WMI/plant/engine для Honda Accord 2019",
+        "bundle": "Honda Accord 2019",
+        "stage_min": "deep",
+        "stage_max": "prod"
+      }
+    },
+    {
+      "id": "structure_block_min_length_core",
+      "type": "structure",
+      "scope": "block",
+      "priority": 3,
+      "on_fail_severity": "MAJOR",
+      "pattern": ".*",
+      "action": "enforce_min_length",
+      "applies_to": ["hero","state_specific","accident_intelligence","buyer_guide","recalls_tsbs"],
+      "meta": {
+        "min_words": 180,
+        "stage_min": "deep",
+        "stage_max": "prod"
+      }
+    },
+    {
+      "id": "page_wordcount_out_of_range",
+      "type": "structure",
+      "scope": "page",
+      "priority": 4,
+      "on_fail_severity": "FATAL",
+      "pattern": ".*",
+      "action": "page_fail",
+      "applies_to": ["*"],
+      "meta": {
+        "min_words": 2200,
+        "max_words": 3600,
+        "stage_min": "deep",
+        "stage_max": "prod"
+      }
+    }
+  ],
+  "stats": {
+    "usage": {}
+  }
+}

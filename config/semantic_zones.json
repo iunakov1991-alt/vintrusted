@@ -1,0 +1,10 @@
+{
+  "zones": {
+    "vin_identity": ["VIN structure", "WMI", "decoder", "plant codes", "fraud signals"],
+    "dmv_titles": ["title types", "transfer", "registration", "salvage to rebuilt", "emissions", "lien"],
+    "auctions": ["Copart", "IAAI", "Manheim", "ACV", "damage codes", "bidding", "inspection"],
+    "used_fraud": ["odometers", "frame", "flood", "fire", "airbag", "dealer scams", "state flipping"],
+    "brand_model": ["brand encyclopedia", "generations", "common issues", "recalls", "maintenance"],
+    "tech_insurance": ["recalls", "TSBs", "insurance risk", "theft rates", "market value"]
+  }
+}

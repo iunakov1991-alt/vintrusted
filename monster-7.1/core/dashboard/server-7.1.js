@@ -10,8 +10,8 @@ const path = require('path');
 const cors = require('cors');
 const MonsterOrchestratorCore = require('../orchestrator-core');
 const config = require('../../../config/monster-7.1.config.json');
-const { getLogger } = require('../../../monster-7.0/core/utils/logger');
-const SystemMonitor = require('../../../monster-7.0/core/utils/monitor');
+const { getLogger } = require('../utils/logger');
+const SystemMonitor = require('../utils/monitor');
 
 const app = express();
 const PORT = process.env.MONSTER_PORT || 3000;
@@ -107,7 +107,7 @@ app.get('/api/status', async (req, res) => {
     // Получение статистики страниц
     let pageStats = null;
     try {
-            const PageStats = require('../../../monster-7.0/core/utils/page-stats');
+      const PageStats = require('../utils/page-stats');
       const pageStatsInstance = new PageStats();
       pageStats = pageStatsInstance.getDashboardStats();
     } catch (error) {

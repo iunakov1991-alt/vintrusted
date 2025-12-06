@@ -1,0 +1,19 @@
+{
+  "DEEPSEEK_API_KEY": "sk-462c6074494f4c95903866761589ce32",
+  "DEEPSEEK_MODEL": "deepseek-chat",
+  "DEEPSEEK_BASE_URL": "https://api.deepseek.com/v1/chat/completions",
+  "DEEPSEEK_TEMPERATURE": "0.4",
+  "DEEPSEEK_MAX_TOKENS": "3600",
+  "DEEPSEEK_TIMEOUT_MS": "120000",
+  "USE_LOCAL_AI": "1",
+  "LOCAL_AI_MODEL": "phi3:latest",
+  "LOCAL_AI_URL": "http://localhost:11434/api/chat",
+  "LOCAL_AI_TEMPERATURE": "0.5",
+  "LOCAL_AI_MAX_TOKENS": "1200",
+  "LOCAL_AI_TIMEOUT_MS": "90000",
+  "LLM_GEN_MODE": "ensemble",
+  "LLM_QA_MODE": "deepseek",
+  "DEEPSEEK_QA_TIMEOUT_MS": "120000",
+  "LOCAL_AI_QA_TIMEOUT_MS": "90000"
+}
+

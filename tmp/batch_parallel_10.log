@@ -1,0 +1,96 @@
+[BATCH] Processing 10 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue_10.json
+[BATCH] Parallel workers: 10
+[BATCH] Mode: ensemble
+[BATCH] QA Mode: deepseek
+
+[BATCH] Processing batch 1 (10 pages in parallel)...
+[BATCH] [2/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [3/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [4/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [5/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_es_mx_us.json
+[BATCH] [6/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_es_mx_us.json
+[BATCH] [7/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_es_mx_us.json
+[BATCH] [8/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [9/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [10/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [11/10] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_es_mx_us.json
+[BATCH] [4/10] ❌ Failed (0.4s) → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+
+[BATCH] [10/10] ❌ Failed (1.0s) → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+
+[BATCH] [9/10] ✅ Completed in 107.9s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [3/10] ✅ Completed in 109.7s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [2/10] ✅ Completed in 114.0s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [11/10] ✅ Completed in 126.3s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_es_mx_us.json
+[BATCH] [6/10] ✅ Completed in 128.8s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_es_mx_us.json
+[BATCH] [8/10] ❌ Failed (183.3s) → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[LLM] ensemble mode: calling DeepSeek and Ollama in parallel...
+[LLM] DeepSeek: calling API...
+[LLM] Ollama: calling API...
+[LLM] DeepSeek provider responded successfully.
+[LLM] Ollama call failed: Request timeout after 90000ms
+[LLM] ensemble: picked non-empty result
+[LLM] ensemble mode: calling DeepSeek and Ollama in parallel...
+[LLM] DeepSeek: calling API...
+[LLM] Ollama: calling API...
+[LLM] DeepSeek provider responded successfully.
+[LLM] Ollama call failed: Request timeout after 90000ms
+[LLM] ensemble: picked non-empty result
+<anonymous_script>:35
+}ined by asymmetric information between buyer and seller.",
+ ^
+
+SyntaxError: Unexpected non-whitespace character after JSON at position 12655 (line 35 column 2)
+    at JSON.parse (<anonymous>)
+    at main (/Users/dmitrii/Desktop/website/scripts/validate_blocks.js:60:24)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/validate_blocks.js:96:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+
+[BATCH] [5/10] ❌ Failed (195.9s) → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_es_mx_us.json
+[LLM] ensemble mode: calling DeepSeek and Ollama in parallel...
+[LLM] DeepSeek: calling API...
+[LLM] Ollama: calling API...
+[LLM] Ollama call failed: Request timeout after 90000ms
+[LLM] DeepSeek provider responded successfully.
+[LLM] ensemble: picked non-empty result
+[LLM] ensemble mode: calling DeepSeek and Ollama in parallel...
+[LLM] DeepSeek: calling API...
+[LLM] Ollama: calling API...
+[LLM] Ollama call failed: Request timeout after 90000ms
+[LLM] DeepSeek provider responded successfully.
+[LLM] ensemble: picked non-empty result
+<anonymous_script>:35
+} verificación debe hacerse antes de entregar cualquier pago.\n\n¿Un reporte de historial de vehículo (como Carfax) es lo mismo que la verificación de título del DMV? R: No exactamente. El reporte de historial compila datos de múltiples fuentes, mientras que la verificación del California DMV confirma el estado legal oficial del título en sus registros. Se recomienda utilizar ambos para una imagen completa.\n\n¿El California DMV puede cambiar un título de salvamento a limpio? R: No. Un título marcado como salvamento o reconstruido por el California DMV mantendrá esa designación de por vida en sus registros. La marca \"REBUILT\" se imprimirá en cualquier título futuro, protegiendo a futuros compradores."
+  ^
+
+SyntaxError: Unexpected non-whitespace character after JSON at position 12010 (line 35 column 3)
+    at JSON.parse (<anonymous>)
+    at main (/Users/dmitrii/Desktop/website/scripts/validate_blocks.js:60:24)
+    at Object.<anonymous> (/Users/dmitrii/Desktop/website/scripts/validate_blocks.js:96:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:244:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v24.10.0
+
+[BATCH] [7/10] ✅ Completed in 219.8s → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_es_mx_us.json
+[BATCH] Batch completed in 219.8s
+
+[BATCH] ========================================
+[BATCH] Completed in 219.8s
+[BATCH] Success: 6, Failed: 4
+[BATCH] Average page time: NaNs
+[BATCH] Speedup: 5.5x vs sequential
+[BATCH] ========================================

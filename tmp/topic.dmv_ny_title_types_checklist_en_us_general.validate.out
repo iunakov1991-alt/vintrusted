@@ -1,0 +1,4 @@
+SEVERITY: FATAL=0; MAJOR=2; MINOR=0; WORDCOUNT=1653
+DETAILS:
+ - MAJOR: comparison_table -> Block weak (129 words)
+ - MAJOR: vin_section -> Block weak (132 words)

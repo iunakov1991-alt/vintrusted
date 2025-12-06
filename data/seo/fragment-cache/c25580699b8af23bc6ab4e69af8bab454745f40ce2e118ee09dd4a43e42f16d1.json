@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Isuzu",
+    "model": "i-280",
+    "year": "2021",
+    "stateSlug": "kentucky",
+    "stateLabel": "Kentucky",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGCPUHM4MU533180",
+    "variationContext": {
+      "structuralVariant": "risk_focused",
+      "styleVariant": {
+        "name": "Market Economics",
+        "tone": "insurance, value, risk, depreciation",
+        "description": "Экономико-рыночный стиль с акцентом на стоимость и риски",
+        "characteristics": [
+          "Emphasizes risk assessment and actuarial factors",
+          "Uses insurance terminology and risk metrics",
+          "Focuses on loss history and premium implications",
+          "Market value analysis",
+          "Depreciation factors"
+        ],
+        "openingPhrases": [
+          "From an insurance risk perspective",
+          "Actuarial analysis indicates",
+          "Risk assessment reveals",
+          "Market valuation suggests",
+          "Economic factors demonstrate"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "1HGCPUHM4MU533180",
+        "make": "Isuzu",
+        "model": "i-280",
+        "year": 2021,
+        "state": "kentucky",
+        "generated_at": "2025-12-04T09:00:50.207Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Kentucky DMV"
+          ],
+          "main_statutes": [
+            "Kentucky Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## Kentucky-Specific VIN Analysis for a 2021 Isuzu i-280\n\nA VIN check for a 2021 Isuzu i-280 registered in Kentucky must account for the state's specific legal framework and risk environment. Kentucky operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership and must be scrutinized for authenticity and brand history. The vehicle's 17-character identifier, beginning with the WMI code **1HG**, is decoded against both national databases and records held by the **Kentucky DMV** to establish a chain of custody and identify actuarially significant events. This process is governed by the **Kentucky Vehicle Code**, which mandates specific branding and disclosure requirements that directly influence a vehicle's market valuation and insurability.\n\nKey technical and legal considerations for a Kentucky report include:\n*   **Title Brand Scrutiny:** The Kentucky DMV applies specific brands, including **Salvage**, **Rebuilt**, **Flood**, and **Junk**, which are permanent notations on a vehicle's title history. These brands are critical risk metrics, as a \"Rebuilt\" designation, for instance, indicates a total loss that was subsequently repaired and re-certified, carrying a permanently elevated loss probability that affects insurance premiums and residual value.\n*   **Inspection Protocol:** The state requires a **state-required vehicle inspection** for certain title transactions, particularly for branded vehicles. This inspection is a loss-mitigation measure intended to verify vehicle identity and basic roadworthiness, though it may not assess the quality of prior repairs.\n*   **Environmental Risk Factors:** Reports incorporate data on **regional environmental risks**, which for Kentucky may include hail or flood exposure. This environmental history is a key depreciation factor, as undisclosed water damage can lead to latent electrical failures and corrosion, significantly impacting long-term reliability and total cost of ownership.\n*   **Fraud Prevention:** In a title-holding state, verifying the physical VIN plate (.",
+  "timestamp": "2025-12-04T09:01:48.543Z",
+  "wordCount": 291
+}

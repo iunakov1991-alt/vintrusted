@@ -1,0 +1,21 @@
+{
+  "brands": {
+    "Toyota": ["Corolla", "Camry", "RAV4", "Highlander", "Tacoma", "Tundra"],
+    "Honda": ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "Fit"],
+    "Ford": ["F-150", "Escape", "Explorer", "Mustang", "Fusion"],
+    "Chevrolet": ["Silverado", "Equinox", "Malibu", "Tahoe"],
+    "Nissan": ["Altima", "Sentra", "Rogue", "Pathfinder"],
+    "Hyundai": ["Elantra", "Sonata", "Tucson", "Santa Fe"],
+    "Kia": ["Forte", "Optima", "Sportage", "Sorento"],
+    "Subaru": ["Impreza", "Outback", "Forester"],
+    "Mazda": ["Mazda3", "Mazda6", "CX-5"],
+    "Volkswagen": ["Jetta", "Passat", "Tiguan"],
+    "BMW": ["3 Series", "5 Series", "X3", "X5"],
+    "Mercedes-Benz": ["C-Class", "E-Class", "GLC"],
+    "Audi": ["A3", "A4", "Q5"],
+    "Volvo": ["S60", "XC60", "XC90"],
+    "Jeep": ["Wrangler", "Grand Cherokee"],
+    "Dodge": ["Charger", "Durango"],
+    "Chrysler": ["300", "Pacifica"]
+  }
+}

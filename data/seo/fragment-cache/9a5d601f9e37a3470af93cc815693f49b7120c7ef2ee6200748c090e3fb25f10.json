@@ -1,0 +1,41 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "44",
+    "year": "2015",
+    "stateSlug": "31",
+    "stateLabel": "31",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGSV3E94F9686247",
+    "variationContext": {
+      "structuralVariant": "insurance_focused",
+      "styleVariant": {
+        "name": "Legal Academic",
+        "tone": "formal, statute-referenced, analytical",
+        "description": "Формальный академический стиль с ссылками на законодательство",
+        "characteristics": [
+          "Emphasizes legal compliance and regulatory frameworks",
+          "Uses formal terminology and statutory references",
+          "Focuses on documentation and verification processes",
+          "Academic citation style",
+          "Precise legal terminology"
+        ],
+        "openingPhrases": [
+          "A comprehensive legal and technical audit",
+          "From a regulatory compliance perspective",
+          "Under state and federal vehicle regulations",
+          "Per statutory requirements",
+          "In accordance with regulatory frameworks"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": null
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2015 Toyota?**\nAnswer: No, a commercial vehicle history report will not show all accident history. These reports aggregate data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Incidents repaired privately without an insurance claim, minor damage not reported to authorities, or events not captured in the provider's database will not appear on the report.\n\n**Q2: Does a clean California title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean California title does not guarantee the vehicle was never a total loss. Title washing can occur where a vehicle declared salvage or rebuilt in another state is moved to California and receives a clean title. A cross-reference with the National Motor Vehicle Title Information System (NMVTIS) is essential to check for interstate title brands.\n\n**Q3: Can flood or water damage history be hidden from a VIN report?**\nAnswer: Yes, flood or water damage history can be hidden. If the damage occurred in a state without mandatory branding for water damage, or if repairs were conducted privately without an insurance claim, the event may not be recorded in the databases a VIN report queries. Detection requires an NMVTIS check combined with a thorough physical inspection for corrosion, silt, or mold.\n\n**Q4: How do I verify open safety recalls for a 2015 Toyota?**\nAnswer: To verify open safety recalls, you must check two primary sources using the full 17-character VIN. First, consult the National Highway Traffic Safety Administration (NHTSA) website at nhtsa.gov/recalls. Second, check the official Toyota recall portal. Both sources must be consulted for a comprehensive verification, as they may contain different or manufacturer-specific campaign information.\n\n**Q5: What is title washing and how does it work?**\nAnswer: Title washing is a fraudulent practice where a vehicle with a branded title, such as salvage or flood, is moved through states with differing disclosure laws. The vehicle receives a clean title in a state with weaker branding requirements, which is then used to obscure its damaged history when sold in a state like California. The NMVTIS database is designed to track these brands across state lines.\n\n**Q6: How can I detect VIN cloning on a vehicle?**\nAnswer: Detecting VIN cloning requires a multi-point physical verification. You must confirm the VIN plate on the dashboard matches the VIN stickers on the driver's side door jamb and the VIN stamped on the engine firewall or frame. Look for signs of tampering like mismatched rivets, adhesive residue, or altered stampings. An NMVTIS report may also flag a duplicate VIN registered in a different geographic location.\n\n**Q7: What is odometer rollback and how is it detected?**\nAnswer: Odometer rollback is the illegal act of reducing the displayed mileage on a vehicle's odometer, often through manipulation of the vehicle's Controller Area Network (CAN-Bus) system. Detection methods include inspecting for excessive physical wear on pedals, seats, and the steering wheel inconsistent with the odometer reading, verifying a consistent mileage chain in service records, and performing an electronic control unit (ECU) scan to retrieve the true, stored mileage.\n\n**Q8: How do I check for liens on a vehicle in California?**\nAnswer: To check for liens in California, you must conduct a lienholder search through the California Department of Motor Vehicles (DMV). This can be done by requesting a vehicle record or a title search, which will reveal any active financial encumbrances. Clearing any lien is a mandatory step before a clean title can be transferred to a new owner.\n\n**Q9.",
+  "timestamp": "2025-12-04T10:00:32.346Z",
+  "wordCount": 589
+}

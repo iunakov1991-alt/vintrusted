@@ -7,14 +7,22 @@ const path = require('path');
  */
 module.exports = async (req, res) => {
   try {
-    // Извлекаем путь к файлу из URL
+    // Извлекаем путь к файлу из URL или query параметра
     // URL: /seo/images/clusters/california-toyota-vin_check-hero.svg
-    // Путь: public/seo/images/clusters/california-toyota-vin_check-hero.svg
-    const urlPath = req.url.replace('/seo/images/clusters/', '');
-    const fileName = urlPath.split('?')[0]; // Убираем query параметры
+    // Rewrite: /seo/images/clusters/:file* → /api/seo-image.js
+    let fileName = req.query.file;
+    
+    // Если file не в query, пытаемся извлечь из URL
+    if (!fileName) {
+      const urlPath = req.url.replace('/seo/images/clusters/', '').split('?')[0];
+      fileName = urlPath;
+    }
+    
+    // Убираем возможные слеши в начале
+    fileName = fileName.replace(/^\//, '').split('?')[0];
     
     // Валидация имени файла (только SVG, только безопасные символы)
-    if (!fileName.endsWith('.svg') || !/^[a-zA-Z0-9_-]+\.svg$/.test(fileName)) {
+    if (!fileName || !fileName.endsWith('.svg') || !/^[a-zA-Z0-9_.-]+\.svg$/.test(fileName)) {
       return res.status(400).json({ error: 'Invalid file name' });
     }
     

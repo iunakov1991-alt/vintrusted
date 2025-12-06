@@ -1,0 +1,16 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Toyota",
+    "model": "Camry",
+    "year": "2018",
+    "stateSlug": "california",
+    "stateLabel": "California",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "4T1B11HK3JU123456"
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2018 Toyota Camry?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately, unreported damage, or events not captured in these databases will not appear on the report.\n\n**Q2: Will a VIN report show complete California BAR smog check history?**\nAnswer: No, commercial VIN reports do not provide full BAR smog test logs. They may show indirect registration data, but comprehensive smog history, including test results, station numbers, and inspector notes, is available only through the official California BAR website or physical inspection certificates.\n\n**Q3: Does a clean California title guarantee the vehicle was never declared a total loss?**\nAnswer: No, a clean California title does not guarantee this. Title washing can occur where a vehicle declared salvage or a total loss in another state is re-titled in California, receiving a clean brand. Cross-referencing with the National Motor Vehicle Title Information System (NMVTIS) is essential to check for interstate title brands.\n\n**Q4: Can flood or water damage history be hidden from a standard VIN report?**\nAnswer: Yes, flood damage can be hidden if the incident occurred in another state without proper branding or if repairs were conducted privately without an insurance claim. Detection requires an NMVTIS check combined with a thorough physical inspection for corrosion, silt in crevices, or mold odors.\n\n**Q5: How do I verify open safety recalls for a 2018 Toyota Camry?**\nAnswer: Verify open recalls by checking the National Highway Traffic Safety Administration (NHTSA) website at nhtsa.gov/recalls using the full 17-digit VIN. Additionally, check Toyota's official owner portal for any manufacturer-specific service campaigns not listed by.",
+  "timestamp": "2025-12-04T07:20:56.168Z",
+  "wordCount": 286
+}

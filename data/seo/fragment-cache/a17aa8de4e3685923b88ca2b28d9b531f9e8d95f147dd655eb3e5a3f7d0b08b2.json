@@ -1,0 +1,41 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "49",
+    "year": "2023",
+    "stateSlug": "17",
+    "stateLabel": "17",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGU8XE63PX337904",
+    "variationContext": {
+      "structuralVariant": "technical_specs",
+      "styleVariant": {
+        "name": "Investigative",
+        "tone": "fraud-first, pattern detection, red flags",
+        "description": "Расследовательский стиль с фокусом на обнаружение мошенничества",
+        "characteristics": [
+          "Emphasizes fraud detection and pattern recognition",
+          "Uses investigative terminology and red flag indicators",
+          "Focuses on uncovering hidden issues",
+          "Pattern detection methodology",
+          "Risk identification"
+        ],
+        "openingPhrases": [
+          "Investigative analysis reveals",
+          "Red flags to watch for include",
+          "Fraud detection patterns indicate",
+          "Warning signs suggest",
+          "Investigation uncovers"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": null
+    }
+  },
+  "content": "**Q1: Will a VIN report show all accident history for a 2023 Toyota?**\nAnswer: No, a commercial vehicle history report will not show all accident history. These reports aggregate data from specific sources like insurance claims, police reports, and total loss declarations from the National Motor Vehicle Title Information System (NMVTIS). Incidents repaired privately without an insurance claim, unreported minor damage, or events not captured in the provider's database will not appear on the report.\n\n**Q2: Does a clean California title guarantee a 2023 Toyota was never a total loss?**\nAnswer: No, a clean California title does not guarantee the vehicle was never declared a total loss. Title washing can occur when a vehicle with a salvage or flood brand from another state is moved to California and receives a clean title due to differing state branding laws. A cross-reference with the NMVTIS database is essential to check for interstate title brands.\n\n**Q3: How can flood or water damage history be hidden from a VIN report?**\nAnswer: Flood damage history can be hidden if the damage occurred in a state that does not brand titles for water damage, or if repairs were conducted entirely through private parties without an insurance claim. Detection requires checking the NMVTIS for relevant brands and conducting a thorough physical inspection for corrosion, silt in crevices, musty odors, and mismatched interior components.\n\n**Q4: What is the process for verifying open safety recalls on a 2023 Toyota?**\nAnswer: To verify open safety recalls, you must check two primary sources using the full 17-character VIN. First, consult the National Highway Traffic Safety Administration (NHTSA) website at nhtsa.gov/recalls. Second, check the official Toyota recall portal. Both sources must be consulted for comprehensive verification, as data reporting timelines can differ.\n\n**Q5: What is title washing and how does it function?**\nAnswer: Title washing is a fraudulent practice where a vehicle with a branded title (e.g., salvage, flood) is moved from a state with strict disclosure laws to a state with weaker laws to obtain a clean title. The vehicle is then often sold in a state like California without the brand being disclosed. The NMVTIS database is designed to track these brands across state lines.\n\n**Q6: How can I detect VIN cloning on a used vehicle?**\nAnswer: Detect VIN cloning by physically verifying the VIN plate on the dashboard matches the VIN stickers on the driver's side door jamb and the VIN stamped on the engine firewall or frame. Look for signs of tampering like mismatched rivets, adhesive residue, or scratched-off numbers. A NMVTIS report may also flag a duplicate VIN registered in a different geographic location.\n\n**Q7: What is odometer rollback and how is it identified?**\nAnswer: Odometer rollback is the illegal practice of reducing the displayed mileage on a vehicle's odometer, often via CAN-Bus manipulation. Identification involves inspecting for excessive physical wear on the driver's seat, pedals, and steering wheel inconsistent with the odometer reading, verifying the mileage history chain in service records, and performing an electronic control unit (ECU) scan for stored true mileage data.\n\n**Q8: How do I check for active liens on a vehicle in California?**\nAnswer: To check for active liens in California, you must conduct a lienholder search through the California Department of Motor Vehicles (.",
+  "timestamp": "2025-12-04T10:05:15.421Z",
+  "wordCount": 543
+}

@@ -1,0 +1,100 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "McLaren",
+    "model": "600LT",
+    "year": "2023",
+    "stateSlug": "alabama",
+    "stateLabel": "Alabama",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGFP5LB3PW360171",
+    "variationContext": {
+      "structuralVariant": "forensic_detailed",
+      "styleVariant": {
+        "name": "Investigative",
+        "tone": "fraud-first, pattern detection, red flags",
+        "description": "Расследовательский стиль с фокусом на обнаружение мошенничества",
+        "characteristics": [
+          "Emphasizes fraud detection and pattern recognition",
+          "Uses investigative terminology and red flag indicators",
+          "Focuses on uncovering hidden issues",
+          "Pattern detection methodology",
+          "Risk identification"
+        ],
+        "openingPhrases": [
+          "Investigative analysis reveals",
+          "Red flags to watch for include",
+          "Fraud detection patterns indicate",
+          "Warning signs suggest",
+          "Investigation uncovers"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "1HGFP5LB3PW360171",
+        "make": "McLaren",
+        "model": "600LT",
+        "year": 2023,
+        "state": "alabama",
+        "generated_at": "2025-12-04T08:57:09.526Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Alabama DMV"
+          ],
+          "main_statutes": [
+            "Alabama Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report for a 2023 McLaren 600LT show all accident history?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and the National Motor Vehicle Title Information System (NMVTIS) for total loss declarations. Incidents repaired privately, unreported damage, or events not captured in these databases will not appear on the report, necessitating a thorough pre-purchase inspection.\n\n**Q2: Does a clean Alabama title guarantee this vehicle was never declared a total loss?**\nAnswer: No, a clean Alabama title does not guarantee the vehicle is free of prior total loss declarations. Title washing can occur when a vehicle with a Salvage or Junk brand from another state is moved to Alabama, which operates a title-holding system, and receives a clean title. Cross-referencing with NMVTIS is essential to uncover interstate brand history.\n\n**Q3: How can flood or water damage history be hidden from a VIN report?**\nAnswer: Flood damage history can be hidden if the damage occurred in a region without mandatory branding, if repairs were conducted privately without an insurance claim, or if the vehicle was titled in a state with different branding laws. Detection requires an NMVTIS check combined with a meticulous physical inspection for corrosion, silt deposits, and mold in interior compartments.\n\n**Q4: What is title washing and how does it work for vehicles sold in Alabama?**\nAnswer: Title washing is a fraudulent practice where a vehicle with a branded title, such as Salvage or Flood, is moved through states with varying disclosure laws to obscure its history. In Alabama's title-holding system, a vehicle may receive a clean title if the prior brand is not properly disclosed during the titling process, effectively \"washing\" its record clean.\n\n**Q5: How do I verify open safety recalls for a 2023 McLaren 600LT?**\nAnswer: You must verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and by consulting McLaren's official manufacturer portal. Both sources must be checked independently, as recall data can differ between public and proprietary databases.\n\n**Q6: How can I detect VIN cloning on a high-value vehicle like a 600LT?**\nAnswer: Detect VIN cloning by physically verifying the VIN stamp matches on the dashboard, door jamb, and firewall. Look for signs of tampering such as mismatched rivets, adhesive residue, or altered plates. An NMVTIS report may also reveal duplicate.",
+  "timestamp": "2025-12-04T08:58:59.311Z",
+  "wordCount": 398
+}

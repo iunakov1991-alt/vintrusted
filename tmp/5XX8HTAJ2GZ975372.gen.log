@@ -1,0 +1,9 @@
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:08.825Z - ERROR: Block vin_decoder failed validation after 3 attempts: TOO_SHORT_FOR_BLOCK_TYPE: 190 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:08.826Z - ERROR:   Note: End marker was auto-added but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:08.827Z - ERROR:   Note: Ending punctuation was auto-fixed but validation still failed
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:34.154Z - ERROR: Article validation failed: 5 errors, 20 warnings
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:34.155Z - ERROR:   ERROR: H2 "## Related VIN Check Guides" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:34.155Z - ERROR:   ERROR: H2 "## Check Your VIN Now" has insufficient content (less than 2 paragraphs)
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:34.155Z - ERROR:   ERROR: Tiny paragraph detected (13 chars): "[[END_BLOCK:...."
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:34.155Z - ERROR:   ERROR: Unbalanced parentheses in VIN Decoder section
+[SEO ARTICLE-GEN-V6] 2025-12-04T18:48:34.155Z - ERROR:   ERROR: Missing required sections: Deep Explanation

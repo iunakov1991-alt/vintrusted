@@ -100,3 +100,7 @@ class StrategyGeneratorBasic {
 
 module.exports = StrategyGeneratorBasic;
 
+
+
+
+

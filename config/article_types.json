@@ -1,0 +1,34 @@
+{
+  "article_types": {
+    "dmv_state_guide": {
+      "label": "DMV state checklist",
+      "default_blocks": [
+        "hero",
+        "context_legal",
+        "step_by_step",
+        "checklist",
+        "common_errors",
+        "comparison_table",
+        "fees_taxes",
+        "vin_section",
+        "faq"
+      ],
+      "recommended_length": { "min": 1800, "max": 2400 }
+    },
+    "dmv_legal_article": {
+      "label": "DMV legal deep dive",
+      "default_blocks": ["hero", "context_legal", "step_by_step", "common_errors", "fees_taxes", "faq"],
+      "recommended_length": { "min": 1900, "max": 2500 }
+    },
+    "auction_guide": {
+      "label": "Auction buyer guide",
+      "default_blocks": ["hero", "context_legal", "step_by_step", "common_errors", "faq"],
+      "recommended_length": { "min": 1800, "max": 2400 }
+    },
+    "brand_encyclopedia": {
+      "label": "Brand overview",
+      "default_blocks": ["hero", "context_legal", "fees_taxes", "faq"],
+      "recommended_length": { "min": 1800, "max": 2400 }
+    }
+  }
+}

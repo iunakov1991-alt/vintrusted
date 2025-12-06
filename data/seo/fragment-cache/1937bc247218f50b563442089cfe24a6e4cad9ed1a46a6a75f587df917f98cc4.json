@@ -1,0 +1,54 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Honda",
+    "model": "Accord",
+    "year": "2019",
+    "stateSlug": "texas",
+    "stateLabel": "Texas",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "19UUB2F50KA123456",
+    "variationContext": {
+      "structuralVariant": "A",
+      "styleVariant": {
+        "name": "legal-technical",
+        "description": "Юридико-техничный стиль",
+        "characteristics": [
+          "Emphasizes legal compliance and regulatory frameworks",
+          "Uses formal terminology and statutory references",
+          "Focuses on documentation and verification processes"
+        ],
+        "openingPhrases": [
+          "A comprehensive legal and technical audit",
+          "From a regulatory compliance perspective",
+          "Under state and federal vehicle regulations"
+        ]
+      },
+      "stateBoost": {
+        "uniqueRules": [
+          "TxDMV title verification",
+          "Storm and flood risk assessment",
+          "Salvage title loopholes",
+          "Rebuilt vehicle inspection requirements"
+        ],
+        "specificPractices": [
+          "Annual vehicle inspection",
+          "Flood damage documentation",
+          "Hail damage reporting",
+          "Title brand verification"
+        ],
+        "fraudPatterns": [
+          "Flood damage concealment",
+          "Hail damage misrepresentation",
+          "Title washing from other states"
+        ]
+      },
+      "modelBoost": null,
+      "depthRoll": 2
+    }
+  },
+  "content": "**Q1: What specific data sources are used for a 2019 Honda Accord VIN report in Texas?**\nAnswer: Commercial reports aggregate data from the National Motor Vehicle Title Information System (NMVTIS), insurance claim databases (like ISO ClaimSearch), police accident reports, state DMV title and registration records, and auto auction announcements. No single source is comprehensive.\n\n**Q2: Does a VIN report guarantee the vehicle has no hidden mechanical issues?**\nAnswer: No, a VIN report is a history document, not a mechanical inspection. It will not reveal wear-and-tear, impending component failure, or repairs made outside of reported insurance claims. A pre-purchase inspection by a qualified mechanic is essential.\n\n**Q3: How can I verify a Texas title is authentic and not counterfeit?**\nAnswer: Inspect the physical title for security features: micro-printing, security watermark, and correct Texas Department of Motor Vehicles (TxDMV) seal. Cross-reference the title number and VIN with an official TxDMV record check or through an NMVTIS-authorized provider.\n\n**Q4: What is the difference between a \"salvage\" and \"rebuilt\" title in Texas?**\nAnswer: A \"Salvage\" title is issued when an insurer declares a total loss. A \"Rebuilt\" title (formally \"Revived Salvage\" in Texas) can be issued after the vehicle is repaired and passes a rigorous Texas Department of Public Safety (DPS) vehicle inspection.\n\n**Q5: Can a 2019 Honda Accord have an undisclosed \"lemon law\" buyback history?**\nAnswer: Yes, if the manufacturer repurchase occurred in another state without a title brand, it may not transfer to Texas. Check for obscure title brands like \"Manufacturer Buyback\" or \"Lemon Law\" in the vehicle history and review the NMVTIS record.\n\n**Q6: How accurate is the reported number of previous.",
+  "timestamp": "2025-12-04T08:01:02.067Z",
+  "wordCount": 271
+}

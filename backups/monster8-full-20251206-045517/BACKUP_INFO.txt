@@ -1,0 +1,30 @@
+MONSTER 8.0 - Полный бэкап
+==========================
+
+Дата создания: 2025-12-06 04:55:18
+Версия: MONSTER 8.0
+
+Компоненты:
+- Оркестратор: monster8_orchestrator.sh
+- Dashboard: monster-8.0/dashboard/
+- Планировщик партий: scripts/batch_scheduler.js
+- Автодеплой: scripts/auto_deploy_page.sh
+- Генерация сайтмапа: scripts/generate_semantic_pages_sitemap.js
+
+Статистика:
+- EN страниц: 7
+- ES страниц: 3
+- Всего страниц: 10
+
+Git информация:
+Commit: 4f63c45390a3d76722529d1f92efb0c2f6454279
+Author: iunakov1991-alt
+Date: Sat Dec 6 03:43:41 2025 -0800
+Message: Update title: Car VIN Check for $3 (was $2.95)
+
+
+Статистика бэкапа:
+- Размер:  10M
+- Файлов: 60
+- Директория: backups/monster8-full-20251206-045517
+

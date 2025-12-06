@@ -1,0 +1,121 @@
+{
+  "modes": {
+    "legal_academic": {
+      "name": "Legal Academic",
+      "tone": "formal, statute-referenced, analytical",
+      "description": "Формальный академический стиль с ссылками на законодательство",
+      "characteristics": [
+        "Emphasizes legal compliance and regulatory frameworks",
+        "Uses formal terminology and statutory references",
+        "Focuses on documentation and verification processes",
+        "Academic citation style",
+        "Precise legal terminology"
+      ],
+      "openingPhrases": [
+        "A comprehensive legal and technical audit",
+        "From a regulatory compliance perspective",
+        "Under state and federal vehicle regulations",
+        "Per statutory requirements",
+        "In accordance with regulatory frameworks"
+      ]
+    },
+    "forensic_engineer": {
+      "name": "Forensic Engineer",
+      "tone": "mechanical, ADAS/body-structure emphasis, diagnostic",
+      "description": "Инженерно-форензический стиль с акцентом на механику",
+      "characteristics": [
+        "Emphasizes mechanical integrity and engineering analysis",
+        "Uses technical specifications and diagnostic terminology",
+        "Focuses on structural and mechanical assessment",
+        "ADAS system analysis",
+        "Body structure evaluation"
+      ],
+      "openingPhrases": [
+        "An engineering-grade analysis",
+        "From a mechanical integrity standpoint",
+        "Technical evaluation reveals",
+        "Forensic examination indicates",
+        "Structural assessment demonstrates"
+      ]
+    },
+    "consumer_practical": {
+      "name": "Consumer Practical",
+      "tone": "buying-guide, simple, clear instructions",
+      "description": "Практичный потребительский стиль с простыми инструкциями",
+      "characteristics": [
+        "Emphasizes practical advice and actionable steps",
+        "Uses accessible language and real-world scenarios",
+        "Focuses on buyer protection and decision-making",
+        "Step-by-step guidance",
+        "Clear, simple language"
+      ],
+      "openingPhrases": [
+        "When purchasing a used vehicle",
+        "For buyers seeking transparency",
+        "Practical considerations include",
+        "To protect yourself when buying",
+        "Here's what you need to know"
+      ]
+    },
+    "investigative": {
+      "name": "Investigative",
+      "tone": "fraud-first, pattern detection, red flags",
+      "description": "Расследовательский стиль с фокусом на обнаружение мошенничества",
+      "characteristics": [
+        "Emphasizes fraud detection and pattern recognition",
+        "Uses investigative terminology and red flag indicators",
+        "Focuses on uncovering hidden issues",
+        "Pattern detection methodology",
+        "Risk identification"
+      ],
+      "openingPhrases": [
+        "Investigative analysis reveals",
+        "Red flags to watch for include",
+        "Fraud detection patterns indicate",
+        "Warning signs suggest",
+        "Investigation uncovers"
+      ]
+    },
+    "market_economics": {
+      "name": "Market Economics",
+      "tone": "insurance, value, risk, depreciation",
+      "description": "Экономико-рыночный стиль с акцентом на стоимость и риски",
+      "characteristics": [
+        "Emphasizes risk assessment and actuarial factors",
+        "Uses insurance terminology and risk metrics",
+        "Focuses on loss history and premium implications",
+        "Market value analysis",
+        "Depreciation factors"
+      ],
+      "openingPhrases": [
+        "From an insurance risk perspective",
+        "Actuarial analysis indicates",
+        "Risk assessment reveals",
+        "Market valuation suggests",
+        "Economic factors demonstrate"
+      ]
+    },
+    "procedural": {
+      "name": "Procedural",
+      "tone": "DMV process, step-by-step, compliance",
+      "description": "Процедурный стиль с пошаговыми инструкциями DMV",
+      "characteristics": [
+        "Emphasizes step-by-step DMV processes",
+        "Uses procedural terminology and compliance checklists",
+        "Focuses on regulatory compliance steps",
+        "Official process documentation",
+        "Compliance verification"
+      ],
+      "openingPhrases": [
+        "The DMV process requires",
+        "To comply with state regulations",
+        "Following official procedures",
+        "Per DMV requirements",
+        "The registration process involves"
+      ]
+    }
+  }
+}
+
+
+

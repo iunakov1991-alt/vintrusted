@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Honda",
+    "model": "Civic",
+    "year": "2017",
+    "stateSlug": "arizona",
+    "stateLabel": "Arizona",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "19XFC2F59HE123456",
+    "variationContext": {
+      "structuralVariant": "fraud_detection",
+      "styleVariant": {
+        "name": "Procedural",
+        "tone": "DMV process, step-by-step, compliance",
+        "description": "Процедурный стиль с пошаговыми инструкциями DMV",
+        "characteristics": [
+          "Emphasizes step-by-step DMV processes",
+          "Uses procedural terminology and compliance checklists",
+          "Focuses on regulatory compliance steps",
+          "Official process documentation",
+          "Compliance verification"
+        ],
+        "openingPhrases": [
+          "The DMV process requires",
+          "To comply with state regulations",
+          "Following official procedures",
+          "Per DMV requirements",
+          "The registration process involves"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 2,
+      "factSheet": {
+        "vin": "19XFC2F59HE123456",
+        "make": "Honda",
+        "model": "Civic",
+        "year": 2017,
+        "state": "arizona",
+        "generated_at": "2025-12-04T08:37:01.820Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "19X"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Arizona DMV"
+          ],
+          "main_statutes": [
+            "Arizona Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## State-Specific Risks and Compliance for Arizona\n\nWhen conducting a VIN check on a 2017 Honda Civic in Arizona, understanding the state's specific regulatory framework and environmental risks is essential for a complete assessment. Arizona operates a **title-holding** system, meaning the Arizona DMV retains the official record of ownership, which directly impacts how title brands are recorded and tracked. This system requires careful verification against state records to confirm legal status and uncover any hidden issues. The process involves cross-referencing the vehicle's 17-character identifier, beginning with WMI code **19X**, with official state data to ensure all disclosures align with the **Arizona Vehicle Code**.\n\nKey procedural steps and risks specific to Arizona include:\n\n*   **Title Brand Verification:** Scrutinize the title history for state-specific brands such as **Salvage**, **Rebuilt**, **Flood**, or **Junk**. These designations are permanently recorded by the Arizona DMV and indicate significant past damage or total loss.\n*   **Mandatory Inspection Compliance:** A **state-required vehicle inspection** is often necessary for branded titles before re-registration. This inspection verifies the vehicle's roadworthiness and the legitimacy of major repairs.\n*   **Environmental Risk Assessment:** Consider **regional environmental risks**, which may include exposure to extreme heat, dust, or monsoon-related moisture that can accelerate corrosion and degrade electrical components over time, factors not always captured in a standard accident history.\n*   **Odometer Fraud Prevention:** Rigorously analyze the mileage history for inconsistencies, as odometer tampering is a common form of fraud. Arizona law requires accurate mileage disclosure during title transfers.\n\nA comprehensive VIN check for an Arizona-registered vehicle must integrate these state-specific legal and environmental factors with standard vehicle history.",
+  "timestamp": "2025-12-04T08:38:20.639Z",
+  "wordCount": 262
+}

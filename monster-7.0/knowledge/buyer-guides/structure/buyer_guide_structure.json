@@ -1,0 +1,27 @@
+{
+  "sections": [
+    "intro",
+    "year_overview",
+    "engineering_changes",
+    "engine_reliability",
+    "transmission_reliability",
+    "known_issues",
+    "high_risk_trims",
+    "maintenance_cost",
+    "accident_behavior",
+    "market_value",
+    "inspection_checklist",
+    "title_flags",
+    "insurance_theft",
+    "who_should_buy",
+    "who_should_avoid",
+    "faq"
+  ],
+  "min_sections": 12,
+  "max_sections": 16
+}
+
+
+
+
+

@@ -1,0 +1,480 @@
+[SEO AI] 2025-12-04T19:36:28.230Z - Cache loaded: 3091 entries
+[SEO AI] 2025-12-04T19:36:28.235Z - AI training strategy loaded
+[SEO AI] 2025-12-04T19:36:28.235Z - Local AI disabled (Pre-M1 mode or feature flag off)
+[SEO REF-LOADER] 2025-12-04T19:36:28.238Z - Reference articles loaded and cached
+[SEO RULE-ENGINE] 2025-12-04T19:36:28.239Z - Loaded 5 rules from rules.json
+[SEO VARIATION-ENGINE] 2025-12-04T19:36:28.240Z - Loaded 43 structural schemes
+[SEO VARIATION-ENGINE] 2025-12-04T19:36:28.241Z - Loaded 6 style modes
+[SEO VARIATION-ENGINE] 2025-12-04T19:36:28.241Z - Loaded block depth configurations
+[SEO VARIATION-ENGINE] 2025-12-04T19:36:28.242Z - Loaded VIN specs for 3 models
+[SEO VARIATION-ENGINE] 2025-12-04T19:36:28.244Z - Loaded state risks for 4 states
+[SEO VARIATION-ENGINE] 2025-12-04T19:36:28.246Z - Loaded block variants for 8 block types
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.247Z - VIN canon template loaded
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.248Z - Block configuration loaded: 15 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.248Z - FACT-LOCK: Loaded 3 vehicle specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.248Z - FACT-LOCK: Loaded 51 state specs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.248Z - FACT-LOCK: Loaded global invariants
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.249Z - FACT-LOCK: Prompt header loaded
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.250Z - Loading 15 canonical prompt files...
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.250Z - Loaded prompt for accident_intelligence
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.251Z - Loaded prompt for buyer_guide
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.252Z - Loaded prompt for cta
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.252Z - Loaded prompt for deep_explanation
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.252Z - Loaded prompt for faq
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.252Z - Loaded prompt for fraud_patterns
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.253Z - Loaded prompt for hero
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.253Z - Loaded prompt for insurance_risk
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.253Z - Loaded prompt for internal_links
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.253Z - Loaded prompt for key_facts
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.253Z - Loaded prompt for market_value
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.253Z - Loaded prompt for nmvtis
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.253Z - Loaded prompt for recalls_tsbs
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.254Z - Loaded prompt for state_specific
+[SEO CANONICAL-PROMPTS] 2025-12-04T19:36:28.254Z - Loaded prompt for vin_decoder
+[SEO FRAGMENT-CACHE] 2025-12-04T19:36:28.254Z - Loading 74 cached fragments...
+[SEO FRAGMENT-CACHE] 2025-12-04T19:36:28.277Z - Loaded 74 fragments
+[SEO RULE-ENGINE] 2025-12-04T19:36:28.277Z - Loaded 5 rules from rules.json
+[SEO GEN-PAGE] 2025-12-04T19:36:28.278Z - Generating page: 2016 Kia Telluride Hybrid in Maine (VIN: 5XX8HTAJ2GZ975372)
+[SEO GEN-PAGE] 2025-12-04T19:36:28.278Z - Analysis depth: deep, Max retries: 5
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.281Z - FACT-LOCK: Loaded existing FACT-SHEET for VIN 5XX8HTAJ2GZ975372
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.281Z - FACT-LOCK: FACT-SHEET ready for 2016 Kia Telluride Hybrid in maine
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.281Z - Generating V6 article: 2016 Kia Telluride Hybrid in Maine (15 blocks, parallel generation)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.281Z - Structural variant: state_regulations, Style: Legal Academic, Depth roll: 0
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.281Z - Block groups for parallel generation: 2 groups
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.281Z - Generating group 1/2 (3 blocks in parallel)...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.288Z - Using canonical prompt from file for hero
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.289Z - Generating hero block (ollama, 248 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:36:28.296Z - Trying DeepSeek API for vin_check in en (prompt: 9359 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:28.298Z - Using compact strategy (9359 vs 9359 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.354Z - Using canonical prompt from file for nmvtis
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.354Z - Generating nmvtis block (ollama, 263 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:36:28.359Z - Trying DeepSeek API for vin_check in en (prompt: 9080 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:28.360Z - Using compact strategy (9080 vs 9080 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.362Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:28.362Z - Generating vin_decoder block (ollama, 130 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:36:28.364Z - Trying DeepSeek API for vin_check in en (prompt: 11352 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:28.366Z - Using compact strategy (11352 vs 11352 chars)
+[SEO AI] 2025-12-04T19:36:36.945Z - DeepSeek API success (attempt 1): 941 chars, prompt: 11352 chars, timeout: 180000ms, tokens: 206
+[SEO AI] 2025-12-04T19:36:36.947Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:36:36.947Z - AI content generated by deepseek for vin_check in en (941 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:36.964Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:36.965Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:36.972Z - ⚠️  Block vin_decoder is 55 words short (27.5%). Auto-expanding...
+[SEO AI] 2025-12-04T19:36:36.976Z - Trying DeepSeek API for vin_check in en (prompt: 2337 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:36.978Z - Using compact strategy (2337 vs 2337 chars)
+[SEO AI] 2025-12-04T19:36:40.734Z - DeepSeek API success (attempt 1): 1763 chars, prompt: 9080 chars, timeout: 180000ms, tokens: 365
+[SEO AI] 2025-12-04T19:36:40.735Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:36:40.735Z - AI content generated by deepseek for vin_check in en (1763 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:40.756Z - ⚠️  Block nmvtis missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:40.757Z - ⚠️  Block nmvtis does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:40.770Z - ⚠️  Block nmvtis has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:36:40.773Z - Trying DeepSeek API for vin_check in en (prompt: 3019 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:40.775Z - Using compact strategy (3019 vs 3019 chars)
+[SEO AI] 2025-12-04T19:36:41.458Z - DeepSeek API success (attempt 1): 1706 chars, prompt: 9359 chars, timeout: 180000ms, tokens: 347
+[SEO AI] 2025-12-04T19:36:41.459Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:36:41.459Z - AI content generated by deepseek for vin_check in en (1706 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:41.470Z - ⚠️  Block hero missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:41.470Z - ⚠️  Block hero does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:41.474Z - Block hero validated successfully (252 words, marker and punctuation auto-added, 13190ms)
+[SEO AI] 2025-12-04T19:36:43.784Z - DeepSeek API success (attempt 1): 956 chars, prompt: 2337 chars, timeout: 180000ms, tokens: 210
+[SEO AI] 2025-12-04T19:36:43.785Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:36:43.785Z - AI content generated by deepseek for vin_check in en (956 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:43.800Z - ⚠️  Auto-expanded block vin_decoder still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:43.801Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 147 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:43.801Z - Block vin_decoder validation failed (attempt 1): TOO_SHORT_FOR_BLOCK_TYPE: 145 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:43.801Z - Retrying block vin_decoder...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:43.801Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:43.801Z - Generating vin_decoder block (ollama, 130 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:36:43.807Z - Trying DeepSeek API for vin_check in en (prompt: 11373 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:43.811Z - Using compact strategy (11373 vs 11373 chars)
+[SEO AI] 2025-12-04T19:36:47.350Z - DeepSeek API success (attempt 1): 983 chars, prompt: 3019 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:36:47.350Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:36:47.351Z - AI content generated by deepseek for vin_check in en (983 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:47.376Z - ⚠️  Auto-fixed block nmvtis still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:47.376Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 142 words (minimum 150)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:47.377Z - Block nmvtis validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:47.377Z - Retrying block nmvtis...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:47.377Z - Using canonical prompt from file for nmvtis
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:47.377Z - Generating nmvtis block (ollama, 263 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:36:47.382Z - Trying DeepSeek API for vin_check in en (prompt: 9080 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:47.385Z - Using compact strategy (9080 vs 9080 chars)
+[SEO AI] 2025-12-04T19:36:51.008Z - DeepSeek API success (attempt 1): 925 chars, prompt: 11373 chars, timeout: 180000ms, tokens: 206
+[SEO AI] 2025-12-04T19:36:51.009Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:36:51.009Z - AI content generated by deepseek for vin_check in en (925 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:51.032Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:51.032Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:51.034Z - ⚠️  Block vin_decoder is 59 words short (29.5%). Auto-expanding...
+[SEO AI] 2025-12-04T19:36:51.037Z - Trying DeepSeek API for vin_check in en (prompt: 2321 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:51.040Z - Using compact strategy (2321 vs 2321 chars)
+[SEO AI] 2025-12-04T19:36:58.064Z - DeepSeek API success (attempt 1): 996 chars, prompt: 2321 chars, timeout: 180000ms, tokens: 218
+[SEO AI] 2025-12-04T19:36:58.065Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:36:58.065Z - AI content generated by deepseek for vin_check in en (996 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:58.090Z - ⚠️  Auto-expanded block vin_decoder still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:58.090Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 150 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:58.090Z - Block vin_decoder validation failed (attempt 2): TOO_SHORT_FOR_BLOCK_TYPE: 141 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:58.090Z - Retrying block vin_decoder...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:58.091Z - Using canonical prompt from file for vin_decoder
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:36:58.091Z - Generating vin_decoder block (ollama, 130 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:36:58.095Z - Trying DeepSeek API for vin_check in en (prompt: 11351 chars, compact: true)
+[SEO AI] 2025-12-04T19:36:58.098Z - Using compact strategy (11351 vs 11351 chars)
+[SEO AI] 2025-12-04T19:37:00.201Z - DeepSeek API success (attempt 1): 1784 chars, prompt: 9080 chars, timeout: 180000ms, tokens: 365
+[SEO AI] 2025-12-04T19:37:00.202Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:00.202Z - AI content generated by deepseek for vin_check in en (1784 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:00.218Z - ⚠️  Block nmvtis missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:00.218Z - ⚠️  Block nmvtis does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:00.219Z - Block nmvtis validation failed (attempt 2): INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "data"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:00.219Z - Retrying block nmvtis...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:00.219Z - Using canonical prompt from file for nmvtis
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:00.219Z - Generating nmvtis block (ollama, 263 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:37:00.223Z - Trying DeepSeek API for vin_check in en (prompt: 9080 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:00.225Z - Using compact strategy (9080 vs 9080 chars)
+[SEO AI] 2025-12-04T19:37:05.196Z - DeepSeek API success (attempt 1): 941 chars, prompt: 11351 chars, timeout: 180000ms, tokens: 206
+[SEO AI] 2025-12-04T19:37:05.197Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:05.197Z - AI content generated by deepseek for vin_check in en (941 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:05.220Z - ⚠️  Block vin_decoder missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:05.220Z - ⚠️  Block vin_decoder does not end with punctuation, adding period before marker
+[SEO AI] 2025-12-04T19:37:12.725Z - DeepSeek API success (attempt 1): 1877 chars, prompt: 9080 chars, timeout: 180000ms, tokens: 365
+[SEO AI] 2025-12-04T19:37:12.726Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:12.726Z - AI content generated by deepseek for vin_check in en (1877 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.748Z - ⚠️  Block nmvtis missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.749Z - ⚠️  Block nmvtis does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.749Z - Block nmvtis validated successfully (276 words, marker and punctuation auto-added, 44395ms)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.750Z - Group 1 completed in 44.5s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.750Z - Generating group 2/2 (10 blocks in parallel)...
+[SEO FRAGMENT-CACHE] 2025-12-04T19:37:12.751Z - Cache HIT for state_specific (maine)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.751Z - Using cached fragment for state_specific
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.765Z - Using canonical prompt from file for fraud_patterns
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.766Z - Generating fraud_patterns block (deepseek, 238 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:37:12.770Z - Trying DeepSeek API for vin_check in en (prompt: 9323 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:12.773Z - Using compact strategy (9323 vs 9323 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.774Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.774Z - Generating accident_intelligence block (deepseek, 158 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:37:12.776Z - Trying DeepSeek API for vin_check in en (prompt: 9412 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:12.779Z - Using compact strategy (9412 vs 9412 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.780Z - Using canonical prompt from file for insurance_risk
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.780Z - Generating insurance_risk block (deepseek, 312 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:37:12.783Z - Trying DeepSeek API for vin_check in en (prompt: 9385 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:12.785Z - Using compact strategy (9385 vs 9385 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.786Z - Using canonical prompt from file for buyer_guide
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.786Z - Generating buyer_guide block (ollama, 392 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:37:12.788Z - Trying DeepSeek API for vin_check in en (prompt: 9242 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:12.790Z - Using compact strategy (9242 vs 9242 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.790Z - Using canonical prompt from file for market_value
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.790Z - Generating market_value block (deepseek, 124 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:37:12.792Z - Trying DeepSeek API for vin_check in en (prompt: 9299 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:12.794Z - Using compact strategy (9299 vs 9299 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.803Z - Using canonical prompt from file for recalls_tsbs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:12.803Z - Generating recalls_tsbs block (deepseek, 150 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:37:12.805Z - Trying DeepSeek API for vin_check in en (prompt: 9122 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:12.807Z - Using compact strategy (9122 vs 9122 chars)
+[SEO AI] 2025-12-04T19:37:20.443Z - DeepSeek API success (attempt 1): 1008 chars, prompt: 9299 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:37:20.444Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:20.444Z - AI content generated by deepseek for vin_check in en (1008 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.466Z - ⚠️  Block market_value missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.467Z - ⚠️  Block market_value does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.468Z - Block market_value validated successfully (144 words, marker and punctuation auto-added, 7678ms)
+[SEO FRAGMENT-CACHE] 2025-12-04T19:37:20.468Z - Cache HIT for faq (maine)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.468Z - Using cached fragment for faq
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.471Z - Using canonical prompt from file for internal_links
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.471Z - Generating internal_links block (ollama, 50 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:37:20.475Z - Using cached AI response for vin_check in en
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.475Z - ⚠️  Block internal_links missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.475Z - ⚠️  Block internal_links does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.475Z - Block internal_links validated successfully (148 words, marker and punctuation auto-added, 4ms)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.475Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:20.475Z - Generating cta block (ollama, 51 words, attempt 1/3)...
+[SEO AI] 2025-12-04T19:37:20.478Z - Trying DeepSeek API for vin_check in en (prompt: 9056 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:20.481Z - Using compact strategy (9056 vs 9056 chars)
+[SEO AI] 2025-12-04T19:37:21.255Z - DeepSeek API success (attempt 1): 1202 chars, prompt: 9122 chars, timeout: 180000ms, tokens: 230
+[SEO AI] 2025-12-04T19:37:21.256Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:21.256Z - AI content generated by deepseek for vin_check in en (1202 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:21.275Z - ⚠️  Block recalls_tsbs missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:21.275Z - ⚠️  Block recalls_tsbs does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:21.276Z - ⚠️  Block recalls_tsbs has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:37:21.278Z - Trying DeepSeek API for vin_check in en (prompt: 2458 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:21.281Z - Using compact strategy (2458 vs 2458 chars)
+[SEO AI] 2025-12-04T19:37:21.627Z - DeepSeek API success (attempt 1): 1117 chars, prompt: 9412 chars, timeout: 180000ms, tokens: 239
+[SEO AI] 2025-12-04T19:37:21.627Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:21.627Z - AI content generated by deepseek for vin_check in en (1117 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:21.652Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:21.652Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:21.653Z - ⚠️  Block accident_intelligence is 36 words short (18.0%). Auto-expanding...
+[SEO AI] 2025-12-04T19:37:21.658Z - Trying DeepSeek API for vin_check in en (prompt: 2513 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:21.662Z - Using compact strategy (2513 vs 2513 chars)
+[SEO AI] 2025-12-04T19:37:24.512Z - DeepSeek API success (attempt 1): 1671 chars, prompt: 9323 chars, timeout: 180000ms, tokens: 335
+[SEO AI] 2025-12-04T19:37:24.513Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:24.513Z - AI content generated by deepseek for vin_check in en (1671 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:24.537Z - ⚠️  Block fraud_patterns missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:24.540Z - Block fraud_patterns validated successfully (256 words, marker auto-added, 11775ms)
+[SEO AI] 2025-12-04T19:37:25.683Z - DeepSeek API success (attempt 1): 602 chars, prompt: 9056 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:37:25.684Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:25.684Z - AI content generated by deepseek for vin_check in en (602 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:25.698Z - Block cta validation failed (attempt 1): INVALID_TRAILING_PREPOSITION_OR_PHRASE: Block ends with forbidden phrase, INVALID_TRAILING_WORD: Block ends with forbidden word "verification"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:25.698Z - Retrying block cta...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:25.698Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:25.698Z - Generating cta block (ollama, 51 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:37:25.701Z - Trying DeepSeek API for vin_check in en (prompt: 9056 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:25.703Z - Using compact strategy (9056 vs 9056 chars)
+[SEO AI] 2025-12-04T19:37:27.763Z - DeepSeek API success (attempt 1): 1047 chars, prompt: 2458 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:37:27.763Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:27.763Z - AI content generated by deepseek for vin_check in en (1047 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:27.789Z - ⚠️  Auto-fixed block recalls_tsbs still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:27.789Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 149 words (minimum 160)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:27.789Z - Block recalls_tsbs validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:27.789Z - Retrying block recalls_tsbs...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:27.790Z - Using canonical prompt from file for recalls_tsbs
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:27.790Z - Generating recalls_tsbs block (deepseek, 150 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:37:27.796Z - Trying DeepSeek API for vin_check in en (prompt: 9122 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:27.800Z - Using compact strategy (9122 vs 9122 chars)
+[SEO AI] 2025-12-04T19:37:27.853Z - DeepSeek API success (attempt 1): 2307 chars, prompt: 9385 chars, timeout: 180000ms, tokens: 424
+[SEO AI] 2025-12-04T19:37:27.853Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:27.853Z - AI content generated by deepseek for vin_check in en (2307 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:27.853Z - ⚠️  Block insurance_risk missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:27.854Z - Block insurance_risk validated successfully (329 words, marker auto-added, 15074ms)
+[SEO AI] 2025-12-04T19:37:28.178Z - DeepSeek API success (attempt 1): 869 chars, prompt: 2513 chars, timeout: 180000ms, tokens: 172
+[SEO AI] 2025-12-04T19:37:28.179Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:28.179Z - AI content generated by deepseek for vin_check in en (869 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:28.202Z - ⚠️  Auto-expanded block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:28.203Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 129 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:28.203Z - ⚠️  Block accident_intelligence has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:37:28.206Z - Trying DeepSeek API for vin_check in en (prompt: 2373 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:28.210Z - Using compact strategy (2373 vs 2373 chars)
+[SEO AI] 2025-12-04T19:37:30.339Z - DeepSeek API success (attempt 1): 2471 chars, prompt: 9242 chars, timeout: 180000ms, tokens: 520
+[SEO AI] 2025-12-04T19:37:30.341Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:30.341Z - AI content generated by deepseek for vin_check in en (2471 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:30.364Z - ⚠️  Block buyer_guide missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:30.364Z - ⚠️  Block buyer_guide does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:30.365Z - Block buyer_guide validated successfully (362 words, marker and punctuation auto-added, 17580ms)
+[SEO AI] 2025-12-04T19:37:32.914Z - DeepSeek API success (attempt 1): 906 chars, prompt: 9056 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:37:32.916Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:32.916Z - AI content generated by deepseek for vin_check in en (906 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:32.943Z - ⚠️  Block cta missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:32.943Z - ⚠️  Block cta does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:32.943Z - ⚠️  Block cta has grammar error. Auto-fixing...
+[SEO AI] 2025-12-04T19:37:32.949Z - Trying DeepSeek API for vin_check in en (prompt: 2162 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:32.952Z - Using compact strategy (2162 vs 2162 chars)
+[SEO AI] 2025-12-04T19:37:34.807Z - DeepSeek API success (attempt 1): 961 chars, prompt: 2373 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:37:34.808Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:34.808Z - AI content generated by deepseek for vin_check in en (961 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:34.833Z - ⚠️  Auto-fixed block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:34.834Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, TOO_SHORT_FOR_BLOCK_TYPE: 144 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:34.834Z - Block accident_intelligence validation failed (attempt 1): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 164 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:34.834Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:34.835Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:34.835Z - Generating accident_intelligence block (deepseek, 158 words, attempt 2/3)...
+[SEO AI] 2025-12-04T19:37:34.839Z - Trying DeepSeek API for vin_check in en (prompt: 9417 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:34.843Z - Using compact strategy (9417 vs 9417 chars)
+[SEO AI] 2025-12-04T19:37:36.268Z - DeepSeek API success (attempt 1): 1184 chars, prompt: 9122 chars, timeout: 180000ms, tokens: 230
+[SEO AI] 2025-12-04T19:37:36.268Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:36.269Z - AI content generated by deepseek for vin_check in en (1184 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:36.292Z - ⚠️  Block recalls_tsbs missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:36.292Z - ⚠️  Block recalls_tsbs does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:36.293Z - Block recalls_tsbs validated successfully (175 words, marker and punctuation auto-added, 23491ms)
+[SEO AI] 2025-12-04T19:37:39.590Z - DeepSeek API success (attempt 1): 906 chars, prompt: 2162 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:37:39.592Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:39.592Z - AI content generated by deepseek for vin_check in en (906 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:39.615Z - ⚠️  Auto-fixed block cta still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:39.616Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:39.616Z - Block cta validation failed (attempt 2): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:39.616Z - Retrying block cta...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:39.616Z - Using canonical prompt from file for cta
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:39.616Z - Generating cta block (ollama, 51 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:37:39.621Z - Trying DeepSeek API for vin_check in en (prompt: 9056 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:39.623Z - Using compact strategy (9056 vs 9056 chars)
+[SEO AI] 2025-12-04T19:37:43.879Z - DeepSeek API success (attempt 1): 1258 chars, prompt: 9417 chars, timeout: 180000ms, tokens: 239
+[SEO AI] 2025-12-04T19:37:43.883Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:43.883Z - AI content generated by deepseek for vin_check in en (1258 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:43.905Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:43.906Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:43.907Z - ⚠️  Block accident_intelligence is 24 words short (12.0%). Auto-expanding...
+[SEO AI] 2025-12-04T19:37:43.911Z - Trying DeepSeek API for vin_check in en (prompt: 2654 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:43.914Z - Using compact strategy (2654 vs 2654 chars)
+[SEO AI] 2025-12-04T19:37:47.032Z - DeepSeek API success (attempt 1): 908 chars, prompt: 9056 chars, timeout: 180000ms, tokens: 200
+[SEO AI] 2025-12-04T19:37:47.033Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:47.033Z - AI content generated by deepseek for vin_check in en (908 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:47.053Z - ⚠️  Block cta missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:47.053Z - ⚠️  Block cta does not end with punctuation, adding period before marker
+[SEO AI] 2025-12-04T19:37:49.350Z - DeepSeek API success (attempt 1): 742 chars, prompt: 2654 chars, timeout: 180000ms, tokens: 148
+[SEO AI] 2025-12-04T19:37:49.351Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:49.351Z - AI content generated by deepseek for vin_check in en (742 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:49.376Z - ⚠️  Auto-expanded block accident_intelligence still failed validation, retrying...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:49.377Z -    Remaining errors: INVALID_ENDING_PUNCTUATION: Block does not end with . ! or ?, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb, TOO_SHORT_FOR_BLOCK_TYPE: 105 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:49.377Z - Block accident_intelligence validation failed (attempt 2): TOO_SHORT_FOR_BLOCK_TYPE: 176 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:49.377Z - Retrying block accident_intelligence...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:49.377Z - Using canonical prompt from file for accident_intelligence
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:49.377Z - Generating accident_intelligence block (deepseek, 158 words, attempt 3/3)...
+[SEO AI] 2025-12-04T19:37:49.381Z - Trying DeepSeek API for vin_check in en (prompt: 9426 chars, compact: true)
+[SEO AI] 2025-12-04T19:37:49.385Z - Using compact strategy (9426 vs 9426 chars)
+[SEO AI] 2025-12-04T19:37:58.434Z - DeepSeek API success (attempt 1): 1210 chars, prompt: 9426 chars, timeout: 180000ms, tokens: 239
+[SEO AI] 2025-12-04T19:37:58.434Z - DeepSeek API success for vin_check in en
+[SEO AI] 2025-12-04T19:37:58.434Z - AI content generated by deepseek for vin_check in en (1210 chars)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.446Z - ⚠️  Block accident_intelligence missing end marker, adding automatically (AI did not generate it)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.446Z - ⚠️  Block accident_intelligence does not end with punctuation, adding period before marker
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.447Z - Group 2 completed in 45.7s
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.447Z - All blocks generated in 90.2s (parallel mode)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.447Z -   WARNING: OVER_TARGET_LENGTH: 3003 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.447Z - Total article length: 3003 words (target: 2000-2500)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.447Z - Running pre-validation with auto-repair...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.448Z - 🔧 Attempting to repair block vin_decoder (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:37:58.449Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:37:58.451Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.521Z - ⚠️  Block vin_decoder still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, TOO_SHORT_FOR_BLOCK_TYPE: 118 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.524Z - 🔧 Attempting to repair block accident_intelligence (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:37:58.524Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:37:58.525Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.540Z - ⚠️  Block accident_intelligence still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, TOO_SHORT_FOR_BLOCK_TYPE: 173 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.542Z - 🔧 Attempting to repair block cta (status: FAILED_VALIDATION)...
+[SEO POST-PROCESSOR] 2025-12-04T19:37:58.542Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:37:58.542Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.544Z - ⚠️  Block cta still has issues after repair attempts: INVALID_END_MARKER: Missing end marker, INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.544Z - ⚠️  3 blocks still need post-processing:
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.544Z -   - vin_decoder (status: FAILED_VALIDATION): TOO_SHORT_FOR_BLOCK_TYPE: 144 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.544Z -   - accident_intelligence (status: FAILED_VALIDATION): TOO_SHORT_FOR_BLOCK_TYPE: 171 words (minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.544Z -   - cta (status: FAILED_VALIDATION): INVALID_GRAMMAR_LIKELY_INCOMPLETE_SENTENCE: Last sentence lacks verb
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.546Z - Validating article...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: H2 may lack SEO keywords: "Maine-Specific Insights"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: H2 may lack SEO keywords: "Frequently Asked Questions"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Recommended block "Executive Summary" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Recommended block "Data Layers" may be missing or not clearly identified
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: VIN Decoder may not cover all 17 positions (found 0 mentions)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: CTA does not follow canonical format: "Check this {YEAR} {MAKE} {MODEL} VIN now"
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Internal links count (0) should be 4-6
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: FAQ section word count (387) should be 400-600 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: CTA section word count (128) should be 55-75 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Total article word count (2930) should be 2000-2500 words
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Section "VIN Decoder" is too short (138 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Section "Accident Intelligence" is too short (164 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Section "Market Value" is too short (143 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Section "Recalls" is too short (170 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Section "Internal Links" is too short (148 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z -   WARNING: Section "CTA" is too short (128 words, minimum 200)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.580Z - Attempting auto-fix...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.588Z - Running post-processing...
+[SEO POST-PROCESSOR] 2025-12-04T19:37:58.589Z - Loaded 5 rules from rules.json
+[SEO POST-PROCESSOR] 2025-12-04T19:37:58.590Z - Rule syntax_incomplete_tail_common requires regenerate_tail (skipped in post-processor)
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.659Z - ⚠️  Article still has 2 errors after post-processing
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.659Z -   ERROR: VIN Decoder section lacks position table
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.659Z -   ERROR: Missing required sections: Key Facts, Deep Explanation
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.659Z - Checking article uniqueness...
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.660Z - ✅ Article uniqueness score: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.660Z - ✅ Article lexical variation: 100.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.660Z - Article generated: 2905 words, 13 blocks
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.661Z - Circuit Breaker ollama: CLOSED, failure rate: 20.0%
+[SEO ARTICLE-GEN-V6] 2025-12-04T19:37:58.661Z - Circuit Breaker deepseek: CLOSED, failure rate: 11.1%
+[SEO GEN-PAGE] 2025-12-04T19:37:58.661Z - ✅ Article generated in 90.38s
+[SEO GEN-PAGE] 2025-12-04T19:37:58.661Z -    Words: 2905
+[SEO GEN-PAGE] 2025-12-04T19:37:58.661Z -    Blocks: 13
+{
+  "vin": "5XX8HTAJ2GZ975372",
+  "make": "Kia",
+  "model": "Telluride Hybrid",
+  "year": "2016",
+  "state": "maine",
+  "stateLabel": "Maine",
+  "article": {
+    "title": "VIN Check Guide for 2016 Kia Telluride Hybrid in Maine",
+    "h1": "Complete VIN Check Guide: 2016 Kia Telluride Hybrid",
+    "content": "A Vehicle Identification Number (VIN) serves as the definitive legal and technical fingerprint for an automobile, encoding its manufacturing origin, specifications, and unique identity. For a 2016 Kia Telluride Hybrid registered in Maine, a meticulous VIN decode is the foundational step in verifying its history and ensuring compliance with state-specific legal frameworks. The 17-character VIN, structured according to global ISO standards, is partitioned into discrete data segments, each governed by federal regulation. In Maine's title-holding system, this VIN is the primary key used by the Maine DMV to track official ownership, lien status, and any applied title brands, making its accurate interpretation critical for any transaction.\n\nThe technical dissection of VIN `5XX8HTAJ2GZ975372` begins with its World Manufacturer Identifier (WMI). The prefix \"5XX\" is a candidate code assigned to Kia for vehicles manufactured in the United States. Subsequent characters in positions 4 through 8 form the Vehicle Descriptor Section (VDS), detailing model-specific attributes, though the provided data does not specify engine codes or a unibody platform name for this variant. The 9th character is a mandatory check digit, a mathematical safeguard against VIN transcription errors. Position 10, \"G\", decodes to the 2016 model year. Character 11 identifies the specific assembly plant, while the final six digits (12-17) constitute the unique serial number assigned to this individual vehicle on the production line.\n\nFrom a legal and antifraud perspective in Maine, this VIN is the immutable link to all official records. The Maine.\n\n## NMVTIS: National Motor Vehicle Title Information System\n\nThe National Motor Vehicle Title Information System (NMVTIS) serves as a critical federal database designed to combat fraud and provide transparency in vehicle history. For a 2016 Kia Telluride Hybrid registered in Maine, NMVTIS aggregates data from mandatory reporting by various sources, including state titling agencies, insurance carriers, and salvage yards. This system is governed by federal law, and its data is particularly valuable in a title-holding state like Maine, where the physical certificate of title is the primary legal document of ownership. The 17-character VIN, beginning with a WMI code such as \"5XX\", is the unique key used to access this consolidated history, ensuring the information pertains specifically to the vehicle in question.\n\nKey technical and legal points derived from NMVTIS for Maine-registered vehicles include:\n*   **Title Brand History:** The report will disclose any title brands applied under the Maine Vehicle Code, such as Salvage, Rebuilt, Flood, or Junk. These brands are permanent designations that follow the vehicle and significantly impact its value and safety.\n*   **Jurisdictional Data Synthesis:** NMVTIS compiles information from multiple states, revealing if the vehicle has been titled elsewhere. This is essential for detecting attempts to obscure a vehicle's past by moving it through states with different branding requirements.\n*   **Theft and Total Loss Records:** The database includes data on theft recoveries and insurance total loss declarations, which are federally mandated to be reported. This provides an objective record of major incidents beyond what may be self-reported.\n*   **Odometer Reading History:** NMVTIS contains a timeline of odometer readings reported during title transactions, which is a fundamental tool for identifying.\n\n## VIN Decoder for 2016 Kia Telluride Hybrid\n\nA Vehicle Identification Number (VIN) is a unique 17-character code that serves as a legal and technical fingerprint for a vehicle. For a 2016 Kia Telluride Hybrid registered in Maine, decoding this identifier is a critical first step in verifying the vehicle's specifications and uncovering potential discrepancies that could indicate fraud or undisclosed history. The process involves parsing standardized codes that reveal manufacturing origin, model attributes, and production sequence, which must align with documentation from the Maine DMV.\n\n<table><tr><th>Position</th><th>Range</th><th>Meaning</th></tr><tr><td>1-3</td><td>WMI</td><td>World Manufacturer Identifier: 5XX = United States, Unknown, Unknown</td></tr><tr><td>4-8</td><td>VDS</td><td>Vehicle Descriptor Section: Model-specific codes for 2016 Kia Telluride Hybrid (body style, trim, safety features, engine)</td></tr><tr><td>9</td><td>Check Digit</td></tr></table>.\n\n## Maine-Specific Insights\n\nA VIN check for a 2016 Kia Telluride Hybrid in Maine requires understanding the state's specific regulatory framework and risk environment. Maine operates a title-holding system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for registration. This system creates a clear chain of custody that is vital for fraud prevention. The state mandates a vehicle inspection, which can serve as an independent verification point for a vehicle's condition against its reported history. Key agencies like the Maine DMV administer these processes under the Maine Vehicle Code.\n\nFrom a risk assessment perspective, several actuarial factors are heightened in Maine. The state recognizes specific title brands—Salvage, Rebuilt, Flood, and Junk—which directly impact insurance eligibility and premium calculations. A branded title typically results in significantly higher insurance costs due to the associated loss history and perceived future risk. Furthermore, regional environmental risks prevalent in the area can accelerate depreciation and lead to latent mechanical failures not immediately apparent, affecting long-term market value. A vehicle history report for Maine should be scrutinized for any entries from these environmental events.\n\nTherefore, a comprehensive VIN analysis for this vehicle must cross-reference the title status with inspection records and historical data to assess its true risk profile and residual value. This due diligence is essential for accurate premium modeling and investment protection.\n\n## Fraud Patterns\n\nWhen reviewing a vehicle history report for a 2016 Kia Telluride Hybrid in Maine, certain technical and documentary discrepancies can serve as critical indicators of potential fraud. Maine operates a title-holding system, meaning the physical certificate of title is a primary document of ownership and a key target for illicit activity. Fraud patterns often involve manipulating this documentation or the vehicle's identifying markers to conceal a problematic history, such as undisclosed salvage or flood damage. Vigilance in verifying the consistency of all records against the physical vehicle is the most effective defense for a buyer.\n\nKey technical and legal warning signs include:\n*   **VIN Plate Inconsistencies:** The Vehicle Identification Number on the dashboard, door jamb, and engine bay should match the VIN on the title and report (e.g., 5XX8HTAJ2GZ975372). Any variation, evidence of tampering, or poorly aligned rivets on the VIN plate is a severe red flag.\n*   **Title Brand Discrepancies:** Maine recognizes specific title brands including Salvage, Rebuilt, Flood, and Junk. A vehicle history report showing a brand from another state that does not appear on the Maine title may indicate an attempted \"title wash,\" where a vehicle is moved between states to obscure its branded status.\n*   **Illogical Vehicle History:** A report showing the vehicle registered in a coastal or flood-prone area, followed by a gap in history, and then a sudden appearance in Maine with a clean title, warrants further investigation for potential undisclosed flood damage, which is a recognized environmental risk in the region.\n\n## Accident Intelligence\n\nA vehicle history report for a 2016 Kia Telluride Hybrid, such as VIN 5XX8HTAJ2GZ975372, provides critical forensic data to assess past collisions. This analysis is governed by the Maine Vehicle Code, which establishes legal frameworks for title branding and damage disclosure. The intelligence focuses on correlating data points from standard state and federal data sources to reconstruct a vehicle's incident history.\n\n*   **Event Correlation:** Reports cross-reference accident records with subsequent title actions processed by the Maine DMV. A single event may generate multiple entries, including police reports, insurance claims, and repair facility records, which together build a timeline.\n*   **Severity Assessment:** The report analyzes descriptors within records to infer potential impact severity. Key indicators include deployed airbag notifications, structural damage mentions, and repair cost estimates, which help gauge the extent of prior damage.\n*   **Title Brand Analysis:** Following an accident, Maine may apply a formal title brand such as \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk\" based on damage thresholds defined by certified inspectors.\n\n## Insurance Risk\n\nA comprehensive VIN check for a 2016 Kia Telluride Hybrid in Maine provides critical data for insurance underwriting and risk assessment. This analysis moves beyond simple vehicle identification to evaluate the legal and physical history that directly influences insurability and premium calculation. The process verifies the integrity of the vehicle identification number `5XX8HTAJ2GZ975372` against state and federal records, establishing a foundation for accurate risk profiling.\n\nKey technical and legal factors derived from the VIN and Maine's regulatory framework include:\n*   **Title Brand Verification:** The report cross-references the vehicle's history with the Maine DMV to identify any title brands, such as Salvage, Rebuilt, Flood, or Junk, as defined by the Maine Vehicle Code. These brands are permanent indicators of severe past damage and fundamentally alter risk categorization.\n*   **Structural and Safety Documentation:** While specific platform or safety package data for this model may not be detailed in all reports, the absence of a branded title does not guarantee a clean history. Insurers will scrutinize any recorded incidents for implications on structural integrity and safety system functionality.\n*   **Registration and Inspection Compliance:** Maine operates a title-holding system and mandates a state-required vehicle inspection. A consistent history within Maine, verified through the Maine DMV, supports a lower risk profile than a vehicle with frequent interstate transfers, which can complicate history verification.\n*   **Environmental Risk Considerations:** The report incorporates data on regional environmental risks pertinent to Maine, which insurers use to assess the probability of certain damage types, such as corrosion from road treatments or moisture-related electrical issues, even in the absence of a formal flood brand.\n\nFor insurers, the VIN acts as the primary key to unlocking this consolidated risk profile. A discrepancy between the decoded model year (position 10 of the VIN) and the registered history, or an inconsistent record of the World Manufacturer Identifier `5XX`, can signal potential fraud or identity concealment, triggering a high-risk classification.\n\n## Buyer Guide\n\nA comprehensive VIN check is a critical due diligence step for any used vehicle purchase in Maine, particularly for a model like the 2016 Kia Telluride Hybrid. This guide provides a technical and legal checklist to verify the vehicle's history, confirm its structural and administrative status, and protect against fraud. Maine operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership, and it is held by the lienholder or owner. Verification must align with records from the **Maine DMV** and adhere to the **Maine Vehicle Code**. The following checklist is designed for systematic review using the VIN `5XX8HTAJ2GZ975372`.\n\n**1. VIN Structure and Authenticity Validation**\n*   Confirm the VIN `5XX8HTAJ2GZ975372` is exactly 17 characters long, as mandated by international standards. A different length is an immediate red flag.\n*   Validate the World Manufacturer Identifier (WMI). The first three characters, `5XX`, should correspond to the manufacturer and region. Cross-reference this with the vehicle's make.\n*   Inspect the physical VIN plate on the dashboard (visible through the windshield) and secondary locations (e.g., door jamb, firewall) for consistency. Any variation, alteration, or mismatch indicates potential VIN fraud or vehicle retagging.\n\n**2. Title and Ownership History Analysis**\n*   Obtain the vehicle's title history report from standard state and federal data sources. Scrutinize the chain of ownership for gaps or frequent transfers, which can be indicative of hidden problems.\n*   Examine the title for any official **brands** applied by the Maine DMV or other jurisdictions. In Maine, key brands to identify include **Salvage**, **Rebuilt**, **Flood**, and **Junk**. A branded title significantly impacts value, safety, and insurability.\n*   Verify the title's status is clear of any active liens. In Maine's title-holding system, a lien release must be documented on the title itself or with a separate notarized release for the seller to convey clear ownership.\n\n**3. Damage and Incident Reporting**\n*   Review the history report for insurance claims, police accident reports, and damage disclosures. Pay specific attention to entries indicating structural damage, airbag deployment, or repair estimates that exceed a certain threshold of the vehicle's value.\n\n## Market Value\n\nA 2016 Kia Telluride Hybrid's market value in Maine is determined by a confluence of technical, legal, and regional factors beyond its base model year. A comprehensive VIN check is essential for isolating these variables to establish an accurate valuation. The process relies on standard state and federal data sources to compile a factual history.\n\nKey valuation factors include:\n*   **Title Brand History:** The presence of any brand, such as \"Salvage,\" \"Rebuilt,\" \"Flood,\" or \"Junk,\" as defined by the Maine Vehicle Code, will drastically reduce market value and affect insurability.\n*   **Ownership and Registration Pattern:** A consistent history within Maine's title-holding system, verified through the Maine DMV, supports value, while frequent transfers or gaps may indicate underlying issues.\n*   **Compliance Record:** Documentation of the state-required vehicle inspection is a mandatory value indicator, confirming the vehicle's roadworthiness and legal status.\n\n## Recalls & Technical Service Bulletins\n\nA comprehensive VIN check for a 2016 Kia Telluride Hybrid in Maine must include a thorough review of recall and Technical Service Bulletin (TSB) data. This analysis is distinct from title history, focusing instead on manufacturer-issued corrective actions for safety defects or widespread technical problems. For a vehicle identified by a VIN beginning with a WMI code like \"5XX\", verifying this history is a critical component of due diligence, as unresolved recalls can pose significant safety and operational risks. The process relies on standard state and federal data sources to compile this information.\n\n*   **Recall Compliance Verification:** An open safety recall represents a legal non-compliance issue that must be remedied by an authorized dealer at no cost to the vehicle owner. A report should confirm whether all mandated repairs for this model year and specific vehicle have been completed.\n*   **TSB Analysis for Common Issues:** Technical Service Bulletins document manufacturer-recommended repairs for known patterns of non-safety-related faults. Reviewing applicable TSBs for the Tellur.\n\n## Frequently Asked Questions\n\n**Q1: Will a VIN report show all accident history for a 2016 Kia Telluride Hybrid?**\nAnswer: No, a commercial VIN report aggregates data from specific sources like insurance claims, police reports, and NMVTIS total loss records. Minor incidents repaired privately, unreported damage, or events not captured in these databases will not appear, necessitating a thorough pre-purchase inspection.\n\n**Q2: Does a clean Maine title guarantee this vehicle was never declared a total loss?**\nAnswer: No, a clean Maine title does not guarantee the vehicle was never a total loss. Title washing can occur where vehicles declared Salvage or Junk in other states receive clean Maine titles upon transfer. Cross-referencing the National Motor Vehicle Title Information System (NMVTIS) is essential to identify interstate brands.\n\n**Q3: Can flood or water damage history be hidden from a standard VIN report?**\nAnswer: Yes, Flood damage history can be hidden if the incident occurred in a state without a mandatory branding law or if repairs were conducted privately without an insurance claim. Detection requires an NMVTIS check combined with a meticulous physical inspection for corrosion, silt, or mold in concealed areas.\n\n**Q4: What is title washing and how does it affect a vehicle's history in Maine?**\nAnswer: Title washing is the fraudulent practice of moving a vehicle with a branded title, such as Salvage or Rebuilt, through states with differing disclosure laws to obtain a clean title. In Maine's title-holding system, this can mask severe prior damage, making an NMVTIS report critical for uncovering the vehicle's true history.\n\n**Q5: How can I verify open safety recalls for this specific 2016 Kia Telluride Hybrid?**\nAnswer: You must verify open safety recalls by checking the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and by consulting Kia's official recall portal. Both sources must be checked to ensure comprehensive coverage, as databases are not always synchronized in real-time.\n\n**Q6: How do I check for active liens on a vehicle registered in Maine?**\nAnswer: You must conduct a lienholder search directly through the Maine DMV to verify no financial encumbrances exist before purchase. An active lien prevents legal title transfer until the secured debt is cleared, posing a significant financial risk to an unwary buyer.\n\n**Q7: What is the process for a Rebuilt title brand in Maine?**\nAnswer:.\n\n## Related VIN Check Guides\n\nA thorough VIN check for a 2016 Kia Telluride Hybrid in Maine requires cross-referencing multiple data points against official records. This process validates the vehicle's identity and legal standing by connecting decoded information with state documentation.\n\n*   **WMI Validation:** The first three characters (5XX) identify the manufacturer and region of assembly, which must correspond with the vehicle's make and import history.\n*   **Title System Alignment:** Maine operates a title-holding system, meaning the physical certificate is the primary legal document; the VIN on this title must match the vehicle's stamped VIN exactly.\n*   **Brand History Check:** The report searches for any title brands, such as Salvage or Flood, as defined by the Maine Vehicle Code and applied by the Maine DMV.\n\nCross-referencing these elements creates a reliable chain of custody and helps identify discrepancies that may indicate fraud or prior significant damage.\n[[END_B.\n\n## Check Your VIN Now\n\nA comprehensive VIN check is a critical due diligence step for any vehicle transaction in Maine. This process cross-references the provided VIN, 5XX8HTAJ2GZ975372, against state and federal databases to verify its legitimacy and uncover recorded history. For a 2016 Kia Telluride Hybrid, this verification is governed by the Maine Vehicle Code and administered by the Maine DMV within its title-holding system.\n\n*   **Verify Title Status:** Confirm the legal title is free of brands like Salvage, Rebuilt, Flood, or Junk, which are permanently recorded by the state.\n*   **Authenticate VIN Structure:** Validate the 17-character code, ensuring the WMI (World Manufacturer Identifier) begins with an authorized code like '5XX' and all positions, including the Check Digit and Model Year, are correct.\n*   **Assess Inspection Compliance:**.",
+    "wordCount": 2905,
+    "blocks": 13,
+    "blocksDetail": {
+      "hero": {
+        "provider": "ollama",
+        "wordCount": 252
+      },
+      "nmvtis": {
+        "provider": "ollama",
+        "wordCount": 276
+      },
+      "vin_decoder": {
+        "provider": "ollama",
+        "wordCount": 144
+      },
+      "state_specific": {
+        "provider": "deepseek",
+        "wordCount": 230
+      },
+      "fraud_patterns": {
+        "provider": "deepseek",
+        "wordCount": 256
+      },
+      "accident_intelligence": {
+        "provider": "deepseek",
+        "wordCount": 171
+      },
+      "insurance_risk": {
+        "provider": "deepseek",
+        "wordCount": 329
+      },
+      "buyer_guide": {
+        "provider": "ollama",
+        "wordCount": 362
+      },
+      "market_value": {
+        "provider": "deepseek",
+        "wordCount": 144
+      },
+      "recalls_tsbs": {
+        "provider": "deepseek",
+        "wordCount": 175
+      },
+      "faq": {
+        "provider": "ollama",
+        "wordCount": 382
+      },
+      "internal_links": {
+        "provider": "ollama",
+        "wordCount": 148
+      },
+      "cta": {
+        "provider": "ollama",
+        "wordCount": 134
+      }
+    },
+    "timestamp": "2025-12-04T19:37:58.546Z",
+    "validationStats": {
+      "totalBlocks": 13,
+      "validBlocks": 13,
+      "failedBlocks": 3,
+      "autoAddedMarkers": 11,
+      "autoFixedEndings": 9
+    },
+    "uniquenessScore": 1,
+    "lexicalVariation": 1,
+    "structuralVariant": "state_regulations",
+    "styleVariant": "Legal Academic",
+    "performanceStats": {
+      "totalTime": 90380,
+      "averageBlockTime": 18638.153846153848,
+      "totalRetries": 9,
+      "cacheHitRate": 0.15384615384615385,
+      "providerStats": {
+        "ollama": {
+          "count": 6,
+          "totalTime": 138606,
+          "averageTime": 23101,
+          "retries": 6,
+          "cacheHits": 0
+        },
+        "fragment-cache": {
+          "count": 2,
+          "totalTime": 0,
+          "averageTime": 0,
+          "retries": 0,
+          "cacheHits": 2
+        },
+        "deepseek": {
+          "count": 5,
+          "totalTime": 103690,
+          "averageTime": 20738,
+          "retries": 3,
+          "cacheHits": 0
+        }
+      }
+    },
+    "generationTime": 90380
+  },
+  "generated_at": "2025-12-04T19:37:58.661Z",
+  "generation_time": "90.38",
+  "analysis_depth": "deep"
+}

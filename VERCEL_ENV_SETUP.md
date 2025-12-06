@@ -27,8 +27,7 @@ SEO_BUILD_CONCURRENCY=25  # Для Vercel (больше ресурсов)
 
 ### Опционально:
 - `SEO_ENABLE_AI=1` (если используешь API на Vercel)
-- `GROQ_API_KEY` (если используешь Groq)
-- `DEEPSEEK_API_KEY` (если используешь DeepSeek)
+- `DEEPSEEK_API_KEY` (обязательно для AI генерации)
 
 ### НЕ НУЖНО:
 - ❌ `USE_LOCAL_AI` - только для локального MacBook
@@ -47,8 +46,7 @@ SEO_BUILD_CONCURRENCY=25  # Для Vercel (больше ресурсов)
 4. Добавь переменные:
    - `SEO_BUILD_CONCURRENCY` = `25`
    - `SEO_ENABLE_AI` = `1` (если используешь API)
-   - `GROQ_API_KEY` = твой ключ (если используешь)
-   - `DEEPSEEK_API_KEY` = твой ключ (если используешь)
+   - `DEEPSEEK_API_KEY` = твой ключ (обязательно для AI генерации)
 
 ### Вариант 2: Через Vercel CLI
 
@@ -75,16 +73,16 @@ vercel env add SEO_ENABLE_AI production
 ```javascript
 // Код проверяет:
 if (USE_LOCAL_AI === '1') {
-  // Использует локальный AI (Ollama)
+  // Использует локальный AI (Ollama) - отключен
 } else {
-  // Использует API (DeepSeek/Groq)
+  // Использует API (DeepSeek)
 }
 ```
 
 ### На Vercel:
 ```javascript
 // USE_LOCAL_AI не установлен или = '0'
-// Код автоматически использует API (DeepSeek/Groq)
+// Код автоматически использует API (DeepSeek)
 ```
 
 **Вывод:** На Vercel локальный AI не используется, поэтому `USE_LOCAL_AI` не нужен.
@@ -97,21 +95,21 @@ if (USE_LOCAL_AI === '1') {
 ```bash
 SEO_BUILD_CONCURRENCY=25
 SEO_ENABLE_AI=1
-GROQ_API_KEY=твой_ключ
 DEEPSEEK_API_KEY=твой_ключ
 ```
 
 ### В .env.local (локально):
 ```bash
-USE_LOCAL_AI=1
-LOCAL_AI_MODEL=phi3
+# Локальный AI отключен (Ollama больше не используется)
+SEO_ENABLE_AI=1
+DEEPSEEK_API_KEY=твой_ключ
 SEO_BUILD_CONCURRENCY=6
 AUTO_DEPLOY=1
 ```
 
 **Результат:**
-- На MacBook: локальный AI (быстро, бесплатно)
-- На Vercel: API (DeepSeek/Groq)
+- На MacBook: DeepSeek API
+- На Vercel: DeepSeek API
 
 ---
 

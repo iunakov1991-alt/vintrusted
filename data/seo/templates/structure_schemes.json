@@ -1,0 +1,177 @@
+[
+  {
+    "name": "analytic_tx",
+    "sequence": ["hero", "state_specific", "nmvtis", "accident_intelligence", "vin_decoder", "fraud_patterns", "insurance_risk", "buyer_guide", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "technical_first",
+    "sequence": ["hero", "vin_decoder", "deep_explanation", "accident_intelligence", "nmvtis", "insurance_risk", "state_specific", "fraud_patterns", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "legal_then_tech",
+    "sequence": ["hero", "key_facts", "nmvtis", "fraud_patterns", "vin_decoder", "accident_intelligence", "buyer_guide", "insurance_risk", "state_specific", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "risk_focused",
+    "sequence": ["hero", "fraud_patterns", "accident_intelligence", "insurance_risk", "state_specific", "vin_decoder", "nmvtis", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "consumer_guide",
+    "sequence": ["hero", "key_facts", "buyer_guide", "vin_decoder", "accident_intelligence", "fraud_patterns", "state_specific", "insurance_risk", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "dmv_official",
+    "sequence": ["hero", "key_facts", "nmvtis", "state_specific", "vin_decoder", "fraud_patterns", "accident_intelligence", "insurance_risk", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "forensic_analysis",
+    "sequence": ["hero", "deep_explanation", "vin_decoder", "accident_intelligence", "fraud_patterns", "nmvtis", "state_specific", "insurance_risk", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "market_value_first",
+    "sequence": ["hero", "market_value", "insurance_risk", "vin_decoder", "accident_intelligence", "fraud_patterns", "state_specific", "nmvtis", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "state_priority",
+    "sequence": ["hero", "state_specific", "key_facts", "nmvtis", "vin_decoder", "fraud_patterns", "accident_intelligence", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "comprehensive_flow",
+    "sequence": ["hero", "key_facts", "vin_decoder", "deep_explanation", "nmvtis", "state_specific", "accident_intelligence", "fraud_patterns", "market_value", "insurance_risk", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "quick_scan",
+    "sequence": ["hero", "key_facts", "vin_decoder", "accident_intelligence", "fraud_patterns", "state_specific", "buyer_guide", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "deep_dive",
+    "sequence": ["hero", "deep_explanation", "vin_decoder", "nmvtis", "state_specific", "accident_intelligence", "fraud_patterns", "market_value", "insurance_risk", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "insurance_focused",
+    "sequence": ["hero", "insurance_risk", "accident_intelligence", "fraud_patterns", "vin_decoder", "nmvtis", "state_specific", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "fraud_prevention",
+    "sequence": ["hero", "fraud_patterns", "state_specific", "vin_decoder", "accident_intelligence", "nmvtis", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "technical_expert",
+    "sequence": ["hero", "vin_decoder", "deep_explanation", "accident_intelligence", "fraud_patterns", "nmvtis", "state_specific", "insurance_risk", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "buyer_protection",
+    "sequence": ["hero", "buyer_guide", "key_facts", "fraud_patterns", "accident_intelligence", "vin_decoder", "state_specific", "nmvtis", "insurance_risk", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "regulatory_compliance",
+    "sequence": ["hero", "nmvtis", "state_specific", "key_facts", "vin_decoder", "fraud_patterns", "accident_intelligence", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "safety_first",
+    "sequence": ["hero", "recalls_tsbs", "accident_intelligence", "vin_decoder", "fraud_patterns", "state_specific", "nmvtis", "insurance_risk", "buyer_guide", "market_value", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "value_assessment",
+    "sequence": ["hero", "market_value", "vin_decoder", "accident_intelligence", "fraud_patterns", "state_specific", "nmvtis", "insurance_risk", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "state_regulations",
+    "sequence": ["hero", "state_specific", "nmvtis", "fraud_patterns", "vin_decoder", "accident_intelligence", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "comprehensive_check",
+    "sequence": ["hero", "key_facts", "vin_decoder", "nmvtis", "state_specific", "accident_intelligence", "fraud_patterns", "insurance_risk", "market_value", "buyer_guide", "recalls_tsbs", "deep_explanation", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "risk_analysis",
+    "sequence": ["hero", "accident_intelligence", "fraud_patterns", "insurance_risk", "state_specific", "vin_decoder", "nmvtis", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "legal_framework",
+    "sequence": ["hero", "nmvtis", "state_specific", "fraud_patterns", "vin_decoder", "accident_intelligence", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "technical_specs",
+    "sequence": ["hero", "vin_decoder", "deep_explanation", "recalls_tsbs", "accident_intelligence", "fraud_patterns", "state_specific", "nmvtis", "insurance_risk", "market_value", "buyer_guide", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "practical_guide",
+    "sequence": ["hero", "buyer_guide", "key_facts", "vin_decoder", "accident_intelligence", "fraud_patterns", "state_specific", "nmvtis", "insurance_risk", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "forensic_detailed",
+    "sequence": ["hero", "deep_explanation", "vin_decoder", "nmvtis", "accident_intelligence", "fraud_patterns", "state_specific", "insurance_risk", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "quick_verification",
+    "sequence": ["hero", "key_facts", "vin_decoder", "fraud_patterns", "accident_intelligence", "state_specific", "buyer_guide", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "comprehensive_analysis",
+    "sequence": ["hero", "key_facts", "vin_decoder", "deep_explanation", "nmvtis", "state_specific", "accident_intelligence", "fraud_patterns", "market_value", "insurance_risk", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "state_compliance",
+    "sequence": ["hero", "state_specific", "nmvtis", "key_facts", "vin_decoder", "fraud_patterns", "accident_intelligence", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "risk_evaluation",
+    "sequence": ["hero", "insurance_risk", "accident_intelligence", "fraud_patterns", "state_specific", "vin_decoder", "nmvtis", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "buyer_education",
+    "sequence": ["hero", "buyer_guide", "key_facts", "vin_decoder", "accident_intelligence", "fraud_patterns", "state_specific", "nmvtis", "insurance_risk", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "technical_deep",
+    "sequence": ["hero", "vin_decoder", "deep_explanation", "accident_intelligence", "fraud_patterns", "nmvtis", "state_specific", "insurance_risk", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "legal_protection",
+    "sequence": ["hero", "nmvtis", "state_specific", "fraud_patterns", "vin_decoder", "accident_intelligence", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "value_focused",
+    "sequence": ["hero", "market_value", "vin_decoder", "accident_intelligence", "fraud_patterns", "state_specific", "nmvtis", "insurance_risk", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "safety_compliance",
+    "sequence": ["hero", "recalls_tsbs", "accident_intelligence", "vin_decoder", "fraud_patterns", "state_specific", "nmvtis", "insurance_risk", "buyer_guide", "market_value", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "fraud_detection",
+    "sequence": ["hero", "fraud_patterns", "vin_decoder", "accident_intelligence", "state_specific", "nmvtis", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "comprehensive_review",
+    "sequence": ["hero", "key_facts", "vin_decoder", "nmvtis", "deep_explanation", "state_specific", "accident_intelligence", "fraud_patterns", "market_value", "insurance_risk", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "state_specific_focus",
+    "sequence": ["hero", "state_specific", "key_facts", "nmvtis", "vin_decoder", "fraud_patterns", "accident_intelligence", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "risk_assessment",
+    "sequence": ["hero", "accident_intelligence", "fraud_patterns", "insurance_risk", "state_specific", "vin_decoder", "nmvtis", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "technical_analysis",
+    "sequence": ["hero", "vin_decoder", "deep_explanation", "accident_intelligence", "fraud_patterns", "nmvtis", "state_specific", "insurance_risk", "market_value", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "buyer_safety",
+    "sequence": ["hero", "buyer_guide", "fraud_patterns", "accident_intelligence", "vin_decoder", "state_specific", "nmvtis", "insurance_risk", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "regulatory_detailed",
+    "sequence": ["hero", "nmvtis", "state_specific", "key_facts", "vin_decoder", "fraud_patterns", "accident_intelligence", "insurance_risk", "buyer_guide", "market_value", "recalls_tsbs", "faq", "internal_links", "cta"]
+  },
+  {
+    "name": "value_analysis",
+    "sequence": ["hero", "market_value", "insurance_risk", "vin_decoder", "accident_intelligence", "fraud_patterns", "state_specific", "nmvtis", "buyer_guide", "recalls_tsbs", "faq", "internal_links", "cta"]
+  }
+]
+
+
+

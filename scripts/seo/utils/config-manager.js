@@ -142,7 +142,7 @@ class ConfigManager {
       minQualityScore: 0.70,
       enableAI: true,
       aiMaxTokens: 600,
-      aiProviders: ["groq", "deepseek", "openai"],
+      aiProviders: ["deepseek"],
       languages: ["en", "es"],
       defaultLanguage: "en",
       intents: [

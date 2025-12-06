@@ -1,0 +1,59 @@
+# CANONICAL TEMPLATE FOR BLOCK: nmvtis
+
+# ОПИСАНИЕ:
+#   Здесь ты можешь редактировать промпт для блока "nmvtis"
+#   без изменения кода.
+#
+#   Используй переменные:
+#     {MAKE}  — марка (например, Toyota)
+#     {MODEL} — модель (например, Camry)
+#     {YEAR}  — год (например, 2018)
+#     {STATE} — штат (например, California)
+#     {STATE_SLUG} — slug штата (например, california)
+#     {VIN}   — пример VIN (например, 4T1B11HK3JU123456)
+#     {WORD_COUNT} — целевое количество слов
+#
+# ТРЕБОВАНИЯ:
+#   - Техно-аналитика, понятная нормальному человеку.
+#   - Избегай воды.
+#   - Объём: между {WORD_COUNT} словами (с небольшим допуском).
+#   - Не используй дословно клише из отдельного списка.
+#
+# ВАЖНО:
+#   В конце блока ОБЯЗАТЕЛЬНО поставить маркер конца:
+#       [[END_BLOCK:nmvtis]]
+#
+# Пример структуры:
+#
+# H2 заголовок
+# 1–2 абзаца вводки с привязкой к {YEAR} {MAKE} {MODEL} в {STATE}.
+# Буллеты с ключевыми техническими/правовыми моментами.
+# Короткий вывод, который логически завершает мысль.
+# В самом конце — маркер [[END_BLOCK:nmvtis]] на последней строке.
+
+Write a nmvtis block for a VIN check guide for {YEAR} {MAKE} {MODEL} in {STATE}.
+
+Style: DMV-grade, legal, antifraud, engineering-level explanation.
+Word count: {WORD_COUNT} words.
+Use FACTUAL, TECHNICAL style (no literary flourishes).
+
+CRITICAL REQUIREMENTS - NO EXCEPTIONS:
+- Complete ALL sentences fully - NO truncated text ending with "and", "or", "(", "[", "|"
+- Finish ALL bullet points completely - NO incomplete bullets
+- Complete ALL tables with ALL rows - NO partial tables
+- Ensure ALL sections have proper conclusions - NO abrupt endings
+- NO text breaks before headings (##) - finish the sentence, then add heading
+- NO incomplete thoughts or cut-off phrases
+- Every paragraph must have a complete thought
+- Every list item must be a complete sentence or phrase
+
+VALIDATION RULES:
+- If you start a sentence, you MUST finish it
+- If you start a table, you MUST complete all rows
+- If you start a list, you MUST complete all items
+- If you mention a concept, you MUST explain it fully
+
+You MUST end your response with exactly this marker on a new line:
+[[END_BLOCK:nmvtis]]
+
+After the marker, there must be NO additional text, spaces, or content.

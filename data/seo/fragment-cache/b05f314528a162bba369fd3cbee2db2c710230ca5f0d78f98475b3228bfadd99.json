@@ -1,0 +1,41 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "30",
+    "year": "2022",
+    "stateSlug": "34",
+    "stateLabel": "34",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGYSF376N9746822",
+    "variationContext": {
+      "structuralVariant": "state_compliance",
+      "styleVariant": {
+        "name": "Legal Academic",
+        "tone": "formal, statute-referenced, analytical",
+        "description": "Формальный академический стиль с ссылками на законодательство",
+        "characteristics": [
+          "Emphasizes legal compliance and regulatory frameworks",
+          "Uses formal terminology and statutory references",
+          "Focuses on documentation and verification processes",
+          "Academic citation style",
+          "Precise legal terminology"
+        ],
+        "openingPhrases": [
+          "A comprehensive legal and technical audit",
+          "From a regulatory compliance perspective",
+          "Under state and federal vehicle regulations",
+          "Per statutory requirements",
+          "In accordance with regulatory frameworks"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": null
+    }
+  },
+  "content": "**Q1: What specific data sources are compiled in a commercial VIN history report for a 2022 Toyota?**\nAnswer: Commercial reports aggregate data from specific, discrete sources including insurance claim databases, police accident reports, state DMV title and registration records, and the National Motor Vehicle Title Information System (NMVTIS) for total loss and brand history.\n\n**Q2: Does a VIN report provide a complete mechanical or diagnostic history for a 2022 Toyota?**\nAnswer: No, standard VIN reports do not contain comprehensive mechanical service records, diagnostic trouble codes, or real-time system health data; they primarily document titling events, major damage reports, and odometer readings from official sources.\n\n**Q3: Can a vehicle with a clean California title have a concealed salvage history from another jurisdiction?**\nAnswer: Yes, title washing can occur where a vehicle declared salvage in a state with weaker disclosure laws is re-titled in California, receiving a clean brand; NMVTIS is the primary federal tool to identify such interstate brand discrepancies.\n\n**Q4: How is unrepaired safety recall status verified for a specific 2022 Toyota VIN?**\nAnswer: Verification requires checking the National Highway Traffic Safety Administration (NHTSA) recall database using the full 17-character VIN, followed by confirmation through the manufacturer's own recall lookup portal, as both systems must be consulted.\n\n**Q5: What legal limitations exist regarding lienholder information on a standard VIN report?**\nAnswer: While some reports may indicate a lien's presence, the specific lienholder's identity and the exact financial encumbrance amount are typically shielded; a formal lien search through the California DMV is required for complete disclosure.\n\n**Q6: What constitutes the \"Revived Salvage\" brand under California Vehicle Code regulations?**\nAnswer: The \"Revived Salvage\" brand is a permanent designation applied by the California DMV after a salvaged vehicle passes a mandatory California Highway Patrol (CHP) inspection, a brake and lamp inspection, and meets all registration requirements.\n\n**Q7: How can potential odometer fraud be identified beyond the reported mileage history?**\nAnswer: Detection requires a multi-point inspection: examining physical wear patterns on pedals and seats, verifying mileage consistency across all available service records, and performing a diagnostic scan of the vehicle's electronic control units for stored mileage data.\n\n**Q8: What is VIN cloning and what are the primary forensic indicators.",
+  "timestamp": "2025-12-04T10:07:24.451Z",
+  "wordCount": 365
+}

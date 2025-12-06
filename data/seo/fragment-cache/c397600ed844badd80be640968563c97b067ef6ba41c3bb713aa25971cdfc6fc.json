@@ -1,0 +1,100 @@
+{
+  "fragmentType": "faq",
+  "context": {
+    "make": "Subaru",
+    "model": "WRX STI",
+    "year": "2021",
+    "stateSlug": "utah",
+    "stateLabel": "Utah",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "4S3BZFLS9MF470998",
+    "variationContext": {
+      "structuralVariant": "technical_expert",
+      "styleVariant": {
+        "name": "Investigative",
+        "tone": "fraud-first, pattern detection, red flags",
+        "description": "Расследовательский стиль с фокусом на обнаружение мошенничества",
+        "characteristics": [
+          "Emphasizes fraud detection and pattern recognition",
+          "Uses investigative terminology and red flag indicators",
+          "Focuses on uncovering hidden issues",
+          "Pattern detection methodology",
+          "Risk identification"
+        ],
+        "openingPhrases": [
+          "Investigative analysis reveals",
+          "Red flags to watch for include",
+          "Fraud detection patterns indicate",
+          "Warning signs suggest",
+          "Investigation uncovers"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 0,
+      "factSheet": {
+        "vin": "4S3BZFLS9MF470998",
+        "make": "Subaru",
+        "model": "WRX STI",
+        "year": 2021,
+        "state": "utah",
+        "generated_at": "2025-12-04T08:49:20.495Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "4S3"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Truck"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Utah DMV"
+          ],
+          "main_statutes": [
+            "Utah Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "**Q1: Will a VIN report for a 2021 Subaru WRX STI show all accident history?**\nAnswer: No, a commercial vehicle history report aggregates data from specific sources like insurance claims, police reports, and the National Motor Vehicle Title Information System (NMVTIS) for total loss declarations. Incidents repaired privately, unreported damage, or events not captured in the provider's database will not appear in the report.\n\n**Q2: Does a clean Utah title guarantee this vehicle was never declared salvage or rebuilt?**\nAnswer: No, a clean Utah title does not guarantee the vehicle lacks a prior branded history. Title washing can occur when a vehicle with a salvage or rebuilt brand from another state is transferred to Utah, which operates a title-holding system, and receives a clean title. Cross-referencing with NMVTIS is essential to identify interstate brands.\n\n**Q3: How can flood or water damage history be hidden from a standard VIN check?**\nAnswer: Flood damage can be hidden if the incident occurred in a state that did not brand the title, if repairs were conducted privately without an insurance claim, or if the event predates modern reporting databases. Detection requires an NMVTIS check combined with a thorough physical inspection for corrosion, silt, or mold in compartments.\n\n**Q4: What is the process for verifying open safety recalls on this vehicle?**\nAnswer: To verify open safety recalls, you must check the National Highway Traffic Safety Administration (NHTSA) website using the full 17-character VIN and consult Subaru's official recall portal. Both sources must be checked independently, as they may contain different or updated information.\n\n**Q5: How do I check for active liens on a vehicle registered in Utah?**\nAnswer: You must conduct a lienholder search through the Utah DMV to verify no financial encumbrances exist on the vehicle title. A lien prevents legal title transfer until the secured debt is cleared, making this verification a critical step before purchase.\n\n**Q6: What are the common title brands applied by the Utah DMV?**\nAnswer: The Utah DMV may apply the following title brands: Salvage, Rebuilt, Flood, or Junk. These brands are permanent notations on the vehicle's title that indicate a severe history affecting its value and safety.\n\n**Q7: Can odometer fraud be detected through a standard VIN check report?**\nAnswer: A standard VIN check may show mileage discrepancies if they were reported to sources like service records or state inspections. However, sophisticated odometer rollback via CAN-Bus manipulation may not be reported. Detection requires inspecting physical wear, verifying the mileage chain in service records, and performing an electronic control unit (ECU) scan.\n\n**Q8: What is VIN cloning and how can it be identified for a 2021 WRX STI?**\nAnswer: VIN cloning involves applying a legitimate VIN from a similar vehicle to a stolen or totaled one. Identification requires physically verifying the VIN plate on the dashboard, door jamb, and firewall for tampering signs like mismatched rivets or adhesive residue, and checking NMVTIS for duplicate VIN activity.\n\n**Q9: What legal statutes govern vehicle titles and fraud in Utah?**\nAnswer: Vehicle titling and related fraud in Utah are governed primarily by the Utah Vehicle Code. This code outlines the requirements for title issuance, branding, and the penalties for fraudulent activities like title washing or odometer tampering.\n\n**Q10: What does a \"state-required vehicle inspection\" entail in Utah?**\nAnswer: A state-required vehicle inspection in Utah may be mandated for specific transactions, such as registering an out-of-state vehicle or rebuilding a branded vehicle. This inspection typically verifies the vehicle's identity and that it meets safety and emissions standards.\n\n**Q11: How accurate is the vehicle description (.",
+  "timestamp": "2025-12-04T08:51:15.267Z",
+  "wordCount": 592
+}

@@ -46,12 +46,27 @@ const { AITrainingPipeline } = require('./ai/ai-training-pipeline');
 // ТРИЗ оптимизация: единые менеджеры
 const { getConfigManager } = require('./utils/config-manager');
 const { getErrorHandler } = require('./utils/error-handler');
+const { isFeatureEnabled } = require('./utils/feature-flag');
 
 /**
  * SEO MONSTER 6.0: Master Build
  * Полная интеграция всех модулей
  */
 async function main() {
+  // Загружаем конфигурацию ПЕРВОЙ (используется ниже)
+  const configManager = getConfigManager();
+  const errorHandler = getErrorHandler({ debug: process.env.DEBUG === '1' });
+  
+  const config = errorHandler.wrapSync(
+    () => configManager.getConfig(),
+    { module: 'MASTER', operation: 'loadConfig', fallback: configManager.getDefaultConfig() }
+  );
+
+  const rlState = errorHandler.wrapSync(
+    () => configManager.getRLState(),
+    { module: 'MASTER', operation: 'loadRLState', fallback: configManager.getDefaultRLState() }
+  );
+
   // M1 Optimizer для MacBook M1 (условная загрузка)
   // TRIZ: Разделение через feature flags для плавного перехода на M1
   let m1Optimizer = null;
@@ -124,19 +139,6 @@ async function main() {
   log('MASTER', `Starting SEO MONSTER 6.0 build (buildId: ${buildId})`);
 
   try {
-    // ТРИЗ оптимизация: используем единый Config Manager
-    const configManager = getConfigManager();
-    const errorHandler = getErrorHandler({ debug: process.env.DEBUG === '1' });
-    
-    const config = errorHandler.wrapSync(
-      () => configManager.getConfig(),
-      { module: 'MASTER', operation: 'loadConfig', fallback: configManager.getDefaultConfig() }
-    );
-
-    const rlState = errorHandler.wrapSync(
-      () => configManager.getRLState(),
-      { module: 'MASTER', operation: 'loadRLState', fallback: configManager.getDefaultRLState() }
-    );
 
     // ТРИЗ: Инициализация всех модулей
     const { ErrorIsolation } = require('./protection/error-isolation');
@@ -362,7 +364,7 @@ async function main() {
           config.targetPagesPerBuild = result.recommended_build_volume;
           log('SEED-EXPANSION', `AI recommended build volume: ${result.recommended_build_volume}`);
           log('SEED-EXPANSION', `Reasoning: ${result.reasoning}`);
-          log('SEED-EXPANSION', `Strategy: Groq=${result.build_strategy.groq_pages}, DeepSeek=${result.build_strategy.deepseek_pages}, Cached=${result.build_strategy.cached_pages}`);
+          log('SEED-EXPANSION', `Strategy: DeepSeek=${result.build_strategy.deepseek_pages}, Cached=${result.build_strategy.cached_pages}`);
         }
       } catch (e) {
         log('SEED-EXPANSION', `Error: ${e.message}, using default seeds`);
@@ -394,7 +396,7 @@ async function main() {
       const plan = urlFactory.buildUrlPlan();
       
       // Incremental Build: фильтруем страницы, которые нужно обновить
-      if (config.features && config.features.incrementalBuild !== false) {
+      if (isFeatureEnabled(config, 'incrementalBuild')) {
         const { needsUpdate, skip } = incrementalBuild.filterPagesForIncrementalBuild(plan);
         log('INCREMENTAL-BUILD', `Incremental build: ${needsUpdate.length} need update, ${skip.length} skip`);
         ctx.urlPlan = needsUpdate;
@@ -489,7 +491,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
 
         // Adaptive H1 Switching
         let pageWithH1 = null;
-        if (config.features && config.features.h1Variants !== false) {
+        if (isFeatureEnabled(config, 'h1Variants')) {
           try {
             const { H1VariantsEngine } = require('./content/h1-variants-engine');
             const h1VariantsEngine = new H1VariantsEngine(config);
@@ -514,7 +516,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
 
         // Выбор layout (Adaptive Layout Selection)
         let layout;
-        if (config.features && config.features.adaptiveLayout !== false) {
+        if (isFeatureEnabled(config, 'adaptiveLayout')) {
           layout = adaptiveLayout.selectBestLayout(enrichedItem, layoutEngine.getAllLayouts()) || 
                    layoutEngine.selectLayout(enrichedItem, rlState.layoutWeights);
         } else {
@@ -695,7 +697,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         const embedded = smartEmbedder.embedInPage(aligned, extracted);
         
         // Keyword Clustering & Topic Modeling
-        if (config.features && config.features.keywordClustering !== false && Array.isArray(keywords) && keywords.length > 0) {
+        if (isFeatureEnabled(config, 'keywordClustering') && Array.isArray(keywords) && keywords.length > 0) {
           // Преобразуем объекты ключевых слов в строки для кластеризации
           const keywordStrings = keywords.map(kw => typeof kw === 'string' ? kw : kw.word);
           const clusters = keywordClustering.clusterKeywords(keywordStrings);
@@ -703,7 +705,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         }
         
         // Long-tail Keyword Expansion
-        if (config.features && config.features.longtailExpansion !== false) {
+        if (isFeatureEnabled(config, 'longtailExpansion')) {
           const longtailVariants = longtailExpansion.generateLongtailVariants(page.primaryKeyword || page.url);
           embedded.longtailKeywords = longtailVariants;
         }
@@ -741,7 +743,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         let localized = i18nEngine.localizePage(page);
         
         // Multi-language SEO Optimization
-        if (config.features && config.features.multilangSEO !== false) {
+        if (isFeatureEnabled(config, 'multilangSEO')) {
           localized = multilangSEO.optimize(localized);
         }
         
@@ -755,7 +757,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       log('STAGE', 'Synonym Enrichment');
       
       // Проверяем feature flag
-      if (config.features && config.features.synonyms === false) {
+      if (!isFeatureEnabled(config, 'synonyms')) {
         log('SYNONYM', 'Synonyms disabled, skipping');
         return;
       }
@@ -796,48 +798,48 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
         let html = templateEngine.renderPage(page, page.layout);
         
         // Search Intent Classification
-        if (config.features && config.features.searchIntent !== false) {
+        if (isFeatureEnabled(config, 'searchIntent')) {
           page = searchIntent.classifyAndOptimize(page);
         }
         
         // Auto FAQ Generation
-        if (config.features && config.features.autoFAQ !== false) {
+        if (isFeatureEnabled(config, 'autoFAQ')) {
           page = autoFAQ.generate(page);
         }
         
         // Content Depth Optimization
-        if (config.features && config.features.contentDepth !== false) {
+        if (isFeatureEnabled(config, 'contentDepth')) {
           page = contentDepth.optimize(page);
         }
         
         // Voice Search Optimization
-        if (config.features && config.features.voiceSearch !== false) {
+        if (isFeatureEnabled(config, 'voiceSearch')) {
           page = voiceSearch.optimize(page);
         }
         
         // SERP Features Optimization
-        if (config.features && config.features.serpFeatures !== false) {
+        if (isFeatureEnabled(config, 'serpFeatures')) {
           page = serpFeatures.optimizePage(page);
         }
         
         // Enhanced Structured Data
-        if (config.features && config.features.enhancedStructuredData !== false) {
+        if (isFeatureEnabled(config, 'enhancedStructuredData')) {
           page = enhancedStructuredData.optimizePage(page);
         }
         
         // Visual Content Optimization
-        if (config.features && config.features.visualOptimization !== false) {
+        if (isFeatureEnabled(config, 'visualOptimization')) {
           page = visualOptimizer.optimizePage(page);
           html = page.html || html;
         }
         
         // Core Web Vitals Optimization
-        if (config.features && config.features.coreWebVitals !== false) {
+        if (isFeatureEnabled(config, 'coreWebVitals')) {
           page = coreWebVitals.optimize(page);
         }
         
         // Local SEO Optimization
-        if (config.features && config.features.localSEO !== false) {
+        if (isFeatureEnabled(config, 'localSEO')) {
           page = localSEO.optimize(page);
         }
         
@@ -872,7 +874,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       const { scored, accepted, avgQuality } = qualityEngine.scorePages(ctx.pages);
       
       // Predictive Indexing Model
-      if (config.features && config.features.predictiveIndexing !== false && scored && Array.isArray(scored) && scored.length > 0) {
+      if (isFeatureEnabled(config, 'predictiveIndexing') && scored && Array.isArray(scored) && scored.length > 0) {
         const prioritized = predictiveIndexing.prioritizePages(scored);
         if (prioritized) {
           log('PREDICTIVE-INDEXING', `High priority: ${(prioritized.highPriority && Array.isArray(prioritized.highPriority)) ? prioritized.highPriority.length : 0}, Medium: ${(prioritized.mediumPriority && Array.isArray(prioritized.mediumPriority)) ? prioritized.mediumPriority.length : 0}, Low: ${(prioritized.lowPriority && Array.isArray(prioritized.lowPriority)) ? prioritized.lowPriority.length : 0}`);
@@ -880,7 +882,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       }
       
       // Traffic Prediction Model
-      if (config.features && config.features.trafficPrediction !== false && scored && Array.isArray(scored) && scored.length > 0) {
+      if (isFeatureEnabled(config, 'trafficPrediction') && scored && Array.isArray(scored) && scored.length > 0) {
         const trafficPrioritized = trafficPrediction.prioritizePages(scored);
         if (trafficPrioritized) {
           log('TRAFFIC-PREDICTION', `High potential: ${(trafficPrioritized.highPotential && Array.isArray(trafficPrioritized.highPotential)) ? trafficPrioritized.highPotential.length : 0}, Medium: ${(trafficPrioritized.mediumPotential && Array.isArray(trafficPrioritized.mediumPotential)) ? trafficPrioritized.mediumPotential.length : 0}`);
@@ -888,7 +890,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       }
       
       // Content Performance Analytics
-      if (config.features && config.features.contentAnalytics !== false) {
+      if (isFeatureEnabled(config, 'contentAnalytics')) {
         scored.forEach(page => {
           contentAnalytics.analyze(page);
         });
@@ -957,7 +959,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       internalLinksEngine.attachInternalLinks(ctx.acceptedPages, clusterEngine);
       
       // Internal Link Optimization (PageRank-based)
-      if (config.features && config.features.internalLinkOptimization !== false) {
+      if (isFeatureEnabled(config, 'internalLinkOptimization')) {
         internalLinkOptimizer.calculatePageRank(ctx.acceptedPages);
         ctx.acceptedPages = ctx.acceptedPages.map(page => {
           const optimizedLinks = internalLinkOptimizer.optimizeLinks(page, ctx.acceptedPages);
@@ -967,7 +969,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       }
       
       // Smart Canonical Engine
-      if (config.features && config.features.smartCanonical !== false) {
+      if (isFeatureEnabled(config, 'smartCanonical')) {
         ctx.acceptedPages = smartCanonical.processBatch(ctx.acceptedPages);
       }
       
@@ -1003,7 +1005,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       }
       
       // ТРИЗ оптимизация: валидация только на выборке для ускорения
-      if (config.features && config.features.mobileValidation !== false && ctx.acceptedPages.length > 0) {
+      if (isFeatureEnabled(config, 'mobileValidation') && ctx.acceptedPages.length > 0) {
         const sampleSize = Math.min(5, Math.floor(ctx.acceptedPages.length / 100)); // 1% или максимум 5
         if (sampleSize > 0) {
           const sample = ctx.acceptedPages.slice(0, sampleSize);
@@ -1036,16 +1038,28 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
                 page.html = templateEngine.renderPage(page, page.layout || layoutEngine.selectLayout(page, rlState.layoutWeights));
               }
               
+              // Валидация перед публикацией: не публикуем страницы с undefined или state
+              if (!page.vin || page.vin === 'undefined' || 
+                  !page.stateSlug || page.stateSlug === 'undefined' || page.stateSlug === 'state') {
+                log('PUBLISH', `Skipping page with invalid data: vin=${page.vin}, stateSlug=${page.stateSlug}`);
+                continue;
+              }
+              
               // Content Freshness Tracker (только для части страниц для ускорения)
-              if (config.features && config.features.contentFreshness !== false && Math.random() < 0.1) {
+              if (isFeatureEnabled(config, 'contentFreshness') && Math.random() < 0.1) {
                 contentFreshness.registerPage(page);
               }
               
-              staticArch.writeStaticFile(page, page.html);
-              published++;
+              try {
+                staticArch.writeStaticFile(page, page.html);
+                published++;
+              } catch (writeError) {
+                error('PUBLISH', `Failed to publish ${page.url}: ${writeError.message}`);
+                // Продолжаем публикацию других страниц
+              }
               
               // Incremental Build: обновляем checksum (только для части страниц)
-              if (config.features && config.features.incrementalBuild !== false && Math.random() < 0.1) {
+              if (isFeatureEnabled(config, 'incrementalBuild') && Math.random() < 0.1) {
                 incrementalBuild.updateChecksum(page);
               }
             } catch (e) {
@@ -1059,7 +1073,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       await Promise.all(writePromises);
       
       // Incremental Build: сохраняем checksums
-      if (config.features && config.features.incrementalBuild !== false) {
+      if (isFeatureEnabled(config, 'incrementalBuild')) {
         incrementalBuild.updateChecksumsBatch(ctx.acceptedPages);
         const stats = incrementalBuild.getStats();
         log('INCREMENTAL-BUILD', `Checksums saved: ${stats.totalChecksums} pages tracked`);
@@ -1128,7 +1142,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       
       // Sitemap Prioritization
       let pagesForSitemap = (ctx.acceptedPages && Array.isArray(ctx.acceptedPages)) ? ctx.acceptedPages : [];
-      if (config.features && config.features.sitemapPrioritization !== false && pagesForSitemap.length > 0) {
+      if (isFeatureEnabled(config, 'sitemapPrioritization') && pagesForSitemap.length > 0) {
         pagesForSitemap = sitemapPrioritizer.prioritize(pagesForSitemap);
         log('SITEMAP-PRIORITIZER', `Prioritized ${pagesForSitemap.length} pages for sitemap`);
       }
@@ -1196,7 +1210,7 @@ Write a comprehensive, expert-level analysis about "${item.intent}" that feels l
       duration: duration,
       clusters: (result.clusters && Array.isArray(result.clusters)) ? result.clusters.length : 0,
       uniquePages: (result.pages && Array.isArray(result.pages)) ? result.pages.length : 0,
-      aiEnabled: config.enableAI && (!!process.env.GROQ_API_KEY || !!process.env.DEEPSEEK_API_KEY),
+      aiEnabled: config.enableAI && !!process.env.DEEPSEEK_API_KEY,
       aiDecision: aiDecision ? {
         targetPages: aiDecision.targetPages,
         strategy: aiDecision.strategy,

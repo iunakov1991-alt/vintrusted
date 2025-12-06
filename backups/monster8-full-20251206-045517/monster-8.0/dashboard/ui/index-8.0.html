@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MONSTER 8.0 Панель управления</title>
+  <link rel="stylesheet" href="dashboard-8.0.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- HEADER -->
+    <header class="dashboard-header">
+      <div class="header-content">
+        <h1>🚀 MONSTER 8.0 Панель управления</h1>
+        <div class="header-status">
+          <span id="status-indicator" class="status-indicator">●</span>
+          <span id="status-text">Подключение...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+      <!-- LEFT COLUMN: Strategy & Control -->
+      <div class="dashboard-left">
+        <!-- Strategy Visualization -->
+        <section class="card strategy-card">
+          <h2>📊 Стратегия и выполнение</h2>
+          <div class="strategy-visualization">
+            <canvas id="strategy-chart"></canvas>
+          </div>
+          <div class="strategy-info">
+            <div class="info-item">
+              <span class="label">Фаза языка:</span>
+              <span id="lang-phase" class="value">-</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Режим длины:</span>
+              <span id="length-mode" class="value">-</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Порог EN:</span>
+              <span id="en-threshold" class="value">-</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Orchestrator Control -->
+        <section class="card control-card">
+          <h2>🎮 Управление оркестратором</h2>
+          <div class="control-buttons">
+            <button id="btn-start" class="btn btn-primary">▶ Запустить</button>
+            <button id="btn-stop" class="btn btn-danger">⏹ Остановить</button>
+            <button id="btn-start-batch" class="btn btn-success">🚀 Запустить партию</button>
+          </div>
+          <div class="orchestrator-status">
+            <div class="status-item">
+              <span class="label">Статус:</span>
+              <span id="orchestrator-status" class="value">-</span>
+            </div>
+            <div class="status-item">
+              <span class="label">PID:</span>
+              <span id="orchestrator-pid" class="value">-</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Batch Schedule -->
+        <section class="card schedule-card">
+          <h2>📅 Расписание партий</h2>
+          <div id="next-batch-info" class="next-batch-info">
+            <div class="next-batch-header">
+              <span class="label">Следующая партия:</span>
+              <span id="next-batch-time" class="value">-</span>
+            </div>
+            <div class="next-batch-details">
+              <div class="schedule-item">
+                <span class="label">Страниц:</span>
+                <span id="next-batch-pages" class="value">-</span>
+              </div>
+              <div class="schedule-item">
+                <span class="label">Язык:</span>
+                <span id="next-batch-lang" class="value">-</span>
+              </div>
+              <div class="schedule-item">
+                <span class="label">Длительность:</span>
+                <span id="next-batch-duration" class="value">-</span>
+              </div>
+            </div>
+            <div class="schedule-reminder" id="schedule-reminder">
+              <span id="reminder-text">-</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Batch Preview Modal -->
+        <div id="batch-preview-modal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>📋 Превью партии</h2>
+              <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div id="batch-preview-content">
+                <div class="preview-item">
+                  <span class="label">Ожидаемое количество страниц:</span>
+                  <span id="preview-pages" class="value">-</span>
+                </div>
+                <div class="preview-item">
+                  <span class="label">Язык:</span>
+                  <span id="preview-lang" class="value">-</span>
+                </div>
+                <div class="preview-item">
+                  <span class="label">Ожидаемая длительность:</span>
+                  <span id="preview-duration" class="value">-</span>
+                </div>
+                <div class="preview-item">
+                  <span class="label">Штаты:</span>
+                  <span id="preview-states" class="value">-</span>
+                </div>
+                <div class="preview-item">
+                  <span class="label">Зоны:</span>
+                  <span id="preview-zones" class="value">-</span>
+                </div>
+                <div class="preview-item">
+                  <span class="label">Форматы:</span>
+                  <span id="preview-formats" class="value">-</span>
+                </div>
+                <div class="preview-item">
+                  <span class="label">Автодеплой:</span>
+                  <span id="preview-auto-deploy" class="value">-</span>
+                </div>
+              </div>
+              <div class="modal-actions">
+                <button id="btn-confirm-batch" class="btn btn-primary">Подтвердить и запустить</button>
+                <button id="btn-cancel-batch" class="btn btn-secondary">Отмена</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTER COLUMN: Pages & BPG -->
+      <div class="dashboard-center">
+        <!-- Pages Statistics -->
+        <section class="card pages-card">
+          <h2>📄 Страницы в продакшене</h2>
+          <div class="pages-stats">
+            <div class="stat-box">
+              <div class="stat-value" id="pages-en">0</div>
+              <div class="stat-label">Английский</div>
+              <div class="stat-sublabel" id="pages-en-deployed">Задеплоено: 0</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="pages-es">0</div>
+              <div class="stat-label">Испанский</div>
+              <div class="stat-sublabel" id="pages-es-deployed">Задеплоено: 0</div>
+            </div>
+            <div class="stat-box stat-box-total">
+              <div class="stat-value" id="pages-total">0</div>
+              <div class="stat-label">Всего</div>
+              <div class="stat-sublabel" id="pages-total-deployed">Задеплоено: 0</div>
+            </div>
+          </div>
+          <div class="pages-chart">
+            <canvas id="pages-chart"></canvas>
+          </div>
+        </section>
+
+        <!-- Batch Progress -->
+        <section class="card batch-progress-card">
+          <h2>⚙️ Прогресс партии</h2>
+          <div class="batch-progress-info">
+            <div class="progress-info-item">
+              <span class="label">Статус:</span>
+              <span id="batch-status" class="value">-</span>
+            </div>
+            <div class="progress-info-item">
+              <span class="label">Текущая:</span>
+              <span id="batch-current" class="value">-</span>
+            </div>
+          </div>
+          <div class="batch-progress-bar-container">
+            <div class="progress-bar">
+              <div id="batch-progress-fill" class="progress-fill"></div>
+            </div>
+            <div class="progress-text" id="batch-progress-text">0 / 0 (0%)</div>
+          </div>
+          <div class="batch-stats-mini">
+            <div class="stat-mini">
+              <span class="stat-mini-label">Завершено:</span>
+              <span id="batch-completed" class="stat-mini-value">0</span>
+            </div>
+            <div class="stat-mini">
+              <span class="stat-mini-label">Ошибок:</span>
+              <span id="batch-failed" class="stat-mini-value">0</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Deploy Progress -->
+        <section class="card deploy-progress-card">
+          <h2>🚀 Прогресс деплоя</h2>
+          <div class="deploy-progress-info">
+            <div class="progress-info-item">
+              <span class="label">Создано:</span>
+              <span id="deploy-created" class="value">0</span>
+            </div>
+            <div class="progress-info-item">
+              <span class="label">Задеплоено:</span>
+              <span id="deploy-deployed" class="value">0</span>
+            </div>
+          </div>
+          <div class="deploy-progress-bar-container">
+            <div class="progress-bar">
+              <div id="deploy-progress-fill" class="progress-fill deploy-fill"></div>
+            </div>
+            <div class="progress-text" id="deploy-progress-text">0 / 0 (0%)</div>
+          </div>
+          <div class="deploy-stats-mini">
+            <div class="stat-mini">
+              <span class="stat-mini-label">Ожидает:</span>
+              <span id="deploy-pending" class="stat-mini-value">0</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- BPG Status -->
+        <section class="card bpg-card">
+          <h2>⚙️ Фоновая подготовка (BPG)</h2>
+          <div class="bpg-stats">
+            <div class="stat-box">
+              <div class="stat-value" id="bpg-blocks">0</div>
+              <div class="stat-label">Блоков готово</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value" id="bpg-ready">-</div>
+              <div class="stat-label">Статус</div>
+            </div>
+          </div>
+          <div class="bpg-progress">
+            <div class="progress-bar">
+              <div id="bpg-progress" class="progress-fill"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN: Logs & Learning -->
+      <div class="dashboard-right">
+        <!-- Logs -->
+        <section class="card logs-card">
+          <h2>📋 Логи</h2>
+          <div class="logs-controls">
+            <button id="btn-clear-logs" class="btn btn-small">Очистить</button>
+            <select id="log-filter">
+              <option value="all">Все</option>
+              <option value="info">Инфо</option>
+              <option value="warn">Предупреждения</option>
+              <option value="error">Ошибки</option>
+            </select>
+          </div>
+          <div id="logs-container" class="logs-container"></div>
+        </section>
+
+        <!-- Learning Ideas -->
+        <section class="card learning-card">
+          <h2>💡 Идеи для обучения</h2>
+          <div class="learning-form">
+            <textarea id="learning-input" placeholder="Введите идею для улучшения самообучения..."></textarea>
+            <div class="learning-form-controls">
+              <select id="learning-priority">
+                <option value="low">Низкий</option>
+                <option value="medium" selected>Средний</option>
+                <option value="high">Высокий</option>
+              </select>
+              <button id="btn-submit-idea" class="btn btn-primary btn-small">Отправить</button>
+            </div>
+          </div>
+          <div id="learning-ideas-list" class="learning-ideas-list"></div>
+        </section>
+
+        <!-- Batch History -->
+        <section class="card history-card">
+          <h2>📜 История партий</h2>
+          <div class="history-controls">
+            <button id="btn-refresh-history" class="btn btn-small">Обновить</button>
+            <select id="history-limit">
+              <option value="10">Последние 10</option>
+              <option value="20" selected>Последние 20</option>
+              <option value="50">Последние 50</option>
+            </select>
+          </div>
+          <div id="batch-history-list" class="batch-history-list">
+            <div class="history-loading">Загрузка истории...</div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="dashboard-8.0.js"></script>
+</body>
+</html>
+

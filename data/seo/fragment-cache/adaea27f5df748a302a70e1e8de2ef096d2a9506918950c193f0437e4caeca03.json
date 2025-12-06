@@ -1,0 +1,100 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Saturn",
+    "model": "L-Series",
+    "year": "2021",
+    "stateSlug": "louisiana",
+    "stateLabel": "Louisiana",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "1HGSYEM5XMW551968",
+    "variationContext": {
+      "structuralVariant": "legal_framework",
+      "styleVariant": {
+        "name": "Procedural",
+        "tone": "DMV process, step-by-step, compliance",
+        "description": "Процедурный стиль с пошаговыми инструкциями DMV",
+        "characteristics": [
+          "Emphasizes step-by-step DMV processes",
+          "Uses procedural terminology and compliance checklists",
+          "Focuses on regulatory compliance steps",
+          "Official process documentation",
+          "Compliance verification"
+        ],
+        "openingPhrases": [
+          "The DMV process requires",
+          "To comply with state regulations",
+          "Following official procedures",
+          "Per DMV requirements",
+          "The registration process involves"
+        ]
+      },
+      "stateBoost": null,
+      "modelBoost": null,
+      "depthRoll": 1,
+      "factSheet": {
+        "vin": "1HGSYEM5XMW551968",
+        "make": "Saturn",
+        "model": "L-Series",
+        "year": 2021,
+        "state": "louisiana",
+        "generated_at": "2025-12-04T08:47:45.343Z",
+        "source": "database",
+        "vin_facts": {
+          "length": 17,
+          "wmi_candidates": [
+            "1HG"
+          ],
+          "known_engines": [],
+          "body_types": [
+            "Unknown"
+          ],
+          "safety_package": null,
+          "unibody_name": null
+        },
+        "state_facts": {
+          "title_system": "title-holding",
+          "key_agencies": [
+            "Louisiana DMV"
+          ],
+          "main_statutes": [
+            "Louisiana Vehicle Code"
+          ],
+          "brands": [
+            "Salvage",
+            "Rebuilt",
+            "Flood",
+            "Junk"
+          ],
+          "inspection": "State-required vehicle inspection",
+          "env_risks": [
+            "Regional environmental risks"
+          ]
+        },
+        "global_invariants": {
+          "forbidden_claims": [
+            "Texas is a non-title state",
+            "California does not use titles",
+            "VIN has more than 17 characters",
+            "VIN can legally be changed to hide damage",
+            "A vehicle can have multiple valid VINs",
+            "Title brands can be removed by transferring to another state",
+            "Odometer readings are optional in vehicle history reports"
+          ],
+          "required_vin_positions": {
+            "9": "Check Digit",
+            "10": "Model Year",
+            "11": "Assembly Plant",
+            "1-3": "WMI (World Manufacturer Identifier)",
+            "4-8": "VDS (Vehicle Descriptor Section)",
+            "12-17": "Serial Number"
+          }
+        }
+      }
+    }
+  },
+  "content": "## State-Specific Considerations for Louisiana\n\nWhen conducting a VIN check on a 2021 Saturn L-Series registered in Louisiana, several state-specific legal and procedural factors must be accounted for to ensure a complete and accurate vehicle history assessment. Louisiana operates a **title-holding** system, meaning the physical certificate of title is the primary legal document proving ownership and must be presented for most official transactions. This system places significant importance on verifying the title's authenticity and chain of custody directly through the Louisiana DMV. The state's legal framework, governed primarily by the **Louisiana Vehicle Code**, establishes specific rules for branding, inspections, and fraud prevention that directly impact a vehicle's history and value. Understanding these localized procedures is essential for identifying discrepancies that may not be apparent in a generic national report.\n\nThe technical decoding of the VIN `1HGSYEM5XMW551968` provides the foundational data for this state-level analysis. The first three characters, or World Manufacturer Identifier (WMI), are `1HG`. This code is a critical starting point for verifying the vehicle's reported make and manufacturing origin against state registration records. In a title-holding state like Louisiana, any mismatch between the VIN-decoded information and the data on the physical title held by the Louisiana DMV is a major red flag for potential fraud or clerical error that requires immediate resolution before purchase.\n\n*   **Title Brand Verification:** Louisiana recognizes specific title brands that denote a vehicle's severe history. The primary brands to confirm are **Salvage**, **Rebuilt**, **Flood**, and **Junk**. A vehicle history report must cross-reference national databases with the official Louisiana title record to ensure these brands are accurately disclosed and have not been improperly obscured.\n*   **Mandatory Inspection Compliance:** Louisiana requires a **State-required vehicle inspection**. For a 2021 vehicle, this process verifies operational safety and, critically, can help identify vehicles with hidden damage or tampered VINs that may have bypassed branding requirements. The inspection record should be consistent with the vehicle's overall history.\n*   **Environmental Risk Assessment:** The state notes **Regional environmental risks**, which for Louisiana predominantly involve flood and water damage. A thorough VIN check must include a specific search for flood damage claims, insurance payouts, or recovery titles, even if a \"Flood\" brand is not immediately present on the current title, as water damage can have long-term corrosive effects.\n*   **Agency Data Reconciliation:** All findings should be validated against records from **Louisiana DMV**. This is the.",
+  "timestamp": "2025-12-04T08:49:13.420Z",
+  "wordCount": 392
+}

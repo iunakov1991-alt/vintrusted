@@ -1,0 +1,59 @@
+{
+  "vin": "19UPKNJS7HH429908",
+  "make": "Acura",
+  "model": "Integra Type S",
+  "year": 2017,
+  "state": "new-hampshire",
+  "generated_at": "2025-12-04T09:12:26.902Z",
+  "source": "database",
+  "vin_facts": {
+    "length": 17,
+    "wmi_candidates": [
+      "19U"
+    ],
+    "known_engines": [],
+    "body_types": [
+      "Unknown"
+    ],
+    "safety_package": null,
+    "unibody_name": null
+  },
+  "state_facts": {
+    "title_system": "title-holding",
+    "key_agencies": [
+      "New-hampshire DMV"
+    ],
+    "main_statutes": [
+      "New-hampshire Vehicle Code"
+    ],
+    "brands": [
+      "Salvage",
+      "Rebuilt",
+      "Flood",
+      "Junk"
+    ],
+    "inspection": "State-required vehicle inspection",
+    "env_risks": [
+      "Regional environmental risks"
+    ]
+  },
+  "global_invariants": {
+    "forbidden_claims": [
+      "Texas is a non-title state",
+      "California does not use titles",
+      "VIN has more than 17 characters",
+      "VIN can legally be changed to hide damage",
+      "A vehicle can have multiple valid VINs",
+      "Title brands can be removed by transferring to another state",
+      "Odometer readings are optional in vehicle history reports"
+    ],
+    "required_vin_positions": {
+      "9": "Check Digit",
+      "10": "Model Year",
+      "11": "Assembly Plant",
+      "1-3": "WMI (World Manufacturer Identifier)",
+      "4-8": "VDS (Vehicle Descriptor Section)",
+      "12-17": "Serial Number"
+    }
+  }
+}

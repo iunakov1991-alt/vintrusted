@@ -1,0 +1,54 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Honda",
+    "model": "Accord",
+    "year": "2019",
+    "stateSlug": "texas",
+    "stateLabel": "Texas",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "19UUB2F50KA123456",
+    "variationContext": {
+      "structuralVariant": "A",
+      "styleVariant": {
+        "name": "legal-technical",
+        "description": "Юридико-техничный стиль",
+        "characteristics": [
+          "Emphasizes legal compliance and regulatory frameworks",
+          "Uses formal terminology and statutory references",
+          "Focuses on documentation and verification processes"
+        ],
+        "openingPhrases": [
+          "A comprehensive legal and technical audit",
+          "From a regulatory compliance perspective",
+          "Under state and federal vehicle regulations"
+        ]
+      },
+      "stateBoost": {
+        "uniqueRules": [
+          "TxDMV title verification",
+          "Storm and flood risk assessment",
+          "Salvage title loopholes",
+          "Rebuilt vehicle inspection requirements"
+        ],
+        "specificPractices": [
+          "Annual vehicle inspection",
+          "Flood damage documentation",
+          "Hail damage reporting",
+          "Title brand verification"
+        ],
+        "fraudPatterns": [
+          "Flood damage concealment",
+          "Hail damage misrepresentation",
+          "Title washing from other states"
+        ]
+      },
+      "modelBoost": null,
+      "depthRoll": 1
+    }
+  },
+  "content": "## Texas-Specific VIN Verification for the 2019 Honda Accord\n\nA vehicle history report for a 2019 Honda Accord registered in Texas must be scrutinized through the state's unique regulatory and environmental lens. The Texas Department of Motor Vehicles (TxDMV) maintains a centralized title database, but verification requires cross-referencing this data with independent sources to identify discrepancies. Texas law mandates specific branding for salvage and flood-damaged vehicles, yet procedural gaps can allow title washing if a vehicle is titled in another jurisdiction before re-entering Texas. The state's susceptibility to severe weather, including coastal flooding and hail events in regions like Houston and Dallas-Fort Worth, makes storm damage assessment a critical component of due diligence beyond standard accident reporting.\n\nKey technical and legal verification points for a Texas-registered Accord include:\n\n*   **TxDMV Title Brand Verification:** Confirm the title history shows no \"Salvage,\" \"Flood,\" or \"Rebuilt\" brands as defined by Texas Transportation Code Chapter 501. A \"Rebuilt\" brand requires a specific, passed safety inspection by a TxDMV-certified facility, documented on Form VTR-61.\n*   **Flood and Hail Damage Forensics:** Scrutinize the report for insurance claims or service records originating from Texas counties federally declared disaster areas. Correlate these with vehicle service records for electrical diagnostics, mold remediation, or undercarriage corrosion on components like the Accord's aluminum subframe.\n*   **Annual Safety Inspection Compliance:** Verify consistent records of the state-required annual safety inspection, which includes brake, light, and tire checks. Gaps may indicate periods of non-operation or potential odometer fraud.\n*   **Lienholder Perfection:** Ensure the TxDMV record shows a clear title or properly released lien. Texas is a title-holding state, meaning the physical title.",
+  "timestamp": "2025-12-04T08:05:36.774Z",
+  "wordCount": 268
+}

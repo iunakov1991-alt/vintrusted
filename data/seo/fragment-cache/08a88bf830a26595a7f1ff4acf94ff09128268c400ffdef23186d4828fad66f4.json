@@ -1,0 +1,16 @@
+{
+  "fragmentType": "state_specific",
+  "context": {
+    "make": "Toyota",
+    "model": "Camry",
+    "year": "2018",
+    "stateSlug": "california",
+    "stateLabel": "California",
+    "intent": "vin_check",
+    "lang": "en",
+    "vin": "4T1B11HK3JU123456"
+  },
+  "content": "## California-Specific VIN Analysis for the 2018 Toyota Camry\n\nA vehicle history report for a 2018 Toyota Camry registered in California provides uniquely detailed data due to the state's stringent regulatory framework. The California Department of Motor Vehicles (DMV) and the Bureau of Automotive Repair (BAR) mandate comprehensive reporting, creating a more transparent record than many other jurisdictions. This is critical for assessing the long-term reliability and legal status of a vehicle, especially one known for its durability like the Camry.\n\nKey technical and legal factors revealed in a California VIN check include:\n\n*   **Enhanced Emission History:** California's Smog Check Program, governed by Health and Safety Code §44011, requires biennial testing. A report will show every test result, including any failures or pending issues, which can indicate underlying engine or emissions system faults not present in federal models.\n*   **Salvage and Theft Branding Precision:** The California DMV employs specific brand definitions like \"Salvage,\" \"Non-Repairable,\" and \"Dismantled\" under Vehicle Code §11515. A \"Salvage\" brand requires a rigorous brake and lamp inspection and a full vehicle verification by the CHP or DMV to be re-titled as \"Rebuilt,\" a process meticulously documented in the history.\n*   **Mandatory Insurance Reporting:** California Vehicle Code §16058 requires insurance companies to electronically report total loss settlements to the DMV within ten days. This creates a near-real-time record of major accidents, reducing the window for title washing.\n*   **Lemon Law Buyback Disclosure:** If the Camry was repurchased by Toyota under California's Lemon Law (Song-Beverly Consumer.",
+  "timestamp": "2025-12-04T07:16:17.230Z",
+  "wordCount": 247
+}
