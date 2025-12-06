@@ -1513,5 +1513,5 @@ if (typeof loadBatchHistory === 'undefined') {
       </div>`;
     }).join('');
   }
-
+}
 
