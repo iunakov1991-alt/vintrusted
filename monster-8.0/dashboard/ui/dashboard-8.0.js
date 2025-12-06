@@ -618,8 +618,7 @@ async function loadInitialData() {
     loadLogs(),
     loadLearningIdeas(),
     loadBatchSchedule(),
-    loadBatchHistory(),
-    loadBatchHistory()
+    typeof loadBatchHistory === 'function' ? loadBatchHistory() : Promise.resolve()
   ]);
 }
 
@@ -674,6 +673,14 @@ async function loadOrchestratorStatus(force = false) {
   }
   
   try {
+    // На Vercel нет локального оркестратора, возвращаем дефолтный статус
+    if (API_BASE === '/dashboard' || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1')) {
+      const defaultStatus = { isRunning: false, pid: null };
+      setCached('orchestrator', defaultStatus);
+      updateOrchestratorStatus(false, null);
+      return defaultStatus;
+    }
+    
     const response = await fetch(`${API_BASE}/api/orchestrator/status`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     
@@ -693,7 +700,10 @@ async function loadOrchestratorStatus(force = false) {
       updateOrchestratorStatus(cached.isRunning, cached.pid);
       return cached;
     }
-    throw err;
+    // На Vercel возвращаем дефолтный статус
+    const defaultStatus = { isRunning: false, pid: null };
+    updateOrchestratorStatus(false, null);
+    return defaultStatus;
   }
 }
 
@@ -1429,6 +1439,82 @@ function closeStrategyTreeModal() {
   if (modal) {
     modal.style.display = 'none';
   }
+}
+
+// ============================================================
+// BATCH HISTORY (если не определена)
+// ============================================================
+
+if (typeof loadBatchHistory === 'undefined') {
+  async function loadBatchHistory() {
+    try {
+      const limitEl = document.getElementById('history-limit');
+      const limit = limitEl ? limitEl.value : '20';
+      const response = await fetch(`${API_BASE}/api/batch/history?limit=${limit}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      
+      const data = await response.json();
+      if (data.success) {
+        renderBatchHistory(data.batches || []);
+      }
+    } catch (err) {
+      console.error('[Dashboard] Error loading batch history:', err);
+      const container = document.getElementById('batch-history-list');
+      if (container) {
+        container.innerHTML = '<div class="history-loading">Ошибка загрузки истории</div>';
+      }
+    }
+  }
+  
+  function renderBatchHistory(batches) {
+    const container = document.getElementById('batch-history-list');
+    if (!container) return;
+    
+    if (!batches || batches.length === 0) {
+      container.innerHTML = '<div class="history-loading">Истории партий пока нет</div>';
+      return;
+    }
+    
+    container.innerHTML = batches.map(batch => {
+      const completedAt = batch.completedAt ? new Date(batch.completedAt).toLocaleString('ru-RU') : '-';
+      const status = batch.status || 'unknown';
+      const pagesGenerated = batch.result?.pagesGenerated || batch.pagesGenerated || 0;
+      const pagesDeployed = batch.result?.pagesDeployed || batch.pagesDeployed || 0;
+      const language = (batch.language || 'en').toUpperCase();
+      
+      const statusText = {
+        'completed': 'Завершена',
+        'scheduled': 'Запланирована',
+        'failed': 'Ошибка',
+        'running': 'Выполняется'
+      }[status] || status;
+      
+      return `<div class="history-item status-${status}">
+        <div class="history-item-header">
+          <span class="history-batch-id">Партия #${batch.batchNumber || '-'}</span>
+          <span class="history-status">${statusText}</span>
+        </div>
+        <div class="history-item-details">
+          <div class="history-detail">
+            <span class="label">Язык:</span>
+            <span class="value">${language}</span>
+          </div>
+          <div class="history-detail">
+            <span class="label">Страниц:</span>
+            <span class="value">${pagesGenerated} создано, ${pagesDeployed} задеплоено</span>
+          </div>
+          <div class="history-detail">
+            <span class="label">Завершена:</span>
+            <span class="value">${completedAt}</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  
+  // Делаем функции глобальными
+  window.loadBatchHistory = loadBatchHistory;
+  window.renderBatchHistory = renderBatchHistory;
 }
 
 // ============================================================
