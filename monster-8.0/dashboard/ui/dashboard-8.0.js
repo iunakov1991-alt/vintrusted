@@ -1080,14 +1080,16 @@ socket.on('learning-idea:added', () => {
   loadLearningIdeas();
 });
 
-// Socket event for batch completion
-socket.on('batch:completed', (data) => {
-  showSuccess(`Партия ${data.batchId} завершена. Следующая партия запланирована.`);
-  loadBatchSchedule();
-  if (typeof loadBatchHistory === 'function') {
-    loadBatchHistory();
-  }
-});
+// Socket event for batch completion (только для локального сервера)
+if (socket && typeof socket.on === 'function') {
+  socket.on('batch:completed', (data) => {
+    showSuccess(`Партия ${data.batchId} завершена. Следующая партия запланирована.`);
+    loadBatchSchedule();
+    if (typeof loadBatchHistory === 'function') {
+      loadBatchHistory();
+    }
+  });
+}
 
 // ============================================================
 // BATCH SCHEDULE & COUNTDOWN
@@ -1511,11 +1513,6 @@ if (typeof loadBatchHistory === 'undefined') {
       </div>`;
     }).join('');
   }
-  
-  // Делаем функции глобальными
-  window.loadBatchHistory = loadBatchHistory;
-  window.renderBatchHistory = renderBatchHistory;
-}
 
 // ============================================================
 // BATCH HISTORY (если не определена)
