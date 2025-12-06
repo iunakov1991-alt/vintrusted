@@ -231,8 +231,24 @@ function initializeCharts() {
 // ============================================================
 
 function initializeSocket() {
+  // На Vercel Socket.IO не работает (нет WebSocket сервера)
+  if (API_BASE === '/dashboard' || window.location.hostname !== 'localhost') {
+    console.log('[Dashboard] Socket.IO disabled on Vercel - using polling instead');
+    updateStatus('connected', 'Подключено (polling)');
+    // Используем обычный polling вместо WebSocket
+    setInterval(() => {
+      loadStatus(false).catch(() => {});
+    }, 5000);
+    return;
+  }
+  
   let reconnectAttempts = 0;
   const maxReconnectAttempts = 10;
+  
+  if (!socket || typeof socket.on !== 'function') {
+    console.warn('[Dashboard] Socket.IO not available');
+    return;
+  }
   
   socket.on('connect', () => {
     updateStatus('connected', 'Подключено');
@@ -255,7 +271,9 @@ function initializeSocket() {
       reconnectAttempts++;
       setTimeout(() => {
         console.log(`[Socket] Reconnecting (attempt ${reconnectAttempts})...`);
-        socket.connect();
+        if (socket && typeof socket.connect === 'function') {
+          socket.connect();
+        }
       }, delay);
     } else {
       showError('Не удалось переподключиться. Обновите страницу.');
@@ -961,6 +979,11 @@ function loadOfflineData() {
 }
 
 function registerServiceWorker() {
+  // На Vercel Service Worker не нужен (нет офлайн режима)
+  if (API_BASE === '/dashboard' || window.location.hostname !== 'localhost') {
+    return;
+  }
+  
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw-dashboard.js')
       .then(reg => {
@@ -1051,7 +1074,9 @@ socket.on('learning-idea:added', () => {
 socket.on('batch:completed', (data) => {
   showSuccess(`Партия ${data.batchId} завершена. Следующая партия запланирована.`);
   loadBatchSchedule();
-  loadBatchHistory();
+  if (typeof loadBatchHistory === 'function') {
+    loadBatchHistory();
+  }
 });
 
 // ============================================================
@@ -1403,6 +1428,77 @@ function closeStrategyTreeModal() {
   const modal = document.getElementById('strategy-tree-modal');
   if (modal) {
     modal.style.display = 'none';
+  }
+}
+
+// ============================================================
+// BATCH HISTORY (если не определена)
+// ============================================================
+
+if (typeof loadBatchHistory === 'undefined') {
+  async function loadBatchHistory() {
+    try {
+      const limit = document.getElementById('history-limit')?.value || '20';
+      const response = await fetch(`${API_BASE}/api/batch/history?limit=${limit}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      
+      const data = await response.json();
+      if (data.success) {
+        renderBatchHistory(data.batches || []);
+      }
+    } catch (err) {
+      console.error('[Dashboard] Error loading batch history:', err);
+      const container = document.getElementById('batch-history-list');
+      if (container) {
+        container.innerHTML = '<div class="history-loading">Ошибка загрузки истории</div>';
+      }
+    }
+  }
+  
+  function renderBatchHistory(batches) {
+    const container = document.getElementById('batch-history-list');
+    if (!container) return;
+    
+    if (!batches || batches.length === 0) {
+      container.innerHTML = '<div class="history-loading">Истории партий пока нет</div>';
+      return;
+    }
+    
+    container.innerHTML = batches.map(batch => {
+      const completedAt = batch.completedAt ? new Date(batch.completedAt).toLocaleString('ru-RU') : '-';
+      const status = batch.status || 'unknown';
+      const pagesGenerated = batch.result?.pagesGenerated || batch.pagesGenerated || 0;
+      const pagesDeployed = batch.result?.pagesDeployed || batch.pagesDeployed || 0;
+      const language = (batch.language || 'en').toUpperCase();
+      
+      const statusText = {
+        'completed': 'Завершена',
+        'scheduled': 'Запланирована',
+        'failed': 'Ошибка',
+        'running': 'Выполняется'
+      }[status] || status;
+      
+      return `<div class="history-item status-${status}">
+        <div class="history-item-header">
+          <span class="history-batch-id">Партия #${batch.batchNumber || '-'}</span>
+          <span class="history-status">${statusText}</span>
+        </div>
+        <div class="history-item-details">
+          <div class="history-detail">
+            <span class="label">Язык:</span>
+            <span class="value">${language}</span>
+          </div>
+          <div class="history-detail">
+            <span class="label">Страниц:</span>
+            <span class="value">${pagesGenerated} создано, ${pagesDeployed} задеплоено</span>
+          </div>
+          <div class="history-detail">
+            <span class="label">Завершена:</span>
+            <span class="value">${completedAt}</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
   }
 }
 
