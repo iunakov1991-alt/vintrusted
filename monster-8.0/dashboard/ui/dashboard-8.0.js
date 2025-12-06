@@ -3,10 +3,24 @@
  */
 
 // Определяем базовый URL API (для Vercel или локального сервера)
-const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
   ? '' 
   : '/dashboard';
-const socket = io();
+
+// Инициализируем Socket.IO с правильным URL
+let socket;
+try {
+  socket = io(API_BASE || window.location.origin);
+} catch (e) {
+  console.error('[Dashboard] Socket.IO initialization error:', e);
+  // Fallback: создаем заглушку для socket
+  socket = {
+    on: () => {},
+    emit: () => {},
+    connect: () => {},
+    disconnect: () => {}
+  };
+}
 
 let strategyChart = null;
 let pagesChart = null;

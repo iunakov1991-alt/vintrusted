@@ -137,6 +137,10 @@ module.exports = async (req, res) => {
         // Заменяем пути к статическим файлам для Vercel
         html = html.replace(/href="dashboard-8.0\.css"/g, 'href="/dashboard/dashboard-8.0.css"');
         html = html.replace(/src="dashboard-8.0\.js"/g, 'src="/dashboard/dashboard-8.0.js"');
+        // Заменяем Socket.IO CDN на правильный путь
+        html = html.replace(/src="https:\/\/cdn\.socket\.io/g, 'src="https://cdn.socket.io');
+        // Заменяем Chart.js CDN на правильный путь
+        html = html.replace(/src="https:\/\/cdn\.jsdelivr\.net/g, 'src="https://cdn.jsdelivr.net');
         res.setHeader('Content-Type', 'text/html');
         return res.status(200).send(html);
       }
@@ -253,9 +257,15 @@ module.exports = async (req, res) => {
         let content = fs.readFileSync(filePath, 'utf8');
         // Для JS файла заменяем API_BASE для работы на Vercel
         if (pathParts[0] === 'dashboard-8.0.js') {
+          // Заменяем определение API_BASE
           content = content.replace(
             /const API_BASE = .*?;/,
-            `const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '' : '/dashboard';`
+            `const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? '' : '/dashboard';`
+          );
+          // Также заменяем Socket.IO URL если нужно
+          content = content.replace(
+            /const socket = io\(\);?/,
+            `const socket = io(API_BASE || window.location.origin);`
           );
         }
         const contentType = pathParts[0].endsWith('.js') ? 'application/javascript' : 'text/css';
