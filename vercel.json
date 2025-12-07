@@ -94,6 +94,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "public/batch-dashboard.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "**/index.html",
       "use": "@vercel/static"
     },
@@ -289,6 +293,10 @@
     },
     {
       "source": "/batch-dashboard",
+      "destination": "/public/batch-dashboard.html"
+    },
+    {
+      "source": "/batch-dashboard.html",
       "destination": "/public/batch-dashboard.html"
     }
   ],
