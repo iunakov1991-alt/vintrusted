@@ -156,16 +156,77 @@ async function processQueueParallel(queue, rootDir, args) {
 
   // Сохраняем статус батча для дашборда
   const batchStatusPath = path.join(rootDir, "tmp", "batch-status.json");
+  
+  // Функция для отправки статуса на Vercel API (если BATCH_STATUS_TOKEN настроен)
+  async function pushStatusToAPI(status) {
+    const vercelUrl = process.env.VERCEL_URL || process.env.VERCEL_URL || 'https://vintrusted.com';
+    const batchStatusToken = process.env.BATCH_STATUS_TOKEN;
+    
+    if (!batchStatusToken) {
+      return; // Тихо пропускаем, если токен не настроен
+    }
+    
+    try {
+      const https = require('https');
+      const apiUrl = `${vercelUrl}/api/batch-status`;
+      const postData = JSON.stringify(status);
+      
+      const url = new URL(apiUrl);
+      const options = {
+        hostname: url.hostname,
+        path: url.pathname,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${batchStatusToken}`
+        }
+      };
+      
+      return new Promise((resolve) => {
+        const req = https.request(options, (res) => {
+          let data = '';
+          res.on('data', (chunk) => { data += chunk; });
+          res.on('end', () => {
+            if (res.statusCode === 200) {
+              console.log('[BATCH] Status pushed to API');
+            } else {
+              console.warn(`[BATCH] API push failed: ${res.statusCode}`);
+            }
+            resolve();
+          });
+        });
+        
+        req.on('error', () => {
+          // Тихо игнорируем ошибки сети
+          resolve();
+        });
+        
+        req.write(postData);
+        req.end();
+      });
+    } catch (err) {
+      // Тихо игнорируем ошибки
+    }
+  }
+  
   function updateBatchStatus(status) {
+    const statusWithTimestamp = {
+      ...status,
+      lastUpdate: Date.now()
+    };
+    
+    // Сохраняем локально
     try {
       fs.mkdirSync(path.dirname(batchStatusPath), { recursive: true });
-      fs.writeFileSync(batchStatusPath, JSON.stringify({
-        ...status,
-        lastUpdate: Date.now()
-      }, null, 2));
+      fs.writeFileSync(batchStatusPath, JSON.stringify(statusWithTimestamp, null, 2));
     } catch (err) {
       // Игнорируем ошибки записи
     }
+    
+    // Отправляем на Vercel API (не блокируем выполнение)
+    pushStatusToAPI(statusWithTimestamp).catch(() => {
+      // Тихо игнорируем ошибки
+    });
   }
 
   const results = [];
