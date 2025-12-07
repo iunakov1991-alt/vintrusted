@@ -1681,15 +1681,35 @@ async function confirmBatchStart() {
     console.log('[Dashboard] Batch start response:', data);
     
     if (data.success) {
-      addLog('info', 'Партия запущена');
-      showSuccess('Партия успешно запущена');
-      closeBatchPreview();
-      
-      // Обновляем статус
-      setTimeout(() => {
-        loadStatus(true);
-        loadBatchSchedule();
-      }, 1000);
+      // Проверяем, запущена ли партия через GitHub Actions
+      if (data.workflow) {
+        addLog('info', `Партия запущена через GitHub Actions (${data.workflow.phase}/${data.workflow.length})`);
+        showSuccess(`✅ Партия запущена через GitHub Actions!\n\nПроверьте прогресс:\n${data.githubUrl || 'https://github.com/iunakov1991-alt/vintrusted/actions'}`);
+        closeBatchPreview();
+        
+        // Обновляем статус через несколько секунд (GitHub Actions нужно время для старта)
+        setTimeout(() => {
+          loadStatus(true);
+          loadBatchSchedule();
+        }, 3000);
+      } else if (data.command) {
+        // Локальный запуск
+        addLog('info', 'Партия требует локального запуска');
+        const message = `Партия не может быть запущена автоматически на Vercel.\n\n${(data.instructions || []).join('\n')}\n\nКоманда:\n${data.command}`;
+        showInfo(message);
+        closeBatchPreview();
+      } else {
+        // Обычный успех
+        addLog('info', 'Партия запущена');
+        showSuccess(data.message || 'Партия успешно запущена');
+        closeBatchPreview();
+        
+        // Обновляем статус
+        setTimeout(() => {
+          loadStatus(true);
+          loadBatchSchedule();
+        }, 1000);
+      }
     } else {
       throw new Error(data.error || 'Не удалось запустить партию');
     }

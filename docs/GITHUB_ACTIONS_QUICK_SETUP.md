@@ -7,6 +7,21 @@
 
 ## 📋 ЧТО НУЖНО СДЕЛАТЬ
 
+### ШАГ 0: Настроить GITHUB_TOKEN для запуска через дашборд (НОВОЕ!)
+
+**Для запуска партий через дашборд нужно настроить GitHub Personal Access Token.**
+
+📖 **Подробная инструкция:** `docs/GITHUB_TOKEN_SETUP.md`
+
+**Кратко:**
+1. Создайте GitHub Personal Access Token с правами `repo` и `workflow`
+2. Добавьте в Vercel Environment Variables:
+   - **Key:** `GITHUB_TOKEN`
+   - **Value:** ваш токен
+3. Готово! Теперь партии будут запускаться реально через дашборд
+
+---
+
 ### ШАГ 1: Добавить API ключи в GitHub Secrets
 
 #### 🔗 Ссылка:

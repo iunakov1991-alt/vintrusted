@@ -259,13 +259,64 @@ module.exports = async (req, res) => {
           const langPhase = getLanguagePhase(enPages, esPages);
           const lengthMode = getLengthMode();
           
-          // На Vercel мы не можем запустить orchestrator.sh напрямую
-          // Возвращаем инструкции для локального запуска
+          // Пытаемся запустить через GitHub Actions API
+          const githubToken = process.env.GITHUB_TOKEN;
+          const githubRepo = process.env.GITHUB_REPO || 'iunakov1991-alt/vintrusted';
+          const workflowId = 'monster8-batch-scheduler.yml';
+          
+          if (githubToken) {
+            try {
+              // Запускаем GitHub Actions workflow
+              const githubApiUrl = `https://api.github.com/repos/${githubRepo}/actions/workflows/${workflowId}/dispatches`;
+              
+              const response = await fetch(githubApiUrl, {
+                method: 'POST',
+                headers: {
+                  'Authorization': `token ${githubToken}`,
+                  'Accept': 'application/vnd.github.v3+json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  ref: 'main', // или 'master' в зависимости от вашей ветки
+                  inputs: {
+                    force_phase: langPhase === 'en_only' ? 'en_only' : langPhase === 'mixed' ? 'mixed' : langPhase === 'es_focus' ? 'es_focus' : 'auto',
+                    force_length: lengthMode === 'short' ? 'short' : lengthMode === 'long' ? 'long' : 'auto'
+                  }
+                })
+              });
+              
+              if (response.ok || response.status === 204) {
+                // Workflow запущен успешно
+                return res.json({
+                  success: true,
+                  message: '✅ Партия запущена через GitHub Actions!',
+                  preview: preview,
+                  workflow: {
+                    repo: githubRepo,
+                    workflow: workflowId,
+                    phase: langPhase,
+                    length: lengthMode
+                  },
+                  note: 'Партия выполняется в GitHub Actions. Прогресс будет виден в дашборде через несколько секунд.',
+                  githubUrl: `https://github.com/${githubRepo}/actions`
+                });
+              } else {
+                const errorText = await response.text();
+                console.error('[Dashboard API] GitHub Actions error:', response.status, errorText);
+                // Продолжаем с fallback
+              }
+            } catch (githubErr) {
+              console.error('[Dashboard API] Error calling GitHub API:', githubErr);
+              // Продолжаем с fallback
+            }
+          }
+          
+          // Fallback: возвращаем инструкции для локального запуска
           const command = `./monster8_orchestrator.sh ${langPhase} ${lengthMode}`;
           
           return res.json({
             success: true,
-            message: 'Партия не может быть запущена автоматически на Vercel. Используйте локальный оркестратор.',
+            message: 'Партия не может быть запущена автоматически. Используйте локальный оркестратор или настройте GITHUB_TOKEN.',
             preview: preview,
             command: command,
             instructions: [
@@ -274,9 +325,9 @@ module.exports = async (req, res) => {
               `3. Запустите команду: ${command}`,
               '4. Партия начнет генерироваться, прогресс будет виден в дашборде',
               '',
-              'Альтернатива: Настройте GitHub Actions для автоматического запуска партий'
+              'Или настройте GITHUB_TOKEN в Vercel Environment Variables для автоматического запуска через GitHub Actions'
             ],
-            note: 'На Vercel партии запускаются через локальный orchestrator или CI/CD'
+            note: githubToken ? 'GitHub Actions запуск не удался, используйте локальный запуск' : 'Настройте GITHUB_TOKEN для автоматического запуска'
           });
         } catch (err) {
           console.error('[Dashboard API] Error starting batch:', err);
