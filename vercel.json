@@ -297,11 +297,11 @@
     },
     {
       "source": "/batch-dashboard",
-      "destination": "/public/batch-dashboard.html"
+      "destination": "/batch-dashboard.html"
     },
     {
       "source": "/batch-dashboard.html",
-      "destination": "/public/batch-dashboard.html"
+      "destination": "/batch-dashboard.html"
     }
   ],
   "headers": [
