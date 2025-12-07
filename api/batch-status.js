@@ -7,8 +7,10 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
-// Используем /tmp для Vercel serverless functions (единственное место где можно писать)
-const STATUS_FILE = process.env.VERCEL ? '/tmp/batch-status.json' : path.join(ROOT_DIR, 'tmp', 'batch-status.json');
+// В Vercel serverless функциях можно писать только в /tmp
+// Используем /tmp для записи, но читаем из разных мест
+const STATUS_FILE = '/tmp/batch-status.json';
+const LOCAL_STATUS_FILE = path.join(ROOT_DIR, 'tmp', 'batch-status.json');
 
 module.exports = async (req, res) => {
   // CORS headers
@@ -79,15 +81,7 @@ module.exports = async (req, res) => {
         });
       }
       
-      // Создаем директорию если не существует (только если не /tmp)
-      if (!STATUS_FILE.startsWith('/tmp')) {
-        const dir = path.dirname(STATUS_FILE);
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir, { recursive: true });
-        }
-      }
-      
-      // Сохраняем статус
+      // Сохраняем статус в /tmp (единственное место где можно писать в Vercel)
       const statusToSave = {
         current: status.current || 0,
         total: status.total || 0,
@@ -98,7 +92,28 @@ module.exports = async (req, res) => {
         ...status
       };
       
-      fs.writeFileSync(STATUS_FILE, JSON.stringify(statusToSave, null, 2));
+      try {
+        // Пробуем записать в /tmp (Vercel)
+        fs.writeFileSync(STATUS_FILE, JSON.stringify(statusToSave, null, 2));
+        console.log('[Batch Status] Status saved to:', STATUS_FILE);
+      } catch (tmpErr) {
+        // Fallback для локальной разработки
+        console.warn('[Batch Status] Failed to write to /tmp, trying local:', tmpErr.message);
+        try {
+          const dir = path.dirname(LOCAL_STATUS_FILE);
+          if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+          }
+          fs.writeFileSync(LOCAL_STATUS_FILE, JSON.stringify(statusToSave, null, 2));
+          console.log('[Batch Status] Status saved to:', LOCAL_STATUS_FILE);
+        } catch (localErr) {
+          console.error('[Batch Status] Failed to write to both paths:', localErr.message);
+          return res.status(500).json({
+            success: false,
+            error: `Failed to save status: ${localErr.message}`
+          });
+        }
+      }
       
       return res.json({
         success: true,
