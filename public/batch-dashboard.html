@@ -336,7 +336,9 @@
   </div>
 
   <script>
+    // Используем /api/batch-status для чтения статуса (тот же endpoint, куда GitHub Actions пишет)
     const API_BASE = '/api/batch-runner';
+    const STATUS_API = '/api/batch-status';
     let statusInterval = null;
     
     // Парсим body для POST запросов
@@ -364,7 +366,8 @@
     // Обновление статуса
     async function updateStatus() {
       try {
-        const response = await fetch(`${API_BASE}/status`);
+        // Читаем статус из /api/batch-status (тот же endpoint, куда GitHub Actions пишет)
+        const response = await fetch(`${STATUS_API}`);
         const data = await response.json();
         
         if (data.success) {
