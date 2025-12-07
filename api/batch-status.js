@@ -1,9 +1,15 @@
 /**
  * API endpoint для обновления статуса партии
- * Использует Vercel KV для постоянного хранения статуса
+ * Использует Upstash Redis для постоянного хранения статуса
  */
 
-const { kv } = require('@vercel/kv');
+const { Redis } = require('@upstash/redis');
+
+// Инициализируем Redis клиент из переменных окружения
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 const STATUS_KEY = 'batch-status';
 
@@ -21,18 +27,35 @@ module.exports = async (req, res) => {
     // GET - получить текущий статус
     if (req.method === 'GET') {
       try {
-        // Читаем статус из Vercel KV
-        const status = await kv.get(STATUS_KEY);
+        // Проверяем, настроен ли Redis
+        if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+          console.warn('[Batch Status] Upstash Redis not configured');
+          return res.json({
+            success: true,
+            status: {
+              current: 0,
+              total: 0,
+              completed: 0,
+              failed: 0,
+              inProgress: false,
+              lastUpdate: Date.now(),
+              error: 'Upstash Redis not configured. Please install Upstash from Vercel Marketplace.'
+            }
+          });
+        }
+
+        // Читаем статус из Upstash Redis
+        const status = await redis.get(STATUS_KEY);
         
         if (status) {
-          console.log('[Batch Status] Status read from KV');
+          console.log('[Batch Status] Status read from Redis');
           return res.json({
             success: true,
             status
           });
         } else {
           // Если статуса нет, возвращаем пустой
-          console.log('[Batch Status] No status in KV, returning empty');
+          console.log('[Batch Status] No status in Redis, returning empty');
           return res.json({
             success: true,
             status: {
@@ -45,9 +68,9 @@ module.exports = async (req, res) => {
             }
           });
         }
-      } catch (kvErr) {
-        console.error('[Batch Status] KV error:', kvErr);
-        // Fallback: возвращаем пустой статус если KV недоступен
+      } catch (redisErr) {
+        console.error('[Batch Status] Redis error:', redisErr);
+        // Fallback: возвращаем пустой статус если Redis недоступен
         return res.json({
           success: true,
           status: {
@@ -57,7 +80,7 @@ module.exports = async (req, res) => {
             failed: 0,
             inProgress: false,
             lastUpdate: Date.now(),
-            error: 'KV not available'
+            error: `Redis error: ${redisErr.message}`
           }
         });
       }
@@ -85,8 +108,16 @@ module.exports = async (req, res) => {
           error: 'Invalid status object'
         });
       }
+
+      // Проверяем, настроен ли Redis
+      if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+        return res.status(500).json({
+          success: false,
+          error: 'Upstash Redis not configured. Please install Upstash from Vercel Marketplace.'
+        });
+      }
       
-      // Сохраняем статус в Vercel KV
+      // Сохраняем статус в Upstash Redis
       const statusToSave = {
         current: status.current || 0,
         total: status.total || 0,
@@ -98,20 +129,20 @@ module.exports = async (req, res) => {
       };
       
       try {
-        // Сохраняем в KV с TTL 24 часа (опционально)
-        await kv.set(STATUS_KEY, statusToSave);
-        console.log('[Batch Status] Status saved to KV');
+        // Сохраняем в Redis (без TTL - храним постоянно)
+        await redis.set(STATUS_KEY, statusToSave);
+        console.log('[Batch Status] Status saved to Redis');
         
         return res.json({
           success: true,
           message: 'Status updated',
           status: statusToSave
         });
-      } catch (kvErr) {
-        console.error('[Batch Status] KV save error:', kvErr);
+      } catch (redisErr) {
+        console.error('[Batch Status] Redis save error:', redisErr);
         return res.status(500).json({
           success: false,
-          error: `Failed to save status to KV: ${kvErr.message}`
+          error: `Failed to save status to Redis: ${redisErr.message}`
         });
       }
     }

@@ -15,7 +15,7 @@
     "build:topic:dmv_ca": "scripts/build_topic_page.sh data/topic.dmv_ca_title_types_checklist_es_mx_us.json"
   },
   "dependencies": {
-    "@vercel/kv": "^0.2.1",
+    "@upstash/redis": "^1.34.0",
     "@vercel/speed-insights": "^1.2.0",
     "cors": "^2.8.5",
     "express": "^4.22.1",
