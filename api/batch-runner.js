@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
     }
 
     // POST /api/batch-runner/start - запустить партию
-    if (req.method === 'POST' && (pathname.includes('/start') || !pathname.includes('/status'))) {
+    if (req.method === 'POST') {
       const githubToken = process.env.GITHUB_TOKEN;
       const githubRepo = process.env.GITHUB_REPO || 'iunakov1991-alt/vintrusted';
       const workflowFile = 'monster8-batch-scheduler.yml';
