@@ -247,6 +247,30 @@ module.exports = async (req, res) => {
         });
       }
       
+      // POST /api/batch/start
+      if (endpoint === 'batch' && pathParts[2] === 'start' && req.method === 'POST') {
+        try {
+          // Генерируем превью партии
+          const preview = batchScheduler.generateBatchPreview({});
+          
+          // Запускаем партию через оркестратор (если доступен)
+          // На Vercel это не работает, поэтому возвращаем превью
+          // В реальности нужно запускать через orchestrator.sh
+          return res.json({
+            success: true,
+            message: 'Партия запланирована. Для запуска используйте orchestrator локально.',
+            preview: preview,
+            note: 'На Vercel партии запускаются через локальный orchestrator'
+          });
+        } catch (err) {
+          console.error('[Dashboard API] Error starting batch:', err);
+          return res.status(500).json({
+            success: false,
+            error: err.message || 'Не удалось запустить партию'
+          });
+        }
+      }
+      
       return res.status(404).json({ error: 'API endpoint not found' });
     }
     

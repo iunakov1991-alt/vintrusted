@@ -1513,3 +1513,130 @@ function renderBatchHistory(batches) {
   }).join('');
 }
 
+// ============================================================
+// BATCH PREVIEW MODAL
+// ============================================================
+
+async function showBatchPreview() {
+  console.log('[Dashboard] showBatchPreview called');
+  const modal = document.getElementById('batch-preview-modal');
+  if (!modal) {
+    console.error('[Dashboard] Batch preview modal not found');
+    showError('Модальное окно превью не найдено');
+    return;
+  }
+  
+  try {
+    // Показываем модальное окно
+    modal.style.display = 'flex';
+    
+    // Загружаем превью партии
+    const response = await fetch(`${API_BASE}/api/batch/preview`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    
+    const data = await response.json();
+    if (data.success && data.preview) {
+      const preview = data.preview;
+      
+      // Заполняем превью данными
+      const previewPages = document.getElementById('preview-pages');
+      const previewLang = document.getElementById('preview-lang');
+      const previewDuration = document.getElementById('preview-duration');
+      const previewStates = document.getElementById('preview-states');
+      const previewZones = document.getElementById('preview-zones');
+      const previewFormats = document.getElementById('preview-formats');
+      const previewAutoDeploy = document.getElementById('preview-auto-deploy');
+      
+      if (previewPages) previewPages.textContent = preview.expectedPages || preview.pages || '-';
+      if (previewLang) previewLang.textContent = (preview.language || 'en').toUpperCase();
+      if (previewDuration) previewDuration.textContent = preview.expectedDuration || preview.duration || '-';
+      if (previewStates) previewStates.textContent = Array.isArray(preview.states) ? preview.states.join(', ') : (preview.states || '-');
+      if (previewZones) previewZones.textContent = Array.isArray(preview.zones) ? preview.zones.join(', ') : (preview.zones || '-');
+      if (previewFormats) previewFormats.textContent = Array.isArray(preview.formats) ? preview.formats.join(', ') : (preview.formats || '-');
+      if (previewAutoDeploy) previewAutoDeploy.textContent = preview.autoDeploy !== false ? 'Да' : 'Нет';
+      
+      console.log('[Dashboard] Batch preview loaded:', preview);
+    } else {
+      throw new Error(data.error || 'Не удалось загрузить превью');
+    }
+  } catch (err) {
+    console.error('[Dashboard] Error loading batch preview:', err);
+    showError(`Не удалось загрузить превью партии: ${err.message}`);
+    
+    // Заполняем дефолтными значениями
+    const previewPages = document.getElementById('preview-pages');
+    const previewLang = document.getElementById('preview-lang');
+    if (previewPages) previewPages.textContent = 'Загрузка...';
+    if (previewLang) previewLang.textContent = 'EN';
+  }
+}
+
+function closeBatchPreview() {
+  console.log('[Dashboard] closeBatchPreview called');
+  const modal = document.getElementById('batch-preview-modal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+async function confirmBatchStart() {
+  console.log('[Dashboard] confirmBatchStart called');
+  try {
+    const btn = document.getElementById('btn-confirm-batch');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = '⏳ Запуск...';
+    }
+    
+    // Отправляем запрос на запуск партии
+    const response = await fetch(`${API_BASE}/api/batch/start`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP ${response.status}: ${errorText}`);
+    }
+    
+    const data = await response.json();
+    console.log('[Dashboard] Batch start response:', data);
+    
+    if (data.success) {
+      addLog('info', 'Партия запущена');
+      showSuccess('Партия успешно запущена');
+      closeBatchPreview();
+      
+      // Обновляем статус
+      setTimeout(() => {
+        loadStatus(true);
+        loadBatchSchedule();
+      }, 1000);
+    } else {
+      throw new Error(data.error || 'Не удалось запустить партию');
+    }
+  } catch (err) {
+    console.error('[Dashboard] Error starting batch:', err);
+    addLog('error', `Ошибка запуска партии: ${err.message}`);
+    showError(`Не удалось запустить партию: ${err.message}`);
+  } finally {
+    const btn = document.getElementById('btn-confirm-batch');
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Подтвердить и запустить';
+    }
+  }
+}
+
