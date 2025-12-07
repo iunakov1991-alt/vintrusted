@@ -82,6 +82,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/batch-runner.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -278,6 +282,14 @@
     {
       "source": "/api/batch-status",
       "destination": "/api/batch-status.js"
+    },
+    {
+      "source": "/api/batch-runner/:path*",
+      "destination": "/api/batch-runner.js"
+    },
+    {
+      "source": "/batch-dashboard",
+      "destination": "/public/batch-dashboard.html"
     }
   ],
   "headers": [

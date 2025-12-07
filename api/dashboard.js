@@ -264,6 +264,10 @@ module.exports = async (req, res) => {
           const githubRepo = process.env.GITHUB_REPO || 'iunakov1991-alt/vintrusted';
           const workflowId = 'monster8-batch-scheduler.yml';
           
+          console.log('[Dashboard API] GitHub token exists:', !!githubToken);
+          console.log('[Dashboard API] GitHub repo:', githubRepo);
+          console.log('[Dashboard API] Workflow ID:', workflowId);
+          
           if (githubToken) {
             try {
               // Запускаем GitHub Actions workflow через GitHub API
@@ -314,8 +318,11 @@ module.exports = async (req, res) => {
                 req.end();
               });
               
+              console.log('[Dashboard API] GitHub API response status:', githubResponse.status);
+              
               if (githubResponse.ok || githubResponse.status === 204) {
                 // Workflow запущен успешно
+                console.log('[Dashboard API] ✅ GitHub Actions workflow запущен успешно!');
                 return res.json({
                   success: true,
                   message: '✅ Партия запущена через GitHub Actions!',
@@ -331,13 +338,28 @@ module.exports = async (req, res) => {
                 });
               } else {
                 const errorText = await githubResponse.text();
-                console.error('[Dashboard API] GitHub Actions error:', githubResponse.status, errorText);
-                // Продолжаем с fallback
+                console.error('[Dashboard API] ❌ GitHub Actions error:', githubResponse.status, errorText);
+                // Продолжаем с fallback, но добавляем информацию об ошибке
+                return res.json({
+                  success: false,
+                  message: 'Не удалось запустить через GitHub Actions',
+                  error: `GitHub API вернул статус ${githubResponse.status}: ${errorText}`,
+                  preview: preview,
+                  command: `./monster8_orchestrator.sh ${langPhase} ${lengthMode}`,
+                  instructions: [
+                    '1. Проверьте, что GITHUB_TOKEN имеет права repo и workflow',
+                    '2. Проверьте, что workflow файл существует',
+                    '3. Или используйте локальный запуск:',
+                    `   ./monster8_orchestrator.sh ${langPhase} ${lengthMode}`
+                  ]
+                });
               }
             } catch (githubErr) {
-              console.error('[Dashboard API] Error calling GitHub API:', githubErr);
+              console.error('[Dashboard API] ❌ Error calling GitHub API:', githubErr.message, githubErr.stack);
               // Продолжаем с fallback
             }
+          } else {
+            console.log('[Dashboard API] ⚠️ GITHUB_TOKEN не найден, используем fallback');
           }
           
           // Fallback: возвращаем инструкции для локального запуска
