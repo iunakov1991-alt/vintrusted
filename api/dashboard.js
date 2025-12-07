@@ -266,26 +266,55 @@ module.exports = async (req, res) => {
           
           if (githubToken) {
             try {
-              // Запускаем GitHub Actions workflow
+              // Запускаем GitHub Actions workflow через GitHub API
+              const https = require('https');
               const githubApiUrl = `https://api.github.com/repos/${githubRepo}/actions/workflows/${workflowId}/dispatches`;
               
-              const response = await fetch(githubApiUrl, {
+              const postData = JSON.stringify({
+                ref: 'main',
+                inputs: {
+                  force_phase: langPhase === 'en_only' ? 'en_only' : langPhase === 'mixed' ? 'mixed' : langPhase === 'es_focus' ? 'es_focus' : 'auto',
+                  force_length: lengthMode === 'short' ? 'short' : lengthMode === 'long' ? 'long' : 'auto'
+                }
+              });
+              
+              const url = new URL(githubApiUrl);
+              const options = {
+                hostname: url.hostname,
+                path: url.pathname,
                 method: 'POST',
                 headers: {
                   'Authorization': `token ${githubToken}`,
                   'Accept': 'application/vnd.github.v3+json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  ref: 'main', // или 'master' в зависимости от вашей ветки
-                  inputs: {
-                    force_phase: langPhase === 'en_only' ? 'en_only' : langPhase === 'mixed' ? 'mixed' : langPhase === 'es_focus' ? 'es_focus' : 'auto',
-                    force_length: lengthMode === 'short' ? 'short' : lengthMode === 'long' ? 'long' : 'auto'
-                  }
-                })
+                  'Content-Type': 'application/json',
+                  'User-Agent': 'MONSTER-8.0-Dashboard'
+                }
+              };
+              
+              // Используем Promise для async/await
+              const githubResponse = await new Promise((resolve, reject) => {
+                const req = https.request(options, (res) => {
+                  let data = '';
+                  res.on('data', (chunk) => { data += chunk; });
+                  res.on('end', () => {
+                    resolve({
+                      status: res.statusCode,
+                      statusText: res.statusMessage,
+                      ok: res.statusCode >= 200 && res.statusCode < 300,
+                      text: () => Promise.resolve(data)
+                    });
+                  });
+                });
+                
+                req.on('error', (err) => {
+                  reject(err);
+                });
+                
+                req.write(postData);
+                req.end();
               });
               
-              if (response.ok || response.status === 204) {
+              if (githubResponse.ok || githubResponse.status === 204) {
                 // Workflow запущен успешно
                 return res.json({
                   success: true,
@@ -301,8 +330,8 @@ module.exports = async (req, res) => {
                   githubUrl: `https://github.com/${githubRepo}/actions`
                 });
               } else {
-                const errorText = await response.text();
-                console.error('[Dashboard API] GitHub Actions error:', response.status, errorText);
+                const errorText = await githubResponse.text();
+                console.error('[Dashboard API] GitHub Actions error:', githubResponse.status, errorText);
                 // Продолжаем с fallback
               }
             } catch (githubErr) {
