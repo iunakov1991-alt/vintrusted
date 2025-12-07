@@ -8,37 +8,61 @@ const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 
+// Пробуем загрузить HTML из файла, если не получится - используем встроенный
+let dashboardHTML = null;
+
+function loadDashboardHTML() {
+  if (dashboardHTML) return dashboardHTML;
+  
+  const possiblePaths = [
+    path.join(ROOT_DIR, 'batch-dashboard.html'),
+    path.join(ROOT_DIR, 'public', 'batch-dashboard.html'),
+    path.join(ROOT_DIR, '.vercel', 'output', 'static', 'batch-dashboard.html'),
+    path.join('/var/task', 'batch-dashboard.html'),
+    path.join('/var/task', 'public', 'batch-dashboard.html')
+  ];
+
+  for (const filePath of possiblePaths) {
+    try {
+      if (fs.existsSync(filePath)) {
+        dashboardHTML = fs.readFileSync(filePath, 'utf8');
+        console.log('[Batch Dashboard] Loaded from:', filePath);
+        return dashboardHTML;
+      }
+    } catch (err) {
+      // Продолжаем поиск
+    }
+  }
+  
+  // Если файл не найден, используем встроенный HTML (будет загружен из public/batch-dashboard.html)
+  console.warn('[Batch Dashboard] File not found, will try to read from public/');
+  return null;
+}
+
 module.exports = async (req, res) => {
   try {
-    // Пробуем найти файл в разных местах
-    const possiblePaths = [
-      path.join(ROOT_DIR, 'batch-dashboard.html'),
-      path.join(ROOT_DIR, 'public', 'batch-dashboard.html'),
-      path.join(ROOT_DIR, '.vercel', 'output', 'static', 'batch-dashboard.html'),
-      path.join('/var/task', 'batch-dashboard.html'),
-      path.join('/var/task', 'public', 'batch-dashboard.html')
-    ];
-
-    let html = null;
-    let foundPath = null;
-
-    for (const filePath of possiblePaths) {
-      if (fs.existsSync(filePath)) {
-        html = fs.readFileSync(filePath, 'utf8');
-        foundPath = filePath;
-        break;
+    let html = loadDashboardHTML();
+    
+    // Если не загрузили, пробуем еще раз прочитать файл
+    if (!html) {
+      try {
+        const publicPath = path.join(ROOT_DIR, 'public', 'batch-dashboard.html');
+        if (fs.existsSync(publicPath)) {
+          html = fs.readFileSync(publicPath, 'utf8');
+          dashboardHTML = html;
+        }
+      } catch (err) {
+        console.error('[Batch Dashboard] Cannot read file:', err.message);
       }
     }
-
+    
+    // Если все еще нет HTML, возвращаем ошибку
     if (!html) {
-      console.error('[Batch Dashboard] File not found. Tried paths:', possiblePaths);
       return res.status(404).json({
         error: 'Dashboard file not found',
-        triedPaths: possiblePaths
+        message: 'Please ensure public/batch-dashboard.html exists'
       });
     }
-
-    console.log('[Batch Dashboard] Serving from:', foundPath);
     
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.send(html);
