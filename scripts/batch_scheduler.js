@@ -454,28 +454,72 @@ function generateBatchPreview(params) {
           } catch (e) {}
         }
         
-        // Если на проде мало страниц, начинаем с EN
-        language = deployedPages < 100 ? 'EN' : 'ES';
+        // Если на проде мало страниц, начинаем с EN (приоритет английскому)
+        language = deployedPages < 100 ? 'en' : 'en'; // Всегда начинаем с EN
       }
     }
   }
   
-  // Нормализуем язык (EN/ES)
+  // Нормализуем язык (EN/ES) - приоритет английскому
   if (typeof language === 'string') {
-    language = language.toUpperCase();
-    if (language === 'EN' || language === 'EN-US') language = 'EN';
-    if (language === 'ES' || language === 'ES-US' || language === 'ES-MX') language = 'ES';
+    language = language.toLowerCase();
+    if (language === 'en' || language === 'en-us') language = 'en';
+    if (language === 'es' || language === 'es-us' || language === 'es-mx') language = 'es';
+  } else {
+    // По умолчанию английский
+    language = 'en';
+  }
+  
+  // Если очередь пустая, используем дефолтные значения из стратегии
+  let finalStates = queueInfo.states.length > 0 ? queueInfo.states : (params.states || []);
+  let finalZones = queueInfo.zones.length > 0 ? queueInfo.zones : (params.zones || []);
+  let finalFormats = queueInfo.formats.length > 0 ? queueInfo.formats : (params.formats || []);
+  
+  // Если все пусто, используем дефолты из semantic_core.json
+  if (finalStates.length === 0 && finalZones.length === 0 && finalFormats.length === 0) {
+    // Загружаем дефолтные значения из конфига
+    try {
+      const semanticCorePath = path.join(ROOT, 'config', 'semantic_core.json');
+      if (fs.existsSync(semanticCorePath)) {
+        const semanticCore = JSON.parse(fs.readFileSync(semanticCorePath, 'utf8'));
+        // Берем первые несколько штатов из списка
+        const statesConfig = semanticCore.dimensions?.geo?.usa_states;
+        if (statesConfig && typeof statesConfig === 'string' && statesConfig.includes('states_us.json')) {
+          const statesPath = path.join(ROOT, 'config', 'states_us.json');
+          if (fs.existsSync(statesPath)) {
+            const statesData = JSON.parse(fs.readFileSync(statesPath, 'utf8'));
+            finalStates = Array.isArray(statesData) ? statesData.slice(0, 10).map(s => s.code || s.abbr || s) : [];
+          }
+        }
+        // Берем зоны
+        if (semanticCore.zones && Array.isArray(semanticCore.zones)) {
+          finalZones = semanticCore.zones.slice(0, 5).map(z => z.id || z);
+        }
+        // Берем форматы
+        if (semanticCore.variation_formats && Array.isArray(semanticCore.variation_formats)) {
+          finalFormats = semanticCore.variation_formats.slice(0, 3);
+        }
+      }
+    } catch (e) {
+      log(`Error loading defaults from semantic_core.json: ${e.message}`);
+    }
   }
   
   const preview = {
-    estimatedPages,
-    language,
-    estimatedDuration: Math.ceil(estimatedPages * 2), // 2 минуты на страницу
+    estimatedPages: estimatedPages || 0,
+    expectedPages: estimatedPages || 0, // Дублируем для совместимости
+    language: language,
+    estimatedDuration: estimatedPages > 0 ? Math.ceil(estimatedPages * 2) : 0, // 2 минуты на страницу
+    expectedDuration: estimatedPages > 0 ? Math.ceil(estimatedPages * 2) : 0, // Дублируем для совместимости
     topics: {
-      states: queueInfo.states.length > 0 ? queueInfo.states : (params.states || []),
-      zones: queueInfo.zones.length > 0 ? queueInfo.zones : (params.zones || []),
-      formats: queueInfo.formats.length > 0 ? queueInfo.formats : (params.formats || [])
+      states: finalStates,
+      zones: finalZones,
+      formats: finalFormats
     },
+    // Также добавляем на верхний уровень для совместимости
+    states: finalStates,
+    zones: finalZones,
+    formats: finalFormats,
     priority: 'high',
     autoDeploy: params.autoDeploy !== false,
     queueSize, // Добавляем информацию о реальном размере очереди

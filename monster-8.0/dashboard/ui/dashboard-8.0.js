@@ -1556,13 +1556,22 @@ async function showBatchPreview() {
       const previewFormats = document.getElementById('preview-formats');
       const previewAutoDeploy = document.getElementById('preview-auto-deploy');
       
-      if (previewPages) previewPages.textContent = preview.expectedPages || preview.pages || '-';
-      if (previewLang) previewLang.textContent = (preview.language || 'en').toUpperCase();
-      if (previewDuration) previewDuration.textContent = preview.expectedDuration || preview.duration || '-';
-      if (previewStates) previewStates.textContent = Array.isArray(preview.states) ? preview.states.join(', ') : (preview.states || '-');
-      if (previewZones) previewZones.textContent = Array.isArray(preview.zones) ? preview.zones.join(', ') : (preview.zones || '-');
-      if (previewFormats) previewFormats.textContent = Array.isArray(preview.formats) ? preview.formats.join(', ') : (preview.formats || '-');
-      if (previewAutoDeploy) previewAutoDeploy.textContent = preview.autoDeploy !== false ? 'Да' : 'Нет';
+      // Правильный маппинг полей из preview
+      const pages = preview.estimatedPages || preview.expectedPages || preview.pages || 0;
+      const language = preview.language || 'en';
+      const duration = preview.estimatedDuration || preview.expectedDuration || preview.duration || '-';
+      const states = preview.topics?.states || preview.states || [];
+      const zones = preview.topics?.zones || preview.zones || [];
+      const formats = preview.topics?.formats || preview.formats || [];
+      const autoDeploy = preview.autoDeploy !== false;
+      
+      if (previewPages) previewPages.textContent = pages > 0 ? pages.toLocaleString() : '-';
+      if (previewLang) previewLang.textContent = language.toUpperCase();
+      if (previewDuration) previewDuration.textContent = duration !== '-' ? `${duration} мин` : '-';
+      if (previewStates) previewStates.textContent = Array.isArray(states) && states.length > 0 ? states.join(', ') : '-';
+      if (previewZones) previewZones.textContent = Array.isArray(zones) && zones.length > 0 ? zones.join(', ') : '-';
+      if (previewFormats) previewFormats.textContent = Array.isArray(formats) && formats.length > 0 ? formats.join(', ') : '-';
+      if (previewAutoDeploy) previewAutoDeploy.textContent = autoDeploy ? 'Да' : 'Нет';
       
       console.log('[Dashboard] Batch preview loaded:', preview);
     } else {
