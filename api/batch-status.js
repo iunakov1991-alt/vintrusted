@@ -5,11 +5,16 @@
 
 const { Redis } = require('@upstash/redis');
 
-// Инициализируем Redis клиент из переменных окружения
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN,
-});
+// Инициализируем Redis клиент из переменных окружения (автоматически)
+// Использует UPSTASH_REDIS_REST_URL и UPSTASH_REDIS_REST_TOKEN
+let redis;
+try {
+  redis = Redis.fromEnv();
+} catch (err) {
+  console.warn('[Batch Status] Redis.fromEnv() failed, will use manual init:', err.message);
+  // Fallback для случая, когда переменные еще не установлены
+  redis = null;
+}
 
 const STATUS_KEY = 'batch-status';
 
@@ -28,7 +33,7 @@ module.exports = async (req, res) => {
     if (req.method === 'GET') {
       try {
         // Проверяем, настроен ли Redis
-        if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+        if (!redis) {
           console.warn('[Batch Status] Upstash Redis not configured');
           return res.json({
             success: true,
