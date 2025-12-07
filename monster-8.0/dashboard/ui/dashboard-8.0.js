@@ -121,10 +121,12 @@ function showToast(message, type = 'info') {
     toast.classList.add('show');
   }, 10);
   
+  // Увеличиваем время показа для информационных сообщений с командами
+  const displayTime = (type === 'info' && message.includes('\n')) ? 10000 : 3000;
   setTimeout(() => {
     toast.classList.remove('show');
     setTimeout(() => toast.remove(), 300);
-  }, 3000);
+  }, displayTime);
 }
 
 function showError(message) {
