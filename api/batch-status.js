@@ -7,7 +7,8 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
-const STATUS_FILE = path.join(ROOT_DIR, 'tmp', 'batch-status.json');
+// Используем /tmp для Vercel serverless functions (единственное место где можно писать)
+const STATUS_FILE = process.env.VERCEL ? '/tmp/batch-status.json' : path.join(ROOT_DIR, 'tmp', 'batch-status.json');
 
 module.exports = async (req, res) => {
   // CORS headers
@@ -22,23 +23,36 @@ module.exports = async (req, res) => {
   try {
     // GET - получить текущий статус
     if (req.method === 'GET') {
-      if (fs.existsSync(STATUS_FILE)) {
-        const status = JSON.parse(fs.readFileSync(STATUS_FILE, 'utf8'));
-        return res.json({
-          success: true,
-          status
-        });
+      // Пробуем разные пути для tmp
+      const possiblePaths = [
+        '/tmp/batch-status.json',  // Vercel serverless functions
+        path.join(ROOT_DIR, 'tmp', 'batch-status.json'),  // Локально
+        path.join('/var/task', 'tmp', 'batch-status.json')  // Fallback
+      ];
+      
+      let status = {
+        current: 0,
+        total: 0,
+        completed: 0,
+        failed: 0,
+        inProgress: false
+      };
+      
+      // Пробуем найти файл по всем возможным путям
+      for (const statusFile of possiblePaths) {
+        if (fs.existsSync(statusFile)) {
+          try {
+            status = JSON.parse(fs.readFileSync(statusFile, 'utf8'));
+            break;
+          } catch (e) {
+            console.error('[Batch Status] Error reading from', statusFile, ':', e);
+          }
+        }
       }
       
       return res.json({
         success: true,
-        status: {
-          current: 0,
-          total: 0,
-          completed: 0,
-          failed: 0,
-          inProgress: false
-        }
+        status
       });
     }
     
@@ -65,10 +79,12 @@ module.exports = async (req, res) => {
         });
       }
       
-      // Создаем директорию если не существует
-      const dir = path.dirname(STATUS_FILE);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
+      // Создаем директорию если не существует (только если не /tmp)
+      if (!STATUS_FILE.startsWith('/tmp')) {
+        const dir = path.dirname(STATUS_FILE);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
       }
       
       // Сохраняем статус

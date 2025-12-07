@@ -25,7 +25,13 @@ module.exports = async (req, res) => {
     
     // GET /api/batch-runner/status - получить статус
     if (req.method === 'GET') {
-      const batchStatusPath = path.join(ROOT_DIR, 'tmp', 'batch-status.json');
+      // Пробуем разные пути для tmp (Vercel использует /tmp для записи)
+      const possiblePaths = [
+        '/tmp/batch-status.json',  // Vercel serverless functions
+        path.join(ROOT_DIR, 'tmp', 'batch-status.json'),  // Локально
+        path.join('/var/task', 'tmp', 'batch-status.json')  // Fallback
+      ];
+      
       let status = {
         current: 0,
         total: 0,
@@ -35,11 +41,15 @@ module.exports = async (req, res) => {
         lastUpdate: Date.now()
       };
 
-      if (fs.existsSync(batchStatusPath)) {
-        try {
-          status = JSON.parse(fs.readFileSync(batchStatusPath, 'utf8'));
-        } catch (e) {
-          console.error('[Batch Runner] Error reading status:', e);
+      // Пробуем найти файл по всем возможным путям
+      for (const batchStatusPath of possiblePaths) {
+        if (fs.existsSync(batchStatusPath)) {
+          try {
+            status = JSON.parse(fs.readFileSync(batchStatusPath, 'utf8'));
+            break;
+          } catch (e) {
+            console.error('[Batch Runner] Error reading status from', batchStatusPath, ':', e);
+          }
         }
       }
 
@@ -134,24 +144,10 @@ module.exports = async (req, res) => {
       });
 
       if (result.success) {
-        // Обновляем статус партии
-        const batchStatusPath = path.join(ROOT_DIR, 'tmp', 'batch-status.json');
-        const statusDir = path.dirname(batchStatusPath);
-        if (!fs.existsSync(statusDir)) {
-          fs.mkdirSync(statusDir, { recursive: true });
-        }
+        // Не записываем файл здесь - статус будет обновляться через GitHub Actions → /api/batch-status
+        // В Vercel serverless функциях нельзя писать в /var/task (read-only)
+        // Статус будет обновляться автоматически когда GitHub Actions начнет работу
         
-        fs.writeFileSync(batchStatusPath, JSON.stringify({
-          current: 0,
-          total: 0,
-          completed: 0,
-          failed: 0,
-          inProgress: true,
-          lastUpdate: Date.now(),
-          startedAt: Date.now(),
-          workflow: result.workflow
-        }, null, 2));
-
         return res.json(result);
       } else {
         return res.status(500).json(result);
