@@ -253,6 +253,23 @@ function main() {
   const queue = loadQueue(queuePath);
   if (queue.length === 0) {
     console.log(`[BATCH] Queue ${queuePath} is empty.`);
+    // Создаем пустой статус, чтобы дашборд знал, что партия не запущена
+    const batchStatusPath = path.join(rootDir, "tmp", "batch-status.json");
+    try {
+      fs.mkdirSync(path.dirname(batchStatusPath), { recursive: true });
+      fs.writeFileSync(batchStatusPath, JSON.stringify({
+        current: 0,
+        total: 0,
+        completed: 0,
+        failed: 0,
+        inProgress: false,
+        error: "Queue is empty",
+        lastUpdate: Date.now()
+      }, null, 2));
+      console.log(`[BATCH] Created empty batch-status.json (queue is empty)`);
+    } catch (err) {
+      console.error(`[BATCH] Failed to create batch-status.json: ${err.message}`);
+    }
     return;
   }
 
