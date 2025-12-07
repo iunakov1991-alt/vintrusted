@@ -86,6 +86,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/batch-dashboard.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -297,11 +301,11 @@
     },
     {
       "source": "/batch-dashboard",
-      "destination": "/batch-dashboard.html"
+      "destination": "/api/batch-dashboard.js"
     },
     {
       "source": "/batch-dashboard.html",
-      "destination": "/batch-dashboard.html"
+      "destination": "/api/batch-dashboard.js"
     }
   ],
   "headers": [
