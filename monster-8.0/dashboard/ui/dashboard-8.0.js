@@ -783,30 +783,70 @@ function updateDashboard(data) {
     pagesChart.update();
   }
   
-  // Batch Progress
-  if (data.batch) {
-    const batch = data.batch;
-    const isRunning = batch.inProgress || false;
-    const current = batch.current || 0;
-    const total = batch.total || 0;
-    const completed = batch.completed || 0;
-    const failed = batch.failed || 0;
-    
-    const batchStatus = document.getElementById('batch-status');
-    const batchCurrent = document.getElementById('batch-current');
-    const batchCompleted = document.getElementById('batch-completed');
-    const batchFailed = document.getElementById('batch-failed');
-    const batchProgressFill = document.getElementById('batch-progress-fill');
-    const batchProgressText = document.getElementById('batch-progress-text');
-    
-    if (batchStatus) batchStatus.textContent = isRunning ? 'Выполняется' : 'Ожидает';
-    if (batchCurrent) batchCurrent.textContent = current > 0 ? `${current} / ${total}` : '-';
-    if (batchCompleted) batchCompleted.textContent = completed;
-    if (batchFailed) batchFailed.textContent = failed;
-    
-    const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
-    if (batchProgressFill) batchProgressFill.style.width = `${progress}%`;
-    if (batchProgressText) batchProgressText.textContent = `${completed} / ${total} (${progress}%)`;
+  // Batch Progress - всегда отображаем, даже если партия не запущена
+  const batch = data.batch || {};
+  const isRunning = batch.inProgress || false;
+  const current = batch.current || 0;
+  const total = batch.total || 0;
+  const completed = batch.completed || 0;
+  const failed = batch.failed || 0;
+  
+  const batchStatus = document.getElementById('batch-status');
+  const batchCurrent = document.getElementById('batch-current');
+  const batchCompleted = document.getElementById('batch-completed');
+  const batchFailed = document.getElementById('batch-failed');
+  const batchProgressFill = document.getElementById('batch-progress-fill');
+  const batchProgressText = document.getElementById('batch-progress-text');
+  
+  // Обновляем статус
+  if (batchStatus) {
+    if (isRunning) {
+      batchStatus.textContent = '🟢 Выполняется';
+      batchStatus.style.color = 'var(--accent-success)';
+    } else if (total > 0 && completed === total) {
+      batchStatus.textContent = '✅ Завершена';
+      batchStatus.style.color = 'var(--accent-success)';
+    } else if (total > 0) {
+      batchStatus.textContent = '⏸ Остановлена';
+      batchStatus.style.color = 'var(--accent-warning)';
+    } else {
+      batchStatus.textContent = '⏳ Ожидает';
+      batchStatus.style.color = 'var(--text-secondary)';
+    }
+  }
+  
+  // Обновляем текущую позицию
+  if (batchCurrent) {
+    if (total > 0) {
+      batchCurrent.textContent = `${current} / ${total}`;
+    } else {
+      batchCurrent.textContent = '-';
+    }
+  }
+  
+  // Обновляем статистику
+  if (batchCompleted) batchCompleted.textContent = completed;
+  if (batchFailed) batchFailed.textContent = failed;
+  
+  // Обновляем прогресс-бар
+  const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
+  if (batchProgressFill) {
+    batchProgressFill.style.width = `${progress}%`;
+    // Цвет прогресс-бара зависит от статуса
+    if (isRunning) {
+      batchProgressFill.style.background = 'linear-gradient(90deg, var(--accent-primary), #60a5fa)';
+    } else if (total > 0 && completed === total) {
+      batchProgressFill.style.background = 'linear-gradient(90deg, var(--accent-success), #34d399)';
+    } else {
+      batchProgressFill.style.background = 'linear-gradient(90deg, var(--accent-warning), #fbbf24)';
+    }
+  }
+  if (batchProgressText) {
+    if (total > 0) {
+      batchProgressText.textContent = `${completed} / ${total} (${progress}%)`;
+    } else {
+      batchProgressText.textContent = 'Партия не запущена';
+    }
   }
   
   // Deploy Progress
