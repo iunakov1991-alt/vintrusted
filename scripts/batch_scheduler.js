@@ -28,6 +28,7 @@ function loadStrategy() {
   const defaultStrategy = {
     minIntervalHours: 24, // Минимальный интервал между партиями
     maxPagesPerBatch: 100, // Максимальное количество страниц в партии
+    minPagesPerBatch: 20,  // Минимальное количество страниц в партии (для Фазы 1)
     preferredTimes: ['09:00', '15:00', '21:00'], // Предпочтительное время запуска
     batchSizeStrategy: 'adaptive', // 'fixed', 'adaptive', 'progressive'
     workingDaysOnly: false, // Только рабочие дни
@@ -389,75 +390,85 @@ function generateBatchPreview(params) {
   const batchParams = calculateNextBatchParams(lastBatch, strategy);
   let estimatedPages = batchParams.batchSize;
   
+  // Определяем текущую фазу для правильного расчета размера
+  const deployStatusPath = path.join(ROOT, 'tmp', 'deploy-status.json');
+  let deployedEnPages = 0;
+  if (fs.existsSync(deployStatusPath)) {
+    try {
+      const status = JSON.parse(fs.readFileSync(deployStatusPath, 'utf8'));
+      deployedEnPages = status.pages?.en?.deployed || status.en?.deployed || 0;
+    } catch (e) {}
+  }
+  
+  // ФАЗА 1: Если EN < 100, увеличиваем размер партии для быстрого роста
+  if (deployedEnPages < 100) {
+    // Увеличиваем размер партии для Фазы 1 (быстрый рост)
+    estimatedPages = Math.max(strategy.minPagesPerBatch || 20, estimatedPages);
+    // Если на проде очень мало страниц, увеличиваем еще больше
+    if (deployedEnPages < 10) {
+      estimatedPages = Math.min(strategy.maxPagesPerBatch, estimatedPages * 1.5);
+    }
+  }
+  
   // Ограничиваем реальным количеством в очереди
   if (queueSize > 0 && estimatedPages > queueSize) {
     estimatedPages = queueSize;
   }
   
+  // Минимум страниц для превью (даже если очередь маленькая)
+  estimatedPages = Math.max(estimatedPages, 5);
+  
   // Извлекаем информацию из очереди
   const queueInfo = extractQueueInfo(queue);
   
-  // Определяем язык
+  // Определяем язык с учетом фазы стратегии
   let language = params.language;
   if (!language) {
-    if (lastBatch && lastBatch.language) {
-      language = lastBatch.language === 'en' ? 'es' : 'en';
-    } else {
-      // Проверяем реальные темы в очереди (читаем JSON файлы)
-      let enCount = 0;
-      let esCount = 0;
-      
-      if (queueSize > 0) {
-        queue.forEach(item => {
-          const topicFile = item.topic_file || item.path || item.topicFile;
-          if (!topicFile) return;
-          
-          try {
-            const topicPath = path.join(ROOT, topicFile);
-            if (fs.existsSync(topicPath)) {
-              const topicData = JSON.parse(fs.readFileSync(topicPath, 'utf8'));
-              const topicLang = (topicData.language || '').toLowerCase();
-              if (topicLang === 'es' || topicLang === 'es-mx' || topicLang === 'es-us') {
-                esCount++;
-              } else {
-                enCount++;
-              }
-            } else {
-              // Fallback: по имени файла
-              const file = topicFile.toLowerCase();
-              if (file.includes('_es_') || file.includes('/es/') || file.includes('es_mx')) {
-                esCount++;
-              } else {
-                enCount++;
-              }
-            }
-          } catch (e) {
-            // Fallback: по имени файла
-            const file = (topicFile || '').toLowerCase();
-            if (file.includes('_es_') || file.includes('/es/') || file.includes('es_mx')) {
-              esCount++;
-            } else {
-              enCount++;
-            }
-          }
-        });
-        
-        language = enCount >= esCount ? 'EN' : 'ES';
+    // Определяем текущую фазу по количеству страниц на проде
+    const deployStatusPath = path.join(ROOT, 'tmp', 'deploy-status.json');
+    let deployedEnPages = 0;
+    let deployedEsPages = 0;
+    if (fs.existsSync(deployStatusPath)) {
+      try {
+        const status = JSON.parse(fs.readFileSync(deployStatusPath, 'utf8'));
+        deployedEnPages = status.pages?.en?.deployed || status.en?.deployed || 0;
+        deployedEsPages = status.pages?.es?.deployed || status.es?.deployed || 0;
+      } catch (e) {}
+    }
+    
+    // Определяем фазу по стратегии MONSTER 8.0
+    const EN_THRESHOLD = 100; // Порог для перехода к ES
+    const ES_HARD_MIN = 50;   // Минимум ES страниц
+    
+    let currentPhase = 'en_only';
+    if (deployedEnPages >= EN_THRESHOLD && deployedEsPages < ES_HARD_MIN) {
+      currentPhase = 'mixed'; // Начинаем добавлять ES
+    } else if (deployedEsPages >= ES_HARD_MIN) {
+      currentPhase = 'es_focus'; // Оба языка развиваются
+    }
+    
+    // Выбираем язык в зависимости от фазы
+    if (currentPhase === 'en_only') {
+      // ФАЗА 1: Только английский (приоритет по стратегии)
+      language = 'en';
+    } else if (currentPhase === 'mixed') {
+      // ФАЗА 2: Чередуем, но приоритет EN
+      if (lastBatch && lastBatch.language) {
+        language = lastBatch.language === 'en' ? 'es' : 'en';
       } else {
-        // Если очереди нет, используем стратегию
-        const deployStatusPath = path.join(ROOT, 'tmp', 'deploy-status.json');
-        let deployedPages = 0;
-        if (fs.existsSync(deployStatusPath)) {
-          try {
-            const status = JSON.parse(fs.readFileSync(deployStatusPath, 'utf8'));
-            deployedPages = status.total?.deployed || 0;
-          } catch (e) {}
-        }
-        
-        // Если на проде мало страниц, начинаем с EN (приоритет английскому)
-        language = deployedPages < 100 ? 'en' : 'en'; // Всегда начинаем с EN
+        language = 'en'; // По умолчанию EN
+      }
+    } else {
+      // ФАЗА 3: Чередуем оба языка
+      if (lastBatch && lastBatch.language) {
+        language = lastBatch.language === 'en' ? 'es' : 'en';
+      } else {
+        // Если больше EN страниц, начинаем с ES, и наоборот
+        language = deployedEnPages > deployedEsPages ? 'es' : 'en';
       }
     }
+    
+    log(`Language phase: ${currentPhase}, EN: ${deployedEnPages}, ES: ${deployedEsPages}, selected: ${language}`);
   }
   
   // Нормализуем язык (EN/ES) - приоритет английскому
@@ -475,33 +486,65 @@ function generateBatchPreview(params) {
   let finalZones = queueInfo.zones.length > 0 ? queueInfo.zones : (params.zones || []);
   let finalFormats = queueInfo.formats.length > 0 ? queueInfo.formats : (params.formats || []);
   
-  // Если все пусто, используем дефолты из semantic_core.json
+  // Если все пусто, используем дефолты из приоритетов (Фаза 1 стратегия)
   if (finalStates.length === 0 && finalZones.length === 0 && finalFormats.length === 0) {
-    // Загружаем дефолтные значения из конфига
+    // Загружаем приоритеты для правильных дефолтов
     try {
-      const semanticCorePath = path.join(ROOT, 'config', 'semantic_core.json');
-      if (fs.existsSync(semanticCorePath)) {
-        const semanticCore = JSON.parse(fs.readFileSync(semanticCorePath, 'utf8'));
-        // Берем первые несколько штатов из списка
-        const statesConfig = semanticCore.dimensions?.geo?.usa_states;
-        if (statesConfig && typeof statesConfig === 'string' && statesConfig.includes('states_us.json')) {
-          const statesPath = path.join(ROOT, 'config', 'states_us.json');
-          if (fs.existsSync(statesPath)) {
-            const statesData = JSON.parse(fs.readFileSync(statesPath, 'utf8'));
-            finalStates = Array.isArray(statesData) ? statesData.slice(0, 10).map(s => s.code || s.abbr || s) : [];
+      const priorityPath = path.join(ROOT, 'config', 'topic-priority.json');
+      if (fs.existsSync(priorityPath)) {
+        const priorityConfig = JSON.parse(fs.readFileSync(priorityPath, 'utf8'));
+        
+        // Берем топ-штаты по приоритету (Фаза 1: CA, TX, FL, NY, AZ, NV)
+        if (priorityConfig.state_priority) {
+          finalStates = Object.entries(priorityConfig.state_priority)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 6)
+            .map(([state]) => state);
+        }
+        
+        // Берем топ-зоны по приоритету (Фаза 1: dmv_titles, vin_identity)
+        if (priorityConfig.zone_priority) {
+          finalZones = Object.entries(priorityConfig.zone_priority)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 2)
+            .map(([zone]) => zone);
+        }
+        
+        // Берем топ-форматы по приоритету (Фаза 1: checklist, guide)
+        if (priorityConfig.format_variant_priority) {
+          finalFormats = Object.entries(priorityConfig.format_variant_priority)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 2)
+            .map(([format]) => format);
+        }
+      }
+      
+      // Fallback на semantic_core.json если приоритетов нет
+      if (finalStates.length === 0 || finalZones.length === 0 || finalFormats.length === 0) {
+        const semanticCorePath = path.join(ROOT, 'config', 'semantic_core.json');
+        if (fs.existsSync(semanticCorePath)) {
+          const semanticCore = JSON.parse(fs.readFileSync(semanticCorePath, 'utf8'));
+          // Берем первые несколько штатов из списка
+          const statesConfig = semanticCore.dimensions?.geo?.usa_states;
+          if (statesConfig && typeof statesConfig === 'string' && statesConfig.includes('states_us.json')) {
+            const statesPath = path.join(ROOT, 'config', 'states_us.json');
+            if (fs.existsSync(statesPath)) {
+              const statesData = JSON.parse(fs.readFileSync(statesPath, 'utf8'));
+              finalStates = Array.isArray(statesData) ? statesData.slice(0, 6).map(s => s.code || s.abbr || s) : [];
+            }
           }
-        }
-        // Берем зоны
-        if (semanticCore.zones && Array.isArray(semanticCore.zones)) {
-          finalZones = semanticCore.zones.slice(0, 5).map(z => z.id || z);
-        }
-        // Берем форматы
-        if (semanticCore.variation_formats && Array.isArray(semanticCore.variation_formats)) {
-          finalFormats = semanticCore.variation_formats.slice(0, 3);
+          // Берем зоны
+          if (semanticCore.zones && Array.isArray(semanticCore.zones)) {
+            finalZones = semanticCore.zones.slice(0, 2).map(z => z.id || z);
+          }
+          // Берем форматы
+          if (semanticCore.variation_formats && Array.isArray(semanticCore.variation_formats)) {
+            finalFormats = semanticCore.variation_formats.slice(0, 2);
+          }
         }
       }
     } catch (e) {
-      log(`Error loading defaults from semantic_core.json: ${e.message}`);
+      log(`Error loading defaults: ${e.message}`);
     }
   }
   
