@@ -108,6 +108,12 @@ function hideLoading(elementId) {
 function showToast(message, type = 'info') {
   const toast = document.createElement('div');
   toast.className = `toast toast-${type}`;
+  // Поддерживаем многострочные сообщения
+  if (message.includes('\n')) {
+    toast.style.whiteSpace = 'pre-line';
+    toast.style.maxWidth = '500px';
+    toast.style.fontSize = '13px';
+  }
   toast.textContent = message;
   document.body.appendChild(toast);
   
