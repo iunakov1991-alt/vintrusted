@@ -158,7 +158,8 @@ function calculateNextBatchParams(lastBatch, strategy) {
       Math.floor(timeBasedSize * productionMultiplier)
     );
     
-    // Минимум 5 страниц, даже если расчет дал меньше
+    // Минимум зависит от фазы (будет скорректирован в generateBatchPreview)
+    // Здесь оставляем базовый минимум 5, но для Фазы 1 будет увеличен до 20
     batchSize = Math.max(5, batchSize);
     
   } else if (strategy.batchSizeStrategy === 'progressive') {
@@ -403,20 +404,38 @@ function generateBatchPreview(params) {
   // ФАЗА 1: Если EN < 100, увеличиваем размер партии для быстрого роста
   if (deployedEnPages < 100) {
     // Увеличиваем размер партии для Фазы 1 (быстрый рост)
-    estimatedPages = Math.max(strategy.minPagesPerBatch || 20, estimatedPages);
+    const minForPhase1 = strategy.minPagesPerBatch || 20;
+    
+    // Для Фазы 1 НЕ ограничиваем размером очереди, если очередь пустая или маленькая
+    // Вместо этого генерируем новые темы на лету
+    if (queueSize === 0 || queueSize < minForPhase1) {
+      // Очередь пустая или слишком маленькая - устанавливаем минимум для Фазы 1
+      // Оркестратор сгенерирует новые темы автоматически
+      estimatedPages = minForPhase1;
+      log(`Queue is empty or too small (${queueSize}), will generate ${estimatedPages} new topics for Phase 1`);
+    } else {
+      // Очередь есть - используем расчетный размер, но не меньше минимума для Фазы 1
+      estimatedPages = Math.max(minForPhase1, estimatedPages);
+      // Если очередь меньше желаемого размера - используем всю очередь
+      if (estimatedPages > queueSize) {
+        estimatedPages = Math.max(minForPhase1, queueSize); // Но не меньше минимума
+        log(`Queue has ${queueSize} topics, using ${estimatedPages} (minimum for Phase 1)`);
+      }
+    }
+    
     // Если на проде очень мало страниц, увеличиваем еще больше
     if (deployedEnPages < 10) {
-      estimatedPages = Math.min(strategy.maxPagesPerBatch, estimatedPages * 1.5);
+      estimatedPages = Math.min(strategy.maxPagesPerBatch, Math.floor(estimatedPages * 1.5));
+      log(`Very few pages on production (${deployedEnPages}), increasing batch size to ${estimatedPages}`);
     }
+  } else {
+    // Фаза 2 и 3: ограничиваем размером очереди
+    if (queueSize > 0 && estimatedPages > queueSize) {
+      estimatedPages = queueSize;
+    }
+    // Минимум 5 страниц для других фаз
+    estimatedPages = Math.max(estimatedPages, 5);
   }
-  
-  // Ограничиваем реальным количеством в очереди
-  if (queueSize > 0 && estimatedPages > queueSize) {
-    estimatedPages = queueSize;
-  }
-  
-  // Минимум страниц для превью (даже если очередь маленькая)
-  estimatedPages = Math.max(estimatedPages, 5);
   
   // Извлекаем информацию из очереди
   const queueInfo = extractQueueInfo(queue);
@@ -566,7 +585,9 @@ function generateBatchPreview(params) {
     priority: 'high',
     autoDeploy: params.autoDeploy !== false,
     queueSize, // Добавляем информацию о реальном размере очереди
-    note: queueSize > 0 && estimatedPages > queueSize ? `В очереди только ${queueSize} страниц, будет сгенерировано ${queueSize}` : null
+    note: (queueSize === 0 || queueSize < estimatedPages) && deployedEnPages < 100 
+      ? `Очередь пустая или маленькая (${queueSize}). Для Фазы 1 будет сгенерировано ${estimatedPages} новых тем автоматически.`
+      : (queueSize > 0 && estimatedPages > queueSize ? `В очереди только ${queueSize} страниц, будет сгенерировано ${queueSize}` : null)
   };
   
   return preview;
