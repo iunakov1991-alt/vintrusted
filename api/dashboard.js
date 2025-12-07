@@ -253,14 +253,30 @@ module.exports = async (req, res) => {
           // Генерируем превью партии
           const preview = batchScheduler.generateBatchPreview({});
           
-          // Запускаем партию через оркестратор (если доступен)
-          // На Vercel это не работает, поэтому возвращаем превью
-          // В реальности нужно запускать через orchestrator.sh
+          // Определяем параметры для запуска
+          const enPages = countPages('en');
+          const esPages = countPages('es');
+          const langPhase = getLanguagePhase(enPages, esPages);
+          const lengthMode = getLengthMode();
+          
+          // На Vercel мы не можем запустить orchestrator.sh напрямую
+          // Возвращаем инструкции для локального запуска
+          const command = `./monster8_orchestrator.sh ${langPhase} ${lengthMode}`;
+          
           return res.json({
             success: true,
-            message: 'Партия запланирована. Для запуска используйте orchestrator локально.',
+            message: 'Партия не может быть запущена автоматически на Vercel. Используйте локальный оркестратор.',
             preview: preview,
-            note: 'На Vercel партии запускаются через локальный orchestrator'
+            command: command,
+            instructions: [
+              '1. Откройте терминал на вашем локальном компьютере',
+              `2. Перейдите в директорию проекта: cd ${ROOT_DIR}`,
+              `3. Запустите команду: ${command}`,
+              '4. Партия начнет генерироваться, прогресс будет виден в дашборде',
+              '',
+              'Альтернатива: Настройте GitHub Actions для автоматического запуска партий'
+            ],
+            note: 'На Vercel партии запускаются через локальный orchestrator или CI/CD'
           });
         } catch (err) {
           console.error('[Dashboard API] Error starting batch:', err);
