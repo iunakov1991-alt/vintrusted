@@ -1,16 +1,11 @@
 /**
  * API endpoint для обновления статуса партии
- * Используется GitHub Actions для отправки статуса напрямую на Vercel
+ * Использует Vercel KV для постоянного хранения статуса
  */
 
-const fs = require('fs');
-const path = require('path');
+const { kv } = require('@vercel/kv');
 
-const ROOT_DIR = path.resolve(__dirname, '..');
-// В Vercel serverless функциях можно писать только в /tmp
-// Используем /tmp для записи, но читаем из разных мест
-const STATUS_FILE = '/tmp/batch-status.json';
-const LOCAL_STATUS_FILE = path.join(ROOT_DIR, 'tmp', 'batch-status.json');
+const STATUS_KEY = 'batch-status';
 
 module.exports = async (req, res) => {
   // CORS headers
@@ -25,37 +20,47 @@ module.exports = async (req, res) => {
   try {
     // GET - получить текущий статус
     if (req.method === 'GET') {
-      // Пробуем разные пути для tmp
-      const possiblePaths = [
-        '/tmp/batch-status.json',  // Vercel serverless functions
-        path.join(ROOT_DIR, 'tmp', 'batch-status.json'),  // Локально
-        path.join('/var/task', 'tmp', 'batch-status.json')  // Fallback
-      ];
-      
-      let status = {
-        current: 0,
-        total: 0,
-        completed: 0,
-        failed: 0,
-        inProgress: false
-      };
-      
-      // Пробуем найти файл по всем возможным путям
-      for (const statusFile of possiblePaths) {
-        if (fs.existsSync(statusFile)) {
-          try {
-            status = JSON.parse(fs.readFileSync(statusFile, 'utf8'));
-            break;
-          } catch (e) {
-            console.error('[Batch Status] Error reading from', statusFile, ':', e);
-          }
+      try {
+        // Читаем статус из Vercel KV
+        const status = await kv.get(STATUS_KEY);
+        
+        if (status) {
+          console.log('[Batch Status] Status read from KV');
+          return res.json({
+            success: true,
+            status
+          });
+        } else {
+          // Если статуса нет, возвращаем пустой
+          console.log('[Batch Status] No status in KV, returning empty');
+          return res.json({
+            success: true,
+            status: {
+              current: 0,
+              total: 0,
+              completed: 0,
+              failed: 0,
+              inProgress: false,
+              lastUpdate: Date.now()
+            }
+          });
         }
+      } catch (kvErr) {
+        console.error('[Batch Status] KV error:', kvErr);
+        // Fallback: возвращаем пустой статус если KV недоступен
+        return res.json({
+          success: true,
+          status: {
+            current: 0,
+            total: 0,
+            completed: 0,
+            failed: 0,
+            inProgress: false,
+            lastUpdate: Date.now(),
+            error: 'KV not available'
+          }
+        });
       }
-      
-      return res.json({
-        success: true,
-        status
-      });
     }
     
     // POST - обновить статус (только с авторизацией)
@@ -81,7 +86,7 @@ module.exports = async (req, res) => {
         });
       }
       
-      // Сохраняем статус в /tmp (единственное место где можно писать в Vercel)
+      // Сохраняем статус в Vercel KV
       const statusToSave = {
         current: status.current || 0,
         total: status.total || 0,
@@ -93,33 +98,22 @@ module.exports = async (req, res) => {
       };
       
       try {
-        // Пробуем записать в /tmp (Vercel)
-        fs.writeFileSync(STATUS_FILE, JSON.stringify(statusToSave, null, 2));
-        console.log('[Batch Status] Status saved to:', STATUS_FILE);
-      } catch (tmpErr) {
-        // Fallback для локальной разработки
-        console.warn('[Batch Status] Failed to write to /tmp, trying local:', tmpErr.message);
-        try {
-          const dir = path.dirname(LOCAL_STATUS_FILE);
-          if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-          }
-          fs.writeFileSync(LOCAL_STATUS_FILE, JSON.stringify(statusToSave, null, 2));
-          console.log('[Batch Status] Status saved to:', LOCAL_STATUS_FILE);
-        } catch (localErr) {
-          console.error('[Batch Status] Failed to write to both paths:', localErr.message);
-          return res.status(500).json({
-            success: false,
-            error: `Failed to save status: ${localErr.message}`
-          });
-        }
+        // Сохраняем в KV с TTL 24 часа (опционально)
+        await kv.set(STATUS_KEY, statusToSave);
+        console.log('[Batch Status] Status saved to KV');
+        
+        return res.json({
+          success: true,
+          message: 'Status updated',
+          status: statusToSave
+        });
+      } catch (kvErr) {
+        console.error('[Batch Status] KV save error:', kvErr);
+        return res.status(500).json({
+          success: false,
+          error: `Failed to save status to KV: ${kvErr.message}`
+        });
       }
-      
-      return res.json({
-        success: true,
-        message: 'Status updated',
-        status: statusToSave
-      });
     }
     
     return res.status(405).json({
