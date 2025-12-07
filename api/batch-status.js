@@ -9,22 +9,26 @@ const STATUS_KEY = 'batch-status';
 
 // Функция для получения Redis клиента (инициализируем внутри функции, а не на уровне модуля)
 function getRedis() {
-  // Проверяем переменные окружения
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  // Проверяем переменные окружения (поддерживаем оба варианта: UPSTASH_REDIS_* и KV_*)
+  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
   
   // Логируем для диагностики (без секретов)
   console.log('[Batch Status] Checking Redis config:', {
     hasUrl: !!url,
     hasToken: !!token,
     urlLength: url ? url.length : 0,
-    tokenLength: token ? token.length : 0
+    tokenLength: token ? token.length : 0,
+    usingKV: !!process.env.KV_REST_API_URL,
+    usingUpstash: !!process.env.UPSTASH_REDIS_REST_URL
   });
   
   if (!url || !token) {
     console.warn('[Batch Status] Redis env vars missing:', {
-      UPSTASH_REDIS_REST_URL: url ? 'present' : 'missing',
-      UPSTASH_REDIS_REST_TOKEN: token ? 'present' : 'missing'
+      UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL ? 'present' : 'missing',
+      UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN ? 'present' : 'missing',
+      KV_REST_API_URL: process.env.KV_REST_API_URL ? 'present' : 'missing',
+      KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN ? 'present' : 'missing'
     });
     return null; // Redis не настроен
   }
