@@ -72,6 +72,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Полная история для git push
+          
+      - name: Setup git for commits
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -111,14 +119,58 @@ jobs:
           echo "  - DEFAULT_NIGHT_WORKERS: $DEFAULT_NIGHT_WORKERS"
           echo ""
           
+          # Создаем директорию для статусов заранее
+          mkdir -p tmp
+          
           # Запускаем оркестратор
           # Оркестратор сам определит фазу и режим длины
           ./monster8_orchestrator.sh || {
             echo "❌ Orchestrator failed with exit code $?"
+            # Даже при ошибке сохраняем статус
+            if [ ! -f "tmp/batch-status.json" ]; then
+              echo '{"current": 0, "total": 0, "completed": 0, "failed": 0, "inProgress": false, "error": true, "lastUpdate": '$(date +%s000)'}' > tmp/batch-status.json
+            fi
             exit 1
           }
           
           echo "✅ Orchestrator completed successfully"
+          
+          # Проверяем, что статус создан
+          if [ -f "tmp/batch-status.json" ]; then
+            echo "✅ batch-status.json exists"
+            cat tmp/batch-status.json
+          else
+            echo "⚠️  batch-status.json not found after orchestrator"
+          fi
+
+      - name: Commit batch status to repo
+        if: always()
+        run: |
+          # Создаем директорию если не существует
+          mkdir -p tmp
+          
+          # Сохраняем статус в репозиторий, чтобы Vercel мог его прочитать
+          if [ -f "tmp/batch-status.json" ]; then
+            echo "✅ Found batch-status.json, committing..."
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add tmp/batch-status.json
+            git commit -m "Update batch status [skip ci]" || echo "No changes to commit"
+            git push origin main || echo "Push failed (non-critical)"
+          else
+            echo "⚠️  batch-status.json not found, creating empty status..."
+            # Создаем пустой статус, чтобы дашборд знал, что партия не запущена
+            echo '{"current": 0, "total": 0, "completed": 0, "failed": 0, "inProgress": false, "lastUpdate": '$(date +%s000)'}' > tmp/batch-status.json
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add tmp/batch-status.json
+            git commit -m "Initialize batch status [skip ci]" || echo "No changes to commit"
+            git push origin main || echo "Push failed (non-critical)"
+          fi
+          
+          # Показываем содержимое файла для отладки
+          echo "📄 Current batch-status.json:"
+          cat tmp/batch-status.json || echo "File not readable"
 
       - name: Upload batch logs
         if: always()
