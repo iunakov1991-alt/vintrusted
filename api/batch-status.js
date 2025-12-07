@@ -9,19 +9,28 @@ const STATUS_KEY = 'batch-status';
 
 // Функция для получения Redis клиента (инициализируем внутри функции, а не на уровне модуля)
 function getRedis() {
+  // Проверяем переменные окружения
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  
+  if (!url || !token) {
+    return null; // Redis не настроен
+  }
+  
   try {
     // Пробуем использовать fromEnv() (автоматически читает UPSTASH_REDIS_REST_URL и UPSTASH_REDIS_REST_TOKEN)
     return Redis.fromEnv();
   } catch (err) {
     // Если fromEnv() не работает, пробуем ручную инициализацию
-    if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    try {
       return new Redis({
-        url: process.env.UPSTASH_REDIS_REST_URL,
-        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+        url: url,
+        token: token,
       });
+    } catch (initErr) {
+      console.error('[Batch Status] Redis init error:', initErr.message);
+      return null;
     }
-    // Если переменных нет, возвращаем null
-    return null;
   }
 }
 
