@@ -288,6 +288,14 @@
       "destination": "/api/dashboard.js?path="
     },
     {
+      "source": "/batch-dashboard",
+      "destination": "/api/batch-dashboard.js"
+    },
+    {
+      "source": "/batch-dashboard.html",
+      "destination": "/api/batch-dashboard.js"
+    },
+    {
       "source": "/api/batch-status",
       "destination": "/api/batch-status.js"
     },
@@ -298,14 +306,6 @@
     {
       "source": "/api/batch-runner/:path*",
       "destination": "/api/batch-runner.js"
-    },
-    {
-      "source": "/batch-dashboard",
-      "destination": "/api/batch-dashboard.js"
-    },
-    {
-      "source": "/batch-dashboard.html",
-      "destination": "/api/batch-dashboard.js"
     }
   ],
   "headers": [
