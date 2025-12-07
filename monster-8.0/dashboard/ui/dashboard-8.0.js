@@ -493,9 +493,18 @@ async function startOrchestrator() {
     console.log('[Dashboard] Response data:', data);
     
     if (data.success) {
-      addLog('info', 'Оркестратор запущен');
-      updateOrchestratorStatus(true, data.pid);
-      showSuccess('Оркестратор успешно запущен');
+      // Показываем информацию о запуске
+      if (data.command) {
+        // Если есть команда для локального запуска, показываем её
+        addLog('info', `Оркестратор: ${data.message}`);
+        addLog('info', `Команда: ${data.command}`);
+        showInfo(`Оркестратор должен быть запущен локально:\n\n${data.command}\n\n${data.note || ''}`);
+      } else {
+        // Если оркестратор запущен на сервере
+        addLog('info', 'Оркестратор запущен');
+        updateOrchestratorStatus(true, data.pid);
+        showSuccess('Оркестратор успешно запущен');
+      }
       // Инвалидируем кэш
       apiCache.timestamps['orchestrator'] = 0;
       apiCache.timestamps['status'] = 0;

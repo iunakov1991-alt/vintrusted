@@ -271,6 +271,42 @@ module.exports = async (req, res) => {
         }
       }
       
+      // POST /api/orchestrator/start
+      if (endpoint === 'orchestrator' && pathParts[2] === 'start' && req.method === 'POST') {
+        try {
+          // На Vercel мы не можем запустить orchestrator.sh напрямую
+          // Возвращаем инструкции для локального запуска
+          const params = req.body || {};
+          const enPages = countPages('en');
+          const esPages = countPages('es');
+          const langPhase = getLanguagePhase(enPages, esPages);
+          const lengthMode = getLengthMode();
+          
+          // Генерируем команду для локального запуска
+          const command = `./monster8_orchestrator.sh ${langPhase} ${lengthMode}`;
+          
+          return res.json({
+            success: true,
+            message: 'Оркестратор должен быть запущен локально. Используйте команду:',
+            command: command,
+            params: {
+              phase: langPhase,
+              lengthMode: lengthMode,
+              enPages: enPages,
+              esPages: esPages
+            },
+            note: 'На Vercel оркестратор запускается через локальный скрипт. Для автоматического запуска используйте GitHub Actions или локальный сервер.',
+            pid: null // На Vercel нет PID
+          });
+        } catch (err) {
+          console.error('[Dashboard API] Error starting orchestrator:', err);
+          return res.status(500).json({
+            success: false,
+            error: err.message || 'Не удалось запустить оркестратор'
+          });
+        }
+      }
+      
       return res.status(404).json({ error: 'API endpoint not found' });
     }
     
