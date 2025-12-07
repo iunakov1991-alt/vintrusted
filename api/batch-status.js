@@ -115,10 +115,10 @@ module.exports = async (req, res) => {
       }
 
       // Проверяем, настроен ли Redis
-      if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+      if (!redis) {
         return res.status(500).json({
           success: false,
-          error: 'Upstash Redis not configured. Please install Upstash from Vercel Marketplace.'
+          error: 'Upstash Redis not configured. Please install Upstash from Vercel Marketplace and redeploy.'
         });
       }
       
