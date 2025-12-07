@@ -288,6 +288,10 @@
       "destination": "/api/batch-status.js"
     },
     {
+      "source": "/api/batch-runner",
+      "destination": "/api/batch-runner.js"
+    },
+    {
       "source": "/api/batch-runner/:path*",
       "destination": "/api/batch-runner.js"
     },

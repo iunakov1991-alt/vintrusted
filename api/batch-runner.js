@@ -20,6 +20,9 @@ module.exports = async (req, res) => {
   }
 
   try {
+    // Получаем путь из query параметра (Vercel передает через ?path=)
+    const pathParam = req.query.path || '';
+    
     // GET /api/batch-runner/status - получить статус
     if (req.method === 'GET') {
       const batchStatusPath = path.join(ROOT_DIR, 'tmp', 'batch-status.json');
