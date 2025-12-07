@@ -5,18 +5,25 @@
 
 const { Redis } = require('@upstash/redis');
 
-// Инициализируем Redis клиент из переменных окружения (автоматически)
-// Использует UPSTASH_REDIS_REST_URL и UPSTASH_REDIS_REST_TOKEN
-let redis;
-try {
-  redis = Redis.fromEnv();
-} catch (err) {
-  console.warn('[Batch Status] Redis.fromEnv() failed, will use manual init:', err.message);
-  // Fallback для случая, когда переменные еще не установлены
-  redis = null;
-}
-
 const STATUS_KEY = 'batch-status';
+
+// Функция для получения Redis клиента (инициализируем внутри функции, а не на уровне модуля)
+function getRedis() {
+  try {
+    // Пробуем использовать fromEnv() (автоматически читает UPSTASH_REDIS_REST_URL и UPSTASH_REDIS_REST_TOKEN)
+    return Redis.fromEnv();
+  } catch (err) {
+    // Если fromEnv() не работает, пробуем ручную инициализацию
+    if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+      return new Redis({
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+      });
+    }
+    // Если переменных нет, возвращаем null
+    return null;
+  }
+}
 
 module.exports = async (req, res) => {
   // CORS headers
@@ -32,6 +39,9 @@ module.exports = async (req, res) => {
     // GET - получить текущий статус
     if (req.method === 'GET') {
       try {
+        // Получаем Redis клиент
+        const redis = getRedis();
+        
         // Проверяем, настроен ли Redis
         if (!redis) {
           console.warn('[Batch Status] Upstash Redis not configured');
@@ -114,6 +124,9 @@ module.exports = async (req, res) => {
         });
       }
 
+      // Получаем Redis клиент
+      const redis = getRedis();
+      
       // Проверяем, настроен ли Redis
       if (!redis) {
         return res.status(500).json({
