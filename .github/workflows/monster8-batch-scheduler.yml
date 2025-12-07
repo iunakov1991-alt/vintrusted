@@ -143,34 +143,50 @@ jobs:
             echo "⚠️  batch-status.json not found after orchestrator"
           fi
 
-      - name: Commit batch status to repo
+      - name: Update batch status via API
         if: always()
+        env:
+          BATCH_STATUS_TOKEN: ${{ secrets.BATCH_STATUS_TOKEN }}
+          VERCEL_URL: ${{ vars.VERCEL_URL || 'https://vintrusted.com' }}
         run: |
-          # Создаем директорию если не существует
-          mkdir -p tmp
-          
-          # Сохраняем статус в репозиторий, чтобы Vercel мог его прочитать
+          # Читаем статус из файла или создаем пустой
           if [ -f "tmp/batch-status.json" ]; then
-            echo "✅ Found batch-status.json, committing..."
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add tmp/batch-status.json
-            git commit -m "Update batch status [skip ci]" || echo "No changes to commit"
-            git push origin main || echo "Push failed (non-critical)"
+            echo "✅ Found batch-status.json"
+            STATUS=$(cat tmp/batch-status.json)
           else
             echo "⚠️  batch-status.json not found, creating empty status..."
-            # Создаем пустой статус, чтобы дашборд знал, что партия не запущена
-            echo '{"current": 0, "total": 0, "completed": 0, "failed": 0, "inProgress": false, "lastUpdate": '$(date +%s000)'}' > tmp/batch-status.json
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add tmp/batch-status.json
-            git commit -m "Initialize batch status [skip ci]" || echo "No changes to commit"
-            git push origin main || echo "Push failed (non-critical)"
+            STATUS='{"current": 0, "total": 0, "completed": 0, "failed": 0, "inProgress": false, "error": "batch-status.json not created"}'
           fi
           
-          # Показываем содержимое файла для отладки
-          echo "📄 Current batch-status.json:"
-          cat tmp/batch-status.json || echo "File not readable"
+          # Отправляем статус на Vercel API (простой способ без коммитов)
+          if [ -n "$BATCH_STATUS_TOKEN" ] && [ -n "$VERCEL_URL" ]; then
+            echo "📤 Sending status to Vercel API: $VERCEL_URL/api/batch-status"
+            HTTP_CODE=$(curl -s -o /tmp/api-response.json -w "%{http_code}" -X POST \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $BATCH_STATUS_TOKEN" \
+              -d "$STATUS" \
+              "$VERCEL_URL/api/batch-status")
+            
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "✅ Status updated successfully via API"
+              cat /tmp/api-response.json | jq '.' || cat /tmp/api-response.json
+            else
+              echo "❌ API update failed (HTTP $HTTP_CODE)"
+              cat /tmp/api-response.json || echo "No response body"
+              echo ""
+              echo "💡 Убедитесь, что:"
+              echo "  1. BATCH_STATUS_TOKEN установлен в GitHub Secrets"
+              echo "  2. BATCH_STATUS_TOKEN установлен в Vercel Environment Variables"
+              echo "  3. VERCEL_URL правильный (или используйте переменную VERCEL_URL)"
+            fi
+          else
+            echo "⚠️  BATCH_STATUS_TOKEN or VERCEL_URL not set"
+            echo "💡 Добавьте BATCH_STATUS_TOKEN в GitHub Secrets для использования API"
+          fi
+          
+          echo ""
+          echo "📄 Status that was sent:"
+          echo "$STATUS" | jq '.' || echo "$STATUS"
 
       - name: Upload batch logs
         if: always()
