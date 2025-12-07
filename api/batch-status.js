@@ -13,24 +13,33 @@ function getRedis() {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   
+  // Логируем для диагностики (без секретов)
+  console.log('[Batch Status] Checking Redis config:', {
+    hasUrl: !!url,
+    hasToken: !!token,
+    urlLength: url ? url.length : 0,
+    tokenLength: token ? token.length : 0
+  });
+  
   if (!url || !token) {
+    console.warn('[Batch Status] Redis env vars missing:', {
+      UPSTASH_REDIS_REST_URL: url ? 'present' : 'missing',
+      UPSTASH_REDIS_REST_TOKEN: token ? 'present' : 'missing'
+    });
     return null; // Redis не настроен
   }
   
   try {
-    // Пробуем использовать fromEnv() (автоматически читает UPSTASH_REDIS_REST_URL и UPSTASH_REDIS_REST_TOKEN)
-    return Redis.fromEnv();
-  } catch (err) {
-    // Если fromEnv() не работает, пробуем ручную инициализацию
-    try {
-      return new Redis({
-        url: url,
-        token: token,
-      });
-    } catch (initErr) {
-      console.error('[Batch Status] Redis init error:', initErr.message);
-      return null;
-    }
+    // Используем ручную инициализацию (более надежно, чем fromEnv)
+    const redis = new Redis({
+      url: url,
+      token: token,
+    });
+    console.log('[Batch Status] Redis client created successfully');
+    return redis;
+  } catch (initErr) {
+    console.error('[Batch Status] Redis init error:', initErr.message, initErr.stack);
+    return null;
   }
 }
 
