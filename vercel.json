@@ -94,6 +94,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/batch-status-update.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -302,6 +306,10 @@
     {
       "source": "/api/batch-status",
       "destination": "/api/batch-status.js"
+    },
+    {
+      "source": "/api/batch-status-update",
+      "destination": "/api/batch-status-update.js"
     },
     {
       "source": "/api/batch-runner/stop",

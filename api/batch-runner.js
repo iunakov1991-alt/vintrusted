@@ -72,14 +72,15 @@ module.exports = async (req, res) => {
         console.warn('[Batch Runner] Could not save batch to KV:', err.message);
       }
 
-      // Запускаем GitHub Actions workflow
+      // 🚀 ЗАПУСКАЕМ GITHUB ACTIONS WORKFLOW
       const githubApiUrl = `https://api.github.com/repos/${githubRepo}/actions/workflows/${workflowFile}/dispatches`;
       
       const postData = JSON.stringify({
         ref: 'main',
         inputs: {
           force_phase: forcePhase,
-          force_length: forceLength
+          force_length: forceLength,
+          batch_id: newBatch.id  // ⚡ ПЕРЕДАЁМ ID ПАРТИИ В WORKFLOW
         }
       });
 

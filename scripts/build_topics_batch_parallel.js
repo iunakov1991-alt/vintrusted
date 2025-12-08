@@ -157,25 +157,83 @@ async function processQueueParallel(queue, rootDir, args) {
   // Сохраняем статус батча для дашборда
   const batchStatusPath = path.join(rootDir, "tmp", "batch-status.json");
   
-  // KV Batch Store для работы с единым хранилищем статуса
-  let kvStore = null;
-  let currentBatch = null;
-  try {
-    const kvStorePath = path.join(rootDir, 'lib', 'kvBatchStore');
-    kvStore = require(kvStorePath);
-    // Читаем current из KV при старте
-    currentBatch = await kvStore.getCurrentBatch();
-    if (currentBatch && currentBatch.status === 'queued') {
-      // Переводим в running
-      currentBatch.status = 'running';
-      currentBatch.startedAt = new Date().toISOString();
-      currentBatch.topicsPlanned = queue.length;
-      await kvStore.setCurrentBatch(currentBatch);
-      console.log('[BATCH] Batch status updated to running in KV');
-    }
-  } catch (err) {
-    console.warn('[BATCH] KV Batch Store not available, using file-based status only:', err.message);
+  // 🔄 ОБНОВЛЕНИЕ СТАТУСА ЧЕРЕЗ INTERNAL API
+  // (вместо прямой записи в KV из GitHub Actions)
+  const VERCEL_URL = process.env.VERCEL_URL || 'https://vintrusted.com';
+  const INTERNAL_SECRET = process.env.MONSTER_INTERNAL_SECRET || process.env.BATCH_STATUS_TOKEN;
+  let batchId = null;
+
+  // Получаем batch ID из переменных окружения (передается из workflow)
+  if (process.env.BATCH_ID) {
+    batchId = process.env.BATCH_ID;
+    console.log(`[BATCH] Using batch ID from env: ${batchId}`);
   }
+
+  // Функция для обновления статуса через API
+  async function updateStatusViaAPI(patch) {
+    if (!batchId) {
+      console.warn('[BATCH] No batch ID, skipping status update');
+      return;
+    }
+
+    if (!INTERNAL_SECRET) {
+      console.warn('[BATCH] No MONSTER_INTERNAL_SECRET, skipping status update');
+      return;
+    }
+
+    try {
+      const https = require('https');
+      const url = require('url');
+      
+      const apiUrl = `${VERCEL_URL}/api/batch-status-update`;
+      const postData = JSON.stringify({ id: batchId, patch });
+      
+      const parsedUrl = url.parse(apiUrl);
+      const options = {
+        hostname: parsedUrl.hostname,
+        path: parsedUrl.path,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-MONSTER-SECRET': INTERNAL_SECRET,
+          'Content-Length': Buffer.byteLength(postData)
+        }
+      };
+
+      await new Promise((resolve, reject) => {
+        const req = https.request(options, (res) => {
+          let data = '';
+          res.on('data', (chunk) => { data += chunk; });
+          res.on('end', () => {
+            if (res.statusCode >= 200 && res.statusCode < 300) {
+              console.log(`[BATCH] ✅ Status updated via API:`, patch.status || 'update');
+              resolve();
+            } else {
+              console.error(`[BATCH] ❌ API update failed (${res.statusCode}):`, data);
+              resolve(); // не бросаем ошибку, чтобы батч продолжился
+            }
+          });
+        });
+
+        req.on('error', (err) => {
+          console.error('[BATCH] API request error:', err.message);
+          resolve(); // не бросаем ошибку
+        });
+
+        req.write(postData);
+        req.end();
+      });
+    } catch (err) {
+      console.error('[BATCH] Failed to update status via API:', err.message);
+    }
+  }
+
+  // 🚀 ПЕРЕВОДИМ ПАРТИЮ В RUNNING ПРИ СТАРТЕ
+  await updateStatusViaAPI({
+    status: 'running',
+    startedAt: new Date().toISOString(),
+    topicsPlanned: queue.length
+  });
   
   // Функция для отправки статуса на Vercel API (если BATCH_STATUS_TOKEN настроен)
   async function pushStatusToAPI(status) {
@@ -277,13 +335,44 @@ async function processQueueParallel(queue, rootDir, args) {
     });
   }
   
-  // Проверка флага stopRequested
+  // 🛑 ПРОВЕРКА ФЛАГА ОСТАНОВКИ
   async function checkStopRequested() {
-    if (!kvStore) return false;
+    if (!batchId || !VERCEL_URL) return false;
     
     try {
-      const current = await kvStore.getCurrentBatch();
-      return current && current.stopRequested === true;
+      const https = require('https');
+      const url = require('url');
+      
+      const apiUrl = `${VERCEL_URL}/api/batch-status`;
+      const parsedUrl = url.parse(apiUrl);
+      
+      const response = await new Promise((resolve, reject) => {
+        const req = https.get({
+          hostname: parsedUrl.hostname,
+          path: parsedUrl.path,
+          headers: { 'Accept': 'application/json' }
+        }, (res) => {
+          let data = '';
+          res.on('data', (chunk) => { data += chunk; });
+          res.on('end', () => {
+            try {
+              resolve(JSON.parse(data));
+            } catch (err) {
+              resolve(null);
+            }
+          });
+        });
+        req.on('error', () => resolve(null));
+        req.setTimeout(3000, () => {
+          req.destroy();
+          resolve(null);
+        });
+      });
+
+      if (response && response.success && response.current) {
+        return response.current.stopRequested === true;
+      }
+      return false;
     } catch (err) {
       console.warn('[BATCH] Failed to check stopRequested:', err.message);
       return false;
@@ -327,18 +416,15 @@ async function processQueueParallel(queue, rootDir, args) {
   for (let i = 0; i < queueItems.length; i += workers) {
     // Проверяем флаг остановки
     if (await checkStopRequested()) {
-      console.log('[BATCH] Stop requested, gracefully stopping...');
-      if (kvStore && currentBatch) {
-        try {
-          currentBatch.status = 'stopped';
-          currentBatch.finishedAt = new Date().toISOString();
-          await kvStore.setLastBatch(currentBatch);
-          await kvStore.archiveBatch(currentBatch);
-          await kvStore.clearCurrentBatch();
-        } catch (err) {
-          console.error('[BATCH] Failed to update KV on stop:', err.message);
-        }
-      }
+      console.log('[BATCH] 🛑 Stop requested, gracefully stopping...');
+      
+      // Финализируем партию как stopped
+      await updateStatusViaAPI({
+        status: 'stopped',
+        finishedAt: new Date().toISOString(),
+        notes: 'Остановлено пользователем'
+      });
+      
       break;
     }
     
