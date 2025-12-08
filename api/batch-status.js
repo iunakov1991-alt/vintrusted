@@ -5,7 +5,7 @@
 
 const path = require('path');
 const kvBatchStorePath = path.join(__dirname, '..', 'lib', 'kvBatchStore');
-const { getCurrentBatch, getLastBatch } = require(kvBatchStorePath);
+const { getCurrentBatch, getLastBatch, setCurrentBatch, createBatchStatus } = require(kvBatchStorePath);
 
 const { setCurrentBatch, createBatchStatus } = require(kvBatchStorePath);
 
