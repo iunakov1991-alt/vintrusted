@@ -62,13 +62,22 @@ module.exports = async (req, res) => {
 
   try {
     // Получаем текущую партию
-    const current = await getCurrentBatch();
+    let current = await getCurrentBatch();
 
+    // Если текущей партии нет - создаем минимальный объект, чтобы можно было принудительно финализировать/очистить
     if (!current) {
-      return res.status(404).json({
-        success: false,
-        error: `No current batch found. Cannot update batch with id: ${id}`
-      });
+      current = {
+        id,
+        status: 'queued',
+        startedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        topicsPlanned: 0,
+        topicsDone: 0,
+        htmlGenerated: 0,
+        fatalErrors: 0,
+        notes: 'created via batch-status-update (no current batch found)'
+      };
+      await setCurrentBatch(current);
     }
 
     if (current.id !== id) {

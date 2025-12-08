@@ -78,23 +78,23 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/batch-status.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/batch-runner.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/batch-dashboard.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/batch-runner/stop.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "api/batch-status-update.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/monster-dashboard.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/monster-status.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/monster-start.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/monster-stop.js",
       "use": "@vercel/node"
     },
     {
@@ -103,10 +103,6 @@
     },
     {
       "src": "public/**/*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "public/batch-dashboard.html",
       "use": "@vercel/static"
     },
     {
@@ -296,32 +292,24 @@
       "destination": "/api/dashboard.js?path="
     },
     {
-      "source": "/batch-dashboard",
-      "destination": "/api/batch-dashboard.js"
-    },
-    {
-      "source": "/batch-dashboard.html",
-      "destination": "/api/batch-dashboard.js"
-    },
-    {
-      "source": "/api/batch-status",
-      "destination": "/api/batch-status.js"
-    },
-    {
       "source": "/api/batch-status-update",
       "destination": "/api/batch-status-update.js"
     },
     {
-      "source": "/api/batch-runner/stop",
-      "destination": "/api/batch-runner/stop.js"
+      "source": "/monster-dashboard",
+      "destination": "/api/monster-dashboard.js"
     },
     {
-      "source": "/api/batch-runner",
-      "destination": "/api/batch-runner.js"
+      "source": "/api/monster/status",
+      "destination": "/api/monster-status.js"
     },
     {
-      "source": "/api/batch-runner/:path*",
-      "destination": "/api/batch-runner.js"
+      "source": "/api/monster/start",
+      "destination": "/api/monster-start.js"
+    },
+    {
+      "source": "/api/monster/stop",
+      "destination": "/api/monster-stop.js"
     }
   ],
   "headers": [

@@ -1,14 +1,14 @@
 /**
- * API endpoint для остановки текущей партии
- * Устанавливает флаг stopRequested в current batch
+ * MONSTER 8.0 Stop API
+ * Остановка текущей партии
  */
 
 const path = require('path');
-const kvBatchStorePath = path.join(__dirname, '..', '..', 'lib', 'kvBatchStore');
+const kvBatchStorePath = path.join(__dirname, '..', 'lib', 'kvBatchStore');
 const { getCurrentBatch, setCurrentBatch } = require(kvBatchStorePath);
 
 module.exports = async (req, res) => {
-  // CORS headers
+  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -20,34 +20,29 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({
       success: false,
-      error: 'Method not allowed. Use POST to stop batch.'
+      error: 'Method not allowed. Use POST.'
     });
   }
 
   try {
     const current = await getCurrentBatch();
-    
+
     if (!current) {
       return res.status(404).json({
         success: false,
-        error: 'no_running_batch',
-        message: 'Нет активной партии для остановки'
+        error: 'Нет активной партии для остановки'
       });
     }
 
     if (current.status !== 'running' && current.status !== 'queued') {
       return res.status(400).json({
         success: false,
-        error: 'batch_not_running',
-        message: `Партия не запущена (текущий статус: ${current.status})`
+        error: `Партия не может быть остановлена (текущий статус: ${current.status})`
       });
     }
 
-    // Устанавливаем флаг остановки
     current.stopRequested = true;
-    current.notes = (current.notes || '') + (current.notes ? ' | ' : '') + 
-      `Stop requested at ${new Date().toISOString()}`;
-    
+    current.notes = (current.notes || '') + (current.notes ? ' | ' : '') + `Stop requested at ${new Date().toISOString()}`;
     await setCurrentBatch(current);
 
     return res.json({
@@ -57,18 +52,18 @@ module.exports = async (req, res) => {
       stopRequested: true
     });
   } catch (err) {
-    console.error('[Batch Runner Stop] Error:', err);
-    
+    console.error('[Monster Stop API] Error:', err);
+
     if (err.message === 'KV not configured') {
       return res.status(500).json({
         success: false,
-        error: 'KV not configured'
+        error: 'KV not configured. Add Upstash Redis to Vercel project.'
       });
     }
-    
+
     return res.status(500).json({
       success: false,
-      error: err.message
+      error: err.message || 'Internal server error'
     });
   }
 };

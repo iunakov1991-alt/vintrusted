@@ -29,6 +29,10 @@ on:
           - auto
           - short
           - long
+      batch_id:
+        description: 'Batch ID (from /api/batch-runner/start)'
+        required: false
+        type: string
 
 jobs:
   run-batch:
@@ -68,6 +72,11 @@ jobs:
       # Force parameters (если указаны при ручном запуске)
       FORCE_PHASE: ${{ github.event.inputs.force_phase || 'auto' }}
       FORCE_LENGTH: ${{ github.event.inputs.force_length || 'auto' }}
+      
+      # Internal status API
+      MONSTER_INTERNAL_SECRET: ${{ secrets.MONSTER_INTERNAL_SECRET }}
+      BATCH_ID: ${{ github.event.inputs.batch_id || '' }}
+      VERCEL_URL: ${{ vars.VERCEL_URL || 'https://vintrusted.com' }}
 
     steps:
       - name: Checkout repository
