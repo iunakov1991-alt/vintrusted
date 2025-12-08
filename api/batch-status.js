@@ -50,150 +50,43 @@ function getRedis() {
 module.exports = async (req, res) => {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
   
-  try {
-    // GET - получить текущий статус
-    if (req.method === 'GET') {
-      try {
-        // Получаем Redis клиент
-        const redis = getRedis();
-        
-        // Проверяем, настроен ли Redis
-        if (!redis) {
-          console.warn('[Batch Status] Upstash Redis not configured');
-          return res.json({
-            success: true,
-            status: {
-              current: 0,
-              total: 0,
-              completed: 0,
-              failed: 0,
-              inProgress: false,
-              lastUpdate: Date.now(),
-              error: 'Upstash Redis not configured. Please install Upstash from Vercel Marketplace.'
-            }
-          });
-        }
-
-        // Читаем статус из Upstash Redis
-        const status = await redis.get(STATUS_KEY);
-        
-        if (status) {
-          console.log('[Batch Status] Status read from Redis');
-          return res.json({
-            success: true,
-            status
-          });
-        } else {
-          // Если статуса нет, возвращаем пустой
-          console.log('[Batch Status] No status in Redis, returning empty');
-          return res.json({
-            success: true,
-            status: {
-              current: 0,
-              total: 0,
-              completed: 0,
-              failed: 0,
-              inProgress: false,
-              lastUpdate: Date.now()
-            }
-          });
-        }
-      } catch (redisErr) {
-        console.error('[Batch Status] Redis error:', redisErr);
-        // Fallback: возвращаем пустой статус если Redis недоступен
-        return res.json({
-          success: true,
-          status: {
-            current: 0,
-            total: 0,
-            completed: 0,
-            failed: 0,
-            inProgress: false,
-            lastUpdate: Date.now(),
-            error: `Redis error: ${redisErr.message}`
-          }
-        });
-      }
-    }
-    
-    // POST - обновить статус (только с авторизацией)
-    if (req.method === 'POST') {
-      // Простая авторизация через токен
-      const authToken = req.headers.authorization?.replace('Bearer ', '') || req.query.token;
-      const expectedToken = process.env.BATCH_STATUS_TOKEN || 'default-token-change-me';
-      
-      if (authToken !== expectedToken) {
-        return res.status(401).json({
-          success: false,
-          error: 'Unauthorized. Provide BATCH_STATUS_TOKEN in Authorization header or ?token= query param.'
-        });
-      }
-      
-      const status = req.body;
-      
-      // Валидация
-      if (!status || typeof status !== 'object') {
-        return res.status(400).json({
-          success: false,
-          error: 'Invalid status object'
-        });
-      }
-
-      // Получаем Redis клиент
-      const redis = getRedis();
-      
-      // Проверяем, настроен ли Redis
-      if (!redis) {
-        return res.status(500).json({
-          success: false,
-          error: 'Upstash Redis not configured. Please install Upstash from Vercel Marketplace and redeploy.'
-        });
-      }
-      
-      // Сохраняем статус в Upstash Redis
-      const statusToSave = {
-        current: status.current || 0,
-        total: status.total || 0,
-        completed: status.completed || 0,
-        failed: status.failed || 0,
-        inProgress: status.inProgress !== undefined ? status.inProgress : false,
-        lastUpdate: Date.now(),
-        ...status
-      };
-      
-      try {
-        // Сохраняем в Redis (без TTL - храним постоянно)
-        await redis.set(STATUS_KEY, statusToSave);
-        console.log('[Batch Status] Status saved to Redis');
-        
-        return res.json({
-          success: true,
-          message: 'Status updated',
-          status: statusToSave
-        });
-      } catch (redisErr) {
-        console.error('[Batch Status] Redis save error:', redisErr);
-        return res.status(500).json({
-          success: false,
-          error: `Failed to save status to Redis: ${redisErr.message}`
-        });
-      }
-    }
-    
+  // Только GET - чтение статуса
+  if (req.method !== 'GET') {
     return res.status(405).json({
       success: false,
-      error: 'Method not allowed'
+      error: 'Method not allowed. Use GET to read status.'
     });
+  }
+  
+  try {
+    const current = await getCurrentBatch();
+    const last = await getLastBatch();
     
+    return res.json({
+      success: true,
+      current: current || null,
+      last: last || null
+    });
   } catch (err) {
     console.error('[Batch Status API] Error:', err);
+    
+    // Если KV не настроен, возвращаем null вместо ошибки
+    if (err.message === 'KV not configured') {
+      return res.json({
+        success: true,
+        current: null,
+        last: null,
+        error: 'KV not configured'
+      });
+    }
+    
     return res.status(500).json({
       success: false,
       error: err.message

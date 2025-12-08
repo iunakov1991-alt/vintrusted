@@ -157,6 +157,14 @@ async function processQueueParallel(queue, rootDir, args) {
   // Сохраняем статус батча для дашборда
   const batchStatusPath = path.join(rootDir, "tmp", "batch-status.json");
   
+  // KV Batch Store для работы с единым хранилищем статуса
+  let kvStore = null;
+  try {
+    kvStore = require('../lib/kvBatchStore');
+  } catch (err) {
+    console.warn('[BATCH] KV Batch Store not available, using file-based status only');
+  }
+  
   // Функция для отправки статуса на Vercel API (если BATCH_STATUS_TOKEN настроен)
   async function pushStatusToAPI(status) {
     const vercelUrl = process.env.VERCEL_URL || process.env.VERCEL_URL || 'https://vintrusted.com';
@@ -209,13 +217,13 @@ async function processQueueParallel(queue, rootDir, args) {
     }
   }
   
-  function updateBatchStatus(status) {
+  async function updateBatchStatus(status) {
     const statusWithTimestamp = {
       ...status,
       lastUpdate: Date.now()
     };
     
-    // Сохраняем локально
+    // Сохраняем локально (для совместимости)
     try {
       fs.mkdirSync(path.dirname(batchStatusPath), { recursive: true });
       fs.writeFileSync(batchStatusPath, JSON.stringify(statusWithTimestamp, null, 2));
@@ -223,10 +231,51 @@ async function processQueueParallel(queue, rootDir, args) {
       // Игнорируем ошибки записи
     }
     
-    // Отправляем на Vercel API (не блокируем выполнение)
+    // Обновляем в KV (если доступен)
+    if (kvStore) {
+      try {
+        const current = await kvStore.getCurrentBatch();
+        if (current) {
+          // Обновляем существующий статус
+          const updated = {
+            ...current,
+            topicsDone: status.completed || current.topicsDone || 0,
+            htmlGenerated: status.completed || current.htmlGenerated || 0,
+            fatalErrors: status.failed || current.fatalErrors || 0,
+            status: status.inProgress ? 'running' : (status.failed > 0 ? 'failed' : 'success'),
+            updatedAt: new Date().toISOString()
+          };
+          
+          // Если есть дополнительные поля из старого формата
+          if (status.current !== undefined) updated.topicsDone = status.current;
+          if (status.total !== undefined) updated.topicsPlanned = status.total;
+          if (status.completed !== undefined) updated.topicsDone = status.completed;
+          if (status.failed !== undefined) updated.fatalErrors = status.failed;
+          
+          await kvStore.setCurrentBatch(updated);
+        }
+      } catch (err) {
+        console.warn('[BATCH] Failed to update KV:', err.message);
+      }
+    }
+    
+    // Отправляем на Vercel API (не блокируем выполнение, для обратной совместимости)
     pushStatusToAPI(statusWithTimestamp).catch(() => {
       // Тихо игнорируем ошибки
     });
+  }
+  
+  // Проверка флага stopRequested
+  async function checkStopRequested() {
+    if (!kvStore) return false;
+    
+    try {
+      const current = await kvStore.getCurrentBatch();
+      return current && current.stopRequested === true;
+    } catch (err) {
+      console.warn('[BATCH] Failed to check stopRequested:', err.message);
+      return false;
+    }
   }
 
   const results = [];
@@ -264,6 +313,23 @@ async function processQueueParallel(queue, rootDir, args) {
 
   // Обрабатываем батчами по workers
   for (let i = 0; i < queueItems.length; i += workers) {
+    // Проверяем флаг остановки
+    if (await checkStopRequested()) {
+      console.log('[BATCH] Stop requested, gracefully stopping...');
+      if (kvStore && currentBatch) {
+        try {
+          currentBatch.status = 'stopped';
+          currentBatch.finishedAt = new Date().toISOString();
+          await kvStore.setLastBatch(currentBatch);
+          await kvStore.archiveBatch(currentBatch);
+          await kvStore.clearCurrentBatch();
+        } catch (err) {
+          console.error('[BATCH] Failed to update KV on stop:', err.message);
+        }
+      }
+      break;
+    }
+    
     const batch = queueItems.slice(i, i + workers);
     const batchStart = Date.now();
 
@@ -291,7 +357,7 @@ async function processQueueParallel(queue, rootDir, args) {
     // Обновляем статус после батча
     const completed = results.filter(r => r.success).length;
     const failed = results.filter(r => !r.success).length;
-    updateBatchStatus({
+    await updateBatchStatus({
       current: Math.min(i + workers, total),
       total,
       completed,
@@ -347,6 +413,28 @@ function main() {
     .then(async (results) => {
       const totalDuration = ((Date.now() - startTime) / 1000).toFixed(1);
       const success = results.filter(r => r.success).length;
+      const failed = results.filter(r => !r.success).length;
+      
+      // Обновляем финальный статус в KV
+      try {
+        const kvStorePath = path.join(rootDir, 'lib', 'kvBatchStore');
+        const kvStore = require(kvStorePath);
+        const current = await kvStore.getCurrentBatch();
+        if (current) {
+          current.status = failed > 0 ? 'failed' : 'success';
+          current.finishedAt = new Date().toISOString();
+          current.topicsDone = success;
+          current.htmlGenerated = success;
+          current.fatalErrors = failed;
+          
+          await kvStore.setLastBatch(current);
+          await kvStore.archiveBatch(current);
+          await kvStore.clearCurrentBatch();
+          console.log('[BATCH] Final status saved to KV');
+        }
+      } catch (err) {
+        console.warn('[BATCH] Failed to save final status to KV:', err.message);
+      }
       const failed = results.length - success;
       const avgDuration = results.length > 0
         ? (results.reduce((sum, r) => sum + (r.duration || 0), 0) / results.length).toFixed(1)

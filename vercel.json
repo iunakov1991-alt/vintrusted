@@ -90,6 +90,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/batch-runner/stop.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -298,6 +302,10 @@
     {
       "source": "/api/batch-status",
       "destination": "/api/batch-status.js"
+    },
+    {
+      "source": "/api/batch-runner/stop",
+      "destination": "/api/batch-runner/stop.js"
     },
     {
       "source": "/api/batch-runner",
