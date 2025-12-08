@@ -295,7 +295,7 @@ async function processQueueParallel(queue, rootDir, args) {
   const total = queue.length;
   
   // Инициализируем статус батча
-  updateBatchStatus({
+  await updateBatchStatus({
     current: 0,
     total,
     completed: 0,

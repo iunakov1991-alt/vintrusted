@@ -7,8 +7,6 @@ const path = require('path');
 const kvBatchStorePath = path.join(__dirname, '..', 'lib', 'kvBatchStore');
 const { getCurrentBatch, getLastBatch, setCurrentBatch, createBatchStatus } = require(kvBatchStorePath);
 
-const { setCurrentBatch, createBatchStatus } = require(kvBatchStorePath);
-
 module.exports = async (req, res) => {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
