@@ -159,10 +159,22 @@ async function processQueueParallel(queue, rootDir, args) {
   
   // KV Batch Store для работы с единым хранилищем статуса
   let kvStore = null;
+  let currentBatch = null;
   try {
-    kvStore = require('../lib/kvBatchStore');
+    const kvStorePath = path.join(rootDir, 'lib', 'kvBatchStore');
+    kvStore = require(kvStorePath);
+    // Читаем current из KV при старте
+    currentBatch = await kvStore.getCurrentBatch();
+    if (currentBatch && currentBatch.status === 'queued') {
+      // Переводим в running
+      currentBatch.status = 'running';
+      currentBatch.startedAt = new Date().toISOString();
+      currentBatch.topicsPlanned = queue.length;
+      await kvStore.setCurrentBatch(currentBatch);
+      console.log('[BATCH] Batch status updated to running in KV');
+    }
   } catch (err) {
-    console.warn('[BATCH] KV Batch Store not available, using file-based status only');
+    console.warn('[BATCH] KV Batch Store not available, using file-based status only:', err.message);
   }
   
   // Функция для отправки статуса на Vercel API (если BATCH_STATUS_TOKEN настроен)
