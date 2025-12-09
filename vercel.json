@@ -18,6 +18,14 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/stripe-config.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/collect-vin.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/checkout-trial-then-two-charges.js",
       "use": "@vercel/node"
     },
@@ -47,6 +55,10 @@
     },
     {
       "src": "api/health.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-pages-count.js",
       "use": "@vercel/node"
     },
     {
@@ -150,6 +162,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "public/**/*.js",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.xml",
       "use": "@vercel/static"
     },
@@ -181,7 +197,11 @@
     },
     {
       "source": "/api/stripe-config",
-      "destination": "/api/stripe-webhook.js"
+      "destination": "/api/stripe-config.js"
+    },
+    {
+      "source": "/api/collect-vin",
+      "destination": "/api/collect-vin.js"
     },
     {
       "source": "/api/stripe-webhook",
