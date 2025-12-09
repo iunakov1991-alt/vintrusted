@@ -47,8 +47,19 @@ export default async function handler(req, res) {
 
     // Get token from environment variable
     const token = process.env.CLEARVIN_API_TOKEN;
-    if (!token) {
-      return res.status(500).json({ error: 'ClearVin API token not configured' });
+    const useMockMode = !token || process.env.USE_MOCK_REPORTS === 'true';
+    
+    if (useMockMode) {
+      console.log('⚠️ MOCK MODE: Simulating email send for VIN:', cleanVin, 'to:', email);
+      
+      // In mock mode, just return success without actually sending
+      return res.status(200).json({
+        success: true,
+        message: 'Demo mode - Email would be sent in production',
+        email: email,
+        vin: cleanVin,
+        mock: true
+      });
     }
 
     // Fetch PDF report from ClearVin (use cleaned VIN)
