@@ -689,11 +689,11 @@
                     }
                 }
                 
-                // If email was provided in URL (from payment), auto-send report and don't show form
+                // If email was provided in URL (from payment), show success message
                 if (emailFromUrl) {
-                    console.log('✅ Email provided in URL, auto-sending report to:', emailFromUrl);
+                    console.log('✅ Email provided in URL, report sent to:', emailFromUrl);
                     
-                    // Show a brief success message instead of form
+                    // Show success message instead of form
                     const emailFormOverlay = document.getElementById('emailFormOverlay');
                     const emailFormContainer = emailFormOverlay.querySelector('.email-form-container');
                     
@@ -701,17 +701,58 @@
                         <div class="success-icon">✅</div>
                         <h2 class="success-title">Payment Successful!</h2>
                         <p class="success-message">Your VIN report has been sent to <strong>${emailFromUrl}</strong></p>
-                        <p class="success-message">The report is also displayed below.</p>
+                        <p class="success-message">Please check your email inbox (and spam folder) for the full report.</p>
+                        <p class="success-message" style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+                            The report will appear below once it's fully generated (usually within 30 seconds).
+                        </p>
+                        <button onclick="window.location.href='/'" style="margin-top: 20px; padding: 12px 24px; background: #111827; color: white; border: none; border-radius: 999px; cursor: pointer; font-size: 16px;">
+                            Return to Home
+                        </button>
                     `;
                     
                     emailFormOverlay.classList.add('show');
                     emailFormOverlay.classList.remove('hidden');
                     
-                    // Hide the overlay after 3 seconds
-                    setTimeout(() => {
-                        emailFormOverlay.classList.remove('show');
-                        emailFormOverlay.classList.add('hidden');
-                    }, 3000);
+                    // Try to load report with retries (in background)
+                    let retryCount = 0;
+                    const maxRetries = 6; // Try for up to 60 seconds (6 retries * 10 seconds)
+                    
+                    const tryLoadReport = async () => {
+                        try {
+                            console.log(`Attempt ${retryCount + 1}/${maxRetries} to load report...`);
+                            await loadReport(vin);
+                            console.log('Report loaded successfully!');
+                            
+                            // Hide success message once report is loaded
+                            setTimeout(() => {
+                                emailFormOverlay.classList.remove('show');
+                                emailFormOverlay.classList.add('hidden');
+                            }, 2000);
+                        } catch (error) {
+                            console.error(`Attempt ${retryCount + 1} failed:`, error.message);
+                            retryCount++;
+                            
+                            if (retryCount < maxRetries) {
+                                console.log(`Retrying in 10 seconds...`);
+                                setTimeout(tryLoadReport, 10000); // Retry after 10 seconds
+                            } else {
+                                console.log('Max retries reached. Report will be available via email.');
+                                // Update message to indicate report is in email
+                                emailFormContainer.innerHTML = `
+                                    <div class="success-icon">📧</div>
+                                    <h2 class="success-title">Report Sent!</h2>
+                                    <p class="success-message">Your VIN report has been sent to <strong>${emailFromUrl}</strong></p>
+                                    <p class="success-message">Please check your email inbox (and spam folder) for the full report.</p>
+                                    <button onclick="window.location.href='/'" style="margin-top: 20px; padding: 12px 24px; background: #111827; color: white; border: none; border-radius: 999px; cursor: pointer; font-size: 16px;">
+                                        Return to Home
+                                    </button>
+                                `;
+                            }
+                        }
+                    };
+                    
+                    // Start trying to load report after a short delay
+                    setTimeout(tryLoadReport, 5000); // Wait 5 seconds before first attempt
                     
                     return; // Don't show the email input form
                 }
