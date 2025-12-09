@@ -116,6 +116,61 @@ jobs:
             echo "✅ GROQ_API_KEY is set"
           fi
 
+      - name: Set batch to RUNNING
+        run: |
+          if [ -n "$BATCH_ID" ] && [ -n "$MONSTER_INTERNAL_SECRET" ]; then
+            echo "🚀 Setting batch $BATCH_ID to RUNNING..."
+            curl -X POST "$VERCEL_URL/api/batch-status-update" \
+              -H "Content-Type: application/json" \
+              -H "X-MONSTER-SECRET: $MONSTER_INTERNAL_SECRET" \
+              -d "{\"id\":\"$BATCH_ID\",\"patch\":{\"status\":\"running\",\"startedAt\":\"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"}}" \
+              || echo "⚠️ Failed to set running status"
+          else
+            echo "⚠️ BATCH_ID or MONSTER_INTERNAL_SECRET not set, skipping status update"
+          fi
+
+      - name: Run MONSTER 8.0 Orchestrator
+        id: orchestrator
+        run: |
+          echo "🚀 Starting MONSTER 8.0 orchestrator..."
+          echo "📊 Batch ID: ${BATCH_ID:-auto}"
+          echo "📊 Environment:"
+          echo "  - LLM_GEN_MODE: $LLM_GEN_MODE"
+          echo "  - LLM_QA_MODE: $LLM_QA_MODE"
+          echo "  - EN_THRESHOLD_FOR_ES: $EN_THRESHOLD_FOR_ES"
+          echo "  - DEFAULT_DAY_WORKERS: $DEFAULT_DAY_WORKERS"
+          echo "  - DEFAULT_NIGHT_WORKERS: $DEFAULT_NIGHT_WORKERS"
+          echo ""
+          mkdir -p tmp
+          export BATCH_ID="${BATCH_ID}"
+          export MONSTER_INTERNAL_SECRET="${MONSTER_INTERNAL_SECRET}"
+          export VERCEL_URL="${VERCEL_URL}"
+          ./monster8_orchestrator.sh || {
+            echo "❌ Orchestrator failed with exit code $?"
+            exit 1
+          }
+          echo "✅ Orchestrator completed successfully"
+
+      - name: Finalize batch status
+        if: always()
+        run: |
+          if [ -n "$BATCH_ID" ] && [ -n "$MONSTER_INTERNAL_SECRET" ]; then
+            echo "🏁 Finalizing batch $BATCH_ID..."
+            if [ "${{ steps.orchestrator.outcome }}" = "success" ]; then
+              FINAL_STATUS="success"
+            else
+              FINAL_STATUS="failed"
+            fi
+            curl -X POST "$VERCEL_URL/api/batch-status-update" \
+              -H "Content-Type: application/json" \
+              -H "X-MONSTER-SECRET: $MONSTER_INTERNAL_SECRET" \
+              -d "{\"id\":\"$BATCH_ID\",\"patch\":{\"status\":\"$FINAL_STATUS\",\"finishedAt\":\"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"}}" \
+              && echo "✅ Batch finalized as $FINAL_STATUS" \
+              || echo "⚠️ Failed to finalize batch status"
+          else
+            echo "⚠️ BATCH_ID or MONSTER_INTERNAL_SECRET not set, skipping finalization"
+          fi
+
       - name: Run MONSTER 8.0 Orchestrator
         id: orchestrator
         run: |
