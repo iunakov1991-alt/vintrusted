@@ -136,8 +136,19 @@
       }
 
       const vin = getVIN();
-      // Email removed from form - will be collected later if needed
-      const email = '';
+      // Get email from form input
+      const emailInput = form.querySelector('#vin-email');
+      const email = emailInput ? emailInput.value.trim() : '';
+      
+      // Validate email
+      if (!email) {
+        throw new Error('Please enter your email address to receive the report');
+      }
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        throw new Error('Please enter a valid email address');
+      }
 
       // IMPORTANT: Call elements.submit() first to validate the form
       const { error: submitError } = await elements.submit();
@@ -271,6 +282,27 @@
       }
       
       form.appendChild(paymentContainer);
+
+      // Email input field
+      const emailContainer = document.createElement('div');
+      emailContainer.style.cssText = 'display: flex; flex-direction: column; gap: 5px;';
+      
+      const emailLabel = document.createElement('label');
+      emailLabel.textContent = 'Email for report delivery';
+      emailLabel.htmlFor = 'vin-email';
+      emailLabel.style.cssText = 'font-size: 14px; font-weight: 500; color: #374151;';
+      
+      const emailInput = document.createElement('input');
+      emailInput.type = 'email';
+      emailInput.id = 'vin-email';
+      emailInput.name = 'email';
+      emailInput.placeholder = 'your@email.com';
+      emailInput.required = true;
+      emailInput.style.cssText = 'padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; background: white;';
+      
+      emailContainer.appendChild(emailLabel);
+      emailContainer.appendChild(emailInput);
+      form.appendChild(emailContainer);
 
       // Submit button
       const submitButton = document.createElement('button');

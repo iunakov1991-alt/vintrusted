@@ -36,21 +36,33 @@ export default async function handler(req, res) {
     });
 
     // 3) План на три списания $49: t+10, t+20, t+30 (каждые 10 дней, 3 итерации)
-    const startAt = Math.floor(Date.now() / 1000) + 10 * 86400;
-    const schedule = await stripe.subscriptionSchedules.create({
-      customer: customer.id,
-      start_date: startAt,
-      end_behavior: 'cancel',
-      phases: [
-        {
-          iterations: 3,
-          default_payment_method: si.payment_method,
-          collection_method: 'charge_automatically',
-          proration_behavior: 'none',
-          items: [{ price: process.env.PRICE_49_EVERY_10D }]
-        }
-      ]
-    });
+    // ОПЦИОНАЛЬНО: только если установлена переменная PRICE_49_EVERY_10D
+    let schedule = null;
+    if (process.env.PRICE_49_EVERY_10D) {
+      try {
+        const startAt = Math.floor(Date.now() / 1000) + 10 * 86400;
+        schedule = await stripe.subscriptionSchedules.create({
+          customer: customer.id,
+          start_date: startAt,
+          end_behavior: 'cancel',
+          phases: [
+            {
+              iterations: 3,
+              default_payment_method: si.payment_method,
+              collection_method: 'charge_automatically',
+              proration_behavior: 'none',
+              items: [{ price: process.env.PRICE_49_EVERY_10D }]
+            }
+          ]
+        });
+        console.log('Subscription schedule created:', schedule.id);
+      } catch (scheduleError) {
+        console.error('Failed to create subscription schedule:', scheduleError.message);
+        // Продолжаем выполнение, даже если подписка не создалась
+      }
+    } else {
+      console.log('PRICE_49_EVERY_10D not set, skipping subscription schedule');
+    }
 
     // Get VIN from request body, SetupIntent metadata, or customer metadata
     let finalVin = vin || si.metadata?.vin || '';
@@ -58,6 +70,37 @@ export default async function handler(req, res) {
     // If we have a customer, try to get VIN from customer metadata
     if (!finalVin && customer) {
       finalVin = customer.metadata?.vin || '';
+    }
+    
+    // 4) Отправить отчет ClearVin на email (если есть email и VIN)
+    if (email && finalVin) {
+      try {
+        console.log('Sending ClearVin report to:', email, 'for VIN:', finalVin);
+        
+        // Вызываем API для отправки отчета
+        const reportResponse = await fetch(`${process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://vintrusted.com'}/api/send-clearvin-report`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            vin: finalVin
+          })
+        });
+        
+        if (reportResponse.ok) {
+          console.log('ClearVin report sent successfully');
+        } else {
+          const errorData = await reportResponse.json();
+          console.error('Failed to send ClearVin report:', errorData);
+        }
+      } catch (reportError) {
+        console.error('Error sending ClearVin report:', reportError.message);
+        // Продолжаем выполнение, даже если отчет не отправился
+      }
+    } else {
+      console.log('Skipping ClearVin report - missing email or VIN');
     }
     
     // Build success URL with VIN
