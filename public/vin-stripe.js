@@ -275,8 +275,9 @@
       // Submit button
       const submitButton = document.createElement('button');
       submitButton.type = 'submit';
+      submitButton.id = 'vin-submit';
       submitButton.textContent = 'Pay $3.00';
-      submitButton.style.cssText = 'padding: 12px 24px; background: #111827; color: white; border: none; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; text-align: center; display: flex; align-items: center; justify-content: center;';
+      submitButton.style.cssText = 'padding: 12px 24px; background: #111827; color: white; border: none; border-radius: 999px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; text-align: center; display: flex; align-items: center; justify-content: center;';
       submitButton.onmouseover = () => submitButton.style.background = '#374151';
       submitButton.onmouseout = () => submitButton.style.background = '#111827';
       form.appendChild(submitButton);
