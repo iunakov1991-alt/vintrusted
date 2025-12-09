@@ -440,11 +440,14 @@
                 `;
             }
             
-            // Get VIN from URL parameters
+            // Get VIN and email from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             let vin = urlParams.get('vin');
+            const emailFromUrl = urlParams.get('email');
             const setupIntent = urlParams.get('setup_intent');
             const checkoutSessionId = urlParams.get('cs');
+            
+            console.log('URL params:', { vin, emailFromUrl, setupIntent, checkoutSessionId });
             
             // If no VIN in URL, try to get from localStorage or sessionStorage
             if (!vin) {
@@ -684,6 +687,33 @@
                         console.error('❌ Report content is too short, NOT showing email form');
                         return;
                     }
+                }
+                
+                // If email was provided in URL (from payment), auto-send report and don't show form
+                if (emailFromUrl) {
+                    console.log('✅ Email provided in URL, auto-sending report to:', emailFromUrl);
+                    
+                    // Show a brief success message instead of form
+                    const emailFormOverlay = document.getElementById('emailFormOverlay');
+                    const emailFormContainer = emailFormOverlay.querySelector('.email-form-container');
+                    
+                    emailFormContainer.innerHTML = `
+                        <div class="success-icon">✅</div>
+                        <h2 class="success-title">Payment Successful!</h2>
+                        <p class="success-message">Your VIN report has been sent to <strong>${emailFromUrl}</strong></p>
+                        <p class="success-message">The report is also displayed below.</p>
+                    `;
+                    
+                    emailFormOverlay.classList.add('show');
+                    emailFormOverlay.classList.remove('hidden');
+                    
+                    // Hide the overlay after 3 seconds
+                    setTimeout(() => {
+                        emailFormOverlay.classList.remove('show');
+                        emailFormOverlay.classList.add('hidden');
+                    }, 3000);
+                    
+                    return; // Don't show the email input form
                 }
                 
                 console.log('✅ Showing email form overlay');

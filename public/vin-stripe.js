@@ -207,11 +207,18 @@
         }
       }
 
-      // Redirect to success page
+      // Redirect to success page with email
       if (result.success_url) {
-        window.location.href = result.success_url;
+        // Add email to success URL if not already present
+        const successUrl = new URL(result.success_url, window.location.origin);
+        if (!successUrl.searchParams.has('email') && email) {
+          successUrl.searchParams.set('email', email);
+        }
+        window.location.href = successUrl.toString();
       } else {
-        window.location.href = '/success.html?vin=' + encodeURIComponent(vin) + '&setup_intent=' + paymentElement._setupIntentId;
+        window.location.href = '/success.html?vin=' + encodeURIComponent(vin) + 
+          '&setup_intent=' + paymentElement._setupIntentId + 
+          '&email=' + encodeURIComponent(email);
       }
 
     } catch (error) {
