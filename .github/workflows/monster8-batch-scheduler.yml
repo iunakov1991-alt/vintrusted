@@ -117,6 +117,11 @@ jobs:
           fi
 
       - name: Set batch to RUNNING
+        env:
+          BATCH_ID: ${{ github.event.inputs.batch_id || ''' }}
+          MONSTER_INTERNAL_SECRET: ${{ secrets.MONSTER_INTERNAL_SECRET }}
+          VERCEL_URL: ${{ vars.VERCEL_URL || 'https://vintrusted.com' }}
+
         run: |
           if [ -n "$BATCH_ID" ] && [ -n "$MONSTER_INTERNAL_SECRET" ]; then
             echo "🚀 Setting batch $BATCH_ID to RUNNING..."
