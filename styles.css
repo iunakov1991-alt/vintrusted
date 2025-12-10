@@ -8544,3 +8544,74 @@ body.desktop-device .mobile-submit-btn {
         width: 100%;
     }
 }
+
+/* ========================================
+   EXPLORE MORE TOPICS SECTION
+   ======================================== */
+
+.explore-topics-section {
+    background: #f8f9fa;
+    padding: 80px 0;
+}
+
+.explore-topics-title {
+    font-size: 42px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #1a1a1a;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.topic-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.topic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: #FFD700;
+}
+
+.topic-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.topic-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .explore-topics-section {
+        padding: 60px 0;
+    }
+    
+    .explore-topics-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+    
+    .topics-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
