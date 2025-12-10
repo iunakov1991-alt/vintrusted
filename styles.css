@@ -409,8 +409,9 @@ body {
 }
 
 .logo-img {
-    height: 150px;
+    height: 135px; /* Уменьшено на 10% (150px * 0.9) */
     width: auto;
+    margin-left: 0; /* Выровнено по горизонтали с заголовком */
 }
 
 .nav {
@@ -534,11 +535,21 @@ body {
 .main-title {
     font-size: 52px;
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.2;
     margin-bottom: 60px;
     color: #ffffff;
     text-align: left;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Desktop title - two lines */
+.desktop-title-line {
+    display: block;
+    line-height: 1.1;
+}
+
+.desktop-title-line:first-child {
+    margin-bottom: 5px;
 }
 
 .subtitle {
