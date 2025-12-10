@@ -146,6 +146,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "*.pdf",
+      "use": "@vercel/static"
+    },
+    {
       "src": "css/**",
       "use": "@vercel/static"
     },
@@ -163,6 +167,10 @@
     },
     {
       "src": "public/**/*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**/*.pdf",
       "use": "@vercel/static"
     },
     {
