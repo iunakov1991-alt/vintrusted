@@ -122,8 +122,18 @@ function buildPage(rootDir, topicFile, index, total, env, mode) {
     child.on("close", (code) => {
       const duration = ((Date.now() - startTime) / 1000).toFixed(1);
       if (code === 0) {
+        // Извлекаем путь к HTML из stdout
+        let htmlPath = null;
+        const match = stdout.match(/Page built → .*\/(public\/[^\s]+\.html)/);
+        if (match) {
+          htmlPath = '/' + match[1].replace('public/', '').replace('/index.html', '');
+        }
+        
         console.log(`[BATCH] [${index + 1}/${total}] ✅ Completed in ${duration}s → ${resolvedTopic}`);
-        resolve({ success: true, topic: resolvedTopic, duration });
+        if (htmlPath) {
+          console.log(`[BATCH] [${index + 1}/${total}] 📄 HTML: ${htmlPath}`);
+        }
+        resolve({ success: true, topic: resolvedTopic, duration, htmlPath });
       } else {
         console.error(`[BATCH] [${index + 1}/${total}] ❌ Failed (${duration}s) → ${resolvedTopic}`);
         console.error(stderr);
@@ -160,7 +170,7 @@ async function processQueueParallel(queue, rootDir, args) {
   // 🔄 ОБНОВЛЕНИЕ СТАТУСА ЧЕРЕЗ INTERNAL API
   // (вместо прямой записи в KV из GitHub Actions)
   const VERCEL_URL = process.env.VERCEL_URL || 'https://vintrusted.com';
-  const INTERNAL_SECRET = process.env.MONSTER_INTERNAL_SECRET || process.env.BATCH_STATUS_TOKEN;
+  const INTERNAL_SECRET = process.env.MONSTER_INTERNAL_SECRET;
   let batchId = null;
 
   // Получаем batch ID из переменных окружения (передается из workflow)
@@ -301,34 +311,6 @@ async function processQueueParallel(queue, rootDir, args) {
       // Игнорируем ошибки записи
     }
     
-    // Обновляем в KV (если доступен)
-    if (kvStore) {
-      try {
-        const current = await kvStore.getCurrentBatch();
-        if (current) {
-          // Обновляем существующий статус
-          const updated = {
-            ...current,
-            topicsDone: status.completed || current.topicsDone || 0,
-            htmlGenerated: status.completed || current.htmlGenerated || 0,
-            fatalErrors: status.failed || current.fatalErrors || 0,
-            status: status.inProgress ? 'running' : (status.failed > 0 ? 'failed' : 'success'),
-            updatedAt: new Date().toISOString()
-          };
-          
-          // Если есть дополнительные поля из старого формата
-          if (status.current !== undefined) updated.topicsDone = status.current;
-          if (status.total !== undefined) updated.topicsPlanned = status.total;
-          if (status.completed !== undefined) updated.topicsDone = status.completed;
-          if (status.failed !== undefined) updated.fatalErrors = status.failed;
-          
-          await kvStore.setCurrentBatch(updated);
-        }
-      } catch (err) {
-        console.warn('[BATCH] Failed to update KV:', err.message);
-      }
-    }
-    
     // Отправляем на Vercel API (не блокируем выполнение, для обратной совместимости)
     pushStatusToAPI(statusWithTimestamp).catch(() => {
       // Тихо игнорируем ошибки
@@ -416,7 +398,7 @@ async function processQueueParallel(queue, rootDir, args) {
   for (let i = 0; i < queueItems.length; i += workers) {
     // Проверяем флаг остановки
     if (await checkStopRequested()) {
-      console.log('[BATCH] 🛑 Stop requested, gracefully stopping...');
+      console.log(`[BATCH] 🛑 Stop requested for batch ${batchId}, gracefully stopping...`);
       
       // Финализируем партию как stopped
       await updateStatusViaAPI({
@@ -425,7 +407,7 @@ async function processQueueParallel(queue, rootDir, args) {
         notes: 'Остановлено пользователем'
       });
       
-      break;
+      process.exit(0); // выходим с 0, чтобы раннер не ставил failed
     }
     
     const batch = queueItems.slice(i, i + workers);
@@ -440,6 +422,18 @@ async function processQueueParallel(queue, rootDir, args) {
 
     const batchResults = await Promise.allSettled(promises);
     
+    // Отправляем прогресс в локальный дашборд
+    const topicsDone = i + batch.length;
+    try {
+      const { spawn } = require('child_process');
+      spawn('node', [path.join(rootDir, 'scripts', 'report_progress.js'), String(topicsDone)], {
+        stdio: 'ignore',
+        detached: true
+      }).unref();
+    } catch (err) {
+      // Игнорируем ошибки отправки прогресса
+    }
+
     batchResults.forEach((result, idx) => {
       if (result.status === "fulfilled") {
         results.push(result.value);
@@ -512,28 +506,6 @@ function main() {
       const totalDuration = ((Date.now() - startTime) / 1000).toFixed(1);
       const success = results.filter(r => r.success).length;
       const failed = results.filter(r => !r.success).length;
-      
-      // Обновляем финальный статус в KV
-      try {
-        const kvStorePath = path.join(rootDir, 'lib', 'kvBatchStore');
-        const kvStore = require(kvStorePath);
-        const current = await kvStore.getCurrentBatch();
-        if (current) {
-          current.status = failed > 0 ? 'failed' : 'success';
-          current.finishedAt = new Date().toISOString();
-          current.topicsDone = success;
-          current.htmlGenerated = success;
-          current.fatalErrors = failed;
-          
-          await kvStore.setLastBatch(current);
-          await kvStore.archiveBatch(current);
-          await kvStore.clearCurrentBatch();
-          console.log('[BATCH] Final status saved to KV');
-        }
-      } catch (err) {
-        console.warn('[BATCH] Failed to save final status to KV:', err.message);
-      }
-      const failed = results.length - success;
       const avgDuration = results.length > 0
         ? (results.reduce((sum, r) => sum + (r.duration || 0), 0) / results.length).toFixed(1)
         : 0;
@@ -559,6 +531,18 @@ function main() {
       } catch (err) {
         // Игнорируем ошибки
       }
+      
+      // Сохраняем пути к HTML для дашборда
+      const htmlPaths = results.filter(r => r.success && r.htmlPath).map(r => r.htmlPath);
+      if (htmlPaths.length > 0) {
+        const htmlPathsFile = path.join(rootDir, "tmp", "batch-html-paths.json");
+        try {
+          fs.writeFileSync(htmlPathsFile, JSON.stringify(htmlPaths, null, 2));
+          console.log(`[BATCH] Saved ${htmlPaths.length} HTML paths to ${htmlPathsFile}`);
+        } catch (err) {
+          console.warn('[BATCH] Failed to save HTML paths:', err.message);
+        }
+      }
 
       // Выборочный анализ качества для самообучения (до деплоя)
       if (success > 0 && process.env.ENABLE_QUALITY_ANALYSIS !== "0") {
@@ -579,22 +563,74 @@ function main() {
       }
 
       // Автоматический деплой после успешной генерации
-      if (success > 0 && process.env.AUTO_DEPLOY === "1") {
-        console.log("\n[DEPLOY] Starting automatic deployment...");
+      // Всегда деплоим если есть успешные страницы (без проверки AUTO_DEPLOY)
+      if (success > 0) {
+        console.log("\n[DEPLOY] Starting automatic deployment via dashboard API...");
         try {
-          const { spawnSync } = require("child_process");
-          const deployScript = path.join(rootDir, "scripts", "auto_deploy_page.sh");
-          const result = spawnSync("bash", [deployScript, "batch"], {
-            cwd: rootDir,
-            stdio: "inherit",
-            env: { ...process.env, DRY_RUN: "0" }
+          const http = require('http');
+          
+          // Получаем batchId из переменной окружения или создаем новый
+          const batchId = process.env.BATCH_ID || new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5) + 'Z';
+          
+          console.log(`[DEPLOY] Batch ID: ${batchId}`);
+          
+          const postData = JSON.stringify({ 
+            batchId,
+            force: true // Пропускаем проверку качества для автодеплоя
           });
           
-          if (result.status === 0) {
-            console.log("[DEPLOY] ✅ Automatic deployment completed");
-          } else {
-            console.error("[DEPLOY] ⚠️  Deployment failed (non-critical)");
-          }
+          // Делаем запрос полностью синхронным с промисом
+          await new Promise((resolve, reject) => {
+            const options = {
+              hostname: 'localhost',
+              port: 3030,
+              path: '/api/local-deploy',
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(postData)
+              },
+              timeout: 5000
+            };
+            
+            const req = http.request(options, (res) => {
+              let data = '';
+              res.on('data', (chunk) => { data += chunk; });
+              res.on('end', () => {
+                if (res.statusCode === 200) {
+                  console.log("[DEPLOY] ✅ Deployment request accepted");
+                  try {
+                    const result = JSON.parse(data);
+                    if (result.deployUrl) {
+                      console.log(`[DEPLOY] 🌐 Will be live at: ${result.deployUrl}`);
+                    }
+                  } catch (e) {
+                    // Игнорируем ошибки парсинга
+                  }
+                  resolve();
+                } else {
+                  console.error(`[DEPLOY] ⚠️  Deployment request failed with status ${res.statusCode}`);
+                  resolve(); // Не блокируем выполнение
+                }
+              });
+            });
+            
+            req.on('error', (err) => {
+              console.error("[DEPLOY] ⚠️  Deployment error (non-critical):", err.message);
+              resolve(); // Не блокируем выполнение
+            });
+            
+            req.on('timeout', () => {
+              console.error("[DEPLOY] ⚠️  Deployment request timeout");
+              req.destroy();
+              resolve(); // Не блокируем выполнение
+            });
+            
+            req.write(postData);
+            req.end();
+          });
+          
+          console.log("[DEPLOY] Deployment initiated, check dashboard for progress");
         } catch (err) {
           console.error("[DEPLOY] ⚠️  Deployment error (non-critical):", err.message);
         }
