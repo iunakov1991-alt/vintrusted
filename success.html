@@ -689,26 +689,31 @@
                     }
                 }
                 
-                // If email was provided in URL (from payment), show PDF report directly
+                // If email was provided in URL (from payment), load real ClearVin report
                 if (emailFromUrl) {
-                    console.log('✅ Email provided in URL, showing PDF report');
+                    console.log('✅ Email provided in URL, loading ClearVin report for VIN:', vin);
                     
                     // Hide email form overlay
                     const emailFormOverlay = document.getElementById('emailFormOverlay');
                     emailFormOverlay.classList.remove('show');
                     emailFormOverlay.classList.add('hidden');
                     
-                    // Show PDF report fullscreen
+                    // Show loading indicator
                     const reportContentEl = document.getElementById('reportContent');
                     if (reportContentEl) {
                         reportContentEl.innerHTML = `
-                            <iframe 
-                                src="/public/demo-report.pdf" 
-                                style="width: 100%; height: 100vh; border: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;"
-                                title="VIN Report"
-                            ></iframe>
+                            <div style="display: flex; align-items: center; justify-content: center; height: 100vh; background: #f8f9fa;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 48px; margin-bottom: 20px;">⏳</div>
+                                    <h2 style="color: #1a1a1a; margin-bottom: 10px;">Loading Your Report...</h2>
+                                    <p style="color: #666;">Please wait while we fetch your vehicle history report</p>
+                                </div>
+                            </div>
                         `;
                     }
+                    
+                    // Load real ClearVin report
+                    loadReport(vin);
                     
                     return; // Don't show the email input form
                 }
