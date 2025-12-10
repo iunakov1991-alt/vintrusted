@@ -1,10 +1,8 @@
 User-agent: *
 Allow: /
 
-# Sitemaps
+# Sitemap (unified - all pages in one file)
 Sitemap: https://vintrusted.com/sitemap.xml
-Sitemap: https://vintrusted.com/seo/sitemaps/sitemap-seo.xml
-Sitemap: https://vintrusted.com/sitemap-seo-monster.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
