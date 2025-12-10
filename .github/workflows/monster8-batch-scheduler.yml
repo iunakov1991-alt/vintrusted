@@ -105,34 +105,34 @@ jobs:
       - name: Check required secrets
         run: |
           if [ -z "$DEEPSEEK_API_KEY" ]; then
-            echo "⚠️  WARNING: DEEPSEEK_API_KEY not set. Batch may fail."
+            echo "WARNING: DEEPSEEK_API_KEY not set. Batch may fail."
           else
-            echo "✅ DEEPSEEK_API_KEY is set"
+            echo "DEEPSEEK_API_KEY is set"
           fi
           
           if [ -z "$GROQ_API_KEY" ]; then
-            echo "⚠️  WARNING: GROQ_API_KEY not set. Some features may not work."
+            echo "WARNING: GROQ_API_KEY not set. Some features may not work."
           else
-            echo "✅ GROQ_API_KEY is set"
+            echo "GROQ_API_KEY is set"
           fi
 
       - name: Run MONSTER 8.0 Orchestrator
         id: orchestrator
         run: |
-          echo "🚀 Starting MONSTER 8.0 orchestrator..."
+          echo "Starting MONSTER 8.0 orchestrator..."
           ./monster8_orchestrator.sh || {
-            echo "❌ Orchestrator failed"
+            echo "Orchestrator failed"
             exit 1
           }
           
-          echo "✅ Orchestrator completed successfully"
+          echo "Orchestrator completed successfully"
           
           # Проверяем, что статус создан
           if [ -f "tmp/batch-status.json" ]; then
-            echo "✅ batch-status.json exists"
+            echo "batch-status.json exists"
             cat tmp/batch-status.json
           else
-            echo "⚠️  batch-status.json not found after orchestrator"
+            echo "batch-status.json not found after orchestrator"
           fi
 
       - name: Update batch status via API
@@ -143,16 +143,16 @@ jobs:
         run: |
           # Читаем статус из файла или создаем пустой
           if [ -f "tmp/batch-status.json" ]; then
-            echo "✅ Found batch-status.json"
+            echo "Found batch-status.json"
             STATUS=$(cat tmp/batch-status.json)
           else
-            echo "⚠️  batch-status.json not found, creating empty status..."
+            echo "batch-status.json not found, creating empty status..."
             STATUS='{"current": 0, "total": 0, "completed": 0, "failed": 0, "inProgress": false, "error": "batch-status.json not created"}'
           fi
           
           # Отправляем статус на Vercel API (простой способ без коммитов)
           if [ -n "$BATCH_STATUS_TOKEN" ] && [ -n "$VERCEL_URL" ]; then
-            echo "📤 Sending status to Vercel API: $VERCEL_URL/api/batch-status"
+            echo "Sending status to Vercel API: $VERCEL_URL/api/batch-status"
             HTTP_CODE=$(curl -s -o /tmp/api-response.json -w "%{http_code}" -X POST \
               -H "Content-Type: application/json" \
               -H "Authorization: Bearer $BATCH_STATUS_TOKEN" \
@@ -160,31 +160,28 @@ jobs:
               "$VERCEL_URL/api/batch-status")
             
             if [ "$HTTP_CODE" = "200" ]; then
-              echo "✅ Status updated successfully via API"
+              echo "Status updated successfully via API"
               cat /tmp/api-response.json | jq '.' || cat /tmp/api-response.json
             else
-              echo "❌ API update failed (HTTP $HTTP_CODE)"
+              echo "API update failed (HTTP $HTTP_CODE)"
               cat /tmp/api-response.json || echo "No response body"
               echo ""
-              echo "💡 Убедитесь, что:"
-              echo "  1. BATCH_STATUS_TOKEN установлен в GitHub Secrets"
-              echo "  2. BATCH_STATUS_TOKEN установлен в Vercel Environment Variables"
-              echo "  3. VERCEL_URL правильный (или используйте переменную VERCEL_URL)"
+              echo "Note: Check that BATCH_STATUS_TOKEN is set in both GitHub Secrets and Vercel Environment Variables"
             fi
           else
-            echo "⚠️  BATCH_STATUS_TOKEN or VERCEL_URL not set"
-            echo "💡 Добавьте BATCH_STATUS_TOKEN в GitHub Secrets для использования API"
+            echo "BATCH_STATUS_TOKEN or VERCEL_URL not set"
+            echo "Add BATCH_STATUS_TOKEN in GitHub Secrets to use API"
           fi
           
           echo ""
-          echo "📄 Status that was sent:"
+          echo "Status that was sent:"
           echo "$STATUS" | jq '.' || echo "$STATUS"
 
       - name: Finalize batch status
         if: always()
         run: |
           if [ -n "$BATCH_ID" ] && [ -n "$MONSTER_INTERNAL_SECRET" ]; then
-            echo "🏁 Finalizing batch $BATCH_ID..."
+            echo "Finalizing batch $BATCH_ID..."
             if [ "${{ steps.orchestrator.outcome }}" = "success" ]; then
               FINAL_STATUS="success"
             else
@@ -192,7 +189,7 @@ jobs:
             fi
             echo "Final status: $FINAL_STATUS"
           else
-            echo "ℹ️  Batch ID or secret not set, skipping finalization"
+            echo "Batch ID or secret not set, skipping finalization"
           fi
 
       - name: Upload batch logs
@@ -245,10 +242,10 @@ jobs:
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
         run: |
           if [ -n "$VERCEL_DEPLOY_HOOK" ]; then
-            echo "🚀 Triggering Vercel redeploy..."
+            echo "Triggering Vercel redeploy..."
             curl -X POST "$VERCEL_DEPLOY_HOOK" || {
-              echo "⚠️  Vercel redeploy hook failed (non-critical)"
+              echo "Vercel redeploy hook failed (non-critical)"
             }
           else
-            echo "ℹ️  VERCEL_DEPLOY_HOOK not set, skipping redeploy"
+            echo "VERCEL_DEPLOY_HOOK not set, skipping redeploy"
           fi
