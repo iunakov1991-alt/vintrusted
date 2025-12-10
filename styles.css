@@ -7944,7 +7944,7 @@ body.desktop-device .mobile-submit-btn {
     padding: 8px 16px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    border-radius: 999px;
     color: #cbd5e1;
     font-size: 14px;
     font-weight: 500;
@@ -8150,7 +8150,7 @@ body.desktop-device .mobile-submit-btn {
     padding: 14px 24px;
     background: linear-gradient(135deg, #ffd700 0%, #f5a300 100%);
     border: none;
-    border-radius: 8px;
+    border-radius: 999px;
     color: #000000;
     font-size: 16px;
     font-weight: 600;
@@ -8456,10 +8456,12 @@ body.desktop-device .mobile-submit-btn {
     color: #000000;
     font-size: 17px;
     font-weight: 600;
-    border-radius: 12px;
+    border-radius: 999px;
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 8px 24px rgba(255, 215, 0, 0.35);
+    border: none;
+    cursor: pointer;
 }
 
 .btn-primary-new:hover {
@@ -8474,10 +8476,11 @@ body.desktop-device .mobile-submit-btn {
     color: #ffffff;
     font-size: 17px;
     font-weight: 600;
-    border-radius: 12px;
+    border-radius: 999px;
     border: 2px solid rgba(255, 255, 255, 0.2);
     text-decoration: none;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .btn-secondary-new:hover {

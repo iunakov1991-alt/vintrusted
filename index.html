@@ -248,7 +248,7 @@
       },
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "4.8",
+        "ratingValue": "4.99",
         "reviewCount": "3497"
       }
     }
@@ -850,13 +850,13 @@
                     <!-- Rating Summary -->
                     <div class="rating-summary">
                         <div class="rating-score">
-                            <div class="score-number">4.8</div>
+                            <div class="score-number">4.99</div>
                             <div class="score-stars">
                                 <span class="star filled">★</span>
                                 <span class="star filled">★</span>
                                 <span class="star filled">★</span>
                                 <span class="star filled">★</span>
-                                <span class="star half">★</span>
+                                <span class="star filled">★</span>
                             </div>
                             <div class="score-text">based on 1,234 reviews</div>
                         </div>
@@ -3130,6 +3130,123 @@
     } else {
         setTimeout(initMobileParallax, 100);
     }
+    </script>
+
+    <!-- Reviews Section Functionality -->
+    <script>
+    // Filter buttons functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const reviewCards = document.querySelectorAll('.review-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filterText = this.textContent.trim();
+                
+                // Show/hide reviews based on filter
+                reviewCards.forEach(card => {
+                    const stars = card.querySelectorAll('.review-stars .star.filled').length;
+                    
+                    if (filterText === 'All') {
+                        card.style.display = 'block';
+                    } else if (filterText === '5 stars' && stars === 5) {
+                        card.style.display = 'block';
+                    } else if (filterText === '4 stars' && stars === 4) {
+                        card.style.display = 'block';
+                    } else if (filterText === '3 stars' && stars === 3) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Star rating input functionality
+        const starInputs = document.querySelectorAll('.star-input');
+        let selectedRating = 0;
+        
+        starInputs.forEach(star => {
+            star.addEventListener('click', function() {
+                selectedRating = parseInt(this.dataset.rating);
+                updateStarDisplay(selectedRating);
+            });
+            
+            star.addEventListener('mouseenter', function() {
+                const rating = parseInt(this.dataset.rating);
+                updateStarDisplay(rating);
+            });
+        });
+        
+        const starRating = document.querySelector('.star-rating');
+        if (starRating) {
+            starRating.addEventListener('mouseleave', function() {
+                updateStarDisplay(selectedRating);
+            });
+        }
+        
+        function updateStarDisplay(rating) {
+            starInputs.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+        
+        // Review form submission
+        const reviewForm = document.querySelector('.review-form');
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (selectedRating === 0) {
+                    alert('Please select a rating');
+                    return;
+                }
+                
+                const name = this.querySelector('input[type="text"]').value;
+                const reviewText = this.querySelector('textarea').value;
+                
+                if (!name || !reviewText) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                // Show success message
+                alert('Thank you for your review! It will be published after moderation.');
+                
+                // Reset form
+                this.reset();
+                selectedRating = 0;
+                updateStarDisplay(0);
+            });
+        }
+        
+        // Helpful/Not helpful buttons functionality
+        const reviewActionBtns = document.querySelectorAll('.review-action-btn');
+        reviewActionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const thumbIcon = this.querySelector('.thumb-icon');
+                if (thumbIcon && thumbIcon.textContent === '👍') {
+                    const currentText = this.textContent.trim();
+                    const match = currentText.match(/\((\d+)\)/);
+                    if (match) {
+                        const count = parseInt(match[1]) + 1;
+                        this.querySelector('span:last-child').textContent = `Helpful (${count})`;
+                    }
+                }
+                this.style.opacity = '0.5';
+                this.style.pointerEvents = 'none';
+            });
+        });
+    });
     </script>
     
     <!-- Vercel Speed Insights -->
