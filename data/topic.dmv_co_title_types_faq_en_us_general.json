@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_co_title_types_faq",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "CO",
+    "dmv_topic": "title_types",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.139Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_co_registration_guide",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "CO",
+    "dmv_topic": "registration",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.140Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

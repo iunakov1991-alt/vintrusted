@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_nc_title_types_faq",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "NC",
+    "dmv_topic": "title_types",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.850Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

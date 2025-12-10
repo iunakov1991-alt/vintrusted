@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_ar_title_types_checklist",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "AR",
+    "dmv_topic": "title_types",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.130Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

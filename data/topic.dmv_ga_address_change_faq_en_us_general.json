@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_ga_address_change_faq",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "GA",
+    "dmv_topic": "address_change",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.849Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

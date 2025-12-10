@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_ca_name_change_step_by_step",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "CA",
+    "dmv_topic": "name_change",
+    "format_variant": "step_by_step"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.801Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

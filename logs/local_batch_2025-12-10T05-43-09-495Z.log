@@ -1,0 +1,44 @@
+[PHASE-STRATEGY] Phase: PHASE1_DMV_CORE
+[PHASE-STRATEGY] Language: en
+[PHASE-STRATEGY] EN pages: 7, ES pages: 3
+[PHASE-STRATEGY] Target: 30 topics, Generated: 30
+
+[BATCH] Processing 30 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 5
+[BATCH] Mode: prod
+[BATCH] QA Mode: deepseek
+[BATCH] Using batch ID from env: 2025-12-10T05-43-09-495Z
+(node:60660) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[BATCH] ❌ API update failed (400): {"success":false,"error":"Batch ID mismatch. Current: 2025-12-09T12-56-34-167Z_auto_auto, Requested: 2025-12-10T05-43-09-495Z"}
+[BATCH] API push failed: 404
+
+[BATCH] Processing batch 1 (5 pages in parallel)...
+[BATCH] [2/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [3/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [4/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [5/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [6/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] [4/30] ✅ Completed in 94.0s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [4/30] 📄 HTML: /semantic-pages/en/dmv-titles/tx/title-types/checklist
+[BATCH] [2/30] ✅ Completed in 94.0s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [2/30] 📄 HTML: /semantic-pages/en/dmv-titles/ca/title-types/checklist
+[BATCH] [6/30] ✅ Completed in 94.0s → /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] [6/30] 📄 HTML: /semantic-pages/en/dmv-titles/nv/title-types/checklist
+[BATCH] [3/30] ✅ Completed in 94.0s → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [3/30] 📄 HTML: /semantic-pages/en/dmv-titles/fl/title-types/checklist
+[BATCH] [5/30] ✅ Completed in 94.0s → /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [5/30] 📄 HTML: /semantic-pages/en/dmv-titles/ny/title-types/checklist
+[BATCH] Batch completed in 94.1s
+[BATCH] API push failed: 404
+
+[BATCH] Processing batch 2 (5 pages in parallel)...
+[BATCH] [7/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [8/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_registration_checklist_en_us_general.json
+[BATCH] [9/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_registration_guide_en_us_general.json
+[BATCH] [10/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_transfer_guide_en_us_general.json
+[BATCH] [11/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_correction_checklist_en_us_general.json
+[BATCH] [7/30] ✅ Completed in 93.7s → /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [7/30] 📄 HTML: /semantic-pages/en/dmv-titles/az/title-types/checklist
+
+[EXIT] code=null

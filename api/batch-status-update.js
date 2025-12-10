@@ -1,15 +1,12 @@
 /**
  * MONSTER 8.0 Internal Status Update API
- * 
- * Используется ТОЛЬКО для обновления статуса из GitHub Actions.
- * НЕ для внешних пользователей!
- * 
+ * Используется ТОЛЬКО воркером/оркестратором для обновления статуса.
  * Защищено токеном MONSTER_INTERNAL_SECRET.
  */
 
 const path = require('path');
 const kvBatchStorePath = path.join(__dirname, '..', 'lib', 'kvBatchStore');
-const { getCurrentBatch, setCurrentBatch, setLastBatch, archiveBatch, clearCurrentBatch } = require(kvBatchStorePath);
+const { getCurrentBatch, setCurrentBatch, setLastBatch, archiveBatch } = require(kvBatchStorePath);
 
 module.exports = async (req, res) => {
   // CORS
@@ -30,7 +27,7 @@ module.exports = async (req, res) => {
 
   // 🔒 ПРОВЕРКА СЕКРЕТА
   const secret = req.headers['x-monster-secret'];
-  const expectedSecret = process.env.MONSTER_INTERNAL_SECRET || process.env.BATCH_STATUS_TOKEN;
+  const expectedSecret = process.env.MONSTER_INTERNAL_SECRET;
 
   if (!secret || secret !== expectedSecret) {
     console.error('[Status Update API] Unauthorized attempt:', {
@@ -44,12 +41,13 @@ module.exports = async (req, res) => {
   }
 
   // Читаем body
-  const { id, patch } = req.body || {};
+  const { batchId, id, patch } = req.body || {};
+  const incomingId = batchId || id;
 
-  if (!id) {
+  if (!incomingId) {
     return res.status(400).json({
       success: false,
-      error: 'Missing required field: id'
+      error: 'Missing required field: batchId'
     });
   }
 
@@ -62,40 +60,40 @@ module.exports = async (req, res) => {
 
   try {
     // Получаем текущую партию
-    let current = await getCurrentBatch();
+    const current = await getCurrentBatch();
 
-    // Если текущей партии нет - создаем минимальный объект, чтобы можно было принудительно финализировать/очистить
     if (!current) {
-      current = {
-        id,
-        status: 'queued',
-        startedAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        topicsPlanned: 0,
-        topicsDone: 0,
-        htmlGenerated: 0,
-        fatalErrors: 0,
-        notes: 'created via batch-status-update (no current batch found)'
-      };
-      await setCurrentBatch(current);
-    }
-
-    if (current.id !== id) {
       return res.status(400).json({
         success: false,
-        error: `Batch ID mismatch. Current: ${current.id}, Requested: ${id}`
+        error: 'No current batch found'
+      });
+    }
+
+    const currentId = current.batchId || current.id;
+    if (currentId !== incomingId) {
+      return res.status(400).json({
+        success: false,
+        error: `Batch ID mismatch. Current: ${currentId}, Requested: ${incomingId}`
       });
     }
 
     // 🔄 ОБНОВЛЯЕМ СТАТУС
+    const now = new Date().toISOString();
     const updated = {
       ...current,
       ...patch,
-      updatedAt: new Date().toISOString()
+      batchId: current.batchId || current.id,
+      id: current.id || current.batchId,
+      updatedAt: now,
     };
 
+    // Если запустили running и не было startedAt — проставляем
+    if (updated.status === 'running' && !updated.startedAt) {
+      updated.startedAt = now;
+    }
+
     console.log('[Status Update API] Updating batch:', {
-      id: updated.id,
+      id: updated.batchId || updated.id,
       status: updated.status,
       topicsDone: updated.topicsDone,
       fatalErrors: updated.fatalErrors
@@ -105,15 +103,15 @@ module.exports = async (req, res) => {
     const isFinal = ['success', 'failed', 'stopped'].includes(updated.status);
 
     if (isFinal) {
-      // Финальный статус → перемещаем в last, архивируем, очищаем current
-      updated.finishedAt = updated.finishedAt || new Date().toISOString();
+      // Финальный статус → фиксируем finishedAt, записываем last и current оставляем финальным
+      updated.finishedAt = updated.finishedAt || now;
       
       await setLastBatch(updated);
       await archiveBatch(updated);
-      await clearCurrentBatch();
+      await setCurrentBatch(updated);
 
       console.log('[Status Update API] Batch finalized:', {
-        id: updated.id,
+        id: updated.batchId || updated.id,
         status: updated.status,
         topicsDone: updated.topicsDone,
         duration: updated.finishedAt && updated.startedAt 
@@ -123,8 +121,8 @@ module.exports = async (req, res) => {
 
       return res.json({
         success: true,
-        message: 'Batch finalized and moved to archive',
-        status: updated,
+        message: 'Batch finalized',
+        current: updated,
         final: true
       });
     } else {
@@ -134,7 +132,7 @@ module.exports = async (req, res) => {
       return res.json({
         success: true,
         message: 'Batch status updated',
-        status: updated,
+        current: updated,
         final: false
       });
     }

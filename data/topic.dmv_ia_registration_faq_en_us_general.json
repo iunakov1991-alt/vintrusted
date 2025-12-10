@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_ia_registration_faq",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "IA",
+    "dmv_topic": "registration",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.188Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_ga_lien_release_guide",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "GA",
+    "dmv_topic": "lien_release",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.848Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

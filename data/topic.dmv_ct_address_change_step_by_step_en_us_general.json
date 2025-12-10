@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_ct_address_change_step_by_step",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "CT",
+    "dmv_topic": "address_change",
+    "format_variant": "step_by_step"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.150Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

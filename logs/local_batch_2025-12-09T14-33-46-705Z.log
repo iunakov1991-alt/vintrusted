@@ -1,0 +1,8 @@
+[BATCH] Processing 3 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 5
+[BATCH] Mode: prod
+[BATCH] QA Mode: deepseek
+[BATCH] No batch ID, skipping status update
+[BATCH] Fatal error: kvStore is not defined
+
+[EXIT] code=1

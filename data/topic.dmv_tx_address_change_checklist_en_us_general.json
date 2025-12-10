@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_tx_address_change_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "TX",
+    "dmv_topic": "address_change",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.808Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

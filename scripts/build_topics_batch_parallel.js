@@ -15,6 +15,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
+const SmartDeployManager = require("./smart-deploy-manager.js");
 
 function parseArgs(argv) {
   const args = {
@@ -365,6 +366,27 @@ async function processQueueParallel(queue, rootDir, args) {
   const workers = args.workers;
   const total = queue.length;
   
+  // 🚀 Инициализируем Smart Deploy Manager
+  const deployStrategy = process.env.DEPLOY_STRATEGY || 'batch'; // batch, incremental, smart
+  const deployManager = new SmartDeployManager({
+    strategy: deployStrategy,
+    everyPages: parseInt(process.env.DEPLOY_EVERY_PAGES || '10', 10),
+    everyMinutes: parseInt(process.env.DEPLOY_EVERY_MINUTES || '15', 10),
+    minRemainingTime: parseInt(process.env.DEPLOY_MIN_REMAINING_TIME || '5', 10),
+    enabled: process.env.DEPLOY_ENABLED !== 'false',
+    batchId: batchId,
+    totalPages: total,
+    avgTimePerPage: 90 // будем обновлять динамически
+  });
+  
+  // Сохраняем в глобальной переменной для доступа из main()
+  global.__deployManager = deployManager;
+  
+  console.log(`[BATCH] Deploy strategy: ${deployStrategy}`);
+  if (deployStrategy !== 'batch') {
+    console.log(`[BATCH] Deploy config: every ${deployManager.config.everyPages} pages or ${deployManager.config.everyMinutes} minutes`);
+  }
+  
   // Инициализируем статус батча
   await updateBatchStatus({
     current: 0,
@@ -437,6 +459,9 @@ async function processQueueParallel(queue, rootDir, args) {
     batchResults.forEach((result, idx) => {
       if (result.status === "fulfilled") {
         results.push(result.value);
+        
+        // 🚀 Уведомляем Smart Deploy Manager о завершении страницы
+        deployManager.onPageCompleted();
       } else {
         results.push({ success: false, topic: batch[idx].topicFile, error: result.reason });
         if (args.stopOnError) {
@@ -445,6 +470,18 @@ async function processQueueParallel(queue, rootDir, args) {
         }
       }
     });
+    
+    // Обновляем среднее время на страницу для более точных оценок
+    if (results.length > 0) {
+      const avgTime = results.reduce((sum, r) => sum + (parseFloat(r.duration) || 0), 0) / results.length;
+      deployManager.config.avgTimePerPage = avgTime;
+    }
+    
+    // 🚀 Проверяем нужен ли инкрементальный деплой
+    const deployResult = await deployManager.checkAndDeploy();
+    if (deployResult.success) {
+      console.log(`[BATCH] Incremental deploy completed`);
+    }
     
     // Обновляем статус после батча
     const completed = results.filter(r => r.success).length;
@@ -516,6 +553,17 @@ function main() {
       console.log(`[BATCH] Average page time: ${avgDuration}s`);
       console.log(`[BATCH] Speedup: ${(queue.length * 2.0 / (totalDuration / 60)).toFixed(1)}x vs sequential`);
       console.log(`[BATCH] ========================================`);
+      
+      // 🚀 Получаем deployManager из замыкания processQueueParallel
+      // (передаём через глобальную переменную для доступа из main)
+      if (global.__deployManager) {
+        const deployStats = global.__deployManager.getStats();
+        console.log(`\n[SMART-DEPLOY] Deploy Statistics:`);
+        console.log(`[SMART-DEPLOY] Strategy: ${deployStats.strategy}`);
+        console.log(`[SMART-DEPLOY] Total deploys: ${deployStats.deploysCount}`);
+        console.log(`[SMART-DEPLOY] Pages deployed: ${deployStats.totalDeployed}`);
+        console.log(`[SMART-DEPLOY] Pages pending: ${deployStats.pagesSinceLastDeploy}`);
+      }
 
       // Финальный статус батча
       const batchStatusPath = path.join(rootDir, "tmp", "batch-status.json");
@@ -562,9 +610,23 @@ function main() {
         }
       }
 
-      // Автоматический деплой после успешной генерации
-      // Всегда деплоим если есть успешные страницы (без проверки AUTO_DEPLOY)
-      if (success > 0) {
+      // 🚀 Финальный деплой (если есть оставшиеся страницы)
+      if (success > 0 && global.__deployManager) {
+        console.log("\n[SMART-DEPLOY] Checking for final deploy...");
+        const finalDeployResult = await global.__deployManager.finalDeploy();
+        
+        if (finalDeployResult.success) {
+          console.log(`[SMART-DEPLOY] Final deploy completed`);
+        } else if (finalDeployResult.reason === 'already_deployed') {
+          console.log(`[SMART-DEPLOY] All pages already deployed incrementally`);
+        } else {
+          console.log(`[SMART-DEPLOY] Final deploy skipped: ${finalDeployResult.reason || 'unknown'}`);
+        }
+      }
+      
+      // Автоматический деплой после успешной генерации (legacy fallback)
+      // Используется только если Smart Deploy Manager не активен
+      if (success > 0 && !global.__deployManager) {
         console.log("\n[DEPLOY] Starting automatic deployment via dashboard API...");
         try {
           const http = require('http');

@@ -1,0 +1,14 @@
+Vercel CLI 48.5.0
+Retrieving project…
+Deploying dimas-projects-edf037c0/vintrusted
+Uploading [--------------------] (0.0B/284KB)
+Uploading [=====---------------] (73.4KB/284KB)
+Uploading [==========----------] (144.3KB/284KB)
+Uploading [===============-----] (225.7KB/284KB)
+Uploading [====================] (284.0KB/284KB)
+Inspect: https://vercel.com/dimas-projects-edf037c0/vintrusted/BWYRe7idbizbctg9Nn4mBG2YJvH9 [4s]
+Production: https://vintrusted-jkbddv4qz-dimas-projects-edf037c0.vercel.app [4s]
+https://vintrusted-jkbddv4qz-dimas-projects-edf037c0.vercel.appQueued
+2025-12-10T06:19:48.128Z  Running build in Washington, D.C., USA (East) – iad1
+2025-12-10T06:19:48.128Z  Build machine configuration: 4 cores, 8 GB
+2025-12-10T06:19:48.230Z  Retrieving list of deployment files...

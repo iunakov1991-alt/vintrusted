@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_il_title_types_guide",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "IL",
+    "dmv_topic": "title_types",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.831Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

@@ -1,0 +1,59 @@
+🔑 DEEPSEEK_API_KEY: sk-462c607...
+🤖 AI_PROVIDER_PRIMARY: deepseek
+[BATCH] Processing 7 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 5
+[BATCH] Mode: prod
+[BATCH] QA Mode: deepseek
+[BATCH] No batch ID, skipping status update
+
+[BATCH] Processing batch 1 (5 pages in parallel)...
+[BATCH] [2/7] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [3/7] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [4/7] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [5/7] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [6/7] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] API push failed: 404
+[BATCH] [6/7] ✅ Completed in 94.2s → /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [6/7] 📄 HTML: /semantic-pages/en/dmv-titles/az/title-types/checklist
+[BATCH] [4/7] ✅ Completed in 94.2s → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [4/7] 📄 HTML: /semantic-pages/en/dmv-titles/fl/title-types/checklist
+[BATCH] [5/7] ✅ Completed in 94.2s → /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [5/7] 📄 HTML: /semantic-pages/en/dmv-titles/ny/title-types/checklist
+[BATCH] [2/7] ✅ Completed in 94.3s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [2/7] 📄 HTML: /semantic-pages/en/dmv-titles/ca/title-types/checklist
+[BATCH] [3/7] ✅ Completed in 94.3s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [3/7] 📄 HTML: /semantic-pages/en/dmv-titles/tx/title-types/checklist
+[BATCH] Batch completed in 94.3s
+
+[BATCH] Processing batch 2 (2 pages in parallel)...
+[BATCH] [7/7] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] [8/7] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ga_title_types_checklist_en_us_general.json
+[BATCH] API push failed: 404
+[BATCH] [7/7] ✅ Completed in 95.3s → /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] [7/7] 📄 HTML: /semantic-pages/en/dmv-titles/nv/title-types/checklist
+[BATCH] [8/7] ✅ Completed in 95.3s → /Users/dmitrii/Desktop/website/data/topic.dmv_ga_title_types_checklist_en_us_general.json
+[BATCH] [8/7] 📄 HTML: /semantic-pages/en/dmv-titles/ga/title-types/checklist
+[BATCH] Batch completed in 95.4s
+
+[BATCH] ========================================
+[BATCH] Completed in 189.7s
+[BATCH] Success: 7, Failed: 0
+[BATCH] Average page time: NaNs
+[BATCH] Speedup: 4.4x vs sequential
+[BATCH] ========================================
+[BATCH] Saved 7 HTML paths to /Users/dmitrii/Desktop/website/tmp/batch-html-paths.json
+
+[QUALITY-ANALYSIS] Starting quality analysis for self-learning...
+
+[QUALITY-ANALYSIS] ========================================
+[QUALITY-ANALYSIS] Starting batch quality analysis...
+[QUALITY-ANALYSIS] Scanning for recently generated pages (max age: 3600s)...
+[QUALITY-ANALYSIS] Found 0 recently generated pages
+[QUALITY-ANALYSIS] No pages found for analysis
+[QUALITY-ANALYSIS] ✅ Quality analysis completed
+
+[DEPLOY] Starting automatic deployment via dashboard API...
+[DEPLOY] Batch ID: 2025-12-10T06-28-17Z
+[DEPLOY] ⚠️  Deployment request failed with status 404
+[DEPLOY] Deployment initiated, check dashboard for progress
+[BATCH] API push failed: 404

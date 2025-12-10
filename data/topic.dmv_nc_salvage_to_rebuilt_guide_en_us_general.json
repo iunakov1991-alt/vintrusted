@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_nc_salvage_to_rebuilt_guide",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "NC",
+    "dmv_topic": "salvage_to_rebuilt",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.851Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

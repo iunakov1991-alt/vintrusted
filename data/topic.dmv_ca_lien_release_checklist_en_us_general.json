@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_ca_lien_release_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "CA",
+    "dmv_topic": "lien_release",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.801Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

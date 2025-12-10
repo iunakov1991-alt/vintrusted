@@ -1,0 +1,26 @@
+[PHASE-STRATEGY] Phase: PHASE1_DMV_CORE
+[PHASE-STRATEGY] Language: en
+[PHASE-STRATEGY] EN pages: 7, ES pages: 3
+[PHASE-STRATEGY] Target: 30 topics, Generated: 30
+
+[BATCH] Processing 30 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 5
+[BATCH] Mode: prod
+[BATCH] QA Mode: deepseek
+[BATCH] Using batch ID from env: 2025-12-10T01-08-03-151Z
+[BATCH] No MONSTER_INTERNAL_SECRET, skipping status update
+(node:25301) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+[BATCH] Processing batch 1 (5 pages in parallel)...
+[BATCH] [2/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [3/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [4/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [5/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_transfer_checklist_en_us_general.json
+[BATCH] [6/30] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_registration_checklist_en_us_general.json
+[BATCH] [4/30] ✅ Completed in 93.3s → /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [4/30] 📄 HTML: /semantic-pages/en/dmv-titles/az/title-types/checklist
+[BATCH] [2/30] ✅ Completed in 93.4s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [2/30] 📄 HTML: /semantic-pages/en/dmv-titles/ca/title-types/checklist
+[BATCH] [3/30] ✅ Completed in 93.4s → /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [3/30] 📄 HTML: /semantic-pages/en/dmv-titles/ny/title-types/checklist

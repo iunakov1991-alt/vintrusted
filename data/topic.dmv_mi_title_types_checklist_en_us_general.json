@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_mi_title_types_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "MI",
+    "dmv_topic": "title_types",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.857Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

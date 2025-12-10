@@ -1,0 +1,32 @@
+[BATCH] Processing 3 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 5
+[BATCH] Mode: prod
+[BATCH] QA Mode: deepseek
+[BATCH] No batch ID, skipping status update
+
+[BATCH] Processing batch 1 (3 pages in parallel)...
+[BATCH] [2/3] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_es_mx_us.json
+[BATCH] [3/3] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_es_mx_us.json
+[BATCH] [4/3] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_es_mx_us.json
+[BATCH] [3/3] ✅ Completed in 95.5s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_es_mx_us.json
+[BATCH] [2/3] ✅ Completed in 95.7s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_es_mx_us.json
+[BATCH] [4/3] ✅ Completed in 95.7s → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_es_mx_us.json
+[BATCH] Batch completed in 95.7s
+
+[BATCH] ========================================
+[BATCH] Completed in 95.7s
+[BATCH] Success: 3, Failed: 0
+[BATCH] Average page time: NaNs
+[BATCH] Speedup: 3.8x vs sequential
+[BATCH] ========================================
+
+[QUALITY-ANALYSIS] Starting quality analysis for self-learning...
+
+[QUALITY-ANALYSIS] ========================================
+[QUALITY-ANALYSIS] Starting batch quality analysis...
+[QUALITY-ANALYSIS] Scanning for recently generated pages (max age: 3600s)...
+[QUALITY-ANALYSIS] Found 0 recently generated pages
+[QUALITY-ANALYSIS] No pages found for analysis
+[QUALITY-ANALYSIS] ✅ Quality analysis completed
+
+[EXIT] code=0

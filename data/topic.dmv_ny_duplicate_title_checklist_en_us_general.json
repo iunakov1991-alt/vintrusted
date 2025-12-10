@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_ny_duplicate_title_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "NY",
+    "dmv_topic": "duplicate_title",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.820Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

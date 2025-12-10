@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_tx_salvage_to_rebuilt_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "TX",
+    "dmv_topic": "salvage_to_rebuilt",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.805Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

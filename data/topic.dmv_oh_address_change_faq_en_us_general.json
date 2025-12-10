@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_oh_address_change_faq",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "OH",
+    "dmv_topic": "address_change",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.843Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

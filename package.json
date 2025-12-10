@@ -8,6 +8,8 @@
     "monster8:health": "node monster-8.0/dashboard/server-health.js",
     "monster8:watchdog": "node scripts/watchdog_orchestrator.js",
     "monster8:backup": "bash scripts/auto_backup.sh",
+    "monster:runner": "NODE_ENV=production node scripts/local_runner.js",
+    "monster:dashboard:local": "node scripts/monster8_local_dashboard_server.js",
     "vercel-build": "echo 'SEO pages are generated locally on Mac via Monster 7.1 dashboard. Skipping build-time generation.'",
     "seo-build": "node --expose-gc scripts/seo/seo-master-build.js",
     "monster:start": "node monster-7.1/core/dashboard/server-7.1.js",
@@ -18,6 +20,7 @@
     "@upstash/redis": "^1.35.7",
     "@vercel/speed-insights": "^1.2.0",
     "cors": "^2.8.5",
+    "body-parser": "^1.20.3",
     "express": "^4.22.1",
     "jsdom": "^24.0.0",
     "multer": "^2.0.2",
@@ -25,5 +28,8 @@
     "pdf-parse": "^1.1.1",
     "socket.io": "^4.8.1",
     "stripe": "^14.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_ct_duplicate_title_faq",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "CT",
+    "dmv_topic": "duplicate_title",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.148Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

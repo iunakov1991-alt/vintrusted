@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_fl_registration_faq",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "FL",
+    "dmv_topic": "registration",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.810Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

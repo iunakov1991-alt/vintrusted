@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_ga_out_of_state_transfer_step_by_step",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "GA",
+    "dmv_topic": "out_of_state_transfer",
+    "format_variant": "step_by_step"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.846Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

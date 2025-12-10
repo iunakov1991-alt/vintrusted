@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_al_registration_guide",
+  "language": "en",
+  "zone": "dmv_titles",
+  "dimensions": {
+    "state": "AL",
+    "dmv_topic": "registration",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.868Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_il_address_change_faq",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "IL",
+    "dmv_topic": "address_change",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.836Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

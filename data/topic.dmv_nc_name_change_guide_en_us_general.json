@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_nc_name_change_guide",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "NC",
+    "dmv_topic": "name_change",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.854Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

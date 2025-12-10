@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_pa_duplicate_title_step_by_step",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "PA",
+    "dmv_topic": "duplicate_title",
+    "format_variant": "step_by_step"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.828Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

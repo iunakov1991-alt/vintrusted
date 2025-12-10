@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_pa_title_types_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "PA",
+    "dmv_topic": "title_types",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.822Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

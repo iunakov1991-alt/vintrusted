@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_mi_out_of_state_transfer_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "MI",
+    "dmv_topic": "out_of_state_transfer",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.861Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

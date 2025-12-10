@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_pa_salvage_to_rebuilt_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "PA",
+    "dmv_topic": "salvage_to_rebuilt",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.827Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

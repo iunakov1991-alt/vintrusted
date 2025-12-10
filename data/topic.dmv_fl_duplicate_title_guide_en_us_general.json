@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_fl_duplicate_title_guide",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "FL",
+    "dmv_topic": "duplicate_title",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.811Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

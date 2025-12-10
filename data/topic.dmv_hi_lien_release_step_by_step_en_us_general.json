@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_hi_lien_release_step_by_step",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "HI",
+    "dmv_topic": "lien_release",
+    "format_variant": "step_by_step"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.166Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

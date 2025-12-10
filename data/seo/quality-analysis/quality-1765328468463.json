@@ -1,0 +1,72 @@
+{
+  "pagePath": "/Users/dmitrii/Desktop/website/public/semantic-pages/en/dmv-titles/ca/title-types/checklist/index.html",
+  "url": "/Users/dmitrii/Desktop/website/public/semantic-pages/en/dmv-titles/ca/title-types/checklist/",
+  "analyzedAt": "2025-12-10T01:01:08.460Z",
+  "quality": {
+    "overallScore": 0.6066999999999999,
+    "content": {
+      "wordCount": 428,
+      "targetWordCount": 2000,
+      "wordCountScore": 0.214,
+      "structureScore": 1
+    },
+    "keywords": {
+      "scores": {
+        "state": 0.3333333333333333,
+        "dmv": 1,
+        "types": 0,
+        "vin": 0.5,
+        "legal": 0.25
+      },
+      "overallScore": 0.41666666666666663
+    },
+    "seo": {
+      "title": true,
+      "description": false,
+      "canonical": true,
+      "ogTags": true,
+      "twitterCard": true,
+      "schemaCount": 5,
+      "hasWebPageSchema": true,
+      "hasOrganizationSchema": true,
+      "hasSearchAction": true,
+      "seoScore": 0.8999999999999999
+    },
+    "links": {
+      "internalLinks": 31,
+      "targetLinks": 4,
+      "linksScore": 1
+    },
+    "faq": {
+      "count": 0,
+      "targetCount": 5,
+      "faqScore": 0
+    }
+  },
+  "metrics": {
+    "wordCount": 428,
+    "h1Count": 1,
+    "h2Count": 5,
+    "h3Count": 2,
+    "listCount": 3,
+    "tableCount": 1,
+    "paragraphCount": 23,
+    "internalLinks": 31,
+    "faqCount": 0,
+    "schemaCount": 5,
+    "titleLength": 56,
+    "descLength": 129
+  },
+  "recommendations": [
+    {
+      "type": "content",
+      "severity": "major",
+      "message": "Word count (428) is below target (1500-2000 words). Consider adding more detailed content."
+    },
+    {
+      "type": "faq",
+      "severity": "major",
+      "message": "Only 0 FAQ items found. Target: 5+ questions for better coverage."
+    }
+  ]
+}

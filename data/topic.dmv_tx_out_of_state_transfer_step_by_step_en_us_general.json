@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_tx_out_of_state_transfer_step_by_step",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "TX",
+    "dmv_topic": "out_of_state_transfer",
+    "format_variant": "step_by_step"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.805Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

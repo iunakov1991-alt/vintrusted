@@ -1,0 +1,23 @@
+[DEPLOY] Starting deploy for batch 2025-12-10T00-04-20-876Z
+[DEPLOY] Pages: undefined, Avg words: undefined
+
+Vercel CLI 48.5.0
+Retrieving project…
+Deploying dimas-projects-edf037c0/vintrusted
+Uploading [--------------------] (0.0B/559.9KB)
+Uploading [=====---------------] (141.2KB/559.9KB)
+Uploading [==========----------] (286.2KB/559.9KB)
+Uploading [===============-----] (431.3KB/559.9KB)
+Uploading [====================] (559.9KB/559.9KB)
+Inspect: https://vercel.com/dimas-projects-edf037c0/vintrusted/3iA8jo6EbC8sPPpnuCHJBBzM5rT3 [4s]
+Production: https://vintrusted-1kuywgthi-dimas-projects-edf037c0.vercel.app [4s]
+https://vintrusted-1kuywgthi-dimas-projects-edf037c0.vercel.appQueued
+Building
+Completing
+Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+
+Common next commands:
+- `vercel inspect vintrusted-1kuywgthi-dimas-projects-edf037c0.vercel.app --logs`
+- `vercel redeploy vintrusted-1kuywgthi-dimas-projects-edf037c0.vercel.app`
+
+[DEPLOY] Exit code: 0

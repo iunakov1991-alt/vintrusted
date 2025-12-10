@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_al_title_correction_checklist",
+  "language": "en",
+  "zone": "dmv_titles",
+  "dimensions": {
+    "state": "AL",
+    "dmv_topic": "title_correction",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.871Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

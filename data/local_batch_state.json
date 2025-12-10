@@ -1,0 +1,360 @@
+{
+  "current": {
+    "id": "2025-12-10T07-03-37-553Z",
+    "phase": "PHASE1_DMV_CORE",
+    "length": "auto",
+    "language": "en",
+    "status": "running",
+    "startedAt": "2025-12-10T07:03:37.558Z",
+    "finishedAt": null,
+    "pid": 35186,
+    "topicsPlanned": 30,
+    "topicsDone": 5,
+    "lastError": null,
+    "updatedAt": "2025-12-10T07:05:13.487Z",
+    "progress": 17,
+    "estimatedTimeLeft": 480
+  },
+  "history": [
+    {
+      "id": "2025-12-10T00-58-00-451Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-10T00:58:00.451Z",
+      "finishedAt": "2025-12-10T01:01:10.591Z",
+      "pid": 20807,
+      "topicsPlanned": 6,
+      "topicsDone": 6,
+      "lastError": null,
+      "updatedAt": "2025-12-10T01:01:08.462Z",
+      "progress": 100,
+      "estimatedTimeLeft": 0,
+      "avgWords": 3324,
+      "totalWords": 19943,
+      "pagesGenerated": 6,
+      "samplePages": [
+        {
+          "path": "/semantic-pages/en/dmv-titles/ca/title-types/checklist",
+          "words": 2077,
+          "created": "2025-12-10T00:55:44.032Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/fl/title-types/checklist",
+          "words": 3348,
+          "created": "2025-12-06T08:38:31.429Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/tx/title-types/checklist",
+          "words": 3663,
+          "created": "2025-12-06T08:37:01.730Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/ny/title-types/checklist",
+          "words": 3522,
+          "created": "2025-12-06T08:37:02.510Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/az/title-types/checklist",
+          "words": 3999,
+          "created": "2025-12-06T13:23:42.550Z"
+        }
+      ],
+      "deployed": true,
+      "deployedAt": "2025-12-10T01:02:13.665Z"
+    },
+    {
+      "id": "2025-12-10T00-29-51-843Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-10T00:29:51.844Z",
+      "finishedAt": "2025-12-10T00:33:04.309Z",
+      "pid": 8257,
+      "topicsPlanned": 6,
+      "topicsDone": 6,
+      "lastError": null,
+      "updatedAt": "2025-12-10T00:33:02.353Z",
+      "progress": 100,
+      "estimatedTimeLeft": 0,
+      "avgWords": 3600,
+      "totalWords": 21598,
+      "pagesGenerated": 6,
+      "samplePages": [
+        {
+          "path": "/semantic-pages/en/dmv-titles/ca/title-types/checklist",
+          "words": 3732,
+          "created": "2025-12-06T08:35:30.534Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/fl/title-types/checklist",
+          "words": 3348,
+          "created": "2025-12-06T08:38:31.429Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/tx/title-types/checklist",
+          "words": 3663,
+          "created": "2025-12-06T08:37:01.730Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/ny/title-types/checklist",
+          "words": 3522,
+          "created": "2025-12-06T08:37:02.510Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/az/title-types/checklist",
+          "words": 3999,
+          "created": "2025-12-06T13:23:42.550Z"
+        }
+      ],
+      "deployed": true,
+      "deployedAt": "2025-12-10T00:33:54.239Z"
+    },
+    {
+      "id": "2025-12-10T00-04-20-876Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-10T00:04:20.878Z",
+      "finishedAt": "2025-12-10T00:07:31.959Z",
+      "pid": 99115,
+      "topicsPlanned": 6,
+      "topicsDone": 6,
+      "lastError": null,
+      "updatedAt": "2025-12-10T00:07:29.991Z",
+      "progress": 100,
+      "estimatedTimeLeft": 0,
+      "avgWords": 3600,
+      "totalWords": 21598,
+      "pagesGenerated": 6,
+      "samplePages": [
+        {
+          "path": "/semantic-pages/en/dmv-titles/ca/title-types/checklist",
+          "words": 3732,
+          "created": "2025-12-06T08:35:30.534Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/fl/title-types/checklist",
+          "words": 3348,
+          "created": "2025-12-06T08:38:31.429Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/tx/title-types/checklist",
+          "words": 3663,
+          "created": "2025-12-06T08:37:01.730Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/ny/title-types/checklist",
+          "words": 3522,
+          "created": "2025-12-06T08:37:02.510Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/az/title-types/checklist",
+          "words": 3999,
+          "created": "2025-12-06T13:23:42.550Z"
+        }
+      ],
+      "deployed": true,
+      "deployedAt": "2025-12-10T00:08:20.255Z"
+    },
+    {
+      "id": "2025-12-09T23-10-32-360Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-09T23:10:32.361Z",
+      "finishedAt": "2025-12-09T23:13:43.414Z",
+      "pid": 75916,
+      "topicsPlanned": 6,
+      "topicsDone": 6,
+      "lastError": null,
+      "updatedAt": "2025-12-09T23:13:42.476Z",
+      "progress": 100,
+      "estimatedTimeLeft": 0,
+      "avgWords": 3600,
+      "totalWords": 21598,
+      "pagesGenerated": 6,
+      "samplePages": [
+        {
+          "path": "/semantic-pages/en/dmv-titles/ca/title-types/checklist",
+          "words": 3732,
+          "created": "2025-12-06T08:35:30.534Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/fl/title-types/checklist",
+          "words": 3348,
+          "created": "2025-12-06T08:38:31.429Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/tx/title-types/checklist",
+          "words": 3663,
+          "created": "2025-12-06T08:37:01.730Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/ny/title-types/checklist",
+          "words": 3522,
+          "created": "2025-12-06T08:37:02.510Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/az/title-types/checklist",
+          "words": 3999,
+          "created": "2025-12-06T13:23:42.550Z"
+        }
+      ],
+      "deployed": true,
+      "deployedAt": "2025-12-09T23:42:07.566Z"
+    },
+    {
+      "id": "2025-12-09T15-46-18-367Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-09T15:46:18.367Z",
+      "finishedAt": "2025-12-09T15:49:26.523Z",
+      "pid": 54684,
+      "topicsPlanned": 6,
+      "topicsDone": 5,
+      "lastError": null,
+      "updatedAt": "2025-12-09T15:47:53.104Z",
+      "progress": 83,
+      "estimatedTimeLeft": 19,
+      "avgWords": 3600,
+      "totalWords": 21598,
+      "pagesGenerated": 6,
+      "samplePages": [
+        {
+          "path": "/semantic-pages/en/dmv-titles/ca/title-types/checklist",
+          "words": 3732,
+          "created": "2025-12-06T08:35:30.534Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/fl/title-types/checklist",
+          "words": 3348,
+          "created": "2025-12-06T08:38:31.429Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/tx/title-types/checklist",
+          "words": 3663,
+          "created": "2025-12-06T08:37:01.730Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/ny/title-types/checklist",
+          "words": 3522,
+          "created": "2025-12-06T08:37:02.510Z"
+        },
+        {
+          "path": "/semantic-pages/en/dmv-titles/az/title-types/checklist",
+          "words": 3999,
+          "created": "2025-12-06T13:23:42.550Z"
+        }
+      ],
+      "deployed": true,
+      "deployedAt": "2025-12-09T22:45:44.004Z"
+    },
+    {
+      "id": "2025-12-09T15-28-52-223Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-09T15:28:52.226Z",
+      "finishedAt": "2025-12-09T15:32:00.241Z",
+      "pid": 48505,
+      "topicsPlanned": 6,
+      "topicsDone": 5,
+      "lastError": null,
+      "updatedAt": "2025-12-09T15:30:26.951Z",
+      "progress": 83,
+      "estimatedTimeLeft": 19,
+      "avgWords": 0,
+      "totalWords": 0,
+      "pagesGenerated": 0,
+      "samplePages": []
+    },
+    {
+      "id": "2025-12-09T15-10-48-944Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-09T15:10:48.946Z",
+      "finishedAt": "2025-12-09T15:13:57.351Z",
+      "pid": 41666,
+      "topicsPlanned": 6,
+      "topicsDone": 0,
+      "lastError": null,
+      "avgWords": 0,
+      "totalWords": 0,
+      "pagesGenerated": 0,
+      "samplePages": []
+    },
+    {
+      "id": "2025-12-09T15-04-42-033Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-09T15:04:42.034Z",
+      "finishedAt": "2025-12-09T15:07:49.719Z",
+      "pid": 39131,
+      "topicsPlanned": 6,
+      "topicsDone": 0,
+      "lastError": null
+    },
+    {
+      "id": "2025-12-09T15-00-19-377Z",
+      "phase": "PHASE1_DMV_CORE",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-09T15:00:19.380Z",
+      "finishedAt": "2025-12-09T15:03:27.426Z",
+      "pid": 37329,
+      "topicsPlanned": 6,
+      "topicsDone": 0,
+      "lastError": null
+    },
+    {
+      "id": "2025-12-09T14-51-25-965Z",
+      "phase": "en_only",
+      "length": "auto",
+      "language": "en",
+      "status": "success",
+      "startedAt": "2025-12-09T14:51:25.967Z",
+      "finishedAt": "2025-12-09T14:54:34.473Z",
+      "pid": 33823,
+      "topicsPlanned": 6,
+      "topicsDone": 0,
+      "lastError": null
+    },
+    {
+      "id": "2025-12-09T14-36-03-927Z",
+      "phase": "auto",
+      "length": "auto",
+      "status": "success",
+      "startedAt": "2025-12-09T14:36:03.927Z",
+      "finishedAt": "2025-12-09T14:37:39.811Z",
+      "pid": 27994,
+      "topicsPlanned": null,
+      "topicsDone": 0,
+      "lastError": null
+    },
+    {
+      "id": "2025-12-09T14-33-46-705Z",
+      "phase": "auto",
+      "length": "auto",
+      "status": "failed",
+      "startedAt": "2025-12-09T14:33:46.706Z",
+      "finishedAt": "2025-12-09T14:33:46.875Z",
+      "pid": 27139,
+      "topicsPlanned": null,
+      "topicsDone": 0,
+      "lastError": "exit code 1"
+    }
+  ]
+}

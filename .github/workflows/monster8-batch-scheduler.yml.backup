@@ -1,0 +1,256 @@
+name: MONSTER 8.0 Batch Scheduler
+
+on:
+  schedule:
+    # Запуск партий по расписанию (UTC)
+    # Каждый день в 09:00 UTC (02:00 EST / 11:00 MSK)
+    - cron: "0 9 * * *"
+    # Каждый день в 15:00 UTC (08:00 EST / 18:00 MSK)
+    - cron: "0 15 * * *"
+    # Каждый день в 21:00 UTC (14:00 EST / 00:00 MSK следующего дня)
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+    # Ручной запуск через GitHub UI
+    inputs:
+      force_phase:
+        description: 'Force language phase (en_only/mixed/es_focus)'
+        required: false
+        type: choice
+        options:
+          - auto
+          - en_only
+          - mixed
+          - es_focus
+      force_length:
+        description: 'Force length mode (short/long)'
+        required: false
+        type: choice
+        options:
+          - auto
+          - short
+          - long
+      batch_id:
+        description: 'Batch ID (from /api/batch-runner/start)'
+        required: false
+        type: string
+
+jobs:
+  run-batch:
+    name: Run MONSTER 8.0 Batch
+    runs-on: ubuntu-latest
+    timeout-minutes: 120  # 2 часа максимум (партии могут быть долгими)
+
+    env:
+      NODE_ENV: production
+      CI: "true"
+      
+      # AI Provider Keys (из GitHub Secrets)
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+      DEEPSEEK_MODEL: ${{ vars.DEEPSEEK_MODEL || 'deepseek-chat' }}
+      DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL || 'https://api.deepseek.com/v1/chat/completions' }}
+      
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      
+      # LLM Configuration
+      LLM_GEN_MODE: ${{ vars.LLM_GEN_MODE || 'ensemble' }}
+      LLM_QA_MODE: ${{ vars.LLM_QA_MODE || 'deepseek' }}
+      
+      # Orchestrator Configuration
+      EN_THRESHOLD_FOR_ES: ${{ vars.EN_THRESHOLD_FOR_ES || '100' }}
+      ES_HARD_MIN: ${{ vars.ES_HARD_MIN || '50' }}
+      DEFAULT_DAY_WORKERS: ${{ vars.DEFAULT_DAY_WORKERS || '10' }}
+      DEFAULT_NIGHT_WORKERS: ${{ vars.DEFAULT_NIGHT_WORKERS || '6' }}
+      MONSTER8_BPG: ${{ vars.MONSTER8_BPG || '0' }}
+      MONSTER8_LATENCY_HARD_MAX: ${{ vars.MONSTER8_LATENCY_HARD_MAX || '4.0' }}
+      
+      # Auto-deploy после генерации
+      AUTO_DEPLOY: ${{ vars.AUTO_DEPLOY || '1' }}
+      
+      # SEO Configuration
+      SEO_BASE_URL: ${{ vars.SEO_BASE_URL || 'https://vintrusted.com' }}
+      
+      # Force parameters (если указаны при ручном запуске)
+      FORCE_PHASE: ${{ github.event.inputs.force_phase || 'auto' }}
+      FORCE_LENGTH: ${{ github.event.inputs.force_length || 'auto' }}
+      
+      # Internal status API
+      MONSTER_INTERNAL_SECRET: ${{ secrets.MONSTER_INTERNAL_SECRET }}
+      BATCH_ID: ${{ github.event.inputs.batch_id || '' }}
+      VERCEL_URL: ${{ vars.VERCEL_URL || 'https://vintrusted.com' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Полная история для git push
+          
+      - name: Setup git for commits
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Make orchestrator executable
+        run: chmod +x monster8_orchestrator.sh
+
+      - name: Check required secrets
+        run: |
+          if [ -z "$DEEPSEEK_API_KEY" ]; then
+            echo "⚠️  WARNING: DEEPSEEK_API_KEY not set. Batch may fail."
+          else
+            echo "✅ DEEPSEEK_API_KEY is set"
+          fi
+          
+          if [ -z "$GROQ_API_KEY" ]; then
+            echo "⚠️  WARNING: GROQ_API_KEY not set. Some features may not work."
+          else
+            echo "✅ GROQ_API_KEY is set"
+          fi
+
+      - name: Run MONSTER 8.0 Orchestrator
+        id: orchestrator
+        run: |
+          echo "🚀 Starting MONSTER 8.0 orchestrator..."
+          echo "📊 Environment:"
+          echo "  - LLM_GEN_MODE: $LLM_GEN_MODE"
+          echo "  - LLM_QA_MODE: $LLM_QA_MODE"
+          echo "  - EN_THRESHOLD_FOR_ES: $EN_THRESHOLD_FOR_ES"
+          echo "  - DEFAULT_DAY_WORKERS: $DEFAULT_DAY_WORKERS"
+          echo "  - DEFAULT_NIGHT_WORKERS: $DEFAULT_NIGHT_WORKERS"
+          echo ""
+          
+          # Создаем директорию для статусов заранее
+          mkdir -p tmp
+          
+          # Запускаем оркестратор
+          # Оркестратор сам определит фазу и режим длины
+          ./monster8_orchestrator.sh || {
+            echo "❌ Orchestrator failed with exit code $?"
+            # Даже при ошибке сохраняем статус
+            if [ ! -f "tmp/batch-status.json" ]; then
+              echo '{"current": 0, "total": 0, "completed": 0, "failed": 0, "inProgress": false, "error": true, "lastUpdate": '$(date +%s000)'}' > tmp/batch-status.json
+            fi
+            exit 1
+          }
+          
+          echo "✅ Orchestrator completed successfully"
+          
+          # Проверяем, что статус создан
+          if [ -f "tmp/batch-status.json" ]; then
+            echo "✅ batch-status.json exists"
+            cat tmp/batch-status.json
+          else
+            echo "⚠️  batch-status.json not found after orchestrator"
+          fi
+
+      - name: Update batch status via API
+        if: always()
+        env:
+          BATCH_STATUS_TOKEN: ${{ secrets.BATCH_STATUS_TOKEN }}
+          VERCEL_URL: ${{ vars.VERCEL_URL || 'https://vintrusted.com' }}
+        run: |
+          # Читаем статус из файла или создаем пустой
+          if [ -f "tmp/batch-status.json" ]; then
+            echo "✅ Found batch-status.json"
+            STATUS=$(cat tmp/batch-status.json)
+          else
+            echo "⚠️  batch-status.json not found, creating empty status..."
+            STATUS='{"current": 0, "total": 0, "completed": 0, "failed": 0, "inProgress": false, "error": "batch-status.json not created"}'
+          fi
+          
+          # Отправляем статус на Vercel API (простой способ без коммитов)
+          if [ -n "$BATCH_STATUS_TOKEN" ] && [ -n "$VERCEL_URL" ]; then
+            echo "📤 Sending status to Vercel API: $VERCEL_URL/api/batch-status"
+            HTTP_CODE=$(curl -s -o /tmp/api-response.json -w "%{http_code}" -X POST \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $BATCH_STATUS_TOKEN" \
+              -d "$STATUS" \
+              "$VERCEL_URL/api/batch-status")
+            
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "✅ Status updated successfully via API"
+              cat /tmp/api-response.json | jq '.' || cat /tmp/api-response.json
+            else
+              echo "❌ API update failed (HTTP $HTTP_CODE)"
+              cat /tmp/api-response.json || echo "No response body"
+              echo ""
+              echo "💡 Убедитесь, что:"
+              echo "  1. BATCH_STATUS_TOKEN установлен в GitHub Secrets"
+              echo "  2. BATCH_STATUS_TOKEN установлен в Vercel Environment Variables"
+              echo "  3. VERCEL_URL правильный (или используйте переменную VERCEL_URL)"
+            fi
+          else
+            echo "⚠️  BATCH_STATUS_TOKEN or VERCEL_URL not set"
+            echo "💡 Добавьте BATCH_STATUS_TOKEN в GitHub Secrets для использования API"
+          fi
+          
+          echo ""
+          echo "📄 Status that was sent:"
+          echo "$STATUS" | jq '.' || echo "$STATUS"
+
+      - name: Upload batch logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch-logs-${{ github.run_id }}
+          path: |
+            logs/orchestrator.log
+            tmp/batch-status.json
+            tmp/deploy-status.json
+          retention-days: 7
+
+      - name: Upload generated pages (sample)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-pages-sample-${{ github.run_id }}
+          path: |
+            public/semantic-pages/en/**/*.html
+            public/semantic-pages/es/**/*.html
+          if-no-files-found: ignore
+          retention-days: 3
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 📊 Batch Execution Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ steps.orchestrator.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f "tmp/batch-status.json" ]; then
+            echo "**Batch Status:**" >> $GITHUB_STEP_SUMMARY
+            cat tmp/batch-status.json >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          if [ -f "tmp/deploy-status.json" ]; then
+            echo "**Deploy Status:**" >> $GITHUB_STEP_SUMMARY
+            cat tmp/deploy-status.json | head -20 >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "**Logs:** Available in artifacts" >> $GITHUB_STEP_SUMMARY
+
+      - name: Trigger Vercel redeploy (if enabled)
+        if: success() && env.AUTO_DEPLOY == '1'
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -n "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "🚀 Triggering Vercel redeploy..."
+            curl -X POST "$VERCEL_DEPLOY_HOOK" || {
+              echo "⚠️  Vercel redeploy hook failed (non-critical)"
+            }
+          else
+            echo "ℹ️  VERCEL_DEPLOY_HOOK not set, skipping redeploy"
+          fi

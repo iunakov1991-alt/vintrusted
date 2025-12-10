@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_nc_title_fees_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "NC",
+    "dmv_topic": "title_fees",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.856Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

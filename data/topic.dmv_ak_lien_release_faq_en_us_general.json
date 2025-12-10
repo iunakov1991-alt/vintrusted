@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_ak_lien_release_faq",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "AK",
+    "dmv_topic": "lien_release",
+    "format_variant": "faq"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.117Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

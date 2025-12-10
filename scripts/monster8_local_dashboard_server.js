@@ -532,7 +532,15 @@ app.get('/api/local-status', async (req, res) => {
 });
 
 app.post('/api/local-start', (req, res) => {
-  const { phase = 'auto', length = 'auto' } = req.body || {};
+  const { 
+    phase = 'auto', 
+    length = 'auto',
+    deployStrategy = 'batch',
+    deployEveryPages = 10,
+    deployEveryMinutes = 15,
+    deployMinRemainingTime = 5
+  } = req.body || {};
+  
   const state = loadState();
   if (state.current && state.current.status === 'running') {
     return res.status(409).json({ ok: false, error: 'batch_already_running' });
@@ -541,33 +549,43 @@ app.post('/api/local-start', (req, res) => {
   // Определяем текущую фазу и генерируем очередь
   const phaseInfo = detectCurrentPhase();
   const queueInfo = generatePhaseQueue(phaseInfo);
-  
-  const record = startNewBatchRecord({ 
-    phase: queueInfo.phase, 
+
+  const record = startNewBatchRecord({
+    phase: queueInfo.phase,
     length: length,
     topicsPlanned: queueInfo.queue.length,
-    language: queueInfo.language
+    language: queueInfo.language,
+    deployStrategy: deployStrategy
   });
 
   const logFile = path.join(LOGS_DIR, `local_batch_${record.id}.log`);
   const out = fs.createWriteStream(logFile, { flags: 'a' });
-  
+
   // Логируем стратегию
   out.write(`[PHASE-STRATEGY] Phase: ${queueInfo.phase}\n`);
   out.write(`[PHASE-STRATEGY] Language: ${queueInfo.language}\n`);
   out.write(`[PHASE-STRATEGY] EN pages: ${phaseInfo.enCount}, ES pages: ${phaseInfo.esCount}\n`);
-  out.write(`[PHASE-STRATEGY] Target: ${queueInfo.targetCount} topics, Generated: ${queueInfo.queue.length}\n\n`);
+  out.write(`[PHASE-STRATEGY] Target: ${queueInfo.targetCount} topics, Generated: ${queueInfo.queue.length}\n`);
+  out.write(`[DEPLOY-STRATEGY] Strategy: ${deployStrategy}\n`);
+  if (deployStrategy !== 'batch') {
+    out.write(`[DEPLOY-STRATEGY] Config: every ${deployEveryPages} pages or ${deployEveryMinutes} minutes\n`);
+  }
+  out.write(`\n`);
 
   const child = spawn('node', [
     path.join(__dirname, 'build_topics_batch_parallel.js'),
     '--mode', 'prod',
     '--phase', queueInfo.phase,
     '--length', length
-  ], { 
+  ], {
     stdio: ['ignore', 'pipe', 'pipe'],
     env: {
       ...process.env,
-      BATCH_ID: record.id  // Передаем ID батча для автодеплоя
+      BATCH_ID: record.id,  // Передаем ID батча для автодеплоя
+      DEPLOY_STRATEGY: deployStrategy,
+      DEPLOY_EVERY_PAGES: String(deployEveryPages),
+      DEPLOY_EVERY_MINUTES: String(deployEveryMinutes),
+      DEPLOY_MIN_REMAINING_TIME: String(deployMinRemainingTime)
     }
   });
 
@@ -710,7 +728,7 @@ app.post('/api/local-quality-check', async (req, res) => {
  * Деплой батча (после проверки качества)
  */
 app.post('/api/local-deploy', async (req, res) => {
-  const { batchId, force = false } = req.body || {};
+  const { batchId, force = false, type = 'final', pagesDeployed = 0, totalDeployed = 0 } = req.body || {};
   if (!batchId) return res.status(400).json({ ok: false, error: 'missing batchId' });
 
   const state = loadState();
@@ -737,7 +755,11 @@ app.post('/api/local-deploy', async (req, res) => {
     return res.status(404).json({ ok: false, error: 'batch not found' });
   }
   
-  console.log(`[deploy] Starting deploy for batch ${batchId}, force=${force}`);
+  const deployType = type === 'incremental' ? 'incremental' : 'final';
+  console.log(`[deploy] Starting ${deployType} deploy for batch ${batchId}, force=${force}`);
+  if (deployType === 'incremental') {
+    console.log(`[deploy] Incremental: ${pagesDeployed} pages (total deployed: ${totalDeployed})`);
+  }
   
   try {
     // Проверка качества перед деплоем (если не force)
@@ -759,8 +781,12 @@ app.post('/api/local-deploy', async (req, res) => {
     const deployLog = path.join(LOGS_DIR, `deploy_${batchId}.log`);
     const out = fs.createWriteStream(deployLog, { flags: 'a' });
     
-    out.write(`[DEPLOY] Starting deploy for batch ${batchId}\n`);
-    out.write(`[DEPLOY] Pages: ${batch.pagesGenerated}, Avg words: ${batch.avgWords}\n\n`);
+    out.write(`[DEPLOY] Starting ${deployType} deploy for batch ${batchId}\n`);
+    out.write(`[DEPLOY] Pages: ${batch.pagesGenerated}, Avg words: ${batch.avgWords}\n`);
+    if (deployType === 'incremental') {
+      out.write(`[DEPLOY] Incremental: ${pagesDeployed} pages (total: ${totalDeployed})\n`);
+    }
+    out.write(`\n`);
     
     const deployChild = spawn('vercel', ['--prod', '--yes'], {
       cwd: path.join(__dirname, '..'),
@@ -778,18 +804,34 @@ app.post('/api/local-deploy', async (req, res) => {
       const updatedState = loadState();
       const historyIdx = updatedState.history.findIndex(b => b.id === batchId);
       if (historyIdx !== -1) {
-        updatedState.history[historyIdx].deployed = code === 0;
-        updatedState.history[historyIdx].deployedAt = new Date().toISOString();
+        // Для incremental деплоя не перезаписываем deployed, только обновляем
+        if (deployType === 'final' || !updatedState.history[historyIdx].deployed) {
+          updatedState.history[historyIdx].deployed = code === 0;
+          updatedState.history[historyIdx].deployedAt = new Date().toISOString();
+        }
+        
+        // Добавляем информацию о деплое
+        if (!updatedState.history[historyIdx].deploys) {
+          updatedState.history[historyIdx].deploys = [];
+        }
+        updatedState.history[historyIdx].deploys.push({
+          type: deployType,
+          success: code === 0,
+          timestamp: new Date().toISOString(),
+          pagesDeployed: deployType === 'incremental' ? pagesDeployed : batch.pagesGenerated
+        });
+        
         saveState(updatedState);
       }
       
-      console.log(`[deploy] Batch ${batchId} deploy finished with code ${code}`);
+      console.log(`[deploy] Batch ${batchId} ${deployType} deploy finished with code ${code}`);
     });
     
     return res.json({
       ok: true,
-      message: 'Deploy started',
+      message: `${deployType} deploy started`,
       batchId,
+      type: deployType,
       logFile: `deploy_${batchId}.log`
     });
   } catch (err) {

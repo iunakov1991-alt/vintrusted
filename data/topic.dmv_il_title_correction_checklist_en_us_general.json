@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_il_title_correction_checklist",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "IL",
+    "dmv_topic": "title_correction",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.834Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

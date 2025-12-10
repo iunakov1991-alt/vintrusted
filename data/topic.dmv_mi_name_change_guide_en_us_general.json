@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_mi_name_change_guide",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "MI",
+    "dmv_topic": "name_change",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.864Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

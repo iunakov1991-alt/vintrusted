@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_nc_address_change_step_by_step",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "NC",
+    "dmv_topic": "address_change",
+    "format_variant": "step_by_step"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.855Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

@@ -1,0 +1,5 @@
+=== Stop old runner ===
+=== Start runner in background ===
+=== Start batch ===
+Start response: {"success":true,"message":"✅ Партия запущена через GitHub Actions!","id":"2025-12-09T12-56-34-167Z_auto_auto"}
+No batchId returned, abort

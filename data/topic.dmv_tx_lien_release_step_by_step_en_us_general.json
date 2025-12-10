@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_tx_lien_release_step_by_step",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "TX",
+    "dmv_topic": "lien_release",
+    "format_variant": "step_by_step"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.807Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

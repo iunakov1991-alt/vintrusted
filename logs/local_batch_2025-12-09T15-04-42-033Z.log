@@ -1,0 +1,46 @@
+[PHASE-STRATEGY] Phase: PHASE1_DMV_CORE
+[PHASE-STRATEGY] Language: en
+[PHASE-STRATEGY] EN pages: 7, ES pages: 3
+[PHASE-STRATEGY] Target: 30 topics, Generated: 6
+
+[BATCH] Processing 6 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 5
+[BATCH] Mode: prod
+[BATCH] QA Mode: deepseek
+[BATCH] No batch ID, skipping status update
+
+[BATCH] Processing batch 1 (5 pages in parallel)...
+[BATCH] [2/6] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [3/6] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [4/6] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [5/6] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [6/6] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [5/6] ✅ Completed in 94.1s → /Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json
+[BATCH] [4/6] ✅ Completed in 94.1s → /Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json
+[BATCH] [6/6] ✅ Completed in 94.1s → /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [3/6] ✅ Completed in 94.2s → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [2/6] ✅ Completed in 94.2s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] Batch completed in 94.2s
+
+[BATCH] Processing batch 2 (1 pages in parallel)...
+[BATCH] [7/6] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] [7/6] ✅ Completed in 93.3s → /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] Batch completed in 93.3s
+
+[BATCH] ========================================
+[BATCH] Completed in 187.5s
+[BATCH] Success: 6, Failed: 0
+[BATCH] Average page time: NaNs
+[BATCH] Speedup: 3.8x vs sequential
+[BATCH] ========================================
+
+[QUALITY-ANALYSIS] Starting quality analysis for self-learning...
+
+[QUALITY-ANALYSIS] ========================================
+[QUALITY-ANALYSIS] Starting batch quality analysis...
+[QUALITY-ANALYSIS] Scanning for recently generated pages (max age: 3600s)...
+[QUALITY-ANALYSIS] Found 0 recently generated pages
+[QUALITY-ANALYSIS] No pages found for analysis
+[QUALITY-ANALYSIS] ✅ Quality analysis completed
+
+[EXIT] code=0

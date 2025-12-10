@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monster 8.0 Local Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f7; margin: 0; padding: 20px; color: #222; }
+    h1 { margin-bottom: 10px; }
+    .card { background: #fff; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    .row { display: flex; gap: 16px; flex-wrap: wrap; }
+    .row .card { flex: 1 1 300px; }
+    label { display: block; margin-bottom: 6px; font-weight: 600; }
+    select, input, button { padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+    button { cursor: pointer; }
+    button.primary { background: #4a67ff; color: #fff; border: none; }
+    button.danger { background: #e74c3c; color: #fff; border: none; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+    th { background: #fafafa; }
+    pre { background: #111; color: #0f0; padding: 12px; border-radius: 8px; height: 280px; overflow: auto; font-size: 12px; }
+    .status-pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; color: #fff; }
+    .s-running { background: #4a67ff; }
+    .s-queued { background: #3498db; }
+    .s-success { background: #27ae60; }
+    .s-failed { background: #e74c3c; }
+    .s-stopped { background: #f39c12; }
+    .s-idle { background: #999; }
+    
+    /* Progress bar */
+    .progress-container { margin: 12px 0; }
+    .progress-bar { width: 100%; height: 24px; background: #e0e0e0; border-radius: 12px; overflow: hidden; position: relative; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #4a67ff, #6b85ff); transition: width 0.3s ease; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 600; }
+    .progress-text { margin-top: 4px; font-size: 13px; color: #666; }
+    
+    /* Timer */
+    .timer { display: inline-block; padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-size: 13px; font-weight: 600; color: #333; margin-left: 8px; }
+    
+    /* Pages list */
+    .pages-list { margin-top: 8px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .pages-list.expanded { max-height: 300px; overflow-y: auto; }
+    .pages-list-item { padding: 4px 0; font-size: 12px; }
+    .pages-list-item a { color: #4a67ff; text-decoration: none; }
+    .pages-list-item a:hover { text-decoration: underline; }
+    .expand-btn { cursor: pointer; color: #4a67ff; font-size: 12px; margin-top: 4px; user-select: none; }
+    .expand-btn:hover { text-decoration: underline; }
+  </style>
+  <script>
+    // Show/hide deploy config based on strategy
+    document.addEventListener('DOMContentLoaded', function() {
+      const deployStrategySelect = document.getElementById('deployStrategy');
+      const deployConfig = document.getElementById('deploy-config');
+      
+      function updateDeployConfig() {
+        const strategy = deployStrategySelect.value;
+        if (strategy === 'smart' || strategy === 'incremental') {
+          deployConfig.style.display = 'block';
+        } else {
+          deployConfig.style.display = 'none';
+        }
+      }
+      
+      deployStrategySelect.addEventListener('change', updateDeployConfig);
+      updateDeployConfig(); // Initial call
+    });
+  </script>
+</head>
+<body>
+  <h1>Monster 8.0 — Local Dashboard</h1>
+
+  <div class="card">
+    <h3>Controls</h3>
+    <div style="display:flex; gap:12px; flex-wrap: wrap;">
+      <div>
+        <label>Phase</label>
+        <select id="phase">
+          <option value="auto">auto</option>
+          <option value="en_only">en_only</option>
+          <option value="es_phase">es_phase</option>
+          <option value="mixed">mixed</option>
+        </select>
+      </div>
+      <div>
+        <label>Length</label>
+        <select id="length">
+          <option value="auto">auto</option>
+          <option value="short">short</option>
+          <option value="medium">medium</option>
+          <option value="long">long</option>
+        </select>
+      </div>
+      <div>
+        <label>Deploy Strategy 🚀</label>
+        <select id="deployStrategy">
+          <option value="batch">Batch (1 deploy at end)</option>
+          <option value="smart" selected>Smart Hybrid (recommended)</option>
+          <option value="incremental">Incremental (every page)</option>
+        </select>
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:8px;">
+        <button class="primary" onclick="startBatch()">START</button>
+        <button class="danger" onclick="stopBatch()">STOP</button>
+      </div>
+    </div>
+    <div id="deploy-config" style="margin-top:12px; padding:8px; background:#f9f9f9; border-radius:4px; font-size:13px; display:none;">
+      <strong>Deploy Config:</strong>
+      <div style="display:flex; gap:16px; margin-top:6px;">
+        <div>
+          <label style="font-weight:normal; margin-bottom:2px;">Every N pages:</label>
+          <input type="number" id="deployEveryPages" value="10" min="1" max="100" style="width:60px;">
+        </div>
+        <div>
+          <label style="font-weight:normal; margin-bottom:2px;">Or every N minutes:</label>
+          <input type="number" id="deployEveryMinutes" value="15" min="1" max="60" style="width:60px;">
+        </div>
+        <div>
+          <label style="font-weight:normal; margin-bottom:2px;">Min remaining time (min):</label>
+          <input type="number" id="deployMinRemainingTime" value="5" min="0" max="30" style="width:60px;">
+        </div>
+      </div>
+    </div>
+    <div id="start-result" style="margin-top:8px;color:#555;font-size:13px;"></div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <h3>📊 Current Phase & Strategy</h3>
+      <div id="phase-info">Loading...</div>
+    </div>
+    <div class="card">
+      <h3>🌐 Production Stats</h3>
+      <div id="production-stats">Loading...</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <h3>Current Batch</h3>
+      <div id="current-status">Loading...</div>
+    </div>
+    <div class="card">
+      <h3>History</h3>
+      <div style="overflow-x:auto;">
+        <table id="history-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status & Stats</th>
+              <th>Phase</th>
+              <th>Length</th>
+              <th>Started</th>
+              <th>Finished</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Logs (tail)</h3>
+    <pre id="logs">Loading...</pre>
+  </div>
+
+  <script>
+    async function fetchStatus() {
+      try {
+        const res = await fetch('/api/local-status');
+        const data = await res.json();
+        renderStatus(data);
+      } catch (e) {
+        document.getElementById('current-status').innerText = 'Error: ' + e.message;
+      }
+    }
+
+    function pill(status) {
+      const cls = {
+        running:'s-running',
+        queued:'s-queued',
+        success:'s-success',
+        failed:'s-failed',
+        stopped:'s-stopped',
+        idle:'s-idle'
+      }[status] || 's-idle';
+      return `<span class="status-pill ${cls}">${status || 'idle'}</span>`;
+    }
+
+    function renderStatus(data) {
+      // Render phase info
+      const phaseEl = document.getElementById('phase-info');
+      if (data.phase) {
+        const p = data.phase;
+        const phaseEmoji = {
+          'PHASE1_DMV_CORE': '🇺🇸',
+          'PHASE2_DMV_FULL': '🌍',
+          'PHASE3_BRAND_MODEL': '🚗',
+          'PHASE4_FRAUD_PARTIAL': '⚠️',
+          'PHASE5_FRAUD_FULL': '🔥'
+        }[p.phase] || '📊';
+
+        const phaseTarget = {
+          'PHASE1_DMV_CORE': '0 - 5K',
+          'PHASE2_DMV_FULL': '5K - 20K',
+          'PHASE3_BRAND_MODEL': '20K - 200K',
+          'PHASE4_FRAUD_PARTIAL': '200K - 400K',
+          'PHASE5_FRAUD_FULL': '400K - 1M'
+        }[p.phase] || '-';
+
+        phaseEl.innerHTML = `
+          <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
+            <div><b>Phase:</b> ${phaseEmoji} ${pill(p.phase)}</div>
+            <div><b>Description:</b> ${p.phaseDesc || '-'}</div>
+            <div><b>Target Range:</b> ${phaseTarget} pages</div>
+            <div><b>Local Total:</b> ${p.totalPages || 0}</div>
+            <div><b>Local EN:</b> ${p.enCount || 0}</div>
+            <div><b>Local ES:</b> ${p.esCount || 0}</div>
+          </div>
+        `;
+      } else {
+        phaseEl.innerHTML = 'Phase info not available';
+      }
+      
+      // Render production stats
+      const prodEl = document.getElementById('production-stats');
+      if (data.production) {
+        const prod = data.production;
+        prodEl.innerHTML = `
+          <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
+            <div style="font-size:32px; font-weight:700; color:#4a67ff;">${prod.total || 0}</div>
+            <div>
+              <div style="font-size:14px; color:#666; margin-bottom:4px;">Total SEO Pages</div>
+              <div style="font-size:13px; color:#999;">
+                <span style="color:#4a67ff; font-weight:600;">EN: ${prod.en || 0}</span>
+                <span style="margin:0 8px;">•</span>
+                <span style="color:#27ae60; font-weight:600;">ES: ${prod.es || 0}</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:12px; font-size:12px; color:#999;">
+            🌐 Live on <a href="https://vintrusted.com" target="_blank" style="color:#4a67ff;">vintrusted.com</a>
+          </div>
+        `;
+      } else {
+        prodEl.innerHTML = '<div style="color:#999;">Loading production stats...</div>';
+      }
+      
+      // Render current batch
+      const c = data.current;
+      const curEl = document.getElementById('current-status');
+      if (!c) {
+        curEl.innerHTML = 'No current batch';
+      } else {
+        const progress = c.progress || 0;
+        const timeLeft = c.estimatedTimeLeft || 0;
+        const timeLeftStr = timeLeft > 0 
+          ? `${Math.floor(timeLeft / 60)}m ${timeLeft % 60}s` 
+          : '-';
+        
+        const progressBar = c.status === 'running' && c.topicsPlanned > 0
+          ? `<div class="progress-container">
+               <div class="progress-bar">
+                 <div class="progress-fill" style="width: ${progress}%">${progress}%</div>
+               </div>
+               <div class="progress-text">
+                 ${c.topicsDone || 0} / ${c.topicsPlanned} topics
+                 <span class="timer">⏱️ ${timeLeftStr} left</span>
+               </div>
+             </div>`
+          : '';
+        
+        curEl.innerHTML = `
+          <div><b>ID:</b> ${c.id}</div>
+          <div><b>Status:</b> ${pill(c.status)}</div>
+          <div><b>Phase:</b> ${c.phase}</div>
+          <div><b>Language:</b> ${c.language || '-'}</div>
+          ${progressBar}
+          <div><b>Started:</b> ${c.startedAt ? new Date(c.startedAt).toLocaleString() : '-'}</div>
+          <div><b>PID:</b> ${c.pid || '-'}</div>
+          ${c.lastError ? `<div style="color:#e74c3c;"><b>Error:</b> ${c.lastError}</div>` : ''}
+        `;
+        fetchLogs(c.id);
+      }
+
+      const tbody = document.querySelector('#history-table tbody');
+      tbody.innerHTML = (data.history || []).map((h, idx) => {
+        const statsHtml = h.status === 'success' && h.avgWords 
+          ? `<div style="font-size:11px;color:#666;margin-top:4px;">
+               📊 ${h.pagesGenerated || 0} pages, avg ${h.avgWords || 0} words
+             </div>` 
+          : '';
+        
+        const pagesHtml = h.status === 'success' && h.samplePages && h.samplePages.length > 0
+          ? `<div style="font-size:11px;margin-top:4px;">
+               ${h.samplePages.slice(0, 3).map(p => 
+                 `<a href="${p.path}" target="_blank" style="color:#4a67ff;margin-right:8px;">🔗</a>`
+               ).join('')}
+               ${h.samplePages.length > 3 
+                 ? `<span class="expand-btn" onclick="togglePages('pages-${idx}')">▼ Show all ${h.samplePages.length}</span>` 
+                 : ''}
+               <div id="pages-${idx}" class="pages-list">
+                 ${h.samplePages.map(p => 
+                   `<div class="pages-list-item">
+                      <a href="${p.path}" target="_blank">${p.path}</a> 
+                      <span style="color:#999;">(${p.words} words)</span>
+                    </div>`
+                 ).join('')}
+               </div>
+             </div>`
+          : '';
+        
+        const deployBtn = h.status === 'success' && !h.deployed
+          ? `<button onclick="checkQuality('${h.id}')" style="font-size:11px;padding:4px 8px;margin-top:4px;background:#27ae60;color:#fff;border:none;border-radius:4px;cursor:pointer;">✓ Check & Deploy</button>`
+          : h.deployed 
+            ? `<span style="font-size:11px;color:#27ae60;">✓ Deployed at ${new Date(h.deployedAt).toLocaleTimeString()}</span>`
+            : '';
+        
+        return `
+          <tr>
+            <td>${h.id.substring(0, 19)}</td>
+            <td>${pill(h.status)}${statsHtml}${pagesHtml}${deployBtn}</td>
+            <td>${h.phase}</td>
+            <td>${h.length}</td>
+            <td>${h.startedAt ? new Date(h.startedAt).toLocaleString() : '-'}</td>
+            <td>${h.finishedAt ? new Date(h.finishedAt).toLocaleString() : '-'}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+    
+    function togglePages(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle('expanded');
+        const btn = el.previousElementSibling;
+        if (btn && btn.classList.contains('expand-btn')) {
+          btn.textContent = el.classList.contains('expanded') 
+            ? btn.textContent.replace('▼', '▲') 
+            : btn.textContent.replace('▲', '▼');
+        }
+      }
+    }
+
+    async function startBatch() {
+      const phase = document.getElementById('phase').value;
+      const length = document.getElementById('length').value;
+      const deployStrategy = document.getElementById('deployStrategy').value;
+      const deployEveryPages = parseInt(document.getElementById('deployEveryPages').value, 10);
+      const deployEveryMinutes = parseInt(document.getElementById('deployEveryMinutes').value, 10);
+      const deployMinRemainingTime = parseInt(document.getElementById('deployMinRemainingTime').value, 10);
+      
+      try {
+        const res = await fetch('/api/local-start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            phase, 
+            length,
+            deployStrategy,
+            deployEveryPages,
+            deployEveryMinutes,
+            deployMinRemainingTime
+          })
+        });
+        const data = await res.json();
+        document.getElementById('start-result').innerText = JSON.stringify(data);
+        fetchStatus();
+      } catch (e) {
+        document.getElementById('start-result').innerText = 'Error: ' + e.message;
+      }
+    }
+
+    async function stopBatch() {
+      try {
+        const res = await fetch('/api/local-stop', { method: 'POST' });
+        const data = await res.json();
+        document.getElementById('start-result').innerText = JSON.stringify(data);
+        fetchStatus();
+      } catch (e) {
+        document.getElementById('start-result').innerText = 'Error: ' + e.message;
+      }
+    }
+
+    async function fetchLogs(id) {
+      if (!id) return;
+      try {
+        const res = await fetch('/api/local-log?id=' + encodeURIComponent(id) + '&lines=200');
+        const data = await res.json();
+        if (data.ok) {
+          document.getElementById('logs').innerText = data.log;
+        }
+      } catch (e) {
+        document.getElementById('logs').innerText = 'Error loading logs: ' + e.message;
+      }
+    }
+
+    async function checkQuality(batchId) {
+      if (!confirm(`Check quality and deploy batch ${batchId}?`)) return;
+      
+      try {
+        // 1. Проверка качества
+        document.getElementById('start-result').innerText = 'Checking quality...';
+        const qcRes = await fetch('/api/local-quality-check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ batchId })
+        });
+        const qcData = await qcRes.json();
+        
+        if (!qcData.ok || !qcData.canDeploy) {
+          document.getElementById('start-result').innerText = 
+            `Quality check failed: ${qcData.message || 'Unknown error'}`;
+          return;
+        }
+        
+        document.getElementById('start-result').innerText = 
+          `Quality OK: ${qcData.message}. Starting deploy...`;
+        
+        // 2. Деплой
+        const deployRes = await fetch('/api/local-deploy', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ batchId })
+        });
+        const deployData = await deployRes.json();
+        
+        if (deployData.ok) {
+          document.getElementById('start-result').innerText = 
+            `Deploy started! Check logs: ${deployData.logFile}`;
+          setTimeout(fetchStatus, 2000);
+        } else {
+          document.getElementById('start-result').innerText = 
+            `Deploy failed: ${deployData.error}`;
+        }
+      } catch (e) {
+        document.getElementById('start-result').innerText = 'Error: ' + e.message;
+      }
+    }
+
+    fetchStatus();
+    setInterval(fetchStatus, 5000);
+  </script>
+</body>
+</html>
+

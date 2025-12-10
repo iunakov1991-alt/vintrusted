@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_tx_title_fees_guide",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "TX",
+    "dmv_topic": "title_fees",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.809Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "topic_id": "dmv_mi_title_fees_guide",
+  "language": "en",
+  "zone": "us_general",
+  "dimensions": {
+    "state": "MI",
+    "dmv_topic": "title_fees",
+    "format_variant": "guide"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:57:35.867Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}

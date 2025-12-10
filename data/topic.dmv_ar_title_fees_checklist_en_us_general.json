@@ -1,0 +1,15 @@
+{
+  "topic_id": "dmv_ar_title_fees_checklist",
+  "language": "en",
+  "zone": "dmv_titles",
+  "audience": "us_general",
+  "dimensions": {
+    "state": "AR",
+    "dmv_topic": "title_fees",
+    "format_variant": "checklist"
+  },
+  "metadata": {
+    "generated_at": "2025-12-10T00:58:59.138Z",
+    "generator": "generate-dmv-topics.js"
+  }
+}
