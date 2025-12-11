@@ -7,6 +7,84 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/es/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/es/dmv-titles/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ga/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/tx/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/es/dmv-titles/ca/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/es/dmv-titles/fl/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/es/dmv-titles/tx/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/address-change/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -151,7 +229,19 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ak/address-change/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/address-change/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/address-change/guide/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -229,6 +319,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/salvage-to-rebuilt/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/salvage-to-rebuilt/guide/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -253,7 +349,19 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/title-fees/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/title-transfer/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/title-transfer/guide/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
