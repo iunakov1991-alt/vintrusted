@@ -1,0 +1,236 @@
+[
+  {
+    "slug": "vehicle-title-search",
+    "title": "Vehicle Title Search",
+    "subtitle": "Learn how to search title records",
+    "description": "Complete guide to searching vehicle title records, understanding title history, and verifying ownership information.",
+    "category": "Titles",
+    "keywords": ["vehicle title search", "title records", "title lookup", "car title search"],
+    "related": ["what-is-title-number", "title-transfer", "lost-car-title"]
+  },
+  {
+    "slug": "what-is-a-vin-number",
+    "title": "What Is a VIN Number?",
+    "subtitle": "Understanding VIN basics",
+    "description": "Learn everything about Vehicle Identification Numbers (VIN), how they work, and why they're important for vehicle ownership.",
+    "category": "VIN",
+    "keywords": ["VIN number", "vehicle identification number", "VIN decoder", "what is VIN"],
+    "related": ["decode-vin", "new-vin-number", "stolen-car-check"]
+  },
+  {
+    "slug": "what-is-title-number",
+    "title": "What is a Title Number",
+    "subtitle": "Title number explained",
+    "description": "Understanding what a title number is, where to find it, and why it's important for vehicle transactions.",
+    "category": "Titles",
+    "keywords": ["title number", "car title number", "title identification", "title document"],
+    "related": ["vehicle-title-search", "title-transfer", "lost-car-title"]
+  },
+  {
+    "slug": "rebuilt-title",
+    "title": "What Is a Rebuilt Title?",
+    "subtitle": "Rebuilt title guide",
+    "description": "Complete guide to rebuilt titles, salvage vehicles, and what you need to know before buying or selling a rebuilt car.",
+    "category": "Title Types",
+    "keywords": ["rebuilt title", "salvage title", "reconstructed title", "rebuilt vehicle"],
+    "related": ["total-loss-vehicle", "junk-car", "car-auction"]
+  },
+  {
+    "slug": "car-lien",
+    "title": "What Is a Lien On a Car?",
+    "subtitle": "Understanding car liens",
+    "description": "Learn about vehicle liens, how they work, and what it means for buyers and sellers when a car has a lien.",
+    "category": "Finance",
+    "keywords": ["car lien", "vehicle lien", "lien holder", "lien release"],
+    "related": ["title-transfer", "vehicle-title-search", "lost-car-title"]
+  },
+  {
+    "slug": "lemon-car",
+    "title": "What Is a Lemon Car",
+    "subtitle": "Lemon law explained",
+    "description": "Understanding lemon laws, how to identify a lemon car, and your rights as a consumer when you buy a defective vehicle.",
+    "category": "Consumer Rights",
+    "keywords": ["lemon car", "lemon law", "defective vehicle", "lemon buyback"],
+    "related": ["manufacturer-buyback", "car-warranty", "car-recall"]
+  },
+  {
+    "slug": "accident-report",
+    "title": "Car Accident Report",
+    "subtitle": "What's in accident reports",
+    "description": "Learn what information is included in car accident reports and how to access them when buying a used vehicle.",
+    "category": "Reports",
+    "keywords": ["accident report", "car accident history", "accident records", "vehicle damage history"],
+    "related": ["total-loss-vehicle", "vehicle-inspection", "flooded-car"]
+  },
+  {
+    "slug": "title-transfer",
+    "title": "Car Title Transfer",
+    "subtitle": "How title transfers work",
+    "description": "Complete guide to transferring a car title, required documents, fees, and state-specific requirements.",
+    "category": "Titles",
+    "keywords": ["title transfer", "car title transfer", "transfer ownership", "DMV title transfer"],
+    "related": ["vehicle-title-search", "what-is-title-number", "lost-car-title"]
+  },
+  {
+    "slug": "new-vin-number",
+    "title": "Get a New VIN Number",
+    "subtitle": "VIN replacement process",
+    "description": "Learn when and how to get a new VIN number for your vehicle, including the legal process and requirements.",
+    "category": "VIN",
+    "keywords": ["new VIN", "VIN replacement", "VIN assignment", "reassign VIN"],
+    "related": ["what-is-a-vin-number", "decode-vin", "abandoned-vehicle-title"]
+  },
+  {
+    "slug": "manufacturer-buyback",
+    "title": "Manufacturer Buyback",
+    "subtitle": "Buyback vehicles explained",
+    "description": "Understanding manufacturer buyback programs, what they mean for vehicle value, and how to identify buyback vehicles.",
+    "category": "Consumer Rights",
+    "keywords": ["manufacturer buyback", "lemon buyback", "factory buyback", "buyback vehicle"],
+    "related": ["lemon-car", "car-warranty", "car-recall"]
+  },
+  {
+    "slug": "car-recall",
+    "title": "What Is a Car Recall?",
+    "subtitle": "Understanding recalls",
+    "description": "Learn about vehicle recalls, how they work, how to check for recalls, and what to do if your car is recalled.",
+    "category": "Safety",
+    "keywords": ["car recall", "vehicle recall", "safety recall", "recall check"],
+    "related": ["car-safety-ratings", "manufacturer-buyback", "car-warranty"]
+  },
+  {
+    "slug": "junk-car",
+    "title": "What Is a Junk Car",
+    "subtitle": "Junk car definition",
+    "description": "Understanding what qualifies as a junk car, how to title a junk vehicle, and what it means for buyers and sellers.",
+    "category": "Title Types",
+    "keywords": ["junk car", "junk title", "scrap car", "salvage vehicle"],
+    "related": ["rebuilt-title", "total-loss-vehicle", "abandoned-vehicle-title"]
+  },
+  {
+    "slug": "total-loss-vehicle",
+    "title": "Total Loss Vehicle",
+    "subtitle": "When your car is totaled",
+    "description": "Understanding total loss vehicles, insurance claims, salvage titles, and your options after your car is totaled.",
+    "category": "Insurance",
+    "keywords": ["total loss", "totaled car", "total loss vehicle", "salvage after total loss"],
+    "related": ["rebuilt-title", "junk-car", "accident-report"]
+  },
+  {
+    "slug": "odometer-rollback",
+    "title": "Odometer Rollback Check",
+    "subtitle": "Detect odometer fraud",
+    "description": "Learn how to detect odometer fraud, what rollback means, and how to protect yourself when buying a used car.",
+    "category": "Fraud Prevention",
+    "keywords": ["odometer rollback", "odometer fraud", "mileage fraud", "odometer tampering"],
+    "related": ["title-washing", "stolen-car-check", "vehicle-inspection"]
+  },
+  {
+    "slug": "lost-car-title",
+    "title": "Replace Lost Car Title",
+    "subtitle": "Get a duplicate title",
+    "description": "Step-by-step guide to replacing a lost car title, required documents, fees, and how to get a duplicate title certificate.",
+    "category": "Titles",
+    "keywords": ["lost title", "duplicate title", "replacement title", "missing title"],
+    "related": ["what-is-title-number", "title-transfer", "vehicle-title-search"]
+  },
+  {
+    "slug": "decode-vin",
+    "title": "How To Decode a VIN",
+    "subtitle": "VIN decoder guide",
+    "description": "Learn how to decode a VIN number, understand each digit, and extract vehicle information from the VIN.",
+    "category": "VIN",
+    "keywords": ["decode VIN", "VIN decoder", "VIN breakdown", "VIN meaning"],
+    "related": ["what-is-a-vin-number", "new-vin-number", "vehicle-inspection"]
+  },
+  {
+    "slug": "stolen-car-check",
+    "title": "Check If Car Is Stolen",
+    "subtitle": "Verify theft status",
+    "description": "How to check if a car is stolen before buying, what databases to use, and how to protect yourself from buying stolen vehicles.",
+    "category": "Fraud Prevention",
+    "keywords": ["stolen car check", "stolen vehicle lookup", "theft check", "NICB database"],
+    "related": ["odometer-rollback", "title-washing", "vehicle-inspection"]
+  },
+  {
+    "slug": "flooded-car",
+    "title": "Avoid Buying Flooded Car",
+    "subtitle": "Flood damage detection",
+    "description": "How to identify flood-damaged vehicles, signs of water damage, and what to check before buying a used car.",
+    "category": "Inspection",
+    "keywords": ["flooded car", "flood damage", "water damage", "hurricane car"],
+    "related": ["accident-report", "vehicle-inspection", "hail-damage-value"]
+  },
+  {
+    "slug": "hail-damage-value",
+    "title": "Hail Damage Devalue",
+    "subtitle": "Impact on car value",
+    "description": "Understanding how hail damage affects vehicle value, insurance claims, and whether to repair or sell after hail damage.",
+    "category": "Valuation",
+    "keywords": ["hail damage", "hail damage value", "car devalue", "hail repair cost"],
+    "related": ["flooded-car", "accident-report", "total-loss-vehicle"]
+  },
+  {
+    "slug": "vehicle-inspection",
+    "title": "Vehicle Inspection Checklist",
+    "subtitle": "Complete inspection guide",
+    "description": "Comprehensive vehicle inspection checklist for buyers, what to look for, and how to evaluate a used car before purchase.",
+    "category": "Inspection",
+    "keywords": ["vehicle inspection", "car inspection checklist", "pre-purchase inspection", "used car inspection"],
+    "related": ["flooded-car", "decode-vin", "accident-report"]
+  },
+  {
+    "slug": "car-warranty",
+    "title": "What Is a Car Warranty?",
+    "subtitle": "Warranty coverage explained",
+    "description": "Understanding different types of car warranties, what they cover, extended warranties, and how to make warranty claims.",
+    "category": "Consumer Rights",
+    "keywords": ["car warranty", "vehicle warranty", "extended warranty", "warranty coverage"],
+    "related": ["manufacturer-buyback", "car-recall", "lemon-car"]
+  },
+  {
+    "slug": "title-washing",
+    "title": "What Is Title Washing?",
+    "subtitle": "Title fraud prevention",
+    "description": "Learn about title washing fraud, how criminals hide vehicle damage history, and how to protect yourself when buying a car.",
+    "category": "Fraud Prevention",
+    "keywords": ["title washing", "title fraud", "clean title fraud", "salvage title washing"],
+    "related": ["odometer-rollback", "stolen-car-check", "rebuilt-title"]
+  },
+  {
+    "slug": "car-auction",
+    "title": "Car Auction Guide",
+    "subtitle": "How car auctions work",
+    "description": "Complete guide to buying cars at auction, how auctions work, what to expect, and tips for first-time auction buyers.",
+    "category": "Buying",
+    "keywords": ["car auction", "auto auction", "dealer auction", "online car auction"],
+    "related": ["rebuilt-title", "junk-car", "vehicle-inspection"]
+  },
+  {
+    "slug": "classic-antique-car",
+    "title": "Classic or Antique Car",
+    "subtitle": "Classification and registration",
+    "description": "Understanding classic and antique car classifications, registration requirements, insurance, and how to title vintage vehicles.",
+    "category": "Registration",
+    "keywords": ["classic car", "antique car", "vintage car", "historic vehicle"],
+    "related": ["car-warranty", "vehicle-inspection", "title-transfer"]
+  },
+  {
+    "slug": "abandoned-vehicle-title",
+    "title": "Abandoned Vehicle Title",
+    "subtitle": "Get title for abandoned car",
+    "description": "Legal process for obtaining title to an abandoned vehicle, state laws, required documentation, and how to claim ownership.",
+    "category": "Titles",
+    "keywords": ["abandoned vehicle", "abandoned car title", "unclaimed vehicle", "abandoned property"],
+    "related": ["new-vin-number", "junk-car", "title-transfer"]
+  },
+  {
+    "slug": "car-safety-ratings",
+    "title": "Car Safety Ratings",
+    "subtitle": "How safety ratings work",
+    "description": "Understanding NHTSA and IIHS safety ratings, crash test scores, and how to use safety ratings when choosing a vehicle.",
+    "category": "Safety",
+    "keywords": ["car safety ratings", "crash test ratings", "NHTSA ratings", "IIHS ratings"],
+    "related": ["car-recall", "vehicle-inspection", "car-warranty"]
+  }
+]

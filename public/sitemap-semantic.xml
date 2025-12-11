@@ -19,6 +19,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/</loc>
+    <lastmod>2025-12-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/es/dmv-titles/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -205,6 +211,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/title-fees/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/title-transfer/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -254,6 +266,30 @@
   </url>
   <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ga/title-types/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/duplicate-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/lien-release/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/lost-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/title-correction/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -367,8 +403,158 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://vintrusted.com/semantic-pages/en/educational/</loc>
-    <lastmod>2025-12-10</lastmod>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/abandoned-vehicle-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/accident-report/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/car-auction/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/car-lien/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/car-recall/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/car-safety-ratings/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/car-warranty/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/classic-antique-car/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/decode-vin/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/flooded-car/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/hail-damage-value/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/junk-car/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/lemon-car/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/lost-car-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/manufacturer-buyback/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/new-vin-number/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/odometer-rollback/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/rebuilt-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/stolen-car-check/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/title-transfer/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/title-washing/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/total-loss-vehicle/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/vehicle-inspection/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/vehicle-title-search/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/what-is-a-vin-number/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/educational/what-is-title-number/</loc>
+    <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -650,6 +836,12 @@
   </url>
   <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/lien-release/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/lost-title/checklist/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

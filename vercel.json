@@ -320,6 +320,110 @@
       "destination": "/api/semantic-page.js?lang=es&path=$1"
     },
     {
+      "source": "/vehicle-title-search",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/vehicle-title-search"
+    },
+    {
+      "source": "/what-is-a-vin-number",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/what-is-a-vin-number"
+    },
+    {
+      "source": "/what-is-title-number",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/what-is-title-number"
+    },
+    {
+      "source": "/rebuilt-title",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/rebuilt-title"
+    },
+    {
+      "source": "/car-lien",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-lien"
+    },
+    {
+      "source": "/lemon-car",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/lemon-car"
+    },
+    {
+      "source": "/accident-report",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/accident-report"
+    },
+    {
+      "source": "/title-transfer",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/title-transfer"
+    },
+    {
+      "source": "/new-vin-number",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/new-vin-number"
+    },
+    {
+      "source": "/manufacturer-buyback",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/manufacturer-buyback"
+    },
+    {
+      "source": "/car-recall",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-recall"
+    },
+    {
+      "source": "/junk-car",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/junk-car"
+    },
+    {
+      "source": "/total-loss-vehicle",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/total-loss-vehicle"
+    },
+    {
+      "source": "/odometer-rollback",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/odometer-rollback"
+    },
+    {
+      "source": "/lost-car-title",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/lost-car-title"
+    },
+    {
+      "source": "/decode-vin",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/decode-vin"
+    },
+    {
+      "source": "/stolen-car-check",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/stolen-car-check"
+    },
+    {
+      "source": "/flooded-car",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/flooded-car"
+    },
+    {
+      "source": "/hail-damage-value",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/hail-damage-value"
+    },
+    {
+      "source": "/vehicle-inspection",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/vehicle-inspection"
+    },
+    {
+      "source": "/car-warranty",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-warranty"
+    },
+    {
+      "source": "/title-washing",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/title-washing"
+    },
+    {
+      "source": "/car-auction",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-auction"
+    },
+    {
+      "source": "/classic-antique-car",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/classic-antique-car"
+    },
+    {
+      "source": "/abandoned-vehicle-title",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/abandoned-vehicle-title"
+    },
+    {
+      "source": "/car-safety-ratings",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-safety-ratings"
+    },
+    {
       "source": "/dashboard/api/(.*)",
       "destination": "/api/dashboard.js?path=api/$1"
     },
