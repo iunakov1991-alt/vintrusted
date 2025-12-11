@@ -184,6 +184,18 @@
     {
       "src": "*.txt",
       "use": "@vercel/static"
+    },
+    {
+      "src": "*.ico",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "img/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**/*.ico",
+      "use": "@vercel/static"
     }
   ],
   "rewrites": [
