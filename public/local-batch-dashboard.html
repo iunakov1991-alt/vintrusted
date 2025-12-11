@@ -27,11 +27,28 @@
     .s-stopped { background: #f39c12; }
     .s-idle { background: #999; }
     
-    /* Progress bar */
+    /* Progress bar - TRIZ Принцип 15: Динамичность */
     .progress-container { margin: 12px 0; }
     .progress-bar { width: 100%; height: 24px; background: #e0e0e0; border-radius: 12px; overflow: hidden; position: relative; }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, #4a67ff, #6b85ff); transition: width 0.3s ease; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 600; }
+    .progress-fill { 
+      height: 100%; 
+      background: linear-gradient(90deg, #4a67ff, #6b85ff); 
+      transition: width 0.5s ease; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: #fff; 
+      font-size: 12px; 
+      font-weight: 600;
+      animation: pulse 2s ease-in-out infinite;
+    }
     .progress-text { margin-top: 4px; font-size: 13px; color: #666; }
+    
+    /* Pulse animation для активного прогресса */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
     
     /* Timer */
     .timer { display: inline-block; padding: 4px 8px; background: #f0f0f0; border-radius: 4px; font-size: 13px; font-weight: 600; color: #333; margin-left: 8px; }
@@ -44,12 +61,22 @@
     .pages-list-item a:hover { text-decoration: underline; }
     .expand-btn { cursor: pointer; color: #4a67ff; font-size: 12px; margin-top: 4px; user-select: none; }
     .expand-btn:hover { text-decoration: underline; }
+    
+    /* Spinner animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .spinner { display: inline-block; animation: spin 2s linear infinite; }
   </style>
   <script>
     // Show/hide deploy config based on strategy
     document.addEventListener('DOMContentLoaded', function() {
       const deployStrategySelect = document.getElementById('deployStrategy');
       const deployConfig = document.getElementById('deploy-config');
+      const aiModeSelect = document.getElementById('aiMode');
+      const hybridConfig = document.getElementById('hybrid-config');
+      const hybridConfig2 = document.getElementById('hybrid-config-2');
       
       function updateDeployConfig() {
         const strategy = deployStrategySelect.value;
@@ -60,8 +87,21 @@
         }
       }
       
+      function updateAIConfig() {
+        const mode = aiModeSelect.value;
+        if (mode === 'hybrid') {
+          hybridConfig.style.display = 'block';
+          hybridConfig2.style.display = 'block';
+        } else {
+          hybridConfig.style.display = 'none';
+          hybridConfig2.style.display = 'none';
+        }
+      }
+      
       deployStrategySelect.addEventListener('change', updateDeployConfig);
+      aiModeSelect.addEventListener('change', updateAIConfig);
       updateDeployConfig(); // Initial call
+      updateAIConfig(); // Initial call
     });
   </script>
 </head>
@@ -90,6 +130,21 @@
         </select>
       </div>
       <div>
+        <label>AI Mode 🤖</label>
+        <select id="aiMode">
+          <option value="deepseek" selected>DeepSeek only (recommended ✅)</option>
+          <option value="hybrid">Hybrid (DeepSeek + Ollama) ⚠️</option>
+        </select>
+      </div>
+      <div id="hybrid-config" style="display:none;">
+        <label>DeepSeek Workers</label>
+        <input type="number" id="deepseekWorkers" value="5" min="1" max="10" style="width:60px;">
+      </div>
+      <div id="hybrid-config-2" style="display:none;">
+        <label>Ollama Workers</label>
+        <input type="number" id="ollamaWorkers" value="3" min="1" max="5" style="width:60px;">
+      </div>
+      <div>
         <label>Deploy Strategy 🚀</label>
         <select id="deployStrategy">
           <option value="batch">Batch (1 deploy at end)</option>
@@ -100,6 +155,7 @@
       <div style="display:flex; align-items:flex-end; gap:8px;">
         <button class="primary" onclick="startBatch()">START</button>
         <button class="danger" onclick="stopBatch()">STOP</button>
+        <button style="background:#6c757d; color:#fff; border:none;" onclick="generateHubs()">🗂️ Hub Pages</button>
       </div>
     </div>
     <div id="deploy-config" style="margin-top:12px; padding:8px; background:#f9f9f9; border-radius:4px; font-size:13px; display:none;">
@@ -139,22 +195,29 @@
       <div id="current-status">Loading...</div>
     </div>
     <div class="card">
-      <h3>History</h3>
-      <div style="overflow-x:auto;">
-        <table id="history-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Status & Stats</th>
-              <th>Phase</th>
-              <th>Length</th>
-              <th>Started</th>
-              <th>Finished</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      <h3>🔄 Live Process Monitor</h3>
+      <div id="process-monitor" style="font-size:12px; max-height:300px; overflow-y:auto;">
+        <div style="color:#999;">Waiting for batch to start...</div>
       </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>History</h3>
+    <div style="overflow-x:auto;">
+      <table id="history-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Status & Stats</th>
+            <th>Phase</th>
+            <th>Length</th>
+            <th>Started</th>
+            <th>Finished</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
   </div>
 
@@ -257,14 +320,18 @@
           ? `${Math.floor(timeLeft / 60)}m ${timeLeft % 60}s` 
           : '-';
         
+        // TRIZ Принцип 23: Обратная связь - Детальный прогресс
         const progressBar = c.status === 'running' && c.topicsPlanned > 0
           ? `<div class="progress-container">
                <div class="progress-bar">
-                 <div class="progress-fill" style="width: ${progress}%">${progress}%</div>
+                 <div class="progress-fill" style="width: ${progress}%">
+                   ${progress}% ${progress > 0 ? '🚀' : '⏳'}
+                 </div>
                </div>
                <div class="progress-text">
-                 ${c.topicsDone || 0} / ${c.topicsPlanned} topics
-                 <span class="timer">⏱️ ${timeLeftStr} left</span>
+                 <strong>${c.topicsDone || 0} / ${c.topicsPlanned}</strong> topics completed
+                 <span class="timer">⏱️ ${timeLeftStr} remaining</span>
+                 ${c.updatedAt ? `<span style="margin-left:8px;color:#999;font-size:11px;">Updated: ${new Date(c.updatedAt).toLocaleTimeString()}</span>` : ''}
                </div>
              </div>`
           : '';
@@ -344,23 +411,32 @@
     async function startBatch() {
       const phase = document.getElementById('phase').value;
       const length = document.getElementById('length').value;
+      const aiMode = document.getElementById('aiMode').value;
       const deployStrategy = document.getElementById('deployStrategy').value;
       const deployEveryPages = parseInt(document.getElementById('deployEveryPages').value, 10);
       const deployEveryMinutes = parseInt(document.getElementById('deployEveryMinutes').value, 10);
       const deployMinRemainingTime = parseInt(document.getElementById('deployMinRemainingTime').value, 10);
+
+      const body = {
+        phase,
+        length,
+        deployStrategy,
+        deployEveryPages,
+        deployEveryMinutes,
+        deployMinRemainingTime,
+        hybrid: aiMode === 'hybrid' // false = DeepSeek only
+      };
+
+      if (aiMode === 'hybrid') {
+        body.deepseekWorkers = parseInt(document.getElementById('deepseekWorkers').value, 10);
+        body.ollamaWorkers = parseInt(document.getElementById('ollamaWorkers').value, 10);
+      }
       
       try {
         const res = await fetch('/api/local-start', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            phase, 
-            length,
-            deployStrategy,
-            deployEveryPages,
-            deployEveryMinutes,
-            deployMinRemainingTime
-          })
+          body: JSON.stringify(body)
         });
         const data = await res.json();
         document.getElementById('start-result').innerText = JSON.stringify(data);
@@ -388,10 +464,121 @@
         const data = await res.json();
         if (data.ok) {
           document.getElementById('logs').innerText = data.log;
+          updateProcessMonitor(data.log);
         }
       } catch (e) {
         document.getElementById('logs').innerText = 'Error loading logs: ' + e.message;
       }
+    }
+
+    function updateProcessMonitor(logText) {
+      if (!logText) return;
+      
+      const lines = logText.split('\n');
+      const processes = [];
+      const completed = [];
+      
+      // Parse log for active processes and completed pages
+      for (let i = lines.length - 1; i >= 0 && processes.length < 10; i--) {
+        const line = lines[i];
+        
+        // Find "Starting" lines
+        if (line.includes('Starting') && line.includes('.json')) {
+          const match = line.match(/\[(\d+)\/(\d+)\] Starting.*\/(topic\.[^\/]+\.json)/);
+          if (match) {
+            const [, current, total, topic] = match;
+            const topicName = topic.replace('topic.', '').replace('.json', '').replace(/_/g, ' ');
+            processes.unshift({
+              id: current,
+              total: total,
+              topic: topicName,
+              status: 'processing',
+              time: Date.now()
+            });
+          }
+        }
+        
+        // Find "Completed" lines
+        if (line.includes('✅ Completed')) {
+          const match = line.match(/\[(\d+)\/(\d+)\] ✅ Completed in ([\d.]+)s.*\/(topic\.[^\/]+\.json)/);
+          if (match) {
+            const [, current, total, duration, topic] = match;
+            const topicName = topic.replace('topic.', '').replace('.json', '').replace(/_/g, ' ');
+            
+            // Find HTML path
+            let htmlPath = '';
+            for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
+              if (lines[j].includes('📄 HTML:')) {
+                htmlPath = lines[j].match(/📄 HTML: (.+)/)?.[1] || '';
+                break;
+              }
+            }
+            
+            completed.unshift({
+              id: current,
+              total: total,
+              topic: topicName,
+              duration: duration,
+              htmlPath: htmlPath,
+              status: 'completed'
+            });
+            
+            if (completed.length >= 5) break;
+          }
+        }
+      }
+      
+      // Render process monitor
+      const monitorEl = document.getElementById('process-monitor');
+      if (processes.length === 0 && completed.length === 0) {
+        monitorEl.innerHTML = '<div style="color:#999;">No active processes</div>';
+        return;
+      }
+      
+      let html = '';
+      
+      // Show active processes
+      if (processes.length > 0) {
+        html += '<div style="margin-bottom:12px;"><strong style="color:#4a67ff;">⚙️ Processing Now:</strong></div>';
+        processes.forEach(p => {
+          html += `
+            <div style="padding:6px 8px; margin:4px 0; background:#f0f7ff; border-left:3px solid #4a67ff; border-radius:4px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <span style="font-weight:600; color:#4a67ff;">[${p.id}/${p.total}]</span>
+                  <span style="color:#333; margin-left:8px;">${p.topic}</span>
+                </div>
+                <div style="color:#4a67ff; font-size:11px;">
+                  <span class="spinner">⏳</span> Processing...
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+      
+      // Show recently completed
+      if (completed.length > 0) {
+        html += '<div style="margin:16px 0 8px;"><strong style="color:#27ae60;">✅ Recently Completed:</strong></div>';
+        completed.forEach(p => {
+          html += `
+            <div style="padding:6px 8px; margin:4px 0; background:#f0fff4; border-left:3px solid #27ae60; border-radius:4px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="flex:1;">
+                  <span style="font-weight:600; color:#27ae60;">[${p.id}/${p.total}]</span>
+                  <span style="color:#333; margin-left:8px;">${p.topic}</span>
+                  ${p.htmlPath ? `<div style="margin-top:2px;"><a href="${p.htmlPath}" target="_blank" style="color:#4a67ff; font-size:11px; text-decoration:none;">🔗 ${p.htmlPath}</a></div>` : ''}
+                </div>
+                <div style="color:#27ae60; font-size:11px; white-space:nowrap; margin-left:12px;">
+                  ✓ ${p.duration}s
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+      
+      monitorEl.innerHTML = html;
     }
 
     async function checkQuality(batchId) {
@@ -437,8 +624,9 @@
       }
     }
 
+    // TRIZ Принцип 23: Обратная связь - Частое обновление
     fetchStatus();
-    setInterval(fetchStatus, 5000);
+    setInterval(fetchStatus, 2000); // Обновление каждые 2 секунды (вместо 5)
   </script>
 </body>
 </html>

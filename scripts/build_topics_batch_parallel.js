@@ -25,7 +25,10 @@ function parseArgs(argv) {
     qaMode: null,
     workers: 5, // Параллельных воркеров
     lengthMode: null,
-    lang: null
+    lang: null,
+    hybrid: false, // Гибридный режим DeepSeek + Ollama
+    deepseekWorkers: 5, // DeepSeek workers (быстрые)
+    ollamaWorkers: 3 // Ollama workers (медленные)
   };
   for (let i = 0; i < argv.length; i += 1) {
     const key = argv[i];
@@ -50,8 +53,23 @@ function parseArgs(argv) {
     } else if (key === "--lang" && next) {
       args.lang = next;
       i += 1;
+    } else if (key === "--hybrid") {
+      args.hybrid = true;
+    } else if (key === "--deepseek-workers" && next) {
+      args.deepseekWorkers = parseInt(next, 10) || 5;
+      i += 1;
+    } else if (key === "--ollama-workers" && next) {
+      args.ollamaWorkers = parseInt(next, 10) || 3;
+      i += 1;
     }
   }
+  
+  // Если hybrid mode, пересчитываем total workers
+  if (args.hybrid) {
+    args.workers = args.deepseekWorkers + args.ollamaWorkers;
+    console.log(`[HYBRID] Mode enabled: ${args.deepseekWorkers} DeepSeek + ${args.ollamaWorkers} Ollama = ${args.workers} total`);
+  }
+  
   return args;
 }
 
@@ -71,6 +89,8 @@ function loadQueue(queuePath) {
   }
   
   // Сортируем по приоритету (горячести) если не отсортировано
+  // ВРЕМЕННО ОТКЛЮЧЕНО для debugging
+  /*
   try {
     const { sortTopicsByPriority } = require('./sort_topics_by_priority.js');
     const priorityConfigPath = path.join(path.dirname(queuePath), '..', 'config', 'topic-priority.json');
@@ -88,24 +108,41 @@ function loadQueue(queuePath) {
     console.warn('[BATCH] Failed to sort by priority, using original order:', err.message);
     return data;
   }
+  */
+  console.log('[BATCH] Using queue without priority sorting');
+  return data;
 }
 
-function buildPage(rootDir, topicFile, index, total, env, mode) {
+function buildPage(rootDir, topicFile, index, total, env, mode, provider = null, retryCount = 0) {
   return new Promise((resolve, reject) => {
     const resolvedTopic = resolvePath(rootDir, topicFile);
-    console.log(`[BATCH] [${index + 1}/${total}] Starting ${resolvedTopic}`);
+    const providerLabel = provider ? ` [${provider.toUpperCase()}]` : '';
+    const retryLabel = retryCount > 0 ? ` (retry ${retryCount})` : '';
+    console.log(`[BATCH] [${index + 1}/${total}]${providerLabel}${retryLabel} Starting ${resolvedTopic}`);
 
     // Fast mode: используем существующие блоки, только validate + render
     let buildScript = `scripts/build_topic_page.sh ${JSON.stringify(resolvedTopic)}`;
     if (mode === "fast") {
       buildScript += " --skip-gen";
-      console.log(`[BATCH] [${index + 1}/${total}] Fast mode: using existing blocks`);
+      console.log(`[BATCH] [${index + 1}/${total}]${providerLabel} Fast mode: using existing blocks`);
     }
 
     const startTime = Date.now();
+    
+    // Гибридный режим: устанавливаем провайдера через env
+    const taskEnv = { ...process.env, ...env };
+    if (provider) {
+      taskEnv.LLM_GEN_MODE = provider;
+      taskEnv.LLM_QA_MODE = provider;
+      taskEnv.AI_PROVIDER_PRIMARY = provider;
+      if (provider === 'ollama') {
+        taskEnv.OLLAMA_MODEL = 'phi3:latest';
+      }
+    }
+    
     const child = spawn("bash", ["-lc", buildScript], {
       cwd: rootDir,
-      env: { ...process.env, ...env },
+      env: taskEnv,
       stdio: ["ignore", "pipe", "pipe"]
     });
 
@@ -120,7 +157,7 @@ function buildPage(rootDir, topicFile, index, total, env, mode) {
       stderr += data.toString();
     });
 
-    child.on("close", (code) => {
+    child.on("close", async (code) => {
       const duration = ((Date.now() - startTime) / 1000).toFixed(1);
       if (code === 0) {
         // Извлекаем путь к HTML из stdout
@@ -129,16 +166,28 @@ function buildPage(rootDir, topicFile, index, total, env, mode) {
         if (match) {
           htmlPath = '/' + match[1].replace('public/', '').replace('/index.html', '');
         }
-        
+
         console.log(`[BATCH] [${index + 1}/${total}] ✅ Completed in ${duration}s → ${resolvedTopic}`);
         if (htmlPath) {
           console.log(`[BATCH] [${index + 1}/${total}] 📄 HTML: ${htmlPath}`);
         }
-        resolve({ success: true, topic: resolvedTopic, duration, htmlPath });
+        resolve({ success: true, topic: resolvedTopic, duration, htmlPath, provider });
       } else {
+        // TRIZ Принцип 11: Заранее подложенная подушка - Fallback на DeepSeek
+        if (provider === 'ollama' && retryCount === 0) {
+          console.warn(`[BATCH] [${index + 1}/${total}] ⚠️  Ollama failed, retrying with DeepSeek...`);
+          try {
+            const result = await buildPage(rootDir, topicFile, index, total, env, mode, 'deepseek', 1);
+            resolve(result);
+            return;
+          } catch (retryErr) {
+            console.error(`[BATCH] [${index + 1}/${total}] ❌ DeepSeek fallback also failed`);
+          }
+        }
+        
         console.error(`[BATCH] [${index + 1}/${total}] ❌ Failed (${duration}s) → ${resolvedTopic}`);
         console.error(stderr);
-        reject({ success: false, topic: resolvedTopic, duration, code, stderr });
+        reject({ success: false, topic: resolvedTopic, duration, code, stderr, provider });
       }
     });
 
@@ -149,6 +198,38 @@ function buildPage(rootDir, topicFile, index, total, env, mode) {
 }
 
 async function processQueueParallel(queue, rootDir, args) {
+  // 🛡️ HEALTH CHECK: Проверяем Ollama перед стартом батча
+  if (args.mode === 'ollama' || args.qaMode === 'ollama') {
+    console.log('[BATCH] 🔍 Checking Ollama health before starting...');
+    try {
+      const response = await fetch('http://localhost:11434/api/tags', {
+        method: 'GET',
+        signal: AbortSignal.timeout(5000)
+      });
+      
+      if (!response.ok) {
+        console.error('[BATCH] ❌ Ollama health check failed! Status:', response.status);
+        console.error('[BATCH] Please start Ollama: ollama serve');
+        process.exit(1);
+      }
+      
+      const data = await response.json();
+      const hasModel = data.models?.some(m => m.name.includes('phi3'));
+      
+      if (!hasModel) {
+        console.error('[BATCH] ❌ Ollama model phi3 not found!');
+        console.error('[BATCH] Please pull model: ollama pull phi3:latest');
+        process.exit(1);
+      }
+      
+      console.log('[BATCH] ✅ Ollama health check passed');
+    } catch (e) {
+      console.error('[BATCH] ❌ Ollama not responding:', e.message);
+      console.error('[BATCH] Please start Ollama: ollama serve');
+      process.exit(1);
+    }
+  }
+
   const env = {};
   if (args.mode) env.LLM_GEN_MODE = args.mode;
   if (args.qaMode) env.LLM_QA_MODE = args.qaMode;
@@ -399,7 +480,8 @@ async function processQueueParallel(queue, rootDir, args) {
   // TRIZ: Параллельная обработка с пулом воркеров
   const queueItems = queue.map((entry, index) => ({
     index: index + 1,
-    topicFile: entry.topic_file || entry.path || entry.topicFile
+    // Support both string paths and objects with topic_file
+    topicFile: typeof entry === 'string' ? entry : (entry.topic_file || entry.path || entry.topicFile)
   })).filter(item => {
     if (!item.topicFile) return false;
     
@@ -437,21 +519,85 @@ async function processQueueParallel(queue, rootDir, args) {
 
     console.log(`\n[BATCH] Processing batch ${Math.floor(i / workers) + 1} (${batch.length} pages in parallel)...`);
 
-    const promises = batch.map((item) => {
-      return buildPage(rootDir, item.topicFile, item.index, total, env, args.mode)
+    // Гибридный режим: распределяем задачи между DeepSeek и Ollama
+    const promises = batch.map((item, batchIndex) => {
+      let provider = null;
+      
+      if (args.hybrid) {
+        // Первые N задач идут на DeepSeek (быстрее)
+        if (batchIndex < args.deepseekWorkers) {
+          provider = 'deepseek';
+        } else {
+          provider = 'ollama';
+        }
+      }
+      
+      return buildPage(rootDir, item.topicFile, item.index, total, env, args.mode, provider)
         .catch(err => ({ ...err, index: item.index }));
     });
 
     const batchResults = await Promise.allSettled(promises);
     
-    // Отправляем прогресс в локальный дашборд
+    // TRIZ Принцип 15: Динамичность - Адаптивное обновление прогресса
     const topicsDone = i + batch.length;
+    
+    // Собираем статистику по провайдерам
+    const providerStats = {};
+    results.forEach(r => {
+      if (r.provider) {
+        if (!providerStats[r.provider]) {
+          providerStats[r.provider] = { count: 0, totalTime: 0 };
+        }
+        providerStats[r.provider].count++;
+        providerStats[r.provider].totalTime += parseFloat(r.duration) || 0;
+      }
+    });
+    
+    // Логируем статистику
+    Object.keys(providerStats).forEach(provider => {
+      const stats = providerStats[provider];
+      const avgTime = (stats.totalTime / stats.count).toFixed(1);
+      console.log(`[STATS] ${provider.toUpperCase()}: ${stats.count} pages, avg ${avgTime}s`);
+    });
+    
     try {
-      const { spawn } = require('child_process');
-      spawn('node', [path.join(rootDir, 'scripts', 'report_progress.js'), String(topicsDone)], {
-        stdio: 'ignore',
-        detached: true
-      }).unref();
+      const http = require('http');
+      const postData = JSON.stringify({ topicsDone, providerStats });
+      
+      const req = http.request({
+        hostname: 'localhost',
+        port: 3030,
+        path: '/api/local-progress',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(postData)
+        },
+        timeout: 2000
+      }, (res) => {
+        let data = '';
+        res.on('data', (chunk) => { data += chunk; });
+        res.on('end', () => {
+          if (res.statusCode === 200) {
+            try {
+              const result = JSON.parse(data);
+              const timeLeft = result.estimatedTimeLeft || 0;
+              const mins = Math.floor(timeLeft / 60);
+              const secs = timeLeft % 60;
+              console.log(`[PROGRESS] ${topicsDone}/${total} (${result.progress}%) - ${mins}m ${secs}s left`);
+            } catch (err) {
+              console.log(`[PROGRESS] ${topicsDone}/${total}`);
+            }
+          }
+        });
+      });
+      
+      req.on('error', () => {
+        // Тихо игнорируем ошибки (дашборд может быть не запущен)
+      });
+      
+      req.write(postData);
+      req.end();
     } catch (err) {
       // Игнорируем ошибки отправки прогресса
     }
@@ -610,6 +756,19 @@ function main() {
         }
       }
 
+      // 🗂️ Generate hub/index pages automatically
+      if (success > 0) {
+        console.log("\n[HUB] Generating hub/index pages...");
+        try {
+          const { main: generateHubs } = require('./generate-hub-pages.js');
+          generateHubs();
+          console.log("[HUB] ✅ Hub pages generated successfully");
+        } catch (err) {
+          console.error("[HUB] ⚠️ Failed to generate hub pages:", err.message);
+          // Non-fatal, continue
+        }
+      }
+      
       // 🚀 Финальный деплой (если есть оставшиеся страницы)
       if (success > 0 && global.__deployManager) {
         console.log("\n[SMART-DEPLOY] Checking for final deploy...");

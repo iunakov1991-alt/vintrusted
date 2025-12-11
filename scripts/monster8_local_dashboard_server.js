@@ -14,6 +14,9 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 
+// TRIZ: Adaptive Worker Manager
+const AdaptiveWorkerManager = require('./adaptive-worker-manager');
+
 const PORT = process.env.MONSTER_LOCAL_PORT || 3030;
 const STATE_FILE = path.join(__dirname, '..', 'data', 'local_batch_state.json');
 const LOGS_DIR = path.join(__dirname, '..', 'logs');
@@ -531,20 +534,39 @@ app.get('/api/local-status', async (req, res) => {
   });
 });
 
-app.post('/api/local-start', (req, res) => {
-  const { 
-    phase = 'auto', 
+// TRIZ: Создать Adaptive Worker Manager
+const workerManager = new AdaptiveWorkerManager({
+  minWorkers: 3,
+  maxWorkers: 5,
+  targetCPU: 80,
+  targetMemory: 80,
+  checkInterval: 10000
+});
+
+app.post('/api/local-start', async (req, res) => {
+  const {
+    phase = 'auto',
     length = 'auto',
     deployStrategy = 'batch',
     deployEveryPages = 10,
     deployEveryMinutes = 15,
-    deployMinRemainingTime = 5
+    deployMinRemainingTime = 5,
+    hybrid = false,
+    deepseekWorkers = 5,
+    ollamaWorkers = 3
   } = req.body || {};
-  
+
   const state = loadState();
   if (state.current && state.current.status === 'running') {
     return res.status(409).json({ ok: false, error: 'batch_already_running' });
   }
+
+  // TRIZ: Warmup перед батчем
+  console.log('[DASHBOARD] 🔥 Warming up AI...');
+  await workerManager.warmup();
+  
+  // TRIZ: Запустить адаптивный мониторинг
+  workerManager.startMonitoring();
 
   // Определяем текущую фазу и генерируем очередь
   const phaseInfo = detectCurrentPhase();
@@ -572,21 +594,45 @@ app.post('/api/local-start', (req, res) => {
   }
   out.write(`\n`);
 
-  const child = spawn('node', [
+  // Гибридный режим: DeepSeek + Ollama
+  // TRIZ: Получить оптимальное количество workers
+  const optimalWorkers = workerManager.getRecommendedWorkers();
+  console.log(`[DASHBOARD] 🎯 Using ${optimalWorkers} workers (adaptive)`);
+
+  const args = [
     path.join(__dirname, 'build_topics_batch_parallel.js'),
-    '--mode', 'prod',
-    '--phase', queueInfo.phase,
-    '--length', length
-  ], {
+    '--length', length,
+    '--workers', String(optimalWorkers)
+  ];
+
+  const envVars = {
+    ...process.env,
+    BATCH_ID: record.id,
+    DEPLOY_STRATEGY: deployStrategy,
+    DEPLOY_EVERY_PAGES: String(deployEveryPages),
+    DEPLOY_EVERY_MINUTES: String(deployEveryMinutes),
+    DEPLOY_MIN_REMAINING_TIME: String(deployMinRemainingTime)
+  };
+
+  if (hybrid) {
+    // Гибридный режим
+    args.push('--hybrid');
+    args.push('--deepseek-workers', String(deepseekWorkers));
+    args.push('--ollama-workers', String(ollamaWorkers));
+    out.write(`[HYBRID] Mode: ${deepseekWorkers} DeepSeek + ${ollamaWorkers} Ollama = ${deepseekWorkers + ollamaWorkers} total\n`);
+  } else {
+    // ИСПРАВЛЕНО: Только DeepSeek (стабильно!)
+    args.push('--mode', 'deepseek');
+    args.push('--qa-mode', 'deepseek');
+    envVars.LLM_GEN_MODE = 'deepseek';
+    envVars.LLM_QA_MODE = 'deepseek';
+    envVars.AI_PROVIDER_PRIMARY = 'deepseek';
+    out.write(`[MODE] DeepSeek only (recommended)\n`);
+  }
+  
+  const child = spawn('node', args, {
     stdio: ['ignore', 'pipe', 'pipe'],
-    env: {
-      ...process.env,
-      BATCH_ID: record.id,  // Передаем ID батча для автодеплоя
-      DEPLOY_STRATEGY: deployStrategy,
-      DEPLOY_EVERY_PAGES: String(deployEveryPages),
-      DEPLOY_EVERY_MINUTES: String(deployEveryMinutes),
-      DEPLOY_MIN_REMAINING_TIME: String(deployMinRemainingTime)
-    }
+    env: envVars
   });
 
   currentChildProcess = child;
@@ -663,6 +709,26 @@ app.get('/api/local-log', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'local-batch-dashboard.html'));
+});
+
+// Generate hub pages endpoint
+app.post('/api/generate-hubs', (req, res) => {
+  console.log('[API] Generating hub pages...');
+  try {
+    const { main: generateHubs } = require('./generate-hub-pages.js');
+    generateHubs();
+    res.json({ 
+      ok: true, 
+      message: 'Hub pages generated successfully',
+      timestamp: new Date().toISOString()
+    });
+  } catch (err) {
+    console.error('[API] Hub generation failed:', err.message);
+    res.status(500).json({ 
+      ok: false, 
+      error: err.message 
+    });
+  }
 });
 
 // ========================================
