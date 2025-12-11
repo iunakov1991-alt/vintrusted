@@ -304,6 +304,14 @@
       "destination": "/api/seo-page.js?path=$1"
     },
     {
+      "source": "/semantic-pages/en/(.*)",
+      "destination": "/api/semantic-page.js?lang=en&path=$1"
+    },
+    {
+      "source": "/semantic-pages/es/(.*)",
+      "destination": "/api/semantic-page.js?lang=es&path=$1"
+    },
+    {
       "source": "/en/(.*)",
       "destination": "/api/semantic-page.js?lang=en&path=$1"
     },
