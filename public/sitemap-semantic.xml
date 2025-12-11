@@ -25,6 +25,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ak/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -83,6 +89,12 @@
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ak/address-change/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/az/address-change/</loc>
@@ -157,7 +169,37 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/address-change/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/lien-release/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/lost-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/name-change/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/registration/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/title-correction/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -170,6 +212,36 @@
   </url>
   <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/title-types/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/address-change/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/lost-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/registration/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/salvage-to-rebuilt/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/title-correction/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -193,7 +265,79 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/address-change/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/duplicate-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/lien-release/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/name-change/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/out-of-state-transfer/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/registration/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/salvage-to-rebuilt/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/title-correction/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/title-transfer/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/title-types/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/tx/address-change/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/tx/lost-title/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/tx/name-change/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -379,6 +523,36 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/address-change/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/lien-release/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/lost-title/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/lost-title/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/name-change/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/registration/checklist/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -386,6 +560,18 @@
   </url>
   <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/registration/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/title-correction/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ca/title-fees/guide/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -409,7 +595,43 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/address-change/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/lost-title/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/registration/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/salvage-to-rebuilt/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/title-correction/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/title-types/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/fl/title-types/guide/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -421,13 +643,133 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/duplicate-title/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/lien-release/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/title-correction/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/title-types/checklist/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/nv/title-types/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/address-change/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/address-change/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/duplicate-title/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/lien-release/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/lien-release/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/name-change/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/out-of-state-transfer/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/out-of-state-transfer/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/registration/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/salvage-to-rebuilt/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/title-correction/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/title-correction/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/title-transfer/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/ny/title-types/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/tx/address-change/guide/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/tx/lost-title/checklist/</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://vintrusted.com/semantic-pages/en/dmv-titles/tx/name-change/guide/</loc>
     <lastmod>2025-12-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
