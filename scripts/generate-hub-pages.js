@@ -218,7 +218,8 @@ function generateHubHTML(hubPath, children, allPages) {
   <title>${title}</title>
   <meta name="description" content="${description}">
   <link rel="canonical" href="${canonicalUrl}">
-  <link rel="icon" type="image/svg+xml" href="${SITE_URL}/img/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="${SITE_URL}/favicon.ico?v=20251211">
+  <link rel="shortcut icon" href="${SITE_URL}/favicon.ico?v=20251211">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
