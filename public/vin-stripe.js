@@ -341,19 +341,38 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     `;
 
-    // Label with checkbox
+    // Label with checkbox (increased clickable area)
     const label = document.createElement('label');
     label.style.cssText = `
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       cursor: pointer;
+      padding: 8px;
+      margin: -8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
     `;
+    
+    // Hover effect (magnet for cursor)
+    label.addEventListener('mouseenter', () => {
+      label.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+    });
+    label.addEventListener('mouseleave', () => {
+      label.style.backgroundColor = 'transparent';
+    });
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = 'terms-checkbox-overlay';
-    checkbox.style.cssText = 'width: 20px; height: 20px; cursor: pointer;';
+    checkbox.style.cssText = `
+      width: 24px; 
+      height: 24px; 
+      min-width: 24px;
+      cursor: pointer;
+      margin-top: 2px;
+      accent-color: #2563eb;
+    `;
 
     const span = document.createElement('span');
     span.textContent = 'I agree to the Terms & Conditions, including ClearVin usage limitations, waiver of liability, IP rights, and the NMVTIS disclaimer.';
