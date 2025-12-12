@@ -648,13 +648,19 @@
             padding: 16px;
         }
         
-        /* Hide payment form until terms accepted */
+        /* Payment form - prevent layout shift */
         #vin-pay {
-            opacity: 0.4;
-            transition: all 0.3s;
+            opacity: 0;
+            min-height: 450px;
+            transition: opacity 0.5s ease-in-out;
             position: relative;
+            will-change: opacity;
         }
         
+        #vin-pay.stripe-loaded {
+            opacity: 1;
+        }
+
         #vin-pay.terms-accepted {
             opacity: 1;
         }

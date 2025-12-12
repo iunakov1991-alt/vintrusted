@@ -286,12 +286,22 @@
       // Handle form submission
       form.addEventListener('submit', (e) => handleSubmit(e, form));
 
-      // Clear container and add form
-      container.innerHTML = '';
-      container.appendChild(form);
+      // 🔧 FIX: Avoid layout shift - clear and append atomically
+      // Use replaceChildren for smoother transition
+      if (container.replaceChildren) {
+        container.replaceChildren(form);
+      } else {
+        container.innerHTML = '';
+        container.appendChild(form);
+      }
 
-      // ⚡ Add Terms Overlay AFTER form is mounted
-      setTimeout(() => createTermsOverlay(container), 100);
+      // 🔧 FIX: Show container smoothly after mounting
+      requestAnimationFrame(() => {
+        container.classList.add('stripe-loaded');
+        
+        // ⚡ Add Terms Overlay AFTER form is fully mounted and visible
+        setTimeout(() => createTermsOverlay(container), 50);
+      });
 
       console.log('VIN Stripe widget mounted successfully');
     } catch (error) {
