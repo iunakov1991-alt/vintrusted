@@ -290,6 +290,9 @@
       container.innerHTML = '';
       container.appendChild(form);
 
+      // ⚡ Add Terms Overlay AFTER form is mounted
+      setTimeout(() => createTermsOverlay(container), 100);
+
       console.log('VIN Stripe widget mounted successfully');
     } catch (error) {
       console.error('Error mounting VIN Stripe widget:', error);
@@ -302,6 +305,92 @@
       `;
     }
   };
+
+  // Create Terms & Conditions overlay
+  function createTermsOverlay(container) {
+    const overlay = document.createElement('div');
+    overlay.id = 'terms-overlay';
+    overlay.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 215, 0, 0.98);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+      z-index: 100;
+      pointer-events: all;
+      transition: opacity 0.3s;
+    `;
+
+    const label = document.createElement('label');
+    label.style.cssText = `
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      background: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    `;
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = 'terms-checkbox-overlay';
+    checkbox.style.cssText = 'width: 20px; height: 20px; cursor: pointer;';
+
+    const span = document.createElement('span');
+    span.textContent = 'I agree to Terms & Conditions';
+    span.style.cssText = 'font-size: 15px; font-weight: 600; color: #111827;';
+
+    label.appendChild(checkbox);
+    label.appendChild(span);
+
+    const link = document.createElement('a');
+    link.href = '/terms.html';
+    link.target = '_blank';
+    link.textContent = 'View full terms';
+    link.style.cssText = 'color: #78350f; font-size: 13px; text-decoration: underline;';
+
+    overlay.appendChild(label);
+    overlay.appendChild(link);
+    container.appendChild(overlay);
+
+    // Handle checkbox
+    checkbox.addEventListener('change', function() {
+      if (this.checked) {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          container.style.opacity = '1';
+        }, 300);
+        console.log('[Terms] Accepted');
+        
+        // Log consent
+        const urlParams = new URLSearchParams(window.location.search);
+        const vin = urlParams.get('vin') || 'unknown';
+        
+        fetch('/api/log-consent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            timestamp: new Date().toISOString(),
+            vin: vin,
+            terms_version: 'v1.0_20251211',
+            consent_given: true,
+            page: 'report.html'
+          })
+        }).catch(err => console.log('[Terms] Log failed (non-critical):', err));
+      }
+    });
+  }
 
   console.log('VIN Stripe widget script loaded');
 })();
