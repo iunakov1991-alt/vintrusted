@@ -634,6 +634,59 @@
                 max-width: 300px;
             }
         }
+        
+        /* ============================================ */
+        /* TERMS & CONDITIONS STYLES */
+        /* ============================================ */
+        .terms-agreement {
+            margin-bottom: 20px;
+        }
+        
+        .terms-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        /* Hide payment form until terms accepted */
+        #vin-pay {
+            opacity: 0.4;
+            pointer-events: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        #vin-pay.terms-accepted {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Overlay message when terms not accepted */
+        #vin-pay::before {
+            content: '☑️ Accept Terms & Conditions to Continue';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 215, 0, 0.98);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #78350f;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.3s;
+            z-index: 10;
+            white-space: nowrap;
+        }
+        
+        #vin-pay.terms-accepted::before {
+            opacity: 0;
+            display: none;
+        }
     </style>
     
     <!-- Google tag (gtag.js) -->
@@ -754,6 +807,34 @@
 
         <!-- Right Column: Payment Form -->
         <div class="report-right">
+            <!-- Terms & Conditions -->
+            <div class="terms-agreement">
+                <div class="terms-box">
+                    <h4 style="margin: 0 0 10px 0; color: #1f2937; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                        📋 Terms & Conditions
+                    </h4>
+                    <p style="margin: 0 0 12px 0; color: #6b7280; font-size: 13px; line-height: 1.5;">
+                        This report contains data from ClearVin and NMVTIS federal database.
+                    </p>
+                    <div style="background: white; border-left: 3px solid #3b82f6; padding: 10px 12px; margin-bottom: 12px; border-radius: 4px;">
+                        <p style="margin: 0 0 6px 0; font-size: 13px; color: #374151; font-weight: 500;">
+                            <strong>By purchasing, you agree to:</strong>
+                        </p>
+                        <ol style="margin: 4px 0 0 0; padding-left: 18px;">
+                            <li style="margin: 4px 0; color: #4b5563; font-size: 12px;">Personal, non-commercial use only</li>
+                            <li style="margin: 4px 0; color: #4b5563; font-size: 12px;">Use at your own risk (no warranties)</li>
+                            <li style="margin: 4px 0; color: #4b5563; font-size: 12px;">NMVTIS disclaimer <a href="/terms.html" target="_blank" style="color: #2563eb;">view full</a></li>
+                        </ol>
+                    </div>
+                    <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer; padding: 10px; background: #fef3c7; border-radius: 6px; border: 1px solid #fbbf24; transition: all 0.2s;">
+                        <input type="checkbox" id="terms-checkbox" class="terms-checkbox" style="margin-top: 2px; width: 16px; height: 16px; cursor: pointer; flex-shrink: 0;">
+                        <span style="font-size: 13px; color: #78350f; line-height: 1.4;">
+                            I agree to <a href="/terms.html" target="_blank" style="color: #1e40af; text-decoration: underline; font-weight: 500;">Terms & Conditions</a>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            
             <!-- PAYMENT_CONTAINER_START -->
             <div id="vin-pay"></div>
             <!-- PAYMENT_CONTAINER_END -->
@@ -1241,7 +1322,65 @@
             if (vinPay) {
                 observer.observe(vinPay, { childList: true, subtree: true });
             }
-        })();
+        })();        
+    </script>
+    
+    <!-- Terms & Conditions Logic -->
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            const termsCheckbox = document.getElementById('terms-checkbox');
+            const vinPayContainer = document.getElementById('vin-pay');
+            
+            if (!termsCheckbox || !vinPayContainer) {
+                console.error('[Terms] Elements not found');
+                return;
+            }
+            
+            // Handle checkbox change
+            termsCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    // Enable payment
+                    vinPayContainer.classList.add('terms-accepted');
+                    console.log('[Terms] Accepted - payment enabled');
+                    
+                    // Log consent (non-blocking)
+                    logConsent();
+                } else {
+                    // Disable payment
+                    vinPayContainer.classList.remove('terms-accepted');
+                    console.log('[Terms] Not accepted - payment disabled');
+                }
+            });
+            
+            // Log consent to API
+            function logConsent() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const vin = urlParams.get('vin') || 'unknown';
+                
+                const consentData = {
+                    timestamp: new Date().toISOString(),
+                    vin: vin,
+                    terms_version: 'v1.0_20251211',
+                    consent_given: true,
+                    user_agent: navigator.userAgent,
+                    page: 'report.html'
+                };
+                
+                // Send to API (don't block if it fails)
+                fetch('/api/log-consent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(consentData)
+                }).then(response => {
+                    console.log('[Terms] Consent logged:', response.status);
+                }).catch(err => {
+                    console.log('[Terms] Consent log failed (non-critical):', err.message);
+                });
+            }
+            
+            console.log('[Terms] Terms & Conditions initialized');
+        });
     </script>
 </body>
 </html>
