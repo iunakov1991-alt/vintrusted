@@ -1995,7 +1995,7 @@
                     });
             }
             
-            // Redirect to report page after 12 seconds (10s progress + 2s reading time)
+            // Redirect to report page after 18 seconds (enough time for NHTSA API)
             setTimeout(() => {
                 console.log('Progress bar reached 100%, redirecting to report page');
                 if (currentVin) {
@@ -2004,7 +2004,7 @@
                     // Fallback to main page if no VIN
                     showPage('main');
                 }
-            }, 12000);
+            }, 18000);
         } else {
             console.error('Progress bar elements not found!');
         }
