@@ -805,33 +805,6 @@
                 </div>
             </div>
             
-            <!-- Terms & Conditions (moved from right column) -->
-            <div class="terms-agreement" style="margin-top: 30px;">
-                <div class="terms-box">
-                    <h4 style="margin: 0 0 10px 0; color: #1f2937; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                        📋 Terms & Conditions
-                    </h4>
-                    <p style="margin: 0 0 12px 0; color: #6b7280; font-size: 13px; line-height: 1.5;">
-                        This report contains data from ClearVin and NMVTIS federal database.
-                    </p>
-                    <div style="background: white; border-left: 3px solid #3b82f6; padding: 10px 12px; margin-bottom: 12px; border-radius: 4px;">
-                        <p style="margin: 0 0 6px 0; font-size: 13px; color: #374151; font-weight: 500;">
-                            <strong>By purchasing, you agree to:</strong>
-                        </p>
-                        <ol style="margin: 4px 0 0 0; padding-left: 18px;">
-                            <li style="margin: 4px 0; color: #4b5563; font-size: 12px;">Personal, non-commercial use only</li>
-                            <li style="margin: 4px 0; color: #4b5563; font-size: 12px;">Use at your own risk (no warranties)</li>
-                            <li style="margin: 4px 0; color: #4b5563; font-size: 12px;">NMVTIS disclaimer <a href="/terms.html" target="_blank" style="color: #2563eb;">view full</a></li>
-                        </ol>
-                    </div>
-                    <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer; padding: 10px; background: #fef3c7; border-radius: 6px; border: 1px solid #fbbf24; transition: all 0.2s;">
-                        <input type="checkbox" id="terms-checkbox" class="terms-checkbox" style="margin-top: 2px; width: 16px; height: 16px; cursor: pointer; flex-shrink: 0;">
-                        <span style="font-size: 13px; color: #78350f; line-height: 1.4;">
-                            I agree to <a href="/terms.html" target="_blank" style="color: #1e40af; text-decoration: underline; font-weight: 500;">Terms & Conditions</a>
-                        </span>
-                    </label>
-                </div>
-            </div>
         </div>
 
         <!-- Right Column: Payment Form -->
@@ -839,6 +812,44 @@
             <!-- PAYMENT_CONTAINER_START -->
             <div id="vin-pay"></div>
             <!-- PAYMENT_CONTAINER_END -->
+            
+            <!-- Terms & Conditions (checkbox + text BELOW payment button) -->
+            <div class="terms-agreement-compact" style="margin-top: 20px;">
+                <!-- Checkbox first -->
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 12px; background: #fef3c7; border-radius: 6px; border: 1px solid #fbbf24; margin-bottom: 12px;">
+                    <input type="checkbox" id="terms-checkbox-right" class="terms-checkbox" style="width: 18px; height: 18px; cursor: pointer; flex-shrink: 0;">
+                    <span style="font-size: 14px; color: #78350f; line-height: 1.4; font-weight: 500;">
+                        I agree to Terms & Conditions
+                    </span>
+                </label>
+                
+                <!-- Terms text below -->
+                <div class="terms-details" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px;">
+                    <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 13px; font-weight: 600;">
+                        📋 Terms & Conditions
+                    </h4>
+                    <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 12px; line-height: 1.4;">
+                        By purchasing, you agree to:
+                    </p>
+                    <ul style="margin: 0; padding-left: 18px; list-style: none;">
+                        <li style="margin: 3px 0; color: #4b5563; font-size: 11px; position: relative; padding-left: 12px;">
+                            <span style="position: absolute; left: 0;">•</span>
+                            Personal, non-commercial use only
+                        </li>
+                        <li style="margin: 3px 0; color: #4b5563; font-size: 11px; position: relative; padding-left: 12px;">
+                            <span style="position: absolute; left: 0;">•</span>
+                            Use at your own risk (no warranties)
+                        </li>
+                        <li style="margin: 3px 0; color: #4b5563; font-size: 11px; position: relative; padding-left: 12px;">
+                            <span style="position: absolute; left: 0;">•</span>
+                            NMVTIS disclaimer
+                        </li>
+                    </ul>
+                    <a href="/terms.html" target="_blank" style="display: inline-block; margin-top: 8px; color: #2563eb; font-size: 11px; text-decoration: underline;">
+                        View full terms →
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1411,7 +1422,7 @@
     <script>
         // Wait for DOM to load
         document.addEventListener('DOMContentLoaded', function() {
-            const termsCheckbox = document.getElementById('terms-checkbox');
+            const termsCheckbox = document.getElementById('terms-checkbox-right');
             const vinPayContainer = document.getElementById('vin-pay');
             
             if (!termsCheckbox || !vinPayContainer) {
