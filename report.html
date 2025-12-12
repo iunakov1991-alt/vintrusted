@@ -832,16 +832,7 @@
         <div class="report-right">
             <!-- PAYMENT_CONTAINER_START -->
             <div id="vin-pay" style="position: relative;">
-                <!-- Terms Overlay (yellow blocking layer with checkbox) -->
-                <div id="terms-overlay">
-                    <label>
-                        <input type="checkbox" id="terms-checkbox-overlay">
-                        <span>I agree to Terms & Conditions</span>
-                    </label>
-                    <a href="/terms.html" target="_blank" style="color: #78350f; font-size: 13px; text-decoration: underline;">
-                        View full terms
-                    </a>
-                </div>
+                <!-- Terms Overlay will be injected by vin-stripe.js after form mounts -->
             </div>
             <!-- PAYMENT_CONTAINER_END -->
         </div>
@@ -1412,65 +1403,6 @@
         })();        
     </script>
     
-    <!-- Terms & Conditions Logic -->
-    <script>
-        // Wait for DOM to load
-        document.addEventListener('DOMContentLoaded', function() {
-            const termsCheckbox = document.getElementById('terms-checkbox-overlay');
-            const vinPayContainer = document.getElementById('vin-pay');
-            const termsOverlay = document.getElementById('terms-overlay');
-            
-            if (!termsCheckbox || !vinPayContainer || !termsOverlay) {
-                console.error('[Terms] Elements not found');
-                return;
-            }
-            
-            // Handle checkbox change
-            termsCheckbox.addEventListener('change', function() {
-                if (this.checked) {
-                    // Hide overlay and enable payment
-                    termsOverlay.classList.add('hidden');
-                    vinPayContainer.classList.add('terms-accepted');
-                    console.log('[Terms] Accepted - payment enabled');
-                    
-                    // Log consent (non-blocking)
-                    logConsent();
-                } else {
-                    // Show overlay and disable payment
-                    termsOverlay.classList.remove('hidden');
-                    vinPayContainer.classList.remove('terms-accepted');
-                    console.log('[Terms] Not accepted - payment disabled');
-                }
-            });
-            
-            // Log consent to API
-            function logConsent() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const vin = urlParams.get('vin') || 'unknown';
-                
-                const consentData = {
-                    timestamp: new Date().toISOString(),
-                    vin: vin,
-                    terms_version: 'v1.0_20251211',
-                    consent_given: true,
-                    user_agent: navigator.userAgent,
-                    page: 'report.html'
-                };
-                
-                // Send to API (don't block if it fails)
-                fetch('/api/log-consent', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(consentData)
-                }).then(response => {
-                    console.log('[Terms] Consent logged:', response.status);
-                }).catch(err => {
-                    console.log('[Terms] Consent log failed (non-critical):', err.message);
-                });
-            }
-            
-            console.log('[Terms] Terms & Conditions initialized');
-        });
-    </script>
+    <!-- Terms logic moved to vin-stripe.js -->
 </body>
 </html>
