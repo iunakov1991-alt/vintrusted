@@ -329,16 +329,25 @@
       transition: opacity 0.3s;
     `;
 
+    // White box container
+    const whiteBox = document.createElement('div');
+    whiteBox.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: white;
+      padding: 15px 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    `;
+
+    // Label with checkbox
     const label = document.createElement('label');
     label.style.cssText = `
       display: flex;
       align-items: center;
       gap: 12px;
       cursor: pointer;
-      background: white;
-      padding: 12px 20px;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     `;
 
     const checkbox = document.createElement('input');
@@ -353,14 +362,16 @@
     label.appendChild(checkbox);
     label.appendChild(span);
 
+    // Link
     const link = document.createElement('a');
     link.href = '/terms.html';
     link.target = '_blank';
-    link.textContent = 'View full terms';
-    link.style.cssText = 'color: #78350f; font-size: 13px; text-decoration: underline;';
+    link.textContent = 'View full terms →';
+    link.style.cssText = 'color: #2563eb; font-size: 13px; text-decoration: underline; padding-left: 32px;';
 
-    overlay.appendChild(label);
-    overlay.appendChild(link);
+    whiteBox.appendChild(label);
+    whiteBox.appendChild(link);
+    overlay.appendChild(whiteBox);
     container.appendChild(overlay);
 
     // Handle checkbox
