@@ -1975,22 +1975,29 @@
                 console.log('Progress:', progress);
             }, 100);
             
-            // ⚡ OPTIMIZATION: Load NHTSA API data DURING loading page
-            // So when user reaches report.html, data is already ready!
+            // ⚡ OPTIMIZATION: Prefetch NHTSA API data with timeout
+            // If successful → report.html uses cache instantly!
             if (currentVin) {
-                console.log('[PRELOAD] Starting NHTSA API call during loading...');
+                console.log('[⚡ PREFETCH] Starting NHTSA API call (10s timeout)...');
                 const apiUrl = `https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${currentVin}?format=json`;
                 
-                fetch(apiUrl)
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => {
+                    controller.abort();
+                    console.log('[⏱️ PREFETCH TIMEOUT] API too slow, will use fallback');
+                }, 10000); // 10s timeout
+                
+                fetch(apiUrl, { signal: controller.signal })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('[PRELOAD] NHTSA data received, caching...');
-                        // Cache data for report.html to use
+                        clearTimeout(timeoutId);
+                        console.log('[✅ PREFETCH SUCCESS] Data cached for instant load!');
                         sessionStorage.setItem('nhtsa_data_' + currentVin, JSON.stringify(data));
                         sessionStorage.setItem('nhtsa_timestamp_' + currentVin, Date.now().toString());
                     })
                     .catch(err => {
-                        console.log('[PRELOAD] NHTSA API error (non-critical):', err);
+                        clearTimeout(timeoutId);
+                        console.log('[⚠️ PREFETCH FAILED] Will use fallback:', err.message);
                     });
             }
             
