@@ -42,11 +42,10 @@ function generatePageHTML(topic, allTopics) {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://vintrusted.com" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png" />
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg" />
-    <link rel="icon" type="image/png" href="/img/favicon.png" />
     <link rel="apple-touch-icon" href="/img/favicon.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png" />
     <meta name="theme-color" content="#0f0f0f" />
     <meta name="msapplication-TileColor" content="#3B82F6" />
     <link rel="alternate" hreflang="en-US" href="${SITE_URL}/${topic.slug}/" />
