@@ -1976,16 +1976,35 @@
                 console.log('Progress:', progress);
             }, 100);
             
-            // Redirect to report page INSTANTLY (removed 12s artificial delay)
+            // ⚡ OPTIMIZATION: Load NHTSA API data DURING loading page
+            // So when user reaches report.html, data is already ready!
+            if (currentVin) {
+                console.log('[PRELOAD] Starting NHTSA API call during loading...');
+                const apiUrl = `https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${currentVin}?format=json`;
+                
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('[PRELOAD] NHTSA data received, caching...');
+                        // Cache data for report.html to use
+                        sessionStorage.setItem('nhtsa_data_' + currentVin, JSON.stringify(data));
+                        sessionStorage.setItem('nhtsa_timestamp_' + currentVin, Date.now().toString());
+                    })
+                    .catch(err => {
+                        console.log('[PRELOAD] NHTSA API error (non-critical):', err);
+                    });
+            }
+            
+            // Redirect to report page after 12 seconds (10s progress + 2s reading time)
             setTimeout(() => {
-                console.log('Redirecting to report page');
+                console.log('Progress bar reached 100%, redirecting to report page');
                 if (currentVin) {
                     window.location.href = `report.html?vin=${currentVin}`;
                 } else {
                     // Fallback to main page if no VIN
                     showPage('main');
                 }
-            }, 500); // ← 0.5 секунд вместо 12!
+            }, 12000);
         } else {
             console.error('Progress bar elements not found!');
         }

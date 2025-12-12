@@ -879,22 +879,43 @@
             document.getElementById('vinDisplay').textContent = 'No VIN or Plate provided';
         }
 
-        // Decode VIN using NHTSA API
+        // Decode VIN using NHTSA API (with cache check)
         async function decodeVIN(vin) {
             try {
+                // ⚡ CHECK CACHE FIRST (data preloaded on loading page)
+                const cachedData = sessionStorage.getItem('nhtsa_data_' + vin);
+                const cachedTimestamp = sessionStorage.getItem('nhtsa_timestamp_' + vin);
+                
+                if (cachedData && cachedTimestamp) {
+                    const age = Date.now() - parseInt(cachedTimestamp);
+                    // Use cache if less than 5 minutes old
+                    if (age < 5 * 60 * 1000) {
+                        console.log('[CACHE HIT] Using preloaded NHTSA data ⚡');
+                        const data = JSON.parse(cachedData);
+                        if (data.Results && data.Results.length > 0) {
+                            return parseNHTSAData(data.Results);
+                        }
+                    }
+                }
+                
+                // Cache miss or expired - fetch from API
+                console.log('[CACHE MISS] Fetching NHTSA data from API...');
                 const apiUrl = `https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`;
                 const response = await fetch(apiUrl);
-                
+
                 if (!response.ok) {
                     throw new Error('Failed to decode VIN');
                 }
-                
+
                 const data = await response.json();
-                
+
                 if (data.Results && data.Results.length > 0) {
+                    // Cache for next time
+                    sessionStorage.setItem('nhtsa_data_' + vin, JSON.stringify(data));
+                    sessionStorage.setItem('nhtsa_timestamp_' + vin, Date.now().toString());
                     return parseNHTSAData(data.Results);
                 }
-                
+
                 return null;
             } catch (error) {
                 console.error('Error decoding VIN:', error);
