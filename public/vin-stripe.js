@@ -356,8 +356,8 @@
     checkbox.style.cssText = 'width: 20px; height: 20px; cursor: pointer;';
 
     const span = document.createElement('span');
-    span.textContent = 'I agree to Terms & Conditions';
-    span.style.cssText = 'font-size: 15px; font-weight: 600; color: #111827;';
+    span.textContent = 'I agree to the Terms & Conditions, including ClearVin usage limitations, waiver of liability, IP rights, and the NMVTIS disclaimer.';
+    span.style.cssText = 'font-size: 11px; font-weight: 400; color: #374151; line-height: 1.4;';
 
     label.appendChild(checkbox);
     label.appendChild(span);
@@ -366,8 +366,8 @@
     const link = document.createElement('a');
     link.href = '/terms.html';
     link.target = '_blank';
-    link.textContent = 'View full terms →';
-    link.style.cssText = 'color: #2563eb; font-size: 13px; text-decoration: underline; padding-left: 32px;';
+    link.textContent = 'View full terms';
+    link.style.cssText = 'color: #2563eb; font-size: 12px; text-decoration: underline; padding-left: 32px;';
 
     whiteBox.appendChild(label);
     whiteBox.appendChild(link);
