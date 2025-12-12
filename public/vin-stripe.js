@@ -316,7 +316,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255, 215, 0, 0.98);
+      background: rgba(255, 215, 0, 0.5);
       border-radius: 8px;
       display: flex;
       flex-direction: column;
