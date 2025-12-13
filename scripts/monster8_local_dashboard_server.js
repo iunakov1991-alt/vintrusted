@@ -534,14 +534,15 @@ app.get('/api/local-status', async (req, res) => {
   });
 });
 
-// TRIZ: Создать Adaptive Worker Manager
-const workerManager = new AdaptiveWorkerManager({
-  minWorkers: 3,
-  maxWorkers: 5,
-  targetCPU: 80,
-  targetMemory: 80,
-  checkInterval: 10000
-});
+// TRIZ: Создать Adaptive Worker Manager (disabled - module not available)
+// const workerManager = new AdaptiveWorkerManager({
+//   minWorkers: 3,
+//   maxWorkers: 5,
+//   targetCPU: 80,
+//   targetMemory: 80,
+//   checkInterval: 10000
+// });
+const workerManager = null;
 
 app.post('/api/local-start', async (req, res) => {
   const {
@@ -596,7 +597,7 @@ app.post('/api/local-start', async (req, res) => {
 
   // Гибридный режим: DeepSeek + Ollama
   // TRIZ: Получить оптимальное количество workers
-  const optimalWorkers = workerManager.getRecommendedWorkers();
+  const optimalWorkers = workers || 6; // Default to 6 workers
   console.log(`[DASHBOARD] 🎯 Using ${optimalWorkers} workers (adaptive)`);
 
   const args = [
