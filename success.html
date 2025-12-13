@@ -388,6 +388,21 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-CX3CT2K2FC');
+      
+      // 🎯 MAIN CONVERSION GOAL - Purchase completed
+      gtag('event', 'purchase', {
+        'transaction_id': new URLSearchParams(window.location.search).get('setup_intent') || 'unknown',
+        'value': 3.00,
+        'currency': 'USD',
+        'items': [{
+          'item_id': 'vin-report-trial',
+          'item_name': 'VIN Report Trial Access',
+          'price': 3.00,
+          'quantity': 1
+        }]
+      });
+      
+      console.log('✅ Google Analytics purchase event sent');
     </script>
 </head>
 <body>
