@@ -98,10 +98,6 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/monster-dashboard.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "api/monster-status.js",
       "use": "@vercel/node"
     },
@@ -458,10 +454,6 @@
     {
       "source": "/api/batch-status-update",
       "destination": "/api/batch-status-update.js"
-    },
-    {
-      "source": "/monster-dashboard",
-      "destination": "/api/monster-dashboard.js"
     },
     {
       "source": "/api/monster/status",
