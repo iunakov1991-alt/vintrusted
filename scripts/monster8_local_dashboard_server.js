@@ -597,7 +597,7 @@ app.post('/api/local-start', async (req, res) => {
 
   // Гибридный режим: DeepSeek + Ollama
   // TRIZ: Получить оптимальное количество workers
-  const optimalWorkers = workers || 6; // Default to 6 workers
+  const optimalWorkers = 6; // Default to 6 workers (workerManager disabled)
   console.log(`[DASHBOARD] 🎯 Using ${optimalWorkers} workers (adaptive)`);
 
   const args = [
