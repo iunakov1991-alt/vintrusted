@@ -476,10 +476,11 @@
       if (this.checked) {
         submitButton.disabled = false;
         submitButton.textContent = 'Pay $3.00';
-        submitButton.style.background = '#111827';
+        submitButton.style.background = '#fbbf24';
+        submitButton.style.color = '#111827';
         submitButton.style.cursor = 'pointer';
-        submitButton.onmouseover = () => submitButton.style.background = '#374151';
-        submitButton.onmouseout = () => submitButton.style.background = '#111827';
+        submitButton.onmouseover = () => submitButton.style.background = '#f59e0b';
+        submitButton.onmouseout = () => submitButton.style.background = '#fbbf24';
         console.log('[Terms] Accepted');
         
         // Log consent
@@ -501,6 +502,7 @@
         submitButton.disabled = true;
         submitButton.textContent = 'Pay $3.00';
         submitButton.style.background = '#9ca3af';
+        submitButton.style.color = 'white';
         submitButton.style.cursor = 'not-allowed';
         submitButton.onmouseover = null;
         submitButton.onmouseout = null;
