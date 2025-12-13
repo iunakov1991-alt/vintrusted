@@ -356,9 +356,9 @@
     checkbox.type = 'checkbox';
     checkbox.id = 'terms-checkbox';
     checkbox.style.cssText = `
-      width: 24px;
-      height: 24px;
-      min-width: 24px;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
       cursor: pointer;
       accent-color: #2563eb;
     `;
