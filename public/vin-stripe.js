@@ -277,9 +277,29 @@
       const submitButton = document.createElement('button');
       submitButton.type = 'submit';
       submitButton.id = 'vin-submit';
-      submitButton.textContent = 'Pay $3.00';
       submitButton.disabled = true; // Disabled until terms accepted
-      submitButton.style.cssText = 'padding: 12px 24px; background: #9ca3af; color: white; border: none; border-radius: 999px; font-size: 16px; font-weight: 600; cursor: not-allowed; transition: background 0.2s; text-align: center; display: flex; align-items: center; justify-content: center;';
+      submitButton.style.cssText = `
+        padding: 12px 24px;
+        background: #d1d5db;
+        color: #9ca3af;
+        border: 2px dashed #9ca3af;
+        border-radius: 999px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: not-allowed;
+        transition: all 0.3s;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        opacity: 0.6;
+        position: relative;
+      `;
+      
+      // Add lock icon and text
+      submitButton.innerHTML = '🔒 Pay $3.00 - Check terms below';
+      
       form.appendChild(submitButton);
 
       // 🆕 Terms & Conditions section (below button)
@@ -460,7 +480,11 @@
     checkbox.addEventListener('change', function() {
       if (this.checked) {
         submitButton.disabled = false;
+        submitButton.innerHTML = '✓ Pay $3.00';
         submitButton.style.background = '#111827';
+        submitButton.style.color = 'white';
+        submitButton.style.border = 'none';
+        submitButton.style.opacity = '1';
         submitButton.style.cursor = 'pointer';
         submitButton.onmouseover = () => submitButton.style.background = '#374151';
         submitButton.onmouseout = () => submitButton.style.background = '#111827';
@@ -483,7 +507,11 @@
         }).catch(err => console.log('Consent logging failed (non-critical):', err));
       } else {
         submitButton.disabled = true;
-        submitButton.style.background = '#9ca3af';
+        submitButton.innerHTML = '🔒 Pay $3.00 - Check terms below';
+        submitButton.style.background = '#d1d5db';
+        submitButton.style.color = '#9ca3af';
+        submitButton.style.border = '2px dashed #9ca3af';
+        submitButton.style.opacity = '0.6';
         submitButton.style.cursor = 'not-allowed';
         submitButton.onmouseover = null;
         submitButton.onmouseout = null;
