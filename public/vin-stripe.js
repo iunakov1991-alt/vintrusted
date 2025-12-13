@@ -208,7 +208,7 @@
       // Show error to user
       const errorContainer = form.querySelector('.error-message') || document.createElement('div');
       errorContainer.className = 'error-message';
-      errorContainer.style.cssText = 'color: #ef4444; padding: 10px; margin-top: 10px; background: #fee; border-radius: 4px;';
+      errorContainer.style.cssText = 'color: #ef4444; padding: 10px; margin-top: 10px; background: #fee; border-radius: 20px;';
       errorContainer.textContent = error.message || 'Payment failed. Please try again.';
       
       if (!form.querySelector('.error-message')) {
@@ -321,7 +321,7 @@
     } catch (error) {
       console.error('Error mounting VIN Stripe widget:', error);
       container.innerHTML = `
-        <div style="padding: 20px; background: #fee; border-radius: 8px; color: #ef4444;">
+        <div style="padding: 20px; background: #fee; border-radius: 20px; color: #ef4444;">
           <strong>Error loading payment form:</strong><br>
           ${error.message || 'Unknown error'}<br>
           <small>Please refresh the page and try again.</small>
