@@ -456,14 +456,15 @@
     const planDetails = document.createElement('div');
     planDetails.style.cssText = `
       font-size: 10px;
-      line-height: 1.5;
+      line-height: 1.6;
       color: rgba(107, 114, 128, 0.5);
       margin-top: 15px;
       padding-top: 12px;
       border-top: 1px solid #e5e7eb;
     `;
     planDetails.innerHTML = `
-      <strong style="color: #111827;">Membership Details:</strong> 7-day trial (50 reports/month), then $30/month. Cancel anytime via dashboard, email <a href="mailto:contact@vinhistoryus.com" style="color: #2563eb;">contact@vinhistoryus.com</a>, or call <a href="tel:+18776768162" style="color: #2563eb;">+1-877-676-8162</a>.
+      <strong style="color: #111827;">Plan Details:</strong> The trial costs $3 and activates temporary access to the service. After 10 days, a charge of $49 will be applied for the next access period. The $49 charge then repeats every 10 days, for a maximum of three billing cycles, after which the subscription is automatically canceled.<br><br>
+      Payment is for service access with a limit of up to 2 reports per day; charges are applied once every 10 days, not daily.
     `;
 
     termsContainer.appendChild(checkboxRow);
