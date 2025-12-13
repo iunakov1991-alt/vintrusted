@@ -278,16 +278,18 @@
       submitButton.type = 'submit';
       submitButton.id = 'vin-submit';
       submitButton.textContent = 'Pay $3.00';
-      submitButton.style.cssText = 'padding: 12px 24px; background: #111827; color: white; border: none; border-radius: 999px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; text-align: center; display: flex; align-items: center; justify-content: center;';
-      submitButton.onmouseover = () => submitButton.style.background = '#374151';
-      submitButton.onmouseout = () => submitButton.style.background = '#111827';
+      submitButton.disabled = true; // Disabled until terms accepted
+      submitButton.style.cssText = 'padding: 12px 24px; background: #9ca3af; color: white; border: none; border-radius: 999px; font-size: 16px; font-weight: 600; cursor: not-allowed; transition: background 0.2s; text-align: center; display: flex; align-items: center; justify-content: center;';
       form.appendChild(submitButton);
+
+      // 🆕 Terms & Conditions section (below button)
+      const termsSection = createTermsSection(submitButton);
+      form.appendChild(termsSection);
 
       // Handle form submission
       form.addEventListener('submit', (e) => handleSubmit(e, form));
 
       // 🔧 FIX: Avoid layout shift - clear and append atomically
-      // Use replaceChildren for smoother transition
       if (container.replaceChildren) {
         container.replaceChildren(form);
       } else {
@@ -298,9 +300,6 @@
       // 🔧 FIX: Show container smoothly after mounting
       requestAnimationFrame(() => {
         container.classList.add('stripe-loaded');
-        
-        // ⚡ Add Terms Overlay AFTER form is fully mounted and visible
-        setTimeout(() => createTermsOverlay(container), 50);
       });
 
       console.log('VIN Stripe widget mounted successfully');
