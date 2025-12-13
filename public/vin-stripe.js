@@ -339,6 +339,18 @@
       transition: opacity 0.3s;
     `;
 
+    // Instruction text (bold)
+    const instructionText = document.createElement('div');
+    instructionText.textContent = 'Please check the box below to proceed with payment';
+    instructionText.style.cssText = `
+      font-size: 16px;
+      font-weight: 700;
+      color: #111827;
+      text-align: center;
+      margin-bottom: 8px;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+    `;
+
     // White box container
     const whiteBox = document.createElement('div');
     whiteBox.style.cssText = `
@@ -400,6 +412,8 @@
 
     whiteBox.appendChild(label);
     whiteBox.appendChild(link);
+    
+    overlay.appendChild(instructionText);
     overlay.appendChild(whiteBox);
     container.appendChild(overlay);
 
