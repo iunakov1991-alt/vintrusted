@@ -386,7 +386,7 @@
       margin-bottom: 15px;
     `;
     disclaimerText.innerHTML = `
-      I agree to the <a href="/terms.html" target="_blank" style="color: #2563eb; text-decoration: underline;">Terms &amp; Conditions</a>, including ClearVin usage limitations, waiver of liability, IP rights, and the NMVTIS disclaimer.
+      I agree to the <a href="/legal/terms-and-conditions.html" target="_blank" style="color: #2563eb; text-decoration: underline;">Terms &amp; Conditions</a>, including ClearVin usage limitations, waiver of liability, IP rights, and the NMVTIS disclaimer.
     `;
 
     // Features list with icons
