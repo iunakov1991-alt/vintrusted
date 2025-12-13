@@ -661,6 +661,95 @@ app.post('/api/local-start', async (req, res) => {
   return res.json({ ok: true, id: record.id, phase: queueInfo.phase, topics: queueInfo.queue.length });
 });
 
+/**
+ * 24/7 AUTO MODE - Непрерывная генерация с автоперезапуском
+ */
+let autoRestart24_7 = false;
+let restart24_7Config = null;
+
+app.post('/api/start-24-7', (req, res) => {
+  const config = req.body || {};
+  console.log('[24/7 MODE] 🚀 Starting 24/7 AUTO MODE...');
+  
+  // Enable auto-restart
+  autoRestart24_7 = true;
+  restart24_7Config = {
+    ...config,
+    deployStrategy: 'smart',
+    deployEveryPages: 10,
+    deployEveryMinutes: 15
+  };
+  
+  // Make internal HTTP request to /api/local-start
+  const http = require('http');
+  const postData = JSON.stringify(restart24_7Config);
+  const options = {
+    hostname: 'localhost',
+    port: PORT,
+    path: '/api/local-start',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(postData)
+    }
+  };
+  
+  const clientReq = http.request(options, (clientRes) => {
+    let data = '';
+    clientRes.on('data', chunk => { data += chunk; });
+    clientRes.on('end', () => {
+      try {
+        const result = JSON.parse(data);
+        res.json({
+          ok: true,
+          mode: '24/7',
+          autoRestart: true,
+          startResult: result,
+          message: '24/7 AUTO MODE STARTED! Batches will restart automatically after completion.'
+        });
+      } catch (e) {
+        res.json({ ok: false, error: 'Failed to parse response', raw: data });
+      }
+    });
+  });
+  
+  clientReq.on('error', (e) => {
+    res.status(500).json({ ok: false, error: e.message });
+  });
+  
+  clientReq.write(postData);
+  clientReq.end();
+  
+  // Setup auto-restart listener
+  if (currentChildProcess) {
+    const originalExit = currentChildProcess.listeners('exit')[0];
+    currentChildProcess.removeAllListeners('exit');
+    currentChildProcess.on('exit', (code) => {
+      if (originalExit) originalExit(code);
+      
+      // Auto-restart if enabled
+      if (autoRestart24_7 && restart24_7Config) {
+        console.log('[24/7 MODE] ⏱️ Batch completed. Restarting in 10 seconds...');
+        setTimeout(() => {
+          if (autoRestart24_7) {
+            console.log('[24/7 MODE] 🔄 Auto-restarting...');
+            const restartReq = http.request(options);
+            restartReq.write(postData);
+            restartReq.end();
+          }
+        }, 10000);
+      }
+    });
+  }
+});
+
+app.post('/api/stop-24-7', (req, res) => {
+  console.log('[24/7 MODE] 🛑 Stopping 24/7 AUTO MODE...');
+  autoRestart24_7 = false;
+  restart24_7Config = null;
+  res.json({ ok: true, stopped: true, message: '24/7 AUTO MODE STOPPED. Current batch will finish.' });
+});
+
 app.post('/api/local-stop', (req, res) => {
   const state = loadState();
   if (!state.current || state.current.status !== 'running') {
@@ -674,6 +763,10 @@ app.post('/api/local-stop', (req, res) => {
       if (!child.killed) child.kill('SIGKILL');
     }, 5000);
   }
+
+  // Also stop 24/7 mode
+  autoRestart24_7 = false;
+  restart24_7Config = null;
 
   finalizeCurrentBatch('stopped');
   currentChildProcess = null;

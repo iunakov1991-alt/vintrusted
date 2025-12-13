@@ -154,6 +154,7 @@
       </div>
       <div style="display:flex; align-items:flex-end; gap:8px;">
         <button class="primary" onclick="startBatch()">START</button>
+        <button class="primary" onclick="start24_7Mode()" style="background: linear-gradient(135deg, #4a67ff 0%, #7b2ff7 100%); font-weight: bold; font-size: 13px; padding: 9px 16px;">🚀 START 24/7 AUTO MODE</button>
         <button class="danger" onclick="stopBatch()">STOP</button>
         <button style="background:#6c757d; color:#fff; border:none;" onclick="generateHubs()">🗂️ Hub Pages</button>
       </div>
@@ -189,6 +190,13 @@
     </div>
   </div>
 
+  <!-- 24/7 MODE INDICATOR -->
+  <div id="auto-mode-indicator" style="display:none; background: linear-gradient(135deg, #4a67ff 0%, #7b2ff7 100%); color: white; padding: 16px 20px; border-radius: 12px; margin-bottom: 16px; text-align: center; font-weight: 600; box-shadow: 0 4px 12px rgba(74, 103, 255, 0.3); animation: pulse 2s ease-in-out infinite;">
+    <div style="font-size: 18px; margin-bottom: 4px;">🚀 24/7 AUTO MODE ACTIVE</div>
+    <div style="font-size: 13px; opacity: 0.9;">Batches will automatically restart after completion</div>
+    <button onclick="stop24_7Mode()" style="margin-top: 8px; padding: 6px 16px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.5); color: white; border-radius: 6px; cursor: pointer; font-weight: 600;">STOP 24/7 MODE</button>
+  </div>
+
   <div class="row">
     <div class="card">
       <h3>Current Batch</h3>
@@ -201,6 +209,13 @@
       </div>
     </div>
   </div>
+  
+  <style>
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+  </style>
 
   <div class="card">
     <h3>History</h3>
@@ -232,8 +247,32 @@
         const res = await fetch('/api/monster/status');
         const data = await res.json();
         renderStatus(data);
+        
+        // Check 24/7 mode status
+        const indicator = document.getElementById('auto-mode-indicator');
+        if (data.current && data.current.autoRestart) {
+          indicator.style.display = 'block';
+        } else {
+          indicator.style.display = 'none';
+        }
       } catch (e) {
         document.getElementById('current-status').innerText = 'Error: ' + e.message;
+      }
+    }
+    
+    async function stop24_7Mode() {
+      if (!confirm('Stop 24/7 AUTO MODE?\n\nCurrent batch will finish, but no new batches will start automatically.')) {
+        return;
+      }
+      
+      try {
+        const res = await fetch('/api/stop-24-7', { method: 'POST' });
+        const data = await res.json();
+        document.getElementById('start-result').innerHTML = `<div style="color: #e74c3c; font-weight: 600;">⏸️ 24/7 MODE STOPPED<br>${JSON.stringify(data)}</div>`;
+        document.getElementById('auto-mode-indicator').style.display = 'none';
+        fetchStatus();
+      } catch (e) {
+        alert('Error: ' + e.message);
       }
     }
 
@@ -443,6 +482,45 @@
         fetchStatus();
       } catch (e) {
         document.getElementById('start-result').innerText = 'Error: ' + e.message;
+      }
+    }
+
+    async function start24_7Mode() {
+      if (!confirm('🚀 START 24/7 AUTO MODE?\n\nЭтот режим будет:\n• Запускать батчи по 30 страниц\n• Автоматически деплоить каждые 10 страниц\n• Работать непрерывно до остановки\n\nПродолжить?')) {
+        return;
+      }
+
+      const phase = document.getElementById('phase').value;
+      const length = document.getElementById('length').value;
+      const aiMode = document.getElementById('aiMode').value;
+
+      const body = {
+        phase,
+        length,
+        deployStrategy: 'smart', // Always use smart deploy for 24/7
+        deployEveryPages: 10,    // Deploy every 10 pages
+        deployEveryMinutes: 15,  // Or every 15 minutes
+        deployMinRemainingTime: 5,
+        hybrid: aiMode === 'hybrid',
+        autoRestart: true         // Enable auto-restart
+      };
+
+      if (aiMode === 'hybrid') {
+        body.deepseekWorkers = parseInt(document.getElementById('deepseekWorkers').value, 10);
+        body.ollamaWorkers = parseInt(document.getElementById('ollamaWorkers').value, 10);
+      }
+
+      try {
+        const res = await fetch('/api/start-24-7', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        document.getElementById('start-result').innerHTML = `<div style="color: #27ae60; font-weight: 600;">🚀 24/7 AUTO MODE STARTED!<br>${JSON.stringify(data)}</div>`;
+        fetchStatus();
+      } catch (e) {
+        document.getElementById('start-result').innerHTML = `<div style="color: #e74c3c;">Error: ${e.message}</div>`;
       }
     }
 
