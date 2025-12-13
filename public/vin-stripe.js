@@ -281,13 +281,13 @@
       submitButton.disabled = true; // Disabled until terms accepted
       submitButton.style.cssText = `
         padding: 12px 24px;
-        background: #9ca3af;
-        color: white;
-        border: none;
+        background: #9ca3af !important;
+        color: white !important;
+        border: none !important;
         border-radius: 999px;
         font-size: 16px;
         font-weight: 600;
-        cursor: not-allowed;
+        cursor: not-allowed !important;
         transition: all 0.3s;
         text-align: center;
         display: flex;
@@ -476,11 +476,11 @@
       if (this.checked) {
         submitButton.disabled = false;
         submitButton.textContent = 'Pay $3.00';
-        submitButton.style.background = '#fbbf24';
-        submitButton.style.color = '#111827';
-        submitButton.style.cursor = 'pointer';
-        submitButton.onmouseover = () => submitButton.style.background = '#f59e0b';
-        submitButton.onmouseout = () => submitButton.style.background = '#fbbf24';
+        submitButton.style.setProperty('background', '#fbbf24', 'important');
+        submitButton.style.setProperty('color', '#111827', 'important');
+        submitButton.style.setProperty('cursor', 'pointer', 'important');
+        submitButton.onmouseover = () => submitButton.style.setProperty('background', '#f59e0b', 'important');
+        submitButton.onmouseout = () => submitButton.style.setProperty('background', '#fbbf24', 'important');
         console.log('[Terms] Accepted');
         
         // Log consent
@@ -501,9 +501,9 @@
       } else {
         submitButton.disabled = true;
         submitButton.textContent = 'Pay $3.00';
-        submitButton.style.background = '#9ca3af';
-        submitButton.style.color = 'white';
-        submitButton.style.cursor = 'not-allowed';
+        submitButton.style.setProperty('background', '#9ca3af', 'important');
+        submitButton.style.setProperty('color', 'white', 'important');
+        submitButton.style.setProperty('cursor', 'not-allowed', 'important');
         submitButton.onmouseover = null;
         submitButton.onmouseout = null;
       }
