@@ -14,8 +14,8 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 
-// TRIZ: Adaptive Worker Manager
-const AdaptiveWorkerManager = require('./adaptive-worker-manager');
+// TRIZ: Adaptive Worker Manager (optional, commented out if not available)
+// const AdaptiveWorkerManager = require('./adaptive-worker-manager');
 
 const PORT = process.env.MONSTER_LOCAL_PORT || 3030;
 const STATE_FILE = path.join(__dirname, '..', 'data', 'local_batch_state.json');
