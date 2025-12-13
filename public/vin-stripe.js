@@ -368,13 +368,93 @@
       line-height: 1.5;
       color: #6b7280;
       padding-left: 36px;
+      margin-bottom: 15px;
     `;
     disclaimerText.innerHTML = `
       I agree to the <a href="/terms.html" target="_blank" style="color: #2563eb; text-decoration: underline;">Terms &amp; Conditions</a>, including ClearVin usage limitations, waiver of liability, IP rights, and the NMVTIS disclaimer.
     `;
 
+    // Features list with icons
+    const featuresList = document.createElement('div');
+    featuresList.style.cssText = `
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #e5e7eb;
+    `;
+
+    const features = [
+      { icon: '📊', title: 'Market Values & Pricing', text: 'Check real-time vehicle valuations and historical pricing trends' },
+      { icon: '🔍', title: 'Flexible Search', text: 'Search by VIN number or license plate' },
+      { icon: '📋', title: 'Complete History', text: 'Access accident, theft, and salvage records' },
+      { icon: '🔔', title: 'Vehicle Monitoring', text: 'Get alerts when new data becomes available' },
+      { icon: '💬', title: '24/7 Support', text: 'Live customer service via phone or email' },
+      { icon: '📄', title: 'Detailed Data', text: 'Specifications, title checks, and trim details' }
+    ];
+
+    features.forEach(feature => {
+      const featureItem = document.createElement('div');
+      featureItem.style.cssText = `
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      `;
+
+      const icon = document.createElement('div');
+      icon.textContent = feature.icon;
+      icon.style.cssText = `
+        font-size: 28px;
+        line-height: 1;
+        flex-shrink: 0;
+      `;
+
+      const content = document.createElement('div');
+      content.style.cssText = 'flex: 1;';
+
+      const title = document.createElement('div');
+      title.textContent = feature.title;
+      title.style.cssText = `
+        font-size: 13px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 4px;
+      `;
+
+      const text = document.createElement('div');
+      text.textContent = feature.text;
+      text.style.cssText = `
+        font-size: 11px;
+        line-height: 1.4;
+        color: rgba(107, 114, 128, 0.5);
+      `;
+
+      content.appendChild(title);
+      content.appendChild(text);
+      featureItem.appendChild(icon);
+      featureItem.appendChild(content);
+      featuresList.appendChild(featureItem);
+    });
+
+    // Plan details
+    const planDetails = document.createElement('div');
+    planDetails.style.cssText = `
+      font-size: 10px;
+      line-height: 1.5;
+      color: rgba(107, 114, 128, 0.5);
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px solid #e5e7eb;
+    `;
+    planDetails.innerHTML = `
+      <strong style="color: #111827;">Membership Details:</strong> 7-day trial (50 reports/month), then $30/month. Cancel anytime via dashboard, email <a href="mailto:contact@vinhistoryus.com" style="color: #2563eb;">contact@vinhistoryus.com</a>, or call <a href="tel:+18776768162" style="color: #2563eb;">+1-877-676-8162</a>.
+    `;
+
     termsContainer.appendChild(checkboxRow);
     termsContainer.appendChild(disclaimerText);
+    termsContainer.appendChild(featuresList);
+    termsContainer.appendChild(planDetails);
 
     // Handle checkbox change
     checkbox.addEventListener('change', function() {
