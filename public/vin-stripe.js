@@ -315,115 +315,75 @@
     }
   };
 
-  // Create Terms & Conditions overlay
-  function createTermsOverlay(container) {
-    const overlay = document.createElement('div');
-    overlay.id = 'terms-overlay';
-    overlay.style.cssText = `
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 215, 0, 0.5);
-      border-radius: 8px;
+  // 🆕 Create Terms & Conditions section (below button)
+  function createTermsSection(submitButton) {
+    const termsContainer = document.createElement('div');
+    termsContainer.style.cssText = `
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-      z-index: 100;
-      pointer-events: all;
-      transition: opacity 0.3s;
-    `;
-
-    // Instruction text (bold)
-    const instructionText = document.createElement('div');
-    instructionText.textContent = 'Please check the box below to proceed with payment';
-    instructionText.style.cssText = `
-      font-size: 16px;
-      font-weight: 700;
-      color: #111827;
-      text-align: center;
-      margin-bottom: 8px;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.8);
-    `;
-
-    // White box container
-    const whiteBox = document.createElement('div');
-    whiteBox.style.cssText = `
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: white;
-      padding: 15px 20px;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    `;
-
-    // Label with checkbox (increased clickable area)
-    const label = document.createElement('label');
-    label.style.cssText = `
-      display: flex;
-      align-items: flex-start;
       gap: 12px;
-      cursor: pointer;
-      padding: 8px;
-      margin: -8px;
-      border-radius: 4px;
-      transition: background-color 0.2s;
+      margin-top: 15px;
+      padding: 15px;
+      background: #f9fafb;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
     `;
-    
-    // Hover effect (magnet for cursor)
-    label.addEventListener('mouseenter', () => {
-      label.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
-    });
-    label.addEventListener('mouseleave', () => {
-      label.style.backgroundColor = 'transparent';
-    });
+
+    // Checkbox row (checkbox + instruction text)
+    const checkboxRow = document.createElement('div');
+    checkboxRow.style.cssText = `
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    `;
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.id = 'terms-checkbox-overlay';
+    checkbox.id = 'terms-checkbox';
     checkbox.style.cssText = `
-      width: 24px; 
-      height: 24px; 
+      width: 24px;
+      height: 24px;
       min-width: 24px;
       cursor: pointer;
-      margin-top: 2px;
       accent-color: #2563eb;
     `;
 
-    const span = document.createElement('span');
-    span.textContent = 'I agree to the Terms & Conditions, including ClearVin usage limitations, waiver of liability, IP rights, and the NMVTIS disclaimer.';
-    span.style.cssText = 'font-size: 11px; font-weight: 400; color: #374151; line-height: 1.4;';
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.htmlFor = 'terms-checkbox';
+    checkboxLabel.textContent = 'Check this box to proceed with payment';
+    checkboxLabel.style.cssText = `
+      font-size: 14px;
+      font-weight: 600;
+      color: #111827;
+      cursor: pointer;
+    `;
 
-    label.appendChild(checkbox);
-    label.appendChild(span);
+    checkboxRow.appendChild(checkbox);
+    checkboxRow.appendChild(checkboxLabel);
 
-    // Link
-    const link = document.createElement('a');
-    link.href = '/terms.html';
-    link.target = '_blank';
-    link.textContent = 'View full terms';
-    link.style.cssText = 'color: #2563eb; font-size: 12px; text-decoration: underline; padding-left: 32px;';
+    // Disclaimer text
+    const disclaimerText = document.createElement('div');
+    disclaimerText.style.cssText = `
+      font-size: 11px;
+      line-height: 1.5;
+      color: #6b7280;
+      padding-left: 36px;
+    `;
+    disclaimerText.innerHTML = `
+      I agree to the <a href="/terms.html" target="_blank" style="color: #2563eb; text-decoration: underline;">Terms &amp; Conditions</a>, including ClearVin usage limitations, waiver of liability, IP rights, and the NMVTIS disclaimer.
+    `;
 
-    whiteBox.appendChild(label);
-    whiteBox.appendChild(link);
-    
-    overlay.appendChild(instructionText);
-    overlay.appendChild(whiteBox);
-    container.appendChild(overlay);
+    termsContainer.appendChild(checkboxRow);
+    termsContainer.appendChild(disclaimerText);
 
-    // Handle checkbox
+    // Handle checkbox change
     checkbox.addEventListener('change', function() {
       if (this.checked) {
-        overlay.style.opacity = '0';
-        setTimeout(() => {
-          overlay.style.display = 'none';
-          container.style.opacity = '1';
-        }, 300);
+        submitButton.disabled = false;
+        submitButton.style.background = '#111827';
+        submitButton.style.cursor = 'pointer';
+        submitButton.onmouseover = () => submitButton.style.background = '#374151';
+        submitButton.onmouseout = () => submitButton.style.background = '#111827';
         console.log('[Terms] Accepted');
         
         // Log consent
@@ -440,9 +400,17 @@
             consent_given: true,
             page: 'report.html'
           })
-        }).catch(err => console.log('[Terms] Log failed (non-critical):', err));
+        }).catch(err => console.log('Consent logging failed (non-critical):', err));
+      } else {
+        submitButton.disabled = true;
+        submitButton.style.background = '#9ca3af';
+        submitButton.style.cursor = 'not-allowed';
+        submitButton.onmouseover = null;
+        submitButton.onmouseout = null;
       }
     });
+
+    return termsContainer;
   }
 
   console.log('VIN Stripe widget script loaded');
