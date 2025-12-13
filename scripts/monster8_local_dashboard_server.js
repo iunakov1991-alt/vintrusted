@@ -298,6 +298,7 @@ function startNewBatchRecord(payload) {
     topicsPlanned: payload.topicsPlanned || null,
     topicsDone: 0,
     lastError: null,
+    autoRestart: payload.autoRestart || false,  // Add autoRestart flag
   };
   const state = loadState();
   state.current = record;
