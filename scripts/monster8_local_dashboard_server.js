@@ -562,12 +562,12 @@ app.post('/api/local-start', async (req, res) => {
     return res.status(409).json({ ok: false, error: 'batch_already_running' });
   }
 
-  // TRIZ: Warmup перед батчем
-  console.log('[DASHBOARD] 🔥 Warming up AI...');
-  await workerManager.warmup();
-  
-  // TRIZ: Запустить адаптивный мониторинг
-  workerManager.startMonitoring();
+  // TRIZ: Warmup перед батчем (disabled)
+  console.log('[DASHBOARD] 🔥 Starting batch...');
+  // await workerManager.warmup();
+
+  // TRIZ: Запустить адаптивный мониторинг (disabled)
+  // workerManager.startMonitoring();
 
   // Определяем текущую фазу и генерируем очередь
   const phaseInfo = detectCurrentPhase();
