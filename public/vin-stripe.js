@@ -463,7 +463,7 @@
       border-top: 1px solid #e5e7eb;
     `;
     planDetails.innerHTML = `
-      <strong style="color: #111827;">Plan Details:</strong> The trial costs $3 and activates temporary access to the service. After 10 days, a charge of $49 will be applied for the next access period. The $49 charge then repeats every 10 days, for a maximum of three billing cycles, after which the subscription is automatically canceled.<br><br>
+      <strong style="color: #111827;">Membership Details:</strong> The trial costs $3 and activates temporary access to the service. After 10 days, a charge of $49 will be applied for the next access period. The $49 charge then repeats every 10 days, for a maximum of three billing cycles, after which the subscription is automatically canceled.<br><br>
       Payment is for service access with a limit of up to 2 reports per day; charges are applied once every 10 days, not daily.
     `;
 
