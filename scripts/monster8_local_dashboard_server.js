@@ -667,80 +667,149 @@ app.post('/api/local-start', async (req, res) => {
 let autoRestart24_7 = false;
 let restart24_7Config = null;
 
-app.post('/api/start-24-7', (req, res) => {
-  const config = req.body || {};
+app.post('/api/start-24-7', async (req, res) => {
+  const {
+    phase = 'auto',
+    length = 'auto',
+    hybrid = false,
+    deepseekWorkers = 5,
+    ollamaWorkers = 3
+  } = req.body || {};
+
   console.log('[24/7 MODE] 🚀 Starting 24/7 AUTO MODE...');
   
+  const state = loadState();
+  if (state.current && state.current.status === 'running') {
+    return res.status(409).json({ ok: false, error: 'batch_already_running' });
+  }
+
   // Enable auto-restart
   autoRestart24_7 = true;
   restart24_7Config = {
-    ...config,
-    deployStrategy: 'smart',
-    deployEveryPages: 10,
-    deployEveryMinutes: 15
+    phase,
+    length,
+    hybrid,
+    deepseekWorkers,
+    ollamaWorkers
   };
   
-  // Make internal HTTP request to /api/local-start
-  const http = require('http');
-  const postData = JSON.stringify(restart24_7Config);
-  const options = {
-    hostname: 'localhost',
-    port: PORT,
-    path: '/api/local-start',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(postData)
-    }
+  // Start batch with auto-restart enabled
+  const deployStrategy = 'smart';
+  const deployEveryPages = 10;
+  const deployEveryMinutes = 15;
+  const deployMinRemainingTime = 5;
+
+  const phaseInfo = detectCurrentPhase();
+  const queueInfo = generatePhaseQueue(phaseInfo);
+
+  const record = startNewBatchRecord({
+    phase: queueInfo.phase,
+    length: length,
+    topicsPlanned: queueInfo.queue.length,
+    language: queueInfo.language,
+    deployStrategy: deployStrategy,
+    autoRestart: true  // KEY: Mark this batch as auto-restart
+  });
+
+  const logFile = path.join(LOGS_DIR, `local_batch_${record.id}.log`);
+  const out = fs.createWriteStream(logFile, { flags: 'a' });
+
+  out.write(`[24/7 MODE] 🚀 AUTO RESTART ENABLED\n`);
+  out.write(`[PHASE-STRATEGY] Phase: ${queueInfo.phase}\n`);
+  out.write(`[DEPLOY-STRATEGY] Strategy: ${deployStrategy}\n`);
+
+  const optimalWorkers = 6;
+  const args = [
+    path.join(__dirname, 'build_topics_batch_parallel.js'),
+    '--length', length,
+    '--workers', String(optimalWorkers)
+  ];
+
+  const envVars = {
+    ...process.env,
+    BATCH_ID: record.id,
+    DEPLOY_STRATEGY: deployStrategy,
+    DEPLOY_EVERY_PAGES: String(deployEveryPages),
+    DEPLOY_EVERY_MINUTES: String(deployEveryMinutes),
+    DEPLOY_MIN_REMAINING_TIME: String(deployMinRemainingTime)
   };
-  
-  const clientReq = http.request(options, (clientRes) => {
-    let data = '';
-    clientRes.on('data', chunk => { data += chunk; });
-    clientRes.on('end', () => {
-      try {
-        const result = JSON.parse(data);
-        res.json({
-          ok: true,
-          mode: '24/7',
-          autoRestart: true,
-          startResult: result,
-          message: '24/7 AUTO MODE STARTED! Batches will restart automatically after completion.'
-        });
-      } catch (e) {
-        res.json({ ok: false, error: 'Failed to parse response', raw: data });
-      }
-    });
-  });
-  
-  clientReq.on('error', (e) => {
-    res.status(500).json({ ok: false, error: e.message });
-  });
-  
-  clientReq.write(postData);
-  clientReq.end();
-  
-  // Setup auto-restart listener
-  if (currentChildProcess) {
-    const originalExit = currentChildProcess.listeners('exit')[0];
-    currentChildProcess.removeAllListeners('exit');
-    currentChildProcess.on('exit', (code) => {
-      if (originalExit) originalExit(code);
-      
-      // Auto-restart if enabled
-      if (autoRestart24_7 && restart24_7Config) {
-        console.log('[24/7 MODE] ⏱️ Batch completed. Restarting in 10 seconds...');
-        setTimeout(() => {
-          if (autoRestart24_7) {
-            console.log('[24/7 MODE] 🔄 Auto-restarting...');
-            const restartReq = http.request(options);
-            restartReq.write(postData);
-            restartReq.end();
-          }
-        }, 10000);
-      }
-    });
+
+  if (hybrid) {
+    args.push('--hybrid');
+    args.push('--deepseek-workers', String(deepseekWorkers));
+    args.push('--ollama-workers', String(ollamaWorkers));
+    out.write(`[HYBRID] ${deepseekWorkers} DeepSeek + ${ollamaWorkers} Ollama\n`);
+  } else {
+    args.push('--mode', 'deepseek');
+    args.push('--qa-mode', 'deepseek');
+    envVars.LLM_GEN_MODE = 'deepseek';
+    envVars.LLM_QA_MODE = 'deepseek';
+    envVars.AI_PROVIDER_PRIMARY = 'deepseek';
+    out.write(`[MODE] DeepSeek only\n`);
   }
+
+  const child = spawn('node', args, {
+    stdio: ['ignore', 'pipe', 'pipe'],
+    env: envVars
+  });
+
+  currentChildProcess = child;
+  updateCurrent({ pid: child.pid });
+
+  child.stdout.on('data', chunk => out.write(chunk));
+  child.stderr.on('data', chunk => out.write(chunk));
+
+  child.on('exit', (code) => {
+    out.write(`\n[EXIT] code=${code}\n`);
+    out.end();
+    finalizeCurrentBatch(code === 0 ? 'success' : 'failed', {
+      lastError: code === 0 ? null : `exit code ${code}`
+    });
+    currentChildProcess = null;
+    
+    // AUTO-RESTART if enabled
+    if (autoRestart24_7 && restart24_7Config) {
+      console.log('[24/7 MODE] ⏱️ Batch completed. Restarting in 10 seconds...');
+      setTimeout(() => {
+        if (autoRestart24_7) {
+          console.log('[24/7 MODE] 🔄 Auto-restarting...');
+          const http = require('http');
+          const postData = JSON.stringify(restart24_7Config);
+          const options = {
+            hostname: 'localhost',
+            port: PORT,
+            path: '/api/start-24-7',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Content-Length': Buffer.byteLength(postData)
+            }
+          };
+          const req = http.request(options);
+          req.write(postData);
+          req.end();
+        }
+      }, 10000);
+    }
+  });
+
+  child.on('error', (err) => {
+    out.write(`\n[ERROR] ${err.message}\n`);
+    out.end();
+    finalizeCurrentBatch('failed', { lastError: err.message });
+    currentChildProcess = null;
+  });
+
+  res.json({
+    ok: true,
+    mode: '24/7',
+    autoRestart: true,
+    id: record.id,
+    phase: queueInfo.phase,
+    topics: queueInfo.queue.length,
+    pid: child.pid,
+    message: '24/7 AUTO MODE STARTED! Batches will restart automatically.'
+  });
 });
 
 app.post('/api/stop-24-7', (req, res) => {
