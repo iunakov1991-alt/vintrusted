@@ -250,13 +250,13 @@
       
       if (tempContainer) {
         tempContainer.id = 'vin-payment-element';
-        tempContainer.style.cssText = 'padding: 15px; background: white; border-radius: 8px; border: 1px solid #e5e7eb; min-height: 200px;';
+        tempContainer.style.cssText = 'padding: 15px; background: white; border-radius: 20px; border: 1px solid #e5e7eb; min-height: 200px;';
         paymentContainer = tempContainer;
       } else {
         // Create new container
         paymentContainer = document.createElement('div');
         paymentContainer.id = 'vin-payment-element';
-        paymentContainer.style.cssText = 'padding: 15px; background: white; border-radius: 8px; border: 1px solid #e5e7eb; min-height: 200px;';
+        paymentContainer.style.cssText = 'padding: 15px; background: white; border-radius: 20px; border: 1px solid #e5e7eb; min-height: 200px;';
         
         // Remount payment element to new container
         if (paymentElement) {
@@ -340,7 +340,7 @@
       margin-top: 15px;
       padding: 15px;
       background: #f9fafb;
-      border-radius: 8px;
+      border-radius: 20px;
       border: 1px solid #e5e7eb;
     `;
 
