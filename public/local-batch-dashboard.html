@@ -244,7 +244,7 @@
   <script>
     async function fetchStatus() {
       try {
-        const res = await fetch('/api/monster/status');
+        const res = await fetch('/api/local-status');
         const data = await res.json();
         renderStatus(data);
         
