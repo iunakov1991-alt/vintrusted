@@ -466,6 +466,30 @@
     {
       "source": "/api/monster/stop",
       "destination": "/api/monster-stop.js"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/legal/terms-and-conditions.html"
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/legal/terms-and-conditions.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/legal/privacy-policy.html"
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "/legal/refund-policy.html"
+    },
+    {
+      "source": "/subscription-policy",
+      "destination": "/legal/subscription-policy.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/legal/contact.html"
     }
   ],
   "headers": [
