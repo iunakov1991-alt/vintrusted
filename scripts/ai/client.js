@@ -118,12 +118,38 @@ async function callAI(params) {
 }
 
 /**
- * High-level helper:
+ * High-level helper with retry:
  *  - Использует DeepSeek (единственный провайдер)
+ *  - Retry up to 3 times on timeout or 5xx errors
  */
 async function callWithFallback(params) {
   const primaryName = DEFAULT_PRIMARY;
-  return await callAI({ ...params, provider: primaryName });
+  const maxRetries = 3;
+  let lastError;
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await callAI({ ...params, provider: primaryName });
+    } catch (err) {
+      lastError = err;
+      const isRetryable = err.message.includes('timeout') || 
+                          err.message.includes('500') || 
+                          err.message.includes('502') ||
+                          err.message.includes('503') ||
+                          err.message.includes('504');
+      
+      if (!isRetryable || attempt === maxRetries) {
+        throw err;
+      }
+      
+      // Exponential backoff: 2s, 4s, 8s
+      const delay = Math.pow(2, attempt) * 1000;
+      console.log(`[AI-CLIENT] Retry ${attempt}/${maxRetries} after ${delay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+  
+  throw lastError;
 }
 
 module.exports = {
