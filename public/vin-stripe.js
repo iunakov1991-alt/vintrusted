@@ -308,8 +308,8 @@
       if (container.replaceChildren) {
         container.replaceChildren(form);
       } else {
-        container.innerHTML = '';
-        container.appendChild(form);
+      container.innerHTML = '';
+      container.appendChild(form);
       }
 
       // 🔧 FIX: Show container smoothly after mounting
@@ -386,7 +386,14 @@
       margin-bottom: 15px;
     `;
     disclaimerText.innerHTML = `
-      I agree to the <a href="/legal/terms-and-conditions.html" target="_blank" style="color: #2563eb; text-decoration: underline;">Terms &amp; Conditions</a>, including ClearVin usage limitations, waiver of liability, IP rights, and the NMVTIS disclaimer.
+      I agree to the <a href="/legal/terms-and-conditions.html" target="_blank" style="color: #2563eb; text-decoration: underline;">Terms &amp; Conditions</a>, including:
+      <ul style="margin: 8px 0; padding-left: 20px; font-size: 12px; line-height: 1.5;">
+        <li>ClearVin report limitations (personal use only, no redistribution)</li>
+        <li>Waiver of all claims against ClearVin</li>
+        <li>ClearVin's intellectual property and trademark rights</li>
+        <li>Agreement to indemnify and hold ClearVin harmless</li>
+        <li>NMVTIS disclaimer and data limitations</li>
+      </ul>
     `;
 
     // Features list with icons
