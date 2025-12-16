@@ -2788,7 +2788,7 @@ button[type="submit"],
 /* Second Screen Styles */
 .second-screen {
     padding: 120px 0;
-    background: #f8f9fa;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     min-height: 100vh;
 }
 
@@ -2834,7 +2834,7 @@ button[type="submit"],
 
 .second-screen-description {
     font-size: 18px;
-    color: #666;
+    color: #cccccc;
     line-height: 1.6;
 }
 
@@ -2877,7 +2877,7 @@ button[type="submit"],
 
 .subpoint p {
     font-size: 14px;
-    color: #666;
+    color: #cccccc;
     line-height: 1.4;
     margin: 0;
 }
