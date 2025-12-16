@@ -114,6 +114,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "legal/*.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "public/**/*.html",
       "use": "@vercel/static"
     },
