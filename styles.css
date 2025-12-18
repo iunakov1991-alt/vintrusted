@@ -2897,8 +2897,12 @@ button[type="submit"],
     0% { 
         width: 0; 
     }
-    100% { 
+    99% { 
         width: 100%;
+    }
+    100% { 
+        width: fit-content;
+        max-width: 100%;
     }
 }
 
