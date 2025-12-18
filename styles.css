@@ -2773,54 +2773,14 @@ button[type="submit"],
     transform-origin: left center;
 }
 
-.title-line-1 {
-    display: block;
-    overflow: visible;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
-    width: 100%;
-    letter-spacing: 0.5em;
-    text-align: justify;
-}
-
-.title-line-2 {
-    display: block;
-    overflow: visible;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
-    width: 100%;
-    letter-spacing: 0.35em;
-    text-align: justify;
-}
-
-.title-line-3 {
-    display: block;
-    overflow: visible;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
-    width: 100%;
-    letter-spacing: 0.45em;
-    text-align: justify;
-}
-
-.title-line-4 {
-    display: block;
-    overflow: visible;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
-    width: 100%;
-    letter-spacing: 0.35em;
-    text-align: justify;
-}
-
+.title-line-1,
+.title-line-2,
+.title-line-3,
+.title-line-4,
 .title-line-5 {
     display: block;
-    overflow: visible;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
     width: 100%;
-    letter-spacing: 0.5em;
-    text-align: justify;
+    letter-spacing: 0.4em;
 }
 
 .second-screen-description {
