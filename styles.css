@@ -2773,14 +2773,109 @@ button[type="submit"],
     transform-origin: left center;
 }
 
-.title-line-1,
-.title-line-2,
-.title-line-3,
-.title-line-4,
+.title-line-1 {
+    display: block;
+    overflow: hidden;
+    border-right: 4px solid transparent;
+    white-space: nowrap;
+    width: 0;
+    letter-spacing: 0.4em;
+    animation: typing-1 1s steps(7, end) forwards, cursor-1 1s step-end forwards;
+    animation-delay: 0.5s, 0.5s;
+}
+
+.title-line-2 {
+    display: block;
+    overflow: hidden;
+    border-right: 4px solid transparent;
+    white-space: nowrap;
+    width: 0;
+    letter-spacing: 0.4em;
+    animation: typing-2 1.2s steps(12, end) forwards, cursor-2 1.2s step-end forwards;
+    animation-delay: 1.5s, 1.5s;
+}
+
+.title-line-3 {
+    display: block;
+    overflow: hidden;
+    border-right: 4px solid transparent;
+    white-space: nowrap;
+    width: 0;
+    letter-spacing: 0.4em;
+    animation: typing-3 1s steps(9, end) forwards, cursor-3 1s step-end forwards;
+    animation-delay: 2.7s, 2.7s;
+}
+
+.title-line-4 {
+    display: block;
+    overflow: hidden;
+    border-right: 4px solid transparent;
+    white-space: nowrap;
+    width: 0;
+    letter-spacing: 0.4em;
+    animation: typing-4 1.2s steps(12, end) forwards, cursor-4 1.2s step-end forwards;
+    animation-delay: 3.7s, 3.7s;
+}
+
 .title-line-5 {
     display: block;
-    width: 100%;
+    overflow: hidden;
+    border-right: 4px solid transparent;
+    white-space: nowrap;
+    width: 0;
     letter-spacing: 0.4em;
+    animation: typing-5 1s steps(7, end) forwards, cursor-5 1s step-end forwards;
+    animation-delay: 4.9s, 4.9s;
+}
+
+@keyframes typing-1 {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+@keyframes typing-2 {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+@keyframes typing-3 {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+@keyframes typing-4 {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+@keyframes typing-5 {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+@keyframes cursor-1 {
+    0%, 90% { border-color: #ffffff; }
+    100% { border-color: transparent; }
+}
+
+@keyframes cursor-2 {
+    0%, 90% { border-color: #ffffff; }
+    100% { border-color: transparent; }
+}
+
+@keyframes cursor-3 {
+    0%, 90% { border-color: #ffffff; }
+    100% { border-color: transparent; }
+}
+
+@keyframes cursor-4 {
+    0%, 90% { border-color: #ffffff; }
+    100% { border-color: transparent; }
+}
+
+@keyframes cursor-5 {
+    0% { border-color: #ffffff; }
+    100% { border-color: #ffffff; }
 }
 
 .second-screen-description {
