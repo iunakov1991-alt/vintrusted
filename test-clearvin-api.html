@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearVin API Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #111827;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #374151;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+        .loading {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #3b82f6;
+        }
+        pre {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .vin-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .vin-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 ClearVin API Test</h1>
+        <p>Тестирование ClearVin API с новым токеном</p>
+        
+        <input 
+            type="text" 
+            class="vin-input" 
+            id="vinInput" 
+            placeholder="Enter VIN (17 characters)" 
+            value="5TDYK3DC8DS290235"
+        />
+        
+        <button onclick="testAPI()">Test API</button>
+        <button onclick="testAPIHTML()">Test API (HTML format)</button>
+        <button onclick="testAPIPDF()">Test API (PDF format)</button>
+        <button onclick="clearResults()">Clear Results</button>
+        
+        <div id="status"></div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function testAPI() {
+            const vinInput = document.getElementById('vinInput').value.trim();
+            if (!vinInput) {
+                alert('Please enter a VIN');
+                return;
+            }
+
+            const statusEl = document.getElementById('status');
+            const resultsEl = document.getElementById('results');
+            
+            statusEl.className = 'status loading';
+            statusEl.textContent = '⏳ Testing API...';
+            resultsEl.innerHTML = '';
+            
+            try {
+                console.log('Testing ClearVin API with VIN:', vinInput);
+                
+                const url = `/api/get-clearvin-report?vin=${encodeURIComponent(vinInput)}`;
+                console.log('API URL:', url);
+                
+                const startTime = Date.now();
+                const response = await fetch(url);
+                const endTime = Date.now();
+                const duration = endTime - startTime;
+                
+                console.log('Response status:', response.status);
+                console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+                console.log('Duration:', duration + 'ms');
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    statusEl.className = 'status success';
+                    statusEl.innerHTML = `
+                        ✅ <strong>API Working!</strong><br>
+                        Status: ${response.status}<br>
+                        Duration: ${duration}ms<br>
+                        Report Length: ${data.report ? data.report.length : 0} characters<br>
+                        VIN: ${data.vin || 'N/A'}
+                    `;
+                    
+                    resultsEl.innerHTML = `
+                        <h3>Response Data:</h3>
+                        <pre>${JSON.stringify(data, null, 2).substring(0, 2000)}${data.report && data.report.length > 2000 ? '\n...(truncated)' : ''}</pre>
+                    `;
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.innerHTML = `
+                        ❌ <strong>API Error</strong><br>
+                        Status: ${response.status}<br>
+                        Duration: ${duration}ms
+                    `;
+                    
+                    resultsEl.innerHTML = `
+                        <h3>Error Response:</h3>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                    console.error('API error:', data);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                statusEl.className = 'status error';
+                statusEl.innerHTML = `
+                    ❌ <strong>Request Failed</strong><br>
+                    ${error.message}
+                `;
+                
+                resultsEl.innerHTML = `
+                    <h3>Error Details:</h3>
+                    <pre>${error.stack || error.message}</pre>
+                `;
+            }
+        }
+        
+        async function testAPIHTML() {
+            const vinInput = document.getElementById('vinInput').value.trim();
+            if (!vinInput) {
+                alert('Please enter a VIN');
+                return;
+            }
+
+            const statusEl = document.getElementById('status');
+            const resultsEl = document.getElementById('results');
+            
+            statusEl.className = 'status loading';
+            statusEl.textContent = '⏳ Testing API (HTML format)...';
+            resultsEl.innerHTML = '';
+            
+            try {
+                const url = `/api/get-clearvin-report?vin=${encodeURIComponent(vinInput)}&format=html`;
+                const startTime = Date.now();
+                const response = await fetch(url);
+                const endTime = Date.now();
+                const duration = endTime - startTime;
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    statusEl.className = 'status success';
+                    statusEl.innerHTML = `
+                        ✅ <strong>HTML API Working!</strong><br>
+                        Status: ${response.status}<br>
+                        Duration: ${duration}ms<br>
+                        HTML Length: ${data.report ? data.report.length : 0} characters
+                    `;
+                    
+                    resultsEl.innerHTML = `
+                        <h3>HTML Preview (first 1000 chars):</h3>
+                        <pre>${data.report ? data.report.substring(0, 1000) : 'No report'}...</pre>
+                    `;
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.innerHTML = `❌ <strong>API Error</strong><br>Status: ${response.status}`;
+                    resultsEl.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ ' + error.message;
+            }
+        }
+        
+        async function testAPIPDF() {
+            const vinInput = document.getElementById('vinInput').value.trim();
+            if (!vinInput) {
+                alert('Please enter a VIN');
+                return;
+            }
+
+            const statusEl = document.getElementById('status');
+            
+            statusEl.className = 'status loading';
+            statusEl.textContent = '⏳ Testing PDF API...';
+            
+            try {
+                const url = `/api/get-clearvin-report?vin=${encodeURIComponent(vinInput)}&format=pdf`;
+                
+                statusEl.className = 'status success';
+                statusEl.innerHTML = `
+                    ✅ <strong>Opening PDF...</strong><br>
+                    <a href="${url}" target="_blank" style="color: #1e40af; text-decoration: underline;">Click here if PDF doesn't open</a>
+                `;
+                
+                window.open(url, '_blank');
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ ' + error.message;
+            }
+        }
+        
+        function clearResults() {
+            document.getElementById('status').innerHTML = '';
+            document.getElementById('results').innerHTML = '';
+        }
+        
+        // Auto-test on page load
+        window.addEventListener('load', () => {
+            console.log('Test page loaded. Click "Test API" to start.');
+        });
+    </script>
+</body>
+</html>
+
