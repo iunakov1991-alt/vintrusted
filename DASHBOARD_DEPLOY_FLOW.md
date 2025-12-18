@@ -624,3 +624,5 @@ Mobile (<768px):
 
 **Документация актуальна на:** 2025-12-10  
 **Dashboard URL:** http://localhost:3030/local-batch-dashboard.html
+
+

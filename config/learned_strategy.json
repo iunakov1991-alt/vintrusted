@@ -1,31 +1,31 @@
 {
   "version": "1.0",
-  "updated_at": "2025-12-10T07:05:12.008Z",
+  "updated_at": "2025-12-15T15:17:30.798Z",
   "article_type_weights": {
-    "dmv_state_guide": 0.005902958103587064
+    "dmv_state_guide": 0.0015474250491067279
   },
   "audience_weights": {
-    "us_general": 0.005902958103587064,
-    "us_mexican": 0.005902958103587064
+    "us_general": 0.0015474250491067279,
+    "us_mexican": 0.0015474250491067279
   },
   "language_weights": {
-    "en": 0.005902958103587064,
-    "es": 0.005902958103587064
+    "en": 0.0015474250491067279,
+    "es": 0.0015474250491067279
   },
   "zone_priority": {
-    "dmv_titles": 0.005902958103587064
+    "dmv_titles": 0.0015474250491067279
   },
   "block_weights": {
-    "comparison_table": 0.005902958103587064,
-    "vin_section": 0.005902958103587064,
-    "hero": 0.005902958103587064,
-    "context_legal": 0.005902958103587064,
-    "step_by_step": 0.005902958103587064,
-    "checklist": 0.005902958103587064,
-    "common_errors": 0.005902958103587064,
-    "fees_taxes": 0.005902958103587064,
-    "faq": 0.005902958103587064,
-    "total": 0.005902958103587064
+    "comparison_table": 0.0015474250491067279,
+    "vin_section": 0.0015474250491067279,
+    "hero": 0.0015474250491067279,
+    "context_legal": 0.0015474250491067279,
+    "step_by_step": 0.0015474250491067279,
+    "checklist": 0.0015474250491067279,
+    "common_errors": 0.0015474250491067279,
+    "fees_taxes": 0.0015474250491067279,
+    "faq": 0.0015474250491067279,
+    "total": 0.0015474250491067279
   },
   "last_update_source": "quality_errors",
   "notes": "Updated from quality error analysis"

@@ -1,0 +1,27 @@
+[24/7 MODE] 🚀 AUTO RESTART ENABLED
+[PHASE-STRATEGY] Phase: PHASE1_DMV_CORE
+[DEPLOY-STRATEGY] Strategy: smart
+[MODE] DeepSeek only
+[BATCH] Using queue without priority sorting
+[BATCH] Processing 20 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 6
+[BATCH] Mode: deepseek
+[BATCH] QA Mode: deepseek
+[BATCH] Using batch ID from env: 2025-12-13T22-47-16-814Z
+[BATCH] No MONSTER_INTERNAL_SECRET, skipping status update
+[BATCH] Deploy strategy: smart
+[BATCH] Deploy config: every 10 pages or 15 minutes
+(node:35559) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+[BATCH] Processing batch 1 (6 pages in parallel)...
+[BATCH] [2/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_lien_release_guide_en_us_general.json
+[BATCH] [3/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_correction_checklist_en_us_general.json
+[BATCH] [4/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [5/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_transfer_guide_en_us_general.json
+[BATCH] [6/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_registration_guide_en_us_general.json
+[BATCH] [7/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] [7/20] ✅ Completed in 86.0s → /Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json
+[BATCH] [7/20] 📄 HTML: /semantic-pages/en/dmv-titles/nv/title-types/checklist
+[BATCH] [4/20] ✅ Completed in 95.3s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [4/20] 📄 HTML: /semantic-pages/en/dmv-titles/ca/title-types/checklist

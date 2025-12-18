@@ -719,7 +719,7 @@ app.post('/api/start-24-7', async (req, res) => {
   out.write(`[PHASE-STRATEGY] Phase: ${queueInfo.phase}\n`);
   out.write(`[DEPLOY-STRATEGY] Strategy: ${deployStrategy}\n`);
 
-  const optimalWorkers = 6;
+  const optimalWorkers = 2; // Reduced to 2 workers (DeepSeek rate limits)
   const args = [
     path.join(__dirname, 'build_topics_batch_parallel.js'),
     '--length', length,

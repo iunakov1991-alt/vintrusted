@@ -1,5 +1,5 @@
 [SUMMARY]
-This is a strong, comprehensive guide to Arizona title types. It thoroughly covers the required definitions, processes, and risks, with a clear, practical focus on checklists and due diligence. The content is well-structured, avoids filler, and consistently uses correct AZ MVD terminology. It effectively serves the intended US general audience.
+This is a comprehensive, well-structured guide that effectively covers Arizona's title types. It provides clear definitions, practical steps, and necessary warnings for a general US audience. The content is detailed, avoids filler, and correctly frames the VIN as a critical due-diligence tool.
 
 [BLOCKS]
 hero: OK
@@ -7,13 +7,17 @@ context_legal: OK
 step_by_step: OK
 checklist: OK
 common_errors: OK
-comparison_table: OK
+comparison_table: WEAK
+1. The table is very short and lacks depth. It should include a row for "Legal Status" or "Roadworthiness" to immediately clarify the core difference (e.g., Clean=Legal, Salvage=Not Legal, Rebuilt=Legal after inspection).
+2. Consider adding a row for "Typical Buyer" (e.g., Clean=General public, Salvage=Rebuilders/parts, Rebuilt=Budget-conscious buyers) to align with audience needs.
+3. The "Insurance" row could be more precise for "Salvage"; it's often not insurable at all until rebuilt.
+
 fees_taxes: OK
 vin_section: OK
 faq: OK
 
 [LEGAL / FACTUAL RISK]
-No obvious legal/factual risks detected. The article correctly cites Arizona statutes (ARS Title 28), accurately describes MVD processes and fees, and provides appropriate warnings about legal requirements (e.g., disclosure when selling a rebuilt title vehicle). The insurance and loan information is cautiously framed as "more challenging" or varying by provider, which is accurate and avoids overpromising.
+No obvious legal/factual risks detected. The article correctly states Arizona law regarding permanent branding for rebuilt vehicles, the role of the AZ MVD, and the prohibitions on registering foreign salvage vehicles without federal certification.
 
 [VIN / CTA]
-VIN usage is correctly framed as a critical due-diligence tool for uncovering hidden history, preventing title washing, and verifying information against the physical title and vehicle. The CTA in the `vin_section` is appropriately neutral, advising a "professional VIN report" as a "non-negotiable step" for protection, without endorsing a specific service. The overall posture correctly positions VIN checks as essential for informed decision-making.
+VIN usage is correctly framed as a due-diligence and verification tool to uncover hidden history, prevent fraud (title washing), and confirm alignment with MVD records. The CTA is neutral and practical, advising a VIN check as a "non-negotiable step" and "best defense," without making overconfident promises about the outcome.

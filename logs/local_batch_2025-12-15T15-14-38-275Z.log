@@ -1,0 +1,35 @@
+[24/7 MODE] 🚀 AUTO RESTART ENABLED
+[PHASE-STRATEGY] Phase: PHASE1_DMV_CORE
+[DEPLOY-STRATEGY] Strategy: smart
+[MODE] DeepSeek only
+[BATCH] Using queue without priority sorting
+[BATCH] Processing 20 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 2
+[BATCH] Mode: deepseek
+[BATCH] QA Mode: deepseek
+[BATCH] Using batch ID from env: 2025-12-15T15-14-38-275Z
+[BATCH] No MONSTER_INTERNAL_SECRET, skipping status update
+[BATCH] Deploy strategy: smart
+[BATCH] Deploy config: every 10 pages or 15 minutes
+(node:95290) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+[BATCH] Processing batch 1 (2 pages in parallel)...
+[BATCH] [2/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [3/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [2/20] ✅ Completed in 90.4s → /Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json
+[BATCH] [2/20] 📄 HTML: /semantic-pages/en/dmv-titles/az/title-types/checklist
+[BATCH] [3/20] ✅ Completed in 91.7s → /Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json
+[BATCH] [3/20] 📄 HTML: /semantic-pages/en/dmv-titles/fl/title-types/checklist
+[SMART-DEPLOY] Page completed (1/20, 1 since last deploy)
+[SMART-DEPLOY] Page completed (2/20, 2 since last deploy)
+[BATCH] Batch completed in 91.7s
+[PROGRESS] 2/20 (10%) - 13m 49s left
+
+[BATCH] Processing batch 2 (2 pages in parallel)...
+[BATCH] [4/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [5/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_name_change_guide_en_us_general.json
+[BATCH] [4/20] ✅ Completed in 89.8s → /Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json
+[BATCH] [4/20] 📄 HTML: /semantic-pages/en/dmv-titles/ca/title-types/checklist
+
+[EXIT] code=null

@@ -570,7 +570,8 @@
         <div class="container">
             <div class="second-screen-content">
                 <div class="second-screen-left">
-                    <h2 class="second-screen-title headline-variant-a">
+                    <h2 class="second-screen-title" id="heroHeadline">
+                        <!-- Variant A: Hierarchy poster (default) -->
                         <span class="line line-big">TRUSTED</span>
                         <span class="line line-mid">BY</span>
                         <span class="line line-big">THOUSANDS</span>
@@ -3402,6 +3403,47 @@
             });
         });
     });
+    
+    // Headline Variant Switcher
+    // Change VARIANT constant to switch between A, B, C or use ?variant=B in URL
+    (function() {
+        const VARIANT = 'A'; // Change to 'A', 'B', or 'C'
+        
+        // Get variant from URL query param or use constant
+        const urlParams = new URLSearchParams(window.location.search);
+        const variant = urlParams.get('variant')?.toUpperCase() || VARIANT;
+        
+        const headlines = {
+            A: [
+                { text: 'TRUSTED', size: 'big' },
+                { text: 'BY', size: 'mid' },
+                { text: 'THOUSANDS', size: 'big' },
+                { text: '— because', size: 'small' },
+                { text: 'EVERY DETAIL', size: 'mid' },
+                { text: 'MATTERS', size: 'big' }
+            ],
+            B: [
+                { text: 'TRUSTED', size: 'big' },
+                { text: 'BY THOUSANDS', size: 'mid' },
+                { text: '— BECAUSE', size: 'small' },
+                { text: 'EVERY DETAIL MATTERS', size: 'mid' }
+            ],
+            C: [
+                { text: 'TRUSTED', size: 'big' },
+                { text: 'BY_1000+', size: 'mid-mono' },
+                { text: 'DETAILS > NO_SURPRISES', size: 'mid-mono' },
+                { text: 'every detail matters.', size: 'small-lower' }
+            ]
+        };
+        
+        const headlineEl = document.getElementById('heroHeadline');
+        if (headlineEl && headlines[variant]) {
+            headlineEl.className = `second-screen-title headline-variant-${variant.toLowerCase()}`;
+            headlineEl.innerHTML = headlines[variant]
+                .map(line => `<span class="line line-${line.size}">${line.text}</span>`)
+                .join('');
+        }
+    })();
     </script>
     
     <!-- Vercel Speed Insights -->

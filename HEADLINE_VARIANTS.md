@@ -1,76 +1,208 @@
-# Hero Headline Variants - A/B Testing Guide
+# Hero Headline Variants — A/B Testing Documentation
 
-## Current Implementation: Variant A (Hierarchy Poster)
+## Overview
+This document describes the three headline variants for the "Trusted by thousands" section, implementing intentional poster-style typography with hierarchy and rhythm.
 
-### How to Switch Variants
+## Quick Switch Guide
 
-**Method 1: Change HTML class**
-In `index.html`, change the class on `<h2>`:
-- `headline-variant-a` (current)
-- `headline-variant-b` 
-- `headline-variant-c`
-
-**Method 2: Uncomment CSS rules**
-In `styles.css`, uncomment the variant styles you want to test.
-
-## Variant A: Hierarchy Poster (CURRENT)
-```html
-<h2 class="second-screen-title headline-variant-a">
-    <span class="line line-big">TRUSTED</span>
-    <span class="line line-mid">BY</span>
-    <span class="line line-big">THOUSANDS</span>
-    <span class="line line-small">— because</span>
-    <span class="line line-mid">EVERY DETAIL</span>
-    <span class="line line-big">MATTERS</span>
-</h2>
+### Method 1: Change JavaScript Constant
+In `index.html`, find the headline switcher script and change the `VARIANT` constant:
+```javascript
+const VARIANT = 'A'; // Change to 'A', 'B', or 'C'
 ```
+
+### Method 2: Use URL Query Parameter
+Navigate to your page with `?variant=B` or `?variant=C` in the URL:
+- Variant A: `index.html` or `index.html?variant=A`
+- Variant B: `index.html?variant=B`
+- Variant C: `index.html?variant=C`
+
+---
+
+## Variant A: Hierarchy Poster (Default)
+
+### Copy
+```
+TRUSTED
+BY
+THOUSANDS
+— because
+EVERY DETAIL
+MATTERS
+```
+
+### Typography
+- **TRUSTED**: Big (clamp 44px–84px), font-weight 900, letter-spacing -0.04em
+- **BY**: Mid (clamp 28px–52px), font-weight 800, letter-spacing -0.03em
+- **THOUSANDS**: Big (clamp 44px–84px), font-weight 900, letter-spacing -0.04em
+- **— because**: Small (14px), lowercase, opacity 0.75, letter-spacing 0.18em
+- **EVERY DETAIL**: Mid (clamp 28px–52px), font-weight 800, letter-spacing -0.03em
+- **MATTERS**: Big (clamp 44px–84px), font-weight 900, letter-spacing -0.04em
+
+### Geometry
+- Desktop: `max-width: 11ch`
+- Mobile: `max-width: 14ch`
+
+### Characteristics
+- Maximum hierarchy with alternating sizes
+- Deliberate, poster-like rhythm
+- Connector line ("— because") creates visual break
+- Each word on its own line for impact
+
+---
 
 ## Variant B: Clean Tech Poster
-```html
-<h2 class="second-screen-title headline-variant-b">
-    <span class="line line-big">TRUSTED</span>
-    <span class="line line-mid">BY THOUSANDS</span>
-    <span class="line line-small">— BECAUSE</span>
-    <span class="line line-mid">EVERY DETAIL MATTERS</span>
-</h2>
+
+### Copy
 ```
+TRUSTED
+BY THOUSANDS
+— BECAUSE
+EVERY DETAIL MATTERS
+```
+
+### Typography
+- **TRUSTED**: Big (clamp 44px–84px), font-weight 900, letter-spacing -0.04em
+- **BY THOUSANDS**: Mid (clamp 28px–52px), font-weight 800, letter-spacing -0.03em
+- **— BECAUSE**: Small (14px), uppercase, opacity 0.75, letter-spacing 0.18em
+- **EVERY DETAIL MATTERS**: Mid (clamp 28px–52px), font-weight 800, letter-spacing -0.03em
+
+### Geometry
+- Desktop: `max-width: 12ch`
+- Mobile: `max-width: 16ch`
+
+### Characteristics
+- Cleaner, more condensed layout
+- Grouping related words together
+- All uppercase for connector line
+- More balanced visual weight
+
+---
 
 ## Variant C: Terminal/Tech
-```html
-<h2 class="second-screen-title headline-variant-c">
-    <span class="line line-big">TRUSTED</span>
-    <span class="line line-mid">BY_1000+</span>
-    <span class="line line-mid">DETAILS > NO_SURPRISES</span>
-    <span class="line line-small">every detail matters.</span>
-</h2>
+
+### Copy
+```
+TRUSTED
+BY_1000+
+DETAILS > NO_SURPRISES
+every detail matters.
 ```
 
-## Typography Specs
+### Typography
+- **TRUSTED**: Big (clamp 44px–84px), font-weight 900, letter-spacing -0.04em
+- **BY_1000+**: Mid-mono (clamp 20px–36px), Courier New, letter-spacing 0.05em
+- **DETAILS > NO_SURPRISES**: Mid-mono (clamp 20px–36px), Courier New, letter-spacing 0.05em
+- **every detail matters.**: Small-lower (13px), lowercase, opacity 0.75, letter-spacing 0.18em
 
-- **Font**: Inter Tight, Roboto Condensed, system-ui fallback
-- **BIG lines**: clamp(44px, 6vw, 84px), weight: 900, tracking: -0.04em
-- **MID lines**: clamp(28px, 4vw, 52px), weight: 800, tracking: -0.02em  
-- **SMALL lines**: 14px, weight: 400, tracking: 0.18em, opacity: 0.85
-- **Line height**: 0.92-0.95 for tight poster feel
-- **Max width**: 11ch desktop, 16ch mobile
+### Geometry
+- Desktop: `max-width: 16ch`
+- Mobile: `max-width: 18ch`
 
-## Mobile Responsive
+### Characteristics
+- Tech/terminal aesthetic with monospace font
+- Programming-style notation (underscore, greater-than)
+- Mixed case for contrast
+- Numeric representation (1000+)
 
-Mobile (< 768px):
-- BIG: clamp(36px, 8vw, 64px)
-- MID: clamp(24px, 6vw, 42px)
-- SMALL: 13px
-- Max-width: 16ch
-- Gap: 6px
+---
 
-## Acceptance Criteria ✅
+## Technical Implementation
 
-- [x] No accidental line wrapping
-- [x] Intentional, poster-style layout
-- [x] Condensed font with tight tracking
-- [x] Typographic hierarchy (big/mid/small)
-- [x] Mobile + desktop responsive
-- [x] "MATTERS" spelled correctly (not "MATTER")
-- [x] Easy variant switching
-- [x] Works with purple->black gradient background
+### Font Stack
+```css
+font-family: 'Inter Tight', 'Roboto Condensed', system-ui, sans-serif;
+```
 
+### Key CSS Features
+1. **Responsive Sizing**: Uses `clamp()` for fluid typography
+2. **Geometry Control**: `max-width` in `ch` units prevents accidental wrapping
+3. **Line Height**: Tight (0.88–0.95) for poster effect
+4. **Letter Spacing**: Negative for big lines, positive for small
+5. **Visual Polish**: Subtle purple glow (`text-shadow: 0 2px 12px rgba(107, 0, 184, 0.3)`)
+
+### Typing Animation
+Each variant includes sequential typing animation with cursor effect:
+- Lines type one at a time
+- Cursor appears during typing, disappears after (except final line)
+- Timing adjusted per variant based on line count
+
+### Responsive Behavior
+- Desktop: Uses specified line breaks as-is
+- Mobile (≤768px): Adjusts `max-width` in `ch` units for better fit
+- Font sizes scale down proportionally on smaller screens
+
+---
+
+## Acceptance Criteria ✓
+
+- ✅ No accidental wrapping — line breaks are intentional
+- ✅ Condensed font with tight tracking (Inter Tight)
+- ✅ Typographic hierarchy (BIG, MID, SMALL)
+- ✅ Readable on all screen sizes
+- ✅ Desktop + Mobile deliberate line breaks
+- ✅ 3 variants switchable via constant or URL param
+- ✅ Correct grammar: "MATTERS" (not "MATTER")
+- ✅ Subtle visual polish (text shadow/glow)
+- ✅ Consistent line spacing (gap: 8px desktop, 6px mobile)
+
+---
+
+## Files Modified
+
+### `index.html`
+- Added variant switcher script
+- Converted headline to dynamic rendering
+- Added `id="heroHeadline"` for JavaScript targeting
+
+### `styles.css`
+- Comprehensive typography system for all variants
+- Geometry control with `max-width` in `ch` units
+- Typing animations for all three variants
+- Responsive overrides for mobile
+- Visual polish (text shadow)
+
+---
+
+## Testing Checklist
+
+### Desktop (>768px)
+- [ ] Headline looks like intentional poster, not broken wrap
+- [ ] All three variants render correctly
+- [ ] Typography hierarchy is clear
+- [ ] Typing animation flows smoothly
+- [ ] Text doesn't collide with logo/menu
+
+### Mobile (iPhone width)
+- [ ] Headline maintains intentional look
+- [ ] No overflow or broken text
+- [ ] Font sizes remain readable
+- [ ] Variants switch correctly via URL param
+
+### Functionality
+- [ ] JavaScript constant switch works
+- [ ] URL parameter switch works
+- [ ] Fallback font works if Inter Tight unavailable
+- [ ] Animations complete properly for all variants
+
+---
+
+## Recommendations
+
+### For A/B Testing
+1. **Traffic Split**: Allocate 33.3% to each variant initially
+2. **Metrics to Track**:
+   - Time on page
+   - Scroll depth
+   - Form submissions (VIN/Plate searches)
+   - Mobile vs. desktop performance
+3. **Duration**: Run test for at least 2 weeks or 1000+ sessions per variant
+
+### Winner Prediction
+- **Variant A**: Best for emotional impact and premium feel
+- **Variant B**: Best for clarity and quick comprehension
+- **Variant C**: Best for tech-savvy audience and differentiation
+
+---
+
+*Last updated: Dec 18, 2025*

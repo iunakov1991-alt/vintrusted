@@ -1,0 +1,21 @@
+[24/7 MODE] 🚀 AUTO RESTART ENABLED
+[PHASE-STRATEGY] Phase: PHASE1_DMV_CORE
+[DEPLOY-STRATEGY] Strategy: smart
+[MODE] DeepSeek only
+[BATCH] Using queue without priority sorting
+[BATCH] Processing 20 topic(s) from /Users/dmitrii/Desktop/website/data/topics_queue.json
+[BATCH] Parallel workers: 2
+[BATCH] Mode: deepseek
+[BATCH] QA Mode: deepseek
+[BATCH] Using batch ID from env: 2025-12-15T15-14-08-430Z
+[BATCH] No MONSTER_INTERNAL_SECRET, skipping status update
+[BATCH] Deploy strategy: smart
+[BATCH] Deploy config: every 10 pages or 15 minutes
+(node:94611) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+[BATCH] Processing batch 1 (2 pages in parallel)...
+[BATCH] [2/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_registration_checklist_en_us_general.json
+[BATCH] [3/20] Starting /Users/dmitrii/Desktop/website/data/topic.dmv_az_registration_guide_en_us_general.json
+
+[EXIT] code=null

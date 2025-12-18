@@ -1,5 +1,5 @@
 [SUMMARY]
-This is a comprehensive and well-structured guide that effectively serves its audience. It provides clear, practical, and legally accurate information on California title types, with a strong emphasis on due diligence and the VIN check process. The content is detailed, avoids filler, and logically flows from explanation to actionable steps.
+This is a comprehensive, well-structured, and highly practical guide to California DMV title types. It thoroughly covers the legal definitions, processes, and critical due-diligence steps for a general US audience, successfully avoiding filler and focusing on actionable advice. The content is accurate, uses official terminology, and effectively frames the VIN check as an essential tool.
 
 [BLOCKS]
 hero: OK
@@ -7,16 +7,13 @@ context_legal: OK
 step_by_step: OK
 checklist: OK
 common_errors: OK
-comparison_table: WEAK
-- Recommendation 1: The table is too brief and lacks critical detail. Expand the "Insurance Implications" column to be more specific (e.g., for "Clean," note "Generally no restrictions").
-- Recommendation 2: Add a column for "Resale Value Impact" (e.g., "Highest," "Very Low," "Reduced") to directly address a key audience concern.
-- Recommendation 3: Ensure the "Inspection Required" column for "Salvage" clarifies it's for conversion to rebuilt, not for registration in its current state.
+comparison_table: OK
 fees_taxes: OK
 vin_section: OK
 faq: OK
 
 [LEGAL / FACTUAL RISK]
-No obvious legal/factual risks detected. The article correctly cites California-specific processes (CHP Form 97C, brake and lamp inspection) and accurately describes legal implications (title branding permanence, lien release necessity, odometer disclosure as a federal offense).
+No obvious legal/factual risks detected. The article correctly describes California-specific processes (CHP inspections, REG forms, 75% total loss threshold as a typical guideline) and legal requirements without making overconfident promises.
 
 [VIN / CTA]
-VIN usage is appropriately framed as a critical due-diligence tool for uncovering hidden history, preventing fraud, and verifying vehicle identity against DMV records. The CTA is neutral and practical, advising readers to "use a reliable VIN verification service" and "check the VIN before purchase" as a protective step, without making overconfident promises.
+VIN usage is correctly framed as a critical due-diligence tool to uncover hidden history, title washing, and fraud, not as a guarantee. The CTA in the `vin_section` is appropriately neutral, advising readers to "invest in a professional VIN report to make an informed decision."

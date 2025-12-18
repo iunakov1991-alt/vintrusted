@@ -874,13 +874,13 @@
                     clearTimeout(timeoutId);
                     
                     if (response.ok) {
-                        const data = await response.json();
-                        if (data.Results && data.Results.length > 0) {
+                const data = await response.json();
+                if (data.Results && data.Results.length > 0) {
                             sessionStorage.setItem('nhtsa_data_' + vin, JSON.stringify(data));
                             sessionStorage.setItem('nhtsa_timestamp_' + vin, Date.now().toString());
                             console.log('[✅ API] Data received successfully');
-                            return parseNHTSAData(data.Results);
-                        }
+                    return parseNHTSAData(data.Results);
+                }
                     }
                 } catch (fetchError) {
                     clearTimeout(timeoutId);
@@ -1046,29 +1046,29 @@
                         bodyStyle: 'Sedan',
                         driveType: 'FWD'
                     };
-                    
-                    // Add default values for missing fields
-                    const reportData = {
-                        year: data.year || '-',
-                        make: data.make || '-',
-                        model: data.model || '-',
-                        engine: data.engine || '-',
-                        transmission: data.transmission || '-',
-                        recalls: 0,
-                        airbagStatus: 'Active',
-                        safetyRating: '5 Stars',
-                        accidents: 0,
-                        ownersCount: '2',
-                        serviceRecords: '12',
-                        titleStatus: 'Clean',
-                        mileage: '85,432',
-                        fuelType: data.fuelType || 'Gasoline',
-                        bodyStyle: data.bodyStyle || 'Sedan',
-                        driveType: data.driveType || 'FWD'
-                    };
-                    
-                    // Populate the report
-                    populateReport(reportData);
+                
+                // Add default values for missing fields
+                const reportData = {
+                    year: data.year || '-',
+                    make: data.make || '-',
+                    model: data.model || '-',
+                    engine: data.engine || '-',
+                    transmission: data.transmission || '-',
+                    recalls: 0,
+                    airbagStatus: 'Active',
+                    safetyRating: '5 Stars',
+                    accidents: 0,
+                    ownersCount: '2',
+                    serviceRecords: '12',
+                    titleStatus: 'Clean',
+                    mileage: '85,432',
+                    fuelType: data.fuelType || 'Gasoline',
+                    bodyStyle: data.bodyStyle || 'Sedan',
+                    driveType: data.driveType || 'FWD'
+                };
+                
+                // Populate the report
+                populateReport(reportData);
                 }
                 
                 // No more code here - VIN path already handled above
@@ -1387,7 +1387,7 @@
             if (vinPay) {
                 observer.observe(vinPay, { childList: true, subtree: true });
             }
-        })();        
+        })();
     </script>
     
     <!-- Terms logic moved to vin-stripe.js -->

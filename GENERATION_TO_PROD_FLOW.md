@@ -600,3 +600,5 @@ node scripts/build_topics_batch_parallel.js --mode prod
 
 **Документация актуальна на:** 2025-12-10  
 **Версия системы:** Monster 8.0
+
+

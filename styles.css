@@ -2759,8 +2759,12 @@ button[type="submit"],
     margin-top: 60px;
 }
 
+/* ============================================================
+   HERO HEADLINE: INTENTIONAL POSTER TYPOGRAPHY
+   ============================================================ */
+
 .second-screen-title {
-    font-family: 'Inter Tight', 'Roboto Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Inter Tight', 'Roboto Condensed', system-ui, sans-serif;
     font-weight: 900;
     color: #ffffff;
     margin-bottom: 20px;
@@ -2769,27 +2773,32 @@ button[type="submit"],
     display: flex;
     flex-direction: column;
     gap: 8px;
+    position: relative;
+    text-shadow: 0 2px 12px rgba(107, 0, 184, 0.3);
 }
 
+/* Base line styles */
 .line {
     display: block;
     white-space: nowrap;
     border-right: 3px solid transparent;
     width: 0;
+    overflow: hidden;
 }
 
+/* Typography Hierarchy */
 .line-big {
-    font-size: clamp(64px, 8vw, 110px);
+    font-size: clamp(44px, 6vw, 84px);
     font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -0.02em;
+    line-height: 0.88;
+    letter-spacing: -0.04em;
 }
 
 .line-mid {
-    font-size: clamp(42px, 6vw, 70px);
+    font-size: clamp(28px, 4vw, 52px);
     font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.01em;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
 }
 
 .line-small {
@@ -2798,11 +2807,53 @@ button[type="submit"],
     line-height: 1.2;
     letter-spacing: 0.18em;
     text-transform: lowercase;
-    opacity: 0.85;
+    opacity: 0.75;
     margin: 4px 0;
 }
 
-/* Typing animation for each line */
+/* Variant C: Monospace lines */
+.line-mid-mono {
+    font-size: clamp(20px, 3vw, 36px);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: 0.05em;
+    font-family: 'Courier New', monospace;
+}
+
+.line-small-lower {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    opacity: 0.75;
+    margin: 4px 0;
+}
+
+/* ============================================================
+   GEOMETRY CONTROL
+   ============================================================ */
+
+/* Variant A: Hierarchy poster */
+.headline-variant-a {
+    max-width: 11ch;
+}
+
+/* Variant B: Clean tech poster */
+.headline-variant-b {
+    max-width: 12ch;
+}
+
+/* Variant C: Terminal/tech */
+.headline-variant-c {
+    max-width: 16ch;
+}
+
+/* ============================================================
+   TYPING ANIMATIONS
+   ============================================================ */
+
+/* Variant A typing animations */
 .headline-variant-a .line:nth-child(1) {
     overflow: hidden;
     animation: typing 1s steps(7, end) forwards, cursor-blink 1s step-end forwards;
@@ -2860,26 +2911,55 @@ button[type="submit"],
     0%, 100% { border-color: #ffffff; }
 }
 
-/* Variant A: Hierarchy poster (default) */
-.headline-variant-a {
-    max-width: 11ch;
+/* Variant B typing animations */
+.headline-variant-b .line:nth-child(1) {
+    overflow: hidden;
+    animation: typing 1s steps(7, end) forwards, cursor-blink 1s step-end forwards;
+    animation-delay: 0.5s, 0.5s;
 }
 
-/* Variant B: Clean tech poster - uncomment to switch */
-/*
-.headline-variant-b .line:nth-child(1) { font-size: clamp(44px, 6vw, 84px); }
-.headline-variant-b .line:nth-child(2) { font-size: clamp(28px, 4vw, 52px); }
-.headline-variant-b .line:nth-child(3) { font-size: 14px; text-transform: uppercase; }
-.headline-variant-b .line:nth-child(4) { font-size: clamp(28px, 4vw, 52px); }
-*/
+.headline-variant-b .line:nth-child(2) {
+    overflow: hidden;
+    animation: typing 1.3s steps(12, end) forwards, cursor-blink 1.3s step-end forwards;
+    animation-delay: 1.5s, 1.5s;
+}
 
-/* Variant C: Terminal/tech - uncomment to switch */
-/*
-.headline-variant-c .line:nth-child(1) { font-size: clamp(44px, 6vw, 84px); }
-.headline-variant-c .line:nth-child(2) { font-size: clamp(28px, 4vw, 52px); font-family: 'Courier New', monospace; }
-.headline-variant-c .line:nth-child(3) { font-size: clamp(20px, 3vw, 36px); font-family: 'Courier New', monospace; }
-.headline-variant-c .line:nth-child(4) { font-size: 13px; text-transform: lowercase; }
-*/
+.headline-variant-b .line:nth-child(3) {
+    overflow: hidden;
+    animation: typing 1s steps(10, end) forwards, cursor-blink 1s step-end forwards;
+    animation-delay: 2.8s, 2.8s;
+}
+
+.headline-variant-b .line:nth-child(4) {
+    overflow: hidden;
+    animation: typing 1.5s steps(20, end) forwards, cursor-blink-final 1.5s step-end forwards;
+    animation-delay: 3.8s, 3.8s;
+}
+
+/* Variant C typing animations */
+.headline-variant-c .line:nth-child(1) {
+    overflow: hidden;
+    animation: typing 1s steps(7, end) forwards, cursor-blink 1s step-end forwards;
+    animation-delay: 0.5s, 0.5s;
+}
+
+.headline-variant-c .line:nth-child(2) {
+    overflow: hidden;
+    animation: typing 1s steps(8, end) forwards, cursor-blink 1s step-end forwards;
+    animation-delay: 1.5s, 1.5s;
+}
+
+.headline-variant-c .line:nth-child(3) {
+    overflow: hidden;
+    animation: typing 1.5s steps(22, end) forwards, cursor-blink 1.5s step-end forwards;
+    animation-delay: 2.5s, 2.5s;
+}
+
+.headline-variant-c .line:nth-child(4) {
+    overflow: hidden;
+    animation: typing 1.5s steps(22, end) forwards, cursor-blink-final 1.5s step-end forwards;
+    animation-delay: 4s, 4s;
+}
 
 .second-screen-description {
     font-size: 18px;
@@ -2890,7 +2970,7 @@ button[type="submit"],
 .subpoints {
     opacity: 0;
     animation: fade-in-subpoints 0.5s ease-in-out;
-    animation-delay: 4.5s;
+    animation-delay: 7s;
     animation-fill-mode: both;
     margin-left: 10%;
     margin-top: 40px;
@@ -2951,20 +3031,39 @@ button[type="submit"],
     }
     
     .second-screen-title {
-        max-width: 16ch;
         gap: 6px;
         margin: 0 auto;
     }
     
+    /* Mobile geometry adjustments */
+    .headline-variant-a {
+        max-width: 14ch;
+    }
+    
+    .headline-variant-b {
+        max-width: 16ch;
+    }
+    
+    .headline-variant-c {
+        max-width: 18ch;
+    }
+    
     .line-big {
-        font-size: clamp(36px, 8vw, 64px);
+        font-size: clamp(36px, 8vw, 54px);
+        line-height: 0.92;
     }
     
     .line-mid {
-        font-size: clamp(24px, 6vw, 42px);
+        font-size: clamp(24px, 6vw, 38px);
+        line-height: 0.95;
     }
     
-    .line-small {
+    .line-mid-mono {
+        font-size: clamp(18px, 4vw, 28px);
+    }
+    
+    .line-small,
+    .line-small-lower {
         font-size: 13px;
     }
     

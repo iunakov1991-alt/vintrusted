@@ -1,92 +1,62 @@
 [
   {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_duplicate_title_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ny_title_types_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_guide_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_lien_release_guide_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ca_registration_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_tx_title_types_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_name_change_checklist_en_us_general.json"
-  },
-  {
     "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_checklist_en_us_general.json"
   },
   {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_correction_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_registration_guide_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_transfer_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_duplicate_title_guide_en_us_general.json"
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_fl_title_types_checklist_en_us_general.json"
   },
   {
     "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_types_checklist_en_us_general.json"
   },
   {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_address_change_guide_en_us_general.json"
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_name_change_guide_en_us_general.json"
   },
   {
     "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_out_of_state_transfer_checklist_en_us_general.json"
   },
   {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_registration_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_address_change_checklist_en_us_general.json"
-  },
-  {
     "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_lost_title_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_correction_guide_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_transfer_guide_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_fees_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_name_change_guide_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_nv_title_types_checklist_en_us_general.json"
-  },
-  {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_transfer_guide_en_us_general.json"
   },
   {
     "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_salvage_to_rebuilt_checklist_en_us_general.json"
   },
   {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ca_registration_guide_en_us_general.json"
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_lost_title_guide_en_us_general.json"
   },
   {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_fees_guide_en_us_general.json"
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_transfer_guide_en_us_general.json"
+  },
+  {
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_out_of_state_transfer_guide_en_us_general.json"
+  },
+  {
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_correction_guide_en_us_general.json"
+  },
+  {
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_address_change_guide_en_us_general.json"
   },
   {
     "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_lien_release_checklist_en_us_general.json"
   },
   {
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_address_change_checklist_en_us_general.json"
+  },
+  {
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ca_registration_checklist_en_us_general.json"
+  },
+  {
     "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_transfer_checklist_en_us_general.json"
   },
   {
-    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_lost_title_guide_en_us_general.json"
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ca_title_transfer_guide_en_us_general.json"
+  },
+  {
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_duplicate_title_checklist_en_us_general.json"
+  },
+  {
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_az_title_types_guide_en_us_general.json"
+  },
+  {
+    "topic_file": "/Users/dmitrii/Desktop/website/data/topic.dmv_ca_registration_guide_en_us_general.json"
   }
 ]
