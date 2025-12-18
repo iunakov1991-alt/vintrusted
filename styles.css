@@ -2857,20 +2857,20 @@ button[type="submit"],
 /* Variant A typing animations */
 .headline-variant-a .line:nth-child(1) {
     overflow: hidden;
-    animation: typing 1.8s ease-out forwards, cursor-blink 1.8s step-end forwards;
-    animation-delay: 0.8s, 0.8s;
+    animation: typing 0.4s ease-out forwards, cursor-blink 0.4s step-end forwards;
+    animation-delay: 0.3s, 0.3s;
 }
 
 .headline-variant-a .line:nth-child(2) {
     overflow: hidden;
-    animation: typing 1.3s ease-out forwards, cursor-blink 1.3s step-end forwards;
-    animation-delay: 2.8s, 2.8s;
+    animation: typing 0.3s ease-out forwards, cursor-blink 0.3s step-end forwards;
+    animation-delay: 0.7s, 0.7s;
 }
 
 .headline-variant-a .line:nth-child(3) {
     overflow: hidden;
-    animation: typing 2s ease-out forwards, cursor-blink 2s step-end forwards;
-    animation-delay: 4.3s, 4.3s;
+    animation: typing 0.4s ease-out forwards, cursor-blink 0.4s step-end forwards;
+    animation-delay: 1s, 1s;
 }
 
 .headline-variant-a .line:nth-child(4) {
@@ -2878,20 +2878,20 @@ button[type="submit"],
     font-size: clamp(13px, 2vw, 15px);
     opacity: 0.85;
     letter-spacing: 0.18em;
-    animation: typing 1.8s ease-out forwards, cursor-blink 1.8s step-end forwards;
-    animation-delay: 6.5s, 6.5s;
+    animation: typing 0.3s ease-out forwards, cursor-blink 0.3s step-end forwards;
+    animation-delay: 1.4s, 1.4s;
 }
 
 .headline-variant-a .line:nth-child(5) {
     overflow: hidden;
-    animation: typing 2.2s ease-out forwards, cursor-blink 2.2s step-end forwards;
-    animation-delay: 8.5s, 8.5s;
+    animation: typing 0.4s ease-out forwards, cursor-blink 0.4s step-end forwards;
+    animation-delay: 1.7s, 1.7s;
 }
 
 .headline-variant-a .line:nth-child(6) {
     overflow: hidden;
-    animation: typing 1.8s ease-out forwards, cursor-blink-final 1.8s step-end forwards;
-    animation-delay: 10.9s, 10.9s;
+    animation: typing 0.4s ease-out forwards, cursor-blink-final 0.4s step-end forwards;
+    animation-delay: 2.1s, 2.1s;
 }
 
 @keyframes typing {
@@ -2915,51 +2915,51 @@ button[type="submit"],
 /* Variant B typing animations */
 .headline-variant-b .line:nth-child(1) {
     overflow: hidden;
-    animation: typing 1.8s ease-out forwards, cursor-blink 1.8s step-end forwards;
-    animation-delay: 0.8s, 0.8s;
+    animation: typing 0.5s ease-out forwards, cursor-blink 0.5s step-end forwards;
+    animation-delay: 0.3s, 0.3s;
 }
 
 .headline-variant-b .line:nth-child(2) {
     overflow: hidden;
-    animation: typing 2.2s ease-out forwards, cursor-blink 2.2s step-end forwards;
-    animation-delay: 2.8s, 2.8s;
+    animation: typing 0.6s ease-out forwards, cursor-blink 0.6s step-end forwards;
+    animation-delay: 0.8s, 0.8s;
 }
 
 .headline-variant-b .line:nth-child(3) {
     overflow: hidden;
-    animation: typing 1.8s ease-out forwards, cursor-blink 1.8s step-end forwards;
-    animation-delay: 5.2s, 5.2s;
+    animation: typing 0.5s ease-out forwards, cursor-blink 0.5s step-end forwards;
+    animation-delay: 1.4s, 1.4s;
 }
 
 .headline-variant-b .line:nth-child(4) {
     overflow: hidden;
-    animation: typing 2.5s ease-out forwards, cursor-blink-final 2.5s step-end forwards;
-    animation-delay: 7.2s, 7.2s;
+    animation: typing 0.6s ease-out forwards, cursor-blink-final 0.6s step-end forwards;
+    animation-delay: 1.9s, 1.9s;
 }
 
 /* Variant C typing animations */
 .headline-variant-c .line:nth-child(1) {
     overflow: hidden;
-    animation: typing 1.8s ease-out forwards, cursor-blink 1.8s step-end forwards;
-    animation-delay: 0.8s, 0.8s;
+    animation: typing 0.5s ease-out forwards, cursor-blink 0.5s step-end forwards;
+    animation-delay: 0.3s, 0.3s;
 }
 
 .headline-variant-c .line:nth-child(2) {
     overflow: hidden;
-    animation: typing 2s ease-out forwards, cursor-blink 2s step-end forwards;
-    animation-delay: 2.8s, 2.8s;
+    animation: typing 0.5s ease-out forwards, cursor-blink 0.5s step-end forwards;
+    animation-delay: 0.8s, 0.8s;
 }
 
 .headline-variant-c .line:nth-child(3) {
     overflow: hidden;
-    animation: typing 2.5s ease-out forwards, cursor-blink 2.5s step-end forwards;
-    animation-delay: 5s, 5s;
+    animation: typing 0.6s ease-out forwards, cursor-blink 0.6s step-end forwards;
+    animation-delay: 1.3s, 1.3s;
 }
 
 .headline-variant-c .line:nth-child(4) {
     overflow: hidden;
-    animation: typing 2.5s ease-out forwards, cursor-blink-final 2.5s step-end forwards;
-    animation-delay: 7.7s, 7.7s;
+    animation: typing 0.6s ease-out forwards, cursor-blink-final 0.6s step-end forwards;
+    animation-delay: 1.9s, 1.9s;
 }
 
 .second-screen-description {
@@ -2971,7 +2971,7 @@ button[type="submit"],
 .subpoints {
     opacity: 0;
     animation: fade-in-subpoints 0.5s ease-in-out;
-    animation-delay: 13s;
+    animation-delay: 3s;
     animation-fill-mode: both;
     margin-left: 10%;
     margin-top: 40px;
