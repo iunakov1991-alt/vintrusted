@@ -1002,7 +1002,7 @@ body {
         border-color: transparent;
     }
     0.1%, 99.9% {
-        border-color: #1a1a1a;
+        border-color: rgba(224, 179, 255, 0.8);
     }
     100% {
         border-color: transparent;
@@ -1014,7 +1014,28 @@ body {
         border-color: transparent;
     }
     0.1%, 99.9% {
-        border-color: #1a1a1a;
+        border-color: rgba(224, 179, 255, 0.8);
+    }
+    100% {
+        border-color: transparent;
+    }
+}
+
+@keyframes typing-line-3 {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes cursor-line-3 {
+    0% {
+        border-color: transparent;
+    }
+    0.1%, 99.9% {
+        border-color: rgba(224, 179, 255, 0.8);
     }
     100% {
         border-color: transparent;
@@ -2801,22 +2822,34 @@ button[type="submit"],
 }
 
 .second-screen-title {
-    font-size: 36px;
-    font-weight: 700;
-    color: #1a1a1a;
+    font-size: 48px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff 0%, #e0b3ff 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 20px;
     margin-top: -40px;
     margin-left: 10%;
-    line-height: 1.2;
+    line-height: 1.3;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 30px rgba(224, 179, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.second-screen-title:hover {
+    text-shadow: 0 0 40px rgba(224, 179, 255, 0.8);
+    transform: translateY(-2px);
 }
 
 .title-line-1 {
     display: block;
     overflow: hidden;
-    border-right: 3px solid transparent;
+    border-right: 3px solid rgba(224, 179, 255, 0.8);
     white-space: nowrap;
     width: 0;
-    animation: typing-line-1 1.75s steps(25, end), cursor-line-1 1.75s linear;
+    animation: typing-line-1 1.5s steps(25, end), cursor-line-1 1.5s linear;
     animation-delay: 0.5s;
     animation-fill-mode: both;
 }
@@ -2824,11 +2857,22 @@ button[type="submit"],
 .title-line-2 {
     display: block;
     overflow: hidden;
-    border-right: 3px solid transparent;
+    border-right: 3px solid rgba(224, 179, 255, 0.8);
     white-space: nowrap;
     width: 0;
-    animation: typing-line-2 1.75s steps(25, end), cursor-line-2 1.75s linear;
-    animation-delay: 2.25s;
+    animation: typing-line-2 1.5s steps(20, end), cursor-line-2 1.5s linear;
+    animation-delay: 2s;
+    animation-fill-mode: both;
+}
+
+.title-line-3 {
+    display: block;
+    overflow: hidden;
+    border-right: 3px solid rgba(224, 179, 255, 0.8);
+    white-space: nowrap;
+    width: 0;
+    animation: typing-line-3 1.5s steps(20, end), cursor-line-3 1.5s linear;
+    animation-delay: 3.5s;
     animation-fill-mode: both;
 }
 
