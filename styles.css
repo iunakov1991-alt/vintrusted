@@ -2836,17 +2836,17 @@ button[type="submit"],
 
 /* Variant A: Hierarchy poster */
 .headline-variant-a {
-    max-width: 11ch;
+    max-width: none;
 }
 
 /* Variant B: Clean tech poster */
 .headline-variant-b {
-    max-width: 12ch;
+    max-width: none;
 }
 
 /* Variant C: Terminal/tech */
 .headline-variant-c {
-    max-width: 16ch;
+    max-width: none;
 }
 
 /* ============================================================
@@ -3033,19 +3033,20 @@ button[type="submit"],
     .second-screen-title {
         gap: 6px;
         margin: 0 auto;
+        max-width: 90%;
     }
     
     /* Mobile geometry adjustments */
     .headline-variant-a {
-        max-width: 14ch;
+        max-width: none;
     }
     
     .headline-variant-b {
-        max-width: 16ch;
+        max-width: none;
     }
     
     .headline-variant-c {
-        max-width: 18ch;
+        max-width: none;
     }
     
     .line-big {
