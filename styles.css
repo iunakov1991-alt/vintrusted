@@ -2981,9 +2981,10 @@ button[type="submit"],
 }
 
 .second-screen-image {
-    width: 100%;
+    width: 110%;
     height: auto;
     border-radius: 12px;
+    margin-left: -10%;
 }
 
 /* Responsive for second screen */
