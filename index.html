@@ -3404,17 +3404,11 @@
         });
     });
     
-    // Headline Variant Switcher
-    // Change VARIANT constant to switch between A, B, C or use ?variant=B in URL
+    // Rotating Headlines System - 10 premium auto check headlines
     (function() {
-        const VARIANT = 'A'; // Change to 'A', 'B', or 'C'
-        
-        // Get variant from URL query param or use constant
-        const urlParams = new URLSearchParams(window.location.search);
-        const variant = urlParams.get('variant')?.toUpperCase() || VARIANT;
-        
-        const headlines = {
-            A: [
+        const headlines = [
+            // Headline 1: Trust & Detail
+            [
                 { text: 'TRUSTED', size: 'big' },
                 { text: 'BY', size: 'mid' },
                 { text: 'THOUSANDS', size: 'big' },
@@ -3422,30 +3416,112 @@
                 { text: 'EVERY DETAIL', size: 'mid' },
                 { text: 'MATTERS', size: 'big' }
             ],
-            B: [
-                { text: 'TRUSTED', size: 'big' },
-                { text: 'BY THOUSANDS', size: 'mid' },
-                { text: '— BECAUSE', size: 'small' },
-                { text: 'EVERY DETAIL MATTERS', size: 'mid' }
+            // Headline 2: Know Before You Buy
+            [
+                { text: 'KNOW', size: 'big' },
+                { text: 'YOUR', size: 'mid' },
+                { text: 'CAR', size: 'big' },
+                { text: '— before', size: 'small' },
+                { text: 'EVERY PURCHASE', size: 'mid' },
+                { text: 'COUNTS', size: 'big' }
             ],
-            C: [
-                { text: 'TRUSTED', size: 'big' },
-                { text: 'BY_1000+', size: 'mid-mono' },
-                { text: 'DETAILS > NO_SURPRISES', size: 'mid-mono' },
-                { text: 'every detail matters.', size: 'small-lower' }
+            // Headline 3: Honest Reports
+            [
+                { text: 'HONEST', size: 'big' },
+                { text: 'REPORTS', size: 'mid' },
+                { text: 'ONLY', size: 'big' },
+                { text: '— where', size: 'small' },
+                { text: 'TRUTH ALWAYS', size: 'mid' },
+                { text: 'WINS', size: 'big' }
+            ],
+            // Headline 4: Verified History
+            [
+                { text: 'VERIFIED', size: 'big' },
+                { text: 'HISTORY', size: 'mid' },
+                { text: 'CHECKS', size: 'big' },
+                { text: '— because', size: 'small' },
+                { text: 'SURPRISES COST', size: 'mid' },
+                { text: 'MORE', size: 'big' }
+            ],
+            // Headline 5: Smart Buyers
+            [
+                { text: 'SMART', size: 'big' },
+                { text: 'BUYERS', size: 'mid' },
+                { text: 'CHOOSE', size: 'big' },
+                { text: '— they', size: 'small' },
+                { text: 'MAKE INFORMED', size: 'mid' },
+                { text: 'DECISIONS', size: 'big' }
+            ],
+            // Headline 6: Hidden Secrets
+            [
+                { text: 'HIDDEN', size: 'big' },
+                { text: 'SECRETS', size: 'mid' },
+                { text: 'REVEALED', size: 'big' },
+                { text: '— discover', size: 'small' },
+                { text: 'STORIES BEHIND', size: 'mid' },
+                { text: 'CARS', size: 'big' }
+            ],
+            // Headline 7: Accident Free Verification
+            [
+                { text: 'ACCIDENT', size: 'big' },
+                { text: 'FREE', size: 'mid' },
+                { text: 'PROOF', size: 'big' },
+                { text: '— verify', size: 'small' },
+                { text: 'CLAIMS BEFORE', size: 'mid' },
+                { text: 'BUYING', size: 'big' }
+            ],
+            // Headline 8: Full Transparency
+            [
+                { text: 'FULL', size: 'big' },
+                { text: 'TRANSPARENCY', size: 'mid' },
+                { text: 'GUARANTEED', size: 'big' },
+                { text: '— where', size: 'small' },
+                { text: 'HONESTY MEETS', size: 'mid' },
+                { text: 'DATA', size: 'big' }
+            ],
+            // Headline 9: Drive Confident
+            [
+                { text: 'DRIVE', size: 'big' },
+                { text: 'WITH', size: 'mid' },
+                { text: 'CONFIDENCE', size: 'big' },
+                { text: '— when', size: 'small' },
+                { text: 'FACTS GUIDE', size: 'mid' },
+                { text: 'CHOICES', size: 'big' }
+            ],
+            // Headline 10: Vehicle Truth
+            [
+                { text: 'VEHICLE', size: 'big' },
+                { text: 'TRUTH', size: 'mid' },
+                { text: 'EXPOSED', size: 'big' },
+                { text: '— we', size: 'small' },
+                { text: 'PROTECT SMART', size: 'mid' },
+                { text: 'BUYERS', size: 'big' }
             ]
-        };
+        ];
         
+        let currentHeadlineIndex = 0;
         const headlineEl = document.getElementById('heroHeadline');
-        if (headlineEl && headlines[variant]) {
-            headlineEl.className = `second-screen-title headline-variant-${variant.toLowerCase()}`;
-            headlineEl.innerHTML = headlines[variant]
-                .map(line => `<span class="line line-${line.size}">${line.text}</span>`)
-                .join('');
+        
+        function updateHeadline(index) {
+            if (headlineEl && headlines[index]) {
+                headlineEl.className = 'second-screen-title headline-variant-a';
+                headlineEl.innerHTML = headlines[index]
+                    .map(line => `<span class="line line-${line.size}">${line.text}</span>`)
+                    .join('');
+            }
         }
+        
+        // Set initial headline
+        updateHeadline(0);
+        
+        // Store update function globally for animation controller to use
+        window.updateToNextHeadline = function() {
+            currentHeadlineIndex = (currentHeadlineIndex + 1) % headlines.length;
+            updateHeadline(currentHeadlineIndex);
+        };
     })();
     
-    // Headline Animation Controller with Intersection Observer
+    // Headline Animation Controller with Intersection Observer and Headline Rotation
     (function() {
         const headlineEl = document.getElementById('heroHeadline');
         const secondScreen = document.querySelector('.second-screen');
@@ -3453,7 +3529,7 @@
         if (!headlineEl || !secondScreen) return;
         
         const ANIMATION_DURATION = 13000; // 13 seconds (total animation time)
-        const PAUSE_DURATION = 10000; // 10 seconds pause before repeat
+        const PAUSE_DURATION = 10000; // 10 seconds pause before next headline
         let animationTimeout = null;
         
         function startAnimation() {
@@ -3469,6 +3545,10 @@
             // Schedule next animation after current animation + pause
             clearTimeout(animationTimeout);
             animationTimeout = setTimeout(() => {
+                // Switch to next headline before starting animation again
+                if (window.updateToNextHeadline) {
+                    window.updateToNextHeadline();
+                }
                 startAnimation();
             }, ANIMATION_DURATION + PAUSE_DURATION);
         }
