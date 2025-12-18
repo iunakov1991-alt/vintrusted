@@ -3444,6 +3444,51 @@
                 .join('');
         }
     })();
+    
+    // Headline Animation Controller with Intersection Observer
+    (function() {
+        const headlineEl = document.getElementById('heroHeadline');
+        const secondScreen = document.querySelector('.second-screen');
+        
+        if (!headlineEl || !secondScreen) return;
+        
+        const ANIMATION_DURATION = 13000; // 13 seconds (total animation time)
+        const PAUSE_DURATION = 10000; // 10 seconds pause before repeat
+        let animationTimeout = null;
+        
+        function startAnimation() {
+            // Remove animate class to reset animation
+            headlineEl.classList.remove('animate');
+            
+            // Force reflow to restart animation
+            void headlineEl.offsetWidth;
+            
+            // Add animate class to trigger animation
+            headlineEl.classList.add('animate');
+            
+            // Schedule next animation after current animation + pause
+            clearTimeout(animationTimeout);
+            animationTimeout = setTimeout(() => {
+                startAnimation();
+            }, ANIMATION_DURATION + PAUSE_DURATION);
+        }
+        
+        // Intersection Observer to detect when section is 50% visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    // Start animation when section is 50% visible
+                    startAnimation();
+                    // Unobserve after first trigger (animation will loop automatically)
+                    observer.unobserve(secondScreen);
+                }
+            });
+        }, {
+            threshold: 0.5 // Trigger when 50% of element is visible
+        });
+        
+        observer.observe(secondScreen);
+    })();
     </script>
     
     <!-- Vercel Speed Insights -->
