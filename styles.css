@@ -2788,7 +2788,7 @@ button[type="submit"],
 /* Second Screen Styles */
 .second-screen {
     padding: 120px 0;
-    background: linear-gradient(to right, #000000 0%, #6b00b8 100%);
+    background: linear-gradient(to right, #6b00b8 0%, #000000 100%);
     min-height: 100vh;
 }
 
@@ -2888,7 +2888,6 @@ button[type="submit"],
     border-radius: 12px;
     margin-top: -80px;
     margin-left: 5%;
-    mix-blend-mode: screen;
 }
 
 /* Responsive for second screen */
