@@ -984,7 +984,7 @@ body {
         width: 0;
     }
     100% {
-        width: 100%;
+        width: 10ch;
     }
 }
 
@@ -1047,7 +1047,7 @@ body {
         width: 0;
     }
     100% {
-        width: 100%;
+        width: 17ch;
     }
 }
 
@@ -1056,7 +1056,7 @@ body {
         width: 0;
     }
     100% {
-        width: 100%;
+        width: 13ch;
     }
 }
 
@@ -1065,7 +1065,7 @@ body {
         width: 0;
     }
     100% {
-        width: 100%;
+        width: 17ch;
     }
 }
 
@@ -1074,7 +1074,7 @@ body {
         width: 0;
     }
     100% {
-        width: 100%;
+        width: 10ch;
     }
 }
 
@@ -2870,53 +2870,61 @@ button[type="submit"],
     text-transform: uppercase;
     transform: scaleX(0.7);
     transform-origin: left center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .title-line-1 {
-    display: block;
+    display: inline-block;
     overflow: hidden;
     border-right: 4px solid transparent;
     white-space: nowrap;
+    max-width: fit-content;
     width: 0;
     animation: typing-line-1 1s steps(7, end) forwards, cursor-line-1 1s step-end forwards;
     animation-delay: 0.5s, 0.5s;
 }
 
 .title-line-2 {
-    display: block;
+    display: inline-block;
     overflow: hidden;
     border-right: 4px solid transparent;
     white-space: nowrap;
+    max-width: fit-content;
     width: 0;
     animation: typing-line-2 1.2s steps(12, end) forwards, cursor-line-2 1.2s step-end forwards;
     animation-delay: 1.5s, 1.5s;
 }
 
 .title-line-3 {
-    display: block;
+    display: inline-block;
     overflow: hidden;
     border-right: 4px solid transparent;
     white-space: nowrap;
+    max-width: fit-content;
     width: 0;
     animation: typing-line-3 1s steps(9, end) forwards, cursor-line-3 1s step-end forwards;
     animation-delay: 2.7s, 2.7s;
 }
 
 .title-line-4 {
-    display: block;
+    display: inline-block;
     overflow: hidden;
     border-right: 4px solid transparent;
     white-space: nowrap;
+    max-width: fit-content;
     width: 0;
     animation: typing-line-4 1.2s steps(12, end) forwards, cursor-line-4 1.2s step-end forwards;
     animation-delay: 3.7s, 3.7s;
 }
 
 .title-line-5 {
-    display: block;
+    display: inline-block;
     overflow: hidden;
     border-right: 4px solid transparent;
     white-space: nowrap;
+    max-width: fit-content;
     width: 0;
     animation: typing-line-5 1s steps(7, end) forwards, cursor-line-5 1s step-end forwards;
     animation-delay: 4.9s, 4.9s;
