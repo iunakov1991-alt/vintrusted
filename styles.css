@@ -2788,7 +2788,7 @@ button[type="submit"],
 /* Second Screen Styles */
 .second-screen {
     padding: 120px 0;
-    background: linear-gradient(to right, #6b00b8 0%, #000000 100%);
+    background: linear-gradient(to right, #6b00b8 0%, #000000 50%);
     min-height: 100vh;
 }
 
