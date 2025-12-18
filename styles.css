@@ -2760,123 +2760,67 @@ button[type="submit"],
 }
 
 .second-screen-title {
-    font-size: 72px;
+    font-family: 'Inter Tight', 'Roboto Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     font-weight: 900;
     color: #ffffff;
     margin-bottom: 20px;
     margin-top: 0;
-    line-height: 0.95;
-    font-family: 'Impact', 'Arial Narrow', 'Arial Black', 'Helvetica Neue', sans-serif;
-    font-stretch: ultra-condensed;
     text-transform: uppercase;
-    transform: scaleX(0.7);
-    transform-origin: left center;
+    max-width: 12ch;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.title-line-1 {
+.line {
     display: block;
-    overflow: hidden;
-    border-right: 4px solid transparent;
     white-space: nowrap;
-    width: 0;
-    letter-spacing: 0.4em;
-    animation: typing-1 1s steps(7, end) forwards, cursor-1 1s step-end forwards;
-    animation-delay: 0.5s, 0.5s;
 }
 
-.title-line-2 {
-    display: block;
-    overflow: hidden;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
-    width: 0;
-    letter-spacing: 0.4em;
-    animation: typing-2 1.2s steps(12, end) forwards, cursor-2 1.2s step-end forwards;
-    animation-delay: 1.5s, 1.5s;
+.line-big {
+    font-size: clamp(44px, 6vw, 84px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
 }
 
-.title-line-3 {
-    display: block;
-    overflow: hidden;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
-    width: 0;
-    letter-spacing: 0.4em;
-    animation: typing-3 1s steps(9, end) forwards, cursor-3 1s step-end forwards;
-    animation-delay: 2.7s, 2.7s;
+.line-mid {
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
 }
 
-.title-line-4 {
-    display: block;
-    overflow: hidden;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
-    width: 0;
-    letter-spacing: 0.4em;
-    animation: typing-4 1.2s steps(12, end) forwards, cursor-4 1.2s step-end forwards;
-    animation-delay: 3.7s, 3.7s;
+.line-small {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    opacity: 0.85;
+    margin: 4px 0;
 }
 
-.title-line-5 {
-    display: block;
-    overflow: hidden;
-    border-right: 4px solid transparent;
-    white-space: nowrap;
-    width: 0;
-    letter-spacing: 0.4em;
-    animation: typing-5 1s steps(7, end) forwards, cursor-5 1s step-end forwards;
-    animation-delay: 4.9s, 4.9s;
+/* Variant A: Hierarchy poster (default) */
+.headline-variant-a {
+    max-width: 11ch;
 }
 
-@keyframes typing-1 {
-    0% { width: 0; }
-    100% { width: 100%; }
-}
+/* Variant B: Clean tech poster - uncomment to switch */
+/*
+.headline-variant-b .line:nth-child(1) { font-size: clamp(44px, 6vw, 84px); }
+.headline-variant-b .line:nth-child(2) { font-size: clamp(28px, 4vw, 52px); }
+.headline-variant-b .line:nth-child(3) { font-size: 14px; text-transform: uppercase; }
+.headline-variant-b .line:nth-child(4) { font-size: clamp(28px, 4vw, 52px); }
+*/
 
-@keyframes typing-2 {
-    0% { width: 0; }
-    100% { width: 100%; }
-}
-
-@keyframes typing-3 {
-    0% { width: 0; }
-    100% { width: 100%; }
-}
-
-@keyframes typing-4 {
-    0% { width: 0; }
-    100% { width: 100%; }
-}
-
-@keyframes typing-5 {
-    0% { width: 0; }
-    100% { width: 100%; }
-}
-
-@keyframes cursor-1 {
-    0%, 90% { border-color: #ffffff; }
-    100% { border-color: transparent; }
-}
-
-@keyframes cursor-2 {
-    0%, 90% { border-color: #ffffff; }
-    100% { border-color: transparent; }
-}
-
-@keyframes cursor-3 {
-    0%, 90% { border-color: #ffffff; }
-    100% { border-color: transparent; }
-}
-
-@keyframes cursor-4 {
-    0%, 90% { border-color: #ffffff; }
-    100% { border-color: transparent; }
-}
-
-@keyframes cursor-5 {
-    0% { border-color: #ffffff; }
-    100% { border-color: #ffffff; }
-}
+/* Variant C: Terminal/tech - uncomment to switch */
+/*
+.headline-variant-c .line:nth-child(1) { font-size: clamp(44px, 6vw, 84px); }
+.headline-variant-c .line:nth-child(2) { font-size: clamp(28px, 4vw, 52px); font-family: 'Courier New', monospace; }
+.headline-variant-c .line:nth-child(3) { font-size: clamp(20px, 3vw, 36px); font-family: 'Courier New', monospace; }
+.headline-variant-c .line:nth-child(4) { font-size: 13px; text-transform: lowercase; }
+*/
 
 .second-screen-description {
     font-size: 18px;
@@ -2948,7 +2892,21 @@ button[type="submit"],
     }
     
     .second-screen-title {
-        font-size: 28px;
+        max-width: 16ch;
+        gap: 6px;
+        margin: 0 auto;
+    }
+    
+    .line-big {
+        font-size: clamp(36px, 8vw, 64px);
+    }
+    
+    .line-mid {
+        font-size: clamp(24px, 6vw, 42px);
+    }
+    
+    .line-small {
+        font-size: 13px;
     }
     
     .second-screen-description {
