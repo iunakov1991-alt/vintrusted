@@ -2774,7 +2774,6 @@ button[type="submit"],
 .line {
     display: block;
     white-space: nowrap;
-    overflow: hidden;
     border-right: 3px solid transparent;
     width: 0;
 }
@@ -2783,14 +2782,12 @@ button[type="submit"],
     font-size: clamp(44px, 6vw, 84px);
     font-weight: 900;
     line-height: 0.92;
-    letter-spacing: -0.04em;
 }
 
 .line-mid {
     font-size: clamp(28px, 4vw, 52px);
     font-weight: 800;
     line-height: 0.95;
-    letter-spacing: -0.02em;
 }
 
 .line-small {
@@ -2805,31 +2802,43 @@ button[type="submit"],
 
 /* Typing animation for each line */
 .headline-variant-a .line:nth-child(1) {
+    overflow: hidden;
+    letter-spacing: 0.25em;
     animation: typing 1s steps(7, end) forwards, cursor-blink 1s step-end forwards;
     animation-delay: 0.5s, 0.5s;
 }
 
 .headline-variant-a .line:nth-child(2) {
+    overflow: hidden;
+    letter-spacing: 0.9em;
     animation: typing 0.8s steps(2, end) forwards, cursor-blink 0.8s step-end forwards;
     animation-delay: 1.5s, 1.5s;
 }
 
 .headline-variant-a .line:nth-child(3) {
+    overflow: hidden;
+    letter-spacing: 0.15em;
     animation: typing 1.2s steps(9, end) forwards, cursor-blink 1.2s step-end forwards;
     animation-delay: 2.3s, 2.3s;
 }
 
 .headline-variant-a .line:nth-child(4) {
+    overflow: hidden;
+    letter-spacing: 0.05em;
     animation: typing 1s steps(10, end) forwards, cursor-blink 1s step-end forwards;
     animation-delay: 3.5s, 3.5s;
 }
 
 .headline-variant-a .line:nth-child(5) {
+    overflow: hidden;
+    letter-spacing: 0.18em;
     animation: typing 1.2s steps(12, end) forwards, cursor-blink 1.2s step-end forwards;
     animation-delay: 4.5s, 4.5s;
 }
 
 .headline-variant-a .line:nth-child(6) {
+    overflow: hidden;
+    letter-spacing: 0.28em;
     animation: typing 1s steps(7, end) forwards, cursor-blink-final 1s step-end forwards;
     animation-delay: 5.7s, 5.7s;
 }
@@ -2838,13 +2847,8 @@ button[type="submit"],
     0% { 
         width: 0; 
     }
-    99% { 
-        width: fit-content;
-        overflow: hidden;
-    }
     100% { 
-        width: fit-content;
-        overflow: visible;
+        width: 100%;
     }
 }
 
