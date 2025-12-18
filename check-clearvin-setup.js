@@ -8,7 +8,7 @@ const https = require('https');
 
 // Test VIN from documentation
 const TEST_VIN = '5TDYK3DC8DS290235';
-const TEST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnZpcm9ubWVudCI6InRlc3QiLCJ1c2VyIjp7ImlkIjoyNjYyNDIsImVtYWlsIjoicmVkc3RlcGxlckBnbWFpbC5jb20ifSwidmVuZG9yIjp7ImlkIjo0MzAsInN0YXR1cyI6ImFjdGl2ZSJ9LCJpYXQiOjE3NjI5NjYxNzIsImV4cCI6MTc2NTU1ODE3Mn0.xDK0eAie7Jo-PTgXabjeRPk7s-T21TRcp5d7CbHYo4';
+const TEST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnZpcm9ubWVudCI6InRlc3QiLCJ1c2VyIjp7ImlkIjoyNjYyNDIsImVtYWlsIjoicmVkc3RlcGxlckBnbWFpbC5jb20ifSwidmVuZG9yIjp7ImlkIjo0MzAsInN0YXR1cyI6ImFjdGl2ZSJ9LCJpYXQiOjE3NjYwMDE1NjEsImV4cCI6MTc2ODU5MzU2MX0.gWLSNn-bGkpyiIJfDLaUpHQHjBDBCP_pYBg7dDJz8zs';
 
 console.log('🔍 Checking ClearVin API Setup...\n');
 

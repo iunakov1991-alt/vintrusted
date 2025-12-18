@@ -15,7 +15,7 @@
 ### Если токена нет:
 1. Нажмите **Add New**
 2. Name: `CLEARVIN_API_TOKEN`
-3. Value: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnZpcm9ubWVudCI6InRlc3QiLCJ1c2VyIjp7ImlkIjoyNjYyNDIsImVtYWlsIjoicmVkc3RlcGxlckBnbWFpbC5jb20ifSwidmVuZG9yIjp7ImlkIjo0MzAsInN0YXR1cyI6ImFjdGl2ZSJ9LCJpYXQiOjE3NjI5NjYxNzIsImV4cCI6MTc2NTU1ODE3Mn0.xDK0eAie7Jo-PTgXabjeRPk7s-T21TRcp5d7CbHYo4`
+3. Value: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnZpcm9ubWVudCI6InRlc3QiLCJ1c2VyIjp7ImlkIjoyNjYyNDIsImVtYWlsIjoicmVkc3RlcGxlckBnbWFpbC5jb20ifSwidmVuZG9yIjp7ImlkIjo0MzAsInN0YXR1cyI6ImFjdGl2ZSJ9LCJpYXQiOjE3NjYwMDE1NjEsImV4cCI6MTc2ODU5MzU2MX0.gWLSNn-bGkpyiIJfDLaUpHQHjBDBCP_pYBg7dDJz8zs`
 4. Выберите все окружения
 5. Нажмите **Save**
 6. **ВАЖНО**: Передеплойте проект (Deployments → ... → Redeploy)

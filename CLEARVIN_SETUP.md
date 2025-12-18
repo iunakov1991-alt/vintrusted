@@ -5,8 +5,8 @@
 Add the following environment variable to your Vercel project:
 
 ### CLEARVIN_API_TOKEN
-- **Value**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnZpcm9ubWVudCI6InRlc3QiLCJ1c2VyIjp7ImlkIjoyNjYyNDIsImVtYWlsIjoicmVkc3RlcGxlckBnbWFpbC5jb20ifSwidmVuZG9yIjp7ImlkIjo0MzAsInN0YXR1cyI6ImFjdGl2ZSJ9LCJpYXQiOjE3NjI5NjYxNzIsImV4cCI6MTc2NTU1ODE3Mn0.x9DK0eAie7Jo-PTgXabjeRPk7s-T21TRcp5d7CbHYo4`
-- **Note**: This is a test token valid until 12/12/2025. Replace with production token when ready.
+- **Value**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnZpcm9ubWVudCI6InRlc3QiLCJ1c2VyIjp7ImlkIjoyNjYyNDIsImVtYWlsIjoicmVkc3RlcGxlckBnbWFpbC5jb20ifSwidmVuZG9yIjp7ImlkIjo0MzAsInN0YXR1cyI6ImFjdGl2ZSJ9LCJpYXQiOjE3NjYwMDE1NjEsImV4cCI6MTc2ODU5MzU2MX0.gWLSNn-bGkpyiIJfDLaUpHQHjBDBCP_pYBg7dDJz8zs`
+- **Note**: Updated token - expires in ~30 days. Replace with production token when ready.
 
 ## How to Add Environment Variable in Vercel
 
