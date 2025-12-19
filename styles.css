@@ -8780,11 +8780,13 @@ body.desktop-device .mobile-submit-btn {
    FULL REPORT TABS - COMPACT CLEARVIN STYLE
    ============================================================ */
 
-.report-section {
+.content-item .report-section {
     background: #ffffff;
     border-radius: 4px;
     padding: 16px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .section-header {
