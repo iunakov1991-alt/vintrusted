@@ -597,11 +597,16 @@
                     <p class="results-subtitle">Get a verified vehicle history report with detailed accident, mileage, and ownership records — powered by ViNtrust data.</p>
                   </div>
                 <div class="nav-tabs">
-                    <button class="nav-tab active" data-tab="odometer">VIN HISTORY</button>
-                    <button class="nav-tab" data-tab="damage">MARKET VALUE</button>
-                    <button class="nav-tab" data-tab="sales">ODOMETER HISTORY</button>
-                    <button class="nav-tab" data-tab="ownership">SALE RECORDS</button>
-                    <button class="nav-tab" data-tab="technical">OWNERSHIP HISTORY</button>
+                    <button class="nav-tab active" data-tab="odometer">ODOMETER</button>
+                    <button class="nav-tab" data-tab="ownership">OWNERSHIP</button>
+                    <button class="nav-tab" data-tab="title">TITLE & BRANDS</button>
+                    <button class="nav-tab" data-tab="damage">DAMAGE</button>
+                    <button class="nav-tab" data-tab="specs">SPECS</button>
+                    <button class="nav-tab" data-tab="sales">SALES</button>
+                    <button class="nav-tab" data-tab="insurance">INSURANCE</button>
+                    <button class="nav-tab" data-tab="liens">LIENS</button>
+                    <button class="nav-tab" data-tab="inspections">INSPECTIONS</button>
+                    <button class="nav-tab" data-tab="recalls">RECALLS</button>
                 </div>
               </div>
 
@@ -610,14 +615,14 @@
                 <div class="results-left">
                     <!-- Interactive Content Display -->
                     <div class="content-display">
-                        <!-- Odometer Reading Tab -->
+                        <!-- 1. ODOMETER TAB -->
                         <div class="content-item active" data-tab="odometer">
-                            <div class="report-table-container">
-                                <div class="table-header">
+                            <div class="report-section">
+                                <div class="section-header">
                                     <h3>Odometer Reading</h3>
-                                    <span class="source-badge">SOURCE: CLEARVIN</span>
+                                    <span class="source">SOURCE: CLEARVIN</span>
                                 </div>
-                                <table class="report-table">
+                                <table class="data-table">
                                     <thead>
                                         <tr>
                                             <th>DATE</th>
@@ -636,16 +641,444 @@
                                             <td><strong>9,031 M</strong></td>
                                             <td>NMVTIS</td>
                                         </tr>
-                                        <tr class="highlight">
+                                        <tr class="current">
                                             <td>May 17, 2022</td>
                                             <td><strong>9,422 M</strong></td>
                                             <td>NMVTIS</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div class="table-note">
-                                    <svg width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                                    <span>Average annual mileage: ~3,140 miles/year (significantly below national average of 13,476 M)</span>
+                                <div class="info-box">
+                                    <strong>Average Miles:</strong> According to USDOT Federal Highway Administration, Americans drive an average of 13,476 M per year. This vehicle is significantly below average.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. OWNERSHIP TAB -->
+                        <div class="content-item" data-tab="ownership">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Ownership History</h3>
+                                    <span class="source">SOURCE: CLEARVIN</span>
+                                </div>
+                                <div class="alert warning">
+                                    <strong>MULTIPLE OWNERS REPORTED</strong>
+                                </div>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>DATE OF PURCHASE</th>
+                                            <th>CONDITION</th>
+                                            <th>LENGTH OF OWNERSHIP</th>
+                                            <th>OWNED IN STATES</th>
+                                            <th>LAST REPORTED ODOMETER</th>
+                                            <th>USAGE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>12/2020</td>
+                                            <td><span class="badge green">New</span></td>
+                                            <td>1 year(s), 5 month(s)</td>
+                                            <td>NY</td>
+                                            <td><strong>9,031 M</strong></td>
+                                            <td>Lease</td>
+                                        </tr>
+                                        <tr class="current">
+                                            <td>05/2022</td>
+                                            <td><span class="badge blue">Used</span></td>
+                                            <td>Current owner</td>
+                                            <td>NE</td>
+                                            <td><strong>9,422 M</strong></td>
+                                            <td>Personal</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 3. TITLE & BRANDS TAB -->
+                        <div class="content-item" data-tab="title">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Title History</h3>
+                                    <span class="source">SOURCE: NMVTIS</span>
+                                </div>
+                                <div class="subsection">
+                                    <h4>Current Title Information</h4>
+                                    <table class="data-table compact">
+                                        <thead>
+                                            <tr>
+                                                <th>TITLE ISSUE DATE</th>
+                                                <th>STATE</th>
+                                                <th>MILEAGE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="current">
+                                                <td>May 17, 2022</td>
+                                                <td>NE</td>
+                                                <td><strong>9,422 M</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="subsection">
+                                    <h4>Historical Title Information</h4>
+                                    <table class="data-table compact">
+                                        <thead>
+                                            <tr>
+                                                <th>TITLE ISSUE DATE</th>
+                                                <th>STATE</th>
+                                                <th>MILEAGE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Jan 11, 2022</td><td>NE</td><td>9,031 M</td></tr>
+                                            <tr><td>Dec 7, 2021</td><td>KS</td><td>5 M</td></tr>
+                                            <tr><td>Nov 2, 2021</td><td>NY</td><td>5 M</td></tr>
+                                            <tr><td>Jan 28, 2021</td><td>NY</td><td>5 M</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="subsection">
+                                    <h4>Title Brand Information</h4>
+                                    <div class="alert critical">
+                                        <strong>3 BRAND(S) REPORTED</strong>
+                                    </div>
+                                    <table class="data-table brands">
+                                        <thead>
+                                            <tr>
+                                                <th>BRAND CATEGORY</th>
+                                                <th>STATUS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="brand-active">
+                                                <td>① Rebuilt</td>
+                                                <td>
+                                                    <span class="status-bad">● Brand Found</span>
+                                                    <div class="details">Applied on: Dec 7, 2021 | Applied by: KANSAS</div>
+                                                </td>
+                                            </tr>
+                                            <tr class="brand-active">
+                                                <td>② Salvage</td>
+                                                <td>
+                                                    <span class="status-bad">● Brand Found</span>
+                                                    <div class="details">Applied on: Nov 2, 2021 | Applied by: NEW YORK</div>
+                                                </td>
+                                            </tr>
+                                            <tr class="brand-active">
+                                                <td>③ Not Actual Mileage</td>
+                                                <td>
+                                                    <span class="status-bad">● Brand Found</span>
+                                                    <div class="details">Applied on: Nov 2, 2021 | Applied by: NEW YORK</div>
+                                                </td>
+                                            </tr>
+                                            <tr><td>④ Clear</td><td><span class="status-ok">☑ No Brand Reported</span></td></tr>
+                                            <tr><td>⑤ Flood damage</td><td><span class="status-ok">☑ No Brand Reported</span></td></tr>
+                                            <tr><td>⑥ Fire damage</td><td><span class="status-ok">☑ No Brand Reported</span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. DAMAGE TAB -->
+                        <div class="content-item" data-tab="damage">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Accident & Damage History</h3>
+                                    <span class="source">SOURCE: Salvage Auction</span>
+                                </div>
+                                <div class="alert critical">
+                                    <strong>MAJOR DAMAGE REPORTED</strong> — Vehicle has significant flood damage
+                                </div>
+                                <div class="info-box warning">
+                                    Not all damage-related events are reported to ClearVin. We highly recommend getting an independent vehicle inspection before purchase.
+                                </div>
+                                <div class="damage-card">
+                                    <div class="damage-header">
+                                        <span class="damage-date">Date: <strong>Nov 2, 2021</strong></span>
+                                        <span class="damage-type critical">Major Impact: <strong>FLOOD</strong></span>
+                                    </div>
+                                    <div class="damage-details">
+                                        <div class="detail-row">
+                                            <span class="label">Airbags:</span>
+                                            <span class="value">—</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Repair Cost:</span>
+                                            <span class="value">—</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. SPECS TAB -->
+                        <div class="content-item" data-tab="specs">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Vehicle Specifications</h3>
+                                    <span class="source">VIN: 4T1FZ1FB1LU051174</span>
+                                </div>
+                                <div class="specs-table">
+                                    <div class="spec-row"><span class="key">VIN:</span><span class="val">4T1FZ1FB1LU051174</span><span class="key">Make:</span><span class="val">Toyota</span></div>
+                                    <div class="spec-row"><span class="key">Model:</span><span class="val">Avalon</span><span class="key">Year:</span><span class="val">2020</span></div>
+                                    <div class="spec-row"><span class="key">Style:</span><span class="val">4D Sedan</span><span class="key">Trim:</span><span class="val">XSE</span></div>
+                                    <div class="spec-row"><span class="key">Engine:</span><span class="val">3.5L V6 DOHC 24V</span><span class="key">Cylinders:</span><span class="val">6</span></div>
+                                    <div class="spec-row"><span class="key">Transmission:</span><span class="val">6-Speed Automatic</span><span class="key">Wheel drive:</span><span class="val">FWD</span></div>
+                                    <div class="spec-row"><span class="key">Fuel type:</span><span class="val">Gas</span><span class="key">Tank Size:</span><span class="val">15.80 gallon</span></div>
+                                    <div class="spec-row"><span class="key">Highway MPG:</span><span class="val">31 miles/gallon</span><span class="key">City MPG:</span><span class="val">22 miles/gallon</span></div>
+                                    <div class="spec-row"><span class="key">Made In:</span><span class="val">UNITED STATES</span><span class="key">Standard Seating:</span><span class="val">5</span></div>
+                                    <div class="spec-row"><span class="key">Anti Brake System:</span><span class="val">4-Wheel ABS</span><span class="key">Steering Type:</span><span class="val">R&P</span></div>
+                                    <div class="spec-row"><span class="key">Overall Height:</span><span class="val">56.50 in.</span><span class="key">Overall Width:</span><span class="val">72.80 in.</span></div>
+                                    <div class="spec-row"><span class="key">Overall Length:</span><span class="val">195.90 in.</span><span class="key">Tires:</span><span class="val">235/45R18</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6. SALES TAB -->
+                        <div class="content-item" data-tab="sales">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Sale History</h3>
+                                    <span class="source">SOURCE: CLEARVIN</span>
+                                </div>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>DATE</th>
+                                            <th>SELLER</th>
+                                            <th>EVENT</th>
+                                            <th>PRICE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Nov 3, 2021</td>
+                                            <td>—</td>
+                                            <td>Put up for sale</td>
+                                            <td><strong>$37,640</strong></td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <td>Nov 8, 2021</td>
+                                            <td>—</td>
+                                            <td><strong>Sold</strong></td>
+                                            <td><strong class="price-drop">$19,700</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="subsection">
+                                    <h4>Past Sales Details — SOURCE: Salvage Auction</h4>
+                                    <div class="sale-card">
+                                        <div class="sale-header">
+                                            <span class="auction">IAAI</span>
+                                            <span class="status">PUT UP FOR SALE Nov 8, 2021</span>
+                                        </div>
+                                        <div class="sale-grid">
+                                            <div><strong>Seller:</strong> Geico Insurance</div>
+                                            <div><strong>Sales Date:</strong> Nov 8, 2021</div>
+                                            <div><strong>Location:</strong> Long Island</div>
+                                            <div><strong>Primary Damage:</strong> <span class="critical">FLOOD</span></div>
+                                            <div><strong>ACV:</strong> $37,640</div>
+                                            <div><strong>Mileage:</strong> 5 M</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="alert critical">
+                                    <strong>Price Drop Alert:</strong> Vehicle sold for $17,940 less (-47.6%) than listed price due to flood damage
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 7. INSURANCE TAB -->
+                        <div class="content-item" data-tab="insurance">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Insurance Records</h3>
+                                    <span class="source">SOURCE: NMVTIS</span>
+                                </div>
+                                <div class="info-box">
+                                    If this VIN has a record, the business that submitted it to NMVTIS deemed the vehicle to be junk, salvage, or total loss.
+                                </div>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>DATE OBTAINED</th>
+                                            <th>ENTITY</th>
+                                            <th>LOCATION</th>
+                                            <th>CONTACT INFO</th>
+                                            <th>DISPOSITION</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="critical">
+                                            <td>Sep 6, 2021</td>
+                                            <td><strong>GEICO INDEMNITY COMPANY</strong></td>
+                                            <td>WOODBURY, NY</td>
+                                            <td>Email: VEHINQ@GEICO.COM<br>Phone: 8008413000</td>
+                                            <td><strong class="status-bad">SALVAGE</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="subsection">
+                                    <h4>Junk & Salvage Records</h4>
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>DATE OBTAINED</th>
+                                                <th>ENTITY</th>
+                                                <th>LOCATION</th>
+                                                <th>CONTACT</th>
+                                                <th>EXPORT?</th>
+                                                <th>DISPOSITION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Sep 9, 2021</td>
+                                                <td><strong>IAA</strong></td>
+                                                <td>WESTCHESTER, IL</td>
+                                                <td>Phone: 7084927000</td>
+                                                <td>NO</td>
+                                                <td><strong>TO BE DETERMINED</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 8. LIENS TAB -->
+                        <div class="content-item" data-tab="liens">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Lien & Impound Records</h3>
+                                    <span class="source">SOURCE: CLEARVIN</span>
+                                </div>
+                                <div class="info-box">
+                                    Collected from multiple sources. We recommend verifying vehicle status directly with the state Motor Vehicle Department.
+                                </div>
+                                <div class="subsection">
+                                    <h4>Historical Title Lien Records</h4>
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>DATE</th>
+                                                <th>STATE</th>
+                                                <th>REPORTED BY</th>
+                                                <th>EVENT</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Jan 29, 2021</td>
+                                                <td>STATEN ISLAND, NY</td>
+                                                <td>MOTOR VEHICLE DEPARTMENT</td>
+                                                <td>TITLE ISSUED OR UPDATED (LIEN REPORTED)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>May 18, 2022</td>
+                                                <td>OFFUTT A F B, NE</td>
+                                                <td>MOTOR VEHICLE DEPARTMENT</td>
+                                                <td>TITLE ISSUED OR UPDATED (LIEN REPORTED)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="subsection">
+                                    <h4>Theft Records</h4>
+                                    <div class="status-card ok">
+                                        <strong>☑ NOT LISTED AS STOLEN</strong>
+                                        <p>No Theft Records Found for your VIN Number</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9. INSPECTIONS TAB -->
+                        <div class="content-item" data-tab="inspections">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Emission & Safety Inspection</h3>
+                                    <span class="source">SOURCE: CLEARVIN</span>
+                                </div>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>DATE</th>
+                                            <th>LOCATION</th>
+                                            <th>DATA SOURCE</th>
+                                            <th>RESULT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="passed">
+                                            <td>May 12, 2020</td>
+                                            <td>NEW YORK</td>
+                                            <td>MOTOR VEHICLE DEPARTMENT</td>
+                                            <td>
+                                                <span class="status-ok">✓ EMISSION INSPECTION PASSED</span><br>
+                                                <span class="status-ok">✓ SAFETY INSPECTION PASSED</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="passed">
+                                            <td>Dec 19, 2020</td>
+                                            <td>NEW YORK</td>
+                                            <td>MOTOR VEHICLE DEPARTMENT</td>
+                                            <td>
+                                                <span class="status-ok">✓ EMISSION INSPECTION PASSED</span><br>
+                                                <span class="status-ok">✓ SAFETY INSPECTION PASSED</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 10. RECALLS TAB -->
+                        <div class="content-item" data-tab="recalls">
+                            <div class="report-section">
+                                <div class="section-header">
+                                    <h3>Recalls</h3>
+                                    <span class="source">SOURCE: NHTSA</span>
+                                </div>
+                                <div class="alert warning">
+                                    <strong>2 RECALL(S) FOUND</strong>
+                                </div>
+                                <div class="recall-card">
+                                    <div class="recall-header">
+                                        <span class="recall-date">Recall Date: <strong>Nov 4, 2020</strong></span>
+                                        <span class="recall-no">Recall #: <strong>20V682000</strong></span>
+                                    </div>
+                                    <div class="recall-component"><strong>Component(s):</strong> FUEL SYSTEM, GASOLINE:DELIVERY:FUEL PUMP</div>
+                                    <div class="recall-summary">
+                                        <strong>SUMMARY:</strong> Toyota is recalling certain 2018-2020 vehicles including 2019-2020 Avalon. The low-pressure fuel pump inside the fuel tank may fail.
+                                    </div>
+                                    <div class="recall-consequence">
+                                        <strong>CONSEQUENCE:</strong> A failed fuel pump can cause vehicle stalling, increasing crash risk.
+                                    </div>
+                                    <div class="recall-remedy">
+                                        <strong>REMEDY:</strong> Dealers will replace the fuel pump assembly free of charge. Parts available starting January 21, 2021. Contact: 1-888-270-9371 | Toyota #: 20TA02
+                                    </div>
+                                </div>
+                                <div class="recall-card">
+                                    <div class="recall-header">
+                                        <span class="recall-date">Recall Date: <strong>Nov 25, 2020</strong></span>
+                                        <span class="recall-no">Recall #: <strong>20V734000</strong></span>
+                                    </div>
+                                    <div class="recall-component"><strong>Component(s):</strong> STEERING:COLUMN</div>
+                                    <div class="recall-summary">
+                                        <strong>SUMMARY:</strong> Toyota is recalling certain 2020-2021 Avalon vehicles. Breakaway pins within the steering column may have been damaged during production, affecting driver's airbag performance.
+                                    </div>
+                                    <div class="recall-consequence">
+                                        <strong>CONSEQUENCE:</strong> Increased risk of injury in a crash.
+                                    </div>
+                                    <div class="recall-remedy">
+                                        <strong>REMEDY:</strong> Dealers will replace the steering column free of charge. Recall began December 18, 2020. Contact: 1-800-331-4331 | Toyota #: 20TB17/20TA17
+                                    </div>
                                 </div>
                             </div>
                         </div>
