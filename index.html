@@ -612,36 +612,222 @@
                     <div class="content-display">
                         <!-- Odometer History Content -->
                         <div class="content-item active" data-tab="odometer">
-                            <div class="content-image">
-                                <img src="images/results/odometer-history.png" alt="Odometer History Chart" />
-            </div>
+                            <div class="chart-container">
+                                <div class="chart-header">
+                                    <h3>Odometer History</h3>
+                                    <span class="chart-badge">Verified Data</span>
+                                </div>
+                                <div class="chart-graph">
+                                    <div class="chart-bars">
+                                        <div class="chart-bar" style="height: 35%;" data-value="45,000">
+                                            <span class="bar-label">2019</span>
+                                            <span class="bar-value">45K</span>
+                                        </div>
+                                        <div class="chart-bar" style="height: 52%;" data-value="68,000">
+                                            <span class="bar-label">2020</span>
+                                            <span class="bar-value">68K</span>
+                                        </div>
+                                        <div class="chart-bar" style="height: 68%;" data-value="89,000">
+                                            <span class="bar-label">2021</span>
+                                            <span class="bar-value">89K</span>
+                                        </div>
+                                        <div class="chart-bar" style="height: 82%;" data-value="105,000">
+                                            <span class="bar-label">2022</span>
+                                            <span class="bar-value">105K</span>
+                                        </div>
+                                        <div class="chart-bar active" style="height: 95%;" data-value="118,000">
+                                            <span class="bar-label">2023</span>
+                                            <span class="bar-value">118K</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Average Annual</span>
+                                        <span class="stat-value">18,250 mi</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Current Mileage</span>
+                                        <span class="stat-value">118,000 mi</span>
+                                    </div>
+                                </div>
+                            </div>
                   </div>
 
                         <!-- Ownership History Content -->
                         <div class="content-item" data-tab="ownership">
-                            <div class="content-image">
-                                <img src="images/results/ownership-history.png" alt="Ownership History" />
-                </div>
+                            <div class="ownership-timeline">
+                                <div class="chart-header">
+                                    <h3>Ownership History</h3>
+                                    <span class="chart-badge">3 Owners</span>
+                                </div>
+                                <div class="timeline-items">
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-header">
+                                                <span class="timeline-title">1st Owner</span>
+                                                <span class="timeline-date">2019 - 2021</span>
+                                            </div>
+                                            <div class="timeline-details">
+                                                <span>Florida • 2 years • 45,000 mi</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-header">
+                                                <span class="timeline-title">2nd Owner</span>
+                                                <span class="timeline-date">2021 - 2022</span>
+                                            </div>
+                                            <div class="timeline-details">
+                                                <span>Georgia • 1 year • 28,000 mi</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item active">
+                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-header">
+                                                <span class="timeline-title">Current Owner</span>
+                                                <span class="timeline-date">2022 - Present</span>
+                                            </div>
+                                            <div class="timeline-details">
+                                                <span>Texas • 2 years • 45,000 mi</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
               </div>
 
                         <!-- Damage Check Content -->
                         <div class="content-item" data-tab="damage">
-                            <div class="content-image">
-                                <img src="images/results/damage-check.png" alt="Damage Check" />
-            </div>
+                            <div class="value-container">
+                                <div class="chart-header">
+                                    <h3>Market Value Analysis</h3>
+                                    <span class="chart-badge">Updated Today</span>
+                                </div>
+                                <div class="value-display">
+                                    <div class="value-main">
+                                        <span class="value-label">Estimated Value</span>
+                                        <span class="value-amount">$24,500</span>
+                                    </div>
+                                    <div class="value-range">
+                                        <div class="range-bar">
+                                            <div class="range-fill" style="width: 65%;"></div>
+                                            <div class="range-marker"></div>
+                                        </div>
+                                        <div class="range-labels">
+                                            <span>$20,000</span>
+                                            <span>$30,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="value-factors">
+                                    <div class="factor-item positive">
+                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                        <span>Low Mileage</span>
+                                    </div>
+                                    <div class="factor-item positive">
+                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                        <span>Clean Title</span>
+                                    </div>
+                                    <div class="factor-item positive">
+                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                        <span>No Accidents</span>
+                                    </div>
+                                </div>
+                            </div>
                   </div>
 
                         <!-- Technical Data Content -->
                         <div class="content-item" data-tab="technical">
-                            <div class="content-image">
-                                <img src="images/results/vehicle-specifications.png" alt="Market Value" />
-                </div>
+                            <div class="specs-container">
+                                <div class="chart-header">
+                                    <h3>Vehicle Specifications</h3>
+                                    <span class="chart-badge">Complete</span>
+                                </div>
+                                <div class="specs-grid">
+                                    <div class="spec-item">
+                                        <span class="spec-label">Make & Model</span>
+                                        <span class="spec-value">Honda CR-V EX</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Year</span>
+                                        <span class="spec-value">2019</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Engine</span>
+                                        <span class="spec-value">1.5L Turbo</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Transmission</span>
+                                        <span class="spec-value">CVT Automatic</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Drivetrain</span>
+                                        <span class="spec-value">AWD</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Fuel Type</span>
+                                        <span class="spec-value">Gasoline</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Color</span>
+                                        <span class="spec-value">Modern Steel</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Body Style</span>
+                                        <span class="spec-value">SUV</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Sale Records Content -->
                         <div class="content-item" data-tab="sales">
-                            <div class="content-image">
-                                <img src="images/results/sale-records.png" alt="Sale Records" />
+                            <div class="sales-container">
+                                <div class="chart-header">
+                                    <h3>Sale Records</h3>
+                                    <span class="chart-badge">3 Records</span>
+                                </div>
+                                <div class="sales-list">
+                                    <div class="sale-item">
+                                        <div class="sale-header">
+                                            <span class="sale-type">Dealership Sale</span>
+                                            <span class="sale-price">$32,500</span>
+                                        </div>
+                                        <div class="sale-details">
+                                            <span class="sale-date">March 15, 2019</span>
+                                            <span class="sale-location">Miami, FL</span>
+                                            <span class="sale-mileage">2,500 mi</span>
+                                        </div>
+                                    </div>
+                                    <div class="sale-item">
+                                        <div class="sale-header">
+                                            <span class="sale-type">Private Sale</span>
+                                            <span class="sale-price">$28,900</span>
+                                        </div>
+                                        <div class="sale-details">
+                                            <span class="sale-date">June 22, 2021</span>
+                                            <span class="sale-location">Atlanta, GA</span>
+                                            <span class="sale-mileage">45,000 mi</span>
+                                        </div>
+                                    </div>
+                                    <div class="sale-item">
+                                        <div class="sale-header">
+                                            <span class="sale-type">Dealership Sale</span>
+                                            <span class="sale-price">$26,200</span>
+                                        </div>
+                                        <div class="sale-details">
+                                            <span class="sale-date">November 8, 2022</span>
+                                            <span class="sale-location">Houston, TX</span>
+                                            <span class="sale-mileage">73,000 mi</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
