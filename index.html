@@ -614,41 +614,131 @@
                         <div class="content-item active" data-tab="odometer">
                             <div class="chart-container">
                                 <div class="chart-header">
-                                    <h3>Odometer History</h3>
-                                    <span class="chart-badge">Verified Data</span>
+                                    <div class="header-left">
+                                        <h3>Complete Odometer History</h3>
+                                        <p class="header-desc">Verified mileage tracking across all records</p>
+                                    </div>
+                                    <span class="chart-badge">
+                                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                        Verified
+                                    </span>
                                 </div>
                                 <div class="chart-graph">
+                                    <div class="chart-y-axis">
+                                        <span>120K</span>
+                                        <span>90K</span>
+                                        <span>60K</span>
+                                        <span>30K</span>
+                                        <span>0</span>
+                                    </div>
                                     <div class="chart-bars">
-                                        <div class="chart-bar" style="height: 35%;" data-value="45,000">
+                                        <div class="chart-bar" style="height: 38%;">
+                                            <div class="bar-fill" data-value="45,000">
+                                                <span class="bar-value">45,230</span>
+                                                <div class="bar-tooltip">
+                                                    <strong>March 2019</strong>
+                                                    <span>First Record</span>
+                                                    <span>Source: DMV</span>
+                                                </div>
+                                            </div>
                                             <span class="bar-label">2019</span>
-                                            <span class="bar-value">45K</span>
                                         </div>
-                                        <div class="chart-bar" style="height: 52%;" data-value="68,000">
+                                        <div class="chart-bar" style="height: 56%;">
+                                            <div class="bar-fill" data-value="68,000">
+                                                <span class="bar-value">67,890</span>
+                                                <div class="bar-tooltip">
+                                                    <strong>October 2020</strong>
+                                                    <span>+22,660 miles</span>
+                                                    <span>Source: Service Center</span>
+                                                </div>
+                                            </div>
                                             <span class="bar-label">2020</span>
-                                            <span class="bar-value">68K</span>
                                         </div>
-                                        <div class="chart-bar" style="height: 68%;" data-value="89,000">
+                                        <div class="chart-bar" style="height: 73%;">
+                                            <div class="bar-fill" data-value="89,000">
+                                                <span class="bar-value">88,450</span>
+                                                <div class="bar-tooltip">
+                                                    <strong>June 2021</strong>
+                                                    <span>+20,560 miles</span>
+                                                    <span>Source: State Inspection</span>
+                                                </div>
+                                            </div>
                                             <span class="bar-label">2021</span>
-                                            <span class="bar-value">89K</span>
                                         </div>
-                                        <div class="chart-bar" style="height: 82%;" data-value="105,000">
+                                        <div class="chart-bar" style="height: 86%;">
+                                            <div class="bar-fill" data-value="105,000">
+                                                <span class="bar-value">104,680</span>
+                                                <div class="bar-tooltip">
+                                                    <strong>December 2022</strong>
+                                                    <span>+16,230 miles</span>
+                                                    <span>Source: Dealer Service</span>
+                                                </div>
+                                            </div>
                                             <span class="bar-label">2022</span>
-                                            <span class="bar-value">105K</span>
                                         </div>
-                                        <div class="chart-bar active" style="height: 95%;" data-value="118,000">
+                                        <div class="chart-bar active" style="height: 98%;">
+                                            <div class="bar-fill" data-value="118,000">
+                                                <span class="bar-value">118,420</span>
+                                                <div class="bar-tooltip">
+                                                    <strong>November 2023</strong>
+                                                    <span>+13,740 miles</span>
+                                                    <span>Source: Current</span>
+                                                </div>
+                                            </div>
                                             <span class="bar-label">2023</span>
-                                            <span class="bar-value">118K</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart-insights">
+                                    <div class="insight-card">
+                                        <div class="insight-icon green">
+                                            <svg width="20" height="20" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                        </div>
+                                        <div class="insight-content">
+                                            <h4>Consistent Pattern</h4>
+                                            <p>Mileage increases consistently with no suspicious gaps or rollbacks detected</p>
+                                        </div>
+                                    </div>
+                                    <div class="insight-card">
+                                        <div class="insight-icon blue">
+                                            <svg width="20" height="20" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                                        </div>
+                                        <div class="insight-content">
+                                            <h4>Average Annual Usage</h4>
+                                            <p>18,340 miles per year — typical for daily commuter</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="chart-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">Average Annual</span>
-                                        <span class="stat-value">18,250 mi</span>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <svg width="24" height="24" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
+                                        </div>
+                                        <div class="stat-info">
+                                            <span class="stat-label">Total Mileage</span>
+                                            <span class="stat-value">118,420 mi</span>
+                                            <span class="stat-change">+13,740 this year</span>
+                                        </div>
                                     </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Current Mileage</span>
-                                        <span class="stat-value">118,000 mi</span>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <svg width="24" height="24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                        </div>
+                                        <div class="stat-info">
+                                            <span class="stat-label">Records Found</span>
+                                            <span class="stat-value">23 Records</span>
+                                            <span class="stat-change">All verified sources</span>
+                                        </div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div class="stat-icon">
+                                            <svg width="24" height="24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                                        </div>
+                                        <div class="stat-info">
+                                            <span class="stat-label">Last Report</span>
+                                            <span class="stat-value">Nov 2023</span>
+                                            <span class="stat-change">4 weeks ago</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -658,44 +748,134 @@
                         <div class="content-item" data-tab="ownership">
                             <div class="ownership-timeline">
                                 <div class="chart-header">
-                                    <h3>Ownership History</h3>
-                                    <span class="chart-badge">3 Owners</span>
+                                    <div class="header-left">
+                                        <h3>Complete Ownership Chain</h3>
+                                        <p class="header-desc">Full ownership transfer history with detailed records</p>
+                                    </div>
+                                    <span class="chart-badge">
+                                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                                        3 Owners
+                                    </span>
                                 </div>
                                 <div class="timeline-items">
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-marker">
+                                            <div class="timeline-dot"></div>
+                                            <div class="timeline-number">1</div>
+                                        </div>
                                         <div class="timeline-content">
                                             <div class="timeline-header">
-                                                <span class="timeline-title">1st Owner</span>
-                                                <span class="timeline-date">2019 - 2021</span>
+                                                <div class="timeline-title-group">
+                                                    <span class="timeline-title">First Owner</span>
+                                                    <span class="ownership-type">Personal Lease</span>
+                                                </div>
+                                                <span class="timeline-date">Mar 2019 - Jun 2021</span>
                                             </div>
-                                            <div class="timeline-details">
-                                                <span>Florida • 2 years • 45,000 mi</span>
+                                            <div class="timeline-stats">
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                                    <span>Miami, Florida</span>
+                                                </div>
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                                                    <span>2 years 3 months</span>
+                                                </div>
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+                                                    <span>45,230 miles</span>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-badges">
+                                                <span class="owner-badge clean">Clean Title</span>
+                                                <span class="owner-badge">Regular Service</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-marker">
+                                            <div class="timeline-dot"></div>
+                                            <div class="timeline-number">2</div>
+                                        </div>
                                         <div class="timeline-content">
                                             <div class="timeline-header">
-                                                <span class="timeline-title">2nd Owner</span>
-                                                <span class="timeline-date">2021 - 2022</span>
+                                                <div class="timeline-title-group">
+                                                    <span class="timeline-title">Second Owner</span>
+                                                    <span class="ownership-type">Private Purchase</span>
+                                                </div>
+                                                <span class="timeline-date">Jun 2021 - Nov 2022</span>
                                             </div>
-                                            <div class="timeline-details">
-                                                <span>Georgia • 1 year • 28,000 mi</span>
+                                            <div class="timeline-stats">
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                                    <span>Atlanta, Georgia</span>
+                                                </div>
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                                                    <span>1 year 5 months</span>
+                                                </div>
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+                                                    <span>28,450 miles</span>
+                                                </div>
+                                            </div>
+                                            <div class="timeline-badges">
+                                                <span class="owner-badge clean">Clean Title</span>
+                                                <span class="owner-badge">Dealer Maintained</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="timeline-item active">
-                                        <div class="timeline-dot"></div>
+                                        <div class="timeline-marker">
+                                            <div class="timeline-dot"></div>
+                                            <div class="timeline-number">3</div>
+                                        </div>
                                         <div class="timeline-content">
                                             <div class="timeline-header">
-                                                <span class="timeline-title">Current Owner</span>
-                                                <span class="timeline-date">2022 - Present</span>
+                                                <div class="timeline-title-group">
+                                                    <span class="timeline-title">Current Owner</span>
+                                                    <span class="ownership-type current">Active</span>
+                                                </div>
+                                                <span class="timeline-date">Nov 2022 - Present</span>
                                             </div>
-                                            <div class="timeline-details">
-                                                <span>Texas • 2 years • 45,000 mi</span>
+                                            <div class="timeline-stats">
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                                    <span>Houston, Texas</span>
+                                                </div>
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                                                    <span>2 years 1 month</span>
+                                                </div>
+                                                <div class="timeline-stat">
+                                                    <svg width="16" height="16" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+                                                    <span>44,740 miles</span>
+                                                </div>
                                             </div>
+                                            <div class="timeline-badges">
+                                                <span class="owner-badge clean">Clean Title</span>
+                                                <span class="owner-badge">Well Maintained</span>
+                                                <span class="owner-badge">Latest Inspection Passed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ownership-summary">
+                                    <div class="summary-card">
+                                        <div class="summary-icon">
+                                            <svg width="20" height="20" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                        </div>
+                                        <div class="summary-text">
+                                            <strong>No Title Issues</strong>
+                                            <span>Clean title throughout all ownership transfers</span>
+                                        </div>
+                                    </div>
+                                    <div class="summary-card">
+                                        <div class="summary-icon">
+                                            <svg width="20" height="20" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                                        </div>
+                                        <div class="summary-text">
+                                            <strong>Consistent Usage</strong>
+                                            <span>Average 17,800 miles/year across all owners</span>
                                         </div>
                                     </div>
                                 </div>
@@ -706,37 +886,144 @@
                         <div class="content-item" data-tab="damage">
                             <div class="value-container">
                                 <div class="chart-header">
-                                    <h3>Market Value Analysis</h3>
-                                    <span class="chart-badge">Updated Today</span>
+                                    <div class="header-left">
+                                        <h3>Market Value Analysis</h3>
+                                        <p class="header-desc">Real-time market pricing based on current conditions</p>
+                                    </div>
+                                    <span class="chart-badge">
+                                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                        Live Data
+                                    </span>
                                 </div>
                                 <div class="value-display">
                                     <div class="value-main">
-                                        <span class="value-label">Estimated Value</span>
-                                        <span class="value-amount">$24,500</span>
+                                        <span class="value-label">Estimated Market Value</span>
+                                        <div class="value-amount-wrapper">
+                                            <span class="value-amount">$24,500</span>
+                                            <span class="value-trend up">
+                                                <svg width="16" height="16" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg>
+                                                +3.2%
+                                            </span>
+                                        </div>
+                                        <span class="value-sublabel">Based on 247 comparable vehicles</span>
                                     </div>
                                     <div class="value-range">
+                                        <div class="range-header">
+                                            <span class="range-title">Market Range</span>
+                                            <span class="range-confidence">95% Confidence</span>
+                                        </div>
                                         <div class="range-bar">
                                             <div class="range-fill" style="width: 65%;"></div>
-                                            <div class="range-marker"></div>
+                                            <div class="range-marker" style="left: 65%;">
+                                                <span class="marker-label">$24,500</span>
+                                            </div>
                                         </div>
                                         <div class="range-labels">
-                                            <span>$20,000</span>
-                                            <span>$30,000</span>
+                                            <div class="range-label">
+                                                <span class="label-value">$20,000</span>
+                                                <span class="label-text">Low</span>
+                                            </div>
+                                            <div class="range-label">
+                                                <span class="label-value">$25,000</span>
+                                                <span class="label-text">Average</span>
+                                            </div>
+                                            <div class="range-label">
+                                                <span class="label-value">$30,000</span>
+                                                <span class="label-text">High</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="value-breakdown">
+                                    <h4 class="breakdown-title">Value Breakdown</h4>
+                                    <div class="breakdown-items">
+                                        <div class="breakdown-item">
+                                            <div class="breakdown-label">
+                                                <span>Base Value (2019 CR-V EX)</span>
+                                                <svg width="14" height="14" fill="currentColor"><circle cx="7" cy="7" r="7"/></svg>
+                                            </div>
+                                            <span class="breakdown-value">$22,000</span>
+                                        </div>
+                                        <div class="breakdown-item positive">
+                                            <div class="breakdown-label">
+                                                <span>Low Mileage Adjustment</span>
+                                                <svg width="14" height="14" fill="currentColor"><path d="M7 2l1.5 5h5.3L9.4 10l1.5 5L7 11.7 3.1 15l1.5-5L.2 7h5.3z"/></svg>
+                                            </div>
+                                            <span class="breakdown-value">+$1,800</span>
+                                        </div>
+                                        <div class="breakdown-item positive">
+                                            <div class="breakdown-label">
+                                                <span>Clean History Premium</span>
+                                                <svg width="14" height="14" fill="currentColor"><path d="M7 2l1.5 5h5.3L9.4 10l1.5 5L7 11.7 3.1 15l1.5-5L.2 7h5.3z"/></svg>
+                                            </div>
+                                            <span class="breakdown-value">+$1,200</span>
+                                        </div>
+                                        <div class="breakdown-item negative">
+                                            <div class="breakdown-label">
+                                                <span>Age Depreciation</span>
+                                                <svg width="14" height="14" fill="currentColor"><path d="M7 10l-1.5-5H.2l4.4 3-1.5 5L7 9.3 10.9 13l-1.5-5 4.4-3h-5.3z"/></svg>
+                                            </div>
+                                            <span class="breakdown-value">-$500</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="value-factors">
-                                    <div class="factor-item positive">
-                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                        <span>Low Mileage</span>
-                                    </div>
-                                    <div class="factor-item positive">
-                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                        <span>Clean Title</span>
-                                    </div>
-                                    <div class="factor-item positive">
-                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                        <span>No Accidents</span>
+                                    <h4 class="factors-title">Positive Factors</h4>
+                                    <div class="factors-grid">
+                                        <div class="factor-item positive">
+                                            <div class="factor-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                            </div>
+                                            <div class="factor-text">
+                                                <strong>Below Average Mileage</strong>
+                                                <span>22% less than typical</span>
+                                            </div>
+                                        </div>
+                                        <div class="factor-item positive">
+                                            <div class="factor-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                            </div>
+                                            <div class="factor-text">
+                                                <strong>Clean Title History</strong>
+                                                <span>No damage or salvage records</span>
+                                            </div>
+                                        </div>
+                                        <div class="factor-item positive">
+                                            <div class="factor-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                            </div>
+                                            <div class="factor-text">
+                                                <strong>Complete Service History</strong>
+                                                <span>Regular maintenance documented</span>
+                                            </div>
+                                        </div>
+                                        <div class="factor-item positive">
+                                            <div class="factor-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                            </div>
+                                            <div class="factor-text">
+                                                <strong>Popular Configuration</strong>
+                                                <span>High demand trim & features</span>
+                                            </div>
+                                        </div>
+                                        <div class="factor-item positive">
+                                            <div class="factor-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                            </div>
+                                            <div class="factor-text">
+                                                <strong>Single State Vehicle</strong>
+                                                <span>No rust belt history</span>
+                                            </div>
+                                        </div>
+                                        <div class="factor-item positive">
+                                            <div class="factor-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                            </div>
+                                            <div class="factor-text">
+                                                <strong>No Open Recalls</strong>
+                                                <span>All safety recalls completed</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -746,41 +1033,229 @@
                         <div class="content-item" data-tab="technical">
                             <div class="specs-container">
                                 <div class="chart-header">
-                                    <h3>Vehicle Specifications</h3>
-                                    <span class="chart-badge">Complete</span>
+                                    <div class="header-left">
+                                        <h3>Complete Vehicle Specifications</h3>
+                                        <p class="header-desc">Detailed technical data and equipment information</p>
+                                    </div>
+                                    <span class="chart-badge">
+                                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                                        Verified
+                                    </span>
                                 </div>
-                                <div class="specs-grid">
-                                    <div class="spec-item">
-                                        <span class="spec-label">Make & Model</span>
-                                        <span class="spec-value">Honda CR-V EX</span>
+                                
+                                <div class="specs-section">
+                                    <div class="section-title">
+                                        <svg width="20" height="20" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+                                        <span>Basic Information</span>
                                     </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Year</span>
-                                        <span class="spec-value">2019</span>
+                                    <div class="specs-grid">
+                                        <div class="spec-item featured">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Make & Model</span>
+                                                <span class="spec-value">Honda CR-V EX</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Model Year</span>
+                                                <span class="spec-value">2019</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">VIN Number</span>
+                                                <span class="spec-value">2HKRM4H76KH•••••8</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Manufactured In</span>
+                                                <span class="spec-value">East Liberty, OH</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Engine</span>
-                                        <span class="spec-value">1.5L Turbo</span>
+                                </div>
+
+                                <div class="specs-section">
+                                    <div class="section-title">
+                                        <svg width="20" height="20" fill="currentColor"><path d="M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.21v7.21c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v16h10v-7.5h1.5v5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V9c0-.69-.28-1.32-.73-1.77zM12 10H6V5h6v5zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+                                        <span>Engine & Performance</span>
                                     </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Transmission</span>
-                                        <span class="spec-value">CVT Automatic</span>
+                                    <div class="specs-grid">
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Engine Type</span>
+                                                <span class="spec-value">1.5L Turbocharged I4</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Horsepower</span>
+                                                <span class="spec-value">190 HP @ 5,600 RPM</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Torque</span>
+                                                <span class="spec-value">179 lb-ft @ 2,000 RPM</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Transmission</span>
+                                                <span class="spec-value">CVT Automatic</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Drivetrain</span>
+                                                <span class="spec-value">All-Wheel Drive (AWD)</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Fuel Type</span>
+                                                <span class="spec-value">Regular Unleaded</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Drivetrain</span>
-                                        <span class="spec-value">AWD</span>
+                                </div>
+
+                                <div class="specs-section">
+                                    <div class="section-title">
+                                        <svg width="20" height="20" fill="currentColor"><path d="M11.5 2C11.5 2 12 4.5 12 6.5c0 1.5-1.5 2.5-3 2.5S6 8 6 6.5C6 4.5 6.5 2 6.5 2H4v18h16V2h-8.5zM7.5 18.5h-1v-9h1v9zm3.25 0h-1.5v-9h1.5v9zm3.25 0h-1.5v-9h1.5v9zM19 18.5h-1.5v-9H19v9z"/></svg>
+                                        <span>Fuel Economy & Capacity</span>
                                     </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Fuel Type</span>
-                                        <span class="spec-value">Gasoline</span>
+                                    <div class="specs-grid">
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">City MPG</span>
+                                                <span class="spec-value">27 MPG</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Highway MPG</span>
+                                                <span class="spec-value">32 MPG</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Combined MPG</span>
+                                                <span class="spec-value">29 MPG</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Fuel Tank</span>
+                                                <span class="spec-value">14.0 gallons</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Color</span>
-                                        <span class="spec-value">Modern Steel</span>
+                                </div>
+
+                                <div class="specs-section">
+                                    <div class="section-title">
+                                        <svg width="20" height="20" fill="currentColor"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm13.5-9l1.96 2.5H17V9h2.5zm-1.5 9c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
+                                        <span>Exterior & Dimensions</span>
                                     </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Body Style</span>
-                                        <span class="spec-value">SUV</span>
+                                    <div class="specs-grid">
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Body Style</span>
+                                                <span class="spec-value">Compact SUV</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Exterior Color</span>
+                                                <span class="spec-value">Modern Steel Metallic</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Interior Color</span>
+                                                <span class="spec-value">Black Cloth</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Seating Capacity</span>
+                                                <span class="spec-value">5 Passengers</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Doors</span>
+                                                <span class="spec-value">4 Doors</span>
+                                            </div>
+                                        </div>
+                                        <div class="spec-item">
+                                            <div class="spec-icon">
+                                                <svg width="18" height="18" fill="currentColor"><circle cx="9" cy="9" r="8"/></svg>
+                                            </div>
+                                            <div class="spec-content">
+                                                <span class="spec-label">Cargo Space</span>
+                                                <span class="spec-value">39.2 cu ft</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -790,42 +1265,193 @@
                         <div class="content-item" data-tab="sales">
                             <div class="sales-container">
                                 <div class="chart-header">
-                                    <h3>Sale Records</h3>
-                                    <span class="chart-badge">3 Records</span>
+                                    <div class="header-left">
+                                        <h3>Complete Sale History</h3>
+                                        <p class="header-desc">All documented sales and price history</p>
+                                    </div>
+                                    <span class="chart-badge">
+                                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                                        3 Records
+                                    </span>
                                 </div>
-                                <div class="sales-list">
-                                    <div class="sale-item">
-                                        <div class="sale-header">
-                                            <span class="sale-type">Dealership Sale</span>
-                                            <span class="sale-price">$32,500</span>
+                                <div class="sales-timeline">
+                                    <div class="sale-card first">
+                                        <div class="sale-badge">
+                                            <svg width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            <span>Original Sale</span>
                                         </div>
-                                        <div class="sale-details">
-                                            <span class="sale-date">March 15, 2019</span>
-                                            <span class="sale-location">Miami, FL</span>
-                                            <span class="sale-mileage">2,500 mi</span>
+                                        <div class="sale-content">
+                                            <div class="sale-main">
+                                                <div class="sale-left">
+                                                    <div class="sale-type-icon">
+                                                        <svg width="24" height="24" fill="currentColor"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
+                                                    </div>
+                                                    <div class="sale-info">
+                                                        <span class="sale-type">Authorized Honda Dealership</span>
+                                                        <span class="sale-subtitle">New Vehicle Purchase</span>
+                                                    </div>
+                                                </div>
+                                                <div class="sale-price-card">
+                                                    <span class="price-label">Sale Price</span>
+                                                    <span class="price-value">$32,500</span>
+                                                </div>
+                                            </div>
+                                            <div class="sale-meta">
+                                                <div class="meta-group">
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Date</span>
+                                                            <span class="meta-value">March 15, 2019</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Location</span>
+                                                            <span class="meta-value">Miami, FL</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Mileage</span>
+                                                            <span class="meta-value">2,450 miles</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="sale-tags">
+                                                    <span class="tag">Factory Warranty</span>
+                                                    <span class="tag">Finance</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="sale-item">
-                                        <div class="sale-header">
-                                            <span class="sale-type">Private Sale</span>
-                                            <span class="sale-price">$28,900</span>
+
+                                    <div class="sale-card">
+                                        <div class="sale-badge secondary">
+                                            <svg width="16" height="16" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                                            <span>Private Transfer</span>
                                         </div>
-                                        <div class="sale-details">
-                                            <span class="sale-date">June 22, 2021</span>
-                                            <span class="sale-location">Atlanta, GA</span>
-                                            <span class="sale-mileage">45,000 mi</span>
+                                        <div class="sale-content">
+                                            <div class="sale-main">
+                                                <div class="sale-left">
+                                                    <div class="sale-type-icon secondary">
+                                                        <svg width="24" height="24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                                                    </div>
+                                                    <div class="sale-info">
+                                                        <span class="sale-type">Private Party Sale</span>
+                                                        <span class="sale-subtitle">Individual to Individual</span>
+                                                    </div>
+                                                </div>
+                                                <div class="sale-price-card">
+                                                    <span class="price-label">Sale Price</span>
+                                                    <span class="price-value">$28,900</span>
+                                                    <span class="price-change down">-11% from original</span>
+                                                </div>
+                                            </div>
+                                            <div class="sale-meta">
+                                                <div class="meta-group">
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Date</span>
+                                                            <span class="meta-value">June 22, 2021</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Location</span>
+                                                            <span class="meta-value">Atlanta, GA</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Mileage</span>
+                                                            <span class="meta-value">45,230 miles</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="sale-tags">
+                                                    <span class="tag">Cash Sale</span>
+                                                    <span class="tag">Clean Title</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="sale-item">
-                                        <div class="sale-header">
-                                            <span class="sale-type">Dealership Sale</span>
-                                            <span class="sale-price">$26,200</span>
+
+                                    <div class="sale-card">
+                                        <div class="sale-badge secondary">
+                                            <svg width="16" height="16" fill="currentColor"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
+                                            <span>Dealer Purchase</span>
                                         </div>
-                                        <div class="sale-details">
-                                            <span class="sale-date">November 8, 2022</span>
-                                            <span class="sale-location">Houston, TX</span>
-                                            <span class="sale-mileage">73,000 mi</span>
+                                        <div class="sale-content">
+                                            <div class="sale-main">
+                                                <div class="sale-left">
+                                                    <div class="sale-type-icon">
+                                                        <svg width="24" height="24" fill="currentColor"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
+                                                    </div>
+                                                    <div class="sale-info">
+                                                        <span class="sale-type">Certified Pre-Owned Dealer</span>
+                                                        <span class="sale-subtitle">With Extended Warranty</span>
+                                                    </div>
+                                                </div>
+                                                <div class="sale-price-card">
+                                                    <span class="price-label">Sale Price</span>
+                                                    <span class="price-value">$26,200</span>
+                                                    <span class="price-change down">-9% from previous</span>
+                                                </div>
+                                            </div>
+                                            <div class="sale-meta">
+                                                <div class="meta-group">
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Date</span>
+                                                            <span class="meta-value">November 8, 2022</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Location</span>
+                                                            <span class="meta-value">Houston, TX</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta-item">
+                                                        <svg width="16" height="16" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+                                                        <div class="meta-text">
+                                                            <span class="meta-label">Mileage</span>
+                                                            <span class="meta-value">73,680 miles</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="sale-tags">
+                                                    <span class="tag">CPO Program</span>
+                                                    <span class="tag">Finance Available</span>
+                                                    <span class="tag">Inspection Passed</span>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="sales-summary">
+                                    <div class="summary-stat">
+                                        <span class="stat-label">Total Depreciation</span>
+                                        <span class="stat-value depreciation">-19.4%</span>
+                                        <span class="stat-detail">$6,300 over 3.5 years</span>
+                                    </div>
+                                    <div class="summary-stat">
+                                        <span class="stat-label">Annual Depreciation</span>
+                                        <span class="stat-value">5.5%</span>
+                                        <span class="stat-detail">Average per year</span>
+                                    </div>
+                                    <div class="summary-stat">
+                                        <span class="stat-label">Price per Mile</span>
+                                        <span class="stat-value">$8.85</span>
+                                        <span class="stat-detail">Value retention rate</span>
                                     </div>
                                 </div>
                             </div>
