@@ -533,7 +533,7 @@ body {
 }
 
 .main-title {
-    font-size: 57px; /* Увеличено на 10% (52px * 1.1 = 57.2px) */
+    font-size: 63px; /* Увеличено на 20% от исходных 52px (52px * 1.2 = 62.4px ≈ 63px) */
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 60px;
@@ -2692,7 +2692,7 @@ button[type="submit"],
     }
     
     .main-title {
-        font-size: 42px;
+        font-size: 46px; /* Увеличено на 10% (42px * 1.1 = 46.2px) */
     }
     
     .search-form-container {
@@ -2708,7 +2708,7 @@ button[type="submit"],
 
 @media (max-width: 480px) {
     .main-title {
-        font-size: 28px;
+        font-size: 31px; /* Увеличено на 10% (28px * 1.1 = 30.8px ≈ 31px) */
         margin-bottom: 20px;
     }
     
