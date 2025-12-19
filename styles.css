@@ -6600,7 +6600,7 @@ button[type="submit"],
 .nav-tabs {
     display: flex;
     gap: 8px;
-    background: #2c3e50;
+    background: #6b00b8; /* Фиолетовый фон панели как на предыдущем экране */
     border-radius: 25px;
     padding: 4px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -6612,12 +6612,12 @@ button[type="submit"],
 .nav-tab {
     flex: 1;
     padding: 12px 16px;
-    background: #6b00b8; /* Фиолетовый фон как на предыдущем экране */
+    background: transparent;
     border: none;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
-    color: #ffffff; /* Белый текст для лучшей читаемости на фиолетовом */
+    color: #bdc3c7;
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -6626,8 +6626,8 @@ button[type="submit"],
 }
 
 .nav-tab:hover {
-    background: #8b2fb8; /* Более светлый фиолетовый при наведении */
-    color: #ffffff;
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
 }
 
 .nav-tab.active {
