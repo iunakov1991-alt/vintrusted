@@ -341,7 +341,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" id="full-report">
         <div class="hero-container">
             <!-- Mobile Logo at top -->
             <div class="mobile-hero-logo">
@@ -349,7 +349,7 @@
             </div>
             
             <!-- Mobile Title -->
-            <h2 class="mobile-main-title">
+            <h2 class="mobile-main-title" id="price-3-dollars">
                 <div class="mobile-title-line">Full VIN Report</div>
                 <div class="mobile-title-line">Only <span class="yellow-text">$3</span></div>
             </h2>
@@ -360,21 +360,21 @@
             </h1>
             
             <div class="subtitle-chips">
-                <span class="subtitle-chip">accidents</span>
+                <span class="subtitle-chip" id="accident-check">accidents</span>
                 <span class="subtitle-chip">hidden damage</span>
-                <span class="subtitle-chip">liens</span>
-                <span class="subtitle-chip">mileage</span>
+                <span class="subtitle-chip" id="lien-check">liens</span>
+                <span class="subtitle-chip" id="mileage-check">mileage</span>
                 <span class="subtitle-chip">and more</span>
-                <span class="subtitle-chip">all in one</span>
+                <span class="subtitle-chip" id="official-nmvtis">all in one</span>
                 <span class="subtitle-chip">official</span>
                 <span class="subtitle-chip">VIN report</span>
             </div>
             
             <!-- Desktop Form (скрыта на мобилке) -->
-            <div class="search-form-container desktop-form-container">
+            <div class="search-form-container desktop-form-container" id="check-vin">
                 <div class="mode-buttons">
-                    <button class="mode-btn active" data-mode="vin" onclick="switchMode('vin')">VIN</button>
-                    <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')">License Plate</button>
+                    <button class="mode-btn active" data-mode="vin" onclick="switchMode('vin')" id="instant-report">VIN</button>
+                    <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')" id="check-plate">License Plate</button>
         </div>
                 
                 <div class="search-form">
@@ -566,7 +566,7 @@
       </section>
 
     <!-- Second Screen -->
-    <section class="second-screen">
+    <section class="second-screen" id="unlimited-checks">
         <div class="container">
             <div class="second-screen-content">
                 <div class="second-screen-left">
@@ -668,7 +668,7 @@
       </div>
 
                 <!-- Card 3: Own -->
-                <div class="wcd-card">
+                <div class="wcd-card" id="recall-check">
                     <div class="wcd-card-header">
                         <div class="wcd-icon-box wcd-icon-blue">
                             <svg viewBox="0 0 24 24" class="wcd-icon" fill="none">
@@ -681,7 +681,7 @@
                             <span class="wcd-accent-dot wcd-dot-blue"></span>
                             <h3 class="wcd-card-title">Own a car?</h3>
           </div>
-                    </div>
+        </div>
 
                     <p class="wcd-card-desc">Track market value and stay current on safety recalls. Know when it might be the right time to sell.</p>
 
@@ -730,8 +730,8 @@
                     <button class="nav-tab active" data-tab="odometer">VIN HISTORY</button>
                     <button class="nav-tab" data-tab="damage">MARKET VALUE</button>
                     <button class="nav-tab" data-tab="sales">ODOMETER HISTORY</button>
-                    <button class="nav-tab" data-tab="ownership">SALE RECORDS</button>
-                    <button class="nav-tab" data-tab="technical">OWNERSHIP HISTORY</button>
+                    <button class="nav-tab" data-tab="ownership" id="sale-records">SALE RECORDS</button>
+                    <button class="nav-tab" data-tab="technical" id="ownership-history">OWNERSHIP HISTORY</button>
                 </div>
               </div>
 
@@ -781,7 +781,7 @@
                                         <span class="stat-value">118,000 mi</span>
                                     </div>
                                 </div>
-                            </div>
+            </div>
                   </div>
 
                         <!-- Ownership History Content -->
@@ -829,7 +829,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                </div>
               </div>
 
                         <!-- Damage Check Content -->
@@ -869,11 +869,11 @@
                                         <span>No Accidents</span>
                                     </div>
                                 </div>
-                            </div>
+            </div>
                   </div>
 
                         <!-- Technical Data Content -->
-                        <div class="content-item" data-tab="technical">
+                        <div class="content-item" data-tab="technical" id="technical-specs">
                             <div class="specs-container">
                                 <div class="chart-header">
                                     <h3>Vehicle Specifications</h3>
@@ -913,7 +913,7 @@
                                         <span class="spec-value">SUV</span>
                                     </div>
                                 </div>
-                            </div>
+                </div>
                         </div>
 
                         <!-- Sale Records Content -->
@@ -922,7 +922,7 @@
                                 <div class="chart-header">
                                     <h3>Sale Records</h3>
                                     <span class="chart-badge">3 Records</span>
-                                </div>
+                            </div>
                                 <div class="sales-list">
                                     <div class="sale-item">
                                         <div class="sale-header">
@@ -1002,7 +1002,7 @@
       </section>
 
     <!-- Comparison Section -->
-    <section class="comparison-section-new">
+    <section class="comparison-section-new" id="comparison">
         <div class="comparison-overlay-new"></div>
         <div class="container comparison-container-new">
             <div class="comparison-header-center">
