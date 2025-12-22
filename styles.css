@@ -8555,6 +8555,13 @@ body.desktop-device .mobile-submit-btn {
     font-weight: 700;
 }
 
+.comparison-logo {
+    height: 32px;
+    width: auto;
+    vertical-align: middle;
+    filter: brightness(1.2);
+}
+
 .comparison-table-new td {
     padding: 18px 20px;
     font-size: 15px;
