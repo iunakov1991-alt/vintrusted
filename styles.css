@@ -520,9 +520,28 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     transform: scaleX(-1);
-    padding: 120px 0 100px;
+    padding: 120px 0 50px;
     min-height: 700px;
     margin-top: 80px;
+    position: relative;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(15, 23, 42, 0.3) 40%,
+        rgba(30, 58, 138, 0.5) 70%,
+        rgba(107, 0, 184, 0.3) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
 }
 
 .hero-container {
@@ -2749,6 +2768,26 @@ button[type="submit"],
     padding: 120px 0;
     background: linear-gradient(to right, #6b00b8 0%, #000000 50%);
     min-height: 100vh;
+    position: relative;
+}
+
+.second-screen::before {
+    content: '';
+    position: absolute;
+    top: -150px;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(
+        to bottom,
+        rgba(26, 26, 26, 0) 0%,
+        rgba(30, 58, 138, 0.2) 20%,
+        rgba(107, 0, 184, 0.4) 50%,
+        rgba(107, 0, 184, 0.8) 80%,
+        #6b00b8 100%
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
 .second-screen-content {
@@ -2757,6 +2796,8 @@ button[type="submit"],
     gap: 60px;
     align-items: center;
     margin-top: 60px;
+    position: relative;
+    z-index: 2;
 }
 
 /* ============================================================
@@ -9136,6 +9177,8 @@ body.desktop-device .mobile-submit-btn {
     gap: 16px;
     margin-top: 60px;
     margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
 }
 
 .wcd-card {
@@ -9270,6 +9313,8 @@ body.desktop-device .mobile-submit-btn {
     justify-content: center;
     gap: 12px;
     margin-top: 48px;
+    position: relative;
+    z-index: 2;
 }
 
 .wcd-btn {
@@ -9312,6 +9357,8 @@ body.desktop-device .mobile-submit-btn {
     text-align: center;
     font-size: 12px;
     color: #a1a1aa;
+    position: relative;
+    z-index: 2;
 }
 
 /* Responsive */
