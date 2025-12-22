@@ -404,6 +404,25 @@
       
       console.log('✅ Google Analytics purchase event sent');
     </script>
+    
+    <!-- Google Ads Conversion Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17824079146"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17824079146');
+      
+      // Google Ads Conversion Event
+      gtag('event', 'conversion', {
+        'send_to': 'AW-17824079146/purchase',
+        'value': 3.00,
+        'currency': 'USD',
+        'transaction_id': new URLSearchParams(window.location.search).get('setup_intent') || ''
+      });
+      
+      console.log('✅ Google Ads conversion event sent');
+    </script>
 </head>
 <body>
     <!-- Email Form Overlay -->
