@@ -176,22 +176,76 @@ export default async function handler(req, res) {
     const responseText = await response.text();
     console.log('Response length:', responseText.length);
     
-    // ClearVin returns HTML directly for format=html
-    let htmlReport = responseText;
+    let htmlReport = null;
     
-    // Check if response is error JSON
+    // Check if response is JSON
     if (responseText.trim().startsWith('{')) {
       try {
         const jsonData = JSON.parse(responseText);
+        console.log('JSON response:', JSON.stringify(jsonData).substring(0, 200));
+        
         if (jsonData.status === 'error') {
           return res.status(400).json({
             error: jsonData.message || 'ClearVin API error',
             details: jsonData
           });
         }
-      } catch {
-        // Not JSON, proceed as HTML
+        
+        if (jsonData.status === 'ok' && jsonData.result) {
+          // Check if html_report exists and is not empty
+          if (jsonData.result.html_report) {
+            const reportText = jsonData.result.html_report.replace(/<[^>]*>/g, '').trim();
+            
+            // If html_report is empty or too short, try to get by reportId
+            if (reportText.length < 100 && jsonData.result.id) {
+              console.log('⚠️ html_report is empty, fetching by reportId:', jsonData.result.id);
+              
+              // Fetch full report by ID
+              const reportByIdUrl = `https://www.clearvin.com/rest/vendor/report?reportId=${jsonData.result.id}&format=html&reportTemplate=2021`;
+              const reportByIdResponse = await fetch(reportByIdUrl, {
+                method: 'GET',
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Accept': 'text/html'
+                }
+              });
+              
+              if (reportByIdResponse.ok) {
+                htmlReport = await reportByIdResponse.text();
+                console.log('✅ Got report by ID, length:', htmlReport.length);
+              } else {
+                console.error('❌ Failed to fetch report by ID:', reportByIdResponse.status);
+                htmlReport = jsonData.result.html_report; // Use what we have
+              }
+            } else {
+              htmlReport = jsonData.result.html_report;
+            }
+          } else if (jsonData.result.id) {
+            // No html_report at all, fetch by ID
+            console.log('📄 No html_report, fetching by reportId:', jsonData.result.id);
+            
+            const reportByIdUrl = `https://www.clearvin.com/rest/vendor/report?reportId=${jsonData.result.id}&format=html&reportTemplate=2021`;
+            const reportByIdResponse = await fetch(reportByIdUrl, {
+              method: 'GET',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'text/html'
+              }
+            });
+            
+            if (reportByIdResponse.ok) {
+              htmlReport = await reportByIdResponse.text();
+              console.log('✅ Got report by ID, length:', htmlReport.length);
+            }
+          }
+        }
+      } catch (e) {
+        console.log('Not JSON or parse error:', e.message);
+        htmlReport = responseText;
       }
+    } else {
+      // Direct HTML response
+      htmlReport = responseText;
     }
 
     // Validate HTML report
