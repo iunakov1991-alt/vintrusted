@@ -8586,15 +8586,15 @@ body.desktop-device .mobile-submit-btn {
 }
 
 .check-icon-new {
-    color: #10b981;
-    font-size: 20px;
+    color: #22c55e !important;
+    font-size: 24px;
     font-weight: 700;
     text-align: center;
 }
 
 .cross-icon-new {
-    color: #ef4444;
-    font-size: 20px;
+    color: #ef4444 !important;
+    font-size: 24px;
     font-weight: 700;
     text-align: center;
 }
