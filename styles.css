@@ -9124,3 +9124,350 @@ body.desktop-device .mobile-submit-btn {
     }
 }
 
+
+/* ============================================================
+   WHAT CAN I DO SECTION
+   ============================================================ */
+
+.what-can-i-do-section {
+    position: relative;
+    overflow: hidden;
+    padding: 64px 0 80px;
+    background: #09090b;
+}
+
+.wcd-background {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+}
+
+.wcd-bg-blur {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(100px);
+}
+
+.wcd-blur-emerald {
+    top: -160px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 520px;
+    width: 900px;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.wcd-blur-sky {
+    bottom: -208px;
+    right: -180px;
+    height: 520px;
+    width: 520px;
+    background: rgba(14, 165, 233, 0.1);
+}
+
+.wcd-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #09090b, #09090b, rgba(9, 9, 11, 0.95));
+}
+
+.wcd-dot-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.18;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.18) 1px, transparent 0);
+    background-size: 22px 22px;
+}
+
+.wcd-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Header */
+.wcd-header {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.wcd-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #e4e4e7;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.wcd-badge-dot {
+    display: inline-block;
+    height: 6px;
+    width: 6px;
+    border-radius: 9999px;
+    background: rgba(52, 211, 153, 0.9);
+}
+
+.wcd-title {
+    margin-top: 16px;
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.wcd-highlight {
+    color: #6ee7b7;
+}
+
+.wcd-subtitle {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #d4d4d8;
+}
+
+/* Cards Grid */
+.wcd-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+}
+
+.wcd-card {
+    position: relative;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    transition: all 0.3s ease;
+}
+
+.wcd-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.wcd-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wcd-icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 44px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    ring: 1px;
+}
+
+.wcd-icon {
+    height: 24px;
+    width: 24px;
+}
+
+.wcd-icon-green {
+    color: #a7f3d0;
+    box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.25);
+}
+
+.wcd-icon-amber {
+    color: #fde68a;
+    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.25);
+}
+
+.wcd-icon-blue {
+    color: #bae6fd;
+    box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.25);
+}
+
+.wcd-card-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wcd-accent-dot {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-radius: 9999px;
+}
+
+.wcd-dot-green {
+    background: rgba(16, 185, 129, 0.9);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.2);
+}
+
+.wcd-dot-amber {
+    background: rgba(245, 158, 11, 0.9);
+    box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.2);
+}
+
+.wcd-dot-blue {
+    background: rgba(14, 165, 233, 0.9);
+    box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.2);
+}
+
+.wcd-card-title {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    margin: 0;
+}
+
+.wcd-card-desc {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d4d4d8;
+}
+
+.wcd-divider {
+    margin-top: 20px;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+}
+
+.wcd-list {
+    margin-top: 16px;
+    list-style: none;
+    padding: 0;
+}
+
+.wcd-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #e4e4e7;
+}
+
+.wcd-bullet {
+    display: inline-block;
+    margin-top: 6px;
+    height: 6px;
+    width: 6px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+}
+
+.wcd-card-border {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0);
+    transition: box-shadow 0.3s ease;
+}
+
+.wcd-card:hover .wcd-card-border {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* CTA Row */
+.wcd-cta-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 48px;
+}
+
+.wcd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 900;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.wcd-btn-primary {
+    background: #34d399;
+    color: #18181b;
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+}
+
+.wcd-btn-primary:hover {
+    background: #6ee7b7;
+    transform: translateY(-2px);
+}
+
+.wcd-btn-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.wcd-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.wcd-disclaimer {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 12px;
+    color: #a1a1aa;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .wcd-title {
+        font-size: 32px;
+    }
+    
+    .wcd-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .what-can-i-do-section {
+        padding: 48px 0 60px;
+    }
+    
+    .wcd-title {
+        font-size: 28px;
+    }
+    
+    .wcd-subtitle {
+        font-size: 14px;
+    }
+    
+    .wcd-cards-grid {
+        margin-top: 32px;
+    }
+    
+    .wcd-cta-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .wcd-btn {
+        width: 100%;
+    }
+}
+
