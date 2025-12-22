@@ -2803,12 +2803,13 @@ button[type="submit"],
 }
 
 .line-small {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: 0.18em;
     text-transform: lowercase;
-    opacity: 0.75;
+    color: #ffc107;
+    opacity: 1;
     margin: 4px 0;
 }
 
@@ -2822,12 +2823,13 @@ button[type="submit"],
 }
 
 .line-small-lower {
-    font-size: 17px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 1.2;
     letter-spacing: 0.18em;
     text-transform: lowercase;
-    opacity: 0.75;
+    color: #ffc107;
+    opacity: 1;
     margin: 4px 0;
 }
 
@@ -3063,7 +3065,7 @@ button[type="submit"],
     
     .line-small,
     .line-small-lower {
-        font-size: 16px;
+        font-size: 20px;
     }
     
     .second-screen-description {
