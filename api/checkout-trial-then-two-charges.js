@@ -63,7 +63,7 @@ export default async function handler(req, res) {
         // Продолжаем выполнение, даже если подписка не создалась
       }
     } else {
-      console.log('PRICE_49_EVERY_10D not set, skipping subscription schedule');
+      console.log('PRICE_49_EVERY_10D and PRICE_49_EVERY_20D not set, skipping subscription schedule');
     }
 
     // Get VIN from request body, SetupIntent metadata, or customer metadata
