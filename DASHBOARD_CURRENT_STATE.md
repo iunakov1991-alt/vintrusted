@@ -341,3 +341,4 @@ curl -X POST http://localhost:3030/api/local-start \
 **Данные:** ✅ API возвращает корректные данные
 
 
+

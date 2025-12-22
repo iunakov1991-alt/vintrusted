@@ -1,3 +1,9 @@
+/* Hide License Plate button on all devices */
+.mode-btn[data-mode="plate"],
+.mobile-mode-btn[data-mobile-mode="plate"] {
+  display: none !important;
+}
+
 .glass {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
