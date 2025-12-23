@@ -401,7 +401,7 @@
     featuresList.style.cssText = `
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
+      gap: 1cm;
       margin-top: 15px;
       padding-top: 15px;
       border-top: 1px solid #e5e7eb;
