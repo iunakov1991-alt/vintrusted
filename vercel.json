@@ -472,6 +472,50 @@
       "destination": "/api/monster-stop.js"
     },
     {
+      "source": "/semantic-pages/en",
+      "destination": "/"
+    },
+    {
+      "source": "/semantic-pages/en/",
+      "destination": "/"
+    },
+    {
+      "source": "/semantic-pages/es",
+      "destination": "/"
+    },
+    {
+      "source": "/semantic-pages/es/",
+      "destination": "/"
+    },
+    {
+      "source": "/compare/bumper-vs-vintrusted",
+      "destination": "/"
+    },
+    {
+      "source": "/compare/autocheck-vs-vintrusted",
+      "destination": "/"
+    },
+    {
+      "source": "/vin-check/new-york",
+      "destination": "/"
+    },
+    {
+      "source": "/vin-check/toyota-camry",
+      "destination": "/"
+    },
+    {
+      "source": "/vin-check/mercedes",
+      "destination": "/"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/"
+    },
+    {
+      "source": "/nmvtis-guide",
+      "destination": "/"
+    },
+    {
       "source": "/terms-of-service",
       "destination": "/legal/terms-and-conditions.html"
     },
