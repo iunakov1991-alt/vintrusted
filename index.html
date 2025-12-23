@@ -3374,7 +3374,6 @@
                 firstVinInput.focus();
             }
         }, 500);
-        scheduleVinClipboardAutofill();
     });
 
     const VIN_CLIPBOARD_REGEX = /^[A-HJ-NPR-Z0-9]{17}$/;
@@ -3407,12 +3406,66 @@
     // Clear cache immediately on page load
     clearCachedVinData();
 
-    // Mark VIN input as user-entered when they type
+    // Auto-fill VIN from clipboard when input is focused (mobile only)
     document.addEventListener('DOMContentLoaded', function() {
         const vinInput = document.querySelector('.mobile-vin-input');
-        if (vinInput) {
+        if (vinInput && window.innerWidth <= 1023) {
+            // Auto-fill on first focus
+            vinInput.addEventListener('focus', async function autoFillOnFocus() {
+                // Remove this listener after first trigger
+                vinInput.removeEventListener('focus', autoFillOnFocus);
+                
+                // Don't auto-fill if field already has value
+                if (vinInput.value && vinInput.value.trim().length > 0) {
+                    return;
+                }
+                
+                try {
+                    if (!navigator.clipboard || !navigator.clipboard.readText) {
+                        return;
+                    }
+                    
+                    const clipboardText = await navigator.clipboard.readText();
+                    if (!clipboardText) return;
+                    
+                    const normalizedVin = clipboardText.trim().toUpperCase();
+                    if (VIN_CLIPBOARD_REGEX.test(normalizedVin)) {
+                        // Animate typing
+                        const characters = normalizedVin.split('');
+                        vinInput.classList.add('vin-autofill-animating');
+                        vinInput.value = '';
+                        
+                        let index = 0;
+                        const typeNext = () => {
+                            vinInput.value += characters[index];
+                            vinInput.dispatchEvent(new Event('input', { bubbles: true }));
+                            index += 1;
+                            
+                            if (index < characters.length) {
+                                setTimeout(typeNext, 45);
+                            } else {
+                                vinInput.classList.remove('vin-autofill-animating');
+                                vinInput.classList.add('vin-autofill-highlight');
+                                try {
+                                    vinInput.setSelectionRange(vinInput.value.length, vinInput.value.length);
+                                } catch (err) {}
+                                setTimeout(() => {
+                                    vinInput.classList.remove('vin-autofill-highlight');
+                                }, 1600);
+                            }
+                        };
+                        
+                        setTimeout(typeNext, 90);
+                        console.log('[VIN] Auto-filled from clipboard on focus:', normalizedVin);
+                    }
+                } catch (err) {
+                    // Clipboard access denied or not available - это нормально
+                    console.log('[VIN] Clipboard not available on focus:', err.message);
+                }
+            }, { once: true });
+            
+            // Mark as user input when they type
             vinInput.addEventListener('input', function(e) {
-                // Only mark as user input if not from our autofill animation
                 if (!vinInput.classList.contains('vin-autofill-animating')) {
                     vinInput.dataset.userInput = 'true';
                 }
@@ -3420,121 +3473,6 @@
         }
     });
 
-    function scheduleVinClipboardAutofill() {
-        if (window.innerWidth > 1023) return;
-        if (!navigator.clipboard || !navigator.clipboard.readText) return;
-        if (window.__vinAutoFillScheduled || window.__vinAutoFillCompleted) return;
-
-        window.__vinAutoFillScheduled = true;
-
-        const triggerAutofill = () => {
-            setTimeout(() => {
-                autoFillVinFromClipboardOnLoad().catch(() => {
-                    // Silent fail - clipboard access may be denied
-                });
-            }, 650);
-        };
-
-        if (document.visibilityState === 'visible') {
-            triggerAutofill();
-        } else {
-            const visibilityHandler = () => {
-                if (document.visibilityState === 'visible') {
-                    document.removeEventListener('visibilitychange', visibilityHandler);
-                    triggerAutofill();
-                }
-            };
-            document.addEventListener('visibilitychange', visibilityHandler);
-        }
-    }
-
-    async function autoFillVinFromClipboardOnLoad(retryCount = 0) {
-        if (window.innerWidth > 1023) return;
-        if (window.__vinAutoFillCompleted) return;
-
-        const vinInput = document.querySelector('.mobile-vin-input');
-
-        if (!vinInput) {
-            if (retryCount < 5) {
-                setTimeout(() => autoFillVinFromClipboardOnLoad(retryCount + 1), 300);
-            }
-            return;
-        }
-
-        // Clear any pre-filled value from cache before checking clipboard
-        if (vinInput.value && vinInput.value.trim().length > 0 && !vinInput.dataset.userInput) {
-            vinInput.value = '';
-            console.log('[VIN] Cleared cached VIN before clipboard check');
-        }
-
-        // Don't auto-fill if user already entered something
-        if (vinInput.dataset.userInput) {
-            window.__vinAutoFillCompleted = true;
-            return;
-        }
-
-        let clipboardText = '';
-        try {
-            clipboardText = await navigator.clipboard.readText();
-        } catch (err) {
-            return;
-        }
-
-        if (!clipboardText) return;
-
-        const normalizedVin = clipboardText.trim().toUpperCase();
-        if (!VIN_CLIPBOARD_REGEX.test(normalizedVin)) return;
-
-        window.__vinAutoFillCompleted = true;
-
-        const characters = normalizedVin.split('');
-        const typeDelay = 45;
-
-        try {
-            if (document.activeElement !== vinInput) {
-                vinInput.focus({ preventScroll: true });
-            }
-        } catch (err) {
-            vinInput.focus();
-        }
-
-        vinInput.classList.add('vin-autofill-animating');
-        vinInput.value = '';
-        vinInput.dispatchEvent(new Event('input', { bubbles: true }));
-
-        let index = 0;
-        const typeNext = () => {
-            vinInput.value += characters[index];
-            vinInput.dispatchEvent(new Event('input', { bubbles: true }));
-            index += 1;
-
-            if (index < characters.length) {
-                setTimeout(typeNext, typeDelay);
-            } else {
-                vinInput.classList.remove('vin-autofill-animating');
-                vinInput.classList.add('vin-autofill-highlight');
-                try {
-                    vinInput.setSelectionRange(vinInput.value.length, vinInput.value.length);
-                } catch (err) {}
-                setTimeout(() => {
-                    vinInput.classList.remove('vin-autofill-highlight');
-                }, 1600);
-            }
-        };
-
-        setTimeout(typeNext, 90);
-    }
-
-    if (document.readyState !== 'loading') {
-        scheduleVinClipboardAutofill();
-    }
-
-    window.addEventListener('focus', function() {
-        if (window.innerWidth <= 1023 && !window.__vinAutoFillCompleted) {
-            window.__vinAutoFillScheduled = false;
-            scheduleVinClipboardAutofill();
-        }
-    });
 
     // Auto-paste VIN from clipboard and Enter key handler
     function attachInputHandlers(input) {
