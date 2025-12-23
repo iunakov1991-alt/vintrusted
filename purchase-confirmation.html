@@ -252,10 +252,9 @@
         const setupIntentId = urlParams.get('setup_intent') || '';
         
         // Display VIN
-        if (vin) {
-            document.getElementById('vinDisplay').textContent = vin.toUpperCase();
-        } else {
-            document.getElementById('vinDisplay').textContent = 'VIN: N/A';
+        const vinDisplayElement = document.getElementById('vinDisplay');
+        if (vinDisplayElement) {
+            vinDisplayElement.textContent = vin ? vin.toUpperCase() : 'VIN: N/A';
         }
 
         // Fire Google Ads Conversion Event
@@ -289,14 +288,16 @@
         let seconds = 10;
         const countdownElement = document.getElementById('countdown');
         
-        const countdownInterval = setInterval(() => {
-            seconds--;
-            countdownElement.textContent = seconds;
-            
-            if (seconds <= 0) {
-                clearInterval(countdownInterval);
-            }
-        }, 1000);
+        if (countdownElement) {
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+        }
 
         // Redirect to report page after 10 seconds
         setTimeout(() => {
