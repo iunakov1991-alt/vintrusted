@@ -14,8 +14,8 @@ async function getClearVinToken() {
   
   const loginUrl = 'https://www.clearvin.com/rest/vendor/login';
   const credentials = {
-    email: 'redstepler@gmail.com',
-    password: 't1sih81s68!36'
+    email: process.env.CLEARVIN_EMAIL || 'redstepler@gmail.com',
+    password: process.env.CLEARVIN_PASSWORD || 't1sih81s68!36'
   };
 
   try {
