@@ -717,7 +717,7 @@
 
             <!-- CTA Row -->
             <div class="wcd-cta-row">
-                <a href="#hero" class="wcd-btn wcd-btn-primary">Run a VIN check</a>
+                <a href="#check-vin" class="wcd-btn wcd-btn-primary" onclick="scrollToVinInput(event)">Run a VIN check</a>
                 <a href="#results" class="wcd-btn wcd-btn-secondary">View sample report</a>
             </div>
 
@@ -1107,8 +1107,8 @@
                 <h3>Get the most complete report.</h3>
                 <p>Make a confident decision. Enter your VIN to see the full vehicle history right now.</p>
                 <div class="cta-buttons-new">
-                    <a href="#hero" class="btn-primary-new">Check VIN now</a>
-                    <a href="#faq" class="btn-secondary-new">Learn more →</a>
+                    <a href="#check-vin" class="btn-primary-new" onclick="scrollToVinInput(event)">Check VIN now</a>
+                    <a href="#unlimited-checks" class="btn-secondary-new">Learn more →</a>
                 </div>
             </div>
         </div>
@@ -2991,6 +2991,25 @@
     
     <!-- JavaScript для новой мобильной формы (только ≤768px) -->
     <script>
+    // Плавная прокрутка к форме VIN
+    function scrollToVinInput(event) {
+        event.preventDefault();
+        const vinForm = document.getElementById('check-vin');
+        if (vinForm) {
+            vinForm.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+            // Фокус на поле ввода после прокрутки
+            setTimeout(() => {
+                const vinInput = document.querySelector('.vin-input') || document.getElementById('mobile-vin-input');
+                if (vinInput) {
+                    vinInput.focus();
+                }
+            }, 500);
+        }
+    }
+    
     // Переключение режимов в новой мобильной форме
     function switchMobileMode(mode) {
         if (window.innerWidth > 768) return; // Только для мобилки

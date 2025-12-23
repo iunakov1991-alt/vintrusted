@@ -4,6 +4,16 @@
   display: none !important;
 }
 
+/* Hide View sample report button */
+.wcd-btn-secondary {
+  display: none !important;
+}
+
+/* Hide Check a Car's True Story section */
+.results-screen {
+  display: none !important;
+}
+
 .glass {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
