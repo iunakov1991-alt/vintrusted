@@ -3379,6 +3379,47 @@
 
     const VIN_CLIPBOARD_REGEX = /^[A-HJ-NPR-Z0-9]{17}$/;
 
+    // Clear any cached VIN data from localStorage/sessionStorage
+    function clearCachedVinData() {
+        try {
+            // Remove old VIN cache keys
+            localStorage.removeItem('lastVin');
+            localStorage.removeItem('cachedVin');
+            localStorage.removeItem('vin');
+            sessionStorage.removeItem('lastVin');
+            sessionStorage.removeItem('cachedVin');
+            sessionStorage.removeItem('vin');
+            
+            // Clear mobile VIN input if it has a pre-filled value
+            const vinInput = document.querySelector('.mobile-vin-input');
+            if (vinInput && vinInput.value && vinInput.value.trim().length > 0) {
+                // Only clear if it's not from user input (no focus yet)
+                if (!vinInput.dataset.userInput) {
+                    vinInput.value = '';
+                    console.log('[VIN] Cleared pre-filled VIN from cache');
+                }
+            }
+        } catch (err) {
+            console.log('[VIN] Could not clear cache:', err);
+        }
+    }
+
+    // Clear cache immediately on page load
+    clearCachedVinData();
+
+    // Mark VIN input as user-entered when they type
+    document.addEventListener('DOMContentLoaded', function() {
+        const vinInput = document.querySelector('.mobile-vin-input');
+        if (vinInput) {
+            vinInput.addEventListener('input', function(e) {
+                // Only mark as user input if not from our autofill animation
+                if (!vinInput.classList.contains('vin-autofill-animating')) {
+                    vinInput.dataset.userInput = 'true';
+                }
+            });
+        }
+    });
+
     function scheduleVinClipboardAutofill() {
         if (window.innerWidth > 1023) return;
         if (!navigator.clipboard || !navigator.clipboard.readText) return;
@@ -3420,7 +3461,14 @@
             return;
         }
 
-        if (vinInput.value && vinInput.value.trim().length > 0) {
+        // Clear any pre-filled value from cache before checking clipboard
+        if (vinInput.value && vinInput.value.trim().length > 0 && !vinInput.dataset.userInput) {
+            vinInput.value = '';
+            console.log('[VIN] Cleared cached VIN before clipboard check');
+        }
+
+        // Don't auto-fill if user already entered something
+        if (vinInput.dataset.userInput) {
             window.__vinAutoFillCompleted = true;
             return;
         }
