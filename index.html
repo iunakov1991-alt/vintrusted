@@ -3213,32 +3213,45 @@
         const vinInput = document.getElementById('mobile-vin-input');
         if (!vinInput) return;
         
-        // Auto-fill VIN from cache (localStorage/sessionStorage)
-        function autoFillVinFromCache() {
+        // Auto-fill VIN from clipboard (если там 17-значный VIN)
+        async function autoFillVinFromClipboard() {
             if (vinInput.value && vinInput.value.trim().length > 0) {
                 // Already has value, don't overwrite
                 return;
             }
             
-            // Try to get VIN from localStorage or sessionStorage
-            const cachedVin = localStorage.getItem('lastVin') || sessionStorage.getItem('lastVin');
-            
-            if (cachedVin && cachedVin.length === 17) {
-                // Clean and validate VIN
-                const cleanVin = cachedVin.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 17);
-                if (cleanVin.length === 17 && /^[A-HJ-NPR-Z0-9]{17}$/.test(cleanVin)) {
-                    vinInput.value = cleanVin;
-                    // Add class to indicate auto-filled from cache
-                    vinInput.classList.add('vin-cached');
-                    // Trigger input event to apply formatting
-                    vinInput.dispatchEvent(new Event('input', { bubbles: true }));
-                    console.log('[Mobile] Auto-filled VIN from cache:', cleanVin);
+            try {
+                // Check if clipboard API is available
+                if (!navigator.clipboard || !navigator.clipboard.readText) {
+                    console.log('[Mobile] Clipboard API not available');
+                    return;
                 }
+                
+                // Try to read from clipboard
+                const clipboardText = await navigator.clipboard.readText();
+                
+                if (clipboardText && clipboardText.length >= 17) {
+                    // Clean and validate VIN
+                    const cleanVin = clipboardText.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 17);
+                    if (cleanVin.length === 17 && /^[A-HJ-NPR-Z0-9]{17}$/.test(cleanVin)) {
+                        vinInput.value = cleanVin;
+                        // Add class to indicate auto-filled from clipboard
+                        vinInput.classList.add('vin-cached');
+                        // Trigger input event to apply formatting
+                        vinInput.dispatchEvent(new Event('input', { bubbles: true }));
+                        console.log('[Mobile] Auto-filled VIN from clipboard:', cleanVin);
+                    }
+                }
+            } catch (error) {
+                // Clipboard access denied or not available (это нормально)
+                console.log('[Mobile] Clipboard access not available:', error.message);
             }
         }
         
-        // Auto-fill immediately
-        autoFillVinFromCache();
+        // Auto-fill from clipboard when input is focused
+        vinInput.addEventListener('focus', () => {
+            autoFillVinFromClipboard();
+        }, { once: true });
         
         // Убеждаемся что VIN режим активен
         const vinBtn = document.querySelector('.mobile-mode-btn[data-mobile-mode="vin"]');
