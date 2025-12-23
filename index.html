@@ -399,7 +399,7 @@
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="vin-mode">
-                            <input type="text" class="vin-input" placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" data-form-type="other">
+                            <input type="text" class="vin-input" placeholder="Enter VIN code here" maxlength="17" style="text-transform: uppercase;" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" data-form-type="other">
       </div>
                         
                         <!-- Plate Mode -->
@@ -493,7 +493,7 @@
                     <input type="text" 
                            class="mobile-vin-input" 
                            id="mobile-vin-input"
-                           placeholder="Enter VIN code" 
+                           placeholder="Enter VIN code here" 
                            maxlength="17" 
                            autocomplete="off" 
                            autocorrect="off" 
@@ -2689,7 +2689,7 @@
                     <div class="form-content">
                         <!-- VIN Mode -->
                         <div class="mode-content active" id="final-vin-mode">
-                            <input type="text" class="vin-input" placeholder="Enter VIN code" maxlength="17" style="text-transform: uppercase;" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" data-form-type="other">
+                            <input type="text" class="vin-input" placeholder="Enter VIN code here" maxlength="17" style="text-transform: uppercase;" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" data-form-type="other">
                         </div>
                         
                         <!-- Plate Mode -->
@@ -3231,14 +3231,14 @@
                 const clipboardText = await navigator.clipboard.readText();
                 
                 if (clipboardText && clipboardText.length >= 17) {
-                    // Clean and validate VIN
+                // Clean and validate VIN
                     const cleanVin = clipboardText.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 17);
-                    if (cleanVin.length === 17 && /^[A-HJ-NPR-Z0-9]{17}$/.test(cleanVin)) {
-                        vinInput.value = cleanVin;
+                if (cleanVin.length === 17 && /^[A-HJ-NPR-Z0-9]{17}$/.test(cleanVin)) {
+                    vinInput.value = cleanVin;
                         // Add class to indicate auto-filled from clipboard
-                        vinInput.classList.add('vin-cached');
-                        // Trigger input event to apply formatting
-                        vinInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    vinInput.classList.add('vin-cached');
+                    // Trigger input event to apply formatting
+                    vinInput.dispatchEvent(new Event('input', { bubbles: true }));
                         console.log('[Mobile] Auto-filled VIN from clipboard:', cleanVin);
                     }
                 }
