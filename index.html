@@ -3269,24 +3269,19 @@
         // Фокус на VIN поле с задержкой для гарантии
         setTimeout(() => {
             if (vinInput) {
-                // Auto-fill again in case cache was updated
-                autoFillVinFromCache();
-                // Ensure cached class is applied if value exists
-                if (vinInput.value && vinInput.value.length === 17) {
-                    vinInput.classList.add('vin-cached');
-                }
-                
                 vinInput.focus();
-                // Устанавливаем курсор в конец
+                // Устанавливаем курсор в конец если есть значение
                 const len = vinInput.value.length;
-                try {
-                    vinInput.setSelectionRange(len, len);
-                } catch (e) {
-                    // Для iOS
-                    setTimeout(() => {
-                        vinInput.focus();
-                        vinInput.click();
-                    }, 100);
+                if (len > 0) {
+                    try {
+                        vinInput.setSelectionRange(len, len);
+                    } catch (e) {
+                        // Для iOS
+                        setTimeout(() => {
+                            vinInput.focus();
+                            vinInput.click();
+                        }, 100);
+                    }
                 }
             }
         }, 200);
