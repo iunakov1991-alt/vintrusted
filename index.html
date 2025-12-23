@@ -150,6 +150,13 @@
     <link rel="shortcut icon" href="/favicon.ico?v=20251211">
     <link rel="apple-touch-icon" href="/img/favicon.png?v=20251211">
     
+    <!-- DNS Prefetch & Preconnect for external resources -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.clarity.ms">
+    <link rel="dns-prefetch" href="https://i.pravatar.cc">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    
     <!-- Fonts - preconnect for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -358,7 +365,7 @@
         <div class="container">
             <div class="header-content">
                 <a href="#hero" class="logo">
-                    <img src="logo-vin-trust.png" alt="VIN TRUST" class="logo-img">
+                    <img src="logo-vin-trust.png" alt="VIN TRUST" class="logo-img" loading="eager" fetchpriority="high" width="150" height="40">
                 </a>
           </div>
           </div>
@@ -369,7 +376,7 @@
         <div class="hero-container">
             <!-- Mobile Logo at top -->
             <div class="mobile-hero-logo">
-                <img src="images/logo-vin-trust.png" alt="VIN TRUST" class="mobile-logo-img">
+                <img src="images/logo-vin-trust.png" alt="VIN TRUST" class="mobile-logo-img" loading="eager" fetchpriority="high" width="150" height="40">
             </div>
             
             <!-- Mobile Title -->
@@ -586,7 +593,7 @@
 
     <!-- Mobile Second Screen Replacement - Image -->
     <section class="mobile-second-screen">
-        <img src="images/image4.jpg" alt="Vehicle History Report" class="mobile-second-image">
+        <img src="images/image4.jpg" alt="Vehicle History Report" class="mobile-second-image" loading="lazy">
       </section>
 
     <!-- Second Screen -->
@@ -605,7 +612,7 @@
                     </h2>
             </div>
                 <div class="second-screen-right">
-                    <img src="images/report-phone-mockup.png" alt="iPhone with Honda CR-V Report" class="second-screen-image">
+                    <img src="images/report-phone-mockup.png" alt="iPhone with Honda CR-V Report" class="second-screen-image" loading="lazy">
                 </div>
               </div>
 
@@ -1206,7 +1213,7 @@
                     <div class="reviews-list">
                         <div class="review-card">
                             <div class="review-header">
-                                <img src="https://i.pravatar.cc/60?img=12" alt="Michael Anderson" class="review-avatar">
+                                <img src="https://i.pravatar.cc/60?img=12" alt="Michael Anderson" class="review-avatar" loading="lazy" width="60" height="60">
                                 <div class="review-meta">
                                     <h4 class="review-name">Michael Anderson</h4>
                                     <div class="review-date">May 15, 2024</div>
@@ -1233,7 +1240,7 @@
 
                         <div class="review-card">
                             <div class="review-header">
-                                <img src="https://i.pravatar.cc/60?img=45" alt="Jennifer Thompson" class="review-avatar">
+                                <img src="https://i.pravatar.cc/60?img=45" alt="Jennifer Thompson" class="review-avatar" loading="lazy" width="60" height="60">
                                 <div class="review-meta">
                                     <h4 class="review-name">Jennifer Thompson</h4>
                                     <div class="review-date">May 12, 2024</div>
@@ -1261,7 +1268,7 @@
 
                         <div class="review-card">
                             <div class="review-header">
-                                <img src="https://i.pravatar.cc/60?img=33" alt="David Martinez" class="review-avatar">
+                                <img src="https://i.pravatar.cc/60?img=33" alt="David Martinez" class="review-avatar" loading="lazy" width="60" height="60">
                                 <div class="review-meta">
                                     <h4 class="review-name">David Martinez</h4>
                                     <div class="review-date">May 10, 2024</div>
@@ -3874,6 +3881,6 @@
     </script>
     
     <!-- Vercel Speed Insights -->
-    <script type="module" src="speed-insights.js"></script>
+    <script type="module" src="speed-insights.js" defer></script>
 </body>
 </html>
