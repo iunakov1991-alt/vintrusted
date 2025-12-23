@@ -9373,3 +9373,27 @@ body.desktop-device .mobile-submit-btn {
     }
 }
 
+/* Desktop VIN input - bold placeholder */
+.vin-input::placeholder {
+  font-weight: 700 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  opacity: 1 !important;
+}
+
+.vin-input::-webkit-input-placeholder {
+  font-weight: 700 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  opacity: 1 !important;
+}
+
+.vin-input::-moz-placeholder {
+  font-weight: 700 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  opacity: 1 !important;
+}
+
+.vin-input:-ms-input-placeholder {
+  font-weight: 700 !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  opacity: 1 !important;
+}

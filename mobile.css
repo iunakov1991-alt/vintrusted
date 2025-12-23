@@ -915,6 +915,36 @@
     appearance: none;
   }
 
+  /* Mobile VIN input - placeholder styling (bold and prominent) */
+  .mobile-vin-input::placeholder,
+  #mobile-vin-input::placeholder {
+    font-weight: 700 !important;
+    color: rgba(0, 0, 0, 0.5) !important;
+    opacity: 1 !important;
+    font-size: 16px !important;
+  }
+
+  .mobile-vin-input::-webkit-input-placeholder {
+    font-weight: 700 !important;
+    color: rgba(0, 0, 0, 0.5) !important;
+    opacity: 1 !important;
+    font-size: 16px !important;
+  }
+
+  .mobile-vin-input::-moz-placeholder {
+    font-weight: 700 !important;
+    color: rgba(0, 0, 0, 0.5) !important;
+    opacity: 1 !important;
+    font-size: 16px !important;
+  }
+
+  .mobile-vin-input:-ms-input-placeholder {
+    font-weight: 700 !important;
+    color: rgba(0, 0, 0, 0.5) !important;
+    opacity: 1 !important;
+    font-size: 16px !important;
+  }
+
   /* Mobile VIN input - cached value styling (bold black) */
   .mobile-vin-input.vin-cached,
   #mobile-vin-input.vin-cached {
