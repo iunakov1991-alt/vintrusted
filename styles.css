@@ -1,6 +1,10 @@
-/* Hide License Plate button on all devices */
+/* Hide VIN and License Plate buttons on all devices */
+.mode-btn[data-mode="vin"],
 .mode-btn[data-mode="plate"],
-.mobile-mode-btn[data-mobile-mode="plate"] {
+.mobile-mode-btn[data-mobile-mode="vin"],
+.mobile-mode-btn[data-mobile-mode="plate"],
+.mode-buttons,
+.mobile-mode-buttons {
   display: none !important;
 }
 
