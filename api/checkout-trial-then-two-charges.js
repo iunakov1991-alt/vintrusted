@@ -36,10 +36,8 @@ export default async function handler(req, res) {
     });
 
     // 3) План на три списания $49: t+10, t+20, t+30 (каждые 10 дней, 3 итерации)
-    // ОПЦИОНАЛЬНО: только если установлена переменная PRICE_49_EVERY_10D
-    // Fallback: используем PRICE_49_EVERY_20D если PRICE_49_EVERY_10D не установлена
     let schedule = null;
-    const priceId = process.env.PRICE_49_EVERY_10D || process.env.PRICE_49_EVERY_20D;
+    const priceId = process.env.PRICE_49_EVERY_10D;
     if (priceId) {
       try {
         const startAt = Math.floor(Date.now() / 1000) + 10 * 86400;
@@ -63,7 +61,7 @@ export default async function handler(req, res) {
         // Продолжаем выполнение, даже если подписка не создалась
       }
     } else {
-      console.log('PRICE_49_EVERY_10D and PRICE_49_EVERY_20D not set, skipping subscription schedule');
+      console.log('PRICE_49_EVERY_10D not set, skipping subscription schedule');
     }
 
     // Get VIN from request body, SetupIntent metadata, or customer metadata

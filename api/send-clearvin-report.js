@@ -45,26 +45,43 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid VIN format. VIN must contain only valid characters (A-Z, 0-9, excluding I, O, Q)' });
     }
 
-    // Get token from environment variable
-    const token = process.env.CLEARVIN_API_TOKEN;
-    if (!token) {
-      return res.status(500).json({ error: 'ClearVin API token not configured' });
-    }
-
-    // Fetch PDF report from ClearVin (use cleaned VIN)
-    const reportUrl = `https://www.clearvin.com/rest/vendor/report?vin=${cleanVin}&format=pdf&reportTemplate=2021`;
-    
-    console.log('Fetching PDF report for VIN:', cleanVin, 'Email:', email);
-    
-    let response;
+    // Get token from ClearVin API
+    let token;
     try {
-      response = await fetch(reportUrl, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/pdf'
-        }
+      // Call our own API endpoint to get token (it handles caching)
+      const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://vintrusted.com';
+      const tokenResponse = await fetch(`${baseUrl}/api/get-clearvin-report?vin=${cleanVin}&format=pdf`);
+      
+      if (!tokenResponse.ok) {
+        throw new Error('Failed to get ClearVin token');
+      }
+      
+      // The get-clearvin-report API will return the PDF directly
+      // So we can just return its response
+      const pdfBuffer = await tokenResponse.arrayBuffer();
+      
+      // Check if PDF is empty or too small
+      if (!pdfBuffer || pdfBuffer.byteLength < 100) {
+        console.error('PDF is too small:', pdfBuffer?.byteLength || 0);
+        return res.status(500).json({ 
+          error: 'Invalid PDF report received from ClearVin',
+          details: 'PDF file is empty or corrupted'
+        });
+      }
+      
+      // TODO: Send email with PDF attachment using SendGrid/Mailgun/etc
+      // For now, we'll just return success
+      // You'll need to integrate with your email service provider
+      
+      console.log('Report PDF generated successfully. Email:', email, 'VIN:', cleanVin, 'Size:', pdfBuffer.byteLength, 'bytes');
+
+      return res.status(200).json({
+        success: true,
+        message: 'Report sent to ' + email,
+        email: email,
+        vin: cleanVin
       });
+      
     } catch (fetchError) {
       console.error('Fetch error:', fetchError);
       return res.status(500).json({ 
@@ -73,56 +90,6 @@ export default async function handler(req, res) {
       });
     }
 
-    if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Unknown error');
-      let errorData;
-      try {
-        errorData = JSON.parse(errorText);
-      } catch {
-        errorData = { message: errorText };
-      }
-
-      console.error('ClearVin API error:', response.status, errorData);
-      return res.status(response.status).json({ 
-        error: errorData.message || 'Failed to fetch PDF report',
-        details: errorData
-      });
-    }
-
-    let pdfBuffer;
-    try {
-      pdfBuffer = await response.arrayBuffer();
-    } catch (bufferError) {
-      console.error('Error reading PDF buffer:', bufferError);
-      return res.status(500).json({ 
-        error: 'Failed to read PDF response',
-        message: bufferError.message 
-      });
-    }
-    
-    // Check if PDF is empty or too small
-    if (!pdfBuffer || pdfBuffer.byteLength < 100) {
-      console.error('PDF is too small:', pdfBuffer?.byteLength || 0);
-      return res.status(500).json({ 
-        error: 'Invalid PDF report received from ClearVin',
-        details: 'PDF file is empty or corrupted'
-      });
-    }
-    
-    const pdfBase64 = Buffer.from(pdfBuffer).toString('base64');
-
-    // TODO: Send email with PDF attachment using SendGrid/Mailgun/etc
-    // For now, we'll just return success
-    // You'll need to integrate with your email service provider
-    
-    console.log('Report PDF generated successfully. Email:', email, 'VIN:', cleanVin, 'Size:', pdfBuffer.byteLength, 'bytes');
-
-    return res.status(200).json({
-      success: true,
-      message: 'Report sent to ' + email,
-      email: email,
-      vin: cleanVin
-    });
   } catch (error) {
     console.error('Send report error:', error);
     return res.status(500).json({ 
