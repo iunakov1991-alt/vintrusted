@@ -30,8 +30,17 @@
           'quantity': 1
         }]
       });
+
+      // 🎯 Custom POKUPKA event for Google Analytics goal
+      gtag('event', 'POKUPKA', {
+        'transaction_id': new URLSearchParams(window.location.search).get('setup_intent') || 'unknown',
+        'value': 3.00,
+        'currency': 'USD',
+        'event_category': 'ecommerce',
+        'event_label': 'Payment Success Page'
+      });
       
-      console.log('✅ Google Analytics purchase event sent');
+      console.log('✅ Google Analytics events sent: purchase + POKUPKA');
     </script>
     <style>
         .success-container {
