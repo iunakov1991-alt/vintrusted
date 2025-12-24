@@ -389,29 +389,15 @@
       gtag('js', new Date());
       gtag('config', 'G-CX3CT2K2FC');
       
-      // 🎯 MAIN CONVERSION GOAL - Purchase completed
-      gtag('event', 'purchase', {
-        'transaction_id': new URLSearchParams(window.location.search).get('setup_intent') || 'unknown',
-        'value': 3.00,
-        'currency': 'USD',
-        'items': [{
-          'item_id': 'vin-report-trial',
-          'item_name': 'VIN Report Trial Access',
-          'price': 3.00,
-          'quantity': 1
-        }]
-      });
-
-      // 🎯 Custom POKUPKA event for Google Analytics goal
-      gtag('event', 'POKUPKA', {
-        'transaction_id': new URLSearchParams(window.location.search).get('setup_intent') || 'unknown',
-        'value': 3.00,
-        'currency': 'USD',
-        'event_category': 'ecommerce',
-        'event_label': 'VIN Report Success Page'
+      // 📊 Track report view (NOT a purchase conversion - that's on purchase-confirmation.html)
+      gtag('event', 'report_viewed', {
+        'vin': new URLSearchParams(window.location.search).get('vin') || 'unknown',
+        'setup_intent': new URLSearchParams(window.location.search).get('setup_intent') || 'unknown',
+        'event_category': 'engagement',
+        'event_label': 'VIN Report Displayed'
       });
       
-      console.log('✅ Google Analytics events sent: purchase + POKUPKA');
+      console.log('✅ Google Analytics event sent: report_viewed');
     </script>
     
     <!-- Note: Google Ads conversion tracking moved to purchase-confirmation.html -->
