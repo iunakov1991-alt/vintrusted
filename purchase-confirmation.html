@@ -278,10 +278,21 @@
             }]
         });
 
+        // Fire custom POKUPKA event for Google Analytics goal
+        gtag('event', 'POKUPKA', {
+            'transaction_id': setupIntentId || '',
+            'value': 3.0,
+            'currency': 'USD',
+            'vin': vin || '',
+            'event_category': 'ecommerce',
+            'event_label': 'VIN Report Purchase'
+        });
+
         console.log('✅ Conversion tracked:', {
             vin: vin,
             setup_intent: setupIntentId,
-            value: 3.0
+            value: 3.0,
+            events: ['purchase', 'POKUPKA']
         });
 
         // Countdown timer
