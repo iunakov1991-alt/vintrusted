@@ -246,10 +246,17 @@
     </div>
 
     <script>
+        // ═══════════════════════════════════════════════════════════════
+        // КРИТИЧНО: ПРОВЕРЯЕМ ОПЛАТУ ПЕРЕД ОТСТУКИВАНИЕМ GA4
+        // Иначе будут ложные конверсии без реальных денег!
+        // ═══════════════════════════════════════════════════════════════
+        
         // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const vin = urlParams.get('vin') || '';
         const setupIntentId = urlParams.get('setup_intent') || '';
+        
+        console.log('[CONFIRMATION] 🔄 Page loaded with:', { vin, setupIntentId });
         
         // Display VIN
         const vinDisplayElement = document.getElementById('vinDisplay');
@@ -257,43 +264,112 @@
             vinDisplayElement.textContent = vin ? vin.toUpperCase() : 'VIN: N/A';
         }
 
-        // Fire Google Ads Conversion Event
-        gtag('event', 'conversion', {
-            'send_to': 'AW-17824079146/1pFQCO7iz9UbEKq6l7NC',
-            'value': 3.0,
-            'currency': 'USD',
-            'transaction_id': setupIntentId || ''
-        });
+        // ┌─────────────────────────────────────────────────────────────┐
+        // │ ШАГ 1: ПРОВЕРИТЬ ЧТО ОПЛАТА РЕАЛЬНО ПРОШЛА                  │
+        // │ Дергаем /api/verify-payment для валидации в Stripe          │
+        // └─────────────────────────────────────────────────────────────┘
+        async function verifyAndTrackPayment() {
+            if (!setupIntentId) {
+                console.error('[CONFIRMATION] ❌ No setup_intent in URL - cannot verify payment');
+                document.querySelector('.progress-text').textContent = 'Error: Missing payment information';
+                return;
+            }
 
-        // Fire Google Analytics Purchase Event
-        gtag('event', 'purchase', {
-            'transaction_id': setupIntentId || '',
-            'value': 3.0,
-            'currency': 'USD',
-            'items': [{
-                'item_id': 'vin_report',
-                'item_name': 'VIN Report',
-                'price': 3.0,
-                'quantity': 1
-            }]
-        });
+            try {
+                console.log('[CONFIRMATION] 🔄 Verifying payment with Stripe...');
+                
+                const verifyResponse = await fetch(`/api/verify-payment?setup_intent=${setupIntentId}`);
+                const verifyData = await verifyResponse.json();
+                
+                console.log('[CONFIRMATION] 📥 Verification result:', verifyData);
 
-        // Fire custom POKUPKA event for Google Analytics goal
-        gtag('event', 'POKUPKA', {
-            'transaction_id': setupIntentId || '',
-            'value': 3.0,
-            'currency': 'USD',
-            'vin': vin || '',
-            'event_category': 'ecommerce',
-            'event_label': 'VIN Report Purchase'
-        });
+                // ┌─────────────────────────────────────────────────────────┐
+                // │ ШАГ 2: ЕСЛИ ОПЛАТА НЕ ПРОШЛА - НЕ ОТСТУКИВАЕМ GA4      │
+                // └─────────────────────────────────────────────────────────┘
+                if (!verifyData.paid) {
+                    console.error('[CONFIRMATION] ❌ Payment NOT confirmed in Stripe!');
+                    console.error('[CONFIRMATION] ❌ Reason:', verifyData.reason || verifyData.error);
+                    console.error('[CONFIRMATION] ❌ NOT firing GA4 events (no real payment)');
+                    
+                    // Показать ошибку пользователю
+                    document.querySelector('h1').textContent = 'Payment Processing...';
+                    document.querySelector('.thank-you').textContent = 
+                        'Your payment is being processed. This may take a few moments.';
+                    document.querySelector('.progress-text').textContent = 
+                        'Waiting for payment confirmation...';
+                    
+                    // Попробовать еще раз через 3 секунды
+                    setTimeout(() => {
+                        console.log('[CONFIRMATION] 🔄 Retrying payment verification...');
+                        verifyAndTrackPayment();
+                    }, 3000);
+                    
+                    return;
+                }
 
-        console.log('✅ Conversion tracked:', {
-            vin: vin,
-            setup_intent: setupIntentId,
-            value: 3.0,
-            events: ['purchase', 'POKUPKA']
-        });
+                // ┌─────────────────────────────────────────────────────────┐
+                // │ ШАГ 3: ОПЛАТА ПОДТВЕРЖДЕНА → ОТСТУКИВАЕМ GA4            │
+                // └─────────────────────────────────────────────────────────┘
+                console.log('[CONFIRMATION] ✅ Payment CONFIRMED in Stripe!');
+                console.log('[CONFIRMATION] ✅ Firing GA4 conversion events...');
+
+                // Google Ads Conversion Event
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-17824079146/1pFQCO7iz9UbEKq6l7NC',
+                    'value': 3.0,
+                    'currency': 'USD',
+                    'transaction_id': setupIntentId || ''
+                });
+                console.log('[CONFIRMATION] ✅ Google Ads conversion tracked');
+
+                // Google Analytics Purchase Event
+                gtag('event', 'purchase', {
+                    'transaction_id': setupIntentId || '',
+                    'value': 3.0,
+                    'currency': 'USD',
+                    'items': [{
+                        'item_id': 'vin_report',
+                        'item_name': 'VIN Report',
+                        'price': 3.0,
+                        'quantity': 1
+                    }]
+                });
+                console.log('[CONFIRMATION] ✅ GA4 purchase event tracked');
+
+                // Custom POKUPKA event for Google Analytics goal
+                gtag('event', 'POKUPKA', {
+                    'transaction_id': setupIntentId || '',
+                    'value': 3.0,
+                    'currency': 'USD',
+                    'vin': vin || '',
+                    'event_category': 'ecommerce',
+                    'event_label': 'VIN Report Purchase'
+                });
+                console.log('[CONFIRMATION] ✅ GA4 POKUPKA event tracked');
+
+                console.log('[CONFIRMATION] 🎉 All conversion events fired successfully!');
+                console.log('[CONFIRMATION] 📊 Payment details:', {
+                    vin: vin,
+                    setup_intent: setupIntentId,
+                    value: 3.0,
+                    events: ['purchase', 'POKUPKA'],
+                    verified: true,
+                    stripe_status: verifyData.setup_intent?.status,
+                    payment_method: verifyData.setup_intent?.payment_method
+                });
+
+            } catch (error) {
+                console.error('[CONFIRMATION] ❌ Error verifying payment:', error);
+                console.error('[CONFIRMATION] ❌ NOT firing GA4 events due to error');
+                
+                // Показать ошибку
+                document.querySelector('.progress-text').textContent = 
+                    'Error verifying payment. Please contact support.';
+            }
+        }
+
+        // Запустить проверку оплаты
+        verifyAndTrackPayment();
 
         // Countdown timer
         let seconds = 10;

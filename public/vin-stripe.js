@@ -138,36 +138,94 @@
       const vin = getVIN();
       // Email removed - will be collected on report page after payment
 
-      // IMPORTANT: Call elements.submit() first to validate the form
-      const { error: submitError } = await elements.submit();
+      // ┌─────────────────────────────────────────────────────────────┐
+      // │ ШАГ 1: Валидация формы (elements.submit)                    │
+      // │ ОБЯЗАТЕЛЬНО ВЫЗВАТЬ ПЕРЕД confirmSetup!                     │
+      // └─────────────────────────────────────────────────────────────┘
+      console.log('[PAY] 🔄 Starting payment process for VIN:', vin);
+      console.log('[PAY] 🔄 Before elements.submit()');
       
-      if (submitError) {
-        throw submitError;
+      const submitResult = await elements.submit();
+      console.log('[PAY] ✅ After elements.submit()', submitResult);
+      
+      if (submitResult.error) {
+        console.error('[PAY] ❌ elements.submit() error:', submitResult.error);
+        throw submitResult.error;
       }
 
-      // Now confirm setup intent
-      const { error: confirmError, setupIntent } = await stripe.confirmSetup({
+      // ┌─────────────────────────────────────────────────────────────┐
+      // │ ШАГ 2: Подтвердить SetupIntent (токенизация карты)          │
+      // │ КРИТИЧНО: return_url должен быть purchase-confirmation.html │
+      // │ Иначе Link/3DS не завершат confirm и payment_method = null  │
+      // └─────────────────────────────────────────────────────────────┘
+      console.log('[PAY] 🔄 Before stripe.confirmSetup()');
+      console.log('[PAY] 📋 clientSecret:', paymentElement._clientSecret?.substring(0, 20) + '...');
+      console.log('[PAY] 📋 setupIntentId:', paymentElement._setupIntentId);
+      
+      const confirmResult = await stripe.confirmSetup({
         elements,
         clientSecret: paymentElement._clientSecret,
         confirmParams: {
-          return_url: window.location.origin + '/success.html?vin=' + encodeURIComponent(vin) + '&setup_intent=' + paymentElement._setupIntentId,
+          return_url: window.location.origin + '/purchase-confirmation.html?vin=' + encodeURIComponent(vin) + '&setup_intent=' + paymentElement._setupIntentId,
         },
-        redirect: 'if_required'
+        redirect: 'if_required'  // Не редиректить если не нужна 3DS
       });
+      
+      console.log('[PAY] ✅ After stripe.confirmSetup()', {
+        error: confirmResult.error,
+        setupIntent: confirmResult.setupIntent ? {
+          id: confirmResult.setupIntent.id,
+          status: confirmResult.setupIntent.status,
+          payment_method: confirmResult.setupIntent.payment_method
+        } : null
+      });
+
+      if (confirmResult.error) {
+        console.error('[PAY] ❌ confirmSetup error:', confirmResult.error);
+        throw confirmResult.error;
+      }
+      
+      const { error: confirmError, setupIntent } = confirmResult;
 
       if (confirmError) {
         throw confirmError;
       }
-
-      // If setup intent requires action, handle it
-      if (setupIntent && setupIntent.status === 'requires_action') {
-        const { error: actionError } = await stripe.confirmCardSetup(paymentElement._clientSecret);
-        if (actionError) {
-          throw actionError;
+      
+      // ┌─────────────────────────────────────────────────────────────┐
+      // │ ПРОВЕРКА: SetupIntent должен быть succeeded или processing   │
+      // └─────────────────────────────────────────────────────────────┘
+      if (setupIntent) {
+        console.log('[PAY] 📊 SetupIntent status:', setupIntent.status);
+        console.log('[PAY] 💳 payment_method:', setupIntent.payment_method || 'NULL - ERROR!');
+        
+        if (!setupIntent.payment_method) {
+          console.error('[PAY] ❌ CRITICAL: payment_method is NULL after confirmSetup!');
+          throw new Error('Card confirmation failed. Please try again.');
         }
       }
 
-      // Proceed with checkout
+      // ┌─────────────────────────────────────────────────────────────┐
+      // │ ШАГ 3: Обработать 3D Secure если требуется                  │
+      // └─────────────────────────────────────────────────────────────┘
+      if (setupIntent && setupIntent.status === 'requires_action') {
+        console.log('[PAY] ⚠️  SetupIntent requires_action - starting 3DS...');
+        const { error: actionError } = await stripe.confirmCardSetup(paymentElement._clientSecret);
+        if (actionError) {
+          console.error('[PAY] ❌ 3DS error:', actionError);
+          throw actionError;
+        }
+        console.log('[PAY] ✅ 3DS completed');
+      }
+
+      // ┌─────────────────────────────────────────────────────────────┐
+      // │ ШАГ 4: Отправить на backend для списания $3 и подписки      │
+      // └─────────────────────────────────────────────────────────────┘
+      console.log('[PAY] 🔄 Calling backend checkout API...');
+      console.log('[PAY] 📤 Payload:', {
+        setup_intent_id: paymentElement._setupIntentId,
+        vin: vin
+      });
+      
       const checkoutResponse = await fetch('/api/checkout-trial-then-two-charges', {
         method: 'POST',
         headers: {
@@ -179,27 +237,46 @@
         })
       });
 
+      console.log('[PAY] 📥 Backend response status:', checkoutResponse.status);
+
       if (!checkoutResponse.ok) {
         const error = await checkoutResponse.json();
+        console.error('[PAY] ❌ Backend checkout failed:', error);
         throw new Error(error.error || 'Checkout failed');
       }
 
       const result = await checkoutResponse.json();
+      console.log('[PAY] ✅ Backend checkout success:', result);
 
+      // ┌─────────────────────────────────────────────────────────────┐
+      // │ ШАГ 5: Обработать 3DS для PaymentIntent ($3) если нужно     │
+      // └─────────────────────────────────────────────────────────────┘
       if (result.next_action && result.client_secret) {
-        // Handle 3D Secure if needed
+        console.log('[PAY] ⚠️  PaymentIntent requires 3DS...');
         const { error: paymentError } = await stripe.confirmCardPayment(result.client_secret);
         if (paymentError) {
+          console.error('[PAY] ❌ PaymentIntent 3DS error:', paymentError);
           throw paymentError;
         }
+        console.log('[PAY] ✅ PaymentIntent 3DS completed');
       }
 
-      // Redirect to success page (no email - collected later on report page)
+      // ┌─────────────────────────────────────────────────────────────┐
+      // │ ШАГ 6: Редирект на страницу подтверждения                   │
+      // │ ОБЯЗАТЕЛЬНО: /purchase-confirmation.html (для GA4 tracking) │
+      // └─────────────────────────────────────────────────────────────┘
+      console.log('[PAY] 🎉 Payment completed successfully!');
+      console.log('[PAY] 🔄 Redirecting to confirmation page...');
+      
       if (result.success_url) {
+        console.log('[PAY] 📍 Redirect URL from backend:', result.success_url);
         window.location.href = result.success_url;
       } else {
-        window.location.href = '/success.html?vin=' + encodeURIComponent(vin) + 
+        // Fallback (не должно происходить, но на всякий случай)
+        const fallbackUrl = '/purchase-confirmation.html?vin=' + encodeURIComponent(vin) + 
           '&setup_intent=' + paymentElement._setupIntentId;
+        console.log('[PAY] 📍 Fallback redirect URL:', fallbackUrl);
+        window.location.href = fallbackUrl;
       }
 
     } catch (error) {
