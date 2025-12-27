@@ -308,8 +308,20 @@
                 console.log('[CONFIRMATION] ✅ Payment CONFIRMED in Stripe!');
                 console.log('[CONFIRMATION] ✅ Pushing conversion events to dataLayer...');
 
-                // Push purchase event to dataLayer (GTM will handle it)
+                // Push events to dataLayer (GTM will handle them)
                 window.dataLayer = window.dataLayer || [];
+                
+                // Google Ads Conversion Event
+                window.dataLayer.push({
+                    'event': 'conversion',
+                    'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
+                    'value': 3.0,
+                    'currency': 'USD',
+                    'transaction_id': setupIntentId || ''
+                });
+                console.log('[CONFIRMATION] ✅ Google Ads conversion event pushed to dataLayer');
+                
+                // Google Analytics Purchase Event
                 window.dataLayer.push({
                     'event': 'purchase',
                     'transaction_id': setupIntentId || '',
@@ -323,9 +335,9 @@
                         'quantity': 1
                     }]
                 });
-                console.log('[CONFIRMATION] ✅ Purchase event pushed to dataLayer');
+                console.log('[CONFIRMATION] ✅ GA4 purchase event pushed to dataLayer');
 
-                // Push custom POKUPKA event to dataLayer
+                // Custom POKUPKA event for Google Analytics
                 window.dataLayer.push({
                     'event': 'POKUPKA',
                     'transaction_id': setupIntentId || '',
@@ -335,7 +347,7 @@
                     'event_category': 'ecommerce',
                     'event_label': 'VIN Report Purchase'
                 });
-                console.log('[CONFIRMATION] ✅ POKUPKA event pushed to dataLayer');
+                console.log('[CONFIRMATION] ✅ GA4 POKUPKA event pushed to dataLayer');
 
                 console.log('[CONFIRMATION] 🎉 All conversion events fired successfully!');
                 console.log('[CONFIRMATION] 📊 Payment details:', {
