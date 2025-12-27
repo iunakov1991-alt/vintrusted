@@ -25,11 +25,50 @@
     return vin ? vin.toUpperCase().replace(/[^A-Z0-9]/g, '') : '';
   }
 
+  // Load Stripe.js dynamically
+  let stripeLoadingPromise = null;
+  
+  async function loadStripeScript() {
+    // If already loading or loaded, return existing promise
+    if (stripeLoadingPromise) return stripeLoadingPromise;
+    
+    // If Stripe is already available, resolve immediately
+    if (typeof Stripe !== 'undefined') {
+      return Promise.resolve(window.Stripe);
+    }
+    
+    console.log('🔄 Loading Stripe.js dynamically...');
+    
+    stripeLoadingPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://js.stripe.com/v3/';
+      script.async = true;
+      
+      script.onload = () => {
+        console.log('✅ Stripe.js loaded successfully!');
+        resolve(window.Stripe);
+      };
+      
+      script.onerror = () => {
+        console.error('❌ Failed to load Stripe.js');
+        stripeLoadingPromise = null; // Reset so we can try again
+        reject(new Error('Failed to load Stripe.js'));
+      };
+      
+      document.head.appendChild(script);
+    });
+    
+    return stripeLoadingPromise;
+  }
+
   // Initialize Stripe
   async function initStripe() {
     if (isInitialized && stripe) return;
 
     try {
+      // Load Stripe.js first
+      await loadStripeScript();
+      
       // Get publishable key from API
       const configResponse = await fetch('/api/stripe-config');
       if (!configResponse.ok) {
@@ -45,15 +84,15 @@
 
       // Initialize Stripe
       if (typeof Stripe === 'undefined') {
-        throw new Error('Stripe.js not loaded. Make sure https://js.stripe.com/v3/ is included before this script.');
+        throw new Error('Stripe.js not loaded properly');
       }
 
       stripe = Stripe(publishableKey);
       
       isInitialized = true;
-      console.log('Stripe initialized successfully');
+      console.log('✅ Stripe initialized successfully');
     } catch (error) {
-      console.error('Error initializing Stripe:', error);
+      console.error('❌ Error initializing Stripe:', error);
       throw error;
     }
   }
@@ -310,8 +349,51 @@
     }
 
     try {
-      // Initialize Stripe
+      // Show loading indicator
+      const loadingHTML = `
+        <div id="stripe-loading" style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 40px 20px;
+          text-align: center;
+          min-height: 200px;
+        ">
+          <div style="
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4A90E2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+          "></div>
+          <div style="
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+          ">Preparing payment...</div>
+          <style>
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          </style>
+        </div>
+      `;
+      container.innerHTML = loadingHTML;
+      
+      console.log('💳 Initializing payment system...');
+      
+      // Initialize Stripe (will load Stripe.js if not loaded)
       await initStripe();
+
+      // Remove loading indicator
+      const loadingEl = container.querySelector('#stripe-loading');
+      if (loadingEl) {
+        loadingEl.remove();
+      }
 
       // Create payment element
       await createPaymentElement(container);
