@@ -260,13 +260,81 @@
         }
 
         // ┌─────────────────────────────────────────────────────────────┐
+        // │ ФУНКЦИЯ: ОТПРАВИТЬ ВСЕ КОНВЕРСИИ В GTM                       │
+        // └─────────────────────────────────────────────────────────────┘
+        function fireConversionEvents(verifyData = null) {
+            // Push events to dataLayer (GTM will handle them)
+            window.dataLayer = window.dataLayer || [];
+            
+            // Google Ads Conversion Event
+            window.dataLayer.push({
+                'event': 'conversion',
+                'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
+                'value': 3.0,
+                'currency': 'USD',
+                'transaction_id': setupIntentId || ''
+            });
+            console.log('[CONFIRMATION] ✅ Google Ads conversion event pushed to dataLayer');
+            
+            // Google Analytics Purchase Event
+            window.dataLayer.push({
+                'event': 'purchase',
+                'transaction_id': setupIntentId || '',
+                'value': 3.0,
+                'currency': 'USD',
+                'vin': vin || '',
+                'items': [{
+                    'item_id': 'vin_report',
+                    'item_name': 'VIN Report',
+                    'price': 3.0,
+                    'quantity': 1
+                }]
+            });
+            console.log('[CONFIRMATION] ✅ GA4 purchase event pushed to dataLayer');
+
+            // Custom POKUPKA event for Google Analytics
+            window.dataLayer.push({
+                'event': 'POKUPKA',
+                'transaction_id': setupIntentId || '',
+                'value': 3.0,
+                'currency': 'USD',
+                'vin': vin || '',
+                'event_category': 'ecommerce',
+                'event_label': 'VIN Report Purchase'
+            });
+            console.log('[CONFIRMATION] ✅ GA4 POKUPKA event pushed to dataLayer');
+
+            console.log('[CONFIRMATION] 🎉 All conversion events fired successfully!');
+            console.log('[CONFIRMATION] 📊 Payment details:', {
+                vin: vin,
+                setup_intent: setupIntentId,
+                value: 3.0,
+                events: ['conversion', 'purchase', 'POKUPKA'],
+                verified: verifyData ? true : false,
+                stripe_status: verifyData?.setup_intent?.status,
+                payment_method: verifyData?.setup_intent?.payment_method
+            });
+        }
+
+        // ┌─────────────────────────────────────────────────────────────┐
         // │ ШАГ 1: ПРОВЕРИТЬ ЧТО ОПЛАТА РЕАЛЬНО ПРОШЛА                  │
         // │ Дергаем /api/verify-payment для валидации в Stripe          │
+        // │ ⚠️  ТЕСТОВЫЙ РЕЖИМ: si_test* → пропускаем проверку           │
         // └─────────────────────────────────────────────────────────────┘
         async function verifyAndTrackPayment() {
             if (!setupIntentId) {
                 console.error('[CONFIRMATION] ❌ No setup_intent in URL - cannot verify payment');
                 document.querySelector('.progress-text').textContent = 'Error: Missing payment information';
+                return;
+            }
+
+            // 🧪 ТЕСТОВЫЙ РЕЖИМ: пропускаем проверку оплаты
+            const isTestMode = setupIntentId.startsWith('si_test');
+            
+            if (isTestMode) {
+                console.log('[CONFIRMATION] 🧪 TEST MODE: Skipping payment verification');
+                console.log('[CONFIRMATION] 🧪 Firing conversion events WITHOUT Stripe check...');
+                fireConversionEvents();
                 return;
             }
 
@@ -306,59 +374,8 @@
                 // │ ШАГ 3: ОПЛАТА ПОДТВЕРЖДЕНА → ОТСТУКИВАЕМ GA4            │
                 // └─────────────────────────────────────────────────────────┘
                 console.log('[CONFIRMATION] ✅ Payment CONFIRMED in Stripe!');
-                console.log('[CONFIRMATION] ✅ Pushing conversion events to dataLayer...');
-
-                // Push events to dataLayer (GTM will handle them)
-                window.dataLayer = window.dataLayer || [];
-                
-                // Google Ads Conversion Event
-                window.dataLayer.push({
-                    'event': 'conversion',
-                    'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
-                    'value': 3.0,
-                    'currency': 'USD',
-                    'transaction_id': setupIntentId || ''
-                });
-                console.log('[CONFIRMATION] ✅ Google Ads conversion event pushed to dataLayer');
-                
-                // Google Analytics Purchase Event
-                window.dataLayer.push({
-                    'event': 'purchase',
-                    'transaction_id': setupIntentId || '',
-                    'value': 3.0,
-                    'currency': 'USD',
-                    'vin': vin || '',
-                    'items': [{
-                        'item_id': 'vin_report',
-                        'item_name': 'VIN Report',
-                        'price': 3.0,
-                        'quantity': 1
-                    }]
-                });
-                console.log('[CONFIRMATION] ✅ GA4 purchase event pushed to dataLayer');
-
-                // Custom POKUPKA event for Google Analytics
-                window.dataLayer.push({
-                    'event': 'POKUPKA',
-                    'transaction_id': setupIntentId || '',
-                    'value': 3.0,
-                    'currency': 'USD',
-                    'vin': vin || '',
-                    'event_category': 'ecommerce',
-                    'event_label': 'VIN Report Purchase'
-                });
-                console.log('[CONFIRMATION] ✅ GA4 POKUPKA event pushed to dataLayer');
-
-                console.log('[CONFIRMATION] 🎉 All conversion events fired successfully!');
-                console.log('[CONFIRMATION] 📊 Payment details:', {
-                    vin: vin,
-                    setup_intent: setupIntentId,
-                    value: 3.0,
-                    events: ['purchase', 'POKUPKA'],
-                    verified: true,
-                    stripe_status: verifyData.setup_intent?.status,
-                    payment_method: verifyData.setup_intent?.payment_method
-                });
+                console.log('[CONFIRMATION] ✅ Firing conversion events...');
+                fireConversionEvents(verifyData);
 
             } catch (error) {
                 console.error('[CONFIRMATION] ❌ Error verifying payment:', error);
