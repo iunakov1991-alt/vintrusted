@@ -92,6 +92,17 @@
       z-index: 1;
     }
 
+    .arrow-to-form {
+      position: absolute;
+      width: 120px;
+      height: auto;
+      left: 50%;
+      transform: translateX(-50%) rotate(-15deg);
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 5;
+    }
+
     .preline {
       font-size: 13px;
       color: var(--text-muted);
@@ -305,6 +316,10 @@
     }
 
     @media (max-width: 600px) {
+      .arrow-to-form {
+        width: 80px;
+      }
+
       .header-content {
         height: 60px;
       }
@@ -387,6 +402,8 @@
         <span class="warning-chip">liens</span>
         <span class="warning-chip">theft records</span>
       </div>
+
+      <img src="foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3.png" alt="" class="arrow-to-form">
 
       <div class="search-form-container desktop-form-container" id="check-vin">
         <div class="mode-buttons">
