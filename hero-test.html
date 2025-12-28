@@ -66,7 +66,7 @@
     .hero {
       min-height: 100vh;
       background-color: #000000;
-      padding: 140px 20px 20px;
+      padding: 180px 20px 20px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
@@ -77,13 +77,13 @@
     .hero::after {
       content: '';
       position: absolute;
-      right: 0;
+      right: -20px;
       top: 0;
       bottom: 0;
       width: 50%;
       background: url('images/report-phone-mockup.png') center right / contain no-repeat;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1001;
     }
 
     .hero-inner {
@@ -334,7 +334,11 @@
       }
 
       .hero {
-        padding: 100px 16px 20px;
+        padding: 120px 16px 20px;
+      }
+
+      .hero::after {
+        right: -10px;
       }
 
       .form-content {
