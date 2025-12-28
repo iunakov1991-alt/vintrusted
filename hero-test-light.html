@@ -221,25 +221,27 @@
     }
 
     .trust-badges {
-      position: absolute;
-      bottom: 40px;
-      left: 40px;
-      right: 50%;
+      width: 100%;
+      max-width: 900px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 40px;
-      padding: 20px 0;
-      opacity: 0.4;
-      z-index: 2;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 40px 40px 20px;
+      margin-top: 60px;
     }
 
     .trust-badge {
-      height: 40px;
+      height: 50px;
       width: auto;
       object-fit: contain;
       filter: grayscale(100%);
-      opacity: 0.6;
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+
+    .trust-badge:hover {
+      opacity: 0.8;
     }
 
     @media (max-width: 1024px) {
@@ -250,13 +252,10 @@
         display: none;
       }
       .trust-badges {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        right: auto;
         margin-top: 40px;
         flex-wrap: wrap;
         justify-content: center;
+        padding: 20px;
       }
     }
 
@@ -360,14 +359,14 @@
         Many sellers won't disclose these issues.<br/>
         A VIN check takes seconds — mistakes cost thousands.
       </div>
-    </div>
 
-    <!-- Trust Badges -->
-    <div class="trust-badges">
-      <img src="nmvtis-logo@2x.png" alt="NMVTIS" class="trust-badge">
-      <img src="guar-Photoroom.png" alt="Guaranteed" class="trust-badge">
-      <img src="SAuVO.png" alt="Verified" class="trust-badge">
-      <img src="nhts.png" alt="NHTSA" class="trust-badge">
+      <!-- Trust Badges -->
+      <div class="trust-badges">
+        <img src="nmvtis-logo@2x.png" alt="NMVTIS" class="trust-badge">
+        <img src="guar-Photoroom.png" alt="Guaranteed" class="trust-badge">
+        <img src="SAuVO.png" alt="Verified" class="trust-badge">
+        <img src="nhts.png" alt="NHTSA" class="trust-badge">
+      </div>
     </div>
   </section>
 </body>
