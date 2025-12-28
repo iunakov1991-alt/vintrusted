@@ -558,7 +558,7 @@ body {
     line-height: 1.2;
     margin-bottom: 60px;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -591,7 +591,9 @@ body {
     margin-bottom: 50px;
     align-items: center;
     max-width: 600px;
-    justify-content: flex-start;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .subtitle-chip {
@@ -599,7 +601,7 @@ body {
     padding: 8px 16px;
     background: rgba(55, 65, 81, 0.6);
     border-radius: 20px;
-    color: #ffffff;
+    color: #fcd34d;
     font-size: 16px;
     font-weight: 500;
     line-height: 1.4;
@@ -783,9 +785,11 @@ body {
 .search-form-container {
     margin-top: 40px;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
     align-items: flex-start;
     position: relative;
     z-index: 10;
