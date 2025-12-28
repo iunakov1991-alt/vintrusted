@@ -157,140 +157,51 @@
       border-radius: 28px;
     }
 
-    .mode-buttons {
-      display: none;
-    }
-
-    .mode-btn {
-      flex: none;
-      padding: 12px 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      color: #ffffff;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-      min-width: 90px;
-    }
-
-    .mode-btn.active {
-      background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
-      border-color: #FFA500;
-      color: #1a1a1a;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-    }
-
-    .mode-btn:hover:not(.active) {
-      background: rgba(255, 255, 255, 0.15);
-    }
 
     .search-form {
       background: #F5F5DC;
       border-radius: 28px;
-      overflow: visible;
       width: 100%;
       max-width: 760px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       position: relative;
-    }
-
-    .form-content {
       display: flex;
       align-items: center;
-      padding: 0 25px 0 25px;
       height: 70px;
-      padding-right: 150px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .mode-content {
-      display: none;
-      flex: 1;
-      gap: 10px;
-      background: #F5F5DC;
-      position: relative;
-      z-index: 3;
-    }
-
-    .mode-content.active {
-      display: flex;
+      padding: 0 0 0 30px;
     }
 
     .vin-input {
       flex: 1;
-      background: #F5F5DC;
+      background: transparent;
       border: none;
-      color: #36454F;
-      font-size: 16px;
-      font-weight: 900;
+      color: #666666;
+      font-size: 17px;
+      font-weight: 600;
       font-style: italic;
       padding: 0;
       outline: none;
       text-transform: uppercase;
-      caret-color: #000000;
-      position: relative;
-      z-index: 3;
     }
 
     .vin-input::placeholder {
-      color: #666666;
-      font-weight: bold;
+      color: #999999;
+      font-weight: 600;
       font-style: italic;
-    }
-
-    .state-select {
-      background: #F5F5DC;
-      border: none;
-      color: #36454F;
-      font-size: 16px;
-      font-weight: 900;
-      font-style: italic;
-      padding: 0;
-      outline: none;
-      cursor: pointer;
-      min-width: 130px;
-      position: relative;
-      z-index: 3;
-    }
-
-    .plate-input {
-      flex: 1;
-      background: #F5F5DC;
-      border: none;
-      color: #36454F;
-      font-size: 16px;
-      font-weight: 900;
-      font-style: italic;
-      padding: 0;
-      outline: none;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 3;
     }
 
     .search-btn {
       background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
       border: none;
       border-radius: 0 28px 28px 0;
-      padding: 0 35px;
-      color: #1a1a1a;
-      font-size: 15px;
-      font-weight: 900;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
+      padding: 0 40px;
       height: 100%;
+      color: #1a1a1a;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
     }
 
     .search-btn:hover {
@@ -343,60 +254,22 @@
         display: none;
       }
 
-      .header-content {
-        height: 60px;
-      }
-
-      .logo {
-        margin-left: 0;
-        transform: scale(0.9);
-      }
-
-      .logo-img {
-        height: 32px;
-      }
-
-      .hero {
-        padding: 120px 16px 20px;
-      }
-
-      .hero-inner {
-        padding-left: 0;
-      }
-
-      .hero::after {
-        right: -30px;
-        width: 50%;
-      }
-
-      .form-content {
+      .search-form {
         flex-direction: column;
         height: auto;
         padding: 20px;
-        padding-right: 20px;
       }
-      
+
+      .vin-input {
+        width: 100%;
+        margin-bottom: 12px;
+      }
+
       .search-btn {
-        position: static;
         width: 100%;
         border-radius: 28px;
         height: 54px;
-        margin-top: 12px;
       }
-      
-      .mode-buttons {
-        width: 100%;
-        gap: 8px;
-      }
-      
-      .mode-btn {
-        flex: 1;
-      }
-      
-      h1 {
-        font-size: 32px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -438,65 +311,20 @@
       </div>
 
       <div class="search-form-container desktop-form-container" id="check-vin">
-        <div class="mode-buttons">
-          <button class="mode-btn active" data-mode="vin" onclick="switchMode('vin')" id="instant-report">VIN</button>
-          <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')" id="check-plate">License Plate</button>
-        </div>
-        
         <div class="search-form">
-          <div class="form-content">
-            <!-- VIN Mode -->
-            <div class="mode-content active" id="vin-mode">
-              <input type="text" class="vin-input" placeholder="Enter VIN code here" maxlength="17" style="text-transform: uppercase;" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" data-form-type="other">
-            </div>
-            
-            <!-- Plate Mode -->
-            <div class="mode-content" id="plate-mode">
-              <select class="state-select">
-                <option value="">Choose Your State</option>
-                <option value="CA" class="populous-state">California</option>
-                <option value="TX" class="populous-state">Texas</option>
-                <option value="FL" class="populous-state">Florida</option>
-                <option value="NY" class="populous-state">New York</option>
-                <option value="PA" class="populous-state">Pennsylvania</option>
-              </select>
-              <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
-            </div>
-            
-            <button class="search-btn" onclick="submitForm.call(this, event);">
-              Get My Report ✓
-            </button>
-          </div>
+          <input type="text" class="vin-input" placeholder="ENTER VIN CODE HERE" maxlength="17" style="text-transform: uppercase;" autocomplete="off">
+          <button class="search-btn" onclick="submitFormSimple(event);">
+            Get My Report ✓
+          </button>
         </div>
       </div>
 
       <script>
-        function switchMode(mode) {
-          const vinMode = document.getElementById('vin-mode');
-          const plateMode = document.getElementById('plate-mode');
-          const vinBtn = document.querySelector('.mode-btn[data-mode="vin"]');
-          const plateBtn = document.querySelector('.mode-btn[data-mode="plate"]');
-          
-          if (mode === 'vin') {
-            vinMode.classList.add('active');
-            plateMode.classList.remove('active');
-            vinBtn.classList.add('active');
-            plateBtn.classList.remove('active');
-          } else {
-            vinMode.classList.remove('active');
-            plateMode.classList.add('active');
-            vinBtn.classList.remove('active');
-            plateBtn.classList.add('active');
-          }
-        }
-
-        function submitForm(e) {
+        function submitFormSimple(e) {
           e.preventDefault();
-          const activeMode = document.querySelector('.mode-content.active');
-          const vinInput = activeMode.querySelector('.vin-input');
-          
-          if (vinInput && vinInput.value.length === 17) {
-            window.location.href = '/report.html?vin=' + vinInput.value;
+          const vinInput = document.querySelector('.vin-input').value;
+          if (vinInput.length === 17) {
+            window.location.href = '/report.html?vin=' + vinInput;
           } else {
             alert('Please enter a valid 17-character VIN');
           }
