@@ -21,10 +21,52 @@
       color: var(--text-main);
     }
 
+    .header {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #1a1a1a;
+      position: relative;
+      z-index: 1001;
+      margin-left: 40px;
+      transform: scale(1.1);
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+    }
+
     .hero {
       min-height: 100vh;
       background-color: #000000;
-      padding: 20px;
+      padding: 100px 20px 20px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
@@ -263,6 +305,23 @@
     }
 
     @media (max-width: 600px) {
+      .header-content {
+        height: 60px;
+      }
+
+      .logo {
+        margin-left: 0;
+        transform: scale(0.9);
+      }
+
+      .logo-img {
+        height: 32px;
+      }
+
+      .hero {
+        padding: 80px 16px 20px;
+      }
+
       .form-content {
         flex-direction: column;
         height: auto;
@@ -287,10 +346,6 @@
         flex: 1;
       }
       
-      .hero {
-        padding: 20px 16px;
-      }
-      
       h1 {
         font-size: 32px;
       }
@@ -298,6 +353,17 @@
   </style>
 </head>
 <body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <img src="logo-vin-trust.png" alt="VIN TRUST" class="logo-img" loading="eager" fetchpriority="high" width="150" height="40">
+        </a>
+      </div>
+    </div>
+  </header>
+
   <section class="hero">
     <div class="hero-inner">
       <div class="preline">
