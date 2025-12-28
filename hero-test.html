@@ -93,14 +93,13 @@
     }
 
     .arrow-to-form {
-      position: absolute;
+      display: block;
       width: 120px;
       height: auto;
-      left: 50%;
-      transform: translateX(-50%) rotate(-15deg);
+      margin: -10px auto 10px;
+      transform: rotate(-15deg);
       opacity: 0.8;
       pointer-events: none;
-      z-index: 5;
     }
 
     .preline {
@@ -318,6 +317,7 @@
     @media (max-width: 600px) {
       .arrow-to-form {
         width: 80px;
+        margin: -5px auto 5px;
       }
 
       .header-content {
