@@ -363,13 +363,13 @@
             
             <!-- Mobile Title -->
             <h2 class="mobile-main-title" id="price-3-dollars">
-                <div class="mobile-title-line">Full VIN Report</div>
-                <div class="mobile-title-line">Only <span class="yellow-text">$3</span></div>
+                <div class="mobile-title-line">This Car Could Cost You Thousands.</div>
+                <div class="mobile-title-line">Check Its History First</div>
             </h2>
             
             <h1 class="main-title">
-                <div class="desktop-title-line">Full VIN Report</div>
-                <div class="desktop-title-line">Only <span class="yellow-text">$3</span></div>
+                <div class="desktop-title-line">This Car Could Cost You Thousands.</div>
+                <div class="desktop-title-line">Check Its History First</div>
             </h1>
             
             <div class="subtitle-chips">
@@ -3224,7 +3224,7 @@
                 
                 // Try to read from clipboard
                 const clipboardText = await navigator.clipboard.readText();
-                
+            
                 if (clipboardText && clipboardText.length >= 17) {
                 // Clean and validate VIN
                     const cleanVin = clipboardText.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 17);
@@ -3235,7 +3235,7 @@
                     // Trigger input event to apply formatting
                     vinInput.dispatchEvent(new Event('input', { bubbles: true }));
                         console.log('[Mobile] Auto-filled VIN from clipboard:', cleanVin);
-                    }
+                }
                 }
             } catch (error) {
                 // Clipboard access denied or not available (это нормально)
@@ -3390,7 +3390,7 @@
             }
         } catch (err) {
             console.log('[VIN] Could not clear cache:', err);
-        }
+                }
     }
 
     // Clear cache immediately on page load
@@ -3451,7 +3451,7 @@
                 } catch (err) {
                     // Clipboard access denied or not available - это нормально
                     console.log('[VIN] Clipboard not available on focus:', err.message);
-                }
+    }
             }, { once: true });
             
             // Mark as user input when they type
