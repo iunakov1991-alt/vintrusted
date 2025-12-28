@@ -86,7 +86,7 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .vin-box input {
+    .vin-input {
       flex: 1;
       height: 56px;
       border-radius: 8px;
@@ -94,14 +94,15 @@
       padding: 0 16px;
       font-size: 16px;
       font-weight: 500;
+      text-transform: uppercase;
     }
 
-    .vin-box input:focus {
+    .vin-input:focus {
       outline: 2px solid var(--accent);
       outline-offset: -2px;
     }
 
-    .vin-box button {
+    .search-btn {
       height: 56px;
       padding: 0 22px;
       border-radius: 8px;
@@ -114,7 +115,7 @@
       color: #0b1320;
     }
 
-    .vin-box button:hover {
+    .search-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(245, 197, 66, 0.4);
     }
@@ -123,6 +124,7 @@
       font-size: 14px;
       color: var(--text-muted);
       margin-bottom: 20px;
+      margin-top: 0;
       font-weight: 500;
     }
 
@@ -169,7 +171,7 @@
       .vin-box {
         flex-direction: column;
       }
-      .vin-box button {
+      .search-btn {
         width: 100%;
       }
       .hero {
@@ -197,70 +199,16 @@
         Hidden accidents, salvage titles, odometer rollback — revealed by VIN.
       </div>
 
-      <div class="search-form-container desktop-form-container" id="check-vin" style="max-width: 100%;">
-        <div class="mode-buttons" style="display: flex; gap: 12px; margin-bottom: 16px;">
-          <button class="mode-btn active" data-mode="vin" onclick="switchMode('vin')" style="flex: 1; padding: 12px; background: #fcd34d; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; color: #000;">VIN</button>
-          <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')" style="flex: 1; padding: 12px; background: rgba(255,255,255,0.1); border: none; border-radius: 8px; font-weight: 600; cursor: pointer; color: #fff;">License Plate</button>
-        </div>
-        
-        <div class="search-form" style="background: rgba(0,0,0,0.55); backdrop-filter: blur(6px); border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.1);">
-          <div class="form-content" style="display: flex; gap: 12px;">
-            <!-- VIN Mode -->
-            <div class="mode-content active" id="vin-mode" style="flex: 1;">
-              <input type="text" class="vin-input" placeholder="Enter VIN code here" maxlength="17" style="width: 100%; height: 56px; border-radius: 8px; border: none; padding: 0 16px; font-size: 16px; text-transform: uppercase;" autocomplete="off">
-            </div>
-            
-            <!-- Plate Mode -->
-            <div class="mode-content" id="plate-mode" style="display: none; flex: 1; gap: 12px;">
-              <select class="state-select" style="height: 56px; border-radius: 8px; border: none; padding: 0 16px; font-size: 16px;">
-                <option value="">Choose State</option>
-                <option value="CA">California</option>
-                <option value="TX">Texas</option>
-                <option value="FL">Florida</option>
-                <option value="NY">New York</option>
-                <option value="PA">Pennsylvania</option>
-              </select>
-              <input type="text" class="plate-input" placeholder="License Plate" maxlength="8" style="height: 56px; border-radius: 8px; border: none; padding: 0 16px; font-size: 16px; text-transform: uppercase;">
-            </div>
-            
-            <button class="search-btn" onclick="submitForm(event)" style="height: 56px; padding: 0 22px; border-radius: 8px; border: none; background: linear-gradient(135deg, #f5c542, #ffb700); font-size: 16px; font-weight: 600; cursor: pointer; color: #0b1320;">
-              Get Report →
-            </button>
-          </div>
-        </div>
+      <div class="vin-box">
+        <input type="text" class="vin-input" placeholder="Enter VIN code here" maxlength="17" autocomplete="off">
+        <button class="search-btn" onclick="submitForm(event)">Get Report →</button>
       </div>
 
-      <div class="trust" style="font-size: 14px; color: #a9b1c3; margin-top: 16px; font-weight: 500;">
+      <div class="trust">
         No signup required • Instant results • Secure check
       </div>
 
       <script>
-        function switchMode(mode) {
-          const vinMode = document.getElementById('vin-mode');
-          const plateMode = document.getElementById('plate-mode');
-          const buttons = document.querySelectorAll('.mode-btn');
-          
-          buttons.forEach(btn => {
-            if (btn.dataset.mode === mode) {
-              btn.classList.add('active');
-              btn.style.background = '#fcd34d';
-              btn.style.color = '#000';
-            } else {
-              btn.classList.remove('active');
-              btn.style.background = 'rgba(255,255,255,0.1)';
-              btn.style.color = '#fff';
-            }
-          });
-          
-          if (mode === 'vin') {
-            vinMode.style.display = 'flex';
-            plateMode.style.display = 'none';
-          } else {
-            vinMode.style.display = 'none';
-            plateMode.style.display = 'flex';
-          }
-        }
-        
         function submitForm(e) {
           e.preventDefault();
           const vinInput = document.querySelector('.vin-input').value;
