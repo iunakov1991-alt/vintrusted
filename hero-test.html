@@ -24,19 +24,35 @@
     .hero {
       min-height: 100vh;
       background:
+        linear-gradient(90deg, rgba(11, 19, 32, 0.95) 0%, rgba(11, 19, 32, 0.85) 50%, transparent 70%),
         radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.12), transparent 35%),
         radial-gradient(circle at 80% 10%, rgba(255, 193, 7, 0.14), transparent 30%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.85) 35%, rgba(0, 0, 0, 0.9) 100%),
-        url('images/mobileback.png');
-      background-size: cover;
-      background-position: center;
+        linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);
+      background-color: #0b1320;
       padding: 24px;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
+      gap: 40px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      background: url('images/mobileback.png') center right / contain no-repeat;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .hero-inner {
       max-width: 720px;
+      position: relative;
+      z-index: 1;
     }
 
     .preline {
@@ -143,6 +159,15 @@
       font-size: 14px;
       color: var(--text-muted);
       line-height: 1.6;
+    }
+
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero::after {
+        display: none;
+      }
     }
 
     @media (max-width: 600px) {
