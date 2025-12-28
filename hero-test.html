@@ -93,6 +93,19 @@
       padding-left: 40px;
     }
 
+    .hero-inner::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: url('carico-Photoroom.png') center / cover no-repeat;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -1;
+    }
+
     .arrow-to-form {
       position: absolute;
       width: 150px;
@@ -141,20 +154,6 @@
       align-items: flex-start;
       position: relative;
       z-index: 10;
-    }
-
-    .search-form-container::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      bottom: -15px;
-      left: 0;
-      background: url('carico-Photoroom.png') center / cover no-repeat;
-      opacity: 0.6;
-      pointer-events: none;
-      z-index: -1;
-      border-radius: 28px;
     }
 
 
