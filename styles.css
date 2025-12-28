@@ -539,7 +539,6 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    transform: scaleX(-1);
     padding: 80px 0 70px;
     min-height: 600px;
     margin-top: 60px;
