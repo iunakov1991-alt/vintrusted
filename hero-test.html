@@ -94,13 +94,28 @@
     }
 
     .arrow-to-form {
-      display: block;
-      width: 120px;
+      position: absolute;
+      width: 150px;
       height: auto;
-      margin: -10px auto 10px;
-      transform: rotate(-15deg);
-      opacity: 0.8;
+      right: 45%;
+      top: 35%;
+      transform: rotate(-25deg);
+      opacity: 0.9;
       pointer-events: none;
+      z-index: 10;
+    }
+
+    .form-background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: url('carico-Photoroom.png') center / cover no-repeat;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -1;
+      border-radius: 28px;
     }
 
     .preline {
@@ -179,6 +194,7 @@
       max-width: 600px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       position: relative;
+      z-index: 1;
     }
 
     .form-content {
@@ -317,8 +333,7 @@
 
     @media (max-width: 600px) {
       .arrow-to-form {
-        width: 80px;
-        margin: -5px auto 5px;
+        display: none;
       }
 
       .header-content {
@@ -390,6 +405,8 @@
   </header>
 
   <section class="hero">
+    <img src="foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3-Photoroom.png" alt="" class="arrow-to-form">
+
     <div class="hero-inner">
       <div class="preline">
         Before you buy a used car — check what sellers don't tell you
@@ -413,8 +430,6 @@
         <span class="warning-chip">theft records</span>
       </div>
 
-      <img src="foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3.png" alt="" class="arrow-to-form">
-
       <div class="search-form-container desktop-form-container" id="check-vin">
         <div class="mode-buttons">
           <button class="mode-btn active" data-mode="vin" onclick="switchMode('vin')" id="instant-report">VIN</button>
@@ -422,6 +437,7 @@
         </div>
         
         <div class="search-form">
+          <div class="form-background"></div>
           <div class="form-content">
             <!-- VIN Mode -->
             <div class="mode-content active" id="vin-mode">
