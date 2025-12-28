@@ -82,7 +82,7 @@
       padding: 16px;
       display: flex;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border: 1px solid rgba(255,255,255,0.1);
     }
 
@@ -133,7 +133,7 @@
       flex-wrap: wrap;
       gap: 8px;
       max-width: 500px;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
     }
 
     .warning-chip {
@@ -152,7 +152,7 @@
     }
 
     .warning {
-      margin-top: 0;
+      margin-top: 20px;
       font-size: 14px;
       color: var(--text-muted);
       line-height: 1.6;
@@ -199,6 +199,15 @@
         Hidden accidents, salvage titles, odometer rollback — revealed by VIN.
       </div>
 
+      <div class="warning-chips">
+        <span class="warning-chip">accident reported</span>
+        <span class="warning-chip">salvage title</span>
+        <span class="warning-chip">odometer rollback</span>
+        <span class="warning-chip">hidden damage</span>
+        <span class="warning-chip">liens</span>
+        <span class="warning-chip">theft records</span>
+      </div>
+
       <div class="vin-box">
         <input type="text" class="vin-input" placeholder="Enter VIN code here" maxlength="17" autocomplete="off">
         <button class="search-btn" onclick="submitForm(event)">Get Report →</button>
@@ -219,15 +228,6 @@
           }
         }
       </script>
-
-      <div class="warning-chips">
-        <span class="warning-chip">accident reported</span>
-        <span class="warning-chip">salvage title</span>
-        <span class="warning-chip">odometer rollback</span>
-        <span class="warning-chip">hidden damage</span>
-        <span class="warning-chip">liens</span>
-        <span class="warning-chip">theft records</span>
-      </div>
 
       <div class="warning">
         Many sellers won't disclose these issues.<br/>
