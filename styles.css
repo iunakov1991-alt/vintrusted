@@ -590,7 +590,7 @@ body {
 .subtitle-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 4px;
     margin-bottom: 30px;
     align-items: center;
     max-width: 600px;
@@ -788,7 +788,7 @@ body {
 .search-form-container {
     margin-top: 40px;
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
     display: flex;
     flex-direction: column;
     margin-left: auto;
