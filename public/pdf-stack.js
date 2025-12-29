@@ -103,12 +103,25 @@ async function renderPage(pageNum, canvas) {
   try {
     const page = await pdfDoc.getPage(pageNum);
     
-    // Set canvas size based on page dimensions
-    const scale = 2; // Higher quality
-    const viewport = page.getViewport({ scale: scale });
+    // Get container dimensions
+    const container = canvas.parentElement;
+    const containerWidth = container.clientWidth - 40; // Account for padding
+    const containerHeight = container.clientHeight - 40;
     
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
+    // Calculate scale to fit container while maintaining aspect ratio
+    const viewport = page.getViewport({ scale: 1 });
+    const scaleX = (containerWidth / viewport.width) * 2; // *2 for higher quality
+    const scaleY = (containerHeight / viewport.height) * 2;
+    const scale = Math.min(scaleX, scaleY);
+    
+    const scaledViewport = page.getViewport({ scale: scale });
+    
+    canvas.width = scaledViewport.width;
+    canvas.height = scaledViewport.height;
+    
+    // Set display size (CSS pixels)
+    canvas.style.width = (scaledViewport.width / 2) + 'px';
+    canvas.style.height = (scaledViewport.height / 2) + 'px';
     
     const context = canvas.getContext('2d');
     
@@ -118,7 +131,7 @@ async function renderPage(pageNum, canvas) {
     
     await page.render({
       canvasContext: context,
-      viewport: viewport
+      viewport: scaledViewport
     }).promise;
     
     console.log('[PDF STACK] Rendered page', pageNum);

@@ -84,11 +84,15 @@
 .stack-page {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 32px;
-  padding: 12px;
+  padding: 20px;
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.15),
     0 8px 20px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .stack-page::before {
@@ -101,17 +105,22 @@
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  z-index: -1;
+  pointer-events: none;
 }
 
 /* PDF Canvas - rendered PDF content */
 .pdf-canvas {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto !important;
+  height: auto !important;
   object-fit: contain;
-  border-radius: 24px;
+  border-radius: 20px;
   background: #ffffff;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  display: block;
 }
 
 /* Navigation Controls */
@@ -258,18 +267,20 @@
 .variant-dark .stack-page {
   background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 8px 20px rgba(0, 0, 0, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 8px 20px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .variant-dark .stack-page::before {
-  background: linear-gradient(135deg, rgba(252, 211, 77, 0.2), rgba(245, 158, 11, 0.1));
+  background: linear-gradient(135deg, rgba(252, 211, 77, 0.25), rgba(245, 158, 11, 0.15));
 }
 
 .variant-dark .pdf-canvas {
-  background: #1a1a1a;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .variant-dark .nav-btn {
@@ -400,11 +411,11 @@
 
   .stack-page {
     border-radius: 24px;
-    padding: 10px;
+    padding: 12px;
   }
 
   .pdf-canvas {
-    border-radius: 18px;
+    border-radius: 16px;
   }
 
   .sample-report-btn {
