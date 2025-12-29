@@ -30,36 +30,34 @@
   }
 
   /**
-   * Get or assign A/B test variant
+   * Get A/B test variant (already set by inline script)
    */
   function getABVariant() {
-    // Check if variant already exists in cookie
-    let variant = getCookie('ab_variant');
+    // Variant already determined by inline script in <head>
+    let variant = window._abVariant || getCookie('ab_variant');
     
     if (!variant) {
-      // Randomly assign variant (50/50 split)
-      variant = Math.random() < 0.5 ? 'light' : 'dark';
-      
-      // Save to cookie for 30 days
-      setCookie('ab_variant', variant, 30);
-      
-      console.log('[AB TEST] New visitor - assigned variant:', variant);
-    } else {
-      console.log('[AB TEST] Returning visitor - variant:', variant);
+      console.error('[AB TEST] ERROR: No variant found! Inline script may have failed.');
+      variant = 'light'; // Fallback
     }
     
+    console.log('[AB TEST] Variant:', variant);
     return variant;
   }
 
   /**
-   * Apply variant styles to page
+   * Apply variant styles to page (already done by inline script)
    */
   function applyVariant(variant) {
-    // Add variant class to body for CSS targeting
-    document.body.classList.add(`variant-${variant}`);
-    document.body.setAttribute('data-ab-variant', variant);
-    
-    console.log('[AB TEST] Applied variant class:', `variant-${variant}`);
+    // Variant class already applied to <html> by inline script
+    // This is just for logging and fallback
+    if (!document.documentElement.classList.contains(`variant-${variant}`)) {
+      document.documentElement.classList.add(`variant-${variant}`);
+      document.body.classList.add(`variant-${variant}`);
+      console.warn('[AB TEST] Fallback: Applied variant class to body');
+    } else {
+      console.log('[AB TEST] Variant class already applied:', `variant-${variant}`);
+    }
   }
 
   /**

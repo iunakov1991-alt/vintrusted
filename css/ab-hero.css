@@ -1,8 +1,28 @@
 /**
  * A/B Test Hero Section Styles
  * Contains both LIGHT and DARK variants
- * Switches based on body class: .variant-light or .variant-dark
+ * Switches based on html/body class: .variant-light or .variant-dark
+ * CRITICAL: Applied to <html> tag to prevent FOUC
  */
+
+/* ========================================
+   CRITICAL: Prevent FOUC
+   ======================================== */
+
+/* Hide hero until variant is determined */
+.ab-hero {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Show hero once variant class is applied */
+html.variant-light .ab-hero,
+html.variant-dark .ab-hero,
+.variant-light .ab-hero,
+.variant-dark .ab-hero {
+  visibility: visible;
+  opacity: 1;
+}
 
 /* ========================================
    SHARED STYLES (Both Variants)

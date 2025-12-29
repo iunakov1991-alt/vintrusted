@@ -335,7 +335,42 @@
     })(window,document,'script','dataLayer','GTM-KR67NRNW');</script>
     <!-- End Google Tag Manager -->
     
-    <!-- A/B Test System -->
+    <!-- A/B Test System - CRITICAL: Must run before page render -->
+    <script>
+    // INLINE A/B Test - prevents FOUC (flash of old content)
+    (function() {
+      'use strict';
+      
+      // Get cookie
+      function getCookie(name) {
+        var value = '; ' + document.cookie;
+        var parts = value.split('; ' + name + '=');
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+      }
+      
+      // Set cookie
+      function setCookie(name, value, days) {
+        var expires = new Date();
+        expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/;SameSite=Lax';
+      }
+      
+      // Get or assign variant
+      var variant = getCookie('ab_variant');
+      if (!variant) {
+        variant = Math.random() < 0.5 ? 'light' : 'dark';
+        setCookie('ab_variant', variant, 30);
+      }
+      
+      // Apply variant class IMMEDIATELY (before render)
+      document.documentElement.className += ' variant-' + variant;
+      document.documentElement.setAttribute('data-ab-variant', variant);
+      
+      // Store for later use
+      window._abVariant = variant;
+    })();
+    </script>
     <link rel="stylesheet" href="/css/ab-hero.css">
     <script src="/public/ab-test.js"></script>
     <!-- End A/B Test System -->
