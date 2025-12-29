@@ -14,7 +14,7 @@ let autoPlayInterval = null;
 const AUTO_PLAY_DELAY = 4000; // 4 seconds between pages
 
 // PDF file path - relative to website root
-const PDF_FILE_PATH = '/VIN-Report-5YJ3E1EA7LF800340.pdf';
+const PDF_FILE_PATH = '/VIN-Report-5TDYK3DC8DS290235.pdf';
 
 /**
  * Initialize PDF stack when DOM is ready
