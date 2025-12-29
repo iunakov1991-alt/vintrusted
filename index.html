@@ -334,6 +334,11 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KR67NRNW');</script>
     <!-- End Google Tag Manager -->
+    
+    <!-- A/B Test System -->
+    <link rel="stylesheet" href="/css/ab-hero.css">
+    <script src="/public/ab-test.js"></script>
+    <!-- End A/B Test System -->
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -353,769 +358,94 @@
           </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section" id="full-report">
-        <div class="hero-container">
-            <!-- Mobile Logo at top -->
-            <div class="mobile-hero-logo">
-                <img src="images/logo-vin-trust.png" alt="VIN TRUST" class="mobile-logo-img" loading="eager" fetchpriority="high" width="150" height="40">
-            </div>
-            
-            <!-- Mobile Title -->
-            <h2 class="mobile-main-title" id="price-3-dollars">
-                <div class="mobile-title-line">Most Used Cars Have a Problem.</div>
-                <div class="mobile-title-line">Find Yours in the VIN</div>
-            </h2>
-            
-            <h1 class="main-title">
-                <div class="desktop-title-line">Most Used Cars Have a Problem.</div>
-                <div class="desktop-title-line">Find Yours in the VIN</div>
-            </h1>
-            
-            <div class="subtitle-chips">
-                <span class="subtitle-chip" id="accident-check">accidents</span>
-                <span class="subtitle-chip">hidden damage</span>
-                <span class="subtitle-chip" id="lien-check">liens</span>
-                <span class="subtitle-chip" id="mileage-check">mileage</span>
-                <span class="subtitle-chip">and more</span>
-                <span class="subtitle-chip" id="official-nmvtis">all in one</span>
-                <span class="subtitle-chip">official</span>
-                <span class="subtitle-chip">VIN report</span>
-            </div>
-            
-            <!-- Desktop Form (скрыта на мобилке) -->
-            <div class="search-form-container desktop-form-container" id="check-vin">
-                <div class="mode-buttons">
-                    <button class="mode-btn active" data-mode="vin" onclick="switchMode('vin')" id="instant-report">VIN</button>
-                    <button class="mode-btn" data-mode="plate" onclick="switchMode('plate')" id="check-plate">License Plate</button>
+    <!-- Hero Section (A/B Test) -->
+    <!-- A/B Test Hero Section - Replace existing hero section with this -->
+    <section class="ab-hero">
+      <img src="foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3-Photoroom.png" alt="" class="ab-arrow">
+    
+      <div class="ab-hero-inner">
+        <div class="ab-preline">
+          Before you buy a used car — check what sellers don't tell you
         </div>
-                
-                <div class="search-form">
-                    <div class="form-content">
-                        <!-- VIN Mode -->
-                        <div class="mode-content active" id="vin-mode">
-                            <input type="text" class="vin-input" placeholder="Enter VIN code here" maxlength="17" style="text-transform: uppercase;" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" data-form-type="other">
+    
+        <h1>
+          <span style="white-space: nowrap;">Most Used Cars Have a Problem.</span><br/>
+          <span>The VIN Reveals It.</span>
+        </h1>
+    
+        <div class="ab-subtitle">
+          The VIN shows what you're really buying.
+        </div>
+    
+        <div class="ab-chips">
+          <div class="ab-chips-row">
+            <span class="ab-chip">accident reported</span>
+            <span class="ab-chip">salvage title</span>
+            <span class="ab-chip">odometer rollback</span>
+            <span class="ab-chip">liens</span>
+          </div>
+          <div class="ab-chips-row">
+            <span class="ab-chip">airbag deployed</span>
+            <span class="ab-chip">frame damage</span>
+            <span class="ab-chip">hidden damage</span>
+          </div>
+          <div class="ab-chips-row">
+            <span class="ab-chip">theft records</span>
+            <span class="ab-chip">flood damage</span>
+          </div>
+        </div>
+    
+        <div class="ab-search-form-container" id="check-vin">
+          <div class="ab-search-form">
+            <input type="text" class="ab-vin-input" placeholder="ENTER VIN CODE HERE" maxlength="17" autocomplete="off">
+            <button class="ab-search-btn">
+              Get My Report ✓
+            </button>
+          </div>
+        </div>
+    
+        <script>
+          // Form submission handler
+          document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.querySelector('.ab-search-btn');
+            const input = document.querySelector('.ab-vin-input');
+            
+            if (btn) {
+              btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const vin = input.value.trim();
+                if (vin.length === 17) {
+                  window.location.href = '/report.html?vin=' + vin;
+                } else {
+                  alert('Please enter a valid 17-character VIN');
+                }
+              });
+            }
+            
+            // Submit on Enter key
+            if (input) {
+              input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                  btn.click();
+                }
+              });
+            }
+          });
+        </script>
+    
+        <div class="ab-warning">
+          Many sellers won't disclose these issues.<br/>
+          A VIN check takes seconds — mistakes cost thousands.
+        </div>
       </div>
-                        
-                        <!-- Plate Mode -->
-                        <div class="mode-content" id="plate-mode">
-                            <select class="state-select">
-                                <option value="">Choose Your State</option>
-                                <!-- Top 5 most populous states (highlighted in blue) -->
-                                <option value="CA" class="populous-state">California</option>
-                                <option value="TX" class="populous-state">Texas</option>
-                                <option value="FL" class="populous-state">Florida</option>
-                                <option value="NY" class="populous-state">New York</option>
-                                <option value="PA" class="populous-state">Pennsylvania</option>
-                                <!-- Rest in alphabetical order -->
-                                <option value="AL">Alabama</option>
-                                <option value="AK">Alaska</option>
-                                <option value="AZ">Arizona</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="CO">Colorado</option>
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="GA">Georgia</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="ID">Idaho</option>
-                                <option value="IL">Illinois</option>
-                                <option value="IN">Indiana</option>
-                                <option value="IA">Iowa</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                                <option value="LA">Louisiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
-                                <option value="MA">Massachusetts</option>
-                                <option value="MI">Michigan</option>
-                                <option value="MN">Minnesota</option>
-                                <option value="MS">Mississippi</option>
-                                <option value="MO">Missouri</option>
-                                <option value="MT">Montana</option>
-                                <option value="NE">Nebraska</option>
-                                <option value="NV">Nevada</option>
-                                <option value="NH">New Hampshire</option>
-                                <option value="NJ">New Jersey</option>
-                                <option value="NM">New Mexico</option>
-                                <option value="NC">North Carolina</option>
-                                <option value="ND">North Dakota</option>
-                                <option value="OH">Ohio</option>
-                                <option value="OK">Oklahoma</option>
-                                <option value="OR">Oregon</option>
-                                <option value="RI">Rhode Island</option>
-                                <option value="SC">South Carolina</option>
-                                <option value="SD">South Dakota</option>
-                                <option value="TN">Tennessee</option>
-                                <option value="UT">Utah</option>
-                                <option value="VT">Vermont</option>
-                                <option value="VA">Virginia</option>
-                                <option value="WA">Washington</option>
-                                <option value="WV">West Virginia</option>
-                                <option value="WI">Wisconsin</option>
-                                <option value="WY">Wyoming</option>
-                                <option value="DC">District of Columbia</option>
-                            </select>
-                            <input type="text" class="plate-input"  placeholder="License Plate" maxlength="8" style="text-transform: uppercase;">
-          </div>
-                        
-                        <button class="search-btn" onclick="submitForm.call(this, event);">
-                            <span>Get My Report</span>
-                            <span>✓</span>
-                        </button>
-                    </div>
-                    <!-- Mobile Get Report Button -->
-                    <button class="mobile-search-btn" onclick="submitForm.call(this, event);">
-                        <span>Get My Report</span>
-                        <span>✓</span>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- НОВАЯ МОБИЛЬНАЯ ФОРМА (только для ≤768px) -->
-            <div class="mobile-form-wrapper">
-                <!-- Кнопки выбора режима -->
-                <div class="mobile-mode-buttons">
-                    <button type="button" class="mobile-mode-btn active" data-mobile-mode="vin" onclick="switchMobileMode('vin')">
-                        VIN
-                    </button>
-                    <button type="button" class="mobile-mode-btn" data-mobile-mode="plate" onclick="switchMobileMode('plate')">
-                        License Plate
-                    </button>
-                </div>
-                
-                <!-- Поле ввода VIN -->
-                <div class="mobile-input-wrapper mobile-vin-wrapper active" id="mobile-vin-wrapper">
-                    <input type="text" 
-                           class="mobile-vin-input" 
-                           id="mobile-vin-input"
-                           placeholder="Enter VIN code here" 
-                           maxlength="17" 
-                           autocomplete="off" 
-                           autocorrect="off" 
-                           autocapitalize="characters" 
-                           spellcheck="false"
-                           data-form-type="other"
-                           style="text-transform: uppercase;">
-                </div>
-                
-                <!-- Поля ввода License Plate -->
-                <div class="mobile-input-wrapper mobile-plate-wrapper" id="mobile-plate-wrapper" style="display: none;">
-                    <select class="mobile-state-select" id="mobile-state-select">
-                        <option value="">Choose Your State</option>
-                        <option value="CA" class="populous-state">California</option>
-                        <option value="TX" class="populous-state">Texas</option>
-                        <option value="FL" class="populous-state">Florida</option>
-                        <option value="NY" class="populous-state">New York</option>
-                        <option value="PA" class="populous-state">Pennsylvania</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IN">Indiana</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                        <option value="LA">Louisiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
-                        <option value="MA">Massachusetts</option>
-                        <option value="MI">Michigan</option>
-                        <option value="MN">Minnesota</option>
-                        <option value="MS">Mississippi</option>
-                        <option value="MO">Missouri</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NV">Nevada</option>
-                        <option value="NH">New Hampshire</option>
-                        <option value="NJ">New Jersey</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="NC">North Carolina</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="OH">Ohio</option>
-                        <option value="OK">Oklahoma</option>
-                        <option value="OR">Oregon</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
-                        <option value="TN">Tennessee</option>
-                        <option value="UT">Utah</option>
-                        <option value="VT">Vermont</option>
-                        <option value="VA">Virginia</option>
-                        <option value="WA">Washington</option>
-                        <option value="WV">West Virginia</option>
-                        <option value="WI">Wisconsin</option>
-                        <option value="WY">Wyoming</option>
-                        <option value="DC">District of Columbia</option>
-                    </select>
-                    <input type="text" 
-                           class="mobile-plate-input" 
-                           id="mobile-plate-input"
-                           placeholder="License Plate" 
-                           maxlength="8"
-                           style="text-transform: uppercase;">
-                </div>
-                
-                <!-- Кнопка отправки -->
-                <button type="button" class="mobile-submit-btn" onclick="submitMobileForm()">
-                    <span>Get My Report</span>
-                    <span>✓</span>
-                </button>
-            </div>
-          </div>
-            
-        </div>
-      </section>
-
-    <!-- Mobile Second Screen Replacement - Image -->
-    <section class="mobile-second-screen">
-        <img src="images/image4.jpg" alt="Vehicle History Report" class="mobile-second-image" loading="lazy">
-      </section>
-
-    <!-- Second Screen -->
-    <section class="second-screen" id="unlimited-checks">
-        <div class="container">
-            <div class="second-screen-content">
-                <div class="second-screen-left">
-                    <h2 class="second-screen-title" id="heroHeadline">
-                        <!-- Variant A: Hierarchy poster (default) -->
-                        <span class="line line-big">TRUSTED</span>
-                        <span class="line line-mid">BY</span>
-                        <span class="line line-big">THOUSANDS</span>
-                        <span class="line line-small">— because</span>
-                        <span class="line line-mid">EVERY DETAIL</span>
-                        <span class="line line-big">MATTERS</span>
-                    </h2>
-            </div>
-                <div class="second-screen-right">
-                    <img src="images/report-phone-mockup.png" alt="iPhone with Honda CR-V Report" class="second-screen-image" loading="lazy">
-                </div>
-              </div>
-
-            <!-- Cards Grid -->
-            <div class="wcd-cards-grid">
-                <!-- Card 1: Selling -->
-                <div class="wcd-card">
-                    <div class="wcd-card-header">
-                        <div class="wcd-icon-box wcd-icon-green">
-                            <svg viewBox="0 0 24 24" class="wcd-icon" fill="none">
-                                <path d="M4 7.5V6a2 2 0 0 1 2-2h6.3a2 2 0 0 1 1.4.6l5.7 5.7a2 2 0 0 1 .6 1.4V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                                <path d="M4 12h9.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                                <path d="M9.5 9.5 13 12l-3.5 2.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M15.25 8.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5Z" stroke="currentColor" stroke-width="1.7" />
-                            </svg>
-            </div>
-                        <div class="wcd-card-title-wrap">
-                            <span class="wcd-accent-dot wcd-dot-green"></span>
-                            <h3 class="wcd-card-title">Selling a car?</h3>
-                </div>
-              </div>
-
-                    <p class="wcd-card-desc">Use report-backed facts to help buyers feel confident they're getting fair value — and to close faster.</p>
-
-                    <div class="wcd-divider"></div>
-
-                    <ul class="wcd-list">
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Evidence-first summaries (no fluff)
-                        </li>
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Clear risk flags when records conflict
-                        </li>
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Fast to scan, easy to trust
-                        </li>
-                    </ul>
-
-                    <div class="wcd-card-border"></div>
-              </div>
-
-                <!-- Card 2: Buying -->
-                <div class="wcd-card">
-                    <div class="wcd-card-header">
-                        <div class="wcd-icon-box wcd-icon-amber">
-                            <svg viewBox="0 0 24 24" class="wcd-icon" fill="none">
-                                <path d="M6 19.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" stroke="currentColor" stroke-width="1.7" />
-                                <path d="M18 19.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" stroke="currentColor" stroke-width="1.7" />
-                                <path d="M7 17h9.5a2 2 0 0 0 1.9-1.4l1.1-3.4a2 2 0 0 0-1.9-2.6H8.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                                <path d="M6.5 7.5h2.2a2 2 0 0 1 1.9 1.4l.6 1.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                                <path d="M14 8.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                                <path d="M17 5.5v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-                            </svg>
-          </div>
-                        <div class="wcd-card-title-wrap">
-                            <span class="wcd-accent-dot wcd-dot-amber"></span>
-                            <h3 class="wcd-card-title">Buying a car?</h3>
-          </div>
-        </div>
-
-                    <p class="wcd-card-desc">Check history signals to avoid hidden surprises — title issues, damage patterns, and inconsistent records.</p>
-
-                    <div class="wcd-divider"></div>
-
-                    <ul class="wcd-list">
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Evidence-first summaries (no fluff)
-                        </li>
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Clear risk flags when records conflict
-                        </li>
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Fast to scan, easy to trust
-                        </li>
-                    </ul>
-
-                    <div class="wcd-card-border"></div>
+    
+      <!-- Trust Badges -->
+      <div class="ab-trust-badges">
+        <img src="nmvtis-logo@2x.png" alt="NMVTIS" class="ab-trust-badge">
+        <img src="nhts.png" alt="NHTSA" class="ab-trust-badge">
+        <img src="SAuVO.png" alt="Trustpilot" class="ab-trust-badge ab-trust-badge-small">
+        <img src="guar-Photoroom.png" alt="Coat of Arms" class="ab-trust-badge ab-trust-badge-large">
       </div>
-
-                <!-- Card 3: Own -->
-                <div class="wcd-card" id="recall-check">
-                    <div class="wcd-card-header">
-                        <div class="wcd-icon-box wcd-icon-blue">
-                            <svg viewBox="0 0 24 24" class="wcd-icon" fill="none">
-                                <path d="M12 3.5 20 7v6c0 5-3.5 8.5-8 9.5C7.5 21.5 4 18 4 13V7l8-3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
-                                <path d="M8 14.2 10.3 16.5 16.2 10.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M7.5 7.6h9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".55" />
-                            </svg>
-            </div>
-                        <div class="wcd-card-title-wrap">
-                            <span class="wcd-accent-dot wcd-dot-blue"></span>
-                            <h3 class="wcd-card-title">Own a car?</h3>
-          </div>
-        </div>
-
-                    <p class="wcd-card-desc">Track market value and stay current on safety recalls. Know when it might be the right time to sell.</p>
-
-                    <div class="wcd-divider"></div>
-
-                    <ul class="wcd-list">
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Evidence-first summaries (no fluff)
-                        </li>
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Clear risk flags when records conflict
-                        </li>
-                        <li class="wcd-list-item">
-                            <span class="wcd-bullet"></span>
-                            Fast to scan, easy to trust
-                        </li>
-                    </ul>
-
-                    <div class="wcd-card-border"></div>
-                </div>
-            </div>
-
-            <!-- CTA Row -->
-            <div class="wcd-cta-row">
-                <a href="#check-vin" class="wcd-btn wcd-btn-primary" onclick="scrollToVinInput(event)">Run a VIN check</a>
-                <a href="#results" class="wcd-btn wcd-btn-secondary">View sample report</a>
-            </div>
-
-            <p class="wcd-disclaimer">
-                Data availability varies by state and reporting sources. Always confirm critical issues with an independent inspection.
-            </p>
-        </div>
-      </section>
-    <!-- Results Screen -->
-    <section class="results-screen">
-        <div class="container">
-            <!-- Navigation Tabs -->
-            <div class="results-nav">
-                <div class="results-header">
-                    <h2 class="results-title">Check a Car's True Story Before You Buy</h2>
-                    <p class="results-subtitle">Get a verified vehicle history report with detailed accident, mileage, and ownership records — powered by ViNtrust data.</p>
-                  </div>
-                <div class="nav-tabs">
-                    <button class="nav-tab active" data-tab="odometer">VIN HISTORY</button>
-                    <button class="nav-tab" data-tab="damage">MARKET VALUE</button>
-                    <button class="nav-tab" data-tab="sales">ODOMETER HISTORY</button>
-                    <button class="nav-tab" data-tab="ownership" id="sale-records">SALE RECORDS</button>
-                    <button class="nav-tab" data-tab="technical" id="ownership-history">OWNERSHIP HISTORY</button>
-                </div>
-              </div>
-
-            <!-- Results Content -->
-            <div class="results-content">
-                <div class="results-left">
-                    <!-- Interactive Content Display -->
-                    <div class="content-display">
-                        <!-- Odometer History Content -->
-                        <div class="content-item active" data-tab="odometer">
-                            <div class="chart-container">
-                                <div class="chart-header">
-                                    <h3>Odometer History</h3>
-                                    <span class="chart-badge">Verified Data</span>
-                                </div>
-                                <div class="chart-graph">
-                                    <div class="chart-bars">
-                                        <div class="chart-bar" style="height: 35%;" data-value="45,000">
-                                            <span class="bar-label">2019</span>
-                                            <span class="bar-value">45K</span>
-                                        </div>
-                                        <div class="chart-bar" style="height: 52%;" data-value="68,000">
-                                            <span class="bar-label">2020</span>
-                                            <span class="bar-value">68K</span>
-                                        </div>
-                                        <div class="chart-bar" style="height: 68%;" data-value="89,000">
-                                            <span class="bar-label">2021</span>
-                                            <span class="bar-value">89K</span>
-                                        </div>
-                                        <div class="chart-bar" style="height: 82%;" data-value="105,000">
-                                            <span class="bar-label">2022</span>
-                                            <span class="bar-value">105K</span>
-                                        </div>
-                                        <div class="chart-bar active" style="height: 95%;" data-value="118,000">
-                                            <span class="bar-label">2023</span>
-                                            <span class="bar-value">118K</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="chart-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">Average Annual</span>
-                                        <span class="stat-value">18,250 mi</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Current Mileage</span>
-                                        <span class="stat-value">118,000 mi</span>
-                                    </div>
-                                </div>
-            </div>
-                  </div>
-
-                        <!-- Ownership History Content -->
-                        <div class="content-item" data-tab="ownership">
-                            <div class="ownership-timeline">
-                                <div class="chart-header">
-                                    <h3>Ownership History</h3>
-                                    <span class="chart-badge">3 Owners</span>
-                                </div>
-                                <div class="timeline-items">
-                                    <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
-                                        <div class="timeline-content">
-                                            <div class="timeline-header">
-                                                <span class="timeline-title">1st Owner</span>
-                                                <span class="timeline-date">2019 - 2021</span>
-                                            </div>
-                                            <div class="timeline-details">
-                                                <span>Florida • 2 years • 45,000 mi</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
-                                        <div class="timeline-content">
-                                            <div class="timeline-header">
-                                                <span class="timeline-title">2nd Owner</span>
-                                                <span class="timeline-date">2021 - 2022</span>
-                                            </div>
-                                            <div class="timeline-details">
-                                                <span>Georgia • 1 year • 28,000 mi</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item active">
-                                        <div class="timeline-dot"></div>
-                                        <div class="timeline-content">
-                                            <div class="timeline-header">
-                                                <span class="timeline-title">Current Owner</span>
-                                                <span class="timeline-date">2022 - Present</span>
-                                            </div>
-                                            <div class="timeline-details">
-                                                <span>Texas • 2 years • 45,000 mi</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                </div>
-              </div>
-
-                        <!-- Damage Check Content -->
-                        <div class="content-item" data-tab="damage">
-                            <div class="value-container">
-                                <div class="chart-header">
-                                    <h3>Market Value Analysis</h3>
-                                    <span class="chart-badge">Updated Today</span>
-                                </div>
-                                <div class="value-display">
-                                    <div class="value-main">
-                                        <span class="value-label">Estimated Value</span>
-                                        <span class="value-amount">$24,500</span>
-                                    </div>
-                                    <div class="value-range">
-                                        <div class="range-bar">
-                                            <div class="range-fill" style="width: 65%;"></div>
-                                            <div class="range-marker"></div>
-                                        </div>
-                                        <div class="range-labels">
-                                            <span>$20,000</span>
-                                            <span>$30,000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="value-factors">
-                                    <div class="factor-item positive">
-                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                        <span>Low Mileage</span>
-                                    </div>
-                                    <div class="factor-item positive">
-                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                        <span>Clean Title</span>
-                                    </div>
-                                    <div class="factor-item positive">
-                                        <svg width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                        <span>No Accidents</span>
-                                    </div>
-                                </div>
-            </div>
-                  </div>
-
-                        <!-- Technical Data Content -->
-                        <div class="content-item" data-tab="technical" id="technical-specs">
-                            <div class="specs-container">
-                                <div class="chart-header">
-                                    <h3>Vehicle Specifications</h3>
-                                    <span class="chart-badge">Complete</span>
-                                </div>
-                                <div class="specs-grid">
-                                    <div class="spec-item">
-                                        <span class="spec-label">Make & Model</span>
-                                        <span class="spec-value">Honda CR-V EX</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Year</span>
-                                        <span class="spec-value">2019</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Engine</span>
-                                        <span class="spec-value">1.5L Turbo</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Transmission</span>
-                                        <span class="spec-value">CVT Automatic</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Drivetrain</span>
-                                        <span class="spec-value">AWD</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Fuel Type</span>
-                                        <span class="spec-value">Gasoline</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Color</span>
-                                        <span class="spec-value">Modern Steel</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Body Style</span>
-                                        <span class="spec-value">SUV</span>
-                                    </div>
-                                </div>
-                </div>
-                        </div>
-
-                        <!-- Sale Records Content -->
-                        <div class="content-item" data-tab="sales">
-                            <div class="sales-container">
-                                <div class="chart-header">
-                                    <h3>Sale Records</h3>
-                                    <span class="chart-badge">3 Records</span>
-                            </div>
-                                <div class="sales-list">
-                                    <div class="sale-item">
-                                        <div class="sale-header">
-                                            <span class="sale-type">Dealership Sale</span>
-                                            <span class="sale-price">$32,500</span>
-                                        </div>
-                                        <div class="sale-details">
-                                            <span class="sale-date">March 15, 2019</span>
-                                            <span class="sale-location">Miami, FL</span>
-                                            <span class="sale-mileage">2,500 mi</span>
-                                        </div>
-                                    </div>
-                                    <div class="sale-item">
-                                        <div class="sale-header">
-                                            <span class="sale-type">Private Sale</span>
-                                            <span class="sale-price">$28,900</span>
-                                        </div>
-                                        <div class="sale-details">
-                                            <span class="sale-date">June 22, 2021</span>
-                                            <span class="sale-location">Atlanta, GA</span>
-                                            <span class="sale-mileage">45,000 mi</span>
-                                        </div>
-                                    </div>
-                                    <div class="sale-item">
-                                        <div class="sale-header">
-                                            <span class="sale-type">Dealership Sale</span>
-                                            <span class="sale-price">$26,200</span>
-                                        </div>
-                                        <div class="sale-details">
-                                            <span class="sale-date">November 8, 2022</span>
-                                            <span class="sale-location">Houston, TX</span>
-                                            <span class="sale-mileage">73,000 mi</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Mobile Action (Logo + Button) - Single instance after content -->
-                    <div class="content-action">
-                        <div class="action-icon">
-                            <img src="images/logo-vin-trust.png" alt="VIN TRUST Logo" class="action-logo">
-                        </div>
-                        <button class="action-btn">
-                            <span>Get Full Report</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="results-right">
-                    <!-- Dynamic Action Card -->
-                    <div class="action-card">
-                        <div class="action-header">
-                            <h3 class="action-title" id="actionTitle">VIN HISTORY</h3>
-                            <p class="action-subtitle" id="actionSubtitle">Track vehicle mileage over time with detailed odometer readings and usage patterns.</p>
-                        </div>
-                        <div class="action-icon">
-                            <div class="icon-circle">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <button class="action-btn">
-                            <span>Get Full Report</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                            </svg>
-                        </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    <!-- Comparison Section -->
-    <section class="comparison-section-new" id="comparison">
-        <div class="comparison-overlay-new"></div>
-        <div class="container comparison-container-new">
-            <div class="comparison-header-center">
-                <div class="marquee-container">
-                    <h2 class="marquee-text">THE ONLY VIN CHECK YOU'LL EVER NEED</h2>
-                </div>
-                <p>See how we provide more data, faster and for a better price than competitors.</p>
-            </div>
-
-            <div class="comparison-features-grid-new">
-                <div class="comparison-feature-card-new">
-                    <div class="feature-icon-circle-new">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                            <path d="M4 6.5C4 5.67 4.67 5 5.5 5h13c.83 0 1.5.67 1.5 1.5v1c0 .83-.67 1.5-1.5 1.5h-13C4.67 9 4 8.33 4 7.5v-1Z" fill="currentColor"/>
-                            <path d="M4 12.5c0-.83.67-1.5 1.5-1.5h13c.83 0 1.5.67 1.5 1.5v1c0 .83-.67 1.5-1.5 1.5h-13C4.67 15 4 14.33 4 13.5v-1Z" fill="currentColor" opacity="0.85"/>
-                            <path d="M4 18.5c0-.83.67-1.5 1.5-1.5h13c.83 0 1.5.67 1.5 1.5v1c0 .83-.67 1.5-1.5 1.5h-13C4.67 21 4 20.33 4 19.5v-1Z" fill="currentColor" opacity="0.7"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content-new">
-                        <h3>Most complete data</h3>
-                        <p>We pull data from thousands of sources including government and insurance records.</p>
-                    </div>
-                </div>
-                <div class="comparison-feature-card-new">
-                    <div class="feature-icon-circle-new">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M13 3 6 14h5l-1 7 7-11h-5l1-7Z" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content-new">
-                        <h3>Instant reports</h3>
-                        <p>Get the full vehicle history in seconds, not minutes.</p>
-                    </div>
-                </div>
-                <div class="comparison-feature-card-new">
-                    <div class="feature-icon-circle-new">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 14.5h-2v-2h2v2Zm0-4h-2v-6h2v6Z" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <div class="feature-content-new">
-                        <h3>Best price</h3>
-                        <p>Transparent pricing without hidden fees. Best value for depth and quality.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="comparison-table-wrapper">
-                <h3 class="comparison-table-title">Comparison with competitors</h3>
-                <p class="comparison-table-subtitle">Make informed decisions with the best tool on the market.</p>
-                
-                <div class="comparison-table-scroll">
-                    <table class="comparison-table-new">
-                        <thead>
-                            <tr>
-                                <th class="feature-col">Feature</th>
-                                <th class="our-service-col"><img src="logo.png" alt="VinTrusted" class="comparison-logo"></th>
-                                <th class="competitor-col">Carfax</th>
-                                <th class="competitor-col">Others</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="feature-name-new">Price</td>
-                                <td class="our-service-col price-highlight">$3 per report</td>
-                                <td class="competitor-col">$44 per report</td>
-                                <td class="competitor-col">$29/month</td>
-                            </tr>
-                            <tr>
-                                <td class="feature-name-new">Vehicle History Reports</td>
-                                <td class="our-service-col check-icon-new">✓</td>
-                                <td class="competitor-col check-icon-new">✓</td>
-                                <td class="competitor-col check-icon-new">✓</td>
-                            </tr>
-                            <tr>
-                                <td class="feature-name-new">Unlimited Report Lookups</td>
-                                <td class="our-service-col check-icon-new">✓</td>
-                                <td class="competitor-col check-icon-new">✓</td>
-                                <td class="competitor-col check-icon-new">✓</td>
-                            </tr>
-                            <tr>
-                                <td class="feature-name-new">24/7 Phone Support</td>
-                                <td class="our-service-col check-icon-new">✓</td>
-                                <td class="competitor-col cross-icon-new">✗</td>
-                                <td class="competitor-col cross-icon-new">✗</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="comparison-cta-new">
-                <h3>Get the most complete report.</h3>
-                <p>Make a confident decision. Enter your VIN to see the full vehicle history right now.</p>
-                <div class="cta-buttons-new">
-                    <a href="#check-vin" class="btn-primary-new" onclick="scrollToVinInput(event)">Check VIN now</a>
-                    <a href="#unlimited-checks" class="btn-secondary-new">Learn more →</a>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Reviews Section -->
