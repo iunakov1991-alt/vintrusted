@@ -25,6 +25,113 @@ html.variant-dark .ab-hero,
 }
 
 /* ========================================
+   CASCADING ENTRANCE ANIMATIONS
+   ======================================== */
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) rotate(-25deg) scale(0.8);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateX(-50%) rotate(-25deg) scale(1);
+  }
+}
+
+/* LEFT COLUMN - Slide in from left */
+.ab-preline {
+  opacity: 0;
+  animation: slideInFromLeft 0.5s ease-out 0.1s forwards;
+}
+
+.ab-hero h1 {
+  opacity: 0;
+  animation: slideInFromLeft 0.5s ease-out 0.2s forwards;
+}
+
+.ab-subtitle {
+  opacity: 0;
+  animation: slideInFromLeft 0.5s ease-out 0.3s forwards;
+}
+
+.ab-chips {
+  opacity: 0;
+  animation: slideInFromLeft 0.5s ease-out 0.4s forwards;
+}
+
+.ab-search-form-container {
+  opacity: 0;
+  animation: slideInFromLeft 0.5s ease-out 0.5s forwards;
+}
+
+.ab-warning {
+  opacity: 0;
+  animation: slideInFromLeft 0.5s ease-out 0.6s forwards;
+}
+
+/* RIGHT COLUMN - Slide in from right */
+.ab-hero::after {
+  opacity: 0;
+  animation: slideInFromRight 0.6s ease-out 0.3s forwards;
+}
+
+/* ARROW - Appear last with scale effect */
+.ab-arrow {
+  opacity: 0;
+  animation: fadeInScale 0.5s ease-out 0.9s forwards;
+}
+
+/* TRUST BADGES - Fade in at the end */
+.ab-trust-badges {
+  opacity: 0;
+  animation: slideInFromLeft 0.4s ease-out 0.7s forwards;
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ab-preline,
+  .ab-hero h1,
+  .ab-subtitle,
+  .ab-chips,
+  .ab-search-form-container,
+  .ab-warning,
+  .ab-hero::after,
+  .ab-arrow,
+  .ab-trust-badges {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .ab-arrow {
+    transform: translateX(-50%) rotate(-25deg);
+  }
+}
+
+/* ========================================
    SHARED STYLES (Both Variants)
    ======================================== */
 
