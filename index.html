@@ -374,6 +374,8 @@
     <link rel="stylesheet" href="/css/ab-hero.css">
     <link rel="stylesheet" href="/css/sample-report.css">
     <script src="/public/ab-test.js"></script>
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <!-- End A/B Test System -->
 </head>
 <body>
@@ -487,96 +489,30 @@
     <!-- Sample Report Section -->
     <section class="sample-report-section">
       <div class="sample-report-container">
-        <!-- Left Column - PDF Stack -->
+        <!-- Left Column - PDF Stack with PDF.js -->
         <div class="pdf-stack-column">
-          <div class="pdf-stack">
-            <div class="pdf-page pdf-page-3">
-              <div class="pdf-outer-frame">
-                <div class="pdf-inner-frame">
-                  <div class="pdf-content">
-                    <div class="pdf-header">Title Brand Information</div>
-                    <div class="pdf-vin">VIN: 5YJ3E1EA7LF800340</div>
-                    <div class="pdf-table-title">2 BRAND(S) REPORTED</div>
-                    <div class="pdf-table">
-                      <div class="pdf-row warning">⚠ Rebuilt - Jul 30, 2024 (IDAHO)</div>
-                      <div class="pdf-row warning">⚠ Salvage - Apr 23, 2024 (WASHINGTON)</div>
+          <div class="pdf-stack-wrapper">
+            <div class="pdf-stack" id="pdfStack">
+              <!-- PDF pages will be rendered here by PDF.js -->
             </div>
-                    <div class="pdf-table-title">Historical Liens</div>
-                    <div class="pdf-table">
-                      <div class="pdf-row">Mar 26, 2024 - AUBURN, WA</div>
-                      <div class="pdf-row">Jun 16, 2023 - EVERETT, WA</div>
-                      <div class="pdf-row">Oct 7, 2020 - KIRKLAND, WA</div>
-                </div>
+            
+            <div class="navigation-controls">
+              <button class="nav-btn prev-btn" id="prevBtn" title="Предыдущая страница">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button class="nav-btn next-btn" id="nextBtn" title="Следующая страница">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+              <div class="page-counter">
+                <span id="currentPage">1</span> / <span id="totalPages">1</span>
               </div>
             </div>
-                </div>
-              </div>
-            <div class="pdf-page pdf-page-2">
-              <div class="pdf-outer-frame">
-                <div class="pdf-inner-frame">
-                  <div class="pdf-content">
-                    <div class="pdf-header">Accident & Insurance Records</div>
-                    <div class="pdf-table-title">Insurance Records (NMVTIS)</div>
-                    <div class="pdf-table">
-                      <div class="pdf-row warning">Feb 27, 2024 - GEICO SECURE</div>
-                      <div class="pdf-row">RENTON, WA - DISPOSITION: SALVAGE</div>
-                      <div class="pdf-row">Contact: 800-841-3000</div>
-              </div>
-                    <div class="pdf-table-title">Accident & Damage History</div>
-                    <div class="pdf-table">
-                      <div class="pdf-row warning">Date: May 9, 2024</div>
-                      <div class="pdf-row warning">Major Impact: RIGHT FRONT</div>
-                      <div class="pdf-row">Source: Salvage Auction</div>
-          </div>
-                    <div class="pdf-table-title">Junk & Salvage Records</div>
-                    <div class="pdf-table">
-                      <div class="pdf-row">Apr 25, 2024 - IAA - SOLD</div>
-                      <div class="pdf-row">Mar 6, 2024 - IAA - TO BE DETERMINED</div>
           </div>
         </div>
-      </div>
-            </div>
-          </div>
-            <div class="pdf-page pdf-page-1">
-              <div class="pdf-outer-frame">
-                <div class="pdf-inner-frame">
-                  <div class="pdf-content">
-                    <div class="pdf-logo">VIN TRUST</div>
-                    <div class="pdf-header">Vehicle History Report</div>
-                    <div class="pdf-vin">5YJ3E1EA7LF800340</div>
-                    <div class="pdf-brand">2020 Tesla Model 3</div>
-                    <div class="pdf-rating">ClearVin Rating: Average</div>
-                    <div class="pdf-table-title">Vehicle Specifications</div>
-                    <div class="pdf-details">
-                      <div class="pdf-detail-item">
-                        <span class="pdf-label">Style:</span>
-                        <span class="pdf-value">4D Sedan RWD</span>
-                      </div>
-                      <div class="pdf-detail-item">
-                        <span class="pdf-label">Trim:</span>
-                        <span class="pdf-value">Standard Range Plus</span>
-                      </div>
-                      <div class="pdf-detail-item">
-                        <span class="pdf-label">Engine:</span>
-                        <span class="pdf-value">ELECTRIC</span>
-                      </div>
-                      <div class="pdf-detail-item">
-                        <span class="pdf-label">Made In:</span>
-                        <span class="pdf-value">UNITED STATES</span>
-                      </div>
-                    </div>
-                    <div class="pdf-table-title">Ownership History</div>
-                    <div class="pdf-table">
-                      <div class="pdf-row">10/2020 - New (VA) - 15 M</div>
-                      <div class="pdf-row">03/2022 - Used (WA) - 13,108 M</div>
-                      <div class="pdf-row">08/2023 - Current (WA) - 48,205 M</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-                </div>
-                        </div>
 
         <!-- Right Column - Title & Description -->
         <div class="sample-report-text">
@@ -3352,6 +3288,9 @@
         observer.observe(secondScreen);
     })();
     </script>
+    
+    <!-- PDF Stack Viewer -->
+    <script src="/public/pdf-stack.js"></script>
     
     <!-- Vercel Speed Insights -->
     <script type="module" src="speed-insights.js" defer></script>
