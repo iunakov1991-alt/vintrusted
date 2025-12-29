@@ -170,9 +170,9 @@ html.variant-dark .ab-hero,
   left: calc(50% - 100px);
   top: 390px;
   transform: translateX(-50%) rotate(-25deg);
-  opacity: 0.9;
   pointer-events: none;
   z-index: 1002;
+  /* opacity set by animation */
 }
 
 .ab-preline {
