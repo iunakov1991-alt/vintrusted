@@ -61,6 +61,15 @@ html.variant-dark .ab-hero,
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* LEFT COLUMN - Slide in from left */
 .ab-preline {
   opacity: 0;
@@ -104,10 +113,10 @@ html.variant-dark .ab-hero,
   animation: fadeInScale 0.5s ease-out 0.9s forwards;
 }
 
-/* TRUST BADGES - Fade in at the end */
+/* TRUST BADGES - Fade in at the end (no transform to preserve centering) */
 .ab-trust-badges {
   opacity: 0;
-  animation: slideInFromLeft 0.4s ease-out 0.7s forwards;
+  animation: fadeIn 0.5s ease-out 0.7s forwards;
 }
 
 /* Disable animations for users who prefer reduced motion */
