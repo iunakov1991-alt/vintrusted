@@ -216,6 +216,15 @@
   border-bottom: none;
 }
 
+.pdf-row.warning {
+  color: #dc2626;
+  font-weight: 600;
+  background: #fef2f2;
+  padding: 8px 12px;
+  margin: -12px -12px 6px -12px;
+  border-left: 3px solid #ef4444;
+}
+
 .pdf-details {
   display: flex;
   flex-direction: column;
@@ -405,6 +414,12 @@
 
 .variant-dark .pdf-value {
   color: #f3f4f6;
+}
+
+.variant-dark .pdf-row.warning {
+  color: #fca5a5;
+  background: #1f1618;
+  border-left-color: #ef4444;
 }
 
 .variant-dark .feature-item {
