@@ -414,7 +414,7 @@ body {
     z-index: 1001;
     animation: slideInFromRight 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     margin-left: 40px;
-    transform: scale(0.55);
+    transform: scale(0.6875);
 }
 
 @keyframes slideInFromRight {
@@ -429,7 +429,7 @@ body {
 }
 
 .logo-img {
-    height: 67.5px; /* Уменьшено на 50% (135px * 0.5) */
+    height: 84px; /* 67.5px × 1.25 = 84.375px ≈ 84px */
     width: auto;
     margin-left: 0; /* Выровнено по горизонтали с заголовком */
 }
