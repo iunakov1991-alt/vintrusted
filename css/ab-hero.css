@@ -1,0 +1,359 @@
+/**
+ * A/B Test Hero Section Styles
+ * Contains both LIGHT and DARK variants
+ * Switches based on body class: .variant-light or .variant-dark
+ */
+
+/* ========================================
+   SHARED STYLES (Both Variants)
+   ======================================== */
+
+.ab-hero {
+  min-height: 100vh;
+  padding: 140px 20px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+}
+
+.ab-hero::after {
+  content: '';
+  position: absolute;
+  right: -50px;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: url('../Frame8mproz.webp') center right / contain no-repeat;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.ab-hero-inner {
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.ab-arrow {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  left: calc(50% - 100px);
+  top: 390px;
+  transform: translateX(-50%) rotate(-25deg);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 1002;
+}
+
+.ab-preline {
+  font-size: 13px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.ab-hero h1 {
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.1;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.ab-subtitle {
+  font-size: 16px;
+  margin-bottom: 28px;
+  line-height: 1.4;
+}
+
+.ab-search-form-container {
+  margin-top: 0;
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: 810px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  z-index: 10;
+}
+
+.ab-search-form {
+  border-radius: 28px;
+  width: 100%;
+  max-width: 810px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  padding: 0 0 0 30px;
+}
+
+.ab-vin-input {
+  flex: 1;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  font-style: italic;
+  padding: 0;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.ab-vin-input::placeholder {
+  color: #999999;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.ab-search-btn {
+  border: none;
+  outline: none;
+  border-radius: 0 26px 26px 0;
+  padding: 0 40px;
+  height: 100%;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  margin-right: -2px;
+}
+
+.ab-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 600px;
+  margin-bottom: 28px;
+}
+
+.ab-chips-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  margin-left: 0;
+}
+
+.ab-chip {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.ab-warning {
+  margin-top: 24px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ab-trust-badges {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  padding: 50px 0 0;
+  width: auto;
+}
+
+.ab-trust-badge {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(80%) opacity(0.7);
+  transition: all 0.3s ease;
+}
+
+.ab-trust-badge:hover {
+  filter: grayscale(0%) opacity(1);
+}
+
+.ab-trust-badge-large {
+  height: 84px;
+}
+
+.ab-trust-badge-small {
+  height: 40px;
+}
+
+/* ========================================
+   LIGHT VARIANT
+   ======================================== */
+
+.variant-light .ab-hero {
+  background-color: #F5F7FA;
+  color: #1a1a1a;
+}
+
+.variant-light .ab-hero-inner {
+  padding-left: 60px;
+}
+
+.variant-light .ab-preline {
+  color: #6B7280;
+}
+
+.variant-light .ab-hero h1 {
+  color: #1a1a1a;
+}
+
+.variant-light .ab-hero h1 span {
+  color: #3B82F6;
+}
+
+.variant-light .ab-subtitle {
+  color: #4B5563;
+}
+
+.variant-light .ab-search-form {
+  background: #ffffff;
+  border: 2px solid #3B82F6;
+}
+
+.variant-light .ab-vin-input {
+  background: #ffffff;
+  color: #666666;
+}
+
+.variant-light .ab-search-btn {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #1E40AF 100%);
+}
+
+.variant-light .ab-search-btn:hover {
+  background: linear-gradient(135deg, #2563EB 0%, #1E40AF 50%, #1E3A8A 100%);
+}
+
+.variant-light .ab-chip {
+  background: #DBEAFE !important;
+  color: #1E40AF !important;
+  border: 1px solid #93C5FD;
+}
+
+.variant-light .ab-warning {
+  color: #6B7280;
+}
+
+.variant-light .ab-trust-badges {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   DARK VARIANT
+   ======================================== */
+
+.variant-dark .ab-hero {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.variant-dark .ab-hero-inner {
+  padding-left: 40px;
+}
+
+.variant-dark .ab-preline {
+  color: #9CA3AF;
+}
+
+.variant-dark .ab-hero h1 {
+  color: #ffffff;
+}
+
+.variant-dark .ab-hero h1 span {
+  color: #FCD34D;
+}
+
+.variant-dark .ab-subtitle {
+  color: #D1D5DB;
+}
+
+.variant-dark .ab-search-form {
+  background: #F5F5DC;
+}
+
+.variant-dark .ab-vin-input {
+  background: transparent;
+  color: #666666;
+}
+
+.variant-dark .ab-search-btn {
+  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%);
+  color: #000000;
+}
+
+.variant-dark .ab-search-btn:hover {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B45309 100%);
+}
+
+.variant-dark .ab-chip {
+  background: rgba(254, 243, 199, 0.15);
+  color: #FCD34D;
+  border: 1px solid rgba(252, 211, 77, 0.3);
+}
+
+.variant-dark .ab-warning {
+  color: #9CA3AF;
+}
+
+.variant-dark .ab-trust-badges {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1024px) {
+  .ab-hero {
+    grid-template-columns: 1fr;
+  }
+  .ab-hero::after {
+    display: none;
+  }
+  .ab-trust-badges {
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ab-arrow {
+    display: none;
+  }
+
+  .ab-search-form {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
+
+  .ab-vin-input {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .ab-search-btn {
+    width: 100%;
+    border-radius: 28px;
+    height: 54px;
+  }
+
+  .ab-trust-badge {
+    height: 30px;
+  }
+}
+
