@@ -374,6 +374,7 @@ html.variant-dark .ab-hero,
 
 .variant-light .ab-search-form {
   background: #ffffff;
+  border: 2px solid #3B82F6;
 }
 
 .variant-light .ab-vin-input {

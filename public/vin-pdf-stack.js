@@ -3,12 +3,44 @@
  * Modern PDF viewer with advanced 3D transforms and chip-based navigation
  */
 
-(async function initVinPdfStack(){
-  const root = document.querySelector(".vin-pdfstack");
-  if(!root) {
-    console.log('[VIN PDF STACK] Container not found, skipping initialization');
-    return;
-  }
+(function initVinPdfStack(){
+  // Wait for DOM and PDF.js to be ready
+  function startInit() {
+    const root = document.querySelector(".vin-pdfstack");
+    if(!root) {
+      console.log('[VIN PDF STACK] Container not found, retrying...');
+      setTimeout(startInit, 100);
+      return;
+    }
+    
+    if (typeof pdfjsLib === 'undefined') {
+      console.log('[VIN PDF STACK] PDF.js not loaded yet, waiting...');
+      setTimeout(startInit, 100);
+      return;
+    }
+    
+    // Now initialize
+    (async function() {
+      const pdfUrl = root.getAttribute("data-pdf");
+      const stackEl = document.getElementById("vinPdfStack");
+      const prevBtn = document.getElementById("vinPrevBtn");
+      const nextBtn = document.getElementById("vinNextBtn");
+      const curEl = document.getElementById("vinCurrentPage");
+      const totalEl = document.getElementById("vinTotalPages");
+      const chipsContainer = document.getElementById("vinChips");
+
+      // Check if PDF.js is loaded
+      if (typeof pdfjsLib === 'undefined') {
+        console.error('[VIN PDF STACK] PDF.js library not loaded');
+        stackEl.innerHTML = '<div style="padding:40px;text-align:center;color:#6b7280;">PDF.js not loaded</div>';
+        return;
+      }
+
+      // Set worker path
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+      console.log('[VIN PDF STACK] Loading PDF from:', pdfUrl);
 
   const pdfUrl = root.getAttribute("data-pdf");
   const stackEl = document.getElementById("vinPdfStack");
@@ -258,16 +290,27 @@
       if(e.key==="ArrowRight") nextBtn.click();
     });
 
-    renderState();
-    console.log('[VIN PDF STACK] Initialization complete with', sections.length, 'sections');
-  } catch (error) {
-    console.error('[VIN PDF STACK] Error loading PDF:', error);
-    stackEl.innerHTML = `
-      <div style="padding: 40px; text-align: center; color: #6b7280;">
-        <p style="font-size: 16px; margin-bottom: 8px;">PDF not available</p>
-        <p style="font-size: 14px;">Place sample.pdf in /reports/ folder</p>
-      </div>
-    `;
+      renderState();
+      console.log('[VIN PDF STACK] Initialization complete with', sections.length, 'sections');
+    } catch (error) {
+      console.error('[VIN PDF STACK] Error loading PDF:', error);
+      if (stackEl) {
+        stackEl.innerHTML = `
+          <div style="padding: 40px; text-align: center; color: #6b7280;">
+            <p style="font-size: 16px; margin-bottom: 8px;">PDF not available</p>
+            <p style="font-size: 14px;">Place sample.pdf in /reports/ folder</p>
+          </div>
+        `;
+      }
+    }
+    })();
+  }
+  
+  // Start initialization
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startInit);
+  } else {
+    startInit();
   }
 })();
 
