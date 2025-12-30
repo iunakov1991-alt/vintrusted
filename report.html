@@ -172,7 +172,7 @@
             margin-bottom: 18px;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
-            gap: 20px;
+            gap: 0;
             align-items: center;
             box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1);
             overflow: visible;
@@ -181,13 +181,15 @@
         .vin-left {
             display: flex;
             flex-direction: column;
-            }
+            padding-right: 20px;
+        }
 
         .vin-divider {
             width: 1px;
             height: 100%;
             background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
             position: relative;
+            margin: 0 20px;
         }
 
         .vin-divider::before {
@@ -205,10 +207,11 @@
 
         .vin-right {
             display: flex;
-                flex-direction: column;
+            flex-direction: column;
             position: relative;
             background: none !important;
-            }
+            padding-left: 20px;
+        }
 
         .report-preview-image {
             position: absolute;
