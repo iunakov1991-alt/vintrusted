@@ -181,6 +181,7 @@
         .vin-left {
             display: flex;
             flex-direction: column;
+            padding-right: 20px;
         }
 
         .vin-divider {
@@ -188,7 +189,7 @@
             height: 100%;
             background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
             position: relative;
-            margin: 0 20px;
+            flex-shrink: 0;
         }
 
         .vin-divider::before {
@@ -206,9 +207,10 @@
 
         .vin-right {
             display: flex;
-                flex-direction: column;
+            flex-direction: column;
             position: relative;
             background: none !important;
+            padding-left: 20px;
         }
 
         .report-preview-image {
