@@ -176,17 +176,17 @@
             align-items: center;
             box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1);
             overflow: visible;
-        }
+            }
 
         .vin-left {
             display: flex;
             flex-direction: column;
-        }
+            }
 
         .vin-divider {
             width: 1px;
             height: 100%;
-            background: rgba(255, 255, 255, 0.15);
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
             position: relative;
         }
 
@@ -201,14 +201,14 @@
             background: rgba(59, 130, 246, 0.5);
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-        }
+            }
 
         .vin-right {
             display: flex;
                 flex-direction: column;
             position: relative;
             background: none !important;
-        }
+            }
 
         .report-preview-image {
             position: absolute;
@@ -228,15 +228,15 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
             filter: none !important;
             clip-path: polygon(2% 2%, 98% 2%, 98% 98%, 2% 98%);
-        }
+            }
 
-        .vin-label {
+            .vin-label {
             font-size: 11px;
             color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
-        }
+            }
 
         .vin-number {
             font-size: 22px;
@@ -251,7 +251,7 @@
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-        }
+            }
 
         .status-item {
             display: flex;
@@ -265,22 +265,22 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-        }
+            }
 
         .status-dot.green {
             background: #10b981;
             box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
-        }
+            }
 
         .status-dot.yellow {
             background: #f59e0b;
             box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
-        }
+            }
 
         .status-dot.red {
             background: #ef4444;
             box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
-        }
+            }
 
         /* Vehicle Info in VIN Card */
         .vehicle-label {
@@ -289,14 +289,14 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
-        }
+            }
 
         .vehicle-name {
             font-size: 18px;
             font-weight: 800;
             margin-bottom: 8px;
             color: #ffffff;
-        }
+            }
 
         .vehicle-specs {
             display: flex;
@@ -305,14 +305,14 @@
             font-size: 12px;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 6px;
-        }
+            }
 
         .vehicle-specs .dot {
             width: 3px;
             height: 3px;
             background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
-        }
+            }
 
         .vehicle-market {
             font-size: 11px;
@@ -336,7 +336,7 @@
             color: #6b7280;
             margin-bottom: 12px;
             font-weight: 500;
-        }
+            }
 
         .report-items {
             display: grid;
@@ -350,7 +350,7 @@
             gap: 8px;
             width: 100%;
             min-width: 0;
-        }
+            }
 
         .report-chip {
             background: #ffffff;
@@ -491,10 +491,10 @@
         @keyframes pulse-red {
             0%, 100% {
                 box-shadow: 0 0 8px rgba(239, 68, 68, 0.6), 0 0 0 3px rgba(239, 68, 68, 0.1);
-            }
+        }
             50% {
                 box-shadow: 0 0 12px rgba(239, 68, 68, 0.8), 0 0 0 5px rgba(239, 68, 68, 0.15);
-            }
+        }
         }
 
         @keyframes pulse-yellow {
@@ -503,7 +503,7 @@
             }
             50% {
                 box-shadow: 0 0 12px rgba(245, 158, 11, 0.8), 0 0 0 5px rgba(245, 158, 11, 0.15);
-            }
+        }
         }
 
         /* Right Column - Payment */
@@ -525,7 +525,7 @@
             padding: 25px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
-        
+
         #vin-pay.stripe-loaded {
             opacity: 1;
         }
@@ -534,11 +534,11 @@
         @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 1fr;
-            }
+        }
 
             .right-column {
                 position: static;
-            }
+        }
         }
 
         @media (max-width: 768px) {
@@ -570,8 +570,8 @@
                 transform: none;
                 width: 120px;
                 margin: 10px auto 0;
-            }
-
+        }
+        
             .vin-divider {
                 display: none;
             }
@@ -1131,7 +1131,7 @@
                     loadReportData(plate, 'plate');
                 } else {
                     document.getElementById('vinDisplay').textContent = 'No VIN or Plate provided';
-                }
+                    }
             } else {
                 document.getElementById('vinDisplay').textContent = 'No VIN or Plate provided';
             }
