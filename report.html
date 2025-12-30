@@ -30,7 +30,8 @@
             overflow: hidden;
         }
 
-        .report-container {
+        .report-container,
+        .container {
             max-width: 1400px;
             margin: 0 auto;
             height: 100%;
@@ -800,8 +801,11 @@
         #vin-pay {
             display: block !important;
             visibility: visible !important;
-            opacity: 1 !important;
             min-height: 100px !important;
+        }
+        
+        #vin-pay.stripe-loaded {
+            opacity: 1 !important;
         }
 
         /* Hide debug log */
@@ -913,17 +917,17 @@
                     Instant access • Downloadable PDF • No account required
                 </div>
             </div>
-        </div>
 
-        <!-- Right Column: Payment Form -->
-        <div class="report-right">
-            <!-- PAYMENT_CONTAINER_START -->
-            <div id="vin-pay" style="position: relative;">
-                <!-- Terms Overlay will be injected by vin-stripe.js after form mounts -->
-            </div>
-            <!-- PAYMENT_CONTAINER_END -->
+            <!-- Right Column: Payment Form -->
+            <div class="report-right">
+                <!-- PAYMENT_CONTAINER_START -->
+                <div id="vin-pay" style="position: relative;">
+                    <!-- Terms Overlay will be injected by vin-stripe.js after form mounts -->
+                </div>
+                <!-- PAYMENT_CONTAINER_END -->
             </div>
         </div>
+    </div>
     </div>
 
     <script>
