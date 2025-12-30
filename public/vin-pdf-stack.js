@@ -29,13 +29,6 @@
       const totalEl = document.getElementById("vinTotalPages");
       const chipsContainer = document.getElementById("vinChips");
 
-      // Check if PDF.js is loaded
-      if (typeof pdfjsLib === 'undefined') {
-        console.error('[VIN PDF STACK] PDF.js library not loaded');
-        stackEl.innerHTML = '<div style="padding:40px;text-align:center;color:#6b7280;">PDF.js not loaded</div>';
-        return;
-      }
-
       // Set worker path
       pdfjsLib.GlobalWorkerOptions.workerSrc =
         "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
