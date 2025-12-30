@@ -163,8 +163,8 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
     
     <!-- Styles - preload critical CSS -->
-    <link rel="preload" href="styles.css?v=91" as="style">
-    <link rel="stylesheet" href="styles.css?v=91">
+    <link rel="preload" href="styles.css?v=113" as="style">
+    <link rel="stylesheet" href="styles.css?v=113">
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
     <link rel="stylesheet" href="mobile-form-new.css?v=22">
     
@@ -372,7 +372,7 @@
     })();
     </script>
     <link rel="stylesheet" href="/css/ab-hero.css">
-    <link rel="stylesheet" href="/css/sample-report.css">
+    <link rel="stylesheet" href="/css/sample-report.css?v=112">
     <link rel="stylesheet" href="/css/vin-decoder.css">
     <script src="/public/ab-test.js"></script>
     <!-- PDF.js Library -->
@@ -393,13 +393,20 @@
                 <a href="#hero" class="logo">
                     <img src="logo-vin-trust.png" alt="VIN TRUST" class="logo-img" loading="eager" fetchpriority="high" width="150" height="40">
                 </a>
+                <nav class="header-nav">
+                    <a href="#hero" class="nav-link">Home</a>
+                    <a href="#sample-report" class="nav-link">Sample Report</a>
+                    <a href="#vin-decoder" class="nav-link">VIN Decoder</a>
+                    <a href="#reviews" class="nav-link">Reviews</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </nav>
           </div>
           </div>
     </header>
 
     <!-- Hero Section (A/B Test) -->
     <!-- A/B Test Hero Section - Replace existing hero section with this -->
-    <section class="ab-hero">
+    <section class="ab-hero" id="hero">
       <img src="foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3-Photoroom.png" alt="" class="ab-arrow">
       
       <!-- Red Triangle on iPhone mockup -->
@@ -491,7 +498,7 @@
       </section>
 
     <!-- Sample Report Section -->
-    <section class="sample-report-section">
+    <section class="sample-report-section" id="sample-report">
       <div class="sample-report-container">
         <!-- Arrow pointing from PDF to button -->
         <img src="/foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3-Photoroom.png" alt="" class="sample-report-arrow" />
@@ -544,82 +551,82 @@
     </section>
 
     <!-- VIN Decoder Section -->
-    <section class="vin-decoder-section">
+    <section class="vin-decoder-section" id="vin-decoder">
         <div class="vin-decoder-wrapper">
-            <div class="vin-decoder-container">
-                <!-- VIN Code Display -->
+        <div class="vin-decoder-container">
+            <!-- VIN Code Display -->
                 <div class="vin-instruction">Hover over the characters to decode the VIN</div>
-                <div class="vin-display-wrapper">
+            <div class="vin-display-wrapper">
                     <div class="vin-code-wrapper">
-                        <div class="vin-code-display">
-                            <span class="vin-char" data-group="1">1</span>
-                            <span class="vin-char" data-group="2">H</span>
-                            <span class="vin-char" data-group="2">G</span>
-                            <span class="vin-char" data-group="2">B</span>
-                            <span class="vin-char" data-group="2">H</span>
-                            <span class="vin-char" data-group="2">4</span>
-                            <span class="vin-char" data-group="3">1</span>
-                            <span class="vin-char" data-group="3">J</span>
-                            <span class="vin-char" data-group="3">X</span>
-                            <span class="vin-char" data-group="3">M</span>
-                            <span class="vin-char" data-group="3">N</span>
-                            <span class="vin-char" data-group="4">1</span>
-                            <span class="vin-char" data-group="5">0</span>
-                            <span class="vin-char" data-group="6">9</span>
-                            <span class="vin-char" data-group="6">1</span>
-                            <span class="vin-char" data-group="6">8</span>
-                            <span class="vin-char" data-group="6">6</span>
-                        </div>
-                        <!-- Diagram with Info Boxes -->
-                        <div class="vin-diagram">
-                    <!-- Info Box 1: Country Code -->
-                    <div class="info-box" data-group="1">
-                        <div class="info-content">
+                <div class="vin-code-display">
+                    <span class="vin-char" data-group="1">1</span>
+                    <span class="vin-char" data-group="2">H</span>
+                    <span class="vin-char" data-group="2">G</span>
+                    <span class="vin-char" data-group="2">B</span>
+                    <span class="vin-char" data-group="2">H</span>
+                    <span class="vin-char" data-group="2">4</span>
+                    <span class="vin-char" data-group="3">1</span>
+                    <span class="vin-char" data-group="3">J</span>
+                    <span class="vin-char" data-group="3">X</span>
+                    <span class="vin-char" data-group="3">M</span>
+                    <span class="vin-char" data-group="3">N</span>
+                    <span class="vin-char" data-group="4">1</span>
+                    <span class="vin-char" data-group="5">0</span>
+                    <span class="vin-char" data-group="6">9</span>
+                    <span class="vin-char" data-group="6">1</span>
+                    <span class="vin-char" data-group="6">8</span>
+                    <span class="vin-char" data-group="6">6</span>
+                </div>
+            <!-- Diagram with Info Boxes -->
+            <div class="vin-diagram">
+                <!-- Info Box 1: Country Code -->
+                <div class="info-box" data-group="1">
+                    <div class="info-content">
                             Country of manufacture
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Info Box 2: Manufacturer Info -->
-                    <div class="info-box" data-group="2">
-                        <div class="info-content">
+                <!-- Info Box 2: Manufacturer Info -->
+                <div class="info-box" data-group="2">
+                    <div class="info-content">
                             Manufacturer name (2 characters)<br>
                             Manufacturing division (3 characters)
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Info Box 3: Vehicle Description -->
-                    <div class="info-box" data-group="3">
-                        <div class="info-content">
+                <!-- Info Box 3: Vehicle Description -->
+                <div class="info-box" data-group="3">
+                    <div class="info-content">
                             Vehicle description: model, body type,<br>
                             specification, transmission and engine
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Info Box 4: Check Digit -->
-                    <div class="info-box" data-group="4">
-                        <div class="info-content">
+                <!-- Info Box 4: Check Digit -->
+                <div class="info-box" data-group="4">
+                    <div class="info-content">
                             Check digit
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Info Box 5: Model Year -->
-                    <div class="info-box" data-group="5">
-                        <div class="info-content">
+                <!-- Info Box 5: Model Year -->
+                <div class="info-box" data-group="5">
+                    <div class="info-content">
                             Vehicle model year
-                        </div>
                     </div>
+                </div>
 
-                    <!-- Info Box 6: Assembly Plant & Serial -->
-                    <div class="info-box" data-group="6">
-                        <div class="info-content">
+                <!-- Info Box 6: Assembly Plant & Serial -->
+                <div class="info-box" data-group="6">
+                    <div class="info-content">
                             Assembly plant and serial number<br>of the vehicle
-                        </div>
                     </div>
+                </div>
                     </div>
                     </div>
                     <h2 class="try-vin-text"><span class="try-text">Try the</span> <span class="vin-decoder-text">VIN Decoder</span></h2>
-                </div>
-                
+            </div>
+
                 <!-- Conversion Text -->
                 <div class="vin-conversion-text">
                     <p class="conversion-message"></p>
@@ -639,8 +646,147 @@
         </div>
     </section>
 
+    <!-- Pricing Comparison Section -->
+    <section class="pricing-comparison-section">
+        <div class="container">
+            <div class="pricing-header">
+                <h2>Why Pay More?</h2>
+                <p>Get the same comprehensive vehicle history report for a fraction of the cost</p>
+            </div>
+
+            <!-- Price Offer -->
+            <div class="price-offer-card">
+                <div class="price-offer-content">
+                    <div class="price-offer-left">
+                        <div class="price-badge">LIMITED TIME OFFER</div>
+                        <div class="price-main">
+                            <span class="price-currency">$</span>
+                            <span class="price-amount">3</span>
+                            <span class="price-decimal">.00</span>
+                        </div>
+                        <div class="price-subtitle">Full Vehicle History Report</div>
+                        <button class="price-cta-btn" onclick="showVinPopup()">Get Your Report Now</button>
+                    </div>
+                    <div class="price-offer-right">
+                        <div class="price-feature">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                            <span>Instant Access</span>
+                        </div>
+                        <div class="price-feature">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Official NMVTIS Data</span>
+                        </div>
+                        <div class="price-feature">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Comprehensive Coverage</span>
+                        </div>
+                        <div class="price-feature">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Money-Back Guarantee</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="comparison-table-wrapper">
+                <h3 class="comparison-title">Compare with Competitors</h3>
+                <div class="comparison-table">
+                    <div class="comparison-header">
+                        <div class="comparison-cell comparison-cell-feature">Features</div>
+                        <div class="comparison-cell comparison-cell-us">
+                            <div class="provider-name">VIN TRUST</div>
+                            <div class="provider-price">$3.00</div>
+                        </div>
+                        <div class="comparison-cell">
+                            <div class="provider-name">Carfax</div>
+                            <div class="provider-price">$39.99</div>
+                        </div>
+                        <div class="comparison-cell">
+                            <div class="provider-name">AutoCheck</div>
+                            <div class="provider-price">$24.99</div>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="comparison-cell comparison-cell-feature">NMVTIS Data</div>
+                        <div class="comparison-cell comparison-cell-us"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="comparison-cell comparison-cell-feature">Accident History</div>
+                        <div class="comparison-cell comparison-cell-us"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="comparison-cell comparison-cell-feature">Title Information</div>
+                        <div class="comparison-cell comparison-cell-us"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="comparison-cell comparison-cell-feature">Odometer Readings</div>
+                        <div class="comparison-cell comparison-cell-us"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="comparison-cell comparison-cell-feature">Theft Records</div>
+                        <div class="comparison-cell comparison-cell-us"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="comparison-cell comparison-cell-feature">Salvage Records</div>
+                        <div class="comparison-cell comparison-cell-us"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="comparison-cell comparison-cell-feature">Instant Access</div>
+                        <div class="comparison-cell comparison-cell-us"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
+                        <div class="comparison-cell"><span class="cross-icon">✗</span></div>
+                    </div>
+                    
+                    <div class="comparison-row">
+                        <div class="comparison-cell comparison-cell-feature">Money-Back Guarantee</div>
+                        <div class="comparison-cell comparison-cell-us"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                        <div class="comparison-cell"><span class="check-icon">✓</span></div>
+                    </div>
+                    
+                    <div class="comparison-footer">
+                        <div class="comparison-cell comparison-cell-feature"></div>
+                        <div class="comparison-cell comparison-cell-us">
+                            <button class="comparison-cta-btn" onclick="showVinPopup()">Choose VIN TRUST</button>
+                        </div>
+                        <div class="comparison-cell"></div>
+                        <div class="comparison-cell"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Reviews Section -->
-    <section class="reviews-section">
+    <section class="reviews-section" id="reviews">
         <div class="reviews-overlay"></div>
         <div class="container reviews-container">
             <div class="reviews-layout">
@@ -654,7 +800,7 @@
                     <!-- Rating Summary -->
                     <div class="rating-summary">
                         <div class="rating-score">
-                            <div class="score-number">4.99</div>
+                            <div class="score-number"><span style="color: #10b981;">4.99</span></div>
                             <div class="score-stars">
                                 <span class="star filled">★</span>
                                 <span class="star filled">★</span>
@@ -802,24 +948,25 @@
                 <div class="reviews-right">
                     <div class="review-form-card">
                         <h3>Rate Our Service</h3>
-                        <form class="review-form">
+                        <form class="review-form" id="reviewForm">
                             <div class="form-group">
                                 <label>Your Name</label>
-                                <input type="text" placeholder="John Smith" class="form-input">
+                                <input type="text" placeholder="John Smith" class="form-input" id="reviewName" required>
                             </div>
                             <div class="form-group">
                                 <label>Your Rating</label>
-                                <div class="star-rating">
+                                <div class="star-rating" id="starRating">
                                     <span class="star-input" data-rating="1">★</span>
                                     <span class="star-input" data-rating="2">★</span>
                                     <span class="star-input" data-rating="3">★</span>
                                     <span class="star-input" data-rating="4">★</span>
                                     <span class="star-input" data-rating="5">★</span>
                                 </div>
+                                <input type="hidden" id="ratingValue" required>
                             </div>
                             <div class="form-group">
                                 <label>Review</label>
-                                <textarea placeholder="Share your experience..." class="form-textarea" rows="6"></textarea>
+                                <textarea placeholder="Share your experience..." class="form-textarea" id="reviewText" rows="6" required></textarea>
                             </div>
                             <button type="submit" class="submit-review-btn">Submit Review</button>
                             <p class="form-note">Your review will be published after moderation.</p>
@@ -3390,8 +3537,10 @@
     <script src="/public/vin-pdf-stack.js?v=1767007665"></script>
     
     <!-- VIN Check Popup -->
+    <!-- VIN Check Popup -->
     <div class="vin-popup-overlay" id="vinPopupOverlay">
       <div class="vin-popup">
+        <img src="/images/mobileback.png" class="vin-popup-bg" alt="" loading="eager">
         <button class="vin-popup-close" id="closeVinPopup" aria-label="Close">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -3473,8 +3622,118 @@
       </div>
     </div>
     
+    <!-- Review Success Popup -->
+    <div class="vin-popup-overlay" id="reviewPopupOverlay">
+      <div class="vin-popup">
+        <img src="/images/mobileback.png" class="vin-popup-bg" alt="" loading="eager">
+        <button class="vin-popup-close" id="closeReviewPopup" aria-label="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        
+        <div class="vin-popup-content" style="text-align: center;">
+          <div style="font-size: 48px; margin-bottom: 20px;">✓</div>
+          <h3 class="vin-popup-title">Thank You!</h3>
+          <p class="vin-popup-subtitle">Your review has been submitted successfully and will be published after moderation.</p>
+        </div>
+      </div>
+    </div>
+    
     <!-- VIN Popup Script -->
     <script src="/public/vin-popup.js"></script>
+    
+    <!-- Review Form Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const reviewForm = document.getElementById('reviewForm');
+        const starInputs = document.querySelectorAll('.star-input');
+        const ratingValue = document.getElementById('ratingValue');
+        const reviewPopupOverlay = document.getElementById('reviewPopupOverlay');
+        const closeReviewPopup = document.getElementById('closeReviewPopup');
+        
+        // Star rating functionality
+        let selectedRating = 0;
+        
+        starInputs.forEach(star => {
+          star.addEventListener('click', function() {
+            selectedRating = parseInt(this.getAttribute('data-rating'));
+            ratingValue.value = selectedRating;
+            
+            // Update star display
+            starInputs.forEach(s => {
+              const rating = parseInt(s.getAttribute('data-rating'));
+              if (rating <= selectedRating) {
+                s.classList.add('active');
+              } else {
+                s.classList.remove('active');
+              }
+            });
+          });
+          
+          star.addEventListener('mouseenter', function() {
+            const rating = parseInt(this.getAttribute('data-rating'));
+            starInputs.forEach(s => {
+              const r = parseInt(s.getAttribute('data-rating'));
+              if (r <= rating) {
+                s.style.color = '#fbbf24';
+              } else {
+                s.style.color = '#4b5563';
+              }
+            });
+          });
+        });
+        
+        document.getElementById('starRating').addEventListener('mouseleave', function() {
+          starInputs.forEach(s => {
+            const rating = parseInt(s.getAttribute('data-rating'));
+            if (rating <= selectedRating) {
+              s.style.color = '#fbbf24';
+            } else {
+              s.style.color = '#4b5563';
+            }
+          });
+        });
+        
+        // Form submission
+        reviewForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const name = document.getElementById('reviewName').value;
+          const rating = ratingValue.value;
+          const text = document.getElementById('reviewText').value;
+          
+          if (!name || !rating || !text) {
+            alert('Please fill in all fields');
+            return;
+          }
+          
+          // Show success popup
+          reviewPopupOverlay.style.display = 'flex';
+          
+          // Reset form
+          reviewForm.reset();
+          selectedRating = 0;
+          ratingValue.value = '';
+          starInputs.forEach(s => {
+            s.classList.remove('active');
+            s.style.color = '#4b5563';
+          });
+        });
+        
+        // Close popup
+        closeReviewPopup.addEventListener('click', function() {
+          reviewPopupOverlay.style.display = 'none';
+        });
+        
+        reviewPopupOverlay.addEventListener('click', function(e) {
+          if (e.target === reviewPopupOverlay) {
+            reviewPopupOverlay.style.display = 'none';
+          }
+        });
+      });
+    </script>
     
     <!-- VIN Decoder Interactive -->
     <script src="/public/vin-decoder-interactive.js"></script>
