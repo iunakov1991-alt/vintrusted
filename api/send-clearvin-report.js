@@ -54,33 +54,33 @@ export default async function handler(req, res) {
       
       if (!tokenResponse.ok) {
         throw new Error('Failed to get ClearVin token');
-      }
-      
+    }
+
       // The get-clearvin-report API will return the PDF directly
       // So we can just return its response
       const pdfBuffer = await tokenResponse.arrayBuffer();
-      
-      // Check if PDF is empty or too small
-      if (!pdfBuffer || pdfBuffer.byteLength < 100) {
-        console.error('PDF is too small:', pdfBuffer?.byteLength || 0);
-        return res.status(500).json({ 
-          error: 'Invalid PDF report received from ClearVin',
-          details: 'PDF file is empty or corrupted'
-        });
-      }
-      
-      // TODO: Send email with PDF attachment using SendGrid/Mailgun/etc
-      // For now, we'll just return success
-      // You'll need to integrate with your email service provider
-      
-      console.log('Report PDF generated successfully. Email:', email, 'VIN:', cleanVin, 'Size:', pdfBuffer.byteLength, 'bytes');
-
-      return res.status(200).json({
-        success: true,
-        message: 'Report sent to ' + email,
-        email: email,
-        vin: cleanVin
+    
+    // Check if PDF is empty or too small
+    if (!pdfBuffer || pdfBuffer.byteLength < 100) {
+      console.error('PDF is too small:', pdfBuffer?.byteLength || 0);
+      return res.status(500).json({ 
+        error: 'Invalid PDF report received from ClearVin',
+        details: 'PDF file is empty or corrupted'
       });
+    }
+
+    // TODO: Send email with PDF attachment using SendGrid/Mailgun/etc
+    // For now, we'll just return success
+    // You'll need to integrate with your email service provider
+    
+    console.log('Report PDF generated successfully. Email:', email, 'VIN:', cleanVin, 'Size:', pdfBuffer.byteLength, 'bytes');
+
+    return res.status(200).json({
+      success: true,
+      message: 'Report sent to ' + email,
+      email: email,
+      vin: cleanVin
+    });
       
     } catch (fetchError) {
       console.error('Fetch error:', fetchError);

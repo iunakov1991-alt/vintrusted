@@ -176,12 +176,56 @@ html.variant-dark .ab-hero,
   position: absolute;
   width: 120px;
   height: auto;
-  left: calc(50% - 100px);
+  left: calc(50% - 100px - 2cm);
   top: 390px;
   transform: translateX(-50%) rotate(-25deg);
   pointer-events: none;
   z-index: 1002;
   /* opacity set by animation */
+}
+
+.iphone-warning-triangle {
+  position: absolute;
+  right: calc(18% + 1cm);
+  top: calc(32% - 2cm);
+  z-index: 1003;
+  pointer-events: none;
+  filter: drop-shadow(0 0 16px rgba(255, 0, 0, 1)) 
+          drop-shadow(0 0 32px rgba(255, 0, 0, 1))
+          drop-shadow(0 0 48px rgba(255, 0, 0, 0.8))
+          drop-shadow(0 0 64px rgba(255, 0, 0, 0.6))
+          contrast(1.3)
+          saturate(1.5);
+  animation: pulse-warning 2s ease-in-out infinite;
+}
+
+.iphone-warning-triangle img {
+  width: 32px;
+  height: auto;
+  display: block;
+}
+
+@keyframes pulse-warning {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 16px rgba(255, 0, 0, 1)) 
+            drop-shadow(0 0 32px rgba(255, 0, 0, 1))
+            drop-shadow(0 0 48px rgba(255, 0, 0, 0.8))
+            drop-shadow(0 0 64px rgba(255, 0, 0, 0.6))
+            contrast(1.3)
+            saturate(1.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 24px rgba(255, 0, 0, 1)) 
+            drop-shadow(0 0 48px rgba(255, 0, 0, 1))
+            drop-shadow(0 0 72px rgba(255, 0, 0, 0.9))
+            drop-shadow(0 0 96px rgba(255, 0, 0, 0.7))
+            contrast(1.5)
+            saturate(2);
+  }
 }
 
 .ab-preline {
@@ -206,8 +250,7 @@ html.variant-dark .ab-hero,
 .ab-search-form-container {
   margin-top: 0;
   margin-bottom: 32px;
-  width: 100%;
-  max-width: 810px;
+  width: 650px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -216,9 +259,8 @@ html.variant-dark .ab-hero,
 }
 
 .ab-search-form {
-  border-radius: 28px;
-  width: 100%;
-  max-width: 810px;
+  border-radius: 50px;
+  width: 650px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
   display: flex;
@@ -247,16 +289,16 @@ html.variant-dark .ab-hero,
 .ab-search-btn {
   border: none;
   outline: none;
-  border-radius: 0 26px 26px 0;
+  border-radius: 40px;
   padding: 0 40px;
-  height: 100%;
+  height: calc(100% - 8px);
+  margin: 4px;
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
-  margin-right: -2px;
 }
 
 .ab-chips {
@@ -416,7 +458,7 @@ html.variant-dark .ab-hero,
 }
 
 .variant-dark .ab-search-form {
-  background: #F5F5DC;
+  background: #ffffff;
 }
 
 .variant-dark .ab-vin-input {

@@ -1,0 +1,727 @@
+/* VIN Decoder Section */
+.vin-decoder-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.vin-decoder-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 80px;
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    padding-top: 0;
+    min-height: 400px;
+}
+
+.vin-decoder-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.vin-decoder-section::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.vin-decoder-container {
+    flex: 0 0 50%;
+    max-width: 50%;
+    width: 100%;
+    position: relative;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: flex-start;
+    z-index: 100;
+}
+
+.vin-decoder-image {
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    padding-top: 0;
+    background: transparent;
+}
+
+.vin-decoder-image img {
+    width: 100%;
+    height: auto;
+    transform: scale(1.4) translateX(-3cm);
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: calc(60px + 3cm);
+}
+
+/* VIN Display */
+.vin-display-wrapper {
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 40px;
+}
+
+.vin-code-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Instruction text above VIN code */
+.vin-instruction {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 15px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    width: 100%;
+}
+
+/* Try VIN Decoder Heading */
+.try-vin-text {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+    line-height: 1.1;
+    white-space: nowrap;
+    flex-shrink: 1;
+}
+
+.try-text {
+    color: #ffffff;
+}
+
+.vin-decoder-text {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Conversion Text */
+.vin-conversion-text {
+    margin-top: calc(60px + 2.5cm);
+    padding: 20px 28px;
+    background: rgba(15, 20, 25, 0.6);
+    border-radius: 24px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    width: 420px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.conversion-message {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 12px 0;
+    font-weight: 400;
+}
+
+.conversion-message strong {
+    color: #fbbf24;
+    font-weight: 700;
+}
+
+.conversion-cta {
+    color: #3b82f6;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.conversion-cta::before {
+    content: '→';
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.conversion-cta:hover {
+    color: #60a5fa;
+}
+
+.conversion-cta:hover::before {
+    transform: translateX(4px);
+}
+
+/* Check VIN Button */
+.vin-check-button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.vin-check-btn {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #000000;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 16px 48px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.vin-check-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(251, 191, 36, 0.4);
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.vin-code-display {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'Inter', monospace;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 0;
+    padding: 12px 30px;
+    background: rgba(0, 0, 0, 0.85);
+    border: none;
+    border-radius: 50px;
+    width: auto;
+    box-sizing: border-box;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    position: relative;
+    flex-shrink: 0;
+    z-index: 300;
+}
+
+.vin-char {
+    color: #e5e7eb;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 301;
+}
+
+.vin-char:hover {
+    color: #3b82f6;
+    transform: scale(1.15);
+}
+
+/* Diagram Container */
+.vin-diagram {
+    display: flex;
+    gap: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+    overflow: visible;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 100%;
+    margin-top: 5px;
+    left: 0;
+    right: 0;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+/* Hide SVG connection lines */
+.vin-connection-lines {
+    display: none;
+}
+
+.connection-line path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 1.5s ease-out forwards;
+}
+
+@keyframes drawLine {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Info Boxes - Positioned under each group */
+.info-box {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.95);
+    border-radius: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 150px;
+    max-width: 220px;
+    cursor: default;
+    z-index: 500;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+    pointer-events: auto;
+    top: 0;
+}
+
+/* Arrow/connector for bubble */
+.info-box::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid rgba(59, 130, 246, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.info-box::after {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid rgba(0, 0, 0, 0.95);
+}
+
+/* Group 1 - single digit, arrow points to first character */
+.info-box[data-group="1"]::before {
+    left: 20px;
+    transform: translateX(0);
+}
+
+.info-box[data-group="1"]::after {
+    left: 20px;
+    transform: translateX(0);
+}
+
+/* Group 2 - multiple characters, centered arrow */
+.info-box[data-group="2"]::before {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.info-box[data-group="2"]::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Group 3 - multiple characters, centered arrow */
+.info-box[data-group="3"]::before {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.info-box[data-group="3"]::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Group 4 - single digit, centered arrow */
+.info-box[data-group="4"]::before {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.info-box[data-group="4"]::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Group 5 - single digit, centered arrow */
+.info-box[data-group="5"]::before {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.info-box[data-group="5"]::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Group 6 - multiple characters, arrow points near right edge */
+.info-box[data-group="6"]::before {
+    left: auto;
+    right: 55px;
+    transform: translateX(0);
+}
+
+.info-box[data-group="6"]::after {
+    left: auto;
+    right: 55px;
+    transform: translateX(0);
+}
+
+/* Color-specific arrows for each group */
+.info-box[data-group="1"]::before {
+    border-bottom-color: #3b82f6;
+}
+
+.info-box[data-group="2"]::before {
+    border-bottom-color: #8b5cf6;
+}
+
+.info-box[data-group="3"]::before {
+    border-bottom-color: #ec4899;
+}
+
+.info-box[data-group="4"]::before {
+    border-bottom-color: #f59e0b;
+}
+
+.info-box[data-group="5"]::before {
+    border-bottom-color: #10b981;
+}
+
+.info-box[data-group="6"]::before {
+    border-bottom-color: #06b6d4;
+}
+
+/* Position each group's bubble under its digits - adjusted for accurate arrow placement */
+.info-box[data-group="1"] {
+    left: 0;
+    transform: translateX(0);
+}
+
+.info-box[data-group="2"] {
+    left: 20%;
+    transform: translateX(-50%);
+}
+
+.info-box[data-group="3"] {
+    left: 48%;
+    transform: translateX(-50%);
+}
+
+.info-box[data-group="4"] {
+    left: 69%;
+    transform: translateX(-50%);
+}
+
+.info-box[data-group="5"] {
+    left: 75%;
+    transform: translateX(-50%);
+}
+
+.info-box[data-group="6"] {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+}
+
+/* First info box visible by default */
+.info-box[data-group="1"] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.info-box:hover {
+    border-color: #3b82f6;
+}
+
+/* Info Box Content */
+.info-label {
+    display: none;
+}
+
+.info-content {
+    font-size: 11px;
+    font-weight: 500;
+    color: #e2e8f0;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* CTA Button */
+.vin-decoder-cta {
+    text-align: center;
+    margin-top: 50px;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 1.4s forwards;
+}
+
+.vin-decoder-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 40px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        0 10px 30px rgba(239, 68, 68, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.vin-decoder-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.vin-decoder-btn:hover::before {
+    left: 100%;
+}
+
+.vin-decoder-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        0 20px 50px rgba(239, 68, 68, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.vin-decoder-btn:active {
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .vin-decoder-wrapper {
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .vin-decoder-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+    
+    .vin-decoder-container {
+        flex: 1 1 auto;
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .vin-decoder-image {
+        flex: 1 1 auto;
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .vin-decoder-image img {
+        transform: scale(1.5);
+    }
+    
+    .vin-code-display {
+        font-size: 56px;
+        letter-spacing: 6px;
+        padding: 24px 40px;
+    }
+
+    .info-box {
+        padding: 20px 12px;
+    }
+}
+
+@media (max-width: 992px) {
+    .vin-diagram {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+    }
+    
+    .info-box {
+        padding: 16px 12px;
+        min-height: 80px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .info-box:nth-child(3n) {
+        border-right: none;
+    }
+    
+    .info-content {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .vin-decoder-section {
+        padding: 60px 16px;
+    }
+    
+    .vin-decoder-wrapper {
+        gap: 30px;
+    }
+    
+    .vin-decoder-container {
+        padding: 0;
+    }
+    
+    .vin-decoder-image {
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+    }
+    
+    .vin-decoder-image img {
+        transform: scale(1.2);
+    }
+
+    .vin-code-display {
+        font-size: 32px;
+        letter-spacing: 2px;
+        padding: 16px 20px;
+        gap: 3px;
+        flex-wrap: wrap;
+        justify-content: center;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .vin-display-wrapper {
+        margin-bottom: 0;
+    }
+
+    .vin-diagram {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .info-box {
+        padding: 16px 10px;
+        min-height: 90px;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .info-box:nth-child(2n) {
+        border-right: none;
+    }
+    
+    .info-box:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+    
+    .info-content {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .vin-decoder-cta {
+        margin-top: 40px;
+    }
+
+    .vin-decoder-btn {
+        padding: 16px 36px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vin-code-display {
+        font-size: 24px;
+        letter-spacing: 1px;
+        padding: 12px 16px;
+        gap: 2px;
+    }
+    
+    .vin-diagram {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .info-content {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+    
+    .info-box {
+        min-height: 70px;
+        padding: 12px 10px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .info-box:last-child {
+        border-bottom: none;
+    }
+
+    .vin-decoder-btn {
+        padding: 14px 28px;
+        font-size: 15px;
+    }
+}
+

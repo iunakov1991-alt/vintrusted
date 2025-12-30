@@ -373,6 +373,7 @@
     </script>
     <link rel="stylesheet" href="/css/ab-hero.css">
     <link rel="stylesheet" href="/css/sample-report.css">
+    <link rel="stylesheet" href="/css/vin-decoder.css">
     <script src="/public/ab-test.js"></script>
     <!-- PDF.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -400,6 +401,11 @@
     <!-- A/B Test Hero Section - Replace existing hero section with this -->
     <section class="ab-hero">
       <img src="foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3-Photoroom.png" alt="" class="ab-arrow">
+      
+      <!-- Red Triangle on iPhone mockup -->
+      <div class="iphone-warning-triangle">
+        <img src="carico -Photoroom2.png" alt="Warning" />
+      </div>
     
       <div class="ab-hero-inner">
         <div class="ab-preline">
@@ -420,15 +426,13 @@
             <span class="ab-chip">accident reported</span>
             <span class="ab-chip">salvage title</span>
             <span class="ab-chip">odometer rollback</span>
-            <span class="ab-chip">liens</span>
         </div>
           <div class="ab-chips-row">
+            <span class="ab-chip">liens</span>
             <span class="ab-chip">airbag deployed</span>
-            <span class="ab-chip">frame damage</span>
-            <span class="ab-chip">hidden damage</span>
       </div>
           <div class="ab-chips-row">
-            <span class="ab-chip">theft records</span>
+            <span class="ab-chip">hidden damage</span>
             <span class="ab-chip">flood damage</span>
           </div>
           </div>
@@ -437,7 +441,7 @@
           <div class="ab-search-form">
             <input type="text" class="ab-vin-input" placeholder="ENTER VIN CODE HERE" maxlength="17" autocomplete="off">
             <button class="ab-search-btn">
-              Get My Report ✓
+              Check VIN
                     </button>
                 </div>
             </div>
@@ -489,36 +493,148 @@
     <!-- Sample Report Section -->
     <section class="sample-report-section">
       <div class="sample-report-container">
+        <!-- Arrow pointing from PDF to button -->
+        <img src="/foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3-Photoroom.png" alt="" class="sample-report-arrow" />
+        
         <!-- Left Column - PDF Stack with PDF.js -->
         <div class="pdf-stack-column">
-          <div class="pdf-stack-wrapper">
-            <div class="pdf-stack" id="pdfStack">
-              <!-- PDF pages will be rendered here by PDF.js -->
-            </div>
-            
-            <div class="navigation-controls">
-              <button class="nav-btn prev-btn" id="prevBtn" title="Предыдущая страница">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                        </button>
-              <button class="nav-btn next-btn" id="nextBtn" title="Следующая страница">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </button>
-              <div class="page-counter">
-                <span id="currentPage">1</span> / <span id="totalPages">1</span>
-              </div>
+          <div class="vin-pdfstack" data-pdf="/reports/sample.pdf">
+            <div class="vin-pdfstack__stage">
+              <div class="vin-pdfstack__stack" id="vinPdfStack"></div>
             </div>
           </div>
         </div>
 
-        <!-- Right Column - Title & Description -->
+        <!-- Right Column - Chips & Action -->
         <div class="sample-report-text">
-          <h2 class="sample-report-title">See a Sample of Our Report</h2>
-          <p class="sample-report-subtitle">Complete Vehicle History in One Document</p>
-          <a href="#check-vin" class="sample-report-btn">Check My VIN</a>
+          <div class="sample-report-content">
+            <!-- Chips Column -->
+            <div class="sample-report-chips-wrapper">
+              <div class="vin-pdfstack__chips" id="vinChips"></div>
+              
+              <div class="vin-pdfstack__nav-pill">
+                <button class="vin-pdfstack__nav-btn" id="vinPrevBtn" aria-label="Previous page">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+
+                <div class="vin-pdfstack__counter">
+                  <span id="vinCurrentPage">1</span> / <span id="vinTotalPages">1</span>
+                </div>
+
+                <button class="vin-pdfstack__nav-btn" id="vinNextBtn" aria-label="Next page">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Action Column -->
+            <div class="sample-report-action">
+              <h2 class="sample-report-title">See a Sample<br>of Our Report</h2>
+              <p class="sample-report-subtitle">Complete Vehicle History<br>in One Document</p>
+              <button class="sample-report-btn" id="openVinPopup">CHECK VIN</button>
+              <p class="sample-report-disclaimer">Nearly 40% of used cars have documented accident damage, and 20% carry active safety recalls. Free VIN check reveals hidden damage, odometer fraud, and title issues before you buy.</p>
+            </div>
+          </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- VIN Decoder Section -->
+    <section class="vin-decoder-section">
+        <div class="vin-decoder-wrapper">
+            <div class="vin-decoder-container">
+                <!-- VIN Code Display -->
+                <div class="vin-instruction">Hover over the characters to decode the VIN</div>
+                <div class="vin-display-wrapper">
+                    <div class="vin-code-wrapper">
+                        <div class="vin-code-display">
+                            <span class="vin-char" data-group="1">1</span>
+                            <span class="vin-char" data-group="2">H</span>
+                            <span class="vin-char" data-group="2">G</span>
+                            <span class="vin-char" data-group="2">B</span>
+                            <span class="vin-char" data-group="2">H</span>
+                            <span class="vin-char" data-group="2">4</span>
+                            <span class="vin-char" data-group="3">1</span>
+                            <span class="vin-char" data-group="3">J</span>
+                            <span class="vin-char" data-group="3">X</span>
+                            <span class="vin-char" data-group="3">M</span>
+                            <span class="vin-char" data-group="3">N</span>
+                            <span class="vin-char" data-group="4">1</span>
+                            <span class="vin-char" data-group="5">0</span>
+                            <span class="vin-char" data-group="6">9</span>
+                            <span class="vin-char" data-group="6">1</span>
+                            <span class="vin-char" data-group="6">8</span>
+                            <span class="vin-char" data-group="6">6</span>
+                        </div>
+                        <!-- Diagram with Info Boxes -->
+                        <div class="vin-diagram">
+                    <!-- Info Box 1: Country Code -->
+                    <div class="info-box" data-group="1">
+                        <div class="info-content">
+                            Country of manufacture
+                        </div>
+                    </div>
+
+                    <!-- Info Box 2: Manufacturer Info -->
+                    <div class="info-box" data-group="2">
+                        <div class="info-content">
+                            Manufacturer name (2 characters)<br>
+                            Manufacturing division (3 characters)
+                        </div>
+                    </div>
+
+                    <!-- Info Box 3: Vehicle Description -->
+                    <div class="info-box" data-group="3">
+                        <div class="info-content">
+                            Vehicle description: model, body type,<br>
+                            specification, transmission and engine
+                        </div>
+                    </div>
+
+                    <!-- Info Box 4: Check Digit -->
+                    <div class="info-box" data-group="4">
+                        <div class="info-content">
+                            Check digit
+                        </div>
+                    </div>
+
+                    <!-- Info Box 5: Model Year -->
+                    <div class="info-box" data-group="5">
+                        <div class="info-content">
+                            Vehicle model year
+                        </div>
+                    </div>
+
+                    <!-- Info Box 6: Assembly Plant & Serial -->
+                    <div class="info-box" data-group="6">
+                        <div class="info-content">
+                            Assembly plant and serial number<br>of the vehicle
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    <h2 class="try-vin-text"><span class="try-text">Try the</span> <span class="vin-decoder-text">VIN Decoder</span></h2>
+                </div>
+                
+                <!-- Conversion Text -->
+                <div class="vin-conversion-text">
+                    <p class="conversion-message"></p>
+                    <a href="#" class="conversion-cta" onclick="showVinPopup(); return false;"></a>
+                </div>
+
+                <!-- Check VIN Button -->
+                <div class="vin-check-button-wrapper">
+                    <button class="vin-check-btn" onclick="showVinPopup()">Check VIN</button>
+                </div>
+            </div>
+            
+            <!-- Image on the right -->
+            <div class="vin-decoder-image">
+                <img src="wheresvin.webp" alt="Where's VIN" />
             </div>
         </div>
     </section>
@@ -3269,6 +3385,102 @@
     
     <!-- PDF Stack Viewer -->
     <script src="/public/pdf-stack.js"></script>
+    
+    <!-- VIN PDF Stack Viewer (New 3D Effect with Chips Navigation) -->
+    <script src="/public/vin-pdf-stack.js?v=1767007665"></script>
+    
+    <!-- VIN Check Popup -->
+    <div class="vin-popup-overlay" id="vinPopupOverlay">
+      <div class="vin-popup">
+        <button class="vin-popup-close" id="closeVinPopup" aria-label="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        
+        <div class="vin-popup-content">
+          <h3 class="vin-popup-title">Check Your Vehicle History</h3>
+          <p class="vin-popup-subtitle">Enter your VIN to get a comprehensive vehicle report instantly</p>
+          
+          <form class="vin-popup-form" id="vinCheckForm">
+            <div class="vin-input-wrapper">
+              <input 
+                type="text" 
+                class="vin-popup-input" 
+                id="vinInput" 
+                placeholder="Enter VIN (17 characters)"
+                maxlength="17"
+                pattern="[A-HJ-NPR-Z0-9]{17}"
+                required
+              />
+              <span class="vin-input-counter">0/17</span>
+            </div>
+            
+            <button type="submit" class="vin-popup-submit">
+              <span>CHECK VIN</span>
+            </button>
+          </form>
+          
+          <div class="vin-popup-features">
+            <div class="vin-popup-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Accident History</span>
+            </div>
+            <div class="vin-popup-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Ownership Records</span>
+            </div>
+            <div class="vin-popup-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Title Information</span>
+            </div>
+            <div class="vin-popup-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Salvage Records</span>
+            </div>
+            <div class="vin-popup-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Theft Records</span>
+            </div>
+            <div class="vin-popup-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Odometer Check</span>
+            </div>
+            <div class="vin-popup-chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Recall Info</span>
+            </div>
+            <div class="vin-popup-chip vin-popup-chip--more">
+              <span>and more...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- VIN Popup Script -->
+    <script src="/public/vin-popup.js"></script>
+    
+    <!-- VIN Decoder Interactive -->
+    <script src="/public/vin-decoder-interactive.js"></script>
+    
+    <!-- VIN Conversion Text Rotator -->
+    <script src="/js/vin-conversion-text.js"></script>
     
     <!-- Vercel Speed Insights -->
     <script type="module" src="speed-insights.js" defer></script>

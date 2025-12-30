@@ -199,21 +199,21 @@ export default async function handler(req, res) {
             // If html_report is empty or too short, try to get by reportId
             if (reportText.length < 100 && jsonData.result.id) {
               console.log('⚠️ html_report is empty, fetching by reportId:', jsonData.result.id);
-              
+          
               // Fetch full report by ID
               const reportByIdUrl = `https://www.clearvin.com/rest/vendor/report?reportId=${jsonData.result.id}&format=html&reportTemplate=2021`;
-              const reportByIdResponse = await fetch(reportByIdUrl, {
-                method: 'GET',
-                headers: {
-                  'Authorization': `Bearer ${token}`,
+          const reportByIdResponse = await fetch(reportByIdUrl, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
                   'Accept': 'text/html'
-                }
-              });
-              
-              if (reportByIdResponse.ok) {
+            }
+          });
+          
+          if (reportByIdResponse.ok) {
                 htmlReport = await reportByIdResponse.text();
                 console.log('✅ Got report by ID, length:', htmlReport.length);
-              } else {
+                } else {
                 console.error('❌ Failed to fetch report by ID:', reportByIdResponse.status);
                 htmlReport = jsonData.result.html_report; // Use what we have
               }
@@ -230,7 +230,7 @@ export default async function handler(req, res) {
               headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'text/html'
-              }
+                }
             });
             
             if (reportByIdResponse.ok) {
