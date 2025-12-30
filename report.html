@@ -738,29 +738,6 @@
             transform: translateY(-2px);
         }
 
-        /* Footer */
-        .footer {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            font-size: 11px;
-            color: #64748b;
-            flex-shrink: 0;
-        }
-
-        .footer a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: #ffffff;
-        }
-
         /* Mobile Responsive */
         @media (max-width: 1200px) {
             .main-content {
@@ -809,7 +786,7 @@
                 display: none;
             }
 
-            #vin-pay {
+        #vin-pay {
                 padding: 24px;
             }
         }
@@ -864,9 +841,9 @@
         <header class="header">
             <div class="logo-section">
                 <img src="/logo-vin-trust.png" alt="VIN TRUST" class="logo-img" width="150" height="40">
-            </div>
+                </div>
             <div class="header-buttons">
-            </div>
+                </div>
         </header>
 
         <!-- Main Content -->
@@ -885,17 +862,17 @@
                         <div class="status-item">
                             <div class="status-dot green"></div>
                             <span>VIN decoded</span>
-                        </div>
+                    </div>
                         <div class="status-item">
                             <div class="status-dot yellow"></div>
                             <span>2 items need verification</span>
-                        </div>
+                </div>
                         <div class="status-item">
                             <div class="status-dot red"></div>
                             <span>potential risk detected</span>
-                        </div>
                     </div>
                 </div>
+                    </div>
 
                 <div class="vin-divider"></div>
 
@@ -908,7 +885,7 @@
                         <span id="transmissionSpec">-</span>
                         <span class="dot"></span>
                         <span id="driveTypeSpec">-</span>
-                    </div>
+                </div>
                     <div class="vehicle-market">Market: US • Source: Multi-database</div>
                     
                     <!-- Report Preview Image -->
@@ -936,24 +913,17 @@
                     Instant access • Downloadable PDF • No account required
                 </div>
             </div>
-            </div>
-
-            <!-- Right Column: Payment Form -->
-            <div class="report-right">
-                <!-- PAYMENT_CONTAINER_START -->
-                <div id="vin-pay" style="position: relative;">
-                    <!-- Terms Overlay will be injected by vin-stripe.js after form mounts -->
-                </div>
-                <!-- PAYMENT_CONTAINER_END -->
-            </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <span>© VINTRUST</span>
-            <a href="#">Terms</a>
-            <a href="#">Privacy</a>
-        </footer>
+        <!-- Right Column: Payment Form -->
+        <div class="report-right">
+            <!-- PAYMENT_CONTAINER_START -->
+            <div id="vin-pay" style="position: relative;">
+                <!-- Terms Overlay will be injected by vin-stripe.js after form mounts -->
+            </div>
+            <!-- PAYMENT_CONTAINER_END -->
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1163,13 +1133,13 @@
                     clearTimeout(timeoutId);
                     
                     if (response.ok) {
-                        const data = await response.json();
-                        if (data.Results && data.Results.length > 0) {
+                const data = await response.json();
+                if (data.Results && data.Results.length > 0) {
                             sessionStorage.setItem('nhtsa_data_' + vin, JSON.stringify(data));
                             sessionStorage.setItem('nhtsa_timestamp_' + vin, Date.now().toString());
                             console.log('[✅ API] Data received successfully');
-                            return parseNHTSAData(data.Results);
-                        }
+                    return parseNHTSAData(data.Results);
+                }
                     }
                 } catch (fetchError) {
                     clearTimeout(timeoutId);
@@ -1303,7 +1273,7 @@
                         bodyStyle: 'Sedan',
                         driveType: 'FWD'
                     };
-                    
+                
                     populateReport(data);
                 }
                 
