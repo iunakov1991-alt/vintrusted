@@ -777,11 +777,16 @@
                 const statusColor = item.statusColor || 'yellow';
                 const isRedText = statusColor === 'red';
 
+                let iconSvg = `<path d="${item.icon}"></path>`;
+                if (item.iconPath2) {
+                    iconSvg += `<polyline points="${item.iconPath2}"></polyline>`;
+                }
+                
                 return `
                     <div class="report-item">
                         <div class="${chipClass}">
                             <svg class="report-chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                ${item.iconPath2 ? `<path d="${item.icon}"></path><polyline points="${item.iconPath2}"></polyline>` : `<path d="${item.icon}"></path>`}
+                                ${iconSvg}
                             </svg>
                             <span class="report-chip-text">${item.title}</span>
                         </div>
