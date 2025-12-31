@@ -34,7 +34,12 @@
   console.log('[VIN PDF STACK] Loading PDF from:', pdfUrl);
 
   try {
-    const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+    const loadingTask = pdfjsLib.getDocument({
+      url: pdfUrl,
+      httpHeaders: {},
+      withCredentials: false
+    });
+    const pdf = await loadingTask.promise;
     const total = pdf.numPages;
     totalEl.textContent = String(total);
 
