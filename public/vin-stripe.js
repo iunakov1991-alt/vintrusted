@@ -443,7 +443,7 @@
         background: #9ca3af !important;
         color: white !important;
         border: none !important;
-        border-radius: 999px;
+        border-radius: 999px !important;
         font-size: 16px;
         font-weight: 600;
         cursor: not-allowed !important;
@@ -646,6 +646,7 @@
         submitButton.style.setProperty('background', '#fbbf24', 'important');
         submitButton.style.setProperty('color', '#111827', 'important');
         submitButton.style.setProperty('cursor', 'pointer', 'important');
+        submitButton.style.setProperty('border-radius', '999px', 'important');
         submitButton.onmouseover = () => submitButton.style.setProperty('background', '#f59e0b', 'important');
         submitButton.onmouseout = () => submitButton.style.setProperty('background', '#fbbf24', 'important');
         console.log('[Terms] Accepted');
@@ -671,6 +672,7 @@
         submitButton.style.setProperty('background', '#9ca3af', 'important');
         submitButton.style.setProperty('color', 'white', 'important');
         submitButton.style.setProperty('cursor', 'not-allowed', 'important');
+        submitButton.style.setProperty('border-radius', '999px', 'important');
         submitButton.onmouseover = null;
         submitButton.onmouseout = null;
       }
