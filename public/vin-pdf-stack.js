@@ -239,8 +239,10 @@
       // Ensure current page chip is always visible
       const currentPageChipIndex = sections.findIndex(s => s.page === idx);
       if(currentPageChipIndex !== -1 && !visibleChipIndices.includes(currentPageChipIndex)) {
-        // Replace the first chip with current page chip
-        visibleChipIndices[0] = currentPageChipIndex;
+        // Rotate chips: remove the first (oldest) chip and add current page chip
+        // This ensures all chips rotate, not just the first one
+        visibleChipIndices.shift(); // Remove first chip
+        visibleChipIndices.push(currentPageChipIndex); // Add current page chip at the end
       }
       
       updateChips();
