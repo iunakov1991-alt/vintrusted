@@ -1125,15 +1125,15 @@
         // Initialize on page load
         (function() {
             // Render report items immediately
-        if (document.readyState === 'loading') {
+            if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function() {
                     renderReportItems();
                     initPaymentWidget();
                 });
-        } else {
+            } else {
                 renderReportItems();
-            initPaymentWidget();
-        }
+                initPaymentWidget();
+            }
         
             const urlParams = new URLSearchParams(window.location.search);
             const vin = urlParams.get('vin');
