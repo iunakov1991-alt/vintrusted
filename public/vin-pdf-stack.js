@@ -269,11 +269,17 @@
     console.log('[VIN PDF STACK] Initialization complete with', sections.length, 'sections');
   } catch (error) {
     console.error('[VIN PDF STACK] Error loading PDF:', error);
+    console.error('[VIN PDF STACK] Error details:', {
+      message: error.message,
+      name: error.name,
+      url: pdfUrl
+    });
     if (stackEl) {
       stackEl.innerHTML = `
         <div style="padding: 40px; text-align: center; color: #6b7280;">
           <p style="font-size: 16px; margin-bottom: 8px;">PDF not available</p>
-          <p style="font-size: 14px;">Place sample.pdf in /reports/ folder</p>
+          <p style="font-size: 14px;">Error: ${error.message || 'Unknown error'}</p>
+          <p style="font-size: 12px; margin-top: 8px; color: #999;">URL: ${pdfUrl}</p>
         </div>
       `;
     }
