@@ -661,6 +661,11 @@
   border-radius: 50%;
 }
 
+/* Black dot for light variant */
+.variant-light .vin-pdfstack__chip.active::before {
+  background: #000000;
+}
+
 /* Light variant chips */
 .variant-light .vin-pdfstack__chip {
   background: #DBEAFE;
@@ -1240,6 +1245,11 @@ button.vin-popup-submit[type="submit"] {
   height: 6px;
   background: #ffffff;
   border-radius: 50%;
+}
+
+/* Black dot for light variant */
+.variant-light .vin-pdfstack__chip.active::before {
+  background: #000000;
 }
 
 /* Light variant chips */
