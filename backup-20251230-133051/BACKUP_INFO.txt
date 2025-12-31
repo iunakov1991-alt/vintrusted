@@ -1,0 +1,19 @@
+BACKUP INFORMATION
+==================
+Date: 2025-12-30 13:30:59
+Version: A/B Test - White and Dark variants complete
+
+Files backed up:
+- index.html (main page with A/B test)
+- report.html (preliminary report page - new design)
+- css/ab-hero.css (A/B test hero styles)
+- preliminary-report-test.html (test version)
+
+Changes in this version:
+1. Applied new design from preliminary-report-test.html to report.html
+2. All elements from dark variant applied to light variant
+3. Both versions ready for A/B testing
+4. Stripe payment widget integrated
+5. Dynamic VIN data loading preserved
+
+Backup location: backup-20251230-133051

@@ -1,0 +1,8 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="400" height="300" fill="#f8f9fa"/>
+<rect x="50" y="50" width="300" height="200" fill="white" stroke="#dee2e6" stroke-width="2"/>
+<text x="200" y="100" font-family="Arial" font-size="18" fill="#333" text-anchor="middle" font-weight="bold">Sale Records</text>
+<text x="200" y="130" font-family="Arial" font-size="14" fill="#6c757d" text-anchor="middle">Loading listings...</text>
+<rect x="80" y="160" width="240" height="60" fill="#e9ecef" rx="4"/>
+<text x="200" y="195" font-family="Arial" font-size="12" fill="#495057" text-anchor="middle">Sale records will appear here</text>
+</svg>

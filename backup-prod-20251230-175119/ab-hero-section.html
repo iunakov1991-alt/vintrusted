@@ -1,0 +1,89 @@
+<!-- A/B Test Hero Section - Replace existing hero section with this -->
+<section class="ab-hero">
+  <img src="foni-papik-pro-awx9-p-kartinki-izognutaya-strelochka-na-prozrach-3-Photoroom.png" alt="" class="ab-arrow">
+
+  <div class="ab-hero-inner">
+    <div class="ab-preline">
+      Before you buy a used car — check what sellers don't tell you
+    </div>
+
+    <h1>
+      <span style="white-space: nowrap;">Most Used Cars Have a Problem.</span><br/>
+      <span>The VIN Reveals It.</span>
+    </h1>
+
+    <div class="ab-subtitle">
+      The VIN shows what you're really buying.
+    </div>
+
+    <div class="ab-chips">
+      <div class="ab-chips-row">
+        <span class="ab-chip">accident reported</span>
+        <span class="ab-chip">salvage title</span>
+        <span class="ab-chip">odometer rollback</span>
+        <span class="ab-chip">liens</span>
+      </div>
+      <div class="ab-chips-row">
+        <span class="ab-chip">airbag deployed</span>
+        <span class="ab-chip">frame damage</span>
+        <span class="ab-chip">hidden damage</span>
+      </div>
+      <div class="ab-chips-row">
+        <span class="ab-chip">theft records</span>
+        <span class="ab-chip">flood damage</span>
+      </div>
+    </div>
+
+    <div class="ab-search-form-container" id="check-vin">
+      <div class="ab-search-form">
+        <input type="text" class="ab-vin-input" placeholder="ENTER VIN CODE HERE" maxlength="17" autocomplete="off">
+        <button class="ab-search-btn">
+          Get My Report ✓
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Form submission handler
+      document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.querySelector('.ab-search-btn');
+        const input = document.querySelector('.ab-vin-input');
+        
+        if (btn) {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const vin = input.value.trim();
+            if (vin.length === 17) {
+              window.location.href = '/report.html?vin=' + vin;
+            } else {
+              alert('Please enter a valid 17-character VIN');
+            }
+          });
+        }
+        
+        // Submit on Enter key
+        if (input) {
+          input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+              btn.click();
+            }
+          });
+        }
+      });
+    </script>
+
+    <div class="ab-warning">
+      Many sellers won't disclose these issues.<br/>
+      A VIN check takes seconds — mistakes cost thousands.
+    </div>
+  </div>
+
+  <!-- Trust Badges -->
+  <div class="ab-trust-badges">
+    <img src="nmvtis-logo@2x.png" alt="NMVTIS" class="ab-trust-badge">
+    <img src="nhts.png" alt="NHTSA" class="ab-trust-badge">
+    <img src="SAuVO.png" alt="Trustpilot" class="ab-trust-badge ab-trust-badge-small">
+    <img src="guar-Photoroom.png" alt="Coat of Arms" class="ab-trust-badge ab-trust-badge-large">
+  </div>
+</section>
+
