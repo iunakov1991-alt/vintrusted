@@ -795,7 +795,11 @@
                 let iconSvg = `<path d="${item.icon}"></path>`;
                 if (item.iconPath2) {
                     // iconPath2 should already be in polyline points format (no "M" command)
-                    iconSvg += `<polyline points="${item.iconPath2}"></polyline>`;
+                    // Remove any "M" command if present (for safety)
+                    const points = item.iconPath2.replace(/^M\s*/i, '').trim();
+                    if (points) {
+                        iconSvg += `<polyline points="${points}"></polyline>`;
+                    }
                 }
                 
                 return `
