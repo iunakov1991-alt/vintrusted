@@ -717,7 +717,7 @@
             {
                 title: "Salvage Records",
                 icon: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z",
-                iconPath2: "M14 2 14 8 20 8",
+                iconPath2: "14 2 14 8 20 8",
                 status: "needs-unlock",
                 statusText: "Record(s) found",
                 statusColor: "yellow"
@@ -796,12 +796,8 @@
 
                 let iconSvg = `<path d="${item.icon}"></path>`;
                 if (item.iconPath2) {
-                    // Convert SVG path commands to polyline points format
-                    // Remove "M" command and keep only coordinates
-                    const points = item.iconPath2.replace(/^M\s*/, '').replace(/\s+/g, ' ').trim();
-                    if (points) {
-                        iconSvg += `<polyline points="${points}"></polyline>`;
-                    }
+                    // iconPath2 should already be in polyline points format (no "M" command)
+                    iconSvg += `<polyline points="${item.iconPath2}"></polyline>`;
                 }
                 
                 return `
