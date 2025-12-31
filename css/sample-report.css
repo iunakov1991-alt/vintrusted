@@ -807,7 +807,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
@@ -820,6 +820,21 @@
   padding: 20px;
 }
 
+.vin-popup {
+  position: relative;
+  overflow: hidden;
+}
+
+.vin-popup-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
 .vin-popup-overlay.active {
   opacity: 1;
   visibility: visible;
@@ -827,7 +842,6 @@
 
 .vin-popup {
   position: relative;
-  background: #ffffff;
   border-radius: 32px;
   padding: 48px;
   max-width: 520px;
@@ -856,6 +870,7 @@
   justify-content: center;
   transition: all 0.2s ease;
   color: #6b7280;
+  z-index: 10;
 }
 
 .vin-popup-close:hover {
@@ -868,6 +883,8 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .vin-popup-title {
@@ -1009,8 +1026,8 @@ button.vin-popup-submit[type="submit"] {
 }
 
 /* Dark Variant */
-.variant-dark .vin-popup-overlay {
-  background: rgba(0, 0, 0, 0.8);
+.variant-dark .vin-popup-overlay::before {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
 }
 
 .variant-dark .vin-popup {
@@ -1030,6 +1047,30 @@ button.vin-popup-submit[type="submit"] {
 
 .variant-dark .vin-popup-title {
   color: #ffffff;
+}
+
+/* Light Variant - White title with yellow accent */
+.variant-light .vin-popup-title {
+  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 70%, #fcd34d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.variant-light .vin-popup-title::after {
+  content: 'Check Your Vehicle History';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 70%, #fcd34d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: -1;
 }
 
 .variant-dark .vin-popup-subtitle {
