@@ -200,7 +200,7 @@
         // Load mobile-only CSS ONLY on mobile devices
         var mobileCss = document.createElement('link');
         mobileCss.rel = 'stylesheet';
-        mobileCss.href = '/css/mobile-only.css?v=2';
+        mobileCss.href = '/css/mobile-only.css?v=3';
         document.head.appendChild(mobileCss);
         console.log('[MOBILE] Loading mobile-only.css');
       }
@@ -3582,142 +3582,7 @@
     
     <!-- ==================== MOBILE VERSION ==================== -->
     <div class="mobile-only">
-        <!-- Mobile Header with Logo -->
-        <header class="mobile-header">
-            <img src="logo-vin-trust.png" alt="VIN TRUST" class="mobile-logo" width="120" height="32">
-        </header>
-
-        <!-- Mobile Hero Section -->
-        <section class="mobile-hero-section">
-            <h1 class="mobile-hero-title">Check the VIN Before It Costs You Thousands</h1>
-            <p class="mobile-hero-subtitle">Get Full VIN history</p>
-
-            <!-- VIN Input Form -->
-            <form class="mobile-vin-form" id="mobile-vin-form-1">
-                <input 
-                    type="text" 
-                    class="mobile-vin-input" 
-                    placeholder="Enter VIN code" 
-                    maxlength="17"
-                    id="mobile-vin-input-1"
-                >
-                <button type="submit" class="mobile-vin-button">Get Report Now</button>
-            </form>
-
-            <!-- Trust Badges -->
-            <div class="mobile-trust-badges">
-                <div class="mobile-trust-badge">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                    </svg>
-                    <span>Secure</span>
-                </div>
-                <div class="mobile-trust-badge">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span>NMVTIS Approved</span>
-                </div>
-                <div class="mobile-trust-badge">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                    <span>Instant Access</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Mobile Car + iPhone Mockup -->
-        <section class="mobile-mockup-section">
-            <div class="mobile-mockup-container">
-                <img src="2015-Honda-CR-V-5J6RM3H93FL026108-1 1.png" alt="Honda CR-V" class="mobile-car-image">
-                <img src="iPhone 16 Pro.png" alt="VIN Report on iPhone" class="mobile-iphone-image">
-            </div>
-        </section>
-
-        <!-- Sample Report Section -->
-        <section class="mobile-sample-section">
-            <h2 class="mobile-sample-title">See a Sample<br>of Our Report</h2>
-            
-            <!-- PDF Stack Viewer (reuse from desktop) -->
-            <div class="vin-pdfstack mobile-pdfstack" data-pdf="/reports/sample.pdf">
-                <div id="vinPdfStack" class="vin-pdfstack__stack"></div>
-                <div class="vin-pdfstack__controls">
-                    <button id="vinPrevBtn" class="vin-pdfstack__btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                    </button>
-                    <span class="vin-pdfstack__page">
-                        <span id="vinCurrentPage">1</span> / <span id="vinTotalPages">0</span>
-                    </span>
-                    <button id="vinNextBtn" class="vin-pdfstack__btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </button>
-                </div>
-                <div id="vinChips" class="vin-pdfstack__chips"></div>
-            </div>
-
-            <!-- Second VIN Form -->
-            <form class="mobile-vin-form mobile-vin-form-secondary" id="mobile-vin-form-2">
-                <input 
-                    type="text" 
-                    class="mobile-vin-input" 
-                    placeholder="Enter VIN code" 
-                    maxlength="17"
-                    id="mobile-vin-input-2"
-                >
-                <button type="submit" class="mobile-vin-button">Check VIN History</button>
-            </form>
-        </section>
-
-        <!-- VIN Decoder Section -->
-        <section class="mobile-decoder-section">
-            <h2 class="mobile-decoder-title">Try the VIN Decoder</h2>
-            
-            <!-- VIN Decoder Interactive (reuse from desktop) -->
-            <div class="vin-decoder-wrapper mobile-decoder-wrapper">
-                <div class="vin-decoder-input-row">
-                    <input 
-                        type="text" 
-                        class="vin-decoder-input" 
-                        placeholder="Enter VIN" 
-                        maxlength="17"
-                        id="mobile-decoder-input"
-                    >
-                </div>
-                <div class="vin-decoder-bubbles" id="mobile-decoder-bubbles">
-                    <!-- Bubbles will be generated by JS -->
-                </div>
-            </div>
-
-            <!-- Conversion Text -->
-            <p class="mobile-conversion-text">
-                Get Your Full Vehicle Report in 30 Seconds — Before Someone Else Does
-            </p>
-
-            <!-- Stats Section with Bold Accents -->
-            <div class="mobile-stats-section">
-                <p class="mobile-stats-text">
-                    <strong>40% of used cars</strong> on U.S. roads have documented accident damage, 
-                    and <strong>20% have open safety recalls.</strong> A quick VIN check reveals 
-                    <strong>hidden issues, odometer fraud, and title problems</strong> — protecting 
-                    your investment <strong>before it's too late.</strong>
-                </p>
-            </div>
-        </section>
-
-        <!-- Mobile Footer (Simple) -->
-        <footer class="mobile-footer">
-            <div class="mobile-footer-links">
-                <a href="/terms-of-service">Terms</a>
-                <a href="/privacy-policy">Privacy</a>
-                <a href="/contact">Contact</a>
-            </div>
-            <p class="mobile-footer-copyright">© 2025 VIN TRUST. NMVTIS Approved.</p>
-        </footer>
+        <!-- Будем добавлять элементы по одному -->
     </div><!-- End Mobile Version -->
     
     <!-- ==================== POPUPS (SHARED BETWEEN DESKTOP & MOBILE) ==================== -->
@@ -3932,7 +3797,7 @@
       if (document.documentElement.classList.contains('mobile-device')) {
         // Load mobile-only JS ONLY on mobile devices
         var mobileScript = document.createElement('script');
-        mobileScript.src = '/public/mobile-only.js?v=2';
+        mobileScript.src = '/public/mobile-only.js?v=3';
         mobileScript.defer = true;
         document.body.appendChild(mobileScript);
         console.log('[MOBILE] Loading mobile-only.js');
