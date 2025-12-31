@@ -53,6 +53,14 @@
 }
 
 /* ==================== MOBILE ISOLATION ==================== */
+/* Reset body on mobile */
+.mobile-device body {
+  background: #F7F8FA !important;
+  background-image: none !important;
+  background-attachment: initial !important;
+  overflow-x: hidden !important;
+}
+
 /* Mobile content ONLY visible on mobile devices */
 .mobile-device .mobile-only {
   display: block !important;
@@ -146,7 +154,6 @@
 }
 
 /* ==================== DEBUGGING (remove in production) ==================== */
-/*
 .desktop-device::before {
   content: 'DESKTOP MODE';
   position: fixed;
@@ -170,5 +177,4 @@
   z-index: 99999;
   font-size: 12px;
 }
-*/
 
