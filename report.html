@@ -780,7 +780,12 @@
 
                 let iconSvg = `<path d="${item.icon}"></path>`;
                 if (item.iconPath2) {
-                    iconSvg += `<polyline points="${item.iconPath2}"></polyline>`;
+                    // Convert SVG path commands to polyline points format
+                    // Remove "M" command and keep only coordinates
+                    const points = item.iconPath2.replace(/^M\s*/, '').replace(/\s+/g, ' ').trim();
+                    if (points) {
+                        iconSvg += `<polyline points="${points}"></polyline>`;
+                    }
                 }
                 
                 return `
