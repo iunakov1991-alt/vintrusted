@@ -1,0 +1,39 @@
+{
+  "name": "vintrusted",
+  "version": "1.0.0",
+  "description": "VIN Trusted website with Stripe integration",
+  "main": "index.html",
+  "scripts": {
+    "monster8:dashboard": "node monster-8.0/dashboard/server-8.0.js",
+    "monster8:health": "node monster-8.0/dashboard/server-health.js",
+    "monster8:watchdog": "node scripts/watchdog_orchestrator.js",
+    "monster8:backup": "bash scripts/auto_backup.sh",
+    "monster:runner": "NODE_ENV=production node scripts/local_runner.js",
+    "monster:dashboard:local": "node scripts/monster8_local_dashboard_server.js",
+    "vercel-build": "echo 'SEO pages are generated locally on Mac via Monster 7.1 dashboard. Skipping build-time generation.'",
+    "seo-build": "node --expose-gc scripts/seo/seo-master-build.js",
+    "monster:start": "node monster-7.1/core/dashboard/server-7.1.js",
+    "monster:check": "node monster-7.1/test/generate-single-page.js",
+    "build:topic:dmv_ca": "scripts/build_topic_page.sh data/topic.dmv_ca_title_types_checklist_es_mx_us.json"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.35.7",
+    "@vercel/speed-insights": "^1.2.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.22.1",
+    "jsdom": "^24.0.0",
+    "multer": "^2.0.2",
+    "openai": "^4.104.0",
+    "pdf-parse": "^1.1.1",
+    "socket.io": "^4.8.1",
+    "stripe": "^14.0.0"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "cssnano": "^7.1.2",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1"
+  }
+}

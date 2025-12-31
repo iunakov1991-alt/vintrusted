@@ -1,0 +1,772 @@
+/**
+ * SEO-ДИЗАЙН ABSOLUTE 1000% - УЛУЧШЕННАЯ ВЕРСИЯ
+ * Стиль: DMV × Apple × LegalTech
+ * Оптимизировано для 1.5-2.2 скролла на десктопе
+ */
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-text-secondary: #6B7280;
+  --color-text-tertiary: #9CA3AF;
+  --color-accent: #0A84FF;
+  --color-accent-hover: #0066CC;
+  --color-border: #E5E7EB;
+  --color-card-bg: #ffffff;
+  --color-shadow: rgba(0, 0, 0, 0.04);
+  --color-shadow-hover: rgba(0, 0, 0, 0.08);
+  
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+  
+  --content-width: 720px;
+  --content-width-wide: 960px;
+  --line-height: 1.5;
+  
+  /* Компактные отступы для 1.5-2.2 скролла */
+  --spacing-xs: 6px;
+  --spacing-sm: 12px;
+  --spacing-md: 18px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
+  
+  --border-radius: 6px;
+  --border-radius-sm: 4px;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 15px;
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   HEADER WITH LOGO
+   ============================================ */
+
+.seo-header {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-sm) 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.seo-header-content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.seo-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.seo-header-descriptor {
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  max-width: 200px;
+}
+
+/* ============================================
+   LAYOUT CONTAINER
+   ============================================ */
+
+.seo-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.seo-container {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  width: 100%;
+}
+
+.seo-container-wide {
+  max-width: var(--content-width-wide);
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  width: 100%;
+}
+
+/* ============================================
+   HERO SECTION (COMPACT)
+   ============================================ */
+
+.seo-hero {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.seo-hero-vin {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.seo-hero-meta {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+}
+
+.seo-hero-summary {
+  font-size: 15px;
+  line-height: var(--line-height);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+  max-width: 600px;
+}
+
+.seo-hero-cta {
+  display: inline-block;
+  padding: 11px 28px;
+  background: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 15px;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 2px 6px var(--color-shadow);
+}
+
+.seo-hero-cta:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px var(--color-shadow-hover);
+}
+
+.seo-hero-cta:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   KEY FACTS (COMPACT CARDS)
+   ============================================ */
+
+.seo-key-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.seo-key-fact-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-sm);
+  box-shadow: 0 1px 2px var(--color-shadow);
+  transition: box-shadow 0.2s, transform 0.1s;
+}
+
+.seo-key-fact-card:hover {
+  box-shadow: 0 3px 8px var(--color-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.seo-key-fact-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--color-accent);
+}
+
+.seo-key-fact-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.seo-key-fact-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+/* ============================================
+   DEEP EXPLANATION (COMPACT)
+   ============================================ */
+
+.seo-explanation {
+  margin-bottom: var(--spacing-xl);
+}
+
+.seo-explanation h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-explanation p {
+  font-size: 15px;
+  line-height: var(--line-height);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+  max-width: 640px;
+}
+
+.seo-explanation p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   VEHICLE SPECS TABLE (COMPACT DMV STYLE)
+   ============================================ */
+
+.seo-specs-table {
+  margin-bottom: var(--spacing-xl);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 1px 2px var(--color-shadow);
+}
+
+.seo-specs-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.seo-specs-table thead {
+  background: #F9FAFB;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.seo-specs-table th {
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-secondary);
+}
+
+.seo-specs-table td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.seo-specs-table tr:last-child td {
+  border-bottom: none;
+}
+
+.seo-specs-table .vin-cell {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--color-accent);
+}
+
+/* ============================================
+   STATE INSIGHTS (COMPACT CARD)
+   ============================================ */
+
+.seo-state-insights {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: 0 1px 2px var(--color-shadow);
+}
+
+.seo-state-insights h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-state-insights p {
+  font-size: 14px;
+  line-height: var(--line-height);
+  color: var(--color-text);
+}
+
+/* ============================================
+   COMMON RISKS (COMPACT LIST)
+   ============================================ */
+
+.seo-risks {
+  margin-bottom: var(--spacing-xl);
+}
+
+.seo-risks h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-risks ul {
+  list-style: none;
+  padding: 0;
+}
+
+.seo-risks li {
+  padding: var(--spacing-xs) 0;
+  padding-left: var(--spacing-md);
+  position: relative;
+  font-size: 14px;
+  line-height: var(--line-height);
+  color: var(--color-text);
+}
+
+.seo-risks li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* ============================================
+   MARKET VALUE (COMPACT)
+   ============================================ */
+
+.seo-market-value {
+  margin-bottom: var(--spacing-xl);
+}
+
+.seo-market-value h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-market-range {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: #F9FAFB;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+}
+
+.seo-market-range-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  min-width: 100px;
+}
+
+.seo-market-range-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   AI ANALYSIS (COMPACT)
+   ============================================ */
+
+.seo-ai-analysis {
+  background: #F9FAFB;
+  border-left: 3px solid var(--color-accent);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  border-radius: var(--border-radius-sm);
+}
+
+.seo-ai-analysis h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-ai-analysis p {
+  font-size: 14px;
+  line-height: var(--line-height);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.seo-ai-analysis p:last-child {
+  margin-bottom: 0;
+}
+
+/* Стили для конвертированного markdown контента */
+.seo-ai-content {
+  font-size: 14px;
+  line-height: var(--line-height);
+  color: var(--color-text);
+}
+
+.seo-ai-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-ai-content h3:first-child {
+  margin-top: 0;
+}
+
+.seo-ai-content h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-ai-content h2:first-child {
+  margin-top: 0;
+}
+
+.seo-ai-content h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+  letter-spacing: -0.3px;
+}
+
+.seo-ai-content h1:first-child {
+  margin-top: 0;
+}
+
+.seo-ai-content p {
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height);
+}
+
+.seo-ai-content p:last-child {
+  margin-bottom: 0;
+}
+
+.seo-ai-content strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.seo-ai-content em {
+  font-style: italic;
+}
+
+.seo-ai-content hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: var(--spacing-lg) 0;
+}
+
+.seo-ai-content ul {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+  list-style-type: disc;
+}
+
+.seo-ai-content li {
+  margin-bottom: var(--spacing-xs);
+  line-height: var(--line-height);
+}
+
+.seo-ai-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   FREE VS PAID (COMPACT TABLE)
+   ============================================ */
+
+.seo-comparison {
+  margin-bottom: var(--spacing-xl);
+}
+
+.seo-comparison h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 1px 2px var(--color-shadow);
+}
+
+.seo-comparison-table th {
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  background: #F9FAFB;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.seo-comparison-table td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.seo-comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.seo-comparison-table .check {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.seo-comparison-table .cross {
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   FAQ (COMPACT)
+   ============================================ */
+
+.seo-faq {
+  margin-bottom: var(--spacing-xl);
+}
+
+.seo-faq h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.seo-faq-item {
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.seo-faq-item:last-child {
+  border-bottom: none;
+}
+
+.seo-faq-question {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: -0.1px;
+}
+
+.seo-faq-answer {
+  font-size: 14px;
+  line-height: var(--line-height);
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   INTERNAL LINKS (COMPACT)
+   ============================================ */
+
+.seo-internal-links {
+  margin-bottom: var(--spacing-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.seo-internal-links-section {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-sm);
+  box-shadow: 0 1px 2px var(--color-shadow);
+}
+
+.seo-internal-links-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text);
+  letter-spacing: -0.1px;
+}
+
+.seo-internal-links-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.seo-internal-links-section li {
+  padding: var(--spacing-xs) 0;
+}
+
+.seo-internal-links-section a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.seo-internal-links-section a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+/* ============================================
+   AI IMAGES
+   ============================================ */
+
+.seo-hero-image {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 4px 16px var(--color-shadow);
+}
+
+.seo-og-image {
+  display: none; /* Для meta tags */
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .seo-header-content {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .seo-logo {
+    height: 28px;
+  }
+  
+  .seo-header-descriptor {
+    font-size: 10px;
+    max-width: 150px;
+  }
+  
+  .seo-container {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+  
+  .seo-hero-vin {
+    font-size: 20px;
+  }
+  
+  .seo-hero-meta {
+    font-size: 14px;
+  }
+  
+  .seo-hero-summary {
+    font-size: 14px;
+  }
+  
+  .seo-key-facts {
+    grid-template-columns: 1fr;
+  }
+  
+  .seo-internal-links {
+    grid-template-columns: 1fr;
+  }
+  
+  .seo-specs-table,
+  .seo-comparison-table {
+    font-size: 13px;
+  }
+  
+  .seo-specs-table th,
+  .seo-specs-table td,
+  .seo-comparison-table th,
+  .seo-comparison-table td {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .seo-hero-cta {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.seo-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.seo-text-center {
+  text-align: center;
+}
+
+.seo-mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+.seo-mb-lg {
+  margin-bottom: var(--spacing-lg);
+}

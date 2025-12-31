@@ -1,0 +1,27 @@
+DESKTOP PRODUCTION BACKUP
+========================
+Date: 2024-12-31 04:27:24
+Purpose: Full backup before implementing mobile version
+
+This backup contains:
+- index.html (A/B test with light/dark variants)
+- report.html (preliminary report page with Stripe integration)
+- All CSS files (ab-hero.css, sample-report.css, stripe-fixes.css, styles.css)
+- All JavaScript files (vin-stripe.js, vin-pdf-stack.js, ab-test.js)
+- Images (mok1-portrait.png, report previews, etc.)
+- Legal documents
+- API endpoints
+- Reports (sample.pdf)
+
+Current state:
+- Desktop optimized layout (1400px max-width)
+- A/B test for main page (light/dark variants)
+- Compact preliminary report design
+- Stripe payment integration with rounded button
+- PDF stack viewer with chip navigation
+
+Next steps:
+- Implement dedicated mobile version
+- Mobile version will be SIGNIFICANTLY different from desktop
+- Need adaptive strategy to show correct version based on device
+

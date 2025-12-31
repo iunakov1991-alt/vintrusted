@@ -1,0 +1,594 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/checkout.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/log-consent.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/create-payment-intent.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/create-setup-intent.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/stripe-webhook.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/stripe-config.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/collect-vin.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/checkout-trial-then-two-charges.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/get-clearvin-report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/send-clearvin-report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/get-vin-from-setup-intent.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/get-checkout-session.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/send-receipt-and-report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/health.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-pages-count.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-vin-page.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-sitemap.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-image.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-dashboard.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/seo-page.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/semantic-page.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/dashboard.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/batch-status-update.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/monster-status.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/monster-start.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/monster-stop.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "legal/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**/*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "**/index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.jpg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.png",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.svg",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.webp",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.pdf",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.xml",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "css/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/seo/images/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "js/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**/*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**/*.pdf",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "reports/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.xml",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.txt",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.ico",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "img/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**/*.ico",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)/",
+      "destination": "/api/seo-vin-page.js?vin=:vin&state=:state"
+    },
+    {
+      "source": "/vin/:vin([A-HJ-NPR-Z0-9]{17})/:state([a-zA-Z-]+)",
+      "destination": "/api/seo-vin-page.js?vin=:vin&state=:state"
+    },
+    {
+      "source": "/api/checkout",
+      "destination": "/api/checkout.js"
+    },
+    {
+      "source": "/api/log-consent",
+      "destination": "/api/log-consent.js"
+    },
+    {
+      "source": "/api/create-payment-intent",
+      "destination": "/api/create-payment-intent.js"
+    },
+    {
+      "source": "/api/create-setup-intent",
+      "destination": "/api/create-setup-intent.js"
+    },
+    {
+      "source": "/api/stripe-config",
+      "destination": "/api/stripe-config.js"
+    },
+    {
+      "source": "/api/collect-vin",
+      "destination": "/api/collect-vin.js"
+    },
+    {
+      "source": "/api/stripe-webhook",
+      "destination": "/api/stripe-webhook.js"
+    },
+    {
+      "source": "/api/checkout-trial-then-two-charges",
+      "destination": "/api/checkout-trial-then-two-charges.js"
+    },
+    {
+      "source": "/api/get-clearvin-report",
+      "destination": "/api/get-clearvin-report.js"
+    },
+    {
+      "source": "/api/send-clearvin-report",
+      "destination": "/api/send-clearvin-report.js"
+    },
+    {
+      "source": "/api/get-vin-from-setup-intent",
+      "destination": "/api/get-vin-from-setup-intent.js"
+    },
+    {
+      "source": "/api/get-checkout-session",
+      "destination": "/api/get-checkout-session.js"
+    },
+    {
+      "source": "/api/send-receipt-and-report",
+      "destination": "/api/send-receipt-and-report.js"
+    },
+    {
+      "source": "/api/report",
+      "destination": "/api/report.js"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/health.js"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about-us.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/accident-history",
+      "destination": "/accident-history.html"
+    },
+    {
+      "source": "/title-records",
+      "destination": "/title-records.html"
+    },
+    {
+      "source": "/recall-information",
+      "destination": "/recall-information.html"
+    },
+    {
+      "source": "/sitemaps",
+      "destination": "/sitemaps.html"
+    },
+    {
+      "source": "/checkout",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/seo/sitemaps/:file*",
+      "destination": "/api/seo-sitemap.js?file=:file*"
+    },
+    {
+      "source": "/seo/images/clusters/:file*",
+      "destination": "/api/seo-image.js"
+    },
+    {
+      "source": "/api/seo-dashboard",
+      "destination": "/api/seo-dashboard.js"
+    },
+    {
+      "source": "/seo-dashboard",
+      "destination": "/seo-dashboard.html"
+    },
+    {
+      "source": "/seo-pages/(.*)",
+      "destination": "/api/seo-page.js?path=$1"
+    },
+    {
+      "source": "/semantic-pages/en/(.*)",
+      "destination": "/api/semantic-page.js?lang=en&path=$1"
+    },
+    {
+      "source": "/semantic-pages/es/(.*)",
+      "destination": "/api/semantic-page.js?lang=es&path=$1"
+    },
+    {
+      "source": "/en/(.*)",
+      "destination": "/api/semantic-page.js?lang=en&path=$1"
+    },
+    {
+      "source": "/es/(.*)",
+      "destination": "/api/semantic-page.js?lang=es&path=$1"
+    },
+    {
+      "source": "/vehicle-title-search",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/vehicle-title-search"
+    },
+    {
+      "source": "/what-is-a-vin-number",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/what-is-a-vin-number"
+    },
+    {
+      "source": "/what-is-title-number",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/what-is-title-number"
+    },
+    {
+      "source": "/rebuilt-title",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/rebuilt-title"
+    },
+    {
+      "source": "/car-lien",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-lien"
+    },
+    {
+      "source": "/lemon-car",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/lemon-car"
+    },
+    {
+      "source": "/accident-report",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/accident-report"
+    },
+    {
+      "source": "/title-transfer",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/title-transfer"
+    },
+    {
+      "source": "/new-vin-number",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/new-vin-number"
+    },
+    {
+      "source": "/manufacturer-buyback",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/manufacturer-buyback"
+    },
+    {
+      "source": "/car-recall",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-recall"
+    },
+    {
+      "source": "/junk-car",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/junk-car"
+    },
+    {
+      "source": "/total-loss-vehicle",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/total-loss-vehicle"
+    },
+    {
+      "source": "/odometer-rollback",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/odometer-rollback"
+    },
+    {
+      "source": "/lost-car-title",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/lost-car-title"
+    },
+    {
+      "source": "/decode-vin",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/decode-vin"
+    },
+    {
+      "source": "/stolen-car-check",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/stolen-car-check"
+    },
+    {
+      "source": "/flooded-car",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/flooded-car"
+    },
+    {
+      "source": "/hail-damage-value",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/hail-damage-value"
+    },
+    {
+      "source": "/vehicle-inspection",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/vehicle-inspection"
+    },
+    {
+      "source": "/car-warranty",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-warranty"
+    },
+    {
+      "source": "/title-washing",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/title-washing"
+    },
+    {
+      "source": "/car-auction",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-auction"
+    },
+    {
+      "source": "/classic-antique-car",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/classic-antique-car"
+    },
+    {
+      "source": "/abandoned-vehicle-title",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/abandoned-vehicle-title"
+    },
+    {
+      "source": "/car-safety-ratings",
+      "destination": "/api/semantic-page.js?lang=en&path=educational/car-safety-ratings"
+    },
+    {
+      "source": "/dashboard/api/(.*)",
+      "destination": "/api/dashboard.js?path=api/$1"
+    },
+    {
+      "source": "/dashboard/(.*)",
+      "destination": "/api/dashboard.js?path=$1"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/api/dashboard.js?path="
+    },
+    {
+      "source": "/api/batch-status-update",
+      "destination": "/api/batch-status-update.js"
+    },
+    {
+      "source": "/api/monster/status",
+      "destination": "/api/monster-status.js"
+    },
+    {
+      "source": "/api/monster/start",
+      "destination": "/api/monster-start.js"
+    },
+    {
+      "source": "/api/monster/stop",
+      "destination": "/api/monster-stop.js"
+    },
+    {
+      "source": "/semantic-pages/en",
+      "destination": "/"
+    },
+    {
+      "source": "/semantic-pages/en/",
+      "destination": "/"
+    },
+    {
+      "source": "/semantic-pages/es",
+      "destination": "/"
+    },
+    {
+      "source": "/semantic-pages/es/",
+      "destination": "/"
+    },
+    {
+      "source": "/compare/bumper-vs-vintrusted",
+      "destination": "/"
+    },
+    {
+      "source": "/compare/autocheck-vs-vintrusted",
+      "destination": "/"
+    },
+    {
+      "source": "/vin-check/new-york",
+      "destination": "/"
+    },
+    {
+      "source": "/vin-check/toyota-camry",
+      "destination": "/"
+    },
+    {
+      "source": "/vin-check/mercedes",
+      "destination": "/"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/"
+    },
+    {
+      "source": "/nmvtis-guide",
+      "destination": "/"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/legal/terms-and-conditions.html"
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/legal/terms-and-conditions.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/legal/privacy-policy.html"
+    },
+    {
+      "source": "/refund-policy",
+      "destination": "/legal/refund-policy.html"
+    },
+    {
+      "source": "/subscription-policy",
+      "destination": "/legal/subscription-policy.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/legal/contact.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/public/semantic-pages/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).{jpg,jpeg,png,gif,webp,svg,ico}",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}

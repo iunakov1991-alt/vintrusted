@@ -162,9 +162,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
     
+    <!-- ==================== DEVICE DETECTION (CRITICAL - MUST RUN FIRST) ==================== -->
+    <script>
+    (function() {
+      'use strict';
+      // Detect mobile device BEFORE any content loads to prevent FOUC
+      var isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                     || (window.innerWidth < 768 && 'ontouchstart' in window);
+      
+      if (isMobile) {
+        document.documentElement.classList.add('mobile-device');
+        document.documentElement.setAttribute('data-device', 'mobile');
+        console.log('[DEVICE] Mobile detected');
+      } else {
+        document.documentElement.classList.add('desktop-device');
+        document.documentElement.setAttribute('data-device', 'desktop');
+        console.log('[DEVICE] Desktop detected');
+      }
+    })();
+    </script>
+    
     <!-- Styles - preload critical CSS -->
     <link rel="preload" href="styles.css?v=113" as="style">
     <link rel="stylesheet" href="styles.css?v=113">
+    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=1">
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
     <link rel="stylesheet" href="mobile-form-new.css?v=22">
     
@@ -384,6 +405,9 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KR67NRNW"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- ==================== DESKTOP VERSION ==================== -->
+    <div class="desktop-only">
     <!-- Main Page -->
     <div id="mainPage">
     <!-- Header -->
@@ -3536,6 +3560,19 @@
     <!-- VIN PDF Stack Viewer (New 3D Effect with Chips Navigation) -->
     <script src="/public/vin-pdf-stack.js?v=1767007665"></script>
     
+    </div><!-- End Desktop Version -->
+    
+    <!-- ==================== MOBILE VERSION ==================== -->
+    <div class="mobile-only">
+        <!-- Mobile version will be implemented here -->
+        <div style="padding: 20px; text-align: center; color: #666;">
+            <h1>Mobile Version Coming Soon</h1>
+            <p>The mobile-optimized version is under development.</p>
+            <p>For now, please use desktop view or check back soon!</p>
+        </div>
+    </div><!-- End Mobile Version -->
+    
+    <!-- ==================== POPUPS (SHARED BETWEEN DESKTOP & MOBILE) ==================== -->
     <!-- VIN Check Popup -->
     <!-- VIN Check Popup -->
     <div class="vin-popup-overlay" id="vinPopupOverlay">

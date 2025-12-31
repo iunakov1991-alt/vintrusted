@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Payment Successful - VIN Trust</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20251211">
+    <link rel="shortcut icon" href="/favicon.ico?v=20251211">
+    <link rel="apple-touch-icon" href="/img/favicon.png?v=20251211">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CX3CT2K2FC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-CX3CT2K2FC');
+      
+      // 📊 Track email form displayed (NOT a purchase conversion - that's on purchase-confirmation.html)
+      gtag('event', 'email_form_viewed', {
+        'setup_intent': new URLSearchParams(window.location.search).get('setup_intent') || 'unknown',
+        'event_category': 'engagement',
+        'event_label': 'Email Collection Page'
+      });
+      
+      console.log('✅ Google Analytics event sent: email_form_viewed');
+    </script>
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 40px;
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        
+        .success-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+        
+        .success-message {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .success-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .detail-value {
+            color: #6b7280;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">✓</div>
+        <h1 class="success-title">Payment Successful!</h1>
+        <p class="success-message">
+            Thank you for your purchase! Enter your email to receive the receipt and VIN report.
+        </p>
+        
+        <form id="email-form" style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px">
+            <input
+                type="email"
+                id="email-input"
+                placeholder="your@email.com"
+                required
+                style="padding:12px;border:2px solid #e5e7eb;border-radius:12px;font-size:1rem;font-family:inherit"
+            />
+            <button
+                type="submit"
+                id="submit-btn"
+                style="width:100%;margin:0;padding:12px 24px;background:#FFC107;color:#000;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s"
+                onmouseover="this.style.background='#FFB300'"
+                onmouseout="this.style.background='#FFC107'"
+            >
+                Send Receipt & Report
+            </button>
+            <div id="message" style="font-size:0.9rem;min-height:20px;text-align:center"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('email-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email-input').value;
+            const submitBtn = document.getElementById('submit-btn');
+            const message = document.getElementById('message');
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const setup_intent_id = urlParams.get('setup_intent');
+            const vin = urlParams.get('vin');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            message.textContent = '';
+            
+            try {
+                const response = await fetch('/api/send-receipt-and-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, setup_intent_id, vin })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    message.style.color = '#28a745';
+                    message.textContent = '✓ Receipt and report sent to ' + email;
+                    document.getElementById('email-input').value = '';
+                } else {
+                    message.style.color = '#dc3545';
+                    message.textContent = '✗ ' + (data.error || 'Failed to send');
+                }
+            } catch (error) {
+                message.style.color = '#dc3545';
+                message.textContent = '✗ Network error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Receipt & Report';
+            }
+        });
+    </script>
+</body>
+</html>

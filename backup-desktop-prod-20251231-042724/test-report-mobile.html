@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Test VIN Report Mobile - VIN Trust</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .mobile-test-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* VIN Input Form */
+        .mobile-test-form {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .mobile-test-form h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .mobile-test-form p {
+            color: #6b7280;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+        }
+
+        .mobile-vin-input-group {
+            margin-bottom: 15px;
+        }
+
+        .mobile-vin-input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .mobile-vin-input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            text-transform: uppercase;
+            transition: border-color 0.2s;
+        }
+
+        .mobile-vin-input-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .mobile-vin-input-group input.error {
+            border-color: #ef4444;
+        }
+
+        .mobile-test-btn {
+            width: 100%;
+            padding: 16px 24px;
+            background: #111827;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        .mobile-test-btn:hover:not(:disabled) {
+            background: #374151;
+        }
+
+        .mobile-test-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .mobile-test-vins {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+
+        .mobile-test-vins h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .mobile-test-vins ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mobile-test-vins li {
+            margin-bottom: 6px;
+            padding: 8px;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.75rem;
+        }
+
+        .mobile-test-vins li:active {
+            background: #e5e7eb;
+        }
+
+        /* Report Display */
+        .mobile-report-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            min-height: 400px;
+        }
+
+        .mobile-report-panel h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #111827;
+        }
+
+        .mobile-report-status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .mobile-report-status.loading {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fbbf24;
+        }
+
+        .mobile-report-status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #f87171;
+        }
+
+        .mobile-report-status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #34d399;
+        }
+
+        .mobile-report-content {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            min-height: 300px;
+            overflow: hidden;
+        }
+
+        .mobile-report-content.loading {
+            text-align: center;
+            padding: 40px 15px;
+            color: #6b7280;
+        }
+
+        .mobile-report-content.error {
+            text-align: center;
+            padding: 40px 15px;
+            color: #ef4444;
+        }
+
+        .mobile-loader {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #111827;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Iframe for React reports */
+        .mobile-report-content iframe {
+            width: 100%;
+            min-height: 600px;
+            border: none;
+            display: block;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* ClearVin report HTML styling */
+        .mobile-report-content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .mobile-report-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.8rem;
+        }
+
+        .mobile-report-content table td,
+        .mobile-report-content table th {
+            padding: 6px;
+            border: 1px solid #ddd;
+        }
+
+        .mobile-report-content h1,
+        .mobile-report-content h2,
+        .mobile-report-content h3 {
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .mobile-report-content p {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        /* Debug info (collapsible) */
+        .mobile-debug-toggle {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-align: center;
+            color: #6b7280;
+            border: 1px solid #e5e7eb;
+        }
+
+        .mobile-debug-info {
+            margin-top: 10px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-family: 'Courier New', monospace;
+            color: #374151;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .mobile-debug-info.show {
+            display: block;
+        }
+
+        .mobile-debug-info pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.65rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-test-container">
+        <!-- VIN Input Form -->
+        <div class="mobile-test-form">
+            <h1>Test VIN Report</h1>
+            <p>Enter a VIN code to test the ClearVin API</p>
+            
+            <form id="mobileTestForm">
+                <div class="mobile-vin-input-group">
+                    <label for="mobileTestVinInput">VIN Code</label>
+                    <input
+                        type="text"
+                        id="mobileTestVinInput"
+                        placeholder="Enter 17-character VIN"
+                        maxlength="17"
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="characters"
+                        spellcheck="false"
+                        required
+                    />
+                </div>
+                <button type="submit" class="mobile-test-btn" id="mobileTestBtn">
+                    Load Report
+                </button>
+            </form>
+
+            <div class="mobile-test-vins">
+                <h3>Test VINs:</h3>
+                <ul>
+                    <li>5TDYK3DC8DS290235</li>
+                    <li>2T1LR32E35C508537</li>
+                    <li>KNDJD733865514567</li>
+                    <li>WAUDG74F25N111998</li>
+                    <li>55SWF4JB3GU099875</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Report Display -->
+        <div class="mobile-report-panel">
+            <h2>Report Result</h2>
+            
+            <div id="mobileReportStatus" class="mobile-report-status" style="display: none;"></div>
+            
+            <div class="mobile-report-content loading" id="mobileReportContent">
+                <p>Enter a VIN code and click "Load Report" to test</p>
+            </div>
+
+            <div class="mobile-debug-toggle" id="mobileDebugToggle">
+                Show Debug Info
+            </div>
+            <div class="mobile-debug-info" id="mobileDebugInfo">
+                <pre id="mobileDebugContent"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const mobileTestForm = document.getElementById('mobileTestForm');
+            const mobileTestVinInput = document.getElementById('mobileTestVinInput');
+            const mobileTestBtn = document.getElementById('mobileTestBtn');
+            const mobileReportContent = document.getElementById('mobileReportContent');
+            const mobileReportStatus = document.getElementById('mobileReportStatus');
+            const mobileDebugInfo = document.getElementById('mobileDebugInfo');
+            const mobileDebugContent = document.getElementById('mobileDebugContent');
+            const mobileDebugToggle = document.getElementById('mobileDebugToggle');
+
+            let debugLog = [];
+            let debugExpanded = false;
+
+            function addDebugLog(message, data = null) {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEntry = `[${timestamp}] ${message}`;
+                debugLog.push(logEntry);
+                if (data) {
+                    debugLog.push(JSON.stringify(data, null, 2));
+                }
+                mobileDebugContent.textContent = debugLog.join('\n\n');
+            }
+
+            function clearDebugLog() {
+                debugLog = [];
+                mobileDebugContent.textContent = '';
+                mobileDebugInfo.classList.remove('show');
+                debugExpanded = false;
+                mobileDebugToggle.textContent = 'Show Debug Info';
+            }
+
+            mobileDebugToggle.addEventListener('click', () => {
+                debugExpanded = !debugExpanded;
+                if (debugExpanded) {
+                    mobileDebugInfo.classList.add('show');
+                    mobileDebugToggle.textContent = 'Hide Debug Info';
+                } else {
+                    mobileDebugInfo.classList.remove('show');
+                    mobileDebugToggle.textContent = 'Show Debug Info';
+                }
+            });
+
+            function showStatus(message, type) {
+                mobileReportStatus.textContent = message;
+                mobileReportStatus.className = `mobile-report-status ${type}`;
+                mobileReportStatus.style.display = 'block';
+            }
+
+            function hideStatus() {
+                mobileReportStatus.style.display = 'none';
+            }
+
+            function setLoading(message = 'Loading report...') {
+                mobileReportContent.className = 'mobile-report-content loading';
+                mobileReportContent.innerHTML = `
+                    <div class="mobile-loader"></div>
+                    <p>${message}</p>
+                `;
+                showStatus(message, 'loading');
+            }
+
+            function setError(message, details = null) {
+                mobileReportContent.className = 'mobile-report-content error';
+                mobileReportContent.innerHTML = `
+                    <p><strong>Error:</strong></p>
+                    <p>${message}</p>
+                    ${details ? `<p style="margin-top: 10px; font-size: 0.8rem; color: #666;">${details}</p>` : ''}
+                `;
+                showStatus('Error loading report', 'error');
+            }
+
+            function setSuccess(htmlReport) {
+                console.log('setSuccess called with HTML length:', htmlReport ? htmlReport.length : 0);
+                
+                mobileReportContent.className = 'mobile-report-content';
+                mobileReportContent.innerHTML = '';
+                
+                if (htmlReport && htmlReport.trim().length > 0) {
+                    // Check if this is a React-based report
+                    const isReactReport = htmlReport.includes('<div id=root>') || htmlReport.includes('<div id="root">');
+                    
+                    if (isReactReport) {
+                        console.log('Detected React-based report, using iframe for mobile');
+                        
+                        // Create iframe for mobile
+                        const iframe = document.createElement('iframe');
+                        iframe.style.width = '100%';
+                        iframe.style.height = '600px';
+                        iframe.style.border = 'none';
+                        iframe.style.minHeight = '600px';
+                        iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-forms';
+                        
+                        mobileReportContent.appendChild(iframe);
+                        
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        iframeDoc.open();
+                        iframeDoc.write(htmlReport);
+                        iframeDoc.close();
+                        
+                        console.log('Report HTML inserted in iframe for mobile');
+                        
+                        // Wait for iframe to load
+                        iframe.onload = () => {
+                            console.log('Mobile iframe loaded');
+                            const iframeContent = iframeDoc.body.innerText || iframeDoc.body.textContent || '';
+                            console.log('Iframe content length:', iframeContent.length);
+                            
+                            if (iframeContent.trim().length < 50) {
+                                setTimeout(() => {
+                                    showStatus('Report loaded (React app may take a moment)', 'success');
+                                }, 2000);
+                            } else {
+                                showStatus('Report loaded successfully', 'success');
+                            }
+                        };
+                        
+                        setTimeout(() => {
+                            if (mobileReportStatus.textContent !== 'Report loaded successfully') {
+                                showStatus('Report loaded successfully', 'success');
+                            }
+                        }, 3000);
+                        
+                    } else {
+                        // Regular HTML report
+                        mobileReportContent.innerHTML = htmlReport;
+                        console.log('Report content set, innerHTML length:', mobileReportContent.innerHTML.length);
+                        
+                        if (mobileReportContent.innerHTML.length === 0) {
+                            console.error('❌ ERROR: Content was not inserted!');
+                            mobileReportContent.innerHTML = '<p style="color: red;">Error: Report content was not inserted</p>';
+                            showStatus('Error: Content not inserted', 'error');
+                            return;
+                        }
+                        
+                        const textContent = mobileReportContent.innerText || mobileReportContent.textContent || '';
+                        console.log('Text content length:', textContent.length);
+                        
+                        if (textContent.trim().length < 50) {
+                            console.warn('⚠️ WARNING: Report text content is very short');
+                            showStatus('Report loaded but content seems empty', 'error');
+                        } else {
+                            showStatus('Report loaded successfully', 'success');
+                        }
+                    }
+                } else {
+                    console.error('❌ ERROR: htmlReport is empty or null');
+                    mobileReportContent.innerHTML = '<p style="color: red;">Error: Report content is empty</p>';
+                    showStatus('Error: Empty report', 'error');
+                }
+            }
+
+            mobileTestForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const vin = mobileTestVinInput.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+                
+                // Validate VIN
+                if (vin.length !== 17) {
+                    setError('Invalid VIN format. VIN must be exactly 17 characters.');
+                    mobileTestVinInput.classList.add('error');
+                    return;
+                }
+
+                const vinPattern = /^[A-HJ-NPR-Z0-9]{17}$/;
+                if (!vinPattern.test(vin)) {
+                    setError('Invalid VIN format. VIN must contain only valid characters (A-Z, 0-9, excluding I, O, Q).');
+                    mobileTestVinInput.classList.add('error');
+                    return;
+                }
+
+                mobileTestVinInput.classList.remove('error');
+                clearDebugLog();
+                setLoading('Fetching report from ClearVin API...');
+                mobileTestBtn.disabled = true;
+                mobileTestBtn.textContent = 'Loading...';
+
+                addDebugLog('=== Starting report load ===');
+                addDebugLog('VIN:', vin);
+
+                try {
+                    const url = `/api/get-clearvin-report?vin=${encodeURIComponent(vin)}`;
+                    addDebugLog('Fetching from:', url);
+
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+                    let response;
+                    try {
+                        response = await fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json'
+                            },
+                            signal: controller.signal
+                        });
+                        clearTimeout(timeoutId);
+                    } catch (fetchError) {
+                        clearTimeout(timeoutId);
+                        addDebugLog('Fetch error:', fetchError);
+                        if (fetchError.name === 'AbortError') {
+                            throw new Error('Request timeout: The server took too long to respond.');
+                        } else {
+                            throw new Error(`Network error: ${fetchError.message || 'Failed to fetch'}`);
+                        }
+                    }
+
+                    addDebugLog('Response status:', response.status);
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        let errorData;
+                        try {
+                            errorData = JSON.parse(errorText);
+                        } catch {
+                            errorData = { message: errorText };
+                        }
+                        addDebugLog('Error response:', errorData);
+                        throw new Error(errorData.error || errorData.message || `Server returned status ${response.status}`);
+                    }
+
+                    const responseText = await response.text();
+                    addDebugLog('Response text length:', responseText.length);
+
+                    if (!responseText || responseText.trim().length === 0) {
+                        throw new Error('Empty response from server');
+                    }
+
+                    let data;
+                    try {
+                        data = JSON.parse(responseText);
+                    } catch (parseError) {
+                        addDebugLog('JSON parse error:', parseError);
+                        throw new Error(`Invalid JSON response: ${responseText.substring(0, 100)}`);
+                    }
+
+                    addDebugLog('Parsed data keys:', Object.keys(data));
+                    addDebugLog('Data.success:', data.success);
+
+                    if (!data.success) {
+                        const errorMsg = data.error || data.details || data.message || 'Failed to load report';
+                        addDebugLog('API error:', data);
+                        throw new Error(errorMsg);
+                    }
+
+                    if (!data.report || data.report.trim().length === 0) {
+                        throw new Error('Report is empty. The report may still be generating.');
+                    }
+
+                    // Check if report has meaningful content
+                    const reportText = data.report.replace(/<[^>]*>/g, '').trim();
+                    addDebugLog('Report HTML length:', data.report.length);
+                    addDebugLog('Report text length (without HTML):', reportText.length);
+
+                    if (reportText.length < 50) {
+                        addDebugLog('❌ WARNING: Report content is too short');
+                        throw new Error(`Report content is too short (${reportText.length} chars). The report may still be generating.`);
+                    }
+
+                    // Verify report is HTML
+                    if (!data.report.includes('<') && !data.report.includes('>')) {
+                        throw new Error('Report format is invalid - expected HTML but got plain text');
+                    }
+
+                    addDebugLog('✅ Report loaded successfully');
+                    setSuccess(data.report);
+
+                } catch (error) {
+                    addDebugLog('❌ Error:', error.message);
+                    
+                    let errorMessage = error.message || 'Failed to load report';
+                    let errorDetails = null;
+
+                    if (error.message.includes('Failed to fetch') || error.message.includes('Network error')) {
+                        errorMessage = 'Network error: Could not connect to server.';
+                        errorDetails = 'Please check your internet connection and try again.';
+                    } else if (error.message.includes('timeout')) {
+                        errorMessage = 'Request timeout: The server took too long to respond.';
+                        errorDetails = 'The report might still be generating. Please try again in a few moments.';
+                    } else if (error.message.includes('404')) {
+                        errorMessage = 'API endpoint not found.';
+                        errorDetails = 'Please check that the API endpoint is correctly configured.';
+                    } else if (error.message.includes('500')) {
+                        errorMessage = 'Server error.';
+                        errorDetails = 'Please check Vercel logs for more details.';
+                    } else if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+                        errorMessage = 'Authorization error.';
+                        errorDetails = 'API token might be missing or invalid. Please check CLEARVIN_API_TOKEN in Vercel.';
+                    }
+
+                    setError(errorMessage, errorDetails);
+                } finally {
+                    mobileTestBtn.disabled = false;
+                    mobileTestBtn.textContent = 'Load Report';
+                }
+            });
+
+            // Auto-fill test VIN on click
+            document.querySelectorAll('.mobile-test-vins li').forEach(li => {
+                li.addEventListener('click', () => {
+                    const vin = li.textContent.trim();
+                    mobileTestVinInput.value = vin;
+                    mobileTestVinInput.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
+

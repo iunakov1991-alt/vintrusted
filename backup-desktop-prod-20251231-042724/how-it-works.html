@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - VIN TRUST</title>
+    <meta name="description" content="Learn how VIN TRUST generates comprehensive vehicle history reports in seconds">
+    <link rel="canonical" href="https://vintrusted.com/how-it-works">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+        header {
+            background: #6b00b8;
+            padding: 20px;
+            text-align: center;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        h1 { font-size: 32px; margin-bottom: 10px; color: #1f2937; text-align: center; }
+        .intro { color: #6b7280; margin-bottom: 40px; text-align: center; font-size: 18px; }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .step {
+            background: linear-gradient(135deg, #6b00b8 0%, #8b00d8 100%);
+            padding: 30px;
+            border-radius: 12px;
+            color: white;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(107, 0, 184, 0.3);
+        }
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #ffc107;
+            color: #1f2937;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .step h3 {
+            margin: 20px 0 10px;
+            font-size: 22px;
+        }
+        .step p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        .features {
+            background: #f9fafb;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        .features h2 {
+            color: #1f2937;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: #6b00b8;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .feature-content h4 {
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+        .feature-content p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .data-sources {
+            margin: 40px 0;
+        }
+        .data-sources h2 {
+            color: #1f2937;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .source-badge {
+            background: white;
+            border: 2px solid #e5e7eb;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #4b5563;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, #6b00b8 0%, #8b00d8 100%);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            margin: 40px 0;
+        }
+        .cta-box h2 { margin-bottom: 15px; font-size: 28px; }
+        .cta-box p { margin-bottom: 25px; font-size: 18px; opacity: 0.9; }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #ffc107;
+            color: #1f2937;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+        .cta-button:hover { transform: scale(1.05); }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: #6b00b8;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .back-link:hover { background: #5a0099; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">VIN TRUST</a>
+    </header>
+    
+    <div class="container">
+        <h1>How VIN TRUST Works</h1>
+        <p class="intro">Get a comprehensive vehicle history report in just 3 simple steps</p>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Enter VIN or License Plate</h3>
+                <p>Type in the 17-character VIN or license plate number of the vehicle you want to check. You can find the VIN on the dashboard or door jamb.</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Secure Payment</h3>
+                <p>Complete your purchase for just $3. We use Stripe for secure, encrypted payment processing. Your payment information is never stored on our servers.</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Instant Report</h3>
+                <p>Receive your comprehensive vehicle history report within 10 seconds. View it online and get a copy sent to your email for future reference.</p>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>What Makes VIN TRUST Different?</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-content">
+                        <h4>Lightning Fast</h4>
+                        <p>Reports generated in under 10 seconds - no waiting, no hassle</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-content">
+                        <h4>Affordable Pricing</h4>
+                        <p>Only $3 per report vs. $44+ from competitors</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-content">
+                        <h4>Secure & Private</h4>
+                        <p>Bank-level encryption and no data sharing with third parties</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-content">
+                        <h4>NMVTIS Approved</h4>
+                        <p>Certified data provider with access to federal databases</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h4>Comprehensive Data</h4>
+                        <p>Title history, accidents, odometer, theft, recalls, and more</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-content">
+                        <h4>Mobile Friendly</h4>
+                        <p>Works perfectly on any device - phone, tablet, or desktop</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-sources">
+            <h2>Our Data Sources</h2>
+            <p style="color: #6b7280; margin-bottom: 20px;">
+                We compile information from trusted, authoritative databases to ensure accuracy and completeness:
+            </p>
+            <div class="sources-grid">
+                <div class="source-badge">🏛️ NMVTIS Database</div>
+                <div class="source-badge">🚗 State DMV Records</div>
+                <div class="source-badge">🛡️ Insurance Companies</div>
+                <div class="source-badge">🔨 Auction Houses</div>
+                <div class="source-badge">⚠️ Recall Databases</div>
+                <div class="source-badge">🚨 Police Reports</div>
+                <div class="source-badge">🏢 Dealership Records</div>
+                <div class="source-badge">📋 Title Brands</div>
+            </div>
+        </div>
+        
+        <div class="cta-box">
+            <h2>Ready to Check a Vehicle?</h2>
+            <p>Get your comprehensive vehicle history report in seconds</p>
+            <a href="/" class="cta-button">Get Started for $3</a>
+        </div>
+        
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
+</body>
+</html>
+

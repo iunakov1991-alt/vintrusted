@@ -1,0 +1,84 @@
+/**
+ * Mobile Adaptive System
+ * Controls display of desktop-only vs mobile-only content
+ * Works in conjunction with device detection script in <head>
+ */
+
+/* ==================== DEFAULT: HIDE BOTH ==================== */
+.desktop-only,
+.mobile-only {
+  display: none !important;
+}
+
+/* ==================== SHOW DESKTOP ON DESKTOP DEVICES ==================== */
+.desktop-device .desktop-only {
+  display: block !important;
+}
+
+.desktop-device .mobile-only {
+  display: none !important;
+}
+
+/* ==================== SHOW MOBILE ON MOBILE DEVICES ==================== */
+.mobile-device .desktop-only {
+  display: none !important;
+}
+
+.mobile-device .mobile-only {
+  display: block !important;
+}
+
+/* ==================== MEDIA QUERY FALLBACK (if JS fails) ==================== */
+@media (min-width: 768px) {
+  .desktop-only {
+    display: block !important;
+  }
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+/* ==================== SHARED ELEMENTS (visible on both) ==================== */
+.vin-popup-overlay,
+.reviewPopupOverlay,
+[class*="popup"] {
+  /* Popups are shared between desktop and mobile */
+  display: none; /* Hidden by default, shown via JS */
+}
+
+/* ==================== DEBUGGING (remove in production) ==================== */
+/*
+.desktop-device::before {
+  content: 'DESKTOP MODE';
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: green;
+  color: white;
+  padding: 5px 10px;
+  z-index: 99999;
+  font-size: 12px;
+}
+
+.mobile-device::before {
+  content: 'MOBILE MODE';
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: blue;
+  color: white;
+  padding: 5px 10px;
+  z-index: 99999;
+  font-size: 12px;
+}
+*/
+

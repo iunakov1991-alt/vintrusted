@@ -8,10 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://vercel.live; frame-src https://js.stripe.com https://hooks.stripe.com https://vercel.live; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.stripe.com https://*.stripe.com https://pay.google.com https://www.google.com https://www.gstatic.com https://vpic.nhtsa.dot.gov; manifest-src https://pay.google.com;">
     <title>Vehicle Report - VIN Trust</title>
+    <!-- ==================== DEVICE DETECTION (CRITICAL - MUST RUN FIRST) ==================== -->
+    <script>
+    (function() {
+      'use strict';
+      // Detect mobile device BEFORE any content loads to prevent FOUC
+      var isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                     || (window.innerWidth < 768 && 'ontouchstart' in window);
+      
+      if (isMobile) {
+        document.documentElement.classList.add('mobile-device');
+        document.documentElement.setAttribute('data-device', 'mobile');
+        console.log('[DEVICE] Mobile detected');
+      } else {
+        document.documentElement.classList.add('desktop-device');
+        document.documentElement.setAttribute('data-device', 'desktop');
+        console.log('[DEVICE] Desktop detected');
+      }
+    })();
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=1">
     <link rel="stylesheet" href="/css/stripe-fixes.css?v=2" />
     <script src="/public/vin-stripe.js?v=25"></script>
     <style>
@@ -172,7 +193,7 @@
             background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
             border: none;
             border-radius: 12px;
-            padding: 12px;
+                padding: 12px;
             margin-bottom: 12px;
             display: grid;
             grid-template-columns: 1fr auto 1fr;
@@ -604,6 +625,8 @@
     </script>
 </head>
 <body>
+    <!-- ==================== DESKTOP VERSION ==================== -->
+    <div class="desktop-only">
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -1174,5 +1197,17 @@
             setTimeout(initPaymentWidget, 2000);
         })();
     </script>
+    </div><!-- End Desktop Version -->
+    
+    <!-- ==================== MOBILE VERSION ==================== -->
+    <div class="mobile-only">
+        <!-- Mobile version of preliminary report will be implemented here -->
+        <div style="padding: 20px; text-align: center; color: #666; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <h1 style="font-size: 24px; margin-bottom: 16px;">Mobile Version Coming Soon</h1>
+            <p style="margin-bottom: 12px;">The mobile-optimized report page is under development.</p>
+            <p style="margin-bottom: 24px;">For now, please use desktop view or check back soon!</p>
+            <a href="/" style="padding: 12px 24px; background: #2563eb; color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">Back to Home</a>
+        </div>
+    </div><!-- End Mobile Version -->
 </body>
 </html>

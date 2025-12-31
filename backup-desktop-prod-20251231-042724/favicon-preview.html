@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Preview</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            background: #f0f0f0; 
+            font-family: Arial, sans-serif;
+        }
+        .favicon-preview {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .favicon {
+            width: 32px;
+            height: 32px;
+            position: relative;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+            border: 1px solid #000000;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 8px solid white;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+            position: relative;
+        }
+        .arrow::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: -2px;
+            width: 8px;
+            height: 4px;
+            background: white;
+            border: 0.5px solid #000000;
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+        }
+        .size-16 { transform: scale(0.5); }
+        .size-24 { transform: scale(0.75); }
+        .size-32 { transform: scale(1); }
+        .size-48 { transform: scale(1.5); }
+    </style>
+</head>
+<body>
+    <h1>VIN TRUST Favicon Preview</h1>
+    
+    <div class="favicon-preview">
+        <div class="favicon size-16"></div>
+        <span>16x16 (tab icon)</span>
+    </div>
+    
+    <div class="favicon-preview">
+        <div class="favicon size-24"></div>
+        <span>24x24 (bookmark icon)</span>
+    </div>
+    
+    <div class="favicon-preview">
+        <div class="favicon size-32"></div>
+        <span>32x32 (desktop icon)</span>
+    </div>
+    
+    <div class="favicon-preview">
+        <div class="favicon size-48"></div>
+        <span>48x48 (large icon)</span>
+    </div>
+    
+    <p><strong>Description:</strong> Red circular button with white arrow pointing right, black border, and subtle shadow effect.</p>
+</body>
+</html>

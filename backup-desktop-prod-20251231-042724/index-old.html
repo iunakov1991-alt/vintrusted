@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIN TRUST - Полная проверка автомобилей за $1</title>
+    <meta name="description" content="Проверьте любой автомобиль в США по VIN-номеру. Полный отчет по 120+ параметрам за $1. Автоматическая подписка $49/месяц.">
+    <meta name="keywords" content="VIN check, проверка автомобиля, Carfax альтернатива, отчет об автомобиле, США">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="VIN TRUST - Полная проверка автомобилей">
+    <meta property="og:description" content="Получите полный отчет об автомобиле за $1. Проверка VIN-номера в США.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vintrust.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="logo.svg" alt="VIN REPORT" class="logo-img">
+                </div>
+                <div class="nav-menu">
+                    <a href="#features" class="nav-link">Возможности</a>
+                    <a href="#pricing" class="nav-link">Цены</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                    <a href="#contact" class="nav-link">Контакты</a>
+          </div>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+        </div>
+      </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <!-- Online Counter -->
+                <div class="online-counter">
+                    <div class="counter-icon">📊</div>
+                    <div class="counter-content">
+                        <div class="counter-label">Отчётов выдано сегодня</div>
+                        <div class="counter-number" id="reportsCounter">523</div>
+                    </div>
+                </div>
+                
+                <h1 class="hero-title">
+                    Полная проверка автомобиля по VIN-номеру
+                    <span class="hero-highlight">за $1</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Получите детальный отчет об автомобиле по 120+ параметрам: история,
+                    аварии, залоги, обслуживание, отзывы и многое другое.
+                </p>
+                
+                <!-- VIN Input Form -->
+                <div class="vin-form-container">
+                    <form id="vinForm" class="vin-form">
+                        <div class="form-group">
+                            <label for="vinInput" class="form-label">Введите VIN-номер автомобиля</label>
+                            <div class="input-group">
+                                <input 
+                                    type="text" 
+                                    id="vinInput" 
+                                    class="form-input" 
+                                    placeholder="1HGBH41JXMN109186"
+                                    maxlength="17"
+                                    required
+                                >
+                                <button type="submit" class="btn btn-primary" id="checkBtn">
+                                    Проверить за $1
+                                </button>
+                            </div>
+                            <div class="form-help">
+                                <span class="help-text">VIN состоит из 17 символов</span>
+                                <span class="help-example">Пример: 1HGBH41JXMN109186</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <div class="trust-icon">🔒</div>
+                        <span>Безопасная оплата</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">⚡</div>
+                        <span>Мгновенный результат</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">📊</div>
+                        <span>Полный отчет</span>
+          </div>
+        </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="report-preview">
+                    <div class="preview-header">
+                        <h3>Пример отчета</h3>
+                    </div>
+                    <div class="preview-content">
+                        <div class="preview-item">
+                            <span class="preview-label">Марка/Модель:</span>
+                            <span class="preview-value">Honda Civic</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Год:</span>
+                            <span class="preview-value">2021</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Аварии:</span>
+                            <span class="preview-value clean">Нет</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Залоги:</span>
+                            <span class="preview-value clean">Нет</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Пробег:</span>
+                            <span class="preview-value">45,000 миль</span>
+                        </div>
+                    </div>
+                </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Что включает наш отчет</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Базовая информация</h3>
+                    <p>Марка, модель, год выпуска, тип кузова, двигатель, трансмиссия</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>История регистрации</h3>
+                    <p>Все предыдущие владельцы, даты регистрации, штаты</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💥</div>
+                    <h3>Аварии и повреждения</h3>
+                    <p>Полная история ДТП, повреждений, ремонтов</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Финансовая информация</h3>
+                    <p>Залоги, лизинг, страховые выплаты</p>
+                  </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Техническое обслуживание</h3>
+                    <p>История ТО, отзывы, гарантийные работы</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Рыночная стоимость</h3>
+                    <p>Текущая стоимость, прогнозы, сравнения</p>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Прозрачные цены</h2>
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Первый отчет</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">1</span>
+                        </div>
+                        <p class="pricing-description">Полный отчет об одном автомобиле</p>
+                  </div>
+                    <ul class="pricing-features">
+                        <li>✅ Полная история автомобиля</li>
+                        <li>✅ Проверка на аварии</li>
+                        <li>✅ Финансовая информация</li>
+                        <li>✅ Техническое обслуживание</li>
+                        <li>✅ Рыночная стоимость</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Популярно</div>
+                    <div class="pricing-header">
+                        <h3>Подписка</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">49</span>
+                            <span class="period">/месяц</span>
+                        </div>
+                        <p class="pricing-description">Неограниченные проверки</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>✅ Все функции первого отчета</li>
+                        <li>✅ Неограниченные проверки</li>
+                        <li>✅ Приоритетная поддержка</li>
+                        <li>✅ Экспорт в PDF</li>
+                        <li>✅ API доступ</li>
+                    </ul>
+                    <div class="pricing-note">
+                        <small>Автоматически активируется через 7 дней</small>
+                    </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Как работает проверка VIN?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Мы используем официальные базы данных США для получения полной информации об автомобиле. Просто введите 17-значный VIN-номер, и через несколько секунд получите детальный отчет.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Почему так дешево?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Мы предлагаем первый отчет за $1 для демонстрации качества наших данных. Подписка за $49/месяц позволяет нам поддерживать доступ к премиум базам данных.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Что если я не хочу подписку?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Вы можете отменить подписку в любое время в личном кабинете. Подписка активируется автоматически через 7 дней, но вы получите уведомление заранее.</p>
+                  </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Насколько точны данные?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Мы используем официальные источники США и агрегируем данные по 120+ пунктам проверки. Точность составляет 99.9% для автомобилей в США.</p>
+                    </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Готовы проверить автомобиль?</h2>
+                <p>Получите полный отчет за $1 прямо сейчас</p>
+                <form class="cta-form">
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            placeholder="Введите VIN-номер"
+                            maxlength="17"
+                        >
+                        <button type="submit" class="btn btn-primary btn-large">
+                            Проверить за $1
+                        </button>
+                    </div>
+                </form>
+          </div>
+        </div>
+      </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>VIN TRUST</h3>
+                    <p>Надежная проверка автомобилей по VIN-номеру в США</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>Email: support@vincheckusa.com</p>
+                    <p>Телефон: +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Правовая информация</h4>
+                    <a href="/privacy">Политика конфиденциальности</a>
+                    <a href="/terms">Условия использования</a>
+                    <a href="/refund">Возврат средств</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 VIN TRUST. Все права защищены.</p>
+          </div>
+      </div>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="modal">
+        <div class="modal-content">
+            <div class="loading-spinner"></div>
+            <h3>Обрабатываем ваш запрос...</h3>
+            <p>Пожалуйста, подождите</p>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Оплата отчета</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-summary">
+                    <div class="summary-item">
+                        <span>Проверка VIN:</span>
+                        <span>$1.00</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Итого:</span>
+                        <span>$1.00</span>
+                    </div>
+                </div>
+                <div id="payment-form">
+                    <!-- Stripe Payment Form будет здесь -->
+                </div>
+            </div>
+        </div>
+  </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+                </a>
+
+                <div class="item-services__text">
+
+                  Craft a brief description outlining the essence of your first service.
+
+                </div>
+
+                <a href="#" class="item-services__button button">CTA Button</a>
+
+              </div>
+
+            </div>
+
+            <div class="services__column">
+
+              <div class="services__item item-services">
+
+                <a class="item-services__top" href="#">
+
+                  <div class="item-services__image">
+
+                    <img src="img/home/services_placeholder.jpg" alt="img" />
+
+                  </div>
+
+                  <h3 class="item-services__title">Second Service</h3>
+
+                </a>
+
+                <div class="item-services__text">
+
+                  Write a concise statement highlighting the core features of your second service.
+
+                </div>
+
+                <a href="#" class="item-services__button button">CTA Button</a>
+
+              </div>
+
+            </div>
+
+            <div class="services__column">
+
+              <div class="services__item item-services">
+
+                <a class="item-services__top" href="#">
+
+                  <div class="item-services__image">
+
+                    <img src="img/home/services_placeholder.jpg" alt="img" />
+
+                  </div>
+
+                  <h3 class="item-services__title">First Service</h3>
+
+                </a>
+
+                <div class="item-services__text">
+
+                  Provide a succinct overview key offerings of your third service.
+
+                </div>
+
+                <a href="#" class="item-services__button button">CTA Button</a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="page__testimonial testimonial">
+
+        <div class="testimonial__container">
+
+          <h3 class="testiomonial__caption">Testimonial</h3>
+
+          <h2 class="testimonial__title title">
+
+            A comprehensive testimonial will be thoughtfully placed here, complete with all the compelling details and
+
+            thoughtful insights.
+
+          </h2>
+
+          <div class="testimonial__item item-testimonial">
+
+            <div class="item-testimonial__image">
+
+              <img src="img/home/user.png" alt="user" />
+
+            </div>
+
+            <h4 class="item-testimonial__title">Full Name</h4>
+
+            <div class="item-testimonial__caption">Job Title</div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="page__outro outro outro_home">
+
+        <div class="outro__container">
+
+          <h2 class="outro__title title">Talk To Us Heading</h2>
+
+          <div class="outro__text">
+
+            Text: In this section, you can compose a friendly and informative paragraph that encourages visitors to
+
+            engage with your business.
+
+          </div>
+
+          <a href="#" class="outro__button button">CTA Button</a>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer class="footer">
+
+      <div class="footer__container">
+
+        <a href="#" class="footer__policy">Privacy Policy – Terms & Conditions</a>
+
+        <a href="" class="footer__logo logo">LOGO</a>
+
+        <div class="footer__copyright">Copyright © 2025 LOGO – All Rights Reserved</div>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+  <script src="js/script.js"></script>
+
+</body>
+
+
+
+</html>
