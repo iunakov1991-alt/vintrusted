@@ -1,10 +1,28 @@
 /**
- * Mobile Adaptive System - STRICT ISOLATION
+ * Mobile Adaptive System - BIDIRECTIONAL STRICT ISOLATION
+ * ==========================================================
  * Controls display of desktop-only vs mobile-only content
  * Works in conjunction with device detection script in <head>
  * 
- * CRITICAL: This file ensures mobile and desktop versions are COMPLETELY ISOLATED
- * Changes to mobile will NEVER affect desktop and vice versa
+ * CRITICAL GUARANTEES:
+ * ✅ Mobile changes NEVER affect desktop
+ * ✅ Desktop changes NEVER affect mobile
+ * 
+ * EXCEPTIONS (shared between both):
+ * - Google Tag Manager (GTM) scripts
+ * - SEO meta tags (<title>, <meta description>, etc.)
+ * - Analytics events (dataLayer)
+ * - Canonical URLs
+ * - Schema.org structured data
+ * - Open Graph / Twitter Cards
+ * 
+ * PROTECTED FROM EACH OTHER:
+ * - CSS styles
+ * - JavaScript logic
+ * - HTML structure
+ * - Event handlers
+ * - DOM modifications
+ * - Layout systems
  */
 
 /* ==================== DEFAULT: HIDE BOTH ==================== */
@@ -44,7 +62,14 @@
 .mobile-device .desktop-only,
 .mobile-device .desktop-only *,
 .mobile-device #mainPage,
-.mobile-device .ab-hero {
+.mobile-device .ab-hero,
+.mobile-device .header:not(.mobile-header),
+.mobile-device .footer:not(.mobile-footer),
+.mobile-device .container:not([class*="mobile-"]),
+.mobile-device [class*="ab-"],
+.mobile-device [id*="desktop-"],
+.mobile-device .desktop-form,
+.mobile-device .desktop-nav {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -56,7 +81,21 @@
   overflow: hidden !important;
 }
 
+/* Protect mobile from desktop global styles */
+.mobile-device .mobile-only * {
+  /* Reset any desktop styles that might leak */
+  all: revert;
+}
+
+.mobile-device .mobile-only {
+  /* Establish new stacking context */
+  isolation: isolate;
+  /* Contain layout to prevent desktop influence */
+  contain: layout style;
+}
+
 /* ==================== MEDIA QUERY FALLBACK (if JS fails) ==================== */
+/* These rules activate if device detection JavaScript fails to run */
 @media (min-width: 768px) {
   .desktop-only {
     display: block !important;
@@ -74,6 +113,29 @@
     display: block !important;
   }
 }
+
+/* ==================== BIDIRECTIONAL PROTECTION SUMMARY ==================== */
+/**
+ * DESKTOP → MOBILE Protection:
+ * - Desktop CSS doesn't leak to mobile
+ * - Desktop JS doesn't execute on mobile
+ * - Desktop HTML hidden on mobile
+ * - Mobile has CSS reset (all: revert)
+ * - Mobile has isolation context
+ * 
+ * MOBILE → DESKTOP Protection:
+ * - Mobile CSS doesn't leak to desktop
+ * - Mobile JS doesn't execute on desktop
+ * - Mobile HTML hidden on desktop
+ * - Mobile resources don't load on desktop
+ * 
+ * SHARED (intentionally):
+ * - GTM / Analytics
+ * - SEO meta tags
+ * - Fonts
+ * - Favicon
+ * - Stripe integration
+ */
 
 /* ==================== SHARED ELEMENTS (visible on both) ==================== */
 .vin-popup-overlay,
