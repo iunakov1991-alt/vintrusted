@@ -374,16 +374,14 @@
         }
 
         .report-chip.highlight-warning {
-            border: 2px solid transparent;
-            background: linear-gradient(#ffffff, #ffffff) padding-box,
-                        linear-gradient(135deg, #f59e0b 0%, #fb923c 100%) border-box;
+            border: 2px solid #f59e0b;
+            background: #ffffff;
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
         }
 
         .report-chip.highlight-warning:hover {
             box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
-            background: linear-gradient(#ffffff, #ffffff) padding-box,
-                        linear-gradient(135deg, #fb923c 0%, #f97316 100%) border-box;
+            border-color: #fb923c;
         }
 
         .report-chip-icon {
@@ -653,7 +651,7 @@
                         <!-- Report Preview Image -->
                         <img src="mok1-portrait.png" alt="Report Preview" class="report-preview-image">
                     </div>
-            </div>
+                </div>
 
                 <!-- Report Items -->
                 <h3 class="report-section-title">Potential risk indicators detected</h3>
@@ -1127,16 +1125,16 @@
         // Initialize on page load
         (function() {
             // Render report items immediately
-            if (document.readyState === 'loading') {
+        if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function() {
                     renderReportItems();
                     initPaymentWidget();
                 });
-            } else {
+        } else {
                 renderReportItems();
-                initPaymentWidget();
-            }
-            
+            initPaymentWidget();
+        }
+        
             const urlParams = new URLSearchParams(window.location.search);
             const vin = urlParams.get('vin');
             const plate = urlParams.get('plate');
