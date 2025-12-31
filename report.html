@@ -770,8 +770,12 @@
 
         function renderReportItems() {
             const container = document.getElementById('reportItems');
-            if (!container) return;
-
+            if (!container) {
+                console.error('[REPORT] Container #reportItems not found');
+                return;
+            }
+            
+            console.log('[REPORT] Rendering', reportItemsData.length, 'items');
             container.innerHTML = reportItemsData.map(item => {
                 const chipClass = item.highlight ? 'report-chip highlight-warning' : 'report-chip';
                 const statusClass = item.status || 'needs-unlock';
@@ -1114,11 +1118,20 @@
         
         // Initialize on page load
         (function() {
+            // Render report items immediately
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    renderReportItems();
+                    initPaymentWidget();
+                });
+            } else {
+                renderReportItems();
+                initPaymentWidget();
+            }
+            
             const urlParams = new URLSearchParams(window.location.search);
             const vin = urlParams.get('vin');
             const plate = urlParams.get('plate');
-            
-            renderReportItems();
             
             if (vin) {
                 const sanitized = sanitizeVIN(vin);
@@ -1138,12 +1151,6 @@
                     }
             } else {
                 document.getElementById('vinDisplay').textContent = 'No VIN or Plate provided';
-            }
-            
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initPaymentWidget);
-            } else {
-                initPaymentWidget();
             }
             
             setTimeout(initPaymentWidget, 2000);
