@@ -178,7 +178,7 @@
             gap: 16px;
             align-items: center;
             box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1);
-            overflow: visible;
+            overflow: hidden;
         }
 
         .vin-left {
@@ -230,7 +230,7 @@
             z-index: 10;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
             filter: none !important;
-            clip-path: polygon(2% 2%, 98% 2%, 98% 98%, 2% 98%);
+            clip-path: none;
             }
 
             .vin-label {
@@ -245,7 +245,7 @@
             font-size: 20px;
             font-weight: 800;
             letter-spacing: 1.3px;
-            margin-bottom: 12px;
+                margin-bottom: 12px;
             font-family: 'Courier New', monospace;
             color: #ffffff;
             background: transparent !important;
@@ -650,20 +650,20 @@
                             <span id="transmissionSpec">-</span>
                             <span class="dot"></span>
                             <span id="driveTypeSpec">-</span>
-                        </div>
+                </div>
                         <div class="vehicle-market">Market: US • Source: Multi-database</div>
                         
                         <!-- Report Preview Image -->
                         <img src="mok1-portrait.png" alt="Report Preview" class="report-preview-image">
-                    </div>
                 </div>
+            </div>
 
                 <!-- Report Items -->
                 <h3 class="report-section-title">Potential risk indicators detected</h3>
                 <p class="report-section-subtitle">Some records are partially hidden in this preview</p>
                 <div class="report-items" id="reportItems">
                     <!-- Items will be populated by JavaScript -->
-                </div>
+            </div>
             
                 <!-- New VIN Button and Features -->
                 <div class="bottom-actions">
@@ -1134,15 +1134,15 @@
         // Initialize on page load
         (function() {
             // Render report items immediately
-            if (document.readyState === 'loading') {
+        if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function() {
                     renderReportItems();
                     initPaymentWidget();
                 });
-            } else {
+        } else {
                 renderReportItems();
-                initPaymentWidget();
-            }
+            initPaymentWidget();
+        }
         
             const urlParams = new URLSearchParams(window.location.search);
             const vin = urlParams.get('vin');
