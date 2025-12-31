@@ -200,7 +200,7 @@
         // Load mobile-only CSS ONLY on mobile devices
         var mobileCss = document.createElement('link');
         mobileCss.rel = 'stylesheet';
-        mobileCss.href = '/css/mobile-only.css?v=3';
+        mobileCss.href = '/css/mobile-only.css?v=4';
         document.head.appendChild(mobileCss);
         console.log('[MOBILE] Loading mobile-only.css');
       }
@@ -3797,7 +3797,7 @@
       if (document.documentElement.classList.contains('mobile-device')) {
         // Load mobile-only JS ONLY on mobile devices
         var mobileScript = document.createElement('script');
-        mobileScript.src = '/public/mobile-only.js?v=3';
+        mobileScript.src = '/public/mobile-only.js?v=4';
         mobileScript.defer = true;
         document.body.appendChild(mobileScript);
         console.log('[MOBILE] Loading mobile-only.js');

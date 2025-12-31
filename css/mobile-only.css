@@ -9,14 +9,51 @@
 .mobile-device .mobile-only {
   width: 100%;
   min-height: 100vh;
+  /* Поддержка Dynamic Island и notch */
+  min-height: -webkit-fill-available;
   background: #F7F8FA;
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1a1a1a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  padding: 0;
-  margin: 0;
+  
+  /* Safe area insets для Dynamic Island, notch, home indicator */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  
+  /* Box sizing */
+  box-sizing: border-box;
+  
+  /* Prevent bounce scroll на iOS */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==================== SAFE AREA SUPPORT ==================== */
+/* Все контентные контейнеры внутри мобилки автоматически учитывают safe area */
+.mobile-device .mobile-only > * {
+  box-sizing: border-box;
+}
+
+/* Для элементов которые должны касаться краев (фоны, полосы) */
+.mobile-device .mobile-only .mobile-full-bleed {
+  margin-left: calc(-1 * env(safe-area-inset-left));
+  margin-right: calc(-1 * env(safe-area-inset-right));
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ==================== iOS SPECIFIC FIXES ==================== */
+/* Prevent zoom on input focus */
+@supports (-webkit-touch-callout: none) {
+  .mobile-device .mobile-only input,
+  .mobile-device .mobile-only select,
+  .mobile-device .mobile-only textarea {
+    font-size: 16px !important; /* Prevent iOS zoom */
+  }
 }
 
 /* Элементы будут добавляться по мере разработки */

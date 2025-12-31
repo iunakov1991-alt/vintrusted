@@ -17,6 +17,30 @@
   
   console.log('[MOBILE-ONLY] Mobile device detected, ready for initialization');
   
-  // Функции будут добавляться пошагово
+  /**
+   * Установить theme-color для мобилки (светло-серый)
+   */
+  function setMobileThemeColor() {
+    var themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) {
+      themeColorMeta.setAttribute('content', '#F7F8FA');
+      console.log('[MOBILE-ONLY] Theme color set to #F7F8FA');
+    }
+  }
+  
+  /**
+   * Инициализация
+   */
+  function init() {
+    setMobileThemeColor();
+    console.log('[MOBILE-ONLY] Initialization complete');
+  }
+  
+  // Запуск при загрузке
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
   
 })();
