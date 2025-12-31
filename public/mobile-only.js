@@ -37,27 +37,108 @@
   function initMobile() {
     console.log('[MOBILE-ONLY] Initializing mobile version');
     
-    // Add any mobile-specific initialization here
-    // Example: setupMobileNavigation();
-    // Example: initMobileForm();
-    // Example: setupMobileTouchHandlers();
+    initMobileForms();
+    initMobileDecoder();
+    preventZoomOnInput();
+    setupMobileTouchHandlers();
   }
   
   /**
-   * Setup mobile form submission
+   * Setup mobile form submissions
    */
-  function initMobileForm() {
-    var mobileForm = document.querySelector('.mobile-device .mobile-only form');
-    if (!mobileForm) {
-      console.log('[MOBILE-ONLY] Mobile form not found');
+  function initMobileForms() {
+    // Get all mobile VIN forms
+    var forms = document.querySelectorAll('.mobile-device .mobile-only .mobile-vin-form');
+    
+    forms.forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        var input = form.querySelector('.mobile-vin-input');
+        if (!input) return;
+        
+        var vin = input.value.trim().toUpperCase();
+        
+        // Validate VIN
+        if (vin.length !== 17 || !vin.match(/^[A-HJ-NPR-Z0-9]{17}$/)) {
+          alert('Please enter a valid 17-character VIN. The VIN must contain only letters (A-H, J-N, P-R, T-Z) and numbers (0-9).');
+          return;
+        }
+        
+        // Redirect to report page
+        window.location.href = '/report.html?vin=' + encodeURIComponent(vin);
+      });
+      
+      // Auto-uppercase and format VIN input
+      var input = form.querySelector('.mobile-vin-input');
+      if (input) {
+        input.addEventListener('input', function(e) {
+          this.value = this.value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '');
+        });
+      }
+    });
+    
+    console.log('[MOBILE-ONLY] Mobile forms initialized:', forms.length);
+  }
+  
+  /**
+   * Setup mobile VIN decoder
+   */
+  function initMobileDecoder() {
+    var decoderInput = document.getElementById('mobile-decoder-input');
+    var bubblesContainer = document.getElementById('mobile-decoder-bubbles');
+    
+    if (!decoderInput || !bubblesContainer) {
+      console.log('[MOBILE-ONLY] Decoder elements not found');
       return;
     }
     
-    mobileForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      console.log('[MOBILE-ONLY] Mobile form submitted');
-      // Handle mobile form submission
+    // Create bubbles for each VIN character
+    var positions = [
+      { label: 'Country', index: 0 },
+      { label: 'Manufacturer', index: 1 },
+      { label: 'Vehicle Type', index: 2 },
+      { label: 'Engine', index: 3 },
+      { label: 'Body Style', index: 4 },
+      { label: 'Model', index: 5 },
+      { label: 'Restraint', index: 6 },
+      { label: 'Check Digit', index: 7 },
+      { label: 'Year', index: 8 },
+      { label: 'Plant', index: 9 },
+      { label: 'Serial', index: 10, span: 6 }
+    ];
+    
+    var html = '';
+    positions.forEach(function(pos) {
+      var span = pos.span || 1;
+      html += '<div class="vin-bubble" data-index="' + pos.index + '" data-span="' + span + '">';
+      html += '<div class="bubble-label">' + pos.label + '</div>';
+      html += '<div class="bubble-chars">';
+      for (var i = 0; i < span; i++) {
+        html += '<div class="bubble-char">-</div>';
+      }
+      html += '</div>';
+      html += '</div>';
     });
+    
+    bubblesContainer.innerHTML = html;
+    
+    // Update bubbles as user types
+    decoderInput.addEventListener('input', function(e) {
+      this.value = this.value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '');
+      var vin = this.value;
+      
+      document.querySelectorAll('.mobile-decoder-wrapper .bubble-char').forEach(function(char, index) {
+        char.textContent = vin[index] || '-';
+        if (vin[index]) {
+          char.classList.add('filled');
+        } else {
+          char.classList.remove('filled');
+        }
+      });
+    });
+    
+    console.log('[MOBILE-ONLY] Decoder initialized');
   }
   
   /**
