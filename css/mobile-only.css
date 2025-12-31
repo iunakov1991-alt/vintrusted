@@ -56,4 +56,16 @@
   }
 }
 
+/* ==================== MOBILE HEADER & LOGO ==================== */
+.mobile-device .mobile-only .mobile-header {
+  padding: 16px 20px;
+  background: #F7F8FA;
+}
+
+.mobile-device .mobile-only .mobile-logo {
+  display: block;
+  width: 120px;
+  height: auto;
+}
+
 /* Элементы будут добавляться по мере разработки */

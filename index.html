@@ -200,7 +200,7 @@
         // Load mobile-only CSS ONLY on mobile devices
         var mobileCss = document.createElement('link');
         mobileCss.rel = 'stylesheet';
-        mobileCss.href = '/css/mobile-only.css?v=4';
+        mobileCss.href = '/css/mobile-only.css?v=5';
         document.head.appendChild(mobileCss);
         console.log('[MOBILE] Loading mobile-only.css');
       }
@@ -3582,7 +3582,10 @@
     
     <!-- ==================== MOBILE VERSION ==================== -->
     <div class="mobile-only">
-        <!-- Будем добавлять элементы по одному -->
+        <!-- Mobile Header with Logo -->
+        <header class="mobile-header">
+            <img src="logo-vin-trust.png" alt="VIN TRUST" class="mobile-logo" width="120" height="32">
+        </header>
     </div><!-- End Mobile Version -->
     
     <!-- ==================== POPUPS (SHARED BETWEEN DESKTOP & MOBILE) ==================== -->
