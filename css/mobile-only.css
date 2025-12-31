@@ -1,0 +1,117 @@
+/**
+ * MOBILE-ONLY STYLES
+ * ==================
+ * This file is ONLY for mobile version styling
+ * ALL styles here MUST be scoped with .mobile-device .mobile-only
+ * 
+ * CRITICAL RULES:
+ * 1. NEVER use global selectors (body, html, etc.) without .mobile-device prefix
+ * 2. NEVER override desktop classes
+ * 3. ALWAYS scope everything with .mobile-device .mobile-only
+ * 4. Use mobile- prefix for all custom classes
+ * 
+ * Example:
+ * ✅ GOOD: .mobile-device .mobile-only .mobile-hero { }
+ * ❌ BAD:  .hero { }  (affects desktop!)
+ * ❌ BAD:  body { }    (affects desktop!)
+ */
+
+/* ==================== BASE MOBILE STYLES ==================== */
+.mobile-device .mobile-only {
+  /* Base container */
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== MOBILE HERO SECTION ==================== */
+.mobile-device .mobile-only .mobile-hero {
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.mobile-device .mobile-only .mobile-hero h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.mobile-device .mobile-only .mobile-hero p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+/* ==================== MOBILE BUTTONS ==================== */
+.mobile-device .mobile-only .mobile-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #2563eb;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  min-height: 44px; /* Touch target */
+  min-width: 44px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.mobile-device .mobile-only .mobile-btn:active {
+  background: #1d4ed8;
+  transform: scale(0.98);
+}
+
+/* ==================== MOBILE FORM ==================== */
+.mobile-device .mobile-only .mobile-form {
+  padding: 16px;
+}
+
+.mobile-device .mobile-only .mobile-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px; /* Prevent zoom on iOS */
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* ==================== MOBILE REPORT PAGE ==================== */
+.mobile-device .mobile-only .mobile-report-container {
+  padding: 16px;
+}
+
+.mobile-device .mobile-only .mobile-vin-card {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+/* ==================== ENSURE NO DESKTOP STYLES LEAK ==================== */
+/* Reset any inherited desktop styles */
+.mobile-device .mobile-only * {
+  /* Reset desktop-specific properties */
+  all: initial;
+  font-family: inherit;
+  color: inherit;
+}
+
+.mobile-device .mobile-only div,
+.mobile-device .mobile-only section,
+.mobile-device .mobile-only header,
+.mobile-device .mobile-only footer {
+  display: block;
+  box-sizing: border-box;
+}
+
+/* ==================== END MOBILE-ONLY STYLES ==================== */
+

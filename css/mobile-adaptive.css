@@ -1,7 +1,10 @@
 /**
- * Mobile Adaptive System
+ * Mobile Adaptive System - STRICT ISOLATION
  * Controls display of desktop-only vs mobile-only content
  * Works in conjunction with device detection script in <head>
+ * 
+ * CRITICAL: This file ensures mobile and desktop versions are COMPLETELY ISOLATED
+ * Changes to mobile will NEVER affect desktop and vice versa
  */
 
 /* ==================== DEFAULT: HIDE BOTH ==================== */
@@ -10,22 +13,47 @@
   display: none !important;
 }
 
-/* ==================== SHOW DESKTOP ON DESKTOP DEVICES ==================== */
+/* ==================== DESKTOP ISOLATION ==================== */
+/* Desktop content ONLY visible on desktop devices */
 .desktop-device .desktop-only {
   display: block !important;
 }
 
-.desktop-device .mobile-only {
+/* Ensure mobile content is COMPLETELY HIDDEN on desktop */
+.desktop-device .mobile-only,
+.desktop-device .mobile-only *,
+.desktop-device [class*="mobile-"] {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
 
-/* ==================== SHOW MOBILE ON MOBILE DEVICES ==================== */
-.mobile-device .desktop-only {
-  display: none !important;
-}
-
+/* ==================== MOBILE ISOLATION ==================== */
+/* Mobile content ONLY visible on mobile devices */
 .mobile-device .mobile-only {
   display: block !important;
+}
+
+/* Ensure desktop content is COMPLETELY HIDDEN on mobile */
+.mobile-device .desktop-only,
+.mobile-device .desktop-only *,
+.mobile-device #mainPage,
+.mobile-device .ab-hero {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
 
 /* ==================== MEDIA QUERY FALLBACK (if JS fails) ==================== */

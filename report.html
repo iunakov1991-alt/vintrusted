@@ -32,9 +32,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=2">
-    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=1">
+    
+    <!-- ADAPTIVE SYSTEM: Controls desktop/mobile visibility -->
+    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=2">
+    
     <link rel="stylesheet" href="/css/stripe-fixes.css?v=2" />
     <script src="/public/vin-stripe.js?v=25"></script>
+    
+    <!-- MOBILE-ONLY STYLES: Conditional loading based on device detection -->
+    <script>
+    (function() {
+      if (document.documentElement.classList.contains('mobile-device')) {
+        // Load mobile-only CSS ONLY on mobile devices
+        var mobileCss = document.createElement('link');
+        mobileCss.rel = 'stylesheet';
+        mobileCss.href = '/css/mobile-only.css?v=1';
+        document.head.appendChild(mobileCss);
+        console.log('[MOBILE-REPORT] Loading mobile-only.css');
+      }
+    })();
+    </script>
     <style>
         * {
             margin: 0;
@@ -1209,5 +1226,21 @@
             <a href="/" style="padding: 12px 24px; background: #2563eb; color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">Back to Home</a>
         </div>
     </div><!-- End Mobile Version -->
+    
+    <!-- MOBILE-ONLY JAVASCRIPT: Conditional loading -->
+    <script>
+    (function() {
+      if (document.documentElement.classList.contains('mobile-device')) {
+        // Load mobile-only JS ONLY on mobile devices
+        var mobileScript = document.createElement('script');
+        mobileScript.src = '/public/mobile-only.js?v=1';
+        mobileScript.defer = true;
+        document.body.appendChild(mobileScript);
+        console.log('[MOBILE-REPORT] Loading mobile-only.js');
+      } else {
+        console.log('[DESKTOP-REPORT] Skipping mobile-only.js');
+      }
+    })();
+    </script>
 </body>
 </html>

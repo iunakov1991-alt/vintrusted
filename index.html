@@ -185,9 +185,27 @@
     <!-- Styles - preload critical CSS -->
     <link rel="preload" href="styles.css?v=113" as="style">
     <link rel="stylesheet" href="styles.css?v=113">
-    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=1">
+    
+    <!-- ADAPTIVE SYSTEM: Controls desktop/mobile visibility -->
+    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=2">
+    
+    <!-- DESKTOP-ONLY STYLES (old mobile.css kept for backwards compatibility) -->
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
     <link rel="stylesheet" href="mobile-form-new.css?v=22">
+    
+    <!-- MOBILE-ONLY STYLES: Conditional loading based on device detection -->
+    <script>
+    (function() {
+      if (document.documentElement.classList.contains('mobile-device')) {
+        // Load mobile-only CSS ONLY on mobile devices
+        var mobileCss = document.createElement('link');
+        mobileCss.rel = 'stylesheet';
+        mobileCss.href = '/css/mobile-only.css?v=1';
+        document.head.appendChild(mobileCss);
+        console.log('[MOBILE] Loading mobile-only.css');
+      }
+    })();
+    </script>
     
     <!-- Desktop detection script - runs immediately to prevent mobile styles on desktop -->
     <script>
@@ -3777,6 +3795,22 @@
     
     <!-- VIN Conversion Text Rotator -->
     <script src="/js/vin-conversion-text.js"></script>
+    
+    <!-- MOBILE-ONLY JAVASCRIPT: Conditional loading -->
+    <script>
+    (function() {
+      if (document.documentElement.classList.contains('mobile-device')) {
+        // Load mobile-only JS ONLY on mobile devices
+        var mobileScript = document.createElement('script');
+        mobileScript.src = '/public/mobile-only.js?v=1';
+        mobileScript.defer = true;
+        document.body.appendChild(mobileScript);
+        console.log('[MOBILE] Loading mobile-only.js');
+      } else {
+        console.log('[DESKTOP] Skipping mobile-only.js');
+      }
+    })();
+    </script>
     
     <!-- Vercel Speed Insights -->
     <script type="module" src="speed-insights.js" defer></script>
