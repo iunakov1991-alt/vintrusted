@@ -414,7 +414,6 @@
             font-weight: 600;
         }
         
-        /* Remove duplicate .report-item-content definition */
 
         .status-line {
             display: flex;
@@ -521,6 +520,15 @@
         #vin-pay {
             min-height: 450px;
             position: relative;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Unlock card styles for compatibility */
+        .unlock-card {
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 20px;
@@ -639,12 +647,12 @@
                             <span id="transmissionSpec">-</span>
                             <span class="dot"></span>
                             <span id="driveTypeSpec">-</span>
-                </div>
+                        </div>
                         <div class="vehicle-market">Market: US • Source: Multi-database</div>
                         
                         <!-- Report Preview Image -->
                         <img src="mok1-portrait.png" alt="Report Preview" class="report-preview-image">
-                </div>
+                    </div>
             </div>
 
                 <!-- Report Items -->
