@@ -253,6 +253,20 @@
             box-shadow: none !important;
         }
 
+        /* Force transparent backgrounds inside VIN card (fix white blocks) */
+        .vin-card .vehicle-specs,
+        .vin-card .vehicle-specs span,
+        .vin-card .vehicle-name,
+        .vin-card .vehicle-market,
+        .vin-card .vin-status,
+        .vin-card .status-item,
+        .vin-card .vin-label {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
         .vin-status {
             display: flex;
             gap: 15px;
