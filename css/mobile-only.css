@@ -64,7 +64,8 @@
 .mobile-device .mobile-only .mobile-header {
   display: block !important;
   padding: 16px 20px;
-  background: #F7F8FA;
+  background: red !important; /* TEST: Should see red block */
+  min-height: 60px !important;
   visibility: visible !important;
   opacity: 1 !important;
   position: relative !important;
