@@ -228,4 +228,63 @@
   object-fit: contain;
 }
 
+/* ==================== MOBILE SECOND SCREEN: SAMPLE REPORT ==================== */
+.mobile-device .mobile-only .mobile-sample-report {
+  padding: 40px 20px;
+  background: #F7F8FA;
+}
+
+.mobile-device .mobile-only .mobile-sample-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 16px 0;
+}
+
+.mobile-device .mobile-only .mobile-sample-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #666;
+  text-align: center;
+  margin: 0 0 32px 0;
+}
+
+/* PDF Stack Wrapper */
+.mobile-device .mobile-only .mobile-pdf-stack-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* PDF Stack Container */
+.mobile-device .mobile-only .mobile-pdf-stack-wrapper .vin-pdfstack {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+
+.mobile-device .mobile-only .mobile-pdf-stack-wrapper .vin-pdfstack__stage {
+  width: 100%;
+  position: relative;
+}
+
+.mobile-device .mobile-only .mobile-pdf-stack-wrapper .vin-pdfstack__stack {
+  width: 100%;
+  position: relative;
+}
+
+/* Chips Wrapper */
+.mobile-device .mobile-only .mobile-pdf-chips-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
 /* Элементы будут добавляться по мере разработки */

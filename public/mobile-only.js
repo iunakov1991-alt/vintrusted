@@ -73,11 +73,39 @@
   }
   
   /**
+   * Инициализация PDF viewer для мобилки
+   * Инициализирует мобильный PDF viewer после загрузки страницы
+   */
+  function initMobilePdfViewer() {
+    // Ждем загрузки PDF.js и vin-pdf-stack.js
+    if (typeof pdfjsLib === 'undefined') {
+      console.log('[MOBILE-ONLY] PDF.js not loaded yet, will retry');
+      setTimeout(initMobilePdfViewer, 500);
+      return;
+    }
+    
+    // Проверяем наличие мобильного PDF контейнера
+    var mobilePdfRoot = document.querySelector('.mobile-only .mobile-pdf-stack');
+    if (!mobilePdfRoot) {
+      console.log('[MOBILE-ONLY] Mobile PDF stack container not found');
+      return;
+    }
+    
+    // Мобильный PDF viewer будет инициализирован автоматически скриптом vin-pdf-stack.js
+    // Но нужно убедиться, что он использует правильные ID
+    // Для этого можно переименовать ID или использовать отдельную инициализацию
+    console.log('[MOBILE-ONLY] Mobile PDF stack container found, initialization will be handled by vin-pdf-stack.js');
+  }
+  
+  /**
    * Инициализация
    */
   function init() {
     setMobileThemeColor();
     initVinForm();
+    // PDF viewer будет инициализирован автоматически скриптом vin-pdf-stack.js
+    // Но нужно убедиться, что он работает с мобильными элементами
+    // Для этого можно использовать те же ID или создать отдельную инициализацию
     console.log('[MOBILE-ONLY] Initialization complete');
   }
   
