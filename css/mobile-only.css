@@ -129,7 +129,7 @@
 
 .mobile-device .mobile-only .mobile-vin-input {
   width: 100%;
-  padding: 11px 24px; /* Reduced by 3px top/bottom to account for 3px border */
+  padding: 14px 24px; /* Same as button */
   font-size: 16px; /* Prevent iOS zoom */
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   border: 3px solid #3B82F6;
@@ -139,8 +139,8 @@
   box-sizing: border-box;
   -webkit-appearance: none;
   appearance: none;
-  line-height: 1.5;
-  height: 50px; /* Exact same height as button */
+  line-height: 1;
+  height: 56px; /* 50px (button) + 6px (3px border top + 3px border bottom) */
   display: flex;
   align-items: center;
 }
@@ -178,7 +178,8 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: 50px; /* Exact same height as input */
+  height: 50px; /* Match input visual height (input is 56px with border, but visual height is 50px) */
+  line-height: 1;
 }
 
 .mobile-device .mobile-only .mobile-check-btn:active {
