@@ -52,13 +52,14 @@
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
     <link rel="stylesheet" href="/css/mobile-report.css?v=1" media="(max-width: 1023px)">
     <style>
-        * {
+        /* DESKTOP-ONLY STYLES - Scoped to desktop-only container */
+        .desktop-only * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        body.desktop-device {
             font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #f5f5f7;
             min-height: 100vh;
@@ -69,7 +70,7 @@
             overflow-y: auto;
         }
 
-        .container {
+        .desktop-only .container {
             max-width: 1400px;
             margin: 0 auto;
             min-height: 100%;
@@ -78,7 +79,7 @@
         }
 
         /* Header */
-        .header {
+        .desktop-only .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -86,23 +87,23 @@
             flex-shrink: 0;
         }
 
-        .logo-section {
+        .desktop-only .logo-section {
             display: flex;
             align-items: center;
             margin-left: 20px;
         }
 
-        .logo-img {
+        .desktop-only .logo-img {
             height: 40px;
             width: auto;
         }
 
-        .header-buttons {
+        .desktop-only .header-buttons {
             display: flex;
             gap: 10px;
         }
 
-        .header-btn {
+        .desktop-only .header-btn {
             padding: 8px 16px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -117,13 +118,13 @@
             gap: 6px;
         }
 
-        .header-btn:hover {
+        .desktop-only .header-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.2);
         }
 
         /* Main Content */
-        .main-content {
+        .desktop-only .main-content {
             display: grid;
             grid-template-columns: 1fr 380px;
             gap: 20px;
@@ -133,7 +134,7 @@
         }
 
         /* Left Column - Compact */
-        .left-column {
+        .desktop-only .left-column {
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 18px;
@@ -147,7 +148,7 @@
             position: relative;
         }
 
-        .bottom-actions {
+        .desktop-only .bottom-actions {
             position: absolute;
             bottom: 20px;
             left: 20px;
@@ -157,7 +158,7 @@
             gap: 20px;
         }
 
-        .new-vin-btn {
+        .desktop-only .new-vin-btn {
             padding: 8px 16px;
             border-radius: 10px;
             border: 1px solid rgba(0, 0, 0, 0.1);
@@ -176,13 +177,13 @@
             flex-shrink: 0;
         }
 
-        .new-vin-btn:hover {
+        .desktop-only .new-vin-btn:hover {
             background: rgba(255, 255, 255, 1);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transform: translateY(-1px);
         }
 
-        .features-text {
+        .desktop-only .features-text {
             flex: 1;
             text-align: center;
             font-size: 11px;
@@ -190,7 +191,7 @@
             font-weight: 500;
         }
 
-        .report-title {
+        .desktop-only .report-title {
             font-size: 22px;
             font-weight: 800;
             margin-top: 80px; /* push content down to align with Stripe */
@@ -198,14 +199,14 @@
             line-height: 1.2;
         }
 
-        .report-subtitle {
+        .desktop-only .report-subtitle {
             font-size: 12px;
             color: #94a3b8;
             margin-bottom: 12px;
         }
 
         /* VIN Card - Compact */
-        .vin-card {
+        .desktop-only .vin-card {
             background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
             border: none;
             border-radius: 12px;
@@ -219,7 +220,7 @@
             overflow: visible; /* allow mockup to stick out */
         }
 
-        .vin-left {
+        .desktop-only .vin-left {
             display: flex;
             flex-direction: column;
         }
@@ -231,7 +232,7 @@
             position: relative;
         }
 
-        .vin-divider::before {
+        .desktop-only .vin-divider::before {
             content: '';
             position: absolute;
             top: 50%;
@@ -244,7 +245,7 @@
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
 
-        .vin-right {
+        .desktop-only .vin-right {
             display: flex;
                 flex-direction: column;
             position: relative;
@@ -272,7 +273,7 @@
             pointer-events: none;
             }
 
-        .vin-label {
+        .desktop-only .vin-label {
             font-size: 10px;
             color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
@@ -280,7 +281,7 @@
             margin-bottom: 6px;
             }
 
-        .vin-number {
+        .desktop-only .vin-number {
             font-size: 18px;
             font-weight: 800;
             letter-spacing: 1.2px;
@@ -293,26 +294,26 @@
         }
 
         /* Force transparent backgrounds inside VIN card (fix white blocks) */
-        .vin-card .vehicle-specs,
-        .vin-card .vehicle-specs span,
-        .vin-card .vehicle-name,
-        .vin-card .vehicle-market,
-        .vin-card .vin-status,
-        .vin-card .status-item,
-        .vin-card .vin-label {
+        .desktop-only .vin-card .vehicle-specs,
+        .desktop-only .vin-card .vehicle-specs span,
+        .desktop-only .vin-card .vehicle-name,
+        .desktop-only .vin-card .vehicle-market,
+        .desktop-only .vin-card .vin-status,
+        .desktop-only .vin-card .status-item,
+        .desktop-only .vin-card .vin-label {
             background: transparent !important;
             box-shadow: none !important;
             border: none !important;
             padding: 0 !important;
         }
 
-        .vin-status {
+        .desktop-only .vin-status {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
             }
 
-        .status-item {
+        .desktop-only .status-item {
             display: flex;
             align-items: center;
             gap: 5px;
@@ -320,29 +321,29 @@
             color: rgba(255, 255, 255, 0.95);
         }
 
-        .status-dot {
+        .desktop-only .status-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
             }
 
-        .status-dot.green {
+        .desktop-only .status-dot.green {
             background: #10b981;
             box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
             }
 
-        .status-dot.yellow {
+        .desktop-only .status-dot.yellow {
             background: #f59e0b;
             box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
             }
 
-        .status-dot.red {
+        .desktop-only .status-dot.red {
             background: #ef4444;
             box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
             }
 
         /* Vehicle Info in VIN Card */
-        .vehicle-label {
+        .desktop-only .vehicle-label {
             font-size: 10px;
             color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
@@ -350,14 +351,14 @@
             margin-bottom: 6px;
             }
 
-        .vehicle-name {
+        .desktop-only .vehicle-name {
             font-size: 15px;
             font-weight: 800;
             margin-bottom: 6px;
             color: #ffffff;
         }
 
-        .vehicle-specs {
+        .desktop-only .vehicle-specs {
             display: flex;
             align-items: center;
             gap: 5px;
@@ -366,31 +367,31 @@
             margin-bottom: 5px;
             }
 
-        .vehicle-specs .dot {
+        .desktop-only .vehicle-specs .dot {
             width: 3px;
             height: 3px;
             background: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
             }
 
-        .vehicle-market {
+        .desktop-only .vehicle-market {
             font-size: 11px;
             color: rgba(255, 255, 255, 0.7);
         }
 
         /* Remove cards grid */
-        .cards-grid {
+        .desktop-only .cards-grid {
             display: none;
         }
 
         /* Report Items - Compact */
-        .report-section-title {
+        .desktop-only .report-section-title {
             font-size: 14px;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
-        .report-section-subtitle {
+        .desktop-only .report-section-subtitle {
             font-size: 9px;
             color: #6b7280;
             margin-bottom: 8px;
@@ -403,7 +404,7 @@
             gap: 8px;
         }
 
-        .report-item {
+        .desktop-only .report-item {
             display: flex;
             flex-direction: column;
             gap: 6px;
@@ -411,7 +412,7 @@
             min-width: 0;
             }
 
-        .report-chip {
+        .desktop-only .report-chip {
             background: #ffffff;
             border: 1px solid rgba(102, 126, 234, 0.2);
             border-radius: 16px;
@@ -427,30 +428,30 @@
             min-width: 0;
         }
 
-        .report-chip:hover {
+        .desktop-only .report-chip:hover {
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
             border-color: rgba(102, 126, 234, 0.4);
         }
 
-        .report-chip.highlight-warning {
+        .desktop-only .report-chip.highlight-warning {
             border: 2px solid #f59e0b;
             background: #ffffff;
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
         }
 
-        .report-chip.highlight-warning:hover {
+        .desktop-only .report-chip.highlight-warning:hover {
             box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
             border-color: #fb923c;
         }
 
-        .report-chip-icon {
+        .desktop-only .report-chip-icon {
             width: 12px;
             height: 12px;
             color: #667eea;
             flex-shrink: 0;
         }
 
-        .report-chip-text {
+        .desktop-only .report-chip-text {
             font-size: 11px;
             font-weight: 600;
             color: #1a1a1a;
@@ -461,7 +462,7 @@
             min-width: 0;
         }
 
-        .report-item-content {
+        .desktop-only .report-item-content {
             margin-left: 16px;
             display: flex;
             flex-direction: column;
@@ -472,42 +473,42 @@
         }
         
 
-        .status-line {
+        .desktop-only .status-line {
             display: flex;
             align-items: center;
             gap: 3px;
         }
 
-        .status-line-text {
+        .desktop-only .status-line-text {
             filter: blur(2.5px);
             font-size: 8px;
         }
 
-        .status-line.needs-unlock .status-line-text {
+        .desktop-only .status-line.needs-unlock .status-line-text {
             color: #f59e0b;
             font-weight: 700;
         }
 
-        .status-line.flag-possible .status-line-text {
+        .desktop-only .status-line.flag-possible .status-line-text {
             color: #f59e0b;
             font-weight: 700;
         }
 
-        .status-line.available .status-line-text {
+        .desktop-only .status-line.available .status-line-text {
             color: #f59e0b;
             font-weight: 700;
         }
 
-        .status-line-text.green-text {
+        .desktop-only .status-line-text.green-text {
             color: #ef4444 !important;
         }
 
-        .status-line .status-icon {
+        .desktop-only .status-line .status-icon {
             filter: none !important;
             flex-shrink: 0;
         }
 
-        .status-blur {
+        .desktop-only .status-blur {
             font-size: 8px;
             color: #6b7280;
             user-select: none;
@@ -516,35 +517,35 @@
             gap: 2px;
         }
 
-        .status-blur.green-text {
+        .desktop-only .status-blur.green-text {
             color: #6b7280;
         }
 
-        .lock-icon {
+        .desktop-only .lock-icon {
             width: 6px;
             height: 6px;
             color: currentColor;
         }
 
-        .status-icon {
+        .desktop-only .status-icon {
             width: 5px;
             height: 5px;
             border-radius: 50%;
         }
 
-        .status-icon.red {
+        .desktop-only .status-icon.red {
             background: #ef4444;
             box-shadow: 0 0 8px rgba(239, 68, 68, 0.6), 0 0 0 3px rgba(239, 68, 68, 0.1);
             animation: pulse-red 2s ease-in-out infinite;
         }
 
-        .status-icon.yellow {
+        .desktop-only .status-icon.yellow {
             background: #f59e0b;
             box-shadow: 0 0 8px rgba(245, 158, 11, 0.6), 0 0 0 3px rgba(245, 158, 11, 0.1);
             animation: pulse-yellow 2s ease-in-out infinite;
         }
 
-        .status-icon.green {
+        .desktop-only .status-icon.green {
             background: #10b981;
             box-shadow: 0 0 8px rgba(16, 185, 129, 0.6), 0 0 0 3px rgba(16, 185, 129, 0.1);
         }
@@ -568,64 +569,64 @@
         }
 
         /* Right Column - Payment */
-        .right-column {
+        .desktop-only .right-column {
             overflow-y: auto;
             overflow-x: hidden;
             padding-top: 20px; /* align top with left column padding */
         }
 
         /* Payment form - NO background, borders or padding */
-        #vin-pay {
+        .desktop-only #vin-pay {
             position: relative;
         }
 
         /* Responsive */
         @media (max-width: 1200px) {
-            .main-content {
+            .desktop-only .main-content {
                 grid-template-columns: 1fr;
         }
 
-            .right-column {
+            .desktop-only .right-column {
                 position: static;
         }
         }
 
         @media (max-width: 768px) {
-            .header {
+            .desktop-only .header {
                 flex-direction: column;
                 gap: 20px;
             }
 
-            .cards-grid {
+            .desktop-only .cards-grid {
                 grid-template-columns: 1fr;
             }
 
-            .left-column {
+            .desktop-only .left-column {
                 padding: 24px;
             }
 
-            .report-items {
+            .desktop-only .report-items {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
 
-            .vin-card {
+            .desktop-only .vin-card {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
 
-            .report-preview-image {
+            .desktop-only .report-preview-image {
                 position: static;
                 transform: none;
                 width: 120px;
                 margin: 10px auto 0;
         }
         
-            .vin-divider {
+            .desktop-only .vin-divider {
                 display: none;
             }
 
-        #vin-pay {
+        .desktop-only #vin-pay {
                 padding: 24px;
             }
         }
@@ -1210,7 +1211,7 @@
                 document.getElementById('vinDisplay').textContent = 'No VIN or Plate provided';
             }
             
-            setTimeout(initPaymentWidget, 2000);
+        setTimeout(initPaymentWidget, 2000);
         })();
     </script>
     </div><!-- End Desktop Version -->
@@ -1296,7 +1297,7 @@
     
     <!-- MOBILE-ONLY JAVASCRIPT: Report page specific -->
     <script>
-    (function() {
+        (function() {
       'use strict';
       
       // Only run on mobile devices
@@ -1454,7 +1455,7 @@
         
         setTimeout(initMobilePaymentWidget, 2000);
       })();
-    })();
+        })();
     </script>
 </body>
 </html>
