@@ -122,7 +122,7 @@
   font-size: 16px; /* Prevent iOS zoom */
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   border: 2px solid #3B82F6;
-  border-radius: 24px;
+  border-radius: 32px;
   background: #fff;
   color: #1a1a1a;
   box-sizing: border-box;
@@ -152,7 +152,7 @@
   color: #fff;
   background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
   border: none !important;
-  border-radius: 24px !important;
+  border-radius: 32px !important;
   cursor: pointer;
   transition: all 0.2s ease;
   -webkit-appearance: none;
@@ -164,13 +164,13 @@
 .mobile-device .mobile-only .mobile-check-btn:active {
   transform: scale(0.98);
   background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-  border-radius: 24px !important;
+  border-radius: 32px !important;
 }
 
 .mobile-device .mobile-only .mobile-check-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  border-radius: 24px !important;
+  border-radius: 32px !important;
 }
 
 /* Элементы будут добавляться по мере разработки */
