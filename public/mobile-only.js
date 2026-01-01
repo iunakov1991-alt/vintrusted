@@ -73,28 +73,36 @@
   }
   
   /**
-   * Инициализация PDF viewer для мобилки
-   * Инициализирует мобильный PDF viewer после загрузки страницы
+   * Инициализация кнопки "Check VIN" на втором экране
+   * Скроллит к форме на первом экране
    */
-  function initMobilePdfViewer() {
-    // Ждем загрузки PDF.js и vin-pdf-stack.js
-    if (typeof pdfjsLib === 'undefined') {
-      console.log('[MOBILE-ONLY] PDF.js not loaded yet, will retry');
-      setTimeout(initMobilePdfViewer, 500);
+  function initSampleCheckButton() {
+    var button = document.getElementById('mobile-sample-check-btn');
+    if (!button) {
+      console.log('[MOBILE-ONLY] Sample check button not found');
       return;
     }
     
-    // Проверяем наличие мобильного PDF контейнера
-    var mobilePdfRoot = document.querySelector('.mobile-only .mobile-pdf-stack');
-    if (!mobilePdfRoot) {
-      console.log('[MOBILE-ONLY] Mobile PDF stack container not found');
-      return;
-    }
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Находим форму на первом экране
+      var form = document.querySelector('.mobile-only .mobile-vin-form');
+      if (form) {
+        // Плавный скролл к форме
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Фокус на поле ввода через небольшую задержку
+        setTimeout(function() {
+          var input = document.getElementById('mobile-vin-input');
+          if (input) {
+            input.focus();
+          }
+        }, 500);
+      }
+    });
     
-    // Мобильный PDF viewer будет инициализирован автоматически скриптом vin-pdf-stack.js
-    // Но нужно убедиться, что он использует правильные ID
-    // Для этого можно переименовать ID или использовать отдельную инициализацию
-    console.log('[MOBILE-ONLY] Mobile PDF stack container found, initialization will be handled by vin-pdf-stack.js');
+    console.log('[MOBILE-ONLY] Sample check button initialized');
   }
   
   /**
@@ -103,9 +111,7 @@
   function init() {
     setMobileThemeColor();
     initVinForm();
-    // PDF viewer будет инициализирован автоматически скриптом vin-pdf-stack.js
-    // Но нужно убедиться, что он работает с мобильными элементами
-    // Для этого можно использовать те же ID или создать отдельную инициализацию
+    initSampleCheckButton();
     console.log('[MOBILE-ONLY] Initialization complete');
   }
   

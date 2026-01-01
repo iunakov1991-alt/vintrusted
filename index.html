@@ -200,7 +200,7 @@
     <link rel="stylesheet" href="/css/mobile-adaptive.css?v=7">
     
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
-    <link rel="stylesheet" href="/css/mobile-only.css?v=20" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/css/mobile-only.css?v=21" media="(max-width: 1023px)">
     
     <!-- DESKTOP-ONLY STYLES (old mobile.css kept for backwards compatibility) -->
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
@@ -3637,37 +3637,15 @@
                 Nearly 40% of used cars have documented accident damage, and 20% carry active safety recalls. Free VIN check reveals hidden damage, odometer fraud, and title issues before you buy.
             </p>
             
-            <!-- PDF Stack Viewer (using same IDs as desktop since desktop is hidden on mobile) -->
-            <div class="mobile-pdf-stack-wrapper">
-                <div class="vin-pdfstack" data-pdf="/reports/sample.pdf">
-                    <div class="vin-pdfstack__stage">
-                        <div class="vin-pdfstack__stack" id="vinPdfStack"></div>
-                    </div>
-                </div>
-                
-                <!-- Chips Navigation -->
-                <div class="mobile-pdf-chips-wrapper">
-                    <div class="vin-pdfstack__chips" id="vinChips"></div>
-                    
-                    <div class="vin-pdfstack__nav-pill">
-                        <button class="vin-pdfstack__nav-btn" id="vinPrevBtn" aria-label="Previous page">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                        </button>
-                        
-                        <div class="vin-pdfstack__counter">
-                            <span id="vinCurrentPage">1</span> / <span id="vinTotalPages">1</span>
-                        </div>
-                        
-                        <button class="vin-pdfstack__nav-btn" id="vinNextBtn" aria-label="Next page">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+            <!-- Image -->
+            <div class="mobile-sample-image-wrapper">
+                <img src="/image4.png" alt="Car History Report" class="mobile-sample-image">
             </div>
+            
+            <!-- Check VIN Button (scrolls to first screen form) -->
+            <button class="mobile-sample-check-btn" id="mobile-sample-check-btn">
+                Check VIN
+            </button>
         </section>
     </div><!-- End Mobile Version -->
     
@@ -3883,7 +3861,7 @@
       if (document.documentElement.classList.contains('mobile-device')) {
         // Load mobile-only JS ONLY on mobile devices
         var mobileScript = document.createElement('script');
-        mobileScript.src = '/public/mobile-only.js?v=6';
+        mobileScript.src = '/public/mobile-only.js?v=7';
         mobileScript.defer = true;
         document.body.appendChild(mobileScript);
         console.log('[MOBILE] Loading mobile-only.js');
