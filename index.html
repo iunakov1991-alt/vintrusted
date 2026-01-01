@@ -197,25 +197,17 @@
     <link rel="stylesheet" href="styles.css?v=113">
     
     <!-- ADAPTIVE SYSTEM: Controls desktop/mobile visibility -->
-    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=6">
+    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=7">
+    
+    <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
+    <link rel="stylesheet" href="/css/mobile-only.css?v=9" media="(max-width: 1023px)">
     
     <!-- DESKTOP-ONLY STYLES (old mobile.css kept for backwards compatibility) -->
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
     <link rel="stylesheet" href="mobile-form-new.css?v=22">
     
     <!-- MOBILE-ONLY STYLES: Conditional loading based on device detection -->
-    <script>
-    (function() {
-      if (document.documentElement.classList.contains('mobile-device')) {
-        // Load mobile-only CSS ONLY on mobile devices
-        var mobileCss = document.createElement('link');
-        mobileCss.rel = 'stylesheet';
-        mobileCss.href = '/css/mobile-only.css?v=8';
-        document.head.appendChild(mobileCss);
-        console.log('[MOBILE] Loading mobile-only.css');
-      }
-    })();
-    </script>
+    <!-- Mobile-only CSS now loaded directly in head with media query -->
     
     <!-- Desktop detection script - runs immediately to prevent mobile styles on desktop -->
     <script>
