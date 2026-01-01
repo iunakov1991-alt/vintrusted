@@ -106,12 +106,68 @@
   }
   
   /**
+   * Инициализация мобильного меню
+   */
+  function initMobileMenu() {
+    var toggle = document.getElementById('mobileMenuToggle');
+    var overlay = document.getElementById('mobileMenuOverlay');
+    var close = document.getElementById('mobileMenuClose');
+    var menuLinks = document.querySelectorAll('.mobile-menu-link');
+    
+    if (!toggle || !overlay) {
+      console.log('[MOBILE-ONLY] Mobile menu elements not found');
+      return;
+    }
+    
+    // Открытие меню
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggle.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    // Закрытие меню
+    function closeMenu() {
+      toggle.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    if (close) {
+      close.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeMenu();
+      });
+    }
+    
+    // Закрытие при клике на overlay
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        closeMenu();
+      }
+    });
+    
+    // Закрытие при клике на ссылку
+    menuLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        closeMenu();
+      });
+    });
+    
+    console.log('[MOBILE-ONLY] Mobile menu initialized');
+  }
+  
+  /**
    * Инициализация
    */
   function init() {
     setMobileThemeColor();
     initVinForm();
     initSampleCheckButton();
+    initMobileMenu();
     console.log('[MOBILE-ONLY] Initialization complete');
   }
   
