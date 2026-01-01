@@ -60,6 +60,52 @@
   }
 }
 
+/* ==================== MOBILE LOGO SECTION (no header background) ==================== */
+.mobile-device .mobile-only .mobile-logo-section {
+  padding: 16px 20px 12px 20px;
+  text-align: center;
+}
+
+.mobile-device .mobile-only .mobile-logo-center {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+.mobile-device .mobile-only .mobile-logo {
+  display: block !important;
+  width: 100px !important;
+  height: auto !important;
+  max-width: 100px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+}
+
+.mobile-device .mobile-only .mobile-header-divider {
+  color: #d1d5db !important;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  font-weight: 300 !important;
+}
+
+.mobile-device .mobile-only .mobile-header-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  color: #6b7280 !important;
+  text-align: left !important;
+  font-weight: 500 !important;
+}
+
+.mobile-device .mobile-only .mobile-header-text span {
+  display: block !important;
+}
+
 /* ==================== MOBILE HERO SECTION ==================== */
 .mobile-device .mobile-only .mobile-hero {
   padding: 32px 20px;
