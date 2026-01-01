@@ -129,7 +129,7 @@
 
 .mobile-device .mobile-only .mobile-vin-input {
   width: 100%;
-  padding: 14px 24px; /* Same as button */
+  padding: 18px 24px; /* Increased padding for larger height */
   font-size: 16px; /* Prevent iOS zoom */
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   border: 3px solid #3B82F6;
@@ -140,7 +140,7 @@
   -webkit-appearance: none;
   appearance: none;
   line-height: 1;
-  height: 56px; /* 50px (button) + 6px (3px border top + 3px border bottom) */
+  height: 64px; /* Increased height */
   display: flex;
   align-items: center;
 }
@@ -160,7 +160,7 @@
 
 .mobile-device .mobile-only .mobile-check-btn {
   width: 100%;
-  padding: 14px 24px;
+  padding: 18px 24px; /* Increased padding to match input */
   font-size: 16px;
   font-weight: 600;
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -178,7 +178,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: 50px; /* Match input visual height (input is 56px with border, but visual height is 50px) */
+  height: 58px; /* Match input visual height (input is 64px with border, visual height is 58px) */
   line-height: 1;
 }
 
