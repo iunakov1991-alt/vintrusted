@@ -13,17 +13,27 @@
     (function() {
       'use strict';
       // Detect mobile device BEFORE any content loads to prevent FOUC
-      var isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                     || (window.innerWidth < 768 && 'ontouchstart' in window);
+      
+      // Check user agent
+      var mobileUA = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      // Check screen width (more aggressive - any device under 1024px is mobile)
+      var mobileWidth = window.innerWidth < 1024;
+      
+      // Check touch capability
+      var hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      
+      // Mobile if ANY condition is true
+      var isMobile = mobileUA || (mobileWidth && hasTouch) || mobileWidth;
       
       if (isMobile) {
         document.documentElement.classList.add('mobile-device');
         document.documentElement.setAttribute('data-device', 'mobile');
-        console.log('[DEVICE] Mobile detected');
+        console.log('[DEVICE] Mobile detected - UA:', mobileUA, 'Width:', window.innerWidth, 'Touch:', hasTouch);
       } else {
         document.documentElement.classList.add('desktop-device');
         document.documentElement.setAttribute('data-device', 'desktop');
-        console.log('[DEVICE] Desktop detected');
+        console.log('[DEVICE] Desktop detected - Width:', window.innerWidth);
       }
     })();
     </script>
@@ -34,24 +44,13 @@
     <link rel="stylesheet" href="styles.css?v=2">
     
     <!-- ADAPTIVE SYSTEM: Controls desktop/mobile visibility -->
-    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=2">
+    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=7">
     
     <link rel="stylesheet" href="/css/stripe-fixes.css?v=2" />
     <script src="/public/vin-stripe.js?v=25"></script>
     
-    <!-- MOBILE-ONLY STYLES: Conditional loading based on device detection -->
-    <script>
-    (function() {
-      if (document.documentElement.classList.contains('mobile-device')) {
-        // Load mobile-only CSS ONLY on mobile devices
-        var mobileCss = document.createElement('link');
-        mobileCss.rel = 'stylesheet';
-        mobileCss.href = '/css/mobile-only.css?v=1';
-        document.head.appendChild(mobileCss);
-        console.log('[MOBILE-REPORT] Loading mobile-only.css');
-      }
-    })();
-    </script>
+    <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
+    <link rel="stylesheet" href="/css/mobile-report.css?v=1" media="(max-width: 1023px)">
     <style>
         * {
             margin: 0;
@@ -1218,28 +1217,243 @@
     
     <!-- ==================== MOBILE VERSION ==================== -->
     <div class="mobile-only">
-        <!-- Mobile version of preliminary report will be implemented here -->
-        <div style="padding: 20px; text-align: center; color: #666; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <h1 style="font-size: 24px; margin-bottom: 16px;">Mobile Version Coming Soon</h1>
-            <p style="margin-bottom: 12px;">The mobile-optimized report page is under development.</p>
-            <p style="margin-bottom: 24px;">For now, please use desktop view or check back soon!</p>
-            <a href="/" style="padding: 12px 24px; background: #2563eb; color: white; border-radius: 8px; text-decoration: none; font-weight: 600;">Back to Home</a>
+        <div class="mobile-report-container">
+            <!-- Mobile Header -->
+            <header class="mobile-report-header">
+                <img src="/logo-vin-trust.png" alt="VIN TRUST" class="mobile-report-logo" width="120" height="32">
+            </header>
+            
+            <!-- Mobile Content -->
+            <div class="mobile-report-content">
+                <h2 class="mobile-report-title">This Vehicle Has Records You Haven't Seen Yet</h2>
+                <p class="mobile-report-subtitle">Several record categories are hidden until the full report is unlocked.</p>
+                
+                <!-- Mobile VIN Card -->
+                <div class="mobile-vin-card">
+                    <div class="mobile-vin-info">
+                        <div class="mobile-vin-label">VIN</div>
+                        <div class="mobile-vin-number" id="mobileVinDisplay">Loading...</div>
+                        <div class="mobile-vin-status">
+                            <div class="mobile-status-item">
+                                <div class="mobile-status-dot green"></div>
+                                <span>VIN decoded</span>
+                            </div>
+                            <div class="mobile-status-item">
+                                <div class="mobile-status-dot yellow"></div>
+                                <span>2 items need verification</span>
+                            </div>
+                            <div class="mobile-status-item">
+                                <div class="mobile-status-dot red"></div>
+                                <span>potential risk detected</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mobile-vehicle-info">
+                        <div class="mobile-vehicle-label">Vehicle</div>
+                        <div class="mobile-vehicle-name" id="mobileVehicleName">Loading...</div>
+                        <div class="mobile-vehicle-specs" id="mobileVehicleSpecs">
+                            <span id="mobileEngineSpec">-</span>
+                            <span class="mobile-dot"></span>
+                            <span id="mobileTransmissionSpec">-</span>
+                            <span class="mobile-dot"></span>
+                            <span id="mobileDriveTypeSpec">-</span>
+                        </div>
+                        <div class="mobile-vehicle-market">Market: US • Source: Multi-database</div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Report Items -->
+                <h3 class="mobile-report-section-title">Potential risk indicators detected</h3>
+                <p class="mobile-report-section-subtitle">Some records are partially hidden in this preview</p>
+                <div class="mobile-report-items" id="mobileReportItems">
+                    <!-- Items will be populated by JavaScript -->
+                </div>
+                
+                <!-- Mobile Payment Form -->
+                <div class="mobile-payment-section">
+                    <div id="mobile-vin-pay" style="position: relative;">
+                        <!-- Stripe payment widget will be injected here -->
+                    </div>
+                </div>
+                
+                <!-- Mobile Bottom Actions -->
+                <div class="mobile-bottom-actions">
+                    <a href="index.html" class="mobile-new-vin-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        New VIN
+                    </a>
+                    <div class="mobile-features-text">
+                        Instant access • Downloadable PDF • No account required
+                    </div>
+                </div>
+            </div>
         </div>
     </div><!-- End Mobile Version -->
     
-    <!-- MOBILE-ONLY JAVASCRIPT: Conditional loading -->
+    <!-- MOBILE-ONLY JAVASCRIPT: Report page specific -->
     <script>
     (function() {
-      if (document.documentElement.classList.contains('mobile-device')) {
-        // Load mobile-only JS ONLY on mobile devices
-        var mobileScript = document.createElement('script');
-        mobileScript.src = '/public/mobile-only.js?v=1';
-        mobileScript.defer = true;
-        document.body.appendChild(mobileScript);
-        console.log('[MOBILE-REPORT] Loading mobile-only.js');
-      } else {
-        console.log('[DESKTOP-REPORT] Skipping mobile-only.js');
+      'use strict';
+      
+      // Only run on mobile devices
+      if (!document.documentElement.classList.contains('mobile-device')) {
+        return;
       }
+      
+      // Mobile version of renderReportItems
+      function renderMobileReportItems() {
+        const container = document.getElementById('mobileReportItems');
+        if (!container) {
+          console.error('[MOBILE-REPORT] Container #mobileReportItems not found');
+          return;
+        }
+        
+        // Use same data as desktop
+        if (typeof reportItemsData === 'undefined') {
+          console.error('[MOBILE-REPORT] reportItemsData not found');
+          return;
+        }
+        
+        container.innerHTML = reportItemsData.map(item => {
+          const chipClass = item.highlight ? 'mobile-report-chip highlight-warning' : 'mobile-report-chip';
+          const statusClass = item.status || 'needs-unlock';
+          const statusColor = item.statusColor || 'yellow';
+          
+          return `
+            <div class="mobile-report-item">
+              <div class="${chipClass} ${statusClass}">
+                <svg class="mobile-report-chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="${item.icon}"/>
+                  ${item.iconPath2 ? `<path d="${item.iconPath2}"/>` : ''}
+                </svg>
+                <span class="mobile-report-chip-text">${item.title}</span>
+              </div>
+              <div class="mobile-report-item-content">
+                <div class="mobile-status-line ${statusClass}">
+                  <span class="mobile-status-icon ${statusColor}"></span>
+                  <span class="mobile-status-line-text">${item.statusText || 'Record(s) found'}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+      
+      // Mobile version of loadReportData
+      function loadMobileReportData(identifier, type) {
+        // Use same loadReportData function if available, but update mobile elements
+        if (typeof loadReportData === 'function') {
+          loadReportData(identifier, type);
+        }
+        
+        // Update mobile-specific elements
+        setTimeout(function() {
+          const desktopVin = document.getElementById('vinDisplay');
+          const mobileVin = document.getElementById('mobileVinDisplay');
+          if (desktopVin && mobileVin) {
+            mobileVin.textContent = desktopVin.textContent;
+          }
+          
+          const desktopVehicle = document.getElementById('vehicleName');
+          const mobileVehicle = document.getElementById('mobileVehicleName');
+          if (desktopVehicle && mobileVehicle) {
+            mobileVehicle.textContent = desktopVehicle.textContent;
+          }
+          
+          const desktopEngine = document.getElementById('engineSpec');
+          const mobileEngine = document.getElementById('mobileEngineSpec');
+          if (desktopEngine && mobileEngine) {
+            mobileEngine.textContent = desktopEngine.textContent;
+          }
+          
+          const desktopTrans = document.getElementById('transmissionSpec');
+          const mobileTrans = document.getElementById('mobileTransmissionSpec');
+          if (desktopTrans && mobileTrans) {
+            mobileTrans.textContent = desktopTrans.textContent;
+          }
+          
+          const desktopDrive = document.getElementById('driveTypeSpec');
+          const mobileDrive = document.getElementById('mobileDriveTypeSpec');
+          if (desktopDrive && mobileDrive) {
+            mobileDrive.textContent = desktopDrive.textContent;
+          }
+        }, 100);
+      }
+      
+      // Mobile version of initPaymentWidget
+      function initMobilePaymentWidget() {
+        const vinPayContainer = document.getElementById('mobile-vin-pay');
+        if (!vinPayContainer) {
+          console.error('[MOBILE-REPORT] Payment container #mobile-vin-pay not found');
+          return;
+        }
+        
+        if (window.VIN && window.VIN.mount) {
+          try {
+            VIN.mount('#mobile-vin-pay');
+            console.log('[MOBILE-REPORT] Payment widget mounted successfully');
+          } catch (error) {
+            console.error('[MOBILE-REPORT] Error mounting payment widget:', error);
+          }
+        } else {
+          console.error('[MOBILE-REPORT] VIN widget not loaded, retrying...');
+          setTimeout(() => {
+            if (window.VIN && window.VIN.mount) {
+              VIN.mount('#mobile-vin-pay');
+            } else {
+              console.error('[MOBILE-REPORT] VIN widget still not available');
+            }
+          }, 1000);
+        }
+      }
+      
+      // Initialize mobile report
+      (function() {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            renderMobileReportItems();
+            initMobilePaymentWidget();
+          });
+        } else {
+          renderMobileReportItems();
+          initMobilePaymentWidget();
+        }
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const vin = urlParams.get('vin');
+        const plate = urlParams.get('plate');
+        
+        if (vin) {
+          if (typeof sanitizeVIN === 'function') {
+            const sanitized = sanitizeVIN(vin);
+            if (sanitized) {
+              document.getElementById('mobileVinDisplay').textContent = sanitized;
+              loadMobileReportData(sanitized, 'vin');
+            } else {
+              document.getElementById('mobileVinDisplay').textContent = 'Invalid VIN';
+            }
+          } else {
+            document.getElementById('mobileVinDisplay').textContent = vin.toUpperCase();
+            loadMobileReportData(vin, 'vin');
+          }
+        } else if (plate) {
+          const parts = plate.split('-');
+          if (parts.length === 2) {
+            document.getElementById('mobileVinDisplay').textContent = plate;
+            loadMobileReportData(plate, 'plate');
+          } else {
+            document.getElementById('mobileVinDisplay').textContent = 'No VIN or Plate provided';
+          }
+        } else {
+          document.getElementById('mobileVinDisplay').textContent = 'No VIN or Plate provided';
+        }
+        
+        setTimeout(initMobilePaymentWidget, 2000);
+      })();
     })();
     </script>
 </body>
