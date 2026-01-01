@@ -29,41 +29,6 @@
   }
   
   /**
-   * Предотвратить загрузку hero-background.jpg на мобильных
-   * Удаляет все ссылки на это изображение из DOM и стилей
-   */
-  function preventHeroBackgroundLoad() {
-    // Удаляем все элементы с hero-background.jpg в style атрибутах
-    var allElements = document.querySelectorAll('*');
-    allElements.forEach(function(el) {
-      var style = el.getAttribute('style');
-      if (style && style.indexOf('hero-background.jpg') !== -1) {
-        el.removeAttribute('style');
-      }
-    });
-    
-    // Удаляем все <link> и <img> элементы, которые ссылаются на hero-background.jpg
-    var links = document.querySelectorAll('link[href*="hero-background"], img[src*="hero-background"]');
-    links.forEach(function(link) {
-      link.remove();
-    });
-    
-    // Отключаем загрузку через CSS - переопределяем все background-image
-    var style = document.createElement('style');
-    style.textContent = `
-      .mobile-device .hero-section,
-      .mobile-device .ab-hero,
-      .mobile-device [class*="hero"] {
-        background-image: none !important;
-        background: #F7F8FA !important;
-      }
-    `;
-    document.head.appendChild(style);
-    
-    console.log('[MOBILE-ONLY] Prevented hero-background.jpg from loading');
-  }
-  
-  /**
    * Обработчик формы ввода VIN
    */
   function initVinForm() {
@@ -145,7 +110,6 @@
    * Инициализация
    */
   function init() {
-    preventHeroBackgroundLoad();
     setMobileThemeColor();
     initVinForm();
     initSampleCheckButton();
