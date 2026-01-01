@@ -64,8 +64,7 @@
 .mobile-device .mobile-only .mobile-header {
   display: block !important;
   padding: 16px 20px;
-  background: red !important; /* TEST: Should see red block */
-  min-height: 60px !important;
+  background: #F7F8FA;
   visibility: visible !important;
   opacity: 1 !important;
   position: relative !important;
@@ -102,6 +101,73 @@
   line-height: 1.5;
   color: #666;
   margin: 0;
+}
+
+/* ==================== MOBILE VIN INPUT FORM ==================== */
+.mobile-device .mobile-only .mobile-vin-form {
+  padding: 0 20px;
+  margin-top: 18px; /* 1.8cm отступ после подзаголовка */
+}
+
+.mobile-device .mobile-only .mobile-vin-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.mobile-device .mobile-only .mobile-vin-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 16px; /* Prevent iOS zoom */
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  border: 2px solid #3B82F6;
+  border-radius: 8px;
+  background: #fff;
+  color: #1a1a1a;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mobile-device .mobile-only .mobile-vin-input:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.mobile-device .mobile-only .mobile-vin-input::placeholder {
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+}
+
+.mobile-device .mobile-only .mobile-check-btn {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+.mobile-device .mobile-only .mobile-check-btn:active {
+  transform: scale(0.98);
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+}
+
+.mobile-device .mobile-only .mobile-check-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Элементы будут добавляться по мере разработки */

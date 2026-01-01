@@ -29,10 +29,55 @@
   }
   
   /**
+   * Обработчик формы ввода VIN
+   */
+  function initVinForm() {
+    var form = document.getElementById('mobile-vin-form');
+    var input = document.getElementById('mobile-vin-input');
+    var button = form ? form.querySelector('.mobile-check-btn') : null;
+    
+    if (!form || !input || !button) {
+      console.log('[MOBILE-ONLY] VIN form elements not found');
+      return;
+    }
+    
+    // Обработчик отправки формы
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      var vin = input.value.trim().toUpperCase();
+      
+      if (!vin) {
+        input.focus();
+        return;
+      }
+      
+      // Валидация VIN (17 символов)
+      if (vin.length !== 17) {
+        alert('VIN code must be 17 characters long');
+        input.focus();
+        return;
+      }
+      
+      // Редирект на страницу отчета
+      window.location.href = '/report.html?vin=' + encodeURIComponent(vin);
+    });
+    
+    // Обработчик клика по кнопке
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      form.dispatchEvent(new Event('submit'));
+    });
+    
+    console.log('[MOBILE-ONLY] VIN form initialized');
+  }
+  
+  /**
    * Инициализация
    */
   function init() {
     setMobileThemeColor();
+    initVinForm();
     console.log('[MOBILE-ONLY] Initialization complete');
   }
   

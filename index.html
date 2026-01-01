@@ -200,7 +200,7 @@
     <link rel="stylesheet" href="/css/mobile-adaptive.css?v=7">
     
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
-    <link rel="stylesheet" href="/css/mobile-only.css?v=11" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/css/mobile-only.css?v=12" media="(max-width: 1023px)">
     
     <!-- DESKTOP-ONLY STYLES (old mobile.css kept for backwards compatibility) -->
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
@@ -3600,6 +3600,16 @@
                 what you're really buying.
             </p>
         </section>
+        
+        <!-- Mobile VIN Input Form -->
+        <section class="mobile-vin-form">
+            <form class="mobile-vin-form-container" id="mobile-vin-form">
+                <input type="text" class="mobile-vin-input" placeholder="ENTER VIN CODE HERE" maxlength="17" autocomplete="off" id="mobile-vin-input">
+                <button type="submit" class="mobile-check-btn">
+                    Check VIN
+                </button>
+            </form>
+        </section>
     </div><!-- End Mobile Version -->
     
     <!-- ==================== POPUPS (SHARED BETWEEN DESKTOP & MOBILE) ==================== -->
@@ -3814,7 +3824,7 @@
       if (document.documentElement.classList.contains('mobile-device')) {
         // Load mobile-only JS ONLY on mobile devices
         var mobileScript = document.createElement('script');
-        mobileScript.src = '/public/mobile-only.js?v=4';
+        mobileScript.src = '/public/mobile-only.js?v=5';
         mobileScript.defer = true;
         document.body.appendChild(mobileScript);
         console.log('[MOBILE] Loading mobile-only.js');
