@@ -236,7 +236,7 @@
 /* ==================== MOBILE SECOND SCREEN: SAMPLE REPORT ==================== */
 .mobile-device .mobile-only .mobile-sample-report {
   padding: 40px 20px;
-  background: #1a1a1a; /* Match image4.png background color */
+  background: #1c1c1c; /* Match image4.png background color (rgb(28, 28, 28)) */
   min-height: 100vh;
 }
 
