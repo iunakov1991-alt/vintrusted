@@ -318,7 +318,7 @@
 }
 
 .mobile-device .mobile-only .mobile-sample-check-btn:active {
-  transform: scale(0.98);
+  transform: translateX(-50%) scale(0.98);
   background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
 }
 
