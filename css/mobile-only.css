@@ -323,4 +323,200 @@
   background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
 }
 
-/* Элементы будут добавляться по мере разработки */
+/* ==================== MOBILE THIRD SCREEN: REVIEWS ==================== */
+.mobile-device .mobile-only .mobile-reviews-section {
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 50%, #1d4ed8 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-device .mobile-only .mobile-reviews-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23FFD700" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.mobile-device .mobile-only .mobile-reviews-header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.mobile-device .mobile-only .mobile-reviews-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-device .mobile-only .mobile-reviews-subtitle {
+  font-size: 14px;
+  color: #e0e7ff;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.mobile-device .mobile-only .mobile-rating-summary {
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.mobile-device .mobile-only .mobile-rating-score {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-device .mobile-only .mobile-score-number {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.mobile-device .mobile-only .mobile-score-number span {
+  color: #10b981;
+}
+
+.mobile-device .mobile-only .mobile-score-stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.mobile-device .mobile-only .mobile-score-stars .star {
+  font-size: 24px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mobile-device .mobile-only .mobile-score-stars .star.filled {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mobile-device .mobile-only .mobile-score-text {
+  font-size: 14px;
+  color: #e0e7ff;
+  font-weight: 500;
+}
+
+.mobile-device .mobile-only .mobile-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.mobile-device .mobile-only .mobile-review-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.mobile-device .mobile-only .mobile-review-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.mobile-device .mobile-only .mobile-review-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.mobile-device .mobile-only .mobile-review-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-device .mobile-only .mobile-review-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+}
+
+.mobile-device .mobile-only .mobile-review-date {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.mobile-device .mobile-only .mobile-review-stars {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.mobile-device .mobile-only .mobile-review-stars .star {
+  font-size: 16px;
+  color: #FFD700;
+}
+
+.mobile-device .mobile-only .mobile-review-stars .star.filled {
+  color: #FFD700;
+}
+
+.mobile-device .mobile-only .mobile-review-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+.mobile-device .mobile-only .mobile-review-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.mobile-device .mobile-only .mobile-review-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-device .mobile-only .mobile-review-action-btn:active {
+  background: #f3f4f6;
+  transform: scale(0.95);
+}
+
+.mobile-device .mobile-only .mobile-review-action-btn .thumb-icon {
+  font-size: 16px;
+}
