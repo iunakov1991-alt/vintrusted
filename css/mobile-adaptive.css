@@ -154,6 +154,7 @@
 }
 
 /* ==================== DEBUGGING (remove in production) ==================== */
+/*
 .desktop-device::before {
   content: 'DESKTOP MODE';
   position: fixed;
@@ -177,4 +178,5 @@
   z-index: 99999;
   font-size: 12px;
 }
+*/
 
