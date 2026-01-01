@@ -62,14 +62,23 @@
 
 /* ==================== MOBILE HEADER & LOGO ==================== */
 .mobile-device .mobile-only .mobile-header {
+  display: block !important;
   padding: 16px 20px;
   background: #F7F8FA;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1000 !important;
 }
 
 .mobile-device .mobile-only .mobile-logo {
-  display: block;
-  width: 120px;
-  height: auto;
+  display: block !important;
+  width: 120px !important;
+  height: auto !important;
+  max-width: 120px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
 }
 
 /* ==================== MOBILE HERO SECTION ==================== */
