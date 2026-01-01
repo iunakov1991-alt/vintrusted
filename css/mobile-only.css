@@ -30,6 +30,10 @@
   /* Prevent bounce scroll на iOS */
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
+  
+  /* Ensure mobile content is on top */
+  position: relative;
+  z-index: 100;
 }
 
 /* ==================== SAFE AREA SUPPORT ==================== */

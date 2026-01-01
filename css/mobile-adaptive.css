@@ -67,11 +67,33 @@
 }
 
 /* Ensure desktop content is COMPLETELY HIDDEN on mobile */
-.mobile-device .desktop-only,
+.mobile-device .desktop-only {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  z-index: -9999 !important;
+}
+
 .mobile-device .desktop-only *,
+.mobile-device .desktop-only * * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Additional specific selectors for extra safety */
 .mobile-device #mainPage,
 .mobile-device .ab-hero,
 .mobile-device .header:not(.mobile-header),
+.mobile-device .logo:not(.mobile-logo),
+.mobile-device .logo-img:not(.mobile-logo),
 .mobile-device .footer:not(.mobile-footer),
 .mobile-device .container:not([class*="mobile-"]),
 .mobile-device [class*="ab-"],
@@ -82,11 +104,6 @@
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
-  position: absolute !important;
-  left: -9999px !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
 }
 
 /* Protect mobile from desktop global styles */
