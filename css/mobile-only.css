@@ -103,6 +103,17 @@
   margin: 0;
 }
 
+/* ==================== MOBILE RED TRIANGLE ==================== */
+.mobile-device .mobile-only .mobile-red-triangle {
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-top: 20px solid #FF0000;
+  margin: 12px auto 0;
+  display: block;
+}
+
 /* ==================== MOBILE VIN INPUT FORM ==================== */
 .mobile-device .mobile-only .mobile-vin-form {
   padding: 0 20px;
