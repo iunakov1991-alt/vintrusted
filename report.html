@@ -735,7 +735,7 @@
     </div>
 
     <script>
-        // Report items data
+        // Report items data - SHARED between desktop and mobile
         const reportItemsData = [
             {
                 title: "Auction / Wholesale Records",
@@ -827,6 +827,11 @@
         ];
 
         function renderReportItems() {
+            // Only render on desktop
+            if (document.documentElement.classList.contains('mobile-device')) {
+                return;
+            }
+            
             const container = document.getElementById('reportItems');
             if (!container) {
                 console.error('[REPORT] Container #reportItems not found');
@@ -915,8 +920,16 @@
         }
         
         async function loadReportData(input, type) {
+            // Only run on desktop
+            if (document.documentElement.classList.contains('mobile-device')) {
+                return;
+            }
+            
             try {
-                document.querySelector('.left-column').classList.add('loading');
+                const leftColumn = document.querySelector('.left-column');
+                if (leftColumn) {
+                    leftColumn.classList.add('loading');
+                }
                 
                 let data = null;
                 
@@ -964,7 +977,10 @@
                     console.warn('Non-critical error, showing placeholder');
                 }
             } finally {
-                document.querySelector('.left-column').classList.remove('loading');
+                const leftColumn = document.querySelector('.left-column');
+                if (leftColumn) {
+                    leftColumn.classList.remove('loading');
+                }
             }
         }
 
@@ -1149,6 +1165,11 @@
         }
         
         function initPaymentWidget() {
+            // Only run on desktop
+            if (document.documentElement.classList.contains('mobile-device')) {
+                return;
+            }
+            
             const vinPayContainer = document.getElementById('vin-pay');
             if (!vinPayContainer) {
                 console.error('Payment container #vin-pay not found');
@@ -1174,19 +1195,25 @@
             }
         }
         
-        // Initialize on page load
+        // Initialize on page load - DESKTOP ONLY
         (function() {
+            // Only run on desktop devices
+            if (document.documentElement.classList.contains('mobile-device')) {
+                console.log('[DESKTOP-REPORT] Skipping desktop initialization on mobile');
+                return;
+            }
+            
             // Render report items immediately
-        if (document.readyState === 'loading') {
+            if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function() {
                     renderReportItems();
                     initPaymentWidget();
                 });
-        } else {
+            } else {
                 renderReportItems();
-            initPaymentWidget();
-        }
-        
+                initPaymentWidget();
+            }
+            
             const urlParams = new URLSearchParams(window.location.search);
             const vin = urlParams.get('vin');
             const plate = urlParams.get('plate');
@@ -1194,24 +1221,39 @@
             if (vin) {
                 const sanitized = sanitizeVIN(vin);
                 if (sanitized) {
-                    document.getElementById('vinDisplay').textContent = sanitized;
-                    loadReportData(sanitized, 'vin');
+                    const vinDisplay = document.getElementById('vinDisplay');
+                    if (vinDisplay) {
+                        vinDisplay.textContent = sanitized;
+                        loadReportData(sanitized, 'vin');
+                    }
                 } else {
-                    document.getElementById('vinDisplay').textContent = 'Invalid VIN';
+                    const vinDisplay = document.getElementById('vinDisplay');
+                    if (vinDisplay) {
+                        vinDisplay.textContent = 'Invalid VIN';
+                    }
                 }
             } else if (plate) {
                 const parts = plate.split('-');
                 if (parts.length === 2) {
-                    document.getElementById('vinDisplay').textContent = plate;
-                    loadReportData(plate, 'plate');
-                } else {
-                    document.getElementById('vinDisplay').textContent = 'No VIN or Plate provided';
+                    const vinDisplay = document.getElementById('vinDisplay');
+                    if (vinDisplay) {
+                        vinDisplay.textContent = plate;
+                        loadReportData(plate, 'plate');
                     }
+                } else {
+                    const vinDisplay = document.getElementById('vinDisplay');
+                    if (vinDisplay) {
+                        vinDisplay.textContent = 'No VIN or Plate provided';
+                    }
+                }
             } else {
-                document.getElementById('vinDisplay').textContent = 'No VIN or Plate provided';
+                const vinDisplay = document.getElementById('vinDisplay');
+                if (vinDisplay) {
+                    vinDisplay.textContent = 'No VIN or Plate provided';
+                }
             }
             
-        setTimeout(initPaymentWidget, 2000);
+            setTimeout(initPaymentWidget, 2000);
         })();
     </script>
     </div><!-- End Desktop Version -->
