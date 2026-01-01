@@ -129,7 +129,7 @@
 
 .mobile-device .mobile-only .mobile-vin-input {
   width: 100%;
-  padding: 14px 24px; /* Same as button */
+  padding: 11px 24px; /* Reduced by 3px top/bottom to account for 3px border */
   font-size: 16px; /* Prevent iOS zoom */
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   border: 3px solid #3B82F6;
@@ -140,7 +140,9 @@
   -webkit-appearance: none;
   appearance: none;
   line-height: 1.5;
-  min-height: 50px; /* Match button visual height */
+  height: 50px; /* Exact same height as button */
+  display: flex;
+  align-items: center;
 }
 
 .mobile-device .mobile-only .mobile-vin-input:focus {
@@ -176,7 +178,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  min-height: 50px; /* Match input visual height */
+  height: 50px; /* Exact same height as input */
 }
 
 .mobile-device .mobile-only .mobile-check-btn:active {
@@ -234,7 +236,7 @@
 /* ==================== MOBILE SECOND SCREEN: SAMPLE REPORT ==================== */
 .mobile-device .mobile-only .mobile-sample-report {
   padding: 40px 20px;
-  background: #000000;
+  background: #1a1a1a; /* Match image4.png background color */
   min-height: 100vh;
 }
 
@@ -266,10 +268,11 @@
 }
 
 .mobile-device .mobile-only .mobile-sample-image {
-  width: 100%;
-  max-width: 400px;
+  width: calc(100% + 52px); /* Increase by 26px (0.7cm) on each side = 52px total */
+  max-width: calc(400px + 52px);
   height: auto;
   object-fit: contain;
+  margin: 0 -26px; /* Negative margin to extend 26px on each side */
 }
 
 /* Check VIN Button */
