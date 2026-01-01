@@ -107,16 +107,16 @@
 }
 
 /* Protect mobile from desktop global styles */
-.mobile-device .mobile-only * {
-  /* Reset any desktop styles that might leak */
-  all: revert;
-}
-
 .mobile-device .mobile-only {
   /* Establish new stacking context */
   isolation: isolate;
   /* Contain layout to prevent desktop influence */
   contain: layout style;
+}
+
+/* Reset only specific problematic properties, not all */
+.mobile-device .mobile-only * {
+  box-sizing: border-box;
 }
 
 /* ==================== MEDIA QUERY FALLBACK (if JS fails) ==================== */
