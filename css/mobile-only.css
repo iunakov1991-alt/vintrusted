@@ -249,17 +249,9 @@
   margin: 0 0 16px 0;
 }
 
-.mobile-device .mobile-only .mobile-sample-text {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #cccccc;
-  text-align: center;
-  margin: 0 0 32px 0;
-}
-
 /* Image Wrapper */
 .mobile-device .mobile-only .mobile-sample-image-wrapper {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -273,13 +265,37 @@
   height: auto;
   object-fit: contain;
   margin: 0 -26px; /* Negative margin to extend 26px on each side */
+  display: block;
+}
+
+.mobile-device .mobile-only .mobile-sample-text {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: calc(400px - 40px);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  padding: 0 20px;
+  z-index: 10;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none; /* Allow clicks to pass through */
 }
 
 /* Check VIN Button */
 .mobile-device .mobile-only .mobile-sample-check-btn {
-  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0;
   padding: 14px 24px;
   font-size: 16px;
   font-weight: 600;
@@ -296,6 +312,7 @@
   overflow: hidden;
   text-align: center !important;
   display: flex !important;
+  z-index: 10;
   align-items: center !important;
   justify-content: center !important;
 }
