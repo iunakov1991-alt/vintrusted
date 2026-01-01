@@ -53,12 +53,57 @@
 }
 
 /* ==================== MOBILE ISOLATION ==================== */
-/* Reset body on mobile */
+/* Reset body and html on mobile - remove all desktop backgrounds */
+.mobile-device html {
+  background: #F7F8FA !important;
+  background-image: none !important;
+  background-attachment: initial !important;
+}
+
 .mobile-device body {
   background: #F7F8FA !important;
   background-image: none !important;
   background-attachment: initial !important;
+  background-color: #F7F8FA !important;
   overflow-x: hidden !important;
+}
+
+/* COMPLETELY REMOVE hero-background.jpg from loading on mobile */
+.mobile-device .hero-section,
+.mobile-device .ab-hero,
+.mobile-device #mainPage,
+.mobile-device .main,
+.mobile-device [class*="hero"],
+.mobile-device [id*="hero"],
+.mobile-device [style*="hero-background"],
+.mobile-device [style*="background-image"] {
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  background-attachment: initial !important;
+}
+
+/* Prevent loading of hero-background.jpg image file on mobile */
+.mobile-device * {
+  background-attachment: initial !important;
+}
+
+/* Force remove any background images that might be loaded */
+.mobile-device *::before,
+.mobile-device *::after {
+  background-image: none !important;
+}
+
+/* Prevent hero-background.jpg from loading on mobile - override all styles.css rules */
+@media (max-width: 1023px) {
+  .hero-section {
+    background-image: none !important;
+  }
+}
+
+.mobile-device .hero-section {
+  background-image: none !important;
+  background: #F7F8FA !important;
 }
 
 /* Mobile content ONLY visible on mobile devices */
