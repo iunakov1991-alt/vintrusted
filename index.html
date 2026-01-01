@@ -167,17 +167,27 @@
     (function() {
       'use strict';
       // Detect mobile device BEFORE any content loads to prevent FOUC
-      var isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                     || (window.innerWidth < 768 && 'ontouchstart' in window);
+      
+      // Check user agent
+      var mobileUA = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      // Check screen width (more aggressive - any device under 1024px is mobile)
+      var mobileWidth = window.innerWidth < 1024;
+      
+      // Check touch capability
+      var hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      
+      // Mobile if ANY condition is true
+      var isMobile = mobileUA || (mobileWidth && hasTouch) || mobileWidth;
       
       if (isMobile) {
         document.documentElement.classList.add('mobile-device');
         document.documentElement.setAttribute('data-device', 'mobile');
-        console.log('[DEVICE] Mobile detected');
+        console.log('[DEVICE] Mobile detected - UA:', mobileUA, 'Width:', window.innerWidth, 'Touch:', hasTouch);
       } else {
         document.documentElement.classList.add('desktop-device');
         document.documentElement.setAttribute('data-device', 'desktop');
-        console.log('[DEVICE] Desktop detected');
+        console.log('[DEVICE] Desktop detected - Width:', window.innerWidth);
       }
     })();
     </script>
