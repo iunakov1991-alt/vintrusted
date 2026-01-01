@@ -50,7 +50,7 @@
     <script src="/public/vin-stripe.js?v=25"></script>
     
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
-    <link rel="stylesheet" href="/css/mobile-report.css?v=1" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/css/mobile-report.css?v=2" media="(max-width: 1023px)">
     <style>
         /* DESKTOP-ONLY STYLES - Scoped to desktop-only container */
         .desktop-only * {
@@ -1365,20 +1365,35 @@
           const chipClass = item.highlight ? 'mobile-report-chip highlight-warning' : 'mobile-report-chip';
           const statusClass = item.status || 'needs-unlock';
           const statusColor = item.statusColor || 'yellow';
+          const isRedText = statusColor === 'red';
+          
+          let iconSvg = `<path d="${item.icon}"></path>`;
+          if (item.iconPath2) {
+            const points = item.iconPath2.replace(/^M\s*/i, '').trim();
+            if (points) {
+              iconSvg += `<polyline points="${points}"></polyline>`;
+            }
+          }
           
           return `
             <div class="mobile-report-item">
-              <div class="${chipClass} ${statusClass}">
+              <div class="${chipClass}">
                 <svg class="mobile-report-chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="${item.icon}"/>
-                  ${item.iconPath2 ? `<path d="${item.iconPath2}"/>` : ''}
+                  ${iconSvg}
                 </svg>
                 <span class="mobile-report-chip-text">${item.title}</span>
               </div>
               <div class="mobile-report-item-content">
                 <div class="mobile-status-line ${statusClass}">
                   <span class="mobile-status-icon ${statusColor}"></span>
-                  <span class="mobile-status-line-text">${item.statusText || 'Record(s) found'}</span>
+                  <span class="mobile-status-line-text ${isRedText ? 'green-text' : ''}">${item.statusText || 'Record(s) found'}</span>
+                </div>
+                <div class="mobile-status-blur ${isRedText ? 'green-text' : ''}">
+                  <svg class="mobile-lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  Unlock Details
                 </div>
               </div>
             </div>
@@ -1386,45 +1401,103 @@
         }).join('');
       }
       
-      // Mobile version of loadReportData
-      function loadMobileReportData(identifier, type) {
-        // Use same loadReportData function if available, but update mobile elements
-        if (typeof loadReportData === 'function') {
-          loadReportData(identifier, type);
+      // Mobile version of loadReportData - standalone function
+      async function loadMobileReportData(identifier, type) {
+        try {
+          let data = null;
+          
+          if (type === 'vin') {
+            if (identifier.length !== 17 || !identifier.match(/^[A-HJ-NPR-Z0-9]{17}$/)) {
+              throw new Error('INVALID_VIN');
+            }
+            
+            console.log('[MOBILE-REPORT] Starting VIN decode for:', identifier);
+            
+            // Use decodeVIN if available, otherwise fetch directly
+            if (typeof decodeVIN === 'function') {
+              data = await decodeVIN(identifier);
+            } else {
+              const response = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVin/${identifier}?format=json`);
+              if (!response.ok) throw new Error('Failed to decode VIN');
+              
+              const result = await response.json();
+              if (!result.Results || result.Results.length === 0) throw new Error('No results');
+              
+              const parsed = {};
+              result.Results.forEach(r => {
+                if (r.Variable && r.Value && r.Value !== 'Not Applicable' && r.Value !== '') {
+                  const key = r.Variable.toLowerCase().replace(/\s+/g, '_');
+                  parsed[key] = r.Value;
+                }
+              });
+              
+              data = {
+                year: parsed.model_year || parsed.year,
+                make: parsed.make,
+                model: parsed.model,
+                engine: parsed.engine_configuration || parsed.engine_cylinders || parsed.displacement_l,
+                transmission: parsed.transmission_style || parsed.transmission_type,
+                fuelType: parsed.fuel_type_primary || parsed.fuel_type,
+                bodyStyle: parsed.body_class || parsed.vehicle_type,
+                driveType: parsed.drive_type || parsed.drive_system
+              };
+            }
+            
+            if (data && data.year && data.make) {
+              console.log('[MOBILE-REPORT] VIN decoded:', data.make, data.model, data.year);
+              populateMobileReport(data);
+            } else {
+              throw new Error('Failed to decode VIN');
+            }
+            
+          } else if (type === 'plate') {
+            // Placeholder data for plate
+            data = {
+              year: '2015',
+              make: 'Toyota',
+              model: 'Camry',
+              engine: 'V6',
+              transmission: 'Automatic',
+              fuelType: 'Gasoline',
+              bodyStyle: 'Sedan',
+              driveType: 'FWD'
+            };
+            populateMobileReport(data);
+          }
+          
+        } catch (error) {
+          console.error('[MOBILE-REPORT] Error loading report:', error);
+        }
+      }
+      
+      function populateMobileReport(data) {
+        const vehicleName = `${data.year || '-'} ${data.make || '-'} ${data.model || '-'}`;
+        const mobileVehicle = document.getElementById('mobileVehicleName');
+        if (mobileVehicle) {
+          mobileVehicle.textContent = vehicleName;
         }
         
-        // Update mobile-specific elements
-        setTimeout(function() {
-          const desktopVin = document.getElementById('vinDisplay');
-          const mobileVin = document.getElementById('mobileVinDisplay');
-          if (desktopVin && mobileVin) {
-            mobileVin.textContent = desktopVin.textContent;
-          }
-          
-          const desktopVehicle = document.getElementById('vehicleName');
-          const mobileVehicle = document.getElementById('mobileVehicleName');
-          if (desktopVehicle && mobileVehicle) {
-            mobileVehicle.textContent = desktopVehicle.textContent;
-          }
-          
-          const desktopEngine = document.getElementById('engineSpec');
-          const mobileEngine = document.getElementById('mobileEngineSpec');
-          if (desktopEngine && mobileEngine) {
-            mobileEngine.textContent = desktopEngine.textContent;
-          }
-          
-          const desktopTrans = document.getElementById('transmissionSpec');
-          const mobileTrans = document.getElementById('mobileTransmissionSpec');
-          if (desktopTrans && mobileTrans) {
-            mobileTrans.textContent = desktopTrans.textContent;
-          }
-          
-          const desktopDrive = document.getElementById('driveTypeSpec');
-          const mobileDrive = document.getElementById('mobileDriveTypeSpec');
-          if (desktopDrive && mobileDrive) {
-            mobileDrive.textContent = desktopDrive.textContent;
-          }
-        }, 100);
+        const mobileEngine = document.getElementById('mobileEngineSpec');
+        if (mobileEngine) {
+          mobileEngine.textContent = data.engine || data.fuelType || '-';
+        }
+        
+        const mobileTrans = document.getElementById('mobileTransmissionSpec');
+        if (mobileTrans) {
+          mobileTrans.textContent = data.transmission || '-';
+        }
+        
+        const mobileDrive = document.getElementById('mobileDriveTypeSpec');
+        if (mobileDrive) {
+          mobileDrive.textContent = data.driveType || '-';
+        }
+      }
+      
+      // Mobile version of sanitizeVIN
+      function sanitizeMobileVIN(raw) {
+        if (!raw) return null;
+        const cleaned = raw.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '');
+        return cleaned.length === 17 ? cleaned : null;
       }
       
       // Mobile version of initPaymentWidget
@@ -1470,29 +1543,37 @@
         const vin = urlParams.get('vin');
         const plate = urlParams.get('plate');
         
+        const urlParams = new URLSearchParams(window.location.search);
+        const vin = urlParams.get('vin');
+        const plate = urlParams.get('plate');
+        
         if (vin) {
-          if (typeof sanitizeVIN === 'function') {
-            const sanitized = sanitizeVIN(vin);
+          const sanitized = sanitizeMobileVIN(vin);
+          const mobileVinDisplay = document.getElementById('mobileVinDisplay');
+          if (mobileVinDisplay) {
             if (sanitized) {
-              document.getElementById('mobileVinDisplay').textContent = sanitized;
+              mobileVinDisplay.textContent = sanitized;
               loadMobileReportData(sanitized, 'vin');
             } else {
-              document.getElementById('mobileVinDisplay').textContent = 'Invalid VIN';
+              mobileVinDisplay.textContent = 'Invalid VIN';
             }
-          } else {
-            document.getElementById('mobileVinDisplay').textContent = vin.toUpperCase();
-            loadMobileReportData(vin, 'vin');
           }
         } else if (plate) {
           const parts = plate.split('-');
-          if (parts.length === 2) {
-            document.getElementById('mobileVinDisplay').textContent = plate;
-            loadMobileReportData(plate, 'plate');
-          } else {
-            document.getElementById('mobileVinDisplay').textContent = 'No VIN or Plate provided';
+          const mobileVinDisplay = document.getElementById('mobileVinDisplay');
+          if (mobileVinDisplay) {
+            if (parts.length === 2) {
+              mobileVinDisplay.textContent = plate;
+              loadMobileReportData(plate, 'plate');
+            } else {
+              mobileVinDisplay.textContent = 'No VIN or Plate provided';
+            }
           }
         } else {
-          document.getElementById('mobileVinDisplay').textContent = 'No VIN or Plate provided';
+          const mobileVinDisplay = document.getElementById('mobileVinDisplay');
+          if (mobileVinDisplay) {
+            mobileVinDisplay.textContent = 'No VIN or Plate provided';
+          }
         }
         
         setTimeout(initMobilePaymentWidget, 2000);
