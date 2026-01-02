@@ -142,6 +142,10 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  -webkit-text-stroke: 2px #FFD700;
+  text-stroke: 2px #FFD700;
+  -webkit-text-fill-color: #000000;
+  text-fill-color: #000000;
 }
 
 .mobile-device .mobile-only .mobile-title-line {
@@ -151,6 +155,10 @@
   line-height: 0.7 !important;
   margin: 0;
   padding: 0;
+  -webkit-text-stroke: 2px #FFD700;
+  text-stroke: 2px #FFD700;
+  -webkit-text-fill-color: #000000;
+  text-fill-color: #000000;
 }
 
 .mobile-device .mobile-only .mobile-title-line:not(:first-child) {
