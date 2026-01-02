@@ -123,7 +123,7 @@
 .mobile-device .mobile-only .mobile-hero-text {
   position: absolute;
   top: 20px;
-  left: calc(20px + 3cm);
+  left: calc(20px + 3.5cm);
   right: 20px;
   z-index: 10;
   text-align: left;
