@@ -141,19 +141,6 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  text-shadow: 
-    -2px -2px 0 #FFD700,
-    2px -2px 0 #FFD700,
-    -2px 2px 0 #FFD700,
-    2px 2px 0 #FFD700,
-    -2px 0 0 #FFD700,
-    2px 0 0 #FFD700,
-    0 -2px 0 #FFD700,
-    0 2px 0 #FFD700,
-    -1px -1px 0 #FFD700,
-    1px -1px 0 #FFD700,
-    -1px 1px 0 #FFD700,
-    1px 1px 0 #FFD700;
 }
 
 .mobile-device .mobile-only .mobile-title-line {
