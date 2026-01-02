@@ -138,14 +138,22 @@
   color: #000000 !important;
   margin: 0 0 12px 0;
   text-transform: none;
-  text-shadow: none;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   gap: 0;
-  background: #FFD700;
-  padding: 8px 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  text-shadow: 
+    -2px -2px 0 #FFD700,
+    2px -2px 0 #FFD700,
+    -2px 2px 0 #FFD700,
+    2px 2px 0 #FFD700,
+    -2px 0 0 #FFD700,
+    2px 0 0 #FFD700,
+    0 -2px 0 #FFD700,
+    0 2px 0 #FFD700,
+    -1px -1px 0 #FFD700,
+    1px -1px 0 #FFD700,
+    -1px 1px 0 #FFD700,
+    1px 1px 0 #FFD700;
 }
 
 .mobile-device .mobile-only .mobile-title-line {
