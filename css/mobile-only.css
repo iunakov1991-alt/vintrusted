@@ -117,19 +117,28 @@
   align-items: center;
   gap: 24px;
   max-width: 100%;
+  position: relative;
 }
 
 .mobile-device .mobile-only .mobile-hero-text {
-  text-align: center;
-  width: 100%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 10;
+  text-align: left;
+  width: auto;
+  pointer-events: none;
 }
 
 .mobile-device .mobile-only .mobile-hero-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
   line-height: 1.2;
   color: #1a1a1a;
   margin: 0 0 12px 0;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
 }
 
 .mobile-device .mobile-only .mobile-hero-subtitle {
