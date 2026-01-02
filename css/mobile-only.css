@@ -141,16 +141,20 @@
   text-shadow: none;
   display: flex;
   flex-direction: column;
-  gap: -5px;
+  gap: 0;
 }
 
 .mobile-device .mobile-only .mobile-title-line {
   display: block;
   white-space: nowrap;
   color: #000000 !important;
-  line-height: 0.7;
+  line-height: 0.7 !important;
   margin: 0;
   padding: 0;
+}
+
+.mobile-device .mobile-only .mobile-title-line:not(:first-child) {
+  margin-top: -8px;
 }
 
 .mobile-device .mobile-only .mobile-hero-subtitle {
