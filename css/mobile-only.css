@@ -153,7 +153,7 @@
 
 .mobile-device .mobile-only .mobile-hero-mockup {
   width: 100%;
-  max-width: 280px;
+  max-width: 320px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -163,7 +163,7 @@
 .mobile-device .mobile-only .mobile-hero-mockup .mobile-mockup-image {
   width: 100%;
   height: auto;
-  max-width: 280px;
+  max-width: 320px;
   object-fit: contain;
 }
 
