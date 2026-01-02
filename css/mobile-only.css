@@ -146,6 +146,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: -1cm;
 }
 
 .mobile-device .mobile-only .mobile-hero-mockup .mobile-mockup-image {
