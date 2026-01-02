@@ -154,7 +154,7 @@
 }
 
 .mobile-device .mobile-only .mobile-title-line:not(:first-child) {
-  margin-top: -8px;
+  margin-top: -16px;
 }
 
 .mobile-device .mobile-only .mobile-hero-subtitle {
