@@ -265,27 +265,9 @@
 }
 
 /* ==================== MOBILE MOCKUP: iPhone with Honda ==================== */
+/* Mockup now integrated into hero section */
 .mobile-device .mobile-only .mobile-mockup {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.mobile-device .mobile-only .mobile-mockup-container {
-  position: relative;
-  width: 100%;
-  max-width: 350px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.mobile-device .mobile-only .mobile-mockup-image {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  object-fit: contain;
+  display: none; /* Hidden, now part of hero */
 }
 
 /* ==================== MOBILE SECOND SCREEN: SAMPLE REPORT ==================== */
