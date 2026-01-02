@@ -139,6 +139,12 @@
   margin: 0 0 12px 0;
   text-transform: none;
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+  white-space: pre-line;
+}
+
+.mobile-device .mobile-only .mobile-hero-title br {
+  display: block;
+  content: "";
 }
 
 .mobile-device .mobile-only .mobile-hero-subtitle {
