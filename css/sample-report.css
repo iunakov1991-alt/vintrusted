@@ -828,6 +828,14 @@
 .vin-popup {
   position: relative;
   overflow: hidden;
+  border-radius: 32px;
+  padding: 48px;
+  max-width: 520px;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s ease;
 }
 
 .vin-popup-bg {
@@ -843,17 +851,6 @@
 .vin-popup-overlay.active {
   opacity: 1;
   visibility: visible;
-}
-
-.vin-popup {
-  position: relative;
-  border-radius: 32px;
-  padding: 48px;
-  max-width: 520px;
-  width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  transform: scale(0.9) translateY(20px);
-  transition: all 0.3s ease;
 }
 
 .vin-popup-overlay.active .vin-popup {
