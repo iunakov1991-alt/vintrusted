@@ -226,7 +226,7 @@
 .mobile-device .mobile-only .mobile-hero-mockup-wrapper {
   position: relative;
   width: 100%;
-  max-width: 308px;
+  max-width: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -244,25 +244,21 @@
 
 .mobile-device .mobile-only .mobile-hero-mockup {
   width: 100%;
-  max-width: 308px;
+  max-width: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 1000px;
-  -webkit-perspective: 1000px;
   position: relative;
 }
 
 .mobile-device .mobile-only .mobile-hero-mockup .mobile-mockup-image {
   width: 100%;
   height: auto;
-  max-width: 308px;
+  max-width: 280px;
   object-fit: contain;
-  transform: translateZ(50px) scale(1.05) rotateY(15deg);
-  -webkit-transform: translateZ(50px) scale(1.05) rotateY(15deg);
-  -ms-transform: translateZ(50px) scale(1.05) rotateY(15deg);
-  transition: transform 0.3s ease;
-  -webkit-transition: -webkit-transform 0.3s ease;
+  transform: none;
+  -webkit-transform: none;
+  -ms-transform: none;
 }
 
 .mobile-device .mobile-only .mobile-warning-emoji {
