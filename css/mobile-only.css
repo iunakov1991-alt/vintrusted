@@ -223,13 +223,22 @@
   width: 100%;
 }
 
-.mobile-device .mobile-only .mobile-hero-mockup {
+.mobile-device .mobile-only .mobile-hero-mockup-wrapper {
+  position: relative;
   width: 100%;
   max-width: 308px;
   display: flex;
   justify-content: center;
   align-items: center;
   transform: translateX(-1.5cm);
+}
+
+.mobile-device .mobile-only .mobile-hero-mockup {
+  width: 100%;
+  max-width: 308px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   perspective: 1000px;
   -webkit-perspective: 1000px;
   position: relative;
@@ -266,6 +275,8 @@
   padding: 0 !important;
   transform: none !important;
   -webkit-transform: none !important;
+  color: #FFD700 !important;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* ==================== MOBILE RED TRIANGLE ==================== */
