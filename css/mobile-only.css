@@ -230,6 +230,8 @@
   justify-content: center;
   align-items: center;
   transform: translateX(-1.5cm);
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
 }
 
 .mobile-device .mobile-only .mobile-hero-mockup .mobile-mockup-image {
@@ -237,6 +239,11 @@
   height: auto;
   max-width: 308px;
   object-fit: contain;
+  transform: translateZ(50px) scale(1.05);
+  -webkit-transform: translateZ(50px) scale(1.05);
+  -ms-transform: translateZ(50px) scale(1.05);
+  transition: transform 0.3s ease;
+  -webkit-transition: -webkit-transform 0.3s ease;
 }
 
 /* ==================== MOBILE RED TRIANGLE ==================== */
