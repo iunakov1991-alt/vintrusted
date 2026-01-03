@@ -232,6 +232,7 @@
   transform: translateX(-1.5cm);
   perspective: 1000px;
   -webkit-perspective: 1000px;
+  position: relative;
 }
 
 .mobile-device .mobile-only .mobile-hero-mockup .mobile-mockup-image {
@@ -244,6 +245,17 @@
   -ms-transform: translateZ(50px) scale(1.05) rotateY(15deg);
   transition: transform 0.3s ease;
   -webkit-transition: -webkit-transform 0.3s ease;
+}
+
+.mobile-device .mobile-only .mobile-warning-emoji {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 32px;
+  z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  -webkit-filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
 }
 
 /* ==================== MOBILE RED TRIANGLE ==================== */
