@@ -142,11 +142,12 @@
   flex-direction: column;
   gap: 0;
   background: #FFD700;
-  padding: 16px 20px;
+  padding: 18px 24px;
   border-radius: 24px;
   position: relative;
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
   max-width: 100%;
+  min-width: fit-content;
   box-sizing: border-box;
 }
 
@@ -171,6 +172,7 @@
   line-height: 0.7 !important;
   margin: 0;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .mobile-device .mobile-only .mobile-title-line:not(:first-child) {
