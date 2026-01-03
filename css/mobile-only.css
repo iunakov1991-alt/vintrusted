@@ -132,7 +132,7 @@
 }
 
 .mobile-device .mobile-only .mobile-hero-title {
-  font-size: 28px;
+  font-size: 28px !important;
   font-weight: 900;
   line-height: 0.7;
   color: #000000 !important;
@@ -149,6 +149,17 @@
   max-width: 100%;
   min-width: fit-content;
   box-sizing: border-box;
+}
+
+.mobile-device .mobile-only .mobile-title-line {
+  display: block;
+  white-space: nowrap;
+  color: #000000 !important;
+  line-height: 0.7 !important;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+  font-size: inherit !important;
 }
 
 .mobile-device .mobile-only .mobile-hero-title::before {
