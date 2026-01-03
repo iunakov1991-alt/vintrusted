@@ -1527,56 +1527,61 @@
         }
       }
       
-      // Initialize mobile report
+      // Initialize mobile report - ONLY ON MOBILE DEVICES
       (function() {
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function() {
-            renderMobileReportItems();
-            initMobilePaymentWidget();
-          });
-        } else {
-          renderMobileReportItems();
-          initMobilePaymentWidget();
+        // Check if this is a mobile device
+        if (!document.documentElement.classList.contains('mobile-device')) {
+          console.log('[MOBILE-REPORT] Not a mobile device, skipping mobile report initialization');
+          return;
         }
         
-        const urlParams = new URLSearchParams(window.location.search);
-        const vin = urlParams.get('vin');
-        const plate = urlParams.get('plate');
+        console.log('[MOBILE-REPORT] Mobile device detected, initializing mobile report');
         
-        const urlParams = new URLSearchParams(window.location.search);
-        const vin = urlParams.get('vin');
-        const plate = urlParams.get('plate');
-        
-        if (vin) {
-          const sanitized = sanitizeMobileVIN(vin);
-          const mobileVinDisplay = document.getElementById('mobileVinDisplay');
-          if (mobileVinDisplay) {
-            if (sanitized) {
-              mobileVinDisplay.textContent = sanitized;
-              loadMobileReportData(sanitized, 'vin');
-            } else {
-              mobileVinDisplay.textContent = 'Invalid VIN';
+        function initMobileReport() {
+          renderMobileReportItems();
+          initMobilePaymentWidget();
+          
+          const urlParams = new URLSearchParams(window.location.search);
+          const vin = urlParams.get('vin');
+          const plate = urlParams.get('plate');
+          
+          if (vin) {
+            const sanitized = sanitizeMobileVIN(vin);
+            const mobileVinDisplay = document.getElementById('mobileVinDisplay');
+            if (mobileVinDisplay) {
+              if (sanitized) {
+                mobileVinDisplay.textContent = sanitized;
+                loadMobileReportData(sanitized, 'vin');
+              } else {
+                mobileVinDisplay.textContent = 'Invalid VIN';
+              }
             }
-          }
-        } else if (plate) {
-          const parts = plate.split('-');
-          const mobileVinDisplay = document.getElementById('mobileVinDisplay');
-          if (mobileVinDisplay) {
-            if (parts.length === 2) {
-              mobileVinDisplay.textContent = plate;
-              loadMobileReportData(plate, 'plate');
-            } else {
+          } else if (plate) {
+            const parts = plate.split('-');
+            const mobileVinDisplay = document.getElementById('mobileVinDisplay');
+            if (mobileVinDisplay) {
+              if (parts.length === 2) {
+                mobileVinDisplay.textContent = plate;
+                loadMobileReportData(plate, 'plate');
+              } else {
+                mobileVinDisplay.textContent = 'No VIN or Plate provided';
+              }
+            }
+          } else {
+            const mobileVinDisplay = document.getElementById('mobileVinDisplay');
+            if (mobileVinDisplay) {
               mobileVinDisplay.textContent = 'No VIN or Plate provided';
             }
           }
-        } else {
-          const mobileVinDisplay = document.getElementById('mobileVinDisplay');
-          if (mobileVinDisplay) {
-            mobileVinDisplay.textContent = 'No VIN or Plate provided';
-          }
+          
+          setTimeout(initMobilePaymentWidget, 2000);
         }
         
-        setTimeout(initMobilePaymentWidget, 2000);
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initMobileReport);
+        } else {
+          initMobileReport();
+        }
       })();
         })();
     </script>
