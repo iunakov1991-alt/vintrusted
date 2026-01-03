@@ -397,7 +397,8 @@
 .mobile-device .mobile-only .mobile-payment-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 12px;
   margin: 24px 0 16px 0;
   padding: 0;
 }
@@ -407,7 +408,6 @@
   font-weight: 700;
   color: #1a1a1a;
   margin: 0;
-  flex: 1;
 }
 
 .mobile-device .mobile-only .mobile-price-badge-report {
