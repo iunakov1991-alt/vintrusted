@@ -591,6 +591,80 @@
             overflow-x: hidden;
             padding-top: 20px; /* align top with left column padding */
         }
+        
+        /* Payment Header */
+        .desktop-only .payment-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 0 0 20px 0;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .desktop-only .payment-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+        }
+        
+        .desktop-only .price-badge-report {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .desktop-only .price-badge-report .price-badge-icon {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .desktop-only .price-badge-report .price-badge-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+        
+        .desktop-only .price-badge-report .price-badge-price {
+            font-size: 32px;
+            font-weight: 900;
+            color: #000;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+            line-height: 1;
+        }
+        
+        .desktop-only .price-badge-report .price-badge-subtext {
+            font-size: 10px;
+            font-weight: 600;
+            color: #000;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+            line-height: 1;
+            text-transform: lowercase;
+        }
+        
+        /* Remove payment section background */
+        .desktop-only #vin-pay {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
 
         /* Payment form - NO background, borders or padding */
         .desktop-only #vin-pay {
