@@ -14,7 +14,6 @@ function showVinPopup() {
 
 (function() {
   const overlay = document.getElementById('vinPopupOverlay');
-  const openBtn = document.getElementById('openVinPopup');
   const closeBtn = document.getElementById('closeVinPopup');
   const vinInput = document.getElementById('vinInput');
   const vinCounter = document.querySelector('.vin-input-counter');
@@ -22,12 +21,19 @@ function showVinPopup() {
 
   if (!overlay) return;
 
-  // Open popup via button if exists
-  if (openBtn) {
-  openBtn.addEventListener('click', () => {
+  // Open popup via ALL "Check VIN" buttons
+  const openButtons = [
+    document.getElementById('openVinPopup'),
+    ...document.querySelectorAll('.sample-report-btn'),
+    ...document.querySelectorAll('.vin-check-btn')
+  ].filter(btn => btn !== null);
+  
+  openButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       showVinPopup();
     });
-  }
+  });
 
   // Close popup
   function closePopup() {
