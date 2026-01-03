@@ -1048,7 +1048,11 @@ button.vin-popup-submit[type="submit"] {
 }
 
 .variant-dark .vin-popup-title {
-  color: #ffffff;
+  color: #ffffff !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: unset !important;
 }
 
 /* Light Variant - White title with yellow accent */
