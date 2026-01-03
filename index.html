@@ -35,6 +35,11 @@
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="qDo-C4vI8pcD0DjwRgrLnsJkB_3dWwBs8WCPe_nBLrY">
     
+    <!-- Preload critical mobile resources -->
+    <link rel="preload" as="image" href="/Frame8mproz.webp" media="(max-width: 1023px)" fetchpriority="high">
+    <link rel="preload" as="style" href="/css/mobile-only.css?v=103" media="(max-width: 1023px)">
+    <link rel="preload" as="script" href="/public/mobile-only.js?v=8" media="(max-width: 1023px)">
+    
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -197,10 +202,10 @@
     <link rel="stylesheet" href="styles.css?v=113">
     
     <!-- ADAPTIVE SYSTEM: Controls desktop/mobile visibility -->
-    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=7">
+    <link rel="stylesheet" href="/css/mobile-adaptive.css?v=8">
     
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
-    <link rel="stylesheet" href="/css/mobile-only.css?v=102" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/css/mobile-only.css?v=103" media="(max-width: 1023px)">
     
     <!-- DESKTOP-ONLY STYLES (old mobile.css kept for backwards compatibility) -->
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
@@ -3608,7 +3613,7 @@
                 </div>
                 <div class="mobile-hero-mockup-wrapper">
                     <div class="mobile-hero-mockup">
-                        <img src="/Frame8mproz.webp" alt="iPhone with Honda" class="mobile-mockup-image">
+                        <img src="/Frame8mproz.webp" alt="iPhone with Honda" class="mobile-mockup-image" loading="eager" fetchpriority="high" width="280" height="570">
                     </div>
                 </div>
                 <span class="mobile-warning-emoji">⚠️</span>
@@ -3643,9 +3648,9 @@
         
         <!-- Mobile Trust Badges -->
         <section class="mobile-trust-badges">
-            <img src="/nmvtis-logo@2x.png" alt="NMVTIS" class="mobile-trust-badge">
-            <img src="/guar-Photoroom.png" alt="Coat of Arms" class="mobile-trust-badge">
-            <img src="/nhts.png" alt="NHTSA" class="mobile-trust-badge">
+            <img src="/nmvtis-logo@2x.png" alt="NMVTIS" class="mobile-trust-badge" loading="lazy" width="120" height="40">
+            <img src="/guar-Photoroom.png" alt="Coat of Arms" class="mobile-trust-badge" loading="lazy" width="80" height="80">
+            <img src="/nhts.png" alt="NHTSA" class="mobile-trust-badge" loading="lazy" width="120" height="40">
         </section>
         
         <!-- Mobile Second Screen: Sample Report -->
@@ -3656,7 +3661,7 @@
             
             <!-- Image with overlay text and button -->
             <div class="mobile-sample-image-wrapper">
-                <img src="/image4.png" alt="Car History Report" class="mobile-sample-image">
+                <img src="/image4.png" alt="Car History Report" class="mobile-sample-image" loading="lazy" width="400" height="600">
                 <p class="mobile-sample-text">
                     Nearly 40% of used cars have documented accident damage, and 20% carry active safety recalls. Free VIN check reveals hidden damage, odometer fraud, and title issues before you buy.
                 </p>

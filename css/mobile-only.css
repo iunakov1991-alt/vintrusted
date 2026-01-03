@@ -123,12 +123,30 @@
 .mobile-device .mobile-only .mobile-hero-text {
   position: absolute;
   top: 20px;
-  left: calc(20px + 4cm);
-  right: 20px;
+  left: calc(50% - 140px + 40vw);
   z-index: 1000;
   text-align: left;
   width: auto;
   pointer-events: none;
+}
+
+/* Адаптивное позиционирование для разных размеров экранов */
+@media (max-width: 400px) {
+  .mobile-device .mobile-only .mobile-hero-text {
+    left: calc(50% - 140px + 38vw);
+  }
+}
+
+@media (min-width: 401px) and (max-width: 500px) {
+  .mobile-device .mobile-only .mobile-hero-text {
+    left: calc(50% - 140px + 40vw);
+  }
+}
+
+@media (min-width: 501px) {
+  .mobile-device .mobile-only .mobile-hero-text {
+    left: calc(50% - 140px + 42vw);
+  }
 }
 
 .mobile-device .mobile-only .mobile-hero-title {
@@ -264,7 +282,7 @@
 .mobile-device .mobile-only .mobile-warning-emoji {
   position: absolute !important;
   top: calc(120px - 2cm) !important;
-  left: calc(50% - 154px - 1.5cm + 40px + 3.3cm) !important;
+  left: calc(50% - 154px - 1.5cm + 40px + 3.3cm + 2mm) !important;
   font-size: 32px !important;
   z-index: 10000 !important;
   filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6)) drop-shadow(0 0 12px rgba(255, 0, 0, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
