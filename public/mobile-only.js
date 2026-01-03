@@ -18,6 +18,85 @@
   console.log('[MOBILE-ONLY] Mobile device detected, ready for initialization');
   
   /**
+   * A/B ТЕСТ: Кружок с ценой
+   * =======================
+   * Варианты:
+   * A (control): без кружка с ценой
+   * B (variant): с кружком с ценой
+   */
+  var AB_TEST_NAME = 'price_badge_test';
+  var AB_TEST_STORAGE_KEY = 'ab_test_price_badge';
+  
+  function getABTestVariant() {
+    // Проверяем localStorage
+    var stored = localStorage.getItem(AB_TEST_STORAGE_KEY);
+    if (stored) {
+      console.log('[AB-TEST] Existing variant:', stored);
+      return stored;
+    }
+    
+    // Случайное распределение 50/50
+    var variant = Math.random() < 0.5 ? 'A' : 'B';
+    localStorage.setItem(AB_TEST_STORAGE_KEY, variant);
+    console.log('[AB-TEST] New variant assigned:', variant);
+    
+    // Отправляем событие в GTM
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        'event': 'ab_test_assigned',
+        'ab_test_name': AB_TEST_NAME,
+        'ab_test_variant': variant,
+        'timestamp': new Date().toISOString()
+      });
+      console.log('[AB-TEST] Event sent to GTM: ab_test_assigned, variant:', variant);
+    }
+    
+    return variant;
+  }
+  
+  function applyABTest() {
+    var variant = getABTestVariant();
+    var priceBadge = document.querySelector('.mobile-price-badge');
+    
+    if (variant === 'A' && priceBadge) {
+      // Вариант A: скрываем кружок
+      priceBadge.style.display = 'none';
+      console.log('[AB-TEST] Variant A: Price badge hidden');
+    } else if (variant === 'B' && priceBadge) {
+      // Вариант B: показываем кружок (уже показан по умолчанию)
+      priceBadge.style.display = 'flex';
+      console.log('[AB-TEST] Variant B: Price badge visible');
+    }
+    
+    // Отправляем событие показа страницы с вариантом
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        'event': 'ab_test_page_view',
+        'ab_test_name': AB_TEST_NAME,
+        'ab_test_variant': variant,
+        'timestamp': new Date().toISOString()
+      });
+    }
+    
+    return variant;
+  }
+  
+  function trackABTestConversion() {
+    var variant = getABTestVariant();
+    
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        'event': 'ab_test_conversion',
+        'ab_test_name': AB_TEST_NAME,
+        'ab_test_variant': variant,
+        'conversion_type': 'vin_form_submit',
+        'timestamp': new Date().toISOString()
+      });
+      console.log('[AB-TEST] Conversion tracked for variant:', variant);
+    }
+  }
+  
+  /**
    * Установить theme-color для мобилки (светло-серый)
    */
   function setMobileThemeColor() {
@@ -58,6 +137,9 @@
         input.focus();
         return;
       }
+      
+      // Отслеживаем конверсию A/B теста
+      trackABTestConversion();
       
       // Редирект на страницу отчета
       window.location.href = '/report.html?vin=' + encodeURIComponent(vin);
@@ -111,6 +193,7 @@
    */
   function init() {
     setMobileThemeColor();
+    applyABTest(); // Применяем A/B тест
     initVinForm();
     initSampleCheckButton();
     console.log('[MOBILE-ONLY] Initialization complete');
