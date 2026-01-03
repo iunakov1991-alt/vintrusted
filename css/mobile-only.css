@@ -328,14 +328,33 @@
   left: 0;
 }
 
-.mobile-device .mobile-only .mobile-price-badge-text {
+.mobile-device .mobile-only .mobile-price-badge-content {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.mobile-device .mobile-only .mobile-price-badge-price {
   font-size: 40px;
   font-weight: 900;
   color: #000;
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  line-height: 1;
+}
+
+.mobile-device .mobile-only .mobile-price-badge-subtext {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  line-height: 1;
+  text-transform: lowercase;
 }
 
 .mobile-device .mobile-only .mobile-vin-form-container {

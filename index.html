@@ -200,7 +200,7 @@
     <link rel="stylesheet" href="/css/mobile-adaptive.css?v=7">
     
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
-    <link rel="stylesheet" href="/css/mobile-only.css?v=98" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/css/mobile-only.css?v=99" media="(max-width: 1023px)">
     
     <!-- DESKTOP-ONLY STYLES (old mobile.css kept for backwards compatibility) -->
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
@@ -3628,7 +3628,10 @@
                 <svg class="mobile-price-badge-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="50" cy="50" r="45" fill="#FFD700"/>
                 </svg>
-                <span class="mobile-price-badge-text">$3</span>
+                <div class="mobile-price-badge-content">
+                    <span class="mobile-price-badge-price">$3</span>
+                    <span class="mobile-price-badge-subtext">per report</span>
+                </div>
             </div>
             <form class="mobile-vin-form-container" id="mobile-vin-form">
                 <input type="text" class="mobile-vin-input" placeholder="ENTER VIN CODE HERE" maxlength="17" autocomplete="off" id="mobile-vin-input">
