@@ -267,8 +267,8 @@
 
 .mobile-device .mobile-only .mobile-warning-emoji {
   position: absolute !important;
-  top: calc(120px - 1.5cm) !important;
-  left: calc(50% - 154px - 1.5cm + 40px + 2.5cm) !important;
+  top: calc(120px - 2cm) !important;
+  left: calc(50% - 154px - 1.5cm + 40px + 3cm) !important;
   font-size: 32px !important;
   z-index: 10000 !important;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
