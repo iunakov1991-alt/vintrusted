@@ -310,7 +310,7 @@
 
 .mobile-device .mobile-only .mobile-price-badge {
   position: absolute;
-  top: calc(-25px - 3cm);
+  top: calc(-25px - 6cm);
   right: 20px;
   width: 120px;
   height: 120px;
