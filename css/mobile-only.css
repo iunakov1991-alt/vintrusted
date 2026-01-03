@@ -271,8 +271,8 @@
   left: calc(50% - 154px - 1.5cm + 40px + 3.3cm) !important;
   font-size: 32px !important;
   z-index: 10000 !important;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  -webkit-filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6)) drop-shadow(0 0 12px rgba(255, 0, 0, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  -webkit-filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.6)) drop-shadow(0 0 12px rgba(255, 0, 0, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   pointer-events: none;
   display: block !important;
   visibility: visible !important;
@@ -285,7 +285,7 @@
   transform: translateX(-1.5cm) !important;
   -webkit-transform: translateX(-1.5cm) !important;
   color: #FF0000 !important;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
   white-space: nowrap !important;
   font-style: normal !important;
 }
