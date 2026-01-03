@@ -67,6 +67,8 @@
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .mobile-device .mobile-only .mobile-vin-info {
@@ -167,6 +169,17 @@
 .mobile-device .mobile-only .mobile-vehicle-market {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.7);
+}
+
+.mobile-device .mobile-only .mobile-report-preview-image {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;
+  height: auto;
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 /* ==================== MOBILE REPORT SECTION ==================== */
