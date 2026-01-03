@@ -28,9 +28,12 @@ function showVinPopup() {
     ...document.querySelectorAll('.vin-check-btn')
   ].filter(btn => btn !== null);
   
+  console.log('[VIN POPUP] Found buttons:', openButtons.length);
+  
   openButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      console.log('[VIN POPUP] Button clicked, showing popup');
       showVinPopup();
     });
   });
