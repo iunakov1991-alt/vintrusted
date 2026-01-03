@@ -22,7 +22,7 @@
   if (typeof pdfjsLib === 'undefined') {
     console.error('[VIN PDF STACK] PDF.js library not loaded');
     if (stackEl) {
-      stackEl.innerHTML = '<div style="padding:40px;text-align:center;color:#6b7280;">PDF.js not loaded</div>';
+    stackEl.innerHTML = '<div style="padding:40px;text-align:center;color:#6b7280;">PDF.js not loaded</div>';
     }
     return;
   }
@@ -277,13 +277,13 @@
       url: pdfUrl
     });
     if (stackEl) {
-      stackEl.innerHTML = `
-        <div style="padding: 40px; text-align: center; color: #6b7280;">
-          <p style="font-size: 16px; margin-bottom: 8px;">PDF not available</p>
+    stackEl.innerHTML = `
+      <div style="padding: 40px; text-align: center; color: #6b7280;">
+        <p style="font-size: 16px; margin-bottom: 8px;">PDF not available</p>
           <p style="font-size: 14px;">Error: ${error.message || 'Unknown error'}</p>
           <p style="font-size: 12px; margin-top: 8px; color: #999;">URL: ${pdfUrl}</p>
-        </div>
-      `;
+      </div>
+    `;
     }
   }
 })();

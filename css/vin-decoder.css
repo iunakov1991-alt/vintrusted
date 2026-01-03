@@ -474,10 +474,10 @@
 
 /* First info box visible by default */
 .info-box[data-group="1"] {
-    opacity: 1;
+        opacity: 1;
     visibility: visible;
     transform: translateX(0);
-}
+    }
 
 .info-box:hover {
     border-color: #3b82f6;

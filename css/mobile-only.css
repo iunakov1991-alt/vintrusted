@@ -239,9 +239,9 @@
   height: auto;
   max-width: 308px;
   object-fit: contain;
-  transform: translateZ(50px) scale(1.05);
-  -webkit-transform: translateZ(50px) scale(1.05);
-  -ms-transform: translateZ(50px) scale(1.05);
+  transform: translateZ(50px) scale(1.05) rotateY(-15deg);
+  -webkit-transform: translateZ(50px) scale(1.05) rotateY(-15deg);
+  -ms-transform: translateZ(50px) scale(1.05) rotateY(-15deg);
   transition: transform 0.3s ease;
   -webkit-transition: -webkit-transform 0.3s ease;
 }

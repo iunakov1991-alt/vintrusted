@@ -24,7 +24,7 @@ function showVinPopup() {
 
   // Open popup via button if exists
   if (openBtn) {
-    openBtn.addEventListener('click', () => {
+  openBtn.addEventListener('click', () => {
       showVinPopup();
     });
   }
