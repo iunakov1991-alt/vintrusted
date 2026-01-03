@@ -175,11 +175,14 @@
   position: absolute;
   right: -20px;
   top: 50%;
-  transform: translateY(-50%);
-  width: 140px;
+  transform: translateY(-50%) perspective(1000px) translateZ(30px) scale(0.95) rotateY(-15deg);
+  -webkit-transform: translateY(-50%) perspective(1000px) translateZ(30px) scale(0.95) rotateY(-15deg);
+  width: 120px;
   height: auto;
   opacity: 0.9;
   pointer-events: none;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
 /* ==================== MOBILE REPORT SECTION ==================== */

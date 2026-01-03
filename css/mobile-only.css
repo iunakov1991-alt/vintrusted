@@ -381,6 +381,8 @@
   min-height: 70px !important;
   display: flex !important;
   align-items: center !important;
+  transition: border-color 0.3s ease !important;
+  -webkit-transition: border-color 0.3s ease !important;
 }
 
 .mobile-device .mobile-only .mobile-vin-input:focus {
