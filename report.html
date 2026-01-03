@@ -50,7 +50,7 @@
     <script src="/public/vin-stripe.js?v=25"></script>
     
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
-    <link rel="stylesheet" href="/css/mobile-report.css?v=2" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/css/mobile-report.css?v=3" media="(max-width: 1023px)">
     <style>
         /* DESKTOP-ONLY STYLES - Scoped to desktop-only container */
         .desktop-only * {
@@ -1312,6 +1312,23 @@
                 <div class="mobile-report-items" id="mobileReportItems">
                     <!-- Items will be populated by JavaScript -->
                 </div>
+                <button class="mobile-show-more-btn" id="mobileShowMoreBtn" style="display: none;">
+                    Show full list
+                </button>
+                
+                <!-- Mobile Payment Section Header -->
+                <div class="mobile-payment-header">
+                    <h3 class="mobile-payment-title">Get full VIN report</h3>
+                    <div class="mobile-price-badge-report">
+                        <svg class="mobile-price-badge-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#FFD700"/>
+                        </svg>
+                        <div class="mobile-price-badge-content">
+                            <span class="mobile-price-badge-price">$3</span>
+                            <span class="mobile-price-badge-subtext">per report</span>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Mobile Payment Form -->
                 <div class="mobile-payment-section">
@@ -1361,7 +1378,13 @@
           return;
         }
         
-        container.innerHTML = reportItemsData.map(item => {
+        const showMoreBtn = document.getElementById('mobileShowMoreBtn');
+        let showAll = false;
+        
+        function renderItems() {
+          const itemsToShow = showAll ? reportItemsData : reportItemsData.slice(0, 6);
+          
+          container.innerHTML = itemsToShow.map(item => {
           const chipClass = item.highlight ? 'mobile-report-chip highlight-warning' : 'mobile-report-chip';
           const statusClass = item.status || 'needs-unlock';
           const statusColor = item.statusColor || 'yellow';
@@ -1398,7 +1421,28 @@
               </div>
             </div>
           `;
-        }).join('');
+          }).join('');
+          
+          // Show/hide "Show more" button
+          if (reportItemsData.length > 6 && showMoreBtn) {
+            if (showAll) {
+              showMoreBtn.style.display = 'none';
+            } else {
+              showMoreBtn.style.display = 'block';
+              showMoreBtn.textContent = 'Show full list (' + (reportItemsData.length - 6) + ' more)';
+            }
+          }
+        }
+        
+        renderItems();
+        
+        // Add event listener to show more button
+        if (showMoreBtn) {
+          showMoreBtn.addEventListener('click', function() {
+            showAll = true;
+            renderItems();
+          });
+        }
       }
       
       // Mobile version of loadReportData - standalone function
