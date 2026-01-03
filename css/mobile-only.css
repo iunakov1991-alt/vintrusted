@@ -233,6 +233,15 @@
   transform: translateX(-1.5cm);
 }
 
+.mobile-device .mobile-only .mobile-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 100%;
+  position: relative;
+}
+
 .mobile-device .mobile-only .mobile-hero-mockup {
   width: 100%;
   max-width: 308px;
@@ -259,7 +268,7 @@
 .mobile-device .mobile-only .mobile-warning-emoji {
   position: absolute !important;
   top: 20px !important;
-  right: 20px !important;
+  right: calc(50% - 154px + 20px) !important;
   font-size: 32px !important;
   z-index: 10000 !important;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
@@ -273,10 +282,11 @@
   height: auto !important;
   margin: 0 !important;
   padding: 0 !important;
-  transform: none !important;
-  -webkit-transform: none !important;
+  transform: translateX(-1.5cm) !important;
+  -webkit-transform: translateX(-1.5cm) !important;
   color: #FFD700 !important;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  white-space: nowrap !important;
 }
 
 /* ==================== MOBILE RED TRIANGLE ==================== */
