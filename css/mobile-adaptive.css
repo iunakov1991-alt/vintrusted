@@ -216,10 +216,8 @@
  */
 
 /* ==================== SHARED ELEMENTS (visible on both) ==================== */
-.vin-popup-overlay,
-.reviewPopupOverlay,
-[class*="popup"] {
-  /* Popups are shared between desktop and mobile */
+/* Popups are shared between desktop and mobile - controlled by JS via .active class */
+.reviewPopupOverlay {
   display: none; /* Hidden by default, shown via JS */
 }
 
