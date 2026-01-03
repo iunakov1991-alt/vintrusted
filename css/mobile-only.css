@@ -149,6 +149,7 @@
   max-width: 100%;
   min-width: fit-content;
   box-sizing: border-box;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .mobile-device .mobile-only .mobile-title-line {
