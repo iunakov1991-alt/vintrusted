@@ -150,16 +150,18 @@
   box-sizing: border-box;
 }
 
-.mobile-device .mobile-only .mobile-hero-title::after {
+.mobile-device .mobile-only .mobile-hero-title::before {
   content: '';
   position: absolute;
-  left: -10px;
+  left: -14px;
   top: 60%;
-  transform: translateY(-50%) rotate(45deg);
-  width: 20px;
-  height: 20px;
-  background: #FFD700;
-  border-radius: 0 0 0 4px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 14px solid #FFD700;
+  filter: drop-shadow(2px 0 2px rgba(0, 0, 0, 0.1));
 }
 
 .mobile-device .mobile-only .mobile-title-line {
