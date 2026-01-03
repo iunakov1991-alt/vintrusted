@@ -108,7 +108,7 @@
 
 /* ==================== MOBILE HERO SECTION ==================== */
 .mobile-device .mobile-only .mobile-hero {
-  padding: 32px 20px;
+  padding: 32px 20px 4px 20px;
 }
 
 .mobile-device .mobile-only .mobile-hero-content {
@@ -297,7 +297,7 @@
   border-left: 40px solid transparent;
   border-right: 40px solid transparent;
   border-top: 20px solid #FF0000;
-  margin: 4px auto 0;
+  margin: 0 auto;
   display: block;
 }
 
