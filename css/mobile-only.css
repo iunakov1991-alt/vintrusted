@@ -310,10 +310,10 @@
 
 .mobile-device .mobile-only .mobile-price-badge {
   position: absolute;
-  top: -25px;
+  top: calc(-25px - 3cm);
   right: 20px;
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -331,7 +331,7 @@
 .mobile-device .mobile-only .mobile-price-badge-text {
   position: relative;
   z-index: 1;
-  font-size: 20px;
+  font-size: 40px;
   font-weight: 900;
   color: #000;
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
