@@ -50,7 +50,7 @@
     <script src="/public/vin-stripe.js?v=25"></script>
     
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
-    <link rel="stylesheet" href="/css/mobile-report.css?v=4" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/css/mobile-report.css?v=5" media="(max-width: 1023px)">
     <style>
         /* DESKTOP-ONLY STYLES - Scoped to desktop-only container */
         .desktop-only * {
@@ -444,11 +444,28 @@
             border-color: #fb923c;
         }
 
-        .desktop-only .report-chip-icon {
+        .desktop-only .report-chip .status-icon {
             width: 12px;
             height: 12px;
-            color: #667eea;
+            border-radius: 50%;
             flex-shrink: 0;
+        }
+        
+        .desktop-only .report-chip .status-icon.yellow {
+            background: #f59e0b;
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.6), 0 0 0 3px rgba(245, 158, 11, 0.1);
+            animation: pulse-yellow 2s ease-in-out infinite;
+        }
+        
+        .desktop-only .report-chip .status-icon.green {
+            background: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6), 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .desktop-only .report-chip .status-icon.red {
+            background: #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.6), 0 0 0 3px rgba(239, 68, 68, 0.1);
+            animation: pulse-red 2s ease-in-out infinite;
         }
 
         .desktop-only .report-chip-text {
@@ -698,8 +715,8 @@
                         
                         <!-- Report Preview Image -->
                         <img src="mok1-portrait.png" alt="Report Preview" class="report-preview-image">
+                    </div>
                 </div>
-            </div>
 
                 <!-- Report Items -->
                 <h3 class="report-section-title">Potential risk indicators detected</h3>
@@ -707,7 +724,7 @@
                 <div class="report-items" id="reportItems">
                     <!-- Items will be populated by JavaScript -->
             </div>
-            
+
                 <!-- New VIN Button and Features -->
                 <div class="bottom-actions">
                     <a href="index.html" class="new-vin-btn">
@@ -719,12 +736,26 @@
                     </a>
                     <div class="features-text">
                         Instant access • Downloadable PDF • No account required
+                    </div>
+                </div>
+            </div>
+            
+        <!-- Right Column: Payment Form -->
+            <div class="right-column">
+            <!-- Payment Header -->
+            <div class="payment-header">
+                <h3 class="payment-title">Get full VIN report</h3>
+                <div class="price-badge-report">
+                    <svg class="price-badge-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="#FFD700"/>
+                    </svg>
+                    <div class="price-badge-content">
+                        <span class="price-badge-price">$3</span>
+                        <span class="price-badge-subtext">per report</span>
                 </div>
             </div>
         </div>
 
-        <!-- Right Column: Payment Form -->
-            <div class="right-column">
             <!-- PAYMENT_CONTAINER_START -->
             <div id="vin-pay" style="position: relative;">
                 <!-- Terms Overlay will be injected by vin-stripe.js after form mounts -->
@@ -858,9 +889,7 @@
                 return `
                     <div class="report-item">
                         <div class="${chipClass}">
-                            <svg class="report-chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                ${iconSvg}
-                            </svg>
+                            <span class="status-icon ${statusColor}"></span>
                             <span class="report-chip-text">${item.title}</span>
                         </div>
                         <div class="report-item-content">
@@ -1204,16 +1233,16 @@
             }
             
             // Render report items immediately
-            if (document.readyState === 'loading') {
+        if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function() {
                     renderReportItems();
                     initPaymentWidget();
                 });
-            } else {
+        } else {
                 renderReportItems();
-                initPaymentWidget();
-            }
-            
+            initPaymentWidget();
+        }
+        
             const urlParams = new URLSearchParams(window.location.search);
             const vin = urlParams.get('vin');
             const plate = urlParams.get('plate');
@@ -1253,7 +1282,7 @@
                 }
             }
             
-            setTimeout(initPaymentWidget, 2000);
+        setTimeout(initPaymentWidget, 2000);
         })();
     </script>
     </div><!-- End Desktop Version -->
@@ -1401,9 +1430,7 @@
           return `
             <div class="mobile-report-item">
               <div class="${chipClass}">
-                <svg class="mobile-report-chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  ${iconSvg}
-                </svg>
+                <span class="mobile-status-icon ${statusColor}"></span>
                 <span class="mobile-report-chip-text">${item.title}</span>
               </div>
               <div class="mobile-report-item-content">
