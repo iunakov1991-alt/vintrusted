@@ -329,6 +329,59 @@
                 stripe_status: verifyData?.setup_intent?.status,
                 payment_method: verifyData?.setup_intent?.payment_method
             });
+            
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ LOG CONVERSION TO INTERNAL TRACKING SYSTEM                   │
+            // └─────────────────────────────────────────────────────────────┘
+            logConversion();
+        }
+        
+        // ┌─────────────────────────────────────────────────────────────┐
+        // │ ФУНКЦИЯ: ЛОГИРОВАНИЕ КОНВЕРСИИ В ВНУТРЕННЮЮ СИСТЕМУ          │
+        // └─────────────────────────────────────────────────────────────┘
+        async function logConversion() {
+            if (!vin || !setupIntentId) {
+                console.log('[CONVERSION] ⚠️  Skipping conversion logging - missing VIN or setup_intent');
+                return;
+            }
+            
+            try {
+                // Get UTM parameters from URL or sessionStorage
+                const utmSource = urlParams.get('utm_source') || sessionStorage.getItem('utm_source') || 'direct';
+                const utmMedium = urlParams.get('utm_medium') || sessionStorage.getItem('utm_medium') || 'none';
+                const utmCampaign = urlParams.get('utm_campaign') || sessionStorage.getItem('utm_campaign') || 'none';
+                
+                const conversionData = {
+                    vin: vin,
+                    abVariant: abVariant,
+                    device: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+                    source: utmSource,
+                    medium: utmMedium,
+                    campaign: utmCampaign,
+                    sessionId: setupIntentId
+                };
+                
+                console.log('[CONVERSION] 📤 Logging conversion:', conversionData);
+                
+                const response = await fetch('/api/log-conversion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(conversionData)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('[CONVERSION] ✅ Conversion logged successfully:', result.conversionId);
+                } else {
+                    const error = await response.json();
+                    console.error('[CONVERSION] ❌ Failed to log conversion:', error);
+                }
+            } catch (error) {
+                console.error('[CONVERSION] ❌ Error logging conversion:', error);
+                // Don't block the page if logging fails
+            }
         }
 
         // ┌─────────────────────────────────────────────────────────────┐
