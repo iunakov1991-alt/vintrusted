@@ -14,16 +14,36 @@
     margin: 0 auto;
 }
 
-/* Logo Placeholder */
-.mobile-logo-placeholder {
-    background: #f3f4f6;
-    color: #9ca3af;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 16px 20px;
-    border-radius: 8px;
+/* Logo Section */
+.mobile-hero-v2-logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 12px 0;
     margin-bottom: 32px;
-    text-align: left;
+}
+
+.mobile-hero-v2-logo-img {
+    height: 32px;
+    width: auto;
+}
+
+.mobile-hero-v2-divider {
+    color: #d1d5db;
+    font-size: 24px;
+    font-weight: 200;
+    margin: 0 4px;
+}
+
+.mobile-hero-v2-logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    font-size: 10px;
+    line-height: 1.2;
+    color: #6b7280;
+    font-weight: 500;
 }
 
 /* Title */
@@ -39,11 +59,11 @@
 /* Form */
 .mobile-hero-v2-form {
     background: #ffffff;
-    border: 1px solid #e5e7eb;
+    border: 2px solid #3b82f6;
     border-radius: 12px;
     padding: 4px;
     margin-bottom: 24px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
 }
 
 .mobile-hero-v2-input {
@@ -74,7 +94,7 @@
     font-size: 16px;
     font-weight: 700;
     color: #ffffff;
-    background: #2563eb;
+    background: #3b82f6;
     border: none;
     border-radius: 8px;
     display: flex;
@@ -87,7 +107,7 @@
 }
 
 .mobile-hero-v2-btn:active {
-    background: #1d4ed8;
+    background: #2563eb;
 }
 
 .mobile-hero-v2-icon {
@@ -154,12 +174,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
     padding-top: 12px;
     border-top: 1px solid #e5e7eb;
 }
 
-.mobile-hero-v2-logo {
+.mobile-hero-v2-logo-badge {
     max-height: 40px;
     width: auto;
     opacity: 0.8;
