@@ -43,8 +43,8 @@
     <!-- UTM Tracker - Save UTM parameters to sessionStorage -->
     <script src="/public/utm-tracker.js" defer></script>
     
-    <!-- Mobile Hero V2 Form Handler -->
-    <script src="/public/mobile-hero-v2.js" defer></script>
+    <!-- Mobile Hero V3 Form Handler -->
+    <script src="/public/mobile-hero-v3.js" defer></script>
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -217,8 +217,8 @@
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
     <link rel="stylesheet" href="mobile-form-new.css?v=22">
     
-    <!-- Mobile Hero V2 Styles - LAST TO OVERRIDE -->
-    <link rel="stylesheet" href="/css/mobile-hero-v2.css?v=9" media="(max-width: 1023px)">
+    <!-- Mobile Hero V3 Styles - LAST TO OVERRIDE -->
+    <link rel="stylesheet" href="/css/mobile-hero-v3.css?v=1" media="(max-width: 1023px)">
     
     <!-- MOBILE-ONLY STYLES: Conditional loading based on device detection -->
     <!-- Mobile-only CSS now loaded directly in head with media query -->
@@ -3662,95 +3662,117 @@
         -->
         <!-- ======================================== -->
         
-        <!-- NEW MOBILE HERO SECTION (2026-01-04) -->
-        <section class="mobile-hero-v2">
-            <div class="mobile-hero-v2-container">
-                <!-- Logo with Text -->
-                <div class="mobile-hero-v2-logo-section">
-                    <img src="/logo-vin-trust.png" alt="VIN TRUST" class="mobile-hero-v2-logo-img" width="120" height="32">
-                    <span class="mobile-hero-v2-divider">|</span>
-                    <div class="mobile-hero-v2-logo-text">
-                        <span>Powered by</span>
-                        <span>NMVTIS data</span>
-                    </div>
+        <!-- NEW MOBILE HERO SECTION V3 (2026-01-04) -->
+        <section class="mobile-hero-v3">
+            <!-- Top Section (1/3 screen - white) -->
+            <div class="mobile-hero-v3-top">
+                <!-- Logo centered -->
+                <div class="mobile-hero-v3-logo">
+                    <img src="/logo-vin-trust.png" alt="VIN TRUST" width="120" height="32">
                 </div>
                 
-                <!-- Title -->
-                <h1 class="mobile-hero-v2-title">
-                    Check Vehicle History<br>
-                    by VIN
-                </h1>
+                <!-- Thin line separator -->
+                <div class="mobile-hero-v3-separator"></div>
                 
-                <!-- Subtitle -->
-                <p class="mobile-hero-v2-subtitle">
-                    Over 40% of used cars have hidden problems. Check the VIN before you buy.
-                </p>
-                
-                <!-- VIN Input Form -->
-                <form class="mobile-hero-v2-form" id="mobile-vin-form-v2">
+                <!-- VIN Input with inline button -->
+                <form class="mobile-hero-v3-form" id="mobile-vin-form-v3">
                     <input 
                         type="text" 
-                        class="mobile-hero-v2-input" 
+                        class="mobile-hero-v3-input" 
                         placeholder="Enter VIN (17 characters)" 
                         maxlength="17" 
                         autocomplete="off" 
-                        id="mobile-vin-input-v2"
+                        id="mobile-vin-input-v3"
                     >
-                    <button type="submit" class="mobile-hero-v2-btn">
-                        <svg class="mobile-hero-v2-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12.5 12.5L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <button type="submit" class="mobile-hero-v3-btn">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                            <circle cx="8" cy="8" r="6" stroke="white" stroke-width="2"/>
+                            <path d="M12.5 12.5L17 17" stroke="white" stroke-width="2" stroke-linecap="round"/>
                         </svg>
-                        CHECK VIN
                     </button>
                 </form>
                 
-                <!-- Feature List -->
-                <div class="mobile-hero-v2-features">
-                    <div class="mobile-hero-v2-feature">
-                        <svg class="mobile-hero-v2-check" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <circle cx="10" cy="10" r="9" fill="#22c55e"/>
-                            <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>Accident history</span>
-                    </div>
-                    <div class="mobile-hero-v2-feature">
-                        <svg class="mobile-hero-v2-check" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <circle cx="10" cy="10" r="9" fill="#22c55e"/>
-                            <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>Title & lien checks</span>
-                    </div>
-                    <div class="mobile-hero-v2-feature">
-                        <svg class="mobile-hero-v2-check" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <circle cx="10" cy="10" r="9" fill="#22c55e"/>
-                            <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>Mileage & records</span>
-                    </div>
+                <!-- Trust badges (3 items) -->
+                <div class="mobile-hero-v3-trust">
+                    <img src="/nmvtis-logo@2x.png" alt="NMVTIS" width="80" height="25">
+                    <img src="/guar-Photoroom.png" alt="Official" width="35" height="35">
+                    <img src="/nhts.png" alt="NHTSA" width="80" height="25">
                 </div>
+            </div>
+            
+            <!-- Bottom Section (2/3 screen - light gray) -->
+            <div class="mobile-hero-v3-bottom">
+                <h1 class="mobile-hero-v3-title">VIN HISTORY REPORTS</h1>
+                <p class="mobile-hero-v3-subtitle">Узнай все об автомобиле перед покупкой</p>
                 
-                <!-- Trust Section -->
-                <div class="mobile-hero-v2-trust">
-                    <div class="mobile-hero-v2-trust-header">
-                        <svg class="mobile-hero-v2-shield-green" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                            <path d="M16 2L6 6v8c0 7.4 5.12 14.32 12 16 6.88-1.68 12-8.6 12-16V6l-10-4z" fill="#22c55e"/>
-                            <path d="M12 16l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- 9 Icons (3x3 grid) -->
+                <div class="mobile-hero-v3-features">
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <path d="M13 20l5 5 9-10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <div class="mobile-hero-v2-trust-title">
-                            100% Verified & Secure
-                        </div>
+                        <span>Accidents</span>
                     </div>
-                    <div class="mobile-hero-v2-logos">
-                        <img src="/nmvtis-logo@2x.png" alt="NMVTIS" class="mobile-hero-v2-logo-badge" loading="lazy" width="100" height="30">
-                        <img src="/guar-Photoroom.png" alt="Official" class="mobile-hero-v2-logo-badge" loading="lazy" width="50" height="50">
-                        <img src="/nhts.png" alt="NHTSA" class="mobile-hero-v2-logo-badge" loading="lazy" width="100" height="30">
-                        <div class="mobile-hero-v2-trustpilot-badge">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#22c55e">
-                                <path d="M8 1l2 5h5l-4 3.5 2 5-5-3.5-5 3.5 2-5L1 6h5z"/>
-                            </svg>
-                            <span class="mobile-hero-v2-trustpilot-text">Trustpilot ★★★★★</span>
-                        </div>
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <path d="M20 10v10l6 6" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        <span>Mileage</span>
+                    </div>
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <rect x="13" y="12" width="14" height="16" rx="2" stroke="white" stroke-width="2" fill="none"/>
+                            <path d="M17 10v4M23 10v4" stroke="white" stroke-width="2"/>
+                        </svg>
+                        <span>Title</span>
+                    </div>
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <path d="M20 8L12 14v8c0 6 4 11 8 13 4-2 8-7 8-13v-8l-8-6z" stroke="white" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span>Recalls</span>
+                    </div>
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <path d="M28 15L17 26l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Ownership</span>
+                    </div>
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <circle cx="20" cy="20" r="8" stroke="white" stroke-width="2" fill="none"/>
+                            <circle cx="20" cy="20" r="2" fill="white"/>
+                        </svg>
+                        <span>Theft</span>
+                    </div>
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <path d="M12 22c0-4 4-8 8-8s8 4 8 8" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+                            <path d="M14 26h12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Flood</span>
+                    </div>
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <path d="M15 20h10M20 15v10" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        <span>Damage</span>
+                    </div>
+                    <div class="mobile-hero-v3-feature-item">
+                        <svg class="mobile-hero-v3-icon" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" fill="#3b82f6"/>
+                            <rect x="13" y="15" width="14" height="10" rx="1" stroke="white" stroke-width="2" fill="none"/>
+                            <path d="M16 15v-2a4 4 0 018 0v2" stroke="white" stroke-width="2"/>
+                        </svg>
+                        <span>Liens</span>
                     </div>
                 </div>
             </div>
