@@ -49,7 +49,7 @@
 input.mobile-hero-v3-input,
 .mobile-hero-v3-input {
     width: 100% !important;
-    padding: 16px 60px 16px 16px !important;
+    padding: 16px 130px 16px 16px !important;
     font-size: 15px !important;
     font-weight: 600 !important;
     border: 2px solid #9ca3af !important;
@@ -81,7 +81,8 @@ button.mobile-hero-v3-btn,
     right: 4px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    width: 48px !important;
+    width: auto !important;
+    min-width: 120px !important;
     height: 48px !important;
     background: #3b82f6 !important;
     background-color: #3b82f6 !important;
@@ -90,9 +91,14 @@ button.mobile-hero-v3-btn,
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    gap: 6px !important;
     cursor: pointer !important;
     transition: background 0.2s !important;
-    padding: 0 !important;
+    padding: 0 16px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 .mobile-device .mobile-only .mobile-hero-v3-btn:active,
@@ -105,8 +111,9 @@ button.mobile-hero-v3-btn:active,
 .mobile-device .mobile-only .mobile-hero-v3-btn svg,
 button.mobile-hero-v3-btn svg,
 .mobile-hero-v3-btn svg {
-    width: 18px !important;
-    height: 18px !important;
+    width: 16px !important;
+    height: 16px !important;
+    flex-shrink: 0 !important;
 }
 
 .mobile-device .mobile-only .mobile-hero-v3-btn svg *,
@@ -115,16 +122,27 @@ button.mobile-hero-v3-btn svg *,
     stroke: #ffffff !important;
 }
 
+.mobile-device .mobile-only .mobile-hero-v3-btn span,
+button.mobile-hero-v3-btn span,
+.mobile-hero-v3-btn span {
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+}
+
 /* Trust badges */
 .mobile-hero-v3-trust {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
 }
 
 .mobile-hero-v3-trust img {
     opacity: 0.7;
+    max-width: 70px;
+    height: auto;
 }
 
 /* ==================== BOTTOM SECTION (2/3 - Gray) ==================== */
@@ -139,21 +157,22 @@ button.mobile-hero-v3-btn svg *,
 
 /* Title */
 .mobile-hero-v3-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #1f2937;
+    font-size: 28px;
+    font-weight: 800;
+    color: #111827;
     text-align: center;
-    margin: 0 0 8px 0;
+    margin: 0 0 12px 0;
     letter-spacing: 0.5px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Subtitle */
 .mobile-hero-v3-subtitle {
-    font-size: 15px;
-    color: #6b7280;
+    font-size: 16px;
+    color: #4b5563;
     text-align: center;
     margin: 0 0 32px 0;
+    font-weight: 500;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
