@@ -43,6 +43,9 @@
     <!-- UTM Tracker - Save UTM parameters to sessionStorage -->
     <script src="/public/utm-tracker.js" defer></script>
     
+    <!-- Mobile Hero V2 Form Handler -->
+    <script src="/public/mobile-hero-v2.js" defer></script>
+    
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -203,6 +206,9 @@
     <!-- Styles - preload critical CSS -->
     <link rel="preload" href="styles.css?v=113" as="style">
     <link rel="stylesheet" href="styles.css?v=113">
+    
+    <!-- Mobile Hero V2 Styles -->
+    <link rel="stylesheet" href="/css/mobile-hero-v2.css" media="(max-width: 1023px)">
     
     <!-- ADAPTIVE SYSTEM: Controls desktop/mobile visibility -->
     <link rel="stylesheet" href="/css/mobile-adaptive.css?v=8">
@@ -3603,7 +3609,10 @@
             </div>
         </div>
         
-        <!-- Mobile Hero Section with Title and iPhone -->
+        <!-- ========================================
+             ARCHIVED: OLD MOBILE HERO (2026-01-04)
+             ======================================== -->
+        <!--
         <section class="mobile-hero">
             <div class="mobile-hero-content">
                 <div class="mobile-hero-text">
@@ -3626,10 +3635,8 @@
             </div>
         </section>
         
-        <!-- Red Triangle pointing to input -->
         <div class="mobile-red-triangle"></div>
         
-        <!-- Mobile VIN Input Form -->
         <section class="mobile-vin-form">
             <div class="mobile-price-badge">
                 <svg class="mobile-price-badge-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -3648,11 +3655,108 @@
             </form>
         </section>
         
-        <!-- Mobile Trust Badges -->
         <section class="mobile-trust-badges">
             <img src="/nmvtis-logo@2x.png" alt="NMVTIS" class="mobile-trust-badge" loading="lazy" width="120" height="40">
             <img src="/guar-Photoroom.png" alt="Coat of Arms" class="mobile-trust-badge" loading="lazy" width="80" height="80">
             <img src="/nhts.png" alt="NHTSA" class="mobile-trust-badge" loading="lazy" width="120" height="40">
+        </section>
+        -->
+        <!-- ======================================== -->
+        
+        <!-- NEW MOBILE HERO SECTION (2026-01-04) -->
+        <section class="mobile-hero-v2">
+            <div class="mobile-hero-v2-container">
+                <!-- Logo Placeholder -->
+                <div class="mobile-logo-placeholder">
+                    Logo
+                </div>
+                
+                <!-- Title -->
+                <h1 class="mobile-hero-v2-title">
+                    Check Vehicle History<br>
+                    by VIN
+                </h1>
+                
+                <!-- VIN Input Form -->
+                <form class="mobile-hero-v2-form" id="mobile-vin-form-v2">
+                    <input 
+                        type="text" 
+                        class="mobile-hero-v2-input" 
+                        placeholder="Enter VIN (17 characters)" 
+                        maxlength="17" 
+                        autocomplete="off" 
+                        id="mobile-vin-input-v2"
+                    >
+                    <button type="submit" class="mobile-hero-v2-btn">
+                        <svg class="mobile-hero-v2-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12.5 12.5L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        CHECK VIN
+                    </button>
+                </form>
+                
+                <!-- Feature List -->
+                <div class="mobile-hero-v2-features">
+                    <div class="mobile-hero-v2-feature">
+                        <svg class="mobile-hero-v2-check" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="9" fill="#22c55e"/>
+                            <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Accident history</span>
+                    </div>
+                    <div class="mobile-hero-v2-feature">
+                        <svg class="mobile-hero-v2-check" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="9" fill="#22c55e"/>
+                            <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Title & lien checks</span>
+                    </div>
+                    <div class="mobile-hero-v2-feature">
+                        <svg class="mobile-hero-v2-check" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="9" fill="#22c55e"/>
+                            <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Mileage & records</span>
+                    </div>
+                </div>
+                
+                <!-- Trust Section -->
+                <div class="mobile-hero-v2-trust">
+                    <div class="mobile-hero-v2-trust-item">
+                        <svg class="mobile-hero-v2-shield" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L4 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-8-4z" fill="#1e40af"/>
+                            <circle cx="12" cy="12" r="3" fill="white"/>
+                        </svg>
+                        <div class="mobile-hero-v2-trust-text">
+                            <strong>100% Verified</strong> NMVTIS Data
+                        </div>
+                    </div>
+                    <div class="mobile-hero-v2-logos">
+                        <img src="/nmvtis-logo@2x.png" alt="NMVTIS" class="mobile-hero-v2-logo" loading="lazy" width="100" height="30">
+                        <img src="/guar-Photoroom.png" alt="Official" class="mobile-hero-v2-logo" loading="lazy" width="50" height="50">
+                    </div>
+                </div>
+                
+                <!-- Secure Section -->
+                <div class="mobile-hero-v2-secure">
+                    <svg class="mobile-hero-v2-secure-icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <path d="M16 2L6 6v8c0 7.4 5.12 14.32 12 16 6.88-1.68 12-8.6 12-16V6l-10-4z" fill="#22c55e"/>
+                        <path d="M12 16l3 3 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <div class="mobile-hero-v2-secure-text">
+                        <div class="mobile-hero-v2-secure-title">100% Secure</div>
+                        <div class="mobile-hero-v2-secure-rating">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#22c55e">
+                                <path d="M8 1l2 5h5l-4 3.5 2 5-5-3.5-5 3.5 2-5L1 6h5z"/>
+                            </svg>
+                            <span class="mobile-hero-v2-trustpilot">Trustpilot</span>
+                            <span class="mobile-hero-v2-stars">★★★★★</span>
+                        </div>
+                        <div class="mobile-hero-v2-reviews">OVER 5,000 REVIEWS</div>
+                    </div>
+                </div>
+            </div>
         </section>
         
         <!-- Mobile Second Screen: Sample Report -->
