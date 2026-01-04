@@ -57,6 +57,15 @@
     font-weight: 700;
     color: #1f2937;
     line-height: 1.2;
+    margin: 0 0 16px 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Subtitle */
+.mobile-hero-v2-subtitle {
+    font-size: 15px;
+    color: #6b7280;
+    line-height: 1.5;
     margin: 0 0 24px 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
@@ -174,41 +183,37 @@ button.mobile-hero-v2-btn:active,
     background: #f9fafb;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    padding: 16px;
+    padding: 20px;
     margin-bottom: 24px;
 }
 
-.mobile-hero-v2-trust-item {
+.mobile-hero-v2-trust-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
-.mobile-hero-v2-shield {
-    width: 24px;
-    height: 24px;
+.mobile-hero-v2-shield-green {
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
 }
 
-.mobile-hero-v2-trust-text {
-    font-size: 14px;
-    color: #374151;
-    line-height: 1.4;
-}
-
-.mobile-hero-v2-trust-text strong {
+.mobile-hero-v2-trust-title {
+    font-size: 18px;
     font-weight: 700;
     color: #1f2937;
+    line-height: 1.3;
 }
 
 .mobile-hero-v2-logos {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    padding-top: 12px;
-    border-top: 1px solid #e5e7eb;
+    row-gap: 12px;
 }
 
 .mobile-hero-v2-logo-badge {
@@ -217,57 +222,25 @@ button.mobile-hero-v2-btn:active,
     opacity: 0.8;
 }
 
-/* Secure Section */
-.mobile-hero-v2-secure {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 20px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-}
-
-.mobile-hero-v2-secure-icon {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-}
-
-.mobile-hero-v2-secure-text {
-    flex: 1;
-}
-
-.mobile-hero-v2-secure-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 8px;
-}
-
-.mobile-hero-v2-secure-rating {
+.mobile-hero-v2-trustpilot-badge {
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-bottom: 4px;
+    padding: 6px 12px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
 }
 
-.mobile-hero-v2-trustpilot {
-    font-size: 14px;
+.mobile-hero-v2-trustpilot-badge svg {
+    flex-shrink: 0;
+}
+
+.mobile-hero-v2-trustpilot-text {
+    font-size: 13px;
     font-weight: 600;
-    color: #22c55e;
-}
-
-.mobile-hero-v2-stars {
-    color: #fbbf24;
-    font-size: 14px;
-    letter-spacing: 2px;
-}
-
-.mobile-hero-v2-reviews {
-    font-size: 11px;
-    color: #6b7280;
-    letter-spacing: 0.5px;
+    color: #374151;
+    white-space: nowrap;
 }
 
 /* Hide on desktop */
