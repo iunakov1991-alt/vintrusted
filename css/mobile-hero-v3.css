@@ -194,9 +194,10 @@ button.mobile-hero-v3-btn span,
 }
 
 .mobile-hero-v3-icon {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
+    width: 48px !important;
+    height: 48px !important;
+    flex-shrink: 0 !important;
+    object-fit: contain !important;
 }
 
 .mobile-hero-v3-feature-item span {
