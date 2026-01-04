@@ -27,8 +27,6 @@
 .mobile-hero-v3-logo img {
     height: 32px;
     width: auto;
-    filter: brightness(0) saturate(100%) !important;
-    -webkit-filter: brightness(0) saturate(100%) !important;
 }
 
 /* Separator Line */
