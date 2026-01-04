@@ -107,13 +107,28 @@
       // Get VIN
       const vin = getVIN();
       
-      // Create SetupIntent
+      // Get A/B variant from localStorage
+      const ab_variant = localStorage.getItem('ab_variant') || 'unknown';
+      
+      // Get UTM parameters from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const utm_source = urlParams.get('utm_source') || '';
+      const utm_medium = urlParams.get('utm_medium') || '';
+      const utm_campaign = urlParams.get('utm_campaign') || '';
+      
+      // Create SetupIntent with metadata
       const setupIntentResponse = await fetch('/api/create-setup-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ vin: vin })
+        body: JSON.stringify({ 
+          vin,
+          ab_variant,
+          utm_source,
+          utm_medium,
+          utm_campaign
+        })
       });
 
       if (!setupIntentResponse.ok) {

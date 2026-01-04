@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Analytics Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1d1d1f;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #6e6e73;
+            margin-bottom: 40px;
+        }
+
+        .filters {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .filter-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .filter-item label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6e6e73;
+            margin-bottom: 8px;
+        }
+
+        .filter-item input,
+        .filter-item select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .filter-item input:focus,
+        .filter-item select:focus {
+            outline: none;
+            border-color: #0071e3;
+        }
+
+        .button {
+            background: #0071e3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .button:hover {
+            background: #0077ed;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: #6e6e73;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        .stat-breakdown {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #d2d2d7;
+        }
+
+        .stat-breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .stat-breakdown-label {
+            color: #6e6e73;
+        }
+
+        .stat-breakdown-value {
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .conversions-table {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        .conversions-table h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px;
+            background: #f5f5f7;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6e6e73;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #f5f5f7;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-variant-a {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-variant-b {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .badge-desktop {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .badge-mobile {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #6e6e73;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Conversion Analytics</h1>
+        <p class="subtitle">Track conversions from Google Ads across A/B test variants and devices</p>
+
+        <div class="filters">
+            <div class="filter-group">
+                <div class="filter-item">
+                    <label>Start Date</label>
+                    <input type="date" id="startDate">
+                </div>
+                <div class="filter-item">
+                    <label>End Date</label>
+                    <input type="date" id="endDate">
+                </div>
+                <div class="filter-item">
+                    <label>A/B Variant</label>
+                    <select id="variant">
+                        <option value="">All Variants</option>
+                        <option value="variant_a">Variant A (with badge)</option>
+                        <option value="variant_b">Variant B (without badge)</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label>Device</label>
+                    <select id="device">
+                        <option value="">All Devices</option>
+                        <option value="desktop">Desktop</option>
+                        <option value="mobile">Mobile</option>
+                    </select>
+                </div>
+            </div>
+            <button class="button" onclick="loadReport()">Generate Report</button>
+            <button class="button" onclick="exportCSV()" style="background: #34c759; margin-left: 10px;">Export CSV</button>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            Loading report...
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="stats" style="display: none;">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Conversions</h3>
+                    <div class="stat-value" id="totalConversions">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>By A/B Variant</h3>
+                    <div class="stat-breakdown" id="variantBreakdown"></div>
+                </div>
+                <div class="stat-card">
+                    <h3>By Device</h3>
+                    <div class="stat-breakdown" id="deviceBreakdown"></div>
+                </div>
+                <div class="stat-card">
+                    <h3>By Source</h3>
+                    <div class="stat-breakdown" id="sourceBreakdown"></div>
+                </div>
+            </div>
+
+            <div class="conversions-table">
+                <h2>Recent Conversions</h2>
+                <table id="conversionsTable">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>VIN</th>
+                            <th>A/B Variant</th>
+                            <th>Device</th>
+                            <th>Source / Medium</th>
+                            <th>Campaign</th>
+                        </tr>
+                    </thead>
+                    <tbody id="conversionsBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentData = null;
+
+        // Set default dates (today)
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').value = today;
+        document.getElementById('endDate').value = today;
+
+        // Load report on page load
+        loadReport();
+
+        async function loadReport() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const variant = document.getElementById('variant').value;
+            const device = document.getElementById('device').value;
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('stats').style.display = 'none';
+
+            try {
+                const params = new URLSearchParams({
+                    startDate,
+                    endDate
+                });
+
+                if (variant) params.append('variant', variant);
+                if (device) params.append('device', device);
+
+                const response = await fetch(`/api/conversion-report?${params}`);
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to load report');
+                }
+
+                currentData = data;
+                displayReport(data);
+
+            } catch (error) {
+                console.error('Error loading report:', error);
+                document.getElementById('error').textContent = `Error: ${error.message}`;
+                document.getElementById('error').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function displayReport(data) {
+            // Total conversions
+            document.getElementById('totalConversions').textContent = data.stats.total;
+
+            // Variant breakdown
+            const variantBreakdown = document.getElementById('variantBreakdown');
+            variantBreakdown.innerHTML = '';
+            Object.entries(data.stats.byVariant).forEach(([variant, count]) => {
+                const item = document.createElement('div');
+                item.className = 'stat-breakdown-item';
+                item.innerHTML = `
+                    <span class="stat-breakdown-label">${formatVariantName(variant)}</span>
+                    <span class="stat-breakdown-value">${count}</span>
+                `;
+                variantBreakdown.appendChild(item);
+            });
+
+            // Device breakdown
+            const deviceBreakdown = document.getElementById('deviceBreakdown');
+            deviceBreakdown.innerHTML = '';
+            Object.entries(data.stats.byDevice).forEach(([device, count]) => {
+                const item = document.createElement('div');
+                item.className = 'stat-breakdown-item';
+                item.innerHTML = `
+                    <span class="stat-breakdown-label">${device.charAt(0).toUpperCase() + device.slice(1)}</span>
+                    <span class="stat-breakdown-value">${count}</span>
+                `;
+                deviceBreakdown.appendChild(item);
+            });
+
+            // Source breakdown
+            const sourceBreakdown = document.getElementById('sourceBreakdown');
+            sourceBreakdown.innerHTML = '';
+            Object.entries(data.stats.bySource).forEach(([source, count]) => {
+                const item = document.createElement('div');
+                item.className = 'stat-breakdown-item';
+                item.innerHTML = `
+                    <span class="stat-breakdown-label">${source}</span>
+                    <span class="stat-breakdown-value">${count}</span>
+                `;
+                sourceBreakdown.appendChild(item);
+            });
+
+            // Conversions table
+            const tbody = document.getElementById('conversionsBody');
+            tbody.innerHTML = '';
+            data.conversions.forEach(conv => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatDate(conv.timestamp)}</td>
+                    <td><strong>${conv.vin}</strong></td>
+                    <td><span class="badge badge-variant-${conv.abVariant === 'variant_a' ? 'a' : 'b'}">${formatVariantName(conv.abVariant)}</span></td>
+                    <td><span class="badge badge-${conv.device}">${conv.device.charAt(0).toUpperCase() + conv.device.slice(1)}</span></td>
+                    <td>${conv.source} / ${conv.medium}</td>
+                    <td>${conv.campaign !== 'none' ? conv.campaign : '-'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            document.getElementById('stats').style.display = 'block';
+        }
+
+        function formatDate(isoString) {
+            const date = new Date(isoString);
+            return date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function formatVariantName(variant) {
+            if (variant === 'variant_a') return 'Variant A (with badge)';
+            if (variant === 'variant_b') return 'Variant B (no badge)';
+            return variant;
+        }
+
+        function exportCSV() {
+            if (!currentData || !currentData.conversions.length) {
+                alert('No data to export');
+                return;
+            }
+
+            const headers = ['Date & Time', 'VIN', 'A/B Variant', 'Device', 'Source', 'Medium', 'Campaign', 'IP', 'User Agent'];
+            const rows = currentData.conversions.map(conv => [
+                conv.timestamp,
+                conv.vin,
+                conv.abVariant,
+                conv.device,
+                conv.source,
+                conv.medium,
+                conv.campaign,
+                conv.ip,
+                conv.userAgent
+            ]);
+
+            const csv = [
+                headers.join(','),
+                ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+            ].join('\n');
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `conversions_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
+
