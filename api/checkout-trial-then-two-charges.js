@@ -17,13 +17,18 @@ export default async function handler(req, res) {
     console.log('SetupIntent OK, payment_method:', si.payment_method);
 
     // 1) Customer с привязанным PM
+    // Копируем metadata из SetupIntent в Customer для future charges
     const customer = await stripe.customers.create({
       email: email || undefined,
       payment_method: si.payment_method,
-      invoice_settings: { default_payment_method: si.payment_method }
+      invoice_settings: { default_payment_method: si.payment_method },
+      metadata: si.metadata || {} // ✅ Копируем metadata (gclid, utm_*, etc.)
     });
+    console.log('[CHECKOUT] Customer created with metadata:', customer.metadata);
 
     // 2) Снимаем $3 сразу
+    // КРИТИЧНО: копируем metadata из SetupIntent (включая gclid для Google Ads конверсий)
+    console.log('[CHECKOUT] SetupIntent metadata:', si.metadata);
     const pi = await stripe.paymentIntents.create({
       amount: 300,
       currency: 'usd',
@@ -32,8 +37,10 @@ export default async function handler(req, res) {
       confirm: true,
       off_session: true,
       statement_descriptor_suffix: 'VIN Report',
-      description: 'Trial activation $3'
+      description: 'Trial activation $3',
+      metadata: si.metadata || {} // ✅ Копируем все metadata (gclid, utm_*, ab_variant, vin)
     });
+    console.log('[CHECKOUT] PaymentIntent created with metadata:', pi.metadata);
 
     // 3) План на три списания $49: t+10, t+20, t+30 (каждые 10 дней, 3 итерации)
     let schedule = null;
