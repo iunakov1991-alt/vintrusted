@@ -414,12 +414,18 @@
     
     <!-- Event snippet for Purchase conversion page -->
     <script>
+      // Get setup_intent_id from URL for transaction_id (deduplication)
+      const urlParams = new URLSearchParams(window.location.search);
+      const transactionId = urlParams.get('setup_intent') || '';
+      
       gtag('event', 'conversion', {
           'send_to': 'AW-17824079146/I62hCKPTndgbEKq6l7NC',
           'value': 3.0,
           'currency': 'USD',
-          'transaction_id': ''
+          'transaction_id': transactionId
       });
+      
+      console.log('[CONVERSION] Event sent with transaction_id:', transactionId.substring(0, 20) + '...');
     </script>
 </head>
 <body>
