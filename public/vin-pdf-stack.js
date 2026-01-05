@@ -27,9 +27,8 @@
     return;
   }
 
-  // Set worker path
-  pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  // Set worker path (local)
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "/public/pdf.worker.min.js";
 
   console.log('[VIN PDF STACK] Loading PDF from:', pdfUrl);
 
