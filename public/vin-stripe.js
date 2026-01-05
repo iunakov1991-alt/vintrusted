@@ -110,11 +110,13 @@
       // Get A/B variant from localStorage
       const ab_variant = localStorage.getItem('ab_variant') || 'unknown';
       
-      // Get UTM parameters from URL
+      // Get UTM parameters from URL or sessionStorage
       const urlParams = new URLSearchParams(window.location.search);
-      const utm_source = urlParams.get('utm_source') || '';
-      const utm_medium = urlParams.get('utm_medium') || '';
-      const utm_campaign = urlParams.get('utm_campaign') || '';
+      const utm_source = urlParams.get('utm_source') || sessionStorage.getItem('utm_source') || '';
+      const utm_medium = urlParams.get('utm_medium') || sessionStorage.getItem('utm_medium') || '';
+      const utm_campaign = urlParams.get('utm_campaign') || sessionStorage.getItem('utm_campaign') || '';
+      
+      console.log('[VIN-STRIPE] UTM params:', { utm_source, utm_medium, utm_campaign });
       
       // Create SetupIntent with metadata
       const setupIntentResponse = await fetch('/api/create-setup-intent', {
