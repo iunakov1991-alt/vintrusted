@@ -1,6 +1,20 @@
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+// Parse cookies from request headers
+function parseCookies(req) {
+  const cookieHeader = req.headers?.cookie || '';
+  const cookies = {};
+  cookieHeader.split(';').forEach(cookie => {
+    const [name, ...rest] = cookie.split('=');
+    const value = rest.join('=').trim();
+    if (name) {
+      cookies[name.trim()] = decodeURIComponent(value);
+    }
+  });
+  return cookies;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   try {
@@ -13,7 +27,11 @@ export default async function handler(req, res) {
     } = req.body || {};
     
     // Get gclid from cookies (saved by gclid-cookie.js on first visit)
-    const gclid = req.cookies?.gclid || '';
+    const cookies = parseCookies(req);
+    const gclid = cookies.gclid || '';
+    
+    console.log('[CREATE-SETUP-INTENT] Cookies:', cookies);
+    console.log('[CREATE-SETUP-INTENT] gclid:', gclid || 'NOT FOUND');
     
     // Build metadata
     const metadata = {};
