@@ -3,9 +3,9 @@
  * Renders real PDF pages in 3D stack with auto-play
  */
 
-// Set up PDF.js worker
+// Set up PDF.js worker (local)
 if (typeof pdfjsLib !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/public/pdf.worker.min.js';
 }
 
 let pdfDoc = null;
