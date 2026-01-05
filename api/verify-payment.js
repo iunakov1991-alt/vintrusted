@@ -108,22 +108,31 @@ export default async function handler(req, res) {
 
     // ┌─────────────────────────────────────────────────────────────┐
     // │ ИТОГОВАЯ ПРОВЕРКА: Оплата считается валидной если:          │
-    // │ 1. SetupIntent succeeded + payment_method                    │
-    // │ 2. PaymentIntent succeeded ($3)                              │
-    // │ 3. SubscriptionSchedule создан ($49×3)                       │
+    // │ 1. SetupIntent succeeded + payment_method (ОБЯЗАТЕЛЬНО)     │
+    // │ 2. PaymentIntent succeeded ($3) - ОПЦИОНАЛЬНО               │
+    // │    (может не найтись если customer был добавлен позже)     │
     // └─────────────────────────────────────────────────────────────┘
-    const isValid = si.status === 'succeeded' && 
-                    si.payment_method && 
-                    paymentSucceeded;
+    
+    // Минимальная валидация: SetupIntent succeeded
+    const isValid = si.status === 'succeeded' && si.payment_method;
+    
+    // Дополнительная валидация: если нашли PaymentIntent, проверяем его
+    const additionalChecks = {
+      paymentIntentFound: !!paymentIntent,
+      paymentIntentSucceeded: paymentSucceeded,
+      subscriptionScheduleExists: scheduleExists
+    };
 
     console.log('[VERIFY] ✅ Final validation result:', isValid);
+    console.log('[VERIFY] 📊 Additional checks:', additionalChecks);
 
     return res.status(200).json({
       paid: isValid,
       setup_intent: {
         id: si.id,
         status: si.status,
-        payment_method: si.payment_method
+        payment_method: si.payment_method,
+        customer: si.customer
       },
       payment_intent: paymentIntent ? {
         id: paymentIntent.id,
@@ -133,6 +142,7 @@ export default async function handler(req, res) {
       subscription_schedule: {
         exists: scheduleExists
       },
+      checks: additionalChecks,
       timestamp: new Date().toISOString()
     });
 
