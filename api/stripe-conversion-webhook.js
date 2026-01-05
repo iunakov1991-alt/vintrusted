@@ -113,22 +113,27 @@ export default async function handler(req, res) {
       currency,
     });
 
-    // Залогировать в нашу внутреннюю аналитику
-    try {
-      const conversionData = {
-        timestamp: new Date().toISOString(),
-        transactionId: setupIntentId,
-        value: amountInDollars,
-        currency,
-        gclid: gclid || 'none',
-        googleAdsResult: conversionResult,
-        source: 'stripe_webhook',
-      };
+    // Залогировать в нашу внутреннюю аналитику (опционально)
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      try {
+        const conversionData = {
+          timestamp: new Date().toISOString(),
+          transactionId: setupIntentId,
+          value: amountInDollars,
+          currency,
+          gclid: gclid || 'none',
+          googleAdsResult: conversionResult,
+          source: 'stripe_webhook',
+        };
 
-      await kv.lpush('conversions', JSON.stringify(conversionData));
-      console.log('[WEBHOOK] 📊 Logged to internal analytics');
-    } catch (error) {
-      console.error('[WEBHOOK] ⚠️ Failed to log internally:', error);
+        await kv.lpush('conversions', JSON.stringify(conversionData));
+        console.log('[WEBHOOK] 📊 Logged to internal analytics');
+      } catch (error) {
+        // Тихо игнорируем ошибки KV - не критично
+        console.log('[WEBHOOK] ℹ️  KV logging skipped');
+      }
+    } else {
+      console.log('[WEBHOOK] ℹ️  KV not configured, skipping analytics logging');
     }
 
     return res.json({
