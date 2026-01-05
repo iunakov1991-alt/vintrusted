@@ -174,9 +174,20 @@
     }
   }
 
+  // Prevent double submission
+  let isSubmitting = false;
+
   // Handle form submission
   async function handleSubmit(event, form) {
     event.preventDefault();
+
+    // ✅ FIX: Prevent double submission
+    if (isSubmitting) {
+      console.log('[PAY] ⚠️ Already processing payment, ignoring duplicate submit');
+      return;
+    }
+
+    isSubmitting = true;
 
     const submitButton = form.querySelector('button[type="submit"]');
     const originalText = submitButton ? submitButton.textContent : 'Pay';
@@ -352,6 +363,9 @@
         submitButton.disabled = false;
         submitButton.textContent = originalText;
       }
+    } finally {
+      // ✅ FIX: Reset submitting flag to allow retry
+      isSubmitting = false;
     }
   }
 
