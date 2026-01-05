@@ -22,6 +22,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/stripe-conversion-webhook.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/stripe-config.js",
       "use": "@vercel/node"
     },
@@ -242,6 +246,10 @@
     {
       "source": "/api/stripe-webhook",
       "destination": "/api/stripe-webhook.js"
+    },
+    {
+      "source": "/api/stripe-conversion-webhook",
+      "destination": "/api/stripe-conversion-webhook.js"
     },
     {
       "source": "/api/checkout-trial-then-two-charges",

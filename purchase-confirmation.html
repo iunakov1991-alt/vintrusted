@@ -242,11 +242,12 @@
 
     <script>
         // ═══════════════════════════════════════════════════════════════
-        // КРИТИЧНО: ПРОВЕРЯЕМ ОПЛАТУ ПЕРЕД ОТСТУКИВАНИЕМ GA4
-        // Иначе будут ложные конверсии без реальных денег!
+        // CLIENT-SIDE FALLBACK: Fire Google Ads conversion if server fails
+        // Серверный webhook (stripe-conversion-webhook.js) - основной метод
+        // Этот код - резервный вариант на случай сбоя webhook
         // ═══════════════════════════════════════════════════════════════
         
-        // Get cookie value by name (for A/B test variant)
+        // Get cookie value by name (for A/B test variant AND gclid)
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
@@ -258,12 +259,20 @@
         const abVariant = getCookie('ab_variant') || 'unknown';
         console.log('[CONFIRMATION] 🎯 A/B Test Variant:', abVariant);
         
+        // Get gclid from cookie (saved by gclid-cookie.js)
+        const gclid = getCookie('gclid') || '';
+        if (gclid) {
+            console.log('[CONFIRMATION] 🔗 GCLID found:', gclid.substring(0, 10) + '...');
+        } else {
+            console.log('[CONFIRMATION] ⚠️  No GCLID - conversion won\'t attribute to Ads click');
+        }
+        
         // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const vin = urlParams.get('vin') || '';
         const setupIntentId = urlParams.get('setup_intent') || '';
         
-        console.log('[CONFIRMATION] 🔄 Page loaded with:', { vin, setupIntentId, abVariant });
+        console.log('[CONFIRMATION] 🔄 Page loaded with:', { vin, setupIntentId, abVariant, hasGclid: !!gclid });
         
         // Display VIN
         const vinDisplayElement = document.getElementById('vinDisplay');
@@ -272,22 +281,34 @@
         }
 
         // ┌─────────────────────────────────────────────────────────────┐
-        // │ ФУНКЦИЯ: ОТПРАВИТЬ ВСЕ КОНВЕРСИИ В GTM                       │
+        // │ ФУНКЦИЯ: ОТПРАВИТЬ ВСЕ КОНВЕРСИИ (GTM + FALLBACK)           │
         // └─────────────────────────────────────────────────────────────┘
         function fireConversionEvents(verifyData = null) {
             // Push events to dataLayer (GTM will handle them)
             window.dataLayer = window.dataLayer || [];
             
-            // Google Ads Conversion Event
-            window.dataLayer.push({
-                'event': 'conversion',
-                'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
-                'value': 3.0,
-                'currency': 'USD',
-                'transaction_id': setupIntentId || '',
-                'ab_variant': abVariant
-            });
-            console.log('[CONFIRMATION] ✅ Google Ads conversion event pushed to dataLayer (variant:', abVariant + ')');
+            // ════════════════════════════════════════════════════════════
+            // ОСНОВНОЙ МЕТОД: Серверный webhook отправит конверсию
+            // Stripe webhook → Google Ads напрямую
+            // ════════════════════════════════════════════════════════════
+            console.log('[CONFIRMATION] ℹ️  Primary conversion tracking: Server-side webhook');
+            console.log('[CONFIRMATION] ℹ️  Fallback: Client-side gtag event (below)');
+            
+            // ════════════════════════════════════════════════════════════
+            // РЕЗЕРВНЫЙ МЕТОД: Client-side Google Ads conversion
+            // На случай если webhook временно недоступен
+            // ════════════════════════════════════════════════════════════
+            if (window.gtag) {
+                window.gtag('event', 'conversion', {
+                    'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
+                    'value': 3.0,
+                    'currency': 'USD',
+                    'transaction_id': setupIntentId || ''
+                });
+                console.log('[CONFIRMATION] ✅ FALLBACK: Client-side Google Ads conversion fired');
+            } else {
+                console.log('[CONFIRMATION] ⚠️  gtag not available - fallback skipped');
+            }
             
             // Google Analytics Purchase Event
             window.dataLayer.push({
@@ -324,7 +345,7 @@
                 vin: vin,
                 setup_intent: setupIntentId,
                 value: 3.0,
-                events: ['conversion', 'purchase', 'POKUPKA'],
+                events: ['conversion (server+fallback)', 'purchase', 'POKUPKA'],
                 verified: verifyData ? true : false,
                 stripe_status: verifyData?.setup_intent?.status,
                 payment_method: verifyData?.setup_intent?.payment_method

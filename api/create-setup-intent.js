@@ -12,6 +12,9 @@ export default async function handler(req, res) {
       utm_campaign
     } = req.body || {};
     
+    // Get gclid from cookies (saved by gclid-cookie.js on first visit)
+    const gclid = req.cookies?.gclid || '';
+    
     // Build metadata
     const metadata = {};
     
@@ -33,6 +36,11 @@ export default async function handler(req, res) {
     
     if (utm_campaign) {
       metadata.utm_campaign = utm_campaign;
+    }
+    
+    // CRITICAL: Save gclid for Google Ads conversion tracking
+    if (gclid) {
+      metadata.gclid = gclid;
     }
     
     console.log('Creating SetupIntent with metadata:', metadata);
