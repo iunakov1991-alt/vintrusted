@@ -20,9 +20,10 @@ const PDF_FILE_PATH = '/VIN-Report-5TDYK3DC8DS290235.pdf';
  * Initialize PDF stack when DOM is ready
  */
 function initPDFStack() {
-  // Check if PDF.js is loaded
+  // Wait for PDF.js to load
   if (typeof pdfjsLib === 'undefined') {
-    console.error('[PDF STACK] PDF.js library not loaded');
+    console.log('[PDF STACK] Waiting for PDF.js to load...');
+    setTimeout(initPDFStack, 100); // Retry in 100ms
     return;
   }
 
