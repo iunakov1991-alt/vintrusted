@@ -1284,12 +1284,35 @@
     
     function updateURL(page, vin = '') {
         let newUrl = window.location.pathname;
+        
+        // Preserve gclid and UTM parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const gclid = urlParams.get('gclid');
+        const utm_source = urlParams.get('utm_source');
+        const utm_medium = urlParams.get('utm_medium');
+        const utm_campaign = urlParams.get('utm_campaign');
+        const utm_content = urlParams.get('utm_content');
+        const utm_term = urlParams.get('utm_term');
+        
+        const params = new URLSearchParams();
+        
         if (page !== 'main') {
-            newUrl += `?page=${page}`;
+            params.append('page', page);
             if (vin) {
-                newUrl += `&vin=${vin}`;
+                params.append('vin', vin);
             }
         }
+        
+        // Restore gclid and UTM if they existed
+        if (gclid) params.append('gclid', gclid);
+        if (utm_source) params.append('utm_source', utm_source);
+        if (utm_medium) params.append('utm_medium', utm_medium);
+        if (utm_campaign) params.append('utm_campaign', utm_campaign);
+        if (utm_content) params.append('utm_content', utm_content);
+        if (utm_term) params.append('utm_term', utm_term);
+        
+        const queryString = params.toString();
+        newUrl += queryString ? `?${queryString}` : '';
         
         console.log('Updating URL to:', newUrl);
         window.history.pushState({page, vin}, '', newUrl);
