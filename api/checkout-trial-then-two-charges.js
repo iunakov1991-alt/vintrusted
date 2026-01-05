@@ -26,6 +26,12 @@ export default async function handler(req, res) {
     });
     console.log('[CHECKOUT] Customer created with metadata:', customer.metadata);
 
+    // ВАЖНО: Обновляем SetupIntent с customer ID для verify-payment
+    await stripe.setupIntents.update(setup_intent_id, {
+      customer: customer.id
+    });
+    console.log('[CHECKOUT] SetupIntent updated with customer:', customer.id);
+
     // 2) Снимаем $3 сразу
     // КРИТИЧНО: копируем metadata из SetupIntent (включая gclid для Google Ads конверсий)
     console.log('[CHECKOUT] SetupIntent metadata:', si.metadata);
