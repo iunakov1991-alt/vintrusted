@@ -269,11 +269,6 @@ export default async function handler(req, res) {
     
     console.log('✅ HTML report retrieved successfully, length:', htmlReport.length);
 
-    // Remove <base> tag to avoid CSP violation
-    // ClearVin returns <base href="https://www.clearvin.com/"> which violates base-uri 'self'
-    htmlReport = htmlReport.replace(/<base[^>]*>/gi, '');
-    console.log('✅ Removed <base> tags for CSP compatibility');
-
     return res.status(200).json({
       success: true,
       report: htmlReport,
