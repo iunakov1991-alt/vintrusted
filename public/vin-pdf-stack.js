@@ -172,6 +172,32 @@
 
     let idx = 0;
     let visibleChipIndices = [0, 1, 2]; // Start with first 3 chips
+    let autoPlayInterval = null;
+    const AUTO_PLAY_DELAY = 4000; // 4 seconds between pages
+
+    // Auto-play function
+    function startAutoPlay() {
+      stopAutoPlay(); // Clear any existing interval
+      autoPlayInterval = setInterval(() => {
+        if (idx < pages.length - 1) {
+          idx++;
+          renderState();
+        } else {
+          // Loop back to start
+          idx = 0;
+          renderState();
+        }
+      }, AUTO_PLAY_DELAY);
+      console.log('[VIN PDF STACK] Auto-play started');
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+        console.log('[VIN PDF STACK] Auto-play stopped');
+      }
+    }
 
     // Create and update chips (show only 3 at a time)
     function updateChips() {
@@ -204,6 +230,7 @@
           
           // Move to clicked page
           idx = clickedPage;
+          stopAutoPlay(); // Stop auto-play when user clicks chip
           
           // Find next available chip to show (not currently visible)
           let nextChipIndex = (clickedChipIndex + 1) % sections.length;
@@ -248,6 +275,7 @@
     }
 
     prevBtn.addEventListener("click", ()=>{ 
+      stopAutoPlay(); // Stop auto-play on manual interaction
       if(idx>0){ 
         idx--; 
         renderState(); 
@@ -255,6 +283,7 @@
     });
     
     nextBtn.addEventListener("click", ()=>{ 
+      stopAutoPlay(); // Stop auto-play on manual interaction
       if(idx<pages.length-1){ 
         idx++; 
         renderState(); 
@@ -262,11 +291,18 @@
     });
 
     document.addEventListener("keydown", (e)=>{
-      if(e.key==="ArrowLeft") prevBtn.click();
-      if(e.key==="ArrowRight") nextBtn.click();
+      if(e.key==="ArrowLeft") {
+        stopAutoPlay(); // Stop auto-play on manual interaction
+        prevBtn.click();
+      }
+      if(e.key==="ArrowRight") {
+        stopAutoPlay(); // Stop auto-play on manual interaction
+        nextBtn.click();
+      }
     });
 
     renderState();
+    startAutoPlay(); // Start auto-play after initialization
     console.log('[VIN PDF STACK] Initialization complete with', sections.length, 'sections');
   } catch (error) {
     console.error('[VIN PDF STACK] Error loading PDF:', error);
