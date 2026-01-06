@@ -182,6 +182,7 @@ html.variant-dark .ab-hero,
   pointer-events: none;
   z-index: 1002;
   /* opacity set by animation */
+  display: none; /* Hidden on desktop */
 }
 
 .iphone-warning-triangle {
