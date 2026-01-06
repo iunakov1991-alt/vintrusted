@@ -145,6 +145,33 @@
         clientSecret: client_secret,
         appearance: {
           theme: 'stripe',
+          variables: {
+            borderRadius: '8px',
+            fontWeightNormal: '600', // Make text bold
+          },
+          rules: {
+            '.Input': {
+              border: '2px solid #d1d5db', // Thicker border
+              fontWeight: '600', // Bold text
+              fontSize: '15px',
+            },
+            '.Input:focus': {
+              border: '2px solid #3b82f6', // Thicker focus border
+              boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.1)',
+            },
+            '.Label': {
+              fontWeight: '600', // Bold labels
+              fontSize: '14px',
+            },
+            '.Tab': {
+              border: '2px solid #d1d5db', // Thicker tab borders
+              fontWeight: '600',
+            },
+            '.Tab--selected': {
+              border: '2px solid #3b82f6',
+              fontWeight: '700', // Extra bold for selected
+            }
+          }
         }
       });
 
