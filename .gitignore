@@ -18,3 +18,4 @@ public/sitemap-seo.xml
 *.backup
 *.original
 postcss.config.js
+.DS_Store
