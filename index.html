@@ -183,8 +183,8 @@
     <!-- Fonts - preconnect for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
     
     <!-- ==================== DEVICE DETECTION (CRITICAL - MUST RUN FIRST) ==================== -->
     <script>
@@ -3714,92 +3714,197 @@
         -->
         <!-- ======================================== -->
         
-        <!-- NEW MOBILE HERO SECTION V3 (2026-01-04) -->
+        <!-- NEW MOBILE HERO SECTION V4 (2026-01-07) - First Screen Redesign -->
         <section class="mobile-hero-v3">
-            <!-- Top Section (1/3 screen - white) -->
-            <div class="mobile-hero-v3-top">
-                <!-- Logo centered -->
-                <div class="mobile-hero-v3-logo">
-                    <img src="/FLAT LOGO BLACK-Photoroom.png" alt="VIN TRUST" width="120" height="32">
+            <!-- Header Section - Black -->
+            <header class="mobile-header-v4">
+                <div class="mobile-header-content-v4">
+                    <div class="mobile-logo-v4">
+                        <img src="/logo.png" alt="Logo">
+                    </div>
+                    <h1 class="mobile-header-title-v4">
+                        CHECK VEHICLE <span class="mobile-highlight-yellow">HISTORY BY VIN</span>
+                    </h1>
+                    <div class="mobile-shield-flag-v4">
+                        <img src="/flagsh.jpg" alt="US Shield Flag">
+                    </div>
                 </div>
-                
-                <!-- Title -->
-                <h1 class="mobile-hero-v3-title">VIN HISTORY REPORTS</h1>
-                <p class="mobile-hero-v3-subtitle">Learn everything about the car before you buy</p>
-                
-                <!-- Thin line separator -->
-                <div class="mobile-hero-v3-separator"></div>
-                
-                <!-- VIN Input with inline button -->
-                <form class="mobile-hero-v3-form" id="mobile-vin-form-v3">
-                    <input 
-                        type="text" 
-                        class="mobile-hero-v3-input" 
-                        placeholder="Enter VIN (17 characters)" 
-                        maxlength="17" 
-                        autocomplete="off" 
-                        id="mobile-vin-input-v3"
-                    >
-                    <button type="submit" class="mobile-hero-v3-btn">
-                        <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                            <circle cx="8" cy="8" r="6" stroke="white" stroke-width="2"/>
-                            <path d="M12.5 12.5L17 17" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        <span>CHECK VIN</span>
-                    </button>
-                </form>
-                
-                <!-- Trust badges (3 items) -->
-                <div class="mobile-hero-v3-trust">
-                    <img src="/nmvtis-logo@2x.png" alt="NMVTIS" width="80" height="25">
-                    <img src="/guar-Photoroom.png" alt="Official" width="35" height="35">
-                    <img src="/nhts.png" alt="NHTSA" width="80" height="25">
+            </header>
+
+            <!-- Hero Section with Background Image -->
+            <div class="mobile-hero-bg-v4" style="background-image: url('/imagemob.png');">
+                <div class="mobile-hero-overlay-v4"></div>
+                <div class="mobile-hero-content-v4">
+                    <h2 class="mobile-hero-title-v4">
+                        CHECK A VEHICLE'S<br>
+                        REAL HISTORY BY VIN
+                    </h2>
+                    
+                    <!-- Features List -->
+                    <ul class="mobile-features-list-v4">
+                        <li class="mobile-feature-item-v4">
+                            <svg class="mobile-check-icon-v4" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="11" fill="#22c55e"/>
+                                <path d="M7 12l3 3 7-7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Accidents & Damage</span>
+                        </li>
+                        <li class="mobile-feature-item-v4">
+                            <svg class="mobile-check-icon-v4" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="11" fill="#22c55e"/>
+                                <path d="M7 12l3 3 7-7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Mileage & Title</span>
+                        </li>
+                        <li class="mobile-feature-item-v4">
+                            <svg class="mobile-check-icon-v4" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="11" fill="#22c55e"/>
+                                <path d="M7 12l3 3 7-7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Rollback & Recall</span>
+                        </li>
+                    </ul>
+                    
+                    <p class="mobile-more-checks-v4">and more 70+ checkpoints</p>
+
+                    <!-- VIN Input Form -->
+                    <div class="mobile-vin-form-v4">
+                        <input 
+                            type="text" 
+                            class="mobile-vin-input-v4" 
+                            placeholder="Enter VIN (17 characters)"
+                            maxlength="17"
+                            id="mobile-vin-input-v4-new"
+                        >
+                        <button class="mobile-search-button-v4" onclick="submitMobileFormV4(event);">SEARCH VIN</button>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Bottom Section (2/3 screen - light gray) -->
-            <div class="mobile-hero-v3-bottom">
-                <!-- 9 Icons (3x3 grid) -->
-                <div class="mobile-hero-v3-features">
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon1.png" alt="Accidents" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Accidents</span>
+
+            <!-- White Bottom Section -->
+            <div class="mobile-bottom-section-v4">
+                <!-- Yellow Banner with Flag Edges -->
+                <div class="mobile-yellow-banner-v4">
+                    <div class="mobile-banner-flag-left-v4"></div>
+                    <div class="mobile-banner-content-v4">
+                        <h3 class="mobile-banner-title-v4">INSTANT & FULL REPORT</h3>
                     </div>
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon2.png" alt="Mileage" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Mileage</span>
+                    <div class="mobile-banner-flag-right-v4"></div>
+                </div>
+
+                <!-- Trust Icons Grid (Empty for now) -->
+                <div class="mobile-trust-icons-grid-v4">
+                    <div class="mobile-trust-icon-placeholder-v4"></div>
+                    <div class="mobile-trust-icon-placeholder-v4"></div>
+                    <div class="mobile-trust-icon-placeholder-v4"></div>
+                </div>
+
+                <!-- Divider Line -->
+                <div class="mobile-divider-v4"></div>
+
+                <!-- Secure Badge -->
+                <div class="mobile-secure-badge-large-v4">
+                    <svg class="mobile-secure-shield-v4" viewBox="0 0 80 80" fill="none">
+                        <defs>
+                            <linearGradient id="mobileGreenShield" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ade80;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#22c55e;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M40 8 L65 18 L65 35 C65 48 40 60 40 60 C40 60 15 48 15 35 L15 18 L40 8 Z" 
+                              fill="url(#mobileGreenShield)" stroke="#16a34a" stroke-width="2"/>
+                        <path d="M28 35 L36 43 L52 27" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="mobile-secure-text-large-v4">100% Secure</span>
+                </div>
+
+                <!-- Trustpilot Section -->
+                <div class="mobile-trustpilot-section-v4">
+                    <img src="/trustpilot-logo.svg" alt="Trustpilot" class="mobile-trustpilot-logo-small-v4">
+                    <div class="mobile-stars-small-v4">
+                        <span class="mobile-star-v4">⭐</span>
+                        <span class="mobile-star-v4">⭐</span>
+                        <span class="mobile-star-v4">⭐</span>
+                        <span class="mobile-star-v4">⭐</span>
+                        <span class="mobile-star-v4">⭐</span>
                     </div>
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon3.png" alt="Title" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Title</span>
+                    <div class="mobile-rating-text-v4">
+                        <span class="mobile-rating-label-v4">Рейтинг</span>
+                        <span class="mobile-rating-score-v4">4,99 ⭐</span>
                     </div>
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon4.png" alt="Recalls" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Recalls</span>
-                    </div>
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon5.png" alt="Ownership" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Ownership</span>
-                    </div>
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon6.png" alt="Theft" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Theft</span>
-                    </div>
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon7.png" alt="Flood" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Flood</span>
-                    </div>
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon8.png" alt="Damage" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Damage</span>
-                    </div>
-                    <div class="mobile-hero-v3-feature-item">
-                        <img src="/vinicon9.png" alt="Liens" class="mobile-hero-v3-icon" width="48" height="48">
-                        <span>Liens</span>
-                    </div>
+                </div>
+
+                <!-- Divider Line -->
+                <div class="mobile-divider-v4"></div>
+
+                <!-- Encryption Footer -->
+                <div class="mobile-encryption-footer-v4">
+                    <svg class="mobile-lock-icon-small-v4" viewBox="0 0 24 24" fill="none">
+                        <rect x="6" y="10" width="12" height="10" rx="2" stroke="#666" stroke-width="2"/>
+                        <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span class="mobile-encryption-text-small-v4">DATA ENCRYPTED</span>
                 </div>
             </div>
         </section>
+        
+        <script>
+        function submitMobileFormV4(event) {
+            event.preventDefault();
+            const vinInput = document.getElementById('mobile-vin-input-v4-new');
+            if (!vinInput) return;
+            
+            let vin = vinInput.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+            
+            if (vin.length !== 17) {
+                alert('Please enter a valid 17-character VIN number');
+                vinInput.focus();
+                return;
+            }
+            
+            // Validate VIN format (same as existing validation)
+            if (!vin.match(/^[A-HJ-NPR-Z0-9]{17}$/)) {
+                alert('Please enter a valid 17-character VIN. The VIN must contain only letters (A-H, J-N, P-R, T-Z) and numbers (0-9).');
+                vinInput.focus();
+                return;
+            }
+            
+            // Try to set value in existing mobile input if it exists
+            const existingMobileVinInput = document.getElementById('mobile-vin-input');
+            if (existingMobileVinInput) {
+                existingMobileVinInput.value = vin;
+            }
+            
+            // Use existing form submission logic
+            if (typeof submitMobileForm === 'function') {
+                submitMobileForm();
+            } else if (typeof submitForm === 'function') {
+                // Create a temporary event object for submitForm
+                const tempEvent = { preventDefault: () => {}, target: event.target };
+                submitForm.call(event.target, tempEvent);
+            } else {
+                // Fallback: redirect to report page
+                window.location.href = '/report?vin=' + vin;
+            }
+        }
+        
+        // Auto-format VIN input
+        document.addEventListener('DOMContentLoaded', function() {
+            const vinInput = document.getElementById('mobile-vin-input-v4-new');
+            if (vinInput) {
+                vinInput.addEventListener('input', function(e) {
+                    this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                });
+                
+                // Allow Enter key to submit
+                vinInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        submitMobileFormV4(e);
+                    }
+                });
+            }
+        });
+        </script>
         
         <!-- Mobile Second Screen: Sample Report -->
         <section class="mobile-sample-report">
