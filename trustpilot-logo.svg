@@ -1,0 +1,8 @@
+<svg width="120" height="30" viewBox="0 0 120 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Trustpilot star icon -->
+  <path d="M15 2 L18 12 L28 12 L20 18 L23 28 L15 22 L7 28 L10 18 L2 12 L12 12 Z" fill="#00B67A"/>
+  
+  <!-- Trustpilot text -->
+  <text x="35" y="20" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#191919">Trustpilot</text>
+</svg>
+
