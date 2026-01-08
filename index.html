@@ -446,7 +446,6 @@
     <!-- PDF.js Library (local) -->
     <script src="/public/pdf.min.js"></script>
     <!-- End A/B Test System -->
-    <script src="/public/mobile-hero-new.js" defer></script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -3651,6 +3650,95 @@
     
     <!-- ==================== MOBILE VERSION ==================== -->
     <div class="mobile-only">
+        <!-- MOBILE FIRST SCREEN - EXACTLY FROM PROVIDED CODE -->
+        <div class="mobile-hero-wrap">
+            <div class="mobile-hero-topbar">
+                <div class="mobile-hero-brand">
+                    <div class="mobile-hero-logo" aria-hidden="true"></div>
+                    <div class="mobile-hero-name">
+                        <b>VINTRUST</b>
+                        <span>Instant VIN report • US market</span>
+                    </div>
+                </div>
+                <div class="mobile-hero-trustchip" title="Real-time checks">
+                    <span class="mobile-hero-dot" aria-hidden="true"></span>
+                    Verified data sources
+                </div>
+            </div>
+
+            <section class="mobile-hero-hero" aria-label="VIN hero">
+                <div class="mobile-hero-heroHead">
+                    <div class="mobile-hero-kicker">
+                        <div class="mobile-hero-pill">Avoid hidden issues</div>
+                        <div class="mobile-hero-pill mobile-hero-pill-gray">Before you buy</div>
+                    </div>
+
+                    <h1 class="mobile-hero-h1">Check a VIN in seconds.<br/>Know what the seller won't say.</h1>
+                    <p class="mobile-hero-sub">
+                        Title & accident signals, odometer risk, prior use, and key history flags — delivered fast.
+                    </p>
+                </div>
+
+                <div class="mobile-hero-form">
+                    <div class="mobile-hero-field">
+                        <div class="mobile-hero-inputWrap">
+                            <div class="mobile-hero-vinIcon" aria-hidden="true">VIN</div>
+                            <input id="mobile-hero-vin" class="mobile-hero-input" inputmode="latin" autocomplete="off" autocapitalize="characters"
+                                   placeholder="Enter 17-character VIN" maxlength="17" />
+                        </div>
+                        <button class="mobile-hero-btn" id="mobile-hero-cta" disabled>Check VIN</button>
+                    </div>
+
+                    <div class="mobile-hero-metaRow">
+                        <div class="mobile-hero-price">
+                            <b>$3.00 report</b>
+                            <span>Instant delivery • Mobile-friendly</span>
+                        </div>
+                        <div class="mobile-hero-secure"><span class="mobile-hero-lock" aria-hidden="true"></span>Secure checkout</div>
+                    </div>
+
+                    <div class="mobile-hero-grid" role="list">
+                        <div class="mobile-hero-feat" role="listitem">
+                            <b>Accident & damage</b>
+                            <span>Red flags + signals</span>
+                        </div>
+                        <div class="mobile-hero-feat" role="listitem">
+                            <b>Odometer risk</b>
+                            <span>Rollback indicators</span>
+                        </div>
+                        <div class="mobile-hero-feat" role="listitem">
+                            <b>Title & branding</b>
+                            <span>Salvage/flood/lemon</span>
+                        </div>
+                        <div class="mobile-hero-feat" role="listitem">
+                            <b>Use history</b>
+                            <span>Rental/fleet clues</span>
+                        </div>
+                    </div>
+
+                    <div class="mobile-hero-hint">
+                        <span class="mobile-hero-badgeOk"><i></i>Best practice</span>
+                        Check the VIN before payment or deposit.
+                    </div>
+
+                    <div class="mobile-hero-disclaimer">
+                        Data availability varies by vehicle and state. Not affiliated with any government agency.
+                        By continuing you agree to the <a href="#" onclick="return false;">Terms</a>.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sticky conversion bar -->
+        <div class="mobile-hero-sticky" role="region" aria-label="Sticky action">
+            <div class="mobile-hero-stickyInner">
+                <div class="mobile-hero-mini">
+                    <b>$3.00 report</b>
+                    <span>Instant delivery</span>
+                </div>
+                <button class="mobile-hero-btn" id="mobile-hero-cta2" disabled>Check VIN</button>
+            </div>
+        </div>
         
         <!-- Mobile Second Screen: Sample Report -->
         <section class="mobile-sample-report">
