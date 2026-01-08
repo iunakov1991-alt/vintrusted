@@ -36,13 +36,13 @@
 .mobile-hero-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.7);
-  padding: 4px 10px;
-  border-radius: 999px;
-  box-shadow: 0 8px 18px rgba(16,24,40,.05);
+  border: 0;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .mobile-hero-logo {
@@ -168,6 +168,61 @@
 .mobile-hero-inputWrap {
   flex: 1;
   position: relative;
+}
+
+/* Contrast strip behind input and button */
+.mobile-hero-contrast {
+  background: linear-gradient(180deg, #0b1220, #0b1220);
+  padding: 12px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.mobile-hero-field {
+  display: block;
+  gap: 0;
+  align-items: stretch;
+  margin-top: 0;
+}
+
+.mobile-hero-input {
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 0 12px 0 44px;
+  font-size: 14px;
+  outline: none;
+  box-shadow: 0 10px 22px rgba(16,24,40,.06);
+  font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+}
+
+.mobile-hero-btn-block {
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  padding: 0;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.mobile-hero-contrast .mobile-hero-vinIcon {
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, #fff, #f3f6ff);
+  color: #2b3649;
+  font-weight: 900;
+  font-size: 12px;
 }
 
 .mobile-hero-input {
