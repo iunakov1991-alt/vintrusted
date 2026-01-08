@@ -172,13 +172,17 @@
 
 /* Contrast strip behind input and button */
 .mobile-hero-contrast {
-  background: linear-gradient(180deg, #0b1220, #0b1220);
+  background: #0b1220;
   padding: 12px;
   border-radius: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 12px;
+  /* make strip extend visually to edges of the mobile container */
+  width: calc(100% + 28px);
+  margin-left: -14px;
+  margin-right: -14px;
 }
 
 .mobile-hero-field {
@@ -209,6 +213,10 @@
   padding: 0;
   font-weight: 800;
   font-size: 14px;
+  background: #FFD200;
+  color: #0b1220;
+  border: 0;
+  box-shadow: 0 8px 18px rgba(0,0,0,.12);
 }
 
 .mobile-hero-contrast .mobile-hero-vinIcon {
