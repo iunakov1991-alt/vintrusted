@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 6px 2px 10px;
+  padding: 4px 2px 6px;
 }
 
 .mobile-hero-brand {
@@ -40,7 +40,7 @@
   min-width: 0;
   border: 1px solid var(--line);
   background: rgba(255,255,255,.7);
-  padding: 7px 10px;
+  padding: 4px 10px;
   border-radius: 999px;
   box-shadow: 0 8px 18px rgba(16,24,40,.05);
 }
@@ -59,8 +59,11 @@
 .mobile-hero-name {
   display: flex;
   flex-direction: column;
-  line-height: 1.05;
+  justify-content: center;
+  align-items: flex-start;
+  line-height: 1;
   min-width: 0;
+  padding: 0;
 }
 
 .mobile-hero-name b {
