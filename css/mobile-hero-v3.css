@@ -43,7 +43,6 @@
     opacity: 1 !important;
 }
 
-/* Ensure mobile-hero-v3 is visible on mobile */
 @media (max-width: 1023px) {
     .mobile-hero-v3 {
         display: flex !important;
