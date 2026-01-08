@@ -219,6 +219,24 @@
   box-shadow: 0 8px 18px rgba(0,0,0,.12);
 }
 
+/* Stronger, higher-specificity rules to avoid being overridden */
+.mobile-device .mobile-only .mobile-hero-contrast {
+  background: #0b1220 !important;
+  padding: 12px !important;
+  border-radius: 14px !important;
+  width: calc(100% + 28px) !important;
+  margin-left: -14px !important;
+  margin-right: -14px !important;
+  z-index: 2 !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12) !important;
+}
+
+.mobile-device .mobile-only .mobile-hero-btn-block {
+  background: #FFD200 !important;
+  color: #0b1220 !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.12) !important;
+}
+
 .mobile-hero-contrast .mobile-hero-vinIcon {
   left: 12px;
   top: 50%;
