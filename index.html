@@ -57,7 +57,6 @@
     <script src="/public/utm-tracker.js" defer></script>
     
     <!-- Mobile Hero V3 Form Handler -->
-    <script src="/public/mobile-hero-v3.js" defer></script>
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -230,8 +229,6 @@
     <link rel="stylesheet" href="mobile.css?v=105" media="screen and (max-width: 1023px)">
     <link rel="stylesheet" href="mobile-form-new.css?v=22">
     
-    <!-- Mobile Hero V3 Styles - LAST TO OVERRIDE -->
-    <link rel="stylesheet" href="/css/mobile-hero-v3.css?v=35">
     
     <!-- MOBILE-ONLY STYLES: Conditional loading based on device detection -->
     <!-- Mobile-only CSS now loaded directly in head with media query -->
@@ -3650,183 +3647,6 @@
     
     <!-- ==================== MOBILE VERSION ==================== -->
     <div class="mobile-only">
-        <!-- MOBILE FIRST SCREEN - EXACTLY FROM PROVIDED CODE -->
-        <section class="mobile-hero-v3">
-            <!-- Header -->
-            <header class="mobile-hero-header">
-                <div class="mobile-hero-header-left">
-                    <svg class="mobile-hero-shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                    <span class="mobile-hero-header-label">CHECK VEHICLE HISTORY BY</span>
-                </div>
-                <div class="mobile-hero-header-flag">
-                    <span class="mobile-hero-flag-emoji">🇷🇺</span>
-                </div>
-            </header>
-
-            <!-- Hero Image Section -->
-            <div class="mobile-hero-image-section">
-                <img src="/FON.png" alt="Car check" class="mobile-hero-car-image">
-                <div class="mobile-hero-overlay"></div>
-                
-                <div class="mobile-hero-content">
-                    <h1 class="mobile-hero-title">
-                        CHECK YOUR CAR'S
-                        <br>
-                        <span class="mobile-hero-title-accent">HISTORY</span> BY VIN NUMBER
-                    </h1>
-                    
-                    <ul class="mobile-hero-checklist">
-                        <li class="mobile-hero-checklist-item">
-                            <svg class="mobile-hero-check-icon" viewBox="0 0 24 24" fill="none">
-                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Accidents & Damage</span>
-                        </li>
-                        <li class="mobile-hero-checklist-item">
-                            <svg class="mobile-hero-check-icon" viewBox="0 0 24 24" fill="none">
-                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Mileage & Title</span>
-                        </li>
-                        <li class="mobile-hero-checklist-item">
-                            <svg class="mobile-hero-check-icon" viewBox="0 0 24 24" fill="none">
-                                <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Theft & Recalls</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- VIN Input Section -->
-            <div class="mobile-hero-vin-section">
-                <div class="mobile-hero-vin-card">
-                    <form class="mobile-hero-vin-form" id="mobile-hero-vin-form">
-                        <div class="mobile-hero-vin-input-wrapper">
-                            <input
-                                type="text"
-                                class="mobile-hero-vin-input"
-                                placeholder="Enter VIN (17 characters)"
-                                maxlength="17"
-                                autocomplete="off"
-                                id="mobile-hero-vin-input"
-                            >
-                            <button type="submit" class="mobile-hero-vin-button" id="mobile-hero-vin-button">
-                                CHECK NOW
-                            </button>
-                        </div>
-                        <p class="mobile-hero-vin-example">E.g. 1HGCV1F34JA123456</p>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Instant Check Banner -->
-            <div class="mobile-hero-banner">
-                <div class="mobile-hero-banner-content">
-                    <svg class="mobile-hero-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span class="mobile-hero-banner-text">
-                        INSTANT CHECK IN <span class="mobile-hero-banner-number">5</span> SECONDS!
-                    </span>
-                </div>
-            </div>
-
-            <!-- Features -->
-            <div class="mobile-hero-features">
-                <div class="mobile-hero-feature-item">
-                    <div class="mobile-hero-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    <span class="mobile-hero-feature-label">100+ CHECKS</span>
-                </div>
-                <div class="mobile-hero-feature-item">
-                    <div class="mobile-hero-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <span class="mobile-hero-feature-label">ACCURATE MILEAGE</span>
-                </div>
-                <div class="mobile-hero-feature-item">
-                    <div class="mobile-hero-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <path d="M14 2v6h6"/>
-                            <path d="M16 13H8"/>
-                            <path d="M16 17H8"/>
-                            <path d="M10 9H8"/>
-                        </svg>
-                    </div>
-                    <span class="mobile-hero-feature-label">TITLE & THEFT</span>
-                </div>
-            </div>
-
-            <!-- Trust Badges -->
-            <div class="mobile-hero-trust">
-                <div class="mobile-hero-trust-card">
-                    <!-- 100% Secure -->
-                    <div class="mobile-hero-trust-item">
-                        <div class="mobile-hero-trust-icon-success">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <span class="mobile-hero-trust-text-large">100% Secure</span>
-                    </div>
-
-                    <!-- Trustpilot -->
-                    <div class="mobile-hero-trust-item">
-                        <svg class="mobile-hero-trust-star-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                        <span class="mobile-hero-trust-label">Trustpilot</span>
-                        <div class="mobile-hero-trust-stars">
-                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Reviews -->
-                    <div class="mobile-hero-trust-item">
-                        <span class="mobile-hero-trust-reviews-label">ОТЗЫВЫ</span>
-                        <span class="mobile-hero-trust-rating">4.9</span>
-                        <svg class="mobile-hero-trust-star" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                        <span class="mobile-hero-trust-reviews-text">отлично</span>
-                    </div>
-
-                    <!-- Data Encrypted -->
-                    <div class="mobile-hero-trust-item mobile-hero-trust-encrypted">
-                        <svg class="mobile-hero-trust-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                        </svg>
-                        <span class="mobile-hero-trust-encrypted-text">DATA ENCRYPTED</span>
-                    </div>
-                </div>
-            </div>
-        </section>
         
         <!-- Mobile Second Screen: Sample Report -->
         <section class="mobile-sample-report">
