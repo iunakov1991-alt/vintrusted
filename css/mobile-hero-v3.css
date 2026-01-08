@@ -1,10 +1,11 @@
 /* ========================================
-   MOBILE HERO V3 - EXACTLY FROM PROVIDED CODE
+   MOBILE HERO V3 - EXACTLY FROM PROVIDED REACT CODE
+   Converted from HeroSection.tsx, VinInput.tsx, FeaturesList.tsx, TrustBadges.tsx
    ======================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-/* CSS Variables from index.css */
+/* CSS Variables from src/index.css */
 :root {
   --background: 0 0% 95%;
   --foreground: 0 0% 10%;
@@ -29,7 +30,7 @@
   --shadow-card: 0 2px 12px -2px hsl(0 0% 0% / 0.1);
 }
 
-/* Base Container */
+/* Base - from HeroSection.tsx: min-h-screen flex flex-col bg-background */
 .mobile-hero-v3 {
     min-height: 100vh;
     display: flex;
@@ -50,7 +51,7 @@
     }
 }
 
-/* ==================== HEADER ==================== */
+/* Header - from HeroSection.tsx: bg-primary px-4 py-3 flex items-center justify-between */
 .mobile-hero-header {
     background: hsl(var(--primary));
     padding: 12px 16px;
@@ -59,26 +60,30 @@
     justify-content: space-between;
 }
 
+/* Header left - from HeroSection.tsx: flex items-center gap-2 */
 .mobile-hero-header-left {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
+/* Shield icon - from HeroSection.tsx: w-5 h-5 text-primary-foreground */
 .mobile-hero-shield-icon {
     width: 20px;
     height: 20px;
     color: hsl(var(--primary-foreground));
 }
 
+/* Header label - from HeroSection.tsx: text-sm font-bold text-primary-foreground uppercase tracking-wide */
 .mobile-hero-header-label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     color: hsl(var(--primary-foreground));
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
+/* Flag - from HeroSection.tsx: w-8 h-6 bg-gradient-to-b from-red-500 via-white to-blue-600 rounded-sm flex items-center justify-center */
 .mobile-hero-header-flag {
     width: 32px;
     height: 24px;
@@ -93,21 +98,20 @@
     font-size: 12px;
 }
 
-/* ==================== HERO IMAGE SECTION ==================== */
+/* Hero Image Section - from HeroSection.tsx: relative */
 .mobile-hero-image-section {
     position: relative;
-    width: 100%;
-    height: 224px;
-    overflow: hidden;
 }
 
+/* Car image - from HeroSection.tsx: w-full h-56 object-cover object-center */
 .mobile-hero-car-image {
     width: 100%;
-    height: 100%;
+    height: 224px;
     object-fit: cover;
     object-position: center;
 }
 
+/* Overlay - from HeroSection.tsx: absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70 */
 .mobile-hero-overlay {
     position: absolute;
     inset: 0;
@@ -119,6 +123,7 @@
     );
 }
 
+/* Content - from HeroSection.tsx: absolute inset-0 flex flex-col justify-center px-5 */
 .mobile-hero-content {
     position: absolute;
     inset: 0;
@@ -129,24 +134,26 @@
     z-index: 1;
 }
 
+/* Title - from HeroSection.tsx: text-2xl font-black text-white leading-tight text-shadow animate-fade-up */
 .mobile-hero-title {
     font-size: 24px;
     font-weight: 900;
     color: white;
     line-height: 1.2;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    margin-bottom: 16px;
     animation: fadeUp 0.6s ease-out forwards;
 }
 
+/* Title accent - from HeroSection.tsx: text-accent */
 .mobile-hero-title-accent {
     color: hsl(var(--accent));
 }
 
+/* Checklist - from HeroSection.tsx: mt-4 space-y-1.5 animate-fade-up-delay-1 */
 .mobile-hero-checklist {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 16px 0 0 0;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -154,27 +161,29 @@
     opacity: 0;
 }
 
+/* Checklist item - from HeroSection.tsx: flex items-center gap-2 */
 .mobile-hero-checklist-item {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
+/* Check icon - from HeroSection.tsx: w-4 h-4 text-success */
 .mobile-hero-check-icon {
     width: 16px;
     height: 16px;
-    flex-shrink: 0;
     color: hsl(var(--success));
+    flex-shrink: 0;
 }
 
+/* Checklist text - from HeroSection.tsx: text-sm font-medium text-white */
 .mobile-hero-checklist-item span {
     font-size: 14px;
     font-weight: 500;
     color: white;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* ==================== VIN INPUT SECTION ==================== */
+/* VIN Section - from HeroSection.tsx: px-4 -mt-4 relative z-10 animate-fade-up-delay-2 */
 .mobile-hero-vin-section {
     padding: 0 16px;
     margin-top: -16px;
@@ -184,6 +193,7 @@
     opacity: 0;
 }
 
+/* VIN Card - from HeroSection.tsx: bg-card rounded-xl p-4 shadow-soft */
 .mobile-hero-vin-card {
     background: hsl(var(--card));
     border-radius: 12px;
@@ -191,10 +201,15 @@
     box-shadow: var(--shadow-soft);
 }
 
+/* VIN Form - from VinInput.tsx: w-full space-y-2 */
 .mobile-hero-vin-form {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
+/* VIN Input Wrapper - from VinInput.tsx: flex items-stretch gap-0 rounded-lg overflow-hidden shadow-lg */
 .mobile-hero-vin-input-wrapper {
     display: flex;
     align-items: stretch;
@@ -204,6 +219,7 @@
     box-shadow: var(--shadow-button);
 }
 
+/* VIN Input - from VinInput.tsx: flex-1 h-14 px-4 bg-card text-foreground text-base font-medium tracking-wider... */
 .mobile-hero-vin-input {
     flex: 1;
     height: 56px;
@@ -229,6 +245,7 @@
     border-color: hsl(var(--ring));
 }
 
+/* VIN Button - from VinInput.tsx: h-14 px-6 rounded-none rounded-r-lg bg-cta... */
 .mobile-hero-vin-button {
     height: 56px;
     padding: 0 24px;
@@ -255,14 +272,14 @@
     cursor: not-allowed;
 }
 
+/* VIN Example - from VinInput.tsx: text-xs text-muted-foreground pl-1 */
 .mobile-hero-vin-example {
     font-size: 12px;
     color: hsl(var(--muted-foreground));
-    margin-top: 8px;
     padding-left: 4px;
 }
 
-/* ==================== INSTANT CHECK BANNER ==================== */
+/* Banner - from HeroSection.tsx: px-4 mt-4 */
 .mobile-hero-banner {
     padding: 0 16px;
     margin-top: 16px;
@@ -270,6 +287,7 @@
     opacity: 0;
 }
 
+/* Banner Content - from HeroSection.tsx: gradient-banner rounded-lg py-3 px-4 flex items-center justify-center gap-2 shadow-md */
 .mobile-hero-banner-content {
     background: linear-gradient(90deg, hsl(45, 100%, 50%) 0%, hsl(40, 100%, 45%) 100%);
     border-radius: 8px;
@@ -281,12 +299,14 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Banner Icon - from HeroSection.tsx: w-5 h-5 text-accent-foreground */
 .mobile-hero-banner-icon {
     width: 20px;
     height: 20px;
     color: hsl(var(--accent-foreground));
 }
 
+/* Banner Text - from HeroSection.tsx: text-sm font-black text-accent-foreground uppercase tracking-wide */
 .mobile-hero-banner-text {
     font-size: 14px;
     font-weight: 900;
@@ -299,16 +319,22 @@
     font-size: 20px;
 }
 
-/* ==================== FEATURES LIST ==================== */
+/* Features - from HeroSection.tsx: px-4 mt-6 */
 .mobile-hero-features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    padding: 24px 16px;
+    padding: 0 16px;
+    margin-top: 24px;
     animation: fadeUp 0.6s ease-out 0.4s forwards;
     opacity: 0;
 }
 
+/* Features Grid - from FeaturesList.tsx: grid grid-cols-3 gap-4 */
+.mobile-hero-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* Feature Item - from FeaturesList.tsx: flex flex-col items-center text-center */
 .mobile-hero-feature-item {
     display: flex;
     flex-direction: column;
@@ -316,6 +342,7 @@
     text-align: center;
 }
 
+/* Feature Icon - from FeaturesList.tsx: w-14 h-14 rounded-full bg-muted flex items-center justify-center mb-2 */
 .mobile-hero-feature-icon {
     width: 56px;
     height: 56px;
@@ -327,12 +354,14 @@
     margin-bottom: 8px;
 }
 
+/* Feature Icon SVG - from FeaturesList.tsx: w-7 h-7 text-foreground */
 .mobile-hero-feature-icon svg {
     width: 28px;
     height: 28px;
     color: hsl(var(--foreground));
 }
 
+/* Feature Label - from FeaturesList.tsx: text-xs font-bold text-foreground uppercase leading-tight */
 .mobile-hero-feature-label {
     font-size: 12px;
     font-weight: 700;
@@ -341,13 +370,16 @@
     line-height: 1.2;
 }
 
-/* ==================== TRUST BADGES ==================== */
+/* Trust - from HeroSection.tsx: px-4 mt-6 mb-8 */
 .mobile-hero-trust {
-    padding: 0 16px 32px;
+    padding: 0 16px;
+    margin-top: 24px;
+    margin-bottom: 32px;
     animation: fadeUp 0.6s ease-out 0.5s forwards;
     opacity: 0;
 }
 
+/* Trust Card - from TrustBadges.tsx: bg-card rounded-xl p-5 shadow-card space-y-4 */
 .mobile-hero-trust-card {
     background: hsl(var(--card));
     border-radius: 12px;
@@ -358,12 +390,14 @@
     gap: 16px;
 }
 
+/* Trust Item - from TrustBadges.tsx: flex items-center gap-3 */
 .mobile-hero-trust-item {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+/* Trust Icon Success - from TrustBadges.tsx: w-12 h-12 rounded-lg bg-success/10 flex items-center justify-center */
 .mobile-hero-trust-icon-success {
     width: 48px;
     height: 48px;
@@ -374,18 +408,21 @@
     justify-content: center;
 }
 
+/* Trust Icon Success SVG - from TrustBadges.tsx: w-7 h-7 text-success */
 .mobile-hero-trust-icon-success svg {
     width: 28px;
     height: 28px;
     color: hsl(var(--success));
 }
 
+/* Trust Text Large - from TrustBadges.tsx: text-xl font-bold text-foreground */
 .mobile-hero-trust-text-large {
     font-size: 20px;
     font-weight: 700;
     color: hsl(var(--foreground));
 }
 
+/* Trust Star Icon - from TrustBadges.tsx: w-5 h-5 text-success fill-success */
 .mobile-hero-trust-star-icon {
     width: 20px;
     height: 20px;
@@ -393,17 +430,20 @@
     fill: hsl(var(--success));
 }
 
+/* Trust Label - from TrustBadges.tsx: font-semibold text-foreground */
 .mobile-hero-trust-label {
     font-weight: 600;
     color: hsl(var(--foreground));
 }
 
+/* Trust Stars - from TrustBadges.tsx: flex gap-0.5 */
 .mobile-hero-trust-stars {
     display: flex;
     gap: 2px;
     align-items: center;
 }
 
+/* Trust Stars SVG - from TrustBadges.tsx: w-4 h-4 text-success fill-success */
 .mobile-hero-trust-stars svg {
     width: 16px;
     height: 16px;
@@ -411,17 +451,20 @@
     fill: hsl(var(--success));
 }
 
+/* Trust Reviews Label - from TrustBadges.tsx: text-sm text-muted-foreground */
 .mobile-hero-trust-reviews-label {
     font-size: 12px;
     color: hsl(var(--muted-foreground));
     text-transform: uppercase;
 }
 
+/* Trust Rating - from TrustBadges.tsx: text-accent font-bold */
 .mobile-hero-trust-rating {
     color: hsl(var(--accent));
     font-weight: 700;
 }
 
+/* Trust Star - from TrustBadges.tsx: w-4 h-4 text-accent fill-accent */
 .mobile-hero-trust-star {
     width: 16px;
     height: 16px;
@@ -429,23 +472,27 @@
     fill: hsl(var(--accent));
 }
 
+/* Trust Reviews Text - from TrustBadges.tsx: text-sm text-muted-foreground */
 .mobile-hero-trust-reviews-text {
     font-size: 14px;
     color: hsl(var(--muted-foreground));
 }
 
+/* Trust Encrypted - from TrustBadges.tsx: flex items-center justify-center gap-2 pt-2 border-t border-border */
 .mobile-hero-trust-encrypted {
     justify-content: center;
     padding-top: 16px;
     border-top: 1px solid hsl(var(--border));
 }
 
+/* Trust Lock - from TrustBadges.tsx: w-4 h-4 text-muted-foreground */
 .mobile-hero-trust-lock {
     width: 16px;
     height: 16px;
     color: hsl(var(--muted-foreground));
 }
 
+/* Trust Encrypted Text - from TrustBadges.tsx: text-sm font-semibold text-muted-foreground uppercase tracking-wide */
 .mobile-hero-trust-encrypted-text {
     font-size: 12px;
     font-weight: 600;
@@ -454,7 +501,7 @@
     letter-spacing: 0.05em;
 }
 
-/* ==================== ANIMATIONS ==================== */
+/* Animations - from src/index.css */
 @keyframes fadeUp {
     from {
         opacity: 0;
@@ -466,7 +513,7 @@
     }
 }
 
-/* ==================== RESPONSIVE ==================== */
+/* Responsive */
 @media (max-width: 375px) {
     .mobile-hero-title {
         font-size: 20px;
