@@ -231,7 +231,7 @@
     <link rel="stylesheet" href="mobile-form-new.css?v=22">
     
     <!-- Mobile Hero V3 Styles - LAST TO OVERRIDE -->
-    <link rel="stylesheet" href="/css/mobile-hero-v3.css?v=17" media="(max-width: 1023px)">
+    <link rel="stylesheet" href="/css/mobile-hero-v3.css?v=18">
     
     <!-- MOBILE-ONLY STYLES: Conditional loading based on device detection -->
     <!-- Mobile-only CSS now loaded directly in head with media query -->
@@ -3714,7 +3714,7 @@
         -->
         <!-- ======================================== -->
         
-        <!-- NEW MOBILE HERO SECTION V4 (2026-01-07) - First Screen Redesign -->
+        <!-- NEW MOBILE HERO SECTION V3 (2026-01-04) -->
         <section class="mobile-hero-v3">
             <!-- Header -->
             <header class="mobile-hero-header">
@@ -3727,6 +3727,7 @@
                     </div>
                 </div>
             </header>
+
             <!-- Hero Image Section -->
             <div class="mobile-hero-image-section">
                 <img src="/FON.png" alt="Car check" class="mobile-hero-car-image">
@@ -3764,6 +3765,7 @@
                     </ul>
                 </div>
             </div>
+
             <!-- VIN Input Section -->
             <div class="mobile-hero-vin-section">
                 <div class="mobile-hero-vin-card">
@@ -3785,6 +3787,7 @@
                     </form>
                 </div>
             </div>
+
             <!-- Instant Check Banner -->
             <div class="mobile-hero-banner">
                 <div class="mobile-hero-banner-content">
@@ -3796,6 +3799,7 @@
                     </span>
                 </div>
             </div>
+
             <!-- Features List -->
             <div class="mobile-hero-features">
                 <div class="mobile-hero-feature-item">
@@ -3828,6 +3832,7 @@
                     <span class="mobile-hero-feature-label">TITLE & THEFT</span>
                 </div>
             </div>
+
             <!-- Trust Badges -->
             <div class="mobile-hero-trust">
                 <div class="mobile-hero-trust-card">
@@ -3841,6 +3846,7 @@
                         </div>
                         <span class="mobile-hero-trust-text-large">100% Secure</span>
                     </div>
+
                     <!-- Trustpilot -->
                     <div class="mobile-hero-trust-item">
                         <span class="mobile-hero-trust-label">Trustpilot</span>
@@ -3862,6 +3868,7 @@
                             </svg>
                         </div>
                     </div>
+
                     <!-- Reviews -->
                     <div class="mobile-hero-trust-item">
                         <span class="mobile-hero-trust-reviews-label">ОТЗЫВЫ</span>
@@ -3871,6 +3878,7 @@
                         </svg>
                         <span class="mobile-hero-trust-reviews-text">отлично</span>
                     </div>
+
                     <!-- Data Encrypted -->
                     <div class="mobile-hero-trust-item mobile-hero-trust-encrypted">
                         <svg class="mobile-hero-trust-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -3882,64 +3890,6 @@
                 </div>
             </div>
         </section>
-        
-        <script>
-        function submitMobileFormV4(event) {
-            event.preventDefault();
-            const vinInput = document.getElementById('mobile-vin-input-v4-new');
-            if (!vinInput) return;
-            
-            let vin = vinInput.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
-            
-            if (vin.length !== 17) {
-                alert('Please enter a valid 17-character VIN number');
-                vinInput.focus();
-                return;
-            }
-            
-            // Validate VIN format (same as existing validation)
-            if (!vin.match(/^[A-HJ-NPR-Z0-9]{17}$/)) {
-                alert('Please enter a valid 17-character VIN. The VIN must contain only letters (A-H, J-N, P-R, T-Z) and numbers (0-9).');
-                vinInput.focus();
-                return;
-            }
-            
-            // Try to set value in existing mobile input if it exists
-            const existingMobileVinInput = document.getElementById('mobile-vin-input');
-            if (existingMobileVinInput) {
-                existingMobileVinInput.value = vin;
-            }
-            
-            // Use existing form submission logic
-            if (typeof submitMobileForm === 'function') {
-                submitMobileForm();
-            } else if (typeof submitForm === 'function') {
-                // Create a temporary event object for submitForm
-                const tempEvent = { preventDefault: () => {}, target: event.target };
-                submitForm.call(event.target, tempEvent);
-            } else {
-                // Fallback: redirect to report page
-                window.location.href = '/report?vin=' + vin;
-            }
-        }
-        
-        // Auto-format VIN input
-        document.addEventListener('DOMContentLoaded', function() {
-            const vinInput = document.getElementById('mobile-vin-input-v4-new');
-            if (vinInput) {
-                vinInput.addEventListener('input', function(e) {
-                    this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-                });
-                
-                // Allow Enter key to submit
-                vinInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        submitMobileFormV4(e);
-                    }
-                });
-            }
-        });
-        </script>
         
         <!-- Mobile Second Screen: Sample Report -->
         <section class="mobile-sample-report">
