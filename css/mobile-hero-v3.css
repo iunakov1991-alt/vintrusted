@@ -1,722 +1,497 @@
 /* ========================================
-   MOBILE HERO V3 (2026-01-04)
-   New layout: 1/3 white top, 2/3 gray bottom
+   MOBILE HERO V3 - Based on React/Tailwind Design
+   Converted from provided React components
    ======================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* CSS Variables from index.css */
+:root {
+  --background: 0 0% 95%;
+  --foreground: 0 0% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 10%;
+  --primary: 0 0% 8%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 90%;
+  --secondary-foreground: 0 0% 15%;
+  --muted: 0 0% 92%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 45 100% 50%;
+  --accent-foreground: 0 0% 10%;
+  --cta: 0 85% 45%;
+  --cta-foreground: 0 0% 100%;
+  --success: 142 70% 45%;
+  --success-foreground: 0 0% 100%;
+  --border: 0 0% 85%;
+  --input: 0 0% 85%;
+  --ring: 45 100% 50%;
+  --radius: 0.5rem;
+  --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.15);
+  --shadow-button: 0 4px 14px -2px hsl(0 85% 45% / 0.5);
+  --shadow-card: 0 2px 12px -2px hsl(0 0% 0% / 0.1);
+}
+
+/* Base Container */
 .mobile-hero-v3 {
     min-height: 100vh;
     display: flex !important;
     flex-direction: column;
-    visibility: visible !important;
-    opacity: 1 !important;
+    background: hsl(var(--background));
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     visibility: visible !important;
     opacity: 1 !important;
 }
 
-/* ==================== TOP SECTION (1/3 - White) ==================== */
-.mobile-hero-v3-top {
-    background: #ffffff;
-    padding: 24px 20px 32px 20px;
+/* Ensure mobile-hero-v3 is visible on mobile */
+@media (max-width: 1023px) {
+    .mobile-hero-v3 {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+.mobile-device .mobile-hero-v3 {
     display: flex !important;
-    flex-direction: column;
     visibility: visible !important;
     opacity: 1 !important;
+}
+
+/* ==================== HEADER ==================== */
+.mobile-hero-header {
+    background: hsl(var(--primary));
+    padding: 12px 16px;
+    display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    order: -1 !important;
 }
 
-/* Logo */
-.mobile-hero-v3-logo {
-    text-align: center;
-}
-
-.mobile-hero-v3-logo img {
-    height: 32px;
-    width: auto;
-}
-
-/* Separator Line */
-.mobile-hero-v3-separator {
+.mobile-hero-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    height: 1px;
-    background: #e5e7eb;
 }
 
-/* Form with inline button */
-.mobile-device .mobile-only .mobile-hero-v3-form,
-.mobile-hero-v3-form {
-    width: 100% !important;
-    max-width: 400px !important;
-    position: relative !important;
-    display: block !important;
-}
-
-.mobile-device .mobile-only .mobile-hero-v3-input,
-input.mobile-hero-v3-input,
-.mobile-hero-v3-input {
-    width: 100% !important;
-    padding: 16px 130px 16px 16px !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    border: 2px solid #9ca3af !important;
-    border-radius: 10px !important;
-    background: #ffffff !important;
-    color: #1f2937 !important;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    box-sizing: border-box !important;
-}
-
-.mobile-device .mobile-only .mobile-hero-v3-input::placeholder,
-input.mobile-hero-v3-input::placeholder,
-.mobile-hero-v3-input::placeholder {
-    color: #9ca3af !important;
-    font-weight: 500 !important;
-}
-
-.mobile-device .mobile-only .mobile-hero-v3-input:focus,
-input.mobile-hero-v3-input:focus,
-.mobile-hero-v3-input:focus {
-    outline: none !important;
-    border-color: #3b82f6 !important;
-}
-
-.mobile-device .mobile-only .mobile-hero-v3-btn,
-button.mobile-hero-v3-btn,
-.mobile-hero-v3-btn {
-    position: absolute !important;
-    right: 4px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    width: auto !important;
-    min-width: 120px !important;
-    height: 48px !important;
-    background: #3b82f6 !important;
-    background-color: #3b82f6 !important;
-    border: none !important;
-    border-radius: 8px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 6px !important;
-    cursor: pointer !important;
-    transition: background 0.2s !important;
-    padding: 0 16px !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-}
-
-.mobile-device .mobile-only .mobile-hero-v3-btn:active,
-button.mobile-hero-v3-btn:active,
-.mobile-hero-v3-btn:active {
-    background: #2563eb !important;
-    background-color: #2563eb !important;
-}
-
-.mobile-device .mobile-only .mobile-hero-v3-btn svg,
-button.mobile-hero-v3-btn svg,
-.mobile-hero-v3-btn svg {
-    width: 16px !important;
-    height: 16px !important;
-    flex-shrink: 0 !important;
-}
-
-.mobile-device .mobile-only .mobile-hero-v3-btn svg *,
-button.mobile-hero-v3-btn svg *,
-.mobile-hero-v3-btn svg * {
-    stroke: #ffffff !important;
-}
-
-.mobile-device .mobile-only .mobile-hero-v3-btn span,
-button.mobile-hero-v3-btn span,
-.mobile-hero-v3-btn span {
-    color: #ffffff !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    white-space: nowrap !important;
-}
-
-/* Trust badges */
-.mobile-hero-v3-trust {
+.mobile-hero-header-text {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-}
-
-.mobile-hero-v3-trust img {
-    opacity: 0.7;
-    max-width: 70px;
-    height: auto;
-}
-
-/* ==================== BOTTOM SECTION (2/3 - Gray) ==================== */
-.mobile-hero-v3-bottom {
-    background: #f9fafb;
-    padding: 32px 20px 40px 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Title */
-.mobile-hero-v3-title {
-    font-size: 28px;
-    font-weight: 800;
-    color: #111827;
-    text-align: center;
-    margin: 0 0 12px 0;
-    letter-spacing: 0.5px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-/* Subtitle */
-.mobile-hero-v3-subtitle {
-    font-size: 16px;
-    color: #4b5563;
-    text-align: center;
-    margin: 0 0 32px 0;
-    font-weight: 500;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-/* Features Grid (3x3) */
-.mobile-hero-v3-features {
-    width: 100%;
-    max-width: 400px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px 16px;
-    margin: 0 auto;
-}
-
-.mobile-hero-v3-feature-item {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 8px;
 }
 
-.mobile-hero-v3-icon {
-    width: 48px !important;
-    height: 48px !important;
-    flex-shrink: 0 !important;
-    object-fit: contain !important;
+.mobile-hero-header-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: hsl(var(--primary-foreground));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.mobile-hero-v3-feature-item span {
-    font-size: 13px;
+.mobile-hero-header-flag {
+    width: 32px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-hero-flag-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ==================== HERO IMAGE SECTION ==================== */
+.mobile-hero-image-section {
+    position: relative;
+    width: 100%;
+    height: 224px;
+    overflow: hidden;
+}
+
+.mobile-hero-car-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.mobile-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+}
+
+.mobile-hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1;
+}
+
+.mobile-hero-title {
+    font-size: 24px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 16px;
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+.mobile-hero-title-accent {
+    color: hsl(var(--accent));
+}
+
+.mobile-hero-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: fadeUp 0.6s ease-out 0.1s forwards;
+    opacity: 0;
+}
+
+.mobile-hero-checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mobile-hero-check-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.mobile-hero-checklist-item span {
+    font-size: 14px;
     font-weight: 500;
-    color: #374151;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ==================== VIN INPUT SECTION ==================== */
+.mobile-hero-vin-section {
+    padding: 0 16px;
+    margin-top: -16px;
+    position: relative;
+    z-index: 10;
+    animation: fadeUp 0.6s ease-out 0.2s forwards;
+    opacity: 0;
+}
+
+.mobile-hero-vin-card {
+    background: hsl(var(--card));
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: var(--shadow-soft);
+}
+
+.mobile-hero-vin-form {
+    width: 100%;
+}
+
+.mobile-hero-vin-input-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-button);
+}
+
+.mobile-hero-vin-input {
+    flex: 1;
+    height: 56px;
+    padding: 0 16px;
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border: 2px solid hsl(var(--input));
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    font-family: inherit;
+}
+
+.mobile-hero-vin-input::placeholder {
+    color: hsl(var(--muted-foreground));
+    letter-spacing: normal;
+}
+
+.mobile-hero-vin-input:focus {
+    border-color: hsl(var(--ring));
+}
+
+.mobile-hero-vin-button {
+    height: 56px;
+    padding: 0 24px;
+    background: hsl(var(--cta));
+    color: hsl(var(--cta-foreground));
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: inherit;
+    box-shadow: var(--shadow-button);
+}
+
+.mobile-hero-vin-button:hover:not(:disabled) {
+    background: hsl(0, 85%, 40%);
+}
+
+.mobile-hero-vin-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.mobile-hero-vin-example {
+    font-size: 12px;
+    color: hsl(var(--muted-foreground));
+    margin-top: 8px;
+    padding-left: 4px;
+}
+
+/* ==================== INSTANT CHECK BANNER ==================== */
+.mobile-hero-banner {
+    padding: 0 16px;
+    margin-top: 16px;
+    animation: fadeUp 0.6s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+.mobile-hero-banner-content {
+    background: linear-gradient(90deg, hsl(45, 100%, 50%) 0%, hsl(40, 100%, 45%) 100%);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-hero-banner-icon {
+    width: 20px;
+    height: 20px;
+    color: hsl(var(--accent-foreground));
+}
+
+.mobile-hero-banner-text {
+    font-size: 14px;
+    font-weight: 900;
+    color: hsl(var(--accent-foreground));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mobile-hero-banner-number {
+    font-size: 20px;
+}
+
+/* ==================== FEATURES LIST ==================== */
+.mobile-hero-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 24px 16px;
+    animation: fadeUp 0.6s ease-out 0.4s forwards;
+    opacity: 0;
+}
+
+.mobile-hero-feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.mobile-hero-feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: hsl(var(--muted));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.mobile-hero-feature-icon svg {
+    width: 28px;
+    height: 28px;
+    color: hsl(var(--foreground));
+}
+
+.mobile-hero-feature-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+/* ==================== TRUST BADGES ==================== */
+.mobile-hero-trust {
+    padding: 0 16px 32px;
+    animation: fadeUp 0.6s ease-out 0.5s forwards;
+    opacity: 0;
+}
+
+.mobile-hero-trust-card {
+    background: hsl(var(--card));
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mobile-hero-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mobile-hero-trust-icon-success {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: hsla(var(--success), 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-hero-trust-icon-success svg {
+    width: 28px;
+    height: 28px;
+    color: hsl(var(--success));
+}
+
+.mobile-hero-trust-text-large {
+    font-size: 20px;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+}
+
+.mobile-hero-trust-label {
+    font-weight: 600;
+    color: hsl(var(--foreground));
+}
+
+.mobile-hero-trust-stars {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.mobile-hero-trust-stars svg {
+    width: 16px;
+    height: 16px;
+    color: hsl(var(--success));
+    fill: hsl(var(--success));
+}
+
+.mobile-hero-trust-reviews-label {
+    font-size: 12px;
+    color: hsl(var(--muted-foreground));
+    text-transform: uppercase;
+}
+
+.mobile-hero-trust-rating {
+    color: hsl(var(--accent));
+    font-weight: 700;
+}
+
+.mobile-hero-trust-star {
+    width: 16px;
+    height: 16px;
+    color: hsl(var(--accent));
+    fill: hsl(var(--accent));
+}
+
+.mobile-hero-trust-reviews-text {
+    font-size: 14px;
+    color: hsl(var(--muted-foreground));
+}
+
+.mobile-hero-trust-encrypted {
+    justify-content: center;
+    padding-top: 16px;
+    border-top: 1px solid hsl(var(--border));
+}
+
+.mobile-hero-trust-lock {
+    width: 16px;
+    height: 16px;
+    color: hsl(var(--muted-foreground));
+}
+
+.mobile-hero-trust-encrypted-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: hsl(var(--muted-foreground));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 375px) {
+    .mobile-hero-title {
+        font-size: 20px;
+    }
+    
+    .mobile-hero-features {
+        gap: 12px;
+    }
+    
+    .mobile-hero-feature-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .mobile-hero-feature-icon svg {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 /* Hide on desktop */
 @media (min-width: 1024px) {
     .mobile-hero-v3 {
-        display: none;
+        display: none !important;
     }
 }
-
-/* Adjust for smaller screens */
-@media (max-width: 375px) {
-    .mobile-hero-v3-features {
-        gap: 20px 12px;
-    }
-    
-    .mobile-hero-v3-icon {
-        width: 44px;
-        height: 44px;
-    }
-    
-    .mobile-hero-v3-feature-item span {
-        font-size: 12px;
-    }
-}
-
-/* ========================================
-   MOBILE HERO V4 (2026-01-07)
-   New first screen design with header, hero background, and bottom section
-   ======================================== */
-
-/* Header Section - Black */
-.mobile-header-v4 {
-    background-color: #000000;
-    padding: 12px 16px;
-    position: relative;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.mobile-header-content-v4 {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-}
-
-.mobile-logo-v4 {
-    width: 45px;
-    height: 45px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.mobile-logo-v4 img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.mobile-header-title-v4 {
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    line-height: 1.3;
-    flex: 1;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.mobile-highlight-yellow {
-    color: #FFD700;
-    font-weight: 700;
-}
-
-.mobile-shield-flag-v4 {
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 8px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
-.mobile-shield-flag-v4 img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-/* Hero Section - Background Image */
-.mobile-hero-bg-v4 {
-    position: relative;
-    min-height: 50vh;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    display: flex;
-    align-items: flex-start;
-    padding: 20px 16px 0;
-    box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.1);
-    width: 100%;
-}
-
-.mobile-hero-overlay-v4 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
-    pointer-events: none;
-}
-
-.mobile-hero-content-v4 {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 100%;
-}
-
-.mobile-hero-title-v4 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    text-align: left;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-/* Features List */
-.mobile-features-list-v4 {
-    list-style: none;
-    margin-bottom: 12px;
-    padding: 0;
-}
-
-.mobile-feature-item-v4 {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.mobile-check-icon-v4 {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-    flex-shrink: 0;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
-.mobile-more-checks-v4 {
-    font-size: 14px;
-    font-weight: 400;
-    color: #ffffff;
-    margin-bottom: 20px;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-/* VIN Form */
-.mobile-vin-form-v4 {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.mobile-vin-input-v4 {
-    width: 100%;
-    padding: 16px 18px;
-    font-size: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.95);
-    color: #1a1a1a;
-    font-weight: 400;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    outline: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 
-                inset 0 2px 4px rgba(255, 255, 255, 0.8);
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-}
-
-.mobile-vin-input-v4::placeholder {
-    color: #999;
-}
-
-.mobile-vin-input-v4:focus {
-    border-color: #FFD700;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 
-                inset 0 2px 4px rgba(255, 255, 255, 0.9),
-                0 0 0 3px rgba(255, 215, 0, 0.2);
-}
-
-.mobile-search-button-v4 {
-    width: 100%;
-    padding: 16px 18px;
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4),
-                0 2px 4px rgba(0, 0, 0, 0.2),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.1),
-                inset 0 1px 2px rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.mobile-search-button-v4::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
-}
-
-.mobile-search-button-v4:hover::before {
-    left: 100%;
-}
-
-.mobile-search-button-v4:hover {
-    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-    box-shadow: 0 6px 16px rgba(34, 197, 94, 0.5),
-                0 2px 4px rgba(0, 0, 0, 0.2),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.1),
-                inset 0 1px 2px rgba(255, 255, 255, 0.3);
-    transform: translateY(-1px);
-}
-
-.mobile-search-button-v4:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4),
-                inset 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* White Bottom Section */
-.mobile-bottom-section-v4 {
-    background-color: #ffffff;
-    padding: 16px;
-    flex: 1;
-}
-
-/* Yellow Banner */
-.mobile-yellow-banner-v4 {
-    position: relative;
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-    padding: 14px 20px;
-    margin-bottom: 16px;
-    border-radius: 0;
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3),
-                0 2px 4px rgba(0, 0, 0, 0.1),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.1),
-                inset 0 1px 2px rgba(255, 255, 255, 0.5);
-    overflow: hidden;
-}
-
-.mobile-banner-flag-left-v4,
-.mobile-banner-flag-right-v4 {
-    position: absolute;
-    top: 0;
-    width: 20px;
-    height: 100%;
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-    z-index: 1;
-}
-
-.mobile-banner-flag-left-v4 {
-    left: -10px;
-    transform: skewX(-15deg);
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
-}
-
-.mobile-banner-flag-right-v4 {
-    right: -10px;
-    transform: skewX(15deg);
-    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.2);
-}
-
-.mobile-banner-content-v4 {
-    position: relative;
-    z-index: 2;
-}
-
-.mobile-banner-title-v4 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1a1a1a;
-    text-align: center;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
-}
-
-/* Trust Icons Grid */
-.mobile-trust-icons-grid-v4 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.mobile-trust-icon-placeholder-v4 {
-    aspect-ratio: 1;
-    background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
-    border-radius: 12px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
-               0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* Divider */
-.mobile-divider-v4 {
-    height: 1px;
-    background-color: #e5e5e5;
-    margin: 16px 0;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-/* Secure Badge */
-.mobile-secure-badge-large-v4 {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    padding: 8px 0;
-}
-
-.mobile-secure-shield-v4 {
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0;
-    filter: drop-shadow(0 3px 6px rgba(34, 197, 94, 0.3));
-}
-
-.mobile-secure-text-large-v4 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1a1a1a;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-/* Trustpilot Section */
-.mobile-trustpilot-section-v4 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
-    padding: 8px 0;
-}
-
-.mobile-trustpilot-logo-small-v4 {
-    height: 20px;
-    width: auto;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-}
-
-.mobile-stars-small-v4 {
-    display: flex;
-    gap: 3px;
-}
-
-.mobile-star-v4 {
-    font-size: 16px;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-}
-
-.mobile-rating-text-v4 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-}
-
-.mobile-rating-label-v4 {
-    font-size: 12px;
-    font-weight: 400;
-    color: #666;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.mobile-rating-score-v4 {
-    font-size: 16px;
-    font-weight: 700;
-    color: #1a1a1a;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-/* Encryption Footer */
-.mobile-encryption-footer-v4 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px 0;
-}
-
-.mobile-lock-icon-small-v4 {
-    width: 16px;
-    height: 16px;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-}
-
-.mobile-encryption-text-small-v4 {
-    font-size: 12px;
-    font-weight: 600;
-    color: #666;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    letter-spacing: 0.5px;
-}
-
-/* Mobile specific adjustments */
-@media (max-width: 480px) {
-    .mobile-hero-title-v4 {
-        font-size: 22px;
-    }
-    
-    .mobile-feature-item-v4 {
-        font-size: 15px;
-    }
-    
-    .mobile-banner-title-v4 {
-        font-size: 16px;
-    }
-}
-
-/* Compact for small screens */
-@media (max-height: 800px) {
-    .mobile-hero-bg-v4 {
-        min-height: 40vh;
-        padding: 16px 16px 0;
-    }
-    
-    .mobile-hero-title-v4 {
-        font-size: 20px;
-        margin-bottom: 16px;
-    }
-    
-    .mobile-features-list-v4 {
-        margin-bottom: 10px;
-    }
-    
-    .mobile-feature-item-v4 {
-        margin-bottom: 8px;
-        font-size: 14px;
-    }
-    
-    .mobile-more-checks-v4 {
-        font-size: 12px;
-        margin-bottom: 16px;
-    }
-    
-    .mobile-vin-form-v4 {
-        margin-top: 16px;
-        gap: 10px;
-    }
-    
-    .mobile-vin-input-v4,
-    .mobile-search-button-v4 {
-        padding: 14px 16px;
-        font-size: 15px;
-    }
-    
-    .mobile-bottom-section-v4 {
-        padding: 12px;
-    }
-    
-    .mobile-yellow-banner-v4 {
-        padding: 12px 16px;
-        margin-bottom: 12px;
-    }
-    
-    .mobile-trust-icons-grid-v4 {
-        gap: 8px;
-        margin-bottom: 12px;
-    }
-    
-    .mobile-secure-badge-large-v4,
-    .mobile-trustpilot-section-v4 {
-        margin-bottom: 12px;
-    }
-}
-
