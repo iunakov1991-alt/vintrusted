@@ -38,6 +38,11 @@
   align-items: center;
   gap: 10px;
   min-width: 0;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.7);
+  padding: 7px 10px;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(16,24,40,.05);
 }
 
 .mobile-hero-logo {
