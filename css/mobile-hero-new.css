@@ -237,6 +237,31 @@
   box-shadow: 0 8px 18px rgba(0,0,0,.12) !important;
 }
 
+/* Ensure the hero container allows visible overflow so contrast strip can float above other elements */
+.mobile-device .mobile-only .mobile-hero-hero {
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Bring contrast strip and controls to the very front */
+.mobile-device .mobile-only .mobile-hero-contrast {
+  position: relative !important;
+  z-index: 9999 !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25) !important;
+}
+
+.mobile-device .mobile-only .mobile-hero-input,
+.mobile-device .mobile-only .mobile-hero-btn-block {
+  position: relative !important;
+  z-index: 10000 !important;
+}
+
+/* Small visual lift: translate the contrast strip slightly upward so it overlaps hero card */
+.mobile-device .mobile-only .mobile-hero-contrast {
+  transform: translateY(-8px);
+}
+
 .mobile-hero-contrast .mobile-hero-vinIcon {
   left: 12px;
   top: 50%;
