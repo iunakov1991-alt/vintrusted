@@ -46,14 +46,14 @@
 }
 
 .mobile-hero-logo {
-  width: 18px !important;
-  height: 18px !important;
-  border-radius: 6px !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
   object-fit: contain !important;
   display: block !important;
   flex-shrink: 0 !important;
-  max-width: 18px !important;
-  max-height: 18px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
 }
 
 .mobile-hero-name {
