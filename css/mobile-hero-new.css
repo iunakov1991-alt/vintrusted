@@ -44,18 +44,9 @@
   width: 36px;
   height: 36px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(11,92,255,1), rgba(0,163,255,1));
-  box-shadow: 0 10px 26px rgba(11,92,255,.22);
-  position: relative;
-  overflow: hidden;
-}
-
-.mobile-hero-logo:before {
-  content: "";
-  position: absolute;
-  inset: -40%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.85), transparent 35%);
-  transform: rotate(18deg);
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
 .mobile-hero-name {
