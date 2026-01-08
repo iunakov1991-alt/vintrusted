@@ -5,8 +5,10 @@
 
 .mobile-hero-v3 {
     min-height: 100vh;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* ==================== TOP SECTION (1/3 - White) ==================== */
