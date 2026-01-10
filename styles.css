@@ -178,6 +178,16 @@
     background: rgba(255, 255, 255, 0.02);
 }
 
+/* Ensure header logo SVG displays fully (prevent cropping of text part) */
+.header .logo .logo-img,
+.logo .logo-img {
+  width: auto !important;
+  height: 40px !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  display: inline-block !important;
+}
+
 .feature-name {
     font-weight: 700;
     color: #ffffff;
