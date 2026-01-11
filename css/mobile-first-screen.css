@@ -17,14 +17,36 @@
   }
 }
 
-/* Logo in top left corner */
-.mobile-first-screen .mobile-logo {
+/* Logo and descriptor wrapper */
+.mobile-first-screen .mobile-logo-wrapper {
   position: absolute !important;
   top: 20px !important;
   left: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  z-index: 10 !important;
+}
+
+/* Logo */
+.mobile-first-screen .mobile-logo {
   height: 45px !important;
   width: auto !important;
-  z-index: 10 !important;
+}
+
+/* Descriptor - two lines */
+.mobile-first-screen .mobile-descriptor {
+  display: flex !important;
+  flex-direction: column !important;
+  line-height: 1.1 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #9ca3af !important;
+  letter-spacing: 0.3px !important;
+}
+
+.mobile-first-screen .mobile-descriptor span {
+  display: block !important;
 }
 
 /* Main Content */
