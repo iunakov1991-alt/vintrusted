@@ -140,12 +140,12 @@
 
 .mobile-first-screen .mobile-vin-input {
   width: 100% !important;
-  height: 72px !important;
+  height: 144px !important;
   background: #fff !important;
   border: 2px solid #ddd !important;
   border-radius: 12px !important;
   padding: 0 20px !important;
-  font-size: 18px !important;
+  font-size: 24px !important;
   font-weight: 600 !important;
   color: #1a1a1a !important;
   text-transform: uppercase !important;
