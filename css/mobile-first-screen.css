@@ -142,14 +142,14 @@
 
 .mobile-first-screen .mobile-vin-input {
   width: 100% !important;
-  height: 400px !important;
-  min-height: 400px !important;
-  max-height: 400px !important;
+  height: 130px !important;
+  min-height: 130px !important;
+  max-height: 130px !important;
   background: #fff !important;
   border: 2px solid #ddd !important;
   border-radius: 12px !important;
   padding: 0 20px !important;
-  font-size: 64px !important;
+  font-size: 22px !important;
   font-weight: 600 !important;
   color: #1a1a1a !important;
   text-transform: uppercase !important;
@@ -158,7 +158,7 @@
   margin-bottom: 16px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
   transition: all 0.3s ease !important;
-  line-height: 400px !important;
+  line-height: 130px !important;
   text-align: center !important;
 }
 
