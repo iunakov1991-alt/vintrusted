@@ -149,6 +149,8 @@
   font-weight: 600 !important;
   color: #1a1a1a !important;
   text-transform: uppercase !important;
+  position: relative !important;
+  z-index: 100 !important;
   margin-bottom: 16px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
   transition: all 0.3s ease !important;
@@ -179,6 +181,8 @@
   cursor: pointer !important;
   box-shadow: 0 4px 12px rgba(52,152,219,0.3) !important;
   transition: all 0.3s ease !important;
+  position: relative !important;
+  z-index: 100 !important;
 }
 
 .mobile-first-screen .mobile-vin-button:active {
