@@ -67,6 +67,8 @@
   margin: 0 0 12px 0 !important;
   line-height: 1.2 !important;
   display: block !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 .mobile-first-screen .mobile-main-subtitle {
