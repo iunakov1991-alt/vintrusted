@@ -1,0 +1,256 @@
+/* ========================================
+   MOBILE FIRST SCREEN - CLEAN DESIGN
+   ======================================== */
+
+.mobile-first-screen {
+  display: none;
+  min-height: 100vh;
+  background: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+@media (max-width: 1023px) {
+  .mobile-first-screen {
+    display: block !important;
+  }
+}
+
+/* Header - Dark Blue-Gray */
+.mobile-header {
+  background: #2c3e50;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-logo {
+  height: 32px;
+  width: auto;
+}
+
+.mobile-descriptor {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mobile-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-flag {
+  width: 40px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Main Content */
+.mobile-content {
+  padding: 32px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Title */
+.mobile-main-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.mobile-main-subtitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: #e74c3c;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 32px 0;
+}
+
+/* Checkpoints Grid - 3 columns, 2 rows */
+.mobile-checkpoints {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 20px;
+  margin-bottom: 40px;
+}
+
+.mobile-checkpoint {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.mobile-check-icon {
+  width: 20px;
+  height: 20px;
+  background: #27ae60;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.mobile-check-icon::after {
+  content: '✓';
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.mobile-checkpoint span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.3;
+}
+
+/* Form - Centered and Prominent */
+.mobile-form-center {
+  margin: 0 0 40px 0;
+  padding: 0;
+}
+
+.mobile-vin-input {
+  width: 100%;
+  height: 56px;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.mobile-vin-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 4px 12px rgba(52,152,219,0.2);
+}
+
+.mobile-vin-input::placeholder {
+  color: #999;
+  font-weight: 500;
+}
+
+.mobile-vin-button {
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(52,152,219,0.3);
+  transition: all 0.3s ease;
+}
+
+.mobile-vin-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 6px rgba(52,152,219,0.3);
+}
+
+/* Logos Section */
+.mobile-logos-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.mobile-logos-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 16px;
+}
+
+.mobile-logos-row img {
+  max-width: 80px;
+  max-height: 50px;
+  object-fit: contain;
+}
+
+/* Trust Section */
+.mobile-trust-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.mobile-trust-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #ddd 50%, transparent 100%);
+  margin-bottom: 20px;
+}
+
+.mobile-trust-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.mobile-trustpilot {
+  max-width: 80px;
+  height: auto;
+}
+
+.mobile-ssl {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #27ae60;
+}
+
+.mobile-lock-icon {
+  font-size: 16px;
+}
+
+.mobile-guarantee {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 10px;
+  font-weight: 600;
+  color: #666;
+  line-height: 1.2;
+}
+
+.mobile-guarantee strong {
+  font-size: 12px;
+  font-weight: 800;
+  color: #e74c3c;
+  text-transform: uppercase;
+}
