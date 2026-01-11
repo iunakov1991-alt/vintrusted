@@ -134,8 +134,10 @@
 
 /* Form - Centered and Prominent */
 .mobile-first-screen .mobile-vin-form-wrapper {
-  margin: 0 0 40px 0 !important;
+  margin: -120px 0 40px 0 !important;
   padding: 0 !important;
+  position: relative !important;
+  z-index: 100 !important;
 }
 
 .mobile-first-screen .mobile-vin-input {
