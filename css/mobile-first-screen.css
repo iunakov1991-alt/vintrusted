@@ -156,6 +156,8 @@
   margin-bottom: 16px !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
   transition: all 0.3s ease !important;
+  line-height: 400px !important;
+  text-align: center !important;
 }
 
 .mobile-first-screen .mobile-vin-input:focus {
