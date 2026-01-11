@@ -3,7 +3,7 @@
    New design from Figma mockup
    ======================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+/* Font loaded with font-display:swap for performance */
 
 :root {
   --bg-dark: #000000;
