@@ -156,7 +156,7 @@
   position: relative !important;
   z-index: 100 !important;
   margin-bottom: 16px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4) !important;
   transition: all 0.3s ease !important;
   line-height: 73px !important;
   text-align: center !important;
