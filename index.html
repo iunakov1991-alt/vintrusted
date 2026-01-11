@@ -232,6 +232,15 @@
     <!-- Mobile Hero New Styles - EXACTLY FROM PROVIDED CODE -->
     <link rel="stylesheet" href="/css/mobile-hero-new.css?v=8">
     
+    <!-- Mobile Hero FIGMA Design -->
+    <link rel="stylesheet" href="/css/mobile-hero-figma.css?v=4">
+    
+    <!-- Mobile Hero FIGMA Design -->
+    <link rel="stylesheet" href="/css/mobile-hero-figma.css?v=3">
+    
+    <!-- Mobile Hero FIGMA Design -->
+    <link rel="stylesheet" href="/css/mobile-hero-figma.css?v=2">
+    
     
     <!-- MOBILE-ONLY STYLES: Conditional loading based on device detection -->
     <!-- Mobile-only CSS now loaded directly in head with media query -->
@@ -461,8 +470,8 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <a href="#hero" class="logo">
-                    <img src="/images/logo-vin-trust.svg" alt="VIN TRUST" class="logo-img" loading="eager" fetchpriority="high" width="150" height="40">
+                <a href="#hero" class="logo" aria-label="VIN TRUST home">
+                    <img src="/logo-vin-trust.png" alt="VIN TRUST" class="logo-img" loading="eager" fetchpriority="high" width="150" height="40">
                 </a>
                 <nav class="header-nav">
                     <a href="#hero" class="nav-link">Home</a>
@@ -1066,8 +1075,8 @@
             <header class="header">
                 <div class="container">
                     <div class="header-content">
-                        <a href="/" class="logo">
-                            <img src="/images/logo-vin-trust.svg" alt="VIN TRUST" class="logo-img">
+                        <a href="/" class="logo" aria-label="VIN TRUST home">
+                            <img src="/logo-vin-trust.png" alt="VIN TRUST" class="logo-img">
                         </a>
   </div>
   </div>
@@ -3648,214 +3657,85 @@
     
     </div><!-- End Desktop Version -->
     
-    <!-- ==================== MOBILE VERSION ==================== -->
-    <div class="mobile-only">
-        <!-- MOBILE FIRST SCREEN - EXACTLY FROM PROVIDED CODE -->
-        <div class="mobile-hero-wrap">
-            <div class="mobile-hero-topbar">
-                <div class="mobile-hero-brand">
-                    <div class="mobile-hero-name">
-                        <span>VIN HISTORY</span>
+    <!-- ==================== MOBILE VERSION - FIGMA DESIGN ==================== -->
+    <div class="mobile-hero-figma">
+        <!-- MOBILE FIRST SCREEN - FIGMA DESIGN -->
+        <div class="mobile-hero-figma">
+            <!-- Header -->
+            <header class="figma-header">
+                <div class="figma-header-logo">
+                    <span class="figma-logo-text">🚗 VIN</span>
+                </div>
+                <div class="figma-header-title">CHECK VIN BEFORE YOU BUY</div>
+                <div class="figma-header-flag">🇺🇸</div>
+            </header>
+            
+            <!-- Hero Content -->
+            <div class="figma-hero-content">
+                <!-- Background car image -->
+                <div class="figma-bg-car">
+                    <img src="/images/car-bg.jpg" alt="Car" loading="eager">
+                </div>
+                
+                <!-- Main Title -->
+                <h1 class="figma-main-title">CHECK A VIN</h1>
+                <p class="figma-subtitle">KNOW WHAT THE SELLER WON'T DISCLOSE</p>
+                
+                <!-- Checkpoints Grid -->
+                <div class="figma-checkpoints">
+                    <div class="figma-checkpoint">
+                        <div class="figma-check-icon"></div>
+                        <div class="figma-checkpoint-text">Junk & Salvage<br>Accidents & Damage</div>
+                    </div>
+                    <div class="figma-checkpoint">
+                        <div class="figma-check-icon"></div>
+                        <div class="figma-checkpoint-text">Lien & Repossed<br>Rollback & Used type</div>
+                    </div>
+                    <div class="figma-checkpoint">
+                        <div class="figma-check-icon"></div>
+                        <div class="figma-checkpoint-text">Insurance & Theft<br>Sale History & Recall</div>
                     </div>
                 </div>
-            </div>
-
-            <section class="mobile-hero-hero" aria-label="VIN hero">
-                <div class="mobile-hero-heroHead">
-                    <h1 class="mobile-hero-h1">Check a VIN in seconds.<br/>Know what the seller won't say.</h1>
-                    <p class="mobile-hero-sub">
-                        Title & accident signals, odometer risk, prior use, and key history flags — delivered fast.
-                    </p>
+                
+                <!-- Form -->
+                <div class="figma-form">
+                    <input type="text" class="figma-input" placeholder="ENTER VIN CODE HERE" maxlength="17" id="figmaVinInput">
+                    <button class="figma-submit-btn" id="figmaSubmitBtn">SEARCH VIN</button>
                 </div>
-
-                <div class="mobile-hero-form">
-                    <div class="mobile-hero-contrast">
-                        <div class="mobile-hero-field">
-                            <div class="mobile-hero-inputWrap">
-                                <div class="mobile-hero-vinIcon" aria-hidden="true">VIN</div>
-                                <input id="mobile-hero-vin" class="mobile-hero-input" inputmode="latin" autocomplete="off" autocapitalize="characters"
-                                       placeholder="Enter 17-character VIN" maxlength="17" />
+                
+                <!-- Footer Badges -->
+                <div class="figma-footer">
+                    <div class="figma-badges">
+                        <div class="figma-badge">
+                            <img src="/images/nmvtis-badge.png" alt="NMVTIS" onerror="this.style.display='none'">
+                        </div>
+                        <div class="figma-badge">
+                            <img src="/images/quality-badge.png" alt="Quality" onerror="this.style.display='none'">
+                        </div>
+                        <div class="figma-badge">
+                            <img src="/images/nhtsa-badge.png" alt="NHTSA" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                    
+                    <div class="figma-trust">
+                        <div class="figma-secure">
+                            <div class="figma-secure-icon"></div>
+                            <span>100% SECURE</span>
+                        </div>
+                        <div class="figma-trustpilot">
+                            <img src="/trustpilot-logo.svg" alt="Trustpilot" class="figma-tp-logo" onerror="this.style.display='none'">
+                            <div class="figma-stars">
+                                <span class="figma-star">★</span>
+                                <span class="figma-star">★</span>
+                                <span class="figma-star">★</span>
+                                <span class="figma-star">★</span>
+                                <span class="figma-star">★</span>
                             </div>
                         </div>
-                        <button class="mobile-hero-btn mobile-hero-btn-block" id="mobile-hero-cta" disabled>Check VIN</button>
-                    </div>
-
-                    <div class="mobile-hero-metaRow">
-                        <div class="mobile-hero-price">
-                            <b>$3.00 report</b>
-                            <span>Instant delivery • Mobile-friendly</span>
-                        </div>
-                        <div class="mobile-hero-secure"><span class="mobile-hero-lock" aria-hidden="true"></span>Secure checkout</div>
-                    </div>
-
-                    <div class="mobile-hero-grid" role="list">
-                        <div class="mobile-hero-feat" role="listitem">
-                            <b>Accident & damage</b>
-                            <span>Red flags + signals</span>
-                        </div>
-                        <div class="mobile-hero-feat" role="listitem">
-                            <b>Odometer risk</b>
-                            <span>Rollback indicators</span>
-                        </div>
-                        <div class="mobile-hero-feat" role="listitem">
-                            <b>Title & branding</b>
-                            <span>Salvage/flood/lemon</span>
-                        </div>
-                        <div class="mobile-hero-feat" role="listitem">
-                            <b>Use history</b>
-                            <span>Rental/fleet clues</span>
-                        </div>
-                    </div>
-
-                    <div class="mobile-hero-hint">
-                        <span class="mobile-hero-badgeOk"><i></i>Best practice</span>
-                        Check the VIN before payment or deposit.
-                    </div>
-
-                    <div class="mobile-hero-disclaimer">
-                        Data availability varies by vehicle and state. Not affiliated with any government agency.
-                        By continuing you agree to the <a href="#" onclick="return false;">Terms</a>.
                     </div>
                 </div>
-            </section>
-        </div>
-
-        <!-- Sticky conversion bar -->
-        <div class="mobile-hero-sticky" role="region" aria-label="Sticky action">
-            <div class="mobile-hero-stickyInner">
-                <div class="mobile-hero-mini">
-                    <b>$3.00 report</b>
-                    <span>Instant delivery</span>
-                </div>
-                <button class="mobile-hero-btn" id="mobile-hero-cta2" disabled>Check VIN</button>
             </div>
         </div>
-        
-        <!-- Mobile Second Screen: Sample Report -->
-        <section class="mobile-sample-report">
-            <h2 class="mobile-sample-title">
-                Uncover What the Seller Didn't Disclose
-            </h2>
-            
-            <!-- Image with overlay text and button -->
-            <div class="mobile-sample-image-wrapper">
-                <img src="/image4.png" alt="Car History Report" class="mobile-sample-image" loading="lazy" width="400" height="600">
-                <p class="mobile-sample-text">
-                    Nearly 40% of used cars have documented accident damage, and 20% carry active safety recalls. Free VIN check reveals hidden damage, odometer fraud, and title issues before you buy.
-                </p>
-                <button class="mobile-sample-check-btn" id="mobile-sample-check-btn">
-                    Check VIN
-                </button>
-            </div>
-        </section>
-        
-        <!-- Mobile Third Screen: Reviews -->
-        <section class="mobile-reviews-section">
-            <div class="mobile-reviews-header">
-                <h2 class="mobile-reviews-title">Customer Reviews</h2>
-                <p class="mobile-reviews-subtitle">What our customers say about our VIN check service.</p>
-            </div>
-            
-            <!-- Rating Summary -->
-            <div class="mobile-rating-summary">
-                <div class="mobile-rating-score">
-                    <div class="mobile-score-number"><span style="color: #10b981;">4.99</span></div>
-                    <div class="mobile-score-stars">
-                        <span class="star filled">★</span>
-                        <span class="star filled">★</span>
-                        <span class="star filled">★</span>
-                        <span class="star filled">★</span>
-                        <span class="star filled">★</span>
-                    </div>
-                    <div class="mobile-score-text">based on 1,234 reviews</div>
-                </div>
-            </div>
-            
-            <!-- Reviews List -->
-            <div class="mobile-reviews-list">
-                <div class="mobile-review-card">
-                    <div class="mobile-review-header">
-                        <img src="https://i.pravatar.cc/60?img=12" alt="Michael Anderson" class="mobile-review-avatar" loading="lazy" width="60" height="60">
-                        <div class="mobile-review-meta">
-                            <h4 class="mobile-review-name">Michael Anderson</h4>
-                            <div class="mobile-review-date">May 15, 2024</div>
-                        </div>
-                        <div class="mobile-review-stars">
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                        </div>
-                    </div>
-                    <p class="mobile-review-text">Excellent service! Fast and accurate VIN check. All the information was complete and helped me avoid buying a problematic car. Highly recommend!</p>
-                    <div class="mobile-review-actions">
-                        <button class="mobile-review-action-btn">
-                            <span class="thumb-icon">👍</span>
-                            <span>Helpful (12)</span>
-                        </button>
-                        <button class="mobile-review-action-btn">
-                            <span class="thumb-icon">👎</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="mobile-review-card">
-                    <div class="mobile-review-header">
-                        <img src="https://i.pravatar.cc/60?img=45" alt="Jennifer Thompson" class="mobile-review-avatar" loading="lazy" width="60" height="60">
-                        <div class="mobile-review-meta">
-                            <h4 class="mobile-review-name">Jennifer Thompson</h4>
-                            <div class="mobile-review-date">May 12, 2024</div>
-                        </div>
-                        <div class="mobile-review-stars">
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star">★</span>
-                        </div>
-                    </div>
-                    <p class="mobile-review-text">Overall, everything is good. The information was accurate, but I would like a slightly more modern interface. But it does its main job perfectly.</p>
-                    <div class="mobile-review-actions">
-                        <button class="mobile-review-action-btn">
-                            <span class="thumb-icon">👍</span>
-                            <span>Helpful (8)</span>
-                        </button>
-                        <button class="mobile-review-action-btn">
-                            <span class="thumb-icon">👎</span>
-                            <span>(1)</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="mobile-review-card">
-                    <div class="mobile-review-header">
-                        <img src="https://i.pravatar.cc/60?img=33" alt="David Martinez" class="mobile-review-avatar" loading="lazy" width="60" height="60">
-                        <div class="mobile-review-meta">
-                            <h4 class="mobile-review-name">David Martinez</h4>
-                            <div class="mobile-review-date">May 10, 2024</div>
-                        </div>
-                        <div class="mobile-review-stars">
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                            <span class="star filled">★</span>
-                        </div>
-                    </div>
-                    <p class="mobile-review-text">Best VIN check service I've tried. Very detailed report including service history and accident data. Worth every penny.</p>
-                    <div class="mobile-review-actions">
-                        <button class="mobile-review-action-btn">
-                            <span class="thumb-icon">👍</span>
-                            <span>Helpful (5)</span>
-                        </button>
-                        <button class="mobile-review-action-btn">
-                            <span class="thumb-icon">👎</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div><!-- End Mobile Version -->
     
     <!-- ==================== POPUPS (SHARED BETWEEN DESKTOP & MOBILE) ==================== -->
@@ -3966,6 +3846,9 @@
     
     <!-- VIN Popup Script -->
     <script src="/public/vin-popup.js?v=2"></script>
+    
+    <!-- Mobile Figma Form Script -->
+    <script src="/public/mobile-figma.js?v=1"></script>
     
     <!-- Review Form Script -->
     <script>
