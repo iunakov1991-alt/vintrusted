@@ -138,6 +138,7 @@
   padding: 0 !important;
   position: relative !important;
   z-index: 100 !important;
+  filter: drop-shadow(0 0 40px rgba(0,0,0,0.7)) !important;
 }
 
 .mobile-first-screen .mobile-vin-input {
@@ -156,7 +157,7 @@
   position: relative !important;
   z-index: 100 !important;
   margin-bottom: 16px !important;
-  box-shadow: 0 0 40px rgba(0,0,0,0.7) !important;
+  box-shadow: none !important;
   transition: all 0.3s ease !important;
   line-height: 73px !important;
   text-align: center !important;
@@ -165,7 +166,7 @@
 .mobile-first-screen .mobile-vin-input:focus {
   outline: none !important;
   border-color: #3498db !important;
-  box-shadow: 0 4px 12px rgba(52,152,219,0.2) !important;
+  box-shadow: none !important;
 }
 
 .mobile-first-screen .mobile-vin-input::placeholder {
@@ -185,7 +186,7 @@
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 12px rgba(52,152,219,0.3) !important;
+  box-shadow: none !important;
   transition: all 0.3s ease !important;
   position: relative !important;
   z-index: 100 !important;
