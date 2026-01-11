@@ -77,14 +77,19 @@
   margin: 0 0 20px 0 !important;
 }
 
-/* Background Image */
+/* Background Image - Full Width */
 .mobile-first-screen .mobile-bg-image {
-  width: 100% !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
   height: auto !important;
   display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
   position: relative !important;
-  z-index: 1 !important;
-  margin-bottom: -40px !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
 }
 
 /* Checkpoints Grid - 3 columns, 2 rows */
@@ -92,18 +97,13 @@
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 12px 8px !important;
-  margin-bottom: 40px !important;
-  position: relative !important;
-  z-index: 10 !important;
+  margin-bottom: 0 !important;
 }
 
 .mobile-first-screen .mobile-checkpoint {
   display: flex !important;
   align-items: flex-start !important;
   gap: 6px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  padding: 8px 6px !important;
-  border-radius: 6px !important;
 }
 
 .mobile-first-screen .mobile-check-icon {
