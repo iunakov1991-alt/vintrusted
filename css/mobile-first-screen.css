@@ -102,36 +102,38 @@
   top: 32px !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 5px !important;
+  gap: 4px !important;
   align-items: flex-end !important;
   z-index: 5 !important;
-  max-width: 140px !important;
+  max-width: 120px !important;
+  max-height: 280px !important;
+  flex-wrap: wrap !important;
 }
 
 .mobile-first-screen .mobile-chip {
   background: #27ae60 !important;
   color: white !important;
-  padding: 5px 12px !important;
-  border-radius: 18px !important;
-  font-size: 10px !important;
+  padding: 4px 10px !important;
+  border-radius: 16px !important;
+  font-size: 9px !important;
   font-weight: 600 !important;
   white-space: nowrap !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Offset chips for staggered effect */
 .mobile-first-screen .mobile-chip:nth-child(1) { margin-right: 0px !important; }
-.mobile-first-screen .mobile-chip:nth-child(2) { margin-right: 15px !important; }
-.mobile-first-screen .mobile-chip:nth-child(3) { margin-right: 5px !important; }
-.mobile-first-screen .mobile-chip:nth-child(4) { margin-right: 20px !important; }
-.mobile-first-screen .mobile-chip:nth-child(5) { margin-right: 10px !important; }
-.mobile-first-screen .mobile-chip:nth-child(6) { margin-right: 18px !important; }
-.mobile-first-screen .mobile-chip:nth-child(7) { margin-right: 3px !important; }
-.mobile-first-screen .mobile-chip:nth-child(8) { margin-right: 22px !important; }
-.mobile-first-screen .mobile-chip:nth-child(9) { margin-right: 8px !important; }
-.mobile-first-screen .mobile-chip:nth-child(10) { margin-right: 16px !important; }
-.mobile-first-screen .mobile-chip:nth-child(11) { margin-right: 5px !important; }
-.mobile-first-screen .mobile-chip:nth-child(12) { margin-right: 12px !important; }
+.mobile-first-screen .mobile-chip:nth-child(2) { margin-right: 12px !important; }
+.mobile-first-screen .mobile-chip:nth-child(3) { margin-right: 4px !important; }
+.mobile-first-screen .mobile-chip:nth-child(4) { margin-right: 16px !important; }
+.mobile-first-screen .mobile-chip:nth-child(5) { margin-right: 8px !important; }
+.mobile-first-screen .mobile-chip:nth-child(6) { margin-right: 14px !important; }
+.mobile-first-screen .mobile-chip:nth-child(7) { margin-right: 2px !important; }
+.mobile-first-screen .mobile-chip:nth-child(8) { margin-right: 18px !important; }
+.mobile-first-screen .mobile-chip:nth-child(9) { margin-right: 6px !important; }
+.mobile-first-screen .mobile-chip:nth-child(10) { margin-right: 12px !important; }
+.mobile-first-screen .mobile-chip:nth-child(11) { margin-right: 4px !important; }
+.mobile-first-screen .mobile-chip:nth-child(12) { margin-right: 10px !important; }
 
 /* Form - Centered and Prominent */
 .mobile-first-screen .mobile-vin-form-wrapper {
