@@ -77,6 +77,8 @@
   letter-spacing: 0.5px !important;
   margin: 0 !important;
   padding-bottom: 10px !important;
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 /* Background Image - Full Width */
