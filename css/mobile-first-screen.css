@@ -80,20 +80,20 @@
 /* Checkpoints Grid - 3 columns, 2 rows */
 .mobile-first-screen .mobile-checkpoints {
   display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
-  gap: 16px 20px !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 12px 8px !important;
   margin-bottom: 40px !important;
 }
 
 .mobile-first-screen .mobile-checkpoint {
   display: flex !important;
   align-items: flex-start !important;
-  gap: 10px !important;
+  gap: 6px !important;
 }
 
 .mobile-first-screen .mobile-check-icon {
-  width: 20px !important;
-  height: 20px !important;
+  width: 16px !important;
+  height: 16px !important;
   background: #27ae60 !important;
   border-radius: 50% !important;
   flex-shrink: 0 !important;
@@ -111,7 +111,7 @@
 }
 
 .mobile-first-screen .mobile-checkpoint span {
-  font-size: 13px !important;
+  font-size: 11px !important;
   font-weight: 600 !important;
   color: #2c3e50 !important;
   line-height: 1.3 !important;
