@@ -12,10 +12,10 @@
   }
 
   function init() {
-    const form = document.getElementById('mobile-vin-form-new');
-    const input = document.getElementById('mobile-vin-input-new');
+    const input = document.getElementById('mobileVinInput');
+    const button = document.getElementById('mobileVinButton');
 
-    if (!form || !input) {
+    if (!input || !button) {
       console.log('[MOBILE FIRST SCREEN] Form elements not found');
       return;
     }
@@ -27,8 +27,8 @@
       this.value = this.value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '');
     });
 
-    // Handle form submission
-    form.addEventListener('submit', function(e) {
+    // Handle button click
+    button.addEventListener('click', function(e) {
       e.preventDefault();
       
       const vin = input.value.trim();
@@ -42,6 +42,13 @@
       
       // Redirect to results page
       window.location.href = '/?vin=' + encodeURIComponent(vin);
+    });
+
+    // Handle Enter key in input
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        button.click();
+      }
     });
   }
 })();

@@ -247,6 +247,39 @@
     <!-- Mobile First Screen - Clean Design CSS -->
     <link rel="stylesheet" href="/css/mobile-first-screen.css?v=1">
     
+    <!-- Mobile Hero FIGMA Design - Critical CSS Inline (will be removed) -->
+    <style>
+.mobile-hero-figma{display:none;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;min-height:100vh;background:linear-gradient(135deg,#6B2D8F 0%,#D41F3C 100%);position:relative;overflow:hidden}
+@media (max-width:1023px){.mobile-hero-figma{display:block!important}}
+.figma-header{background:#000;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:100}
+.figma-logo-text{font-size:18px;font-weight:800;color:#FFD700;letter-spacing:1px}
+.figma-header-title{font-size:10px;font-weight:600;color:#fff;text-align:center;flex:1;text-transform:uppercase;letter-spacing:.5px}
+.figma-header-flag{width:32px;height:24px;font-size:24px;display:flex;align-items:center;justify-content:center}
+.figma-hero-content{padding:24px 16px;position:relative;z-index:2}
+.figma-bg-car{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:.3;pointer-events:none}
+.figma-bg-car img{width:100%;height:100%;object-fit:cover}
+.figma-main-title{font-size:40px;font-weight:900;color:#FFD700;line-height:1.1;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.figma-subtitle{font-size:16px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:20px;text-transform:uppercase}
+.figma-checkpoints{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin-bottom:24px}
+.figma-checkpoint{display:flex;align-items:flex-start;gap:8px}
+.figma-check-icon{width:20px;height:20px;background:#22C55E;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.figma-check-icon::after{content:'✓';color:#fff;font-size:14px;font-weight:900}
+.figma-checkpoint-text{font-size:11px;font-weight:600;color:#fff;line-height:1.3;text-transform:uppercase}
+.figma-form{background:#fff;border-radius:16px;padding:20px;margin-bottom:20px}
+.figma-input{width:100%;height:56px;background:#fff;border:2px solid #E5E7EB;border-radius:12px;padding:0 16px;font-size:15px;font-weight:500;color:#9CA3AF;margin-bottom:12px;text-transform:uppercase;font-family:'Inter',sans-serif}
+.figma-input:focus{outline:0;border-color:#F59E0B;color:#000}
+.figma-submit-btn{width:100%;height:56px;background:#F59E0B;border:0;border-radius:12px;font-size:16px;font-weight:700;color:#000;text-transform:uppercase;cursor:pointer;letter-spacing:.5px}
+.figma-footer{background:#fff;border-radius:16px;padding:16px}
+.figma-badges{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #E5E7EB}
+.figma-badge{flex:1;text-align:center}
+.figma-badge img{max-width:100%;height:auto;max-height:40px;object-fit:contain}
+.figma-trust{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.figma-secure{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#000;text-transform:uppercase}
+.figma-secure-icon{width:24px;height:24px;background:#22C55E;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.figma-secure-icon::after{content:'✓';color:#fff;font-size:16px;font-weight:900}
+.figma-stars{display:flex;gap:2px}
+.figma-star{color:#FFD700;font-size:16px}
+    </style>
     
     
     
@@ -3668,39 +3701,6 @@
     <!-- ==================== MOBILE VERSION - NEW CLEAN DESIGN ==================== -->
     <div class="mobile-first-screen">
         <!-- Header -->
-        <header class="figma-header">
-            <div class="figma-header-logo">
-                <span class="figma-logo-text">🚗 VIN</span>
-            </div>
-            <div class="figma-header-title">CHECK VIN BEFORE YOU BUY</div>
-            <div class="figma-header-flag">🇺🇸</div>
-        </header>
-            
-            <!-- Hero Content -->
-            <div class="figma-hero-content">
-                <!-- Background car image -->
-                <div class="figma-bg-car">
-                    <img src="/images/car-bg.jpg" alt="Car" loading="eager">
-                </div>
-                
-                <!-- Main Title -->
-                <h1 class="figma-main-title">CHECK A VIN</h1>
-                <p class="figma-subtitle">KNOW WHAT THE SELLER WON'T DISCLOSE</p>
-                
-                <!-- Checkpoints Grid -->
-                <div class="figma-checkpoints">
-                    <div class="figma-checkpoint">
-                        <div class="figma-check-icon"></div>
-                        <div class="figma-checkpoint-text">Junk & Salvage<br>Accidents & Damage</div>
-                    </div>
-                    <div class="figma-checkpoint">
-                        <div class="figma-check-icon"></div>
-                        <div class="figma-checkpoint-text">Lien & Repossed<br>Rollback & Used type</div>
-                    </div>
-                    <div class="figma-checkpoint">
-    <!-- ==================== MOBILE VERSION - NEW CLEAN DESIGN ==================== -->
-    <div class="mobile-first-screen">
-        <!-- Header -->
         <header class="mobile-header">
             <div class="mobile-header-left">
                 <img src="/logo-vin-trust.svg" alt="VIN Trust" class="mobile-logo">
@@ -3745,42 +3745,33 @@
                 </div>
             </div>
             
-            <!-- Form - Centered -->
-            <form class="mobile-form-center" id="mobile-vin-form-new">
-                <input 
-                    type="text" 
-                    class="mobile-vin-input" 
-                    id="mobile-vin-input-new" 
-                    placeholder="ENTER VIN NUMBER"
-                    maxlength="17"
-                    autocomplete="off"
-                >
-                <button type="submit" class="mobile-vin-button">
-                    GET VEHICLE HISTORY
-                </button>
-            </form>
+            <!-- VIN Input Form -->
+            <div class="mobile-vin-form-wrapper">
+                <input type="text" class="mobile-vin-input" placeholder="ENTER VIN NUMBER" maxlength="17" id="mobileVinInput">
+                <button class="mobile-vin-button" id="mobileVinButton">GET VEHICLE HISTORY</button>
+            </div>
             
-            <!-- Logos Section -->
+            <!-- Footer Logos -->
             <div class="mobile-logos-section">
                 <div class="mobile-logos-row">
-                    <img src="/guar-Photoroom.png" alt="Guarantee" loading="lazy">
-                    <img src="/nmvtis-logo@2x.png" alt="NMVTIS" loading="lazy">
-                    <img src="/nhts.png" alt="NHTSA" loading="lazy">
+                    <img src="/guar-Photoroom.png" alt="Guarantee">
+                    <img src="/nmvtis-logo@2x.png" alt="NMVTIS">
+                    <img src="/nhts.png" alt="NHTS">
                 </div>
             </div>
             
-            <!-- Bottom Trust Section -->
+            <!-- Trust Section -->
             <div class="mobile-trust-section">
                 <div class="mobile-trust-divider"></div>
                 <div class="mobile-trust-row">
-                    <img src="/trustpilot-logo.svg" alt="Trustpilot" loading="lazy" class="mobile-trustpilot">
+                    <img src="/trustpilot-logo.svg" alt="Trustpilot" class="mobile-trustpilot">
                     <div class="mobile-ssl">
                         <span class="mobile-lock-icon">🔒</span>
                         <span>SSL SECURE</span>
                     </div>
                     <div class="mobile-guarantee">
-                        <span>SATISFACTION</span>
-                        <strong>100% GUARANTEE</strong>
+                        <strong>SATISFACTION</strong>
+                        <span>100% GUARANTEE</span>
                     </div>
                 </div>
             </div>
