@@ -177,12 +177,12 @@
 .mobile-first-screen .mobile-vin-button {
   width: 100% !important;
   height: 56px !important;
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+  background: #FDB913 !important;
   border: none !important;
   border-radius: 12px !important;
   font-size: 16px !important;
   font-weight: 700 !important;
-  color: #fff !important;
+  color: #000 !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
   cursor: pointer !important;
