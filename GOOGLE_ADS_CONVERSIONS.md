@@ -14,11 +14,11 @@
 - **Категория**: Lead (Лид)
 - **Страница**: `/email-capture.html`
 - **Триггер**: Отправка email формы
-- **Label**: `email_collected`
+- **Label**: `C-ywCOm90-EbEKq6l7NC`
 - **Код события**:
 ```javascript
 gtag('event', 'conversion', {
-    'send_to': 'AW-17824079146/email_collected',
+    'send_to': 'AW-17824079146/C-ywCOm90-EbEKq6l7NC',
     'transaction_id': vin + '_' + Date.now()
 });
 ```
