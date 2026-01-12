@@ -50,7 +50,7 @@
         
         // Show "VIN FOUND ✓" message
         input.value = 'VIN FOUND ✓';
-        input.style.color = '#27ae60';
+        input.style.color = '#fff';
         input.style.fontWeight = '700';
         
         setTimeout(() => {
