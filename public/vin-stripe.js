@@ -25,6 +25,11 @@
     return vin ? vin.toUpperCase().replace(/[^A-Z0-9]/g, '') : '';
   }
 
+  function getEmail() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('email') || '';
+  }
+
   // Load Stripe.js dynamically
   let stripeLoadingPromise = null;
   
@@ -230,7 +235,8 @@
       }
 
       const vin = getVIN();
-      // Email removed - will be collected on report page after payment
+      const email = getEmail();
+      console.log('[PAY] VIN:', vin, 'Email:', email);
 
       // ┌─────────────────────────────────────────────────────────────┐
       // │ ШАГ 1: Валидация формы (elements.submit)                    │
@@ -317,7 +323,8 @@
       console.log('[PAY] 🔄 Calling backend checkout API...');
       console.log('[PAY] 📤 Payload:', {
         setup_intent_id: paymentElement._setupIntentId,
-        vin: vin
+        vin: vin,
+        email: email
       });
       
       const checkoutResponse = await fetch('/api/checkout-trial-then-two-charges', {
@@ -327,7 +334,8 @@
         },
         body: JSON.stringify({
           setup_intent_id: paymentElement._setupIntentId,
-          vin: vin
+          vin: vin,
+          email: email
         })
       });
 
