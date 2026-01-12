@@ -12,7 +12,6 @@
 #### 1. Email Collected - Сбор Email
 - **Название**: Email Collected
 - **Категория**: Lead (Лид)
-- **Значение**: $1.00
 - **Страница**: `/email-capture.html`
 - **Триггер**: Отправка email формы
 - **Label**: `email_collected`
@@ -20,8 +19,6 @@
 ```javascript
 gtag('event', 'conversion', {
     'send_to': 'AW-17824079146/email_collected',
-    'value': 1.0,
-    'currency': 'USD',
     'transaction_id': vin + '_' + Date.now()
 });
 ```
@@ -43,16 +40,13 @@ window.dataLayer.push({
 #### 2. Report Viewed - Просмотр Отчета
 - **Название**: Report Viewed
 - **Категория**: Page View (Просмотр страницы)
-- **Значение**: $1.00
 - **Страница**: `/success.html`
 - **Триггер**: Загрузка страницы успеха
 - **Send To**: `AW-17824079146/I62hCKPTndgbEKq6l7NC`
 - **Код события**:
 ```javascript
 gtag('event', 'conversion', {
-    'send_to': 'AW-17824079146/I62hCKPTndgbEKq6l7NC',
-    'value': 1.0,
-    'currency': 'USD'
+    'send_to': 'AW-17824079146/I62hCKPTndgbEKq6l7NC'
 });
 ```
 
@@ -69,7 +63,6 @@ window.dataLayer.push({
 #### 3. Purchase - Покупка Отчета
 - **Название**: Purchase
 - **Категория**: Purchase (Покупка)
-- **Значение**: $1.00
 - **Страница**: `/purchase-confirmation.html`
 - **Триггер**: Успешная оплата Stripe
 - **Send To**: `AW-17824079146/l62hCKPTndgbEKq6I7NC`
@@ -77,8 +70,6 @@ window.dataLayer.push({
 ```javascript
 gtag('event', 'conversion', {
     'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
-    'value': 1.0,
-    'currency': 'USD',
     'transaction_id': setupIntentId
 });
 ```
@@ -140,7 +131,6 @@ window.dataLayer.push({
 4. Заполните параметры:
    - **Название**: Email Collected
    - **Категория**: Lead (Лид)
-   - **Значение**: Использовать одинаковое значение → $1.00
    - **Подсчет**: Каждая (Every)
    - **Окно конверсии**: 30 дней
    - **Окно взаимодействия с рекламой**: 1 день
