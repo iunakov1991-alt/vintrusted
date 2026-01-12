@@ -154,7 +154,7 @@
   padding: 0 !important;
   position: relative !important;
   z-index: 100 !important;
-  filter: drop-shadow(0 8px 60px rgba(0,0,0,0.5)) !important;
+  filter: drop-shadow(0 10px 80px rgba(0,0,0,0.2)) !important;
 }
 
 .mobile-first-screen .mobile-vin-input {
