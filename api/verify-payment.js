@@ -57,7 +57,7 @@ export default async function handler(req, res) {
     }
 
     // ┌─────────────────────────────────────────────────────────────┐
-    // │ ШАГ 3: Найти связанный PaymentIntent ($3)                   │
+    // │ ШАГ 3: Найти связанный PaymentIntent ($1)                   │
     // │ Используем metadata.setup_intent_id для поиска              │
     // └─────────────────────────────────────────────────────────────┘
     const paymentIntents = await stripe.paymentIntents.list({
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
         limit: 5,
       });
       
-      // Ищем PaymentIntent на $3.00 (300 cents)
+      // Ищем PaymentIntent на $1.00 (100 cents)
       paymentIntent = customerPaymentIntents.data.find(pi => 
         pi.amount === 100 && pi.currency === 'usd'
       );
@@ -87,7 +87,7 @@ export default async function handler(req, res) {
     console.log('[VERIFY] PaymentIntent status:', paymentIntent?.status);
 
     // ┌─────────────────────────────────────────────────────────────┐
-    // │ ШАГ 4: Проверить что $3 списались                           │
+    // │ ШАГ 4: Проверить что $1 списался                            │
     // └─────────────────────────────────────────────────────────────┘
     const paymentSucceeded = paymentIntent && paymentIntent.status === 'succeeded';
     
@@ -109,7 +109,7 @@ export default async function handler(req, res) {
     // ┌─────────────────────────────────────────────────────────────┐
     // │ ИТОГОВАЯ ПРОВЕРКА: Оплата считается валидной если:          │
     // │ 1. SetupIntent succeeded + payment_method (ОБЯЗАТЕЛЬНО)     │
-    // │ 2. PaymentIntent succeeded ($3) - ОПЦИОНАЛЬНО               │
+    // │ 2. PaymentIntent succeeded ($1) - ОПЦИОНАЛЬНО               │
     // │    (может не найтись если customer был добавлен позже)     │
     // └─────────────────────────────────────────────────────────────┘
     

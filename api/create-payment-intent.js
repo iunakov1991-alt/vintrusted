@@ -65,7 +65,7 @@ export default async function handler(req, res) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount,
       currency: 'usd',
-      description: 'Trial activation $3',
+      description: 'VIN Report $1',
       statement_descriptor_suffix: 'VIN Report',
       automatic_payment_methods: {
         enabled: true,

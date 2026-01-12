@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     });
     console.log('[CHECKOUT] SetupIntent updated with customer:', customer.id);
 
-    // 2) Снимаем $3 сразу
+    // 2) Снимаем $1 сразу
     // КРИТИЧНО: копируем metadata из SetupIntent (включая gclid для Google Ads конверсий)
     console.log('[CHECKOUT] SetupIntent metadata:', si.metadata);
     const pi = await stripe.paymentIntents.create({
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       confirm: true,
       off_session: true,
       statement_descriptor_suffix: 'VIN Report',
-      description: 'Trial activation $3',
+      description: 'VIN Report $1',
       metadata: si.metadata || {} // ✅ Копируем все metadata (gclid, utm_*, ab_variant, vin)
     });
     console.log('[CHECKOUT] PaymentIntent created with metadata:', pi.metadata);
@@ -132,7 +132,7 @@ export default async function handler(req, res) {
       successUrl += '?' + params.toString();
     }
     
-    // Если $3 потребовал доп. действия (редко), вернём клиентский secret для confirmCardPayment
+    // Если $1 потребовал доп. действия (редко), вернём клиентский secret для confirmCardPayment
     const payload = { success: true, success_url: successUrl };
     if (pi.status === 'requires_action' || pi.status === 'requires_confirmation') {
       payload.next_action = true;
