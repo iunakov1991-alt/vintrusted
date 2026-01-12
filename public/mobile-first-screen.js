@@ -34,9 +34,15 @@
       // Auto-submit when 17 characters are entered
       if (cleanValue.length === 17) {
         console.log('[MOBILE FIRST SCREEN] Auto-submitting VIN:', cleanValue);
+        
+        // Show "VIN FOUND ✓" message
+        input.value = 'VIN FOUND ✓';
+        input.style.color = '#27ae60';
+        input.style.fontWeight = '700';
+        
         setTimeout(() => {
           window.location.href = '/?vin=' + encodeURIComponent(cleanValue);
-        }, 300);
+        }, 800);
       }
     }
 
