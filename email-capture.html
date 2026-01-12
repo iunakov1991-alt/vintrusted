@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+    <title>Enter Your Email - VIN Trust</title>
+    <link rel="icon" type="image/png" href="/favicon 2.png">
+    
+    <!-- Google Ads Global Site Tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17824079146"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17824079146');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .email-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 120px;
+            margin: 0 auto 20px;
+        }
+        
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            background: #27ae60;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        
+        .vin-display {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+            background: #f0f0f0;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            letter-spacing: 1px;
+        }
+        
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .email-form {
+            margin-bottom: 20px;
+        }
+        
+        .email-input {
+            width: 100%;
+            height: 60px;
+            padding: 0 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .email-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .privacy-note {
+            font-size: 13px;
+            color: #999;
+            margin-top: 15px;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .email-container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .vin-display {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <img src="/logo-vin-trust.png" alt="VIN Trust" class="logo">
+        
+        <div class="checkmark">✓</div>
+        
+        <h1>VIN Found!</h1>
+        
+        <div class="vin-display" id="vinDisplay">Loading...</div>
+        
+        <p>Enter your email to receive your vehicle history report</p>
+        
+        <form class="email-form" id="emailForm">
+            <input 
+                type="email" 
+                class="email-input" 
+                id="emailInput" 
+                placeholder="your@email.com" 
+                required
+                autocomplete="email"
+            >
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Get My Report
+            </button>
+            <div class="error-message" id="errorMessage">Please enter a valid email address</div>
+        </form>
+        
+        <div class="privacy-note">
+            🔒 Your information is secure and will never be shared
+        </div>
+    </div>
+    
+    <script>
+        // Get VIN from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const vin = urlParams.get('vin');
+        
+        // Display VIN
+        if (vin) {
+            document.getElementById('vinDisplay').textContent = vin;
+        } else {
+            // Redirect to home if no VIN
+            window.location.href = '/';
+        }
+        
+        // Handle form submission
+        const form = document.getElementById('emailForm');
+        const emailInput = document.getElementById('emailInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage.style.display = 'block';
+                emailInput.focus();
+                return;
+            }
+            
+            errorMessage.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            
+            // 🎯 PRIMARY CONVERSION - Email Collected
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17824079146/email_collected',
+                'value': 1.0,
+                'currency': 'USD',
+                'transaction_id': vin + '_' + Date.now()
+            });
+            
+            // Also push to dataLayer for additional tracking
+            window.dataLayer.push({
+                'event': 'email_collected',
+                'vin': vin,
+                'email': email,
+                'timestamp': new Date().toISOString()
+            });
+            
+            console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
+            
+            // Redirect to report page with VIN and email
+            setTimeout(() => {
+                window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
+            }, 500);
+        });
+        
+        // Real-time email validation
+        emailInput.addEventListener('input', function() {
+            errorMessage.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

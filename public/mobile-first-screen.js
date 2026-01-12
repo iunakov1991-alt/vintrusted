@@ -54,7 +54,7 @@
         input.style.setProperty('font-weight', '700', 'important');
         
         setTimeout(() => {
-          window.location.href = '/?vin=' + encodeURIComponent(savedVin);
+          window.location.href = '/email-capture.html?vin=' + encodeURIComponent(savedVin);
         }, 800);
       }
     }
@@ -125,7 +125,7 @@
       console.log('[MOBILE FIRST SCREEN] Submitting VIN:', vin);
       
       // Redirect to results page
-      window.location.href = '/?vin=' + encodeURIComponent(vin);
+      window.location.href = '/email-capture.html?vin=' + encodeURIComponent(vin);
     });
 
     // Handle Enter key in input
