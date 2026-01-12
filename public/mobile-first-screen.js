@@ -25,6 +25,15 @@
     // Format VIN input
     input.addEventListener('input', function(e) {
       this.value = this.value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '');
+      
+      // Auto-submit when 17 characters are entered
+      if (this.value.length === 17) {
+        const vin = this.value.trim();
+        console.log('[MOBILE FIRST SCREEN] Auto-submitting VIN:', vin);
+        
+        // Redirect to results page
+        window.location.href = '/?vin=' + encodeURIComponent(vin);
+      }
     });
 
     // Handle button click
