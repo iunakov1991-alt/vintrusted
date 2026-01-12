@@ -494,7 +494,7 @@
       const submitButton = document.createElement('button');
       submitButton.type = 'submit';
       submitButton.id = 'vin-submit';
-      submitButton.textContent = 'Pay $3.00';
+      submitButton.textContent = 'Pay $1.00';
       submitButton.disabled = true; // Disabled until terms accepted
       submitButton.style.cssText = `
         padding: 12px 24px;
@@ -700,7 +700,7 @@
     checkbox.addEventListener('change', function() {
       if (this.checked) {
         submitButton.disabled = false;
-        submitButton.textContent = 'Pay $3.00';
+        submitButton.textContent = 'Pay $1.00';
         submitButton.style.setProperty('background', '#fbbf24', 'important');
         submitButton.style.setProperty('color', '#111827', 'important');
         submitButton.style.setProperty('cursor', 'pointer', 'important');
@@ -726,7 +726,7 @@
         }).catch(err => console.log('Consent logging failed (non-critical):', err));
       } else {
         submitButton.disabled = true;
-        submitButton.textContent = 'Pay $3.00';
+        submitButton.textContent = 'Pay $1.00';
         submitButton.style.setProperty('background', '#9ca3af', 'important');
         submitButton.style.setProperty('color', 'white', 'important');
         submitButton.style.setProperty('cursor', 'not-allowed', 'important');
