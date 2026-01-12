@@ -82,6 +82,10 @@
   z-index: 10 !important;
 }
 
+.mobile-first-screen .mobile-main-title .highlight-yellow {
+  color: #FDB913 !important;
+}
+
 .mobile-first-screen .mobile-main-subtitle {
   font-size: 14px !important;
   font-weight: 700 !important;
