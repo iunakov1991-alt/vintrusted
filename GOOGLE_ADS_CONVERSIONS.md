@@ -43,7 +43,7 @@ window.dataLayer.push({
 #### 2. Report Viewed - Просмотр Отчета
 - **Название**: Report Viewed
 - **Категория**: Page View (Просмотр страницы)
-- **Значение**: $3.00
+- **Значение**: $1.00
 - **Страница**: `/success.html`
 - **Триггер**: Загрузка страницы успеха
 - **Send To**: `AW-17824079146/I62hCKPTndgbEKq6l7NC`
@@ -51,7 +51,7 @@ window.dataLayer.push({
 ```javascript
 gtag('event', 'conversion', {
     'send_to': 'AW-17824079146/I62hCKPTndgbEKq6l7NC',
-    'value': 3.0,
+    'value': 1.0,
     'currency': 'USD'
 });
 ```
@@ -69,7 +69,7 @@ window.dataLayer.push({
 #### 3. Purchase - Покупка Отчета
 - **Название**: Purchase
 - **Категория**: Purchase (Покупка)
-- **Значение**: $3.00
+- **Значение**: $1.00
 - **Страница**: `/purchase-confirmation.html`
 - **Триггер**: Успешная оплата Stripe
 - **Send To**: `AW-17824079146/l62hCKPTndgbEKq6I7NC`
@@ -77,7 +77,7 @@ window.dataLayer.push({
 ```javascript
 gtag('event', 'conversion', {
     'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
-    'value': 3.0,
+    'value': 1.0,
     'currency': 'USD',
     'transaction_id': setupIntentId
 });
@@ -89,7 +89,7 @@ gtag('event', 'conversion', {
 window.dataLayer.push({
     'event': 'purchase',
     'transaction_id': setupIntentId || '',
-    'value': 3.0,
+    'value': 1.0,
     'currency': 'USD'
 });
 
@@ -97,7 +97,7 @@ window.dataLayer.push({
 window.dataLayer.push({
     'event': 'POKUPKA',
     'transaction_id': setupIntentId || '',
-    'value': 3.0,
+    'value': 1.0,
     'currency': 'USD'
 });
 ```

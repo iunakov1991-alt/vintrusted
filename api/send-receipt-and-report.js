@@ -75,7 +75,7 @@ export default async function handler(req, res) {
           timestamp: new Date().toISOString(),
           date: new Date().toISOString().split('T')[0],
           email,
-          amount: paymentDetails?.amount || 300
+          amount: paymentDetails?.amount || 100
         };
 
         // Store conversion in KV

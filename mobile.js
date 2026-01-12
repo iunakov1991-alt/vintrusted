@@ -453,7 +453,7 @@
     
     const button = document.createElement('button');
     button.className = 'm-cta-btn';
-    button.textContent = 'Get Your VIN Report - $3';
+    button.textContent = 'Get Your VIN Report - $1';
     button.onclick = () => {
       const formContainer = document.querySelector('.search-form-container');
       if (formContainer) {

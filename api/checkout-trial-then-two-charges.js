@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     // КРИТИЧНО: копируем metadata из SetupIntent (включая gclid для Google Ads конверсий)
     console.log('[CHECKOUT] SetupIntent metadata:', si.metadata);
     const pi = await stripe.paymentIntents.create({
-      amount: 300,
+      amount: 100,
       currency: 'usd',
       customer: customer.id,
       payment_method: si.payment_method,

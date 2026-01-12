@@ -79,7 +79,7 @@ export default async function handler(req, res) {
       
       // Ищем PaymentIntent на $3.00 (300 cents)
       paymentIntent = customerPaymentIntents.data.find(pi => 
-        pi.amount === 300 && pi.currency === 'usd'
+        pi.amount === 100 && pi.currency === 'usd'
       );
     }
 

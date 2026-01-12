@@ -112,9 +112,9 @@ function updateArticleKeywords(filePath, slug) {
       content = content.replace(descRegex, `$1\n    ${newKeywordsTag}`);
     }
     
-    // Update title to include $3 Instant Check if not present
-    if (!fullTitle.includes('$3') && !fullTitle.includes('Instant')) {
-      const newTitle = fullTitle.replace(' - VIN Trust | Vehicle History Reports', ' - VIN Trust | Vehicle History Reports | $3 Instant Check');
+    // Update title to include $1 Instant Check if not present
+    if (!fullTitle.includes('$1') && !fullTitle.includes('Instant')) {
+      const newTitle = fullTitle.replace(' - VIN Trust | Vehicle History Reports', ' - VIN Trust | Vehicle History Reports | $1 Instant Check');
       content = content.replace(/<title>.*?<\/title>/, `<title>${newTitle}</title>`);
     }
     
@@ -123,7 +123,7 @@ function updateArticleKeywords(filePath, slug) {
     if (descMatch) {
       let desc = descMatch[1];
       if (!desc.includes('Free') && !desc.includes('online')) {
-        desc = `Get instant ${title.toLowerCase()} with VIN Trust. Comprehensive vehicle history reports including accidents, title records, and more. Only $3. NMVTIS verified data. Free ${slug} online.`;
+        desc = `Get instant ${title.toLowerCase()} with VIN Trust. Comprehensive vehicle history reports including accidents, title records, and more. Only $1. NMVTIS verified data. Free ${slug} online.`;
         content = content.replace(/<meta name="description" content=".*?">/, `<meta name="description" content="${desc}">`);
       }
     }
