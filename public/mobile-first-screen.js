@@ -22,9 +22,13 @@
 
     console.log('[MOBILE FIRST SCREEN] Form found, attaching handlers');
 
-    // Format VIN input
+    // Format VIN input and update progress bar
     input.addEventListener('input', function(e) {
       this.value = this.value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '');
+      
+      // Update visual progress (0-17 characters)
+      const progress = (this.value.length / 17) * 100;
+      this.style.background = `linear-gradient(to right, #27ae60 ${progress}%, #fff ${progress}%)`;
       
       // Auto-submit when 17 characters are entered
       if (this.value.length === 17) {
