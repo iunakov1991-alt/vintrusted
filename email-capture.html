@@ -231,12 +231,16 @@
             submitBtn.textContent = 'Processing...';
             
             // 🎯 PRIMARY CONVERSION - Email Collected
+            // Using eventCallback to ensure conversion fires before redirect
             gtag('event', 'conversion', {
                 'send_to': 'AW-17824079146/C-ywCOm90-EbEKq6l7NC',
-                'transaction_id': vin + '_' + Date.now()
+                'transaction_id': vin + '_' + Date.now(),
+                'event_callback': function() {
+                    console.log('[EMAIL CAPTURE] ✅ Google Ads conversion sent');
+                }
             });
             
-            // Also push to dataLayer for additional tracking
+            // Also push to dataLayer for GTM and additional tracking
             window.dataLayer.push({
                 'event': 'email_collected',
                 'vin': vin,
@@ -245,11 +249,14 @@
             });
             
             console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
+            console.log('[EMAIL CAPTURE] Waiting 1000ms for tracking to complete...');
             
-            // Redirect to report page with VIN and email
+            // Redirect to report page with VIN and email after delay
+            // Increased to 1000ms to ensure GTM tags fire
             setTimeout(() => {
+                console.log('[EMAIL CAPTURE] Redirecting to report page...');
                 window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
-            }, 500);
+            }, 1000);
         });
         
         // Real-time email validation
