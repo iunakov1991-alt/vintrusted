@@ -27,10 +27,16 @@ export default async function handler(req, res) {
     console.log('[CHECKOUT] Customer created with metadata:', customer.metadata);
 
     // ВАЖНО: Обновляем SetupIntent с customer ID для verify-payment
-    await stripe.setupIntents.update(setup_intent_id, {
-      customer: customer.id
-    });
-    console.log('[CHECKOUT] SetupIntent updated with customer:', customer.id);
+    // Обернуто в try-catch, так как SetupIntent может быть уже succeeded
+    try {
+      await stripe.setupIntents.update(setup_intent_id, {
+        customer: customer.id
+      });
+      console.log('[CHECKOUT] SetupIntent updated with customer:', customer.id);
+    } catch (updateError) {
+      console.log('[CHECKOUT] ⚠️  Could not update SetupIntent (already succeeded):', updateError.message);
+      // Это не критично - customer уже создан
+    }
 
     // 2) Снимаем $1 сразу
     // КРИТИЧНО: копируем metadata из SetupIntent (включая gclid для Google Ads конверсий)
