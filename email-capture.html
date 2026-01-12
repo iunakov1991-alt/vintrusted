@@ -241,12 +241,15 @@
             });
             
             // Also push to dataLayer for GTM and additional tracking
+            // Initialize dataLayer if not exists
+            window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'email_collected',
                 'vin': vin,
                 'email': email,
                 'timestamp': new Date().toISOString()
             });
+            console.log('[EMAIL CAPTURE] 📊 dataLayer event pushed:', window.dataLayer[window.dataLayer.length - 1]);
             
             console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
             console.log('[EMAIL CAPTURE] Waiting 1000ms for tracking to complete...');
