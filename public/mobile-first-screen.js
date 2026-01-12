@@ -22,6 +22,9 @@
 
     console.log('[MOBILE FIRST SCREEN] Form found, attaching handlers');
 
+    let vinFoundState = false;
+    let savedVin = '';
+
     // Function to update VIN input and progress
     function updateVinInput(value) {
       const cleanValue = value.toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '').substring(0, 17);
@@ -31,9 +34,19 @@
       const progress = (cleanValue.length / 17) * 100;
       input.style.background = `linear-gradient(to right, #27ae60 ${progress}%, #fff ${progress}%)`;
       
+      // Reset state if user deleted characters
+      if (vinFoundState && cleanValue.length < 17) {
+        vinFoundState = false;
+        input.style.color = '#1a1a1a';
+        input.style.fontWeight = '600';
+      }
+      
       // Auto-submit when 17 characters are entered
-      if (cleanValue.length === 17) {
+      if (cleanValue.length === 17 && !vinFoundState) {
         console.log('[MOBILE FIRST SCREEN] Auto-submitting VIN:', cleanValue);
+        
+        vinFoundState = true;
+        savedVin = cleanValue;
         
         // Show "VIN FOUND ✓" message
         input.value = 'VIN FOUND ✓';
@@ -41,14 +54,38 @@
         input.style.fontWeight = '700';
         
         setTimeout(() => {
-          window.location.href = '/?vin=' + encodeURIComponent(cleanValue);
+          window.location.href = '/?vin=' + encodeURIComponent(savedVin);
         }, 800);
       }
     }
 
+    // Block new input when VIN FOUND is shown (allow only deletion)
+    input.addEventListener('keydown', function(e) {
+      if (vinFoundState) {
+        // Allow: backspace, delete, arrow keys, tab
+        if (e.key === 'Backspace' || e.key === 'Delete' || 
+            e.key === 'ArrowLeft' || e.key === 'ArrowRight' || 
+            e.key === 'Tab') {
+          // Clear the "VIN FOUND ✓" message and restore VIN for editing
+          if (e.key === 'Backspace' || e.key === 'Delete') {
+            vinFoundState = false;
+            input.value = savedVin;
+            input.style.color = '#1a1a1a';
+            input.style.fontWeight = '600';
+            // Let the backspace/delete work normally
+          }
+          return;
+        }
+        // Block all other keys when VIN FOUND is shown
+        e.preventDefault();
+      }
+    });
+
     // Format VIN input and update progress bar
     input.addEventListener('input', function(e) {
-      updateVinInput(this.value);
+      if (!vinFoundState) {
+        updateVinInput(this.value);
+      }
     });
 
     // Handle paste event
