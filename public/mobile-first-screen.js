@@ -37,8 +37,8 @@
       // Reset state if user deleted characters
       if (vinFoundState && cleanValue.length < 17) {
         vinFoundState = false;
-        input.style.color = '#1a1a1a';
-        input.style.fontWeight = '600';
+        input.style.setProperty('color', '#1a1a1a', 'important');
+        input.style.setProperty('font-weight', '600', 'important');
       }
       
       // Auto-submit when 17 characters are entered
@@ -50,8 +50,8 @@
         
         // Show "VIN FOUND ✓" message
         input.value = 'VIN FOUND ✓';
-        input.style.color = '#fff';
-        input.style.fontWeight = '700';
+        input.style.setProperty('color', '#fff', 'important');
+        input.style.setProperty('font-weight', '700', 'important');
         
         setTimeout(() => {
           window.location.href = '/?vin=' + encodeURIComponent(savedVin);
@@ -70,8 +70,8 @@
           if (e.key === 'Backspace' || e.key === 'Delete') {
             vinFoundState = false;
             input.value = savedVin;
-            input.style.color = '#1a1a1a';
-            input.style.fontWeight = '600';
+            input.style.setProperty('color', '#1a1a1a', 'important');
+            input.style.setProperty('font-weight', '600', 'important');
             // Let the backspace/delete work normally
           }
           return;
