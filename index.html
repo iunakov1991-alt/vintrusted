@@ -60,6 +60,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-17824079146');
+      gtag('config', 'G-CX3CT2K2FC');
     </script>
     
     <!-- GCLID Cookie - Save gclid for Google Ads conversion tracking -->
@@ -563,7 +564,7 @@
                 e.preventDefault();
                 const vin = input.value.trim();
                 if (vin.length === 17) {
-                  window.location.href = '/email-capture.html?vin=' + vin;
+                  window.location.href = '/report.html?vin=' + vin;
                 } else {
                   alert('Please enter a valid 17-character VIN');
                 }
@@ -2078,7 +2079,7 @@
             setTimeout(() => {
                 console.log('Progress bar reached 100%, redirecting to report page');
                 if (currentVin) {
-                    window.location.href = `email-capture.html?vin=${currentVin}`;
+                    window.location.href = `report.html?vin=${currentVin}`;
                 } else {
                     // Fallback to main page if no VIN
                     showPage('main');

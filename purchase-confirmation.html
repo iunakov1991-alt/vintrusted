@@ -219,6 +219,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-17824079146');
+      gtag('config', 'G-CX3CT2K2FC');
     </script>
 </head>
 <body>
@@ -328,7 +329,7 @@
                 'items': [{
                     'item_id': 'vin_report',
                     'item_name': 'VIN Report',
-                    'price': 3.0,
+                    'price': 1.0,
                     'quantity': 1
                 }]
             });
@@ -351,7 +352,7 @@
             console.log('[CONFIRMATION] 📊 Payment details:', {
                 vin: vin,
                 setup_intent: setupIntentId,
-                value: 3.0,
+                value: 1.0,
                 events: ['conversion (server+fallback)', 'purchase', 'POKUPKA'],
                 verified: verifyData ? true : false,
                 stripe_status: verifyData?.setup_intent?.status,
@@ -501,10 +502,10 @@
             }, 1000);
         }
 
-        // Redirect to report page after 10 seconds
+        // Redirect to email capture page after 10 seconds (NEW FLOW)
         setTimeout(() => {
-            const successUrl = `/success.html?vin=${encodeURIComponent(vin)}&setup_intent=${encodeURIComponent(setupIntentId)}`;
-            window.location.href = successUrl;
+            const emailCaptureUrl = `/email-capture.html?vin=${encodeURIComponent(vin)}&setup_intent=${encodeURIComponent(setupIntentId)}`;
+            window.location.href = emailCaptureUrl;
         }, 10000);
     </script>
 </body>

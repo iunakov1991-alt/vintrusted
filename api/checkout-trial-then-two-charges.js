@@ -54,33 +54,46 @@ export default async function handler(req, res) {
     });
     console.log('[CHECKOUT] PaymentIntent created with metadata:', pi.metadata);
 
-    // 3) План на три списания $49: t+10, t+20, t+30 (каждые 10 дней, 3 итерации)
+    // 3) План: три списания $49 каждые 10 дней, потом $49/месяц навсегда
     let schedule = null;
-    const priceId = process.env.PRICE_49_EVERY_10D;
-    if (priceId) {
+    const priceEvery10D = process.env.PRICE_49_EVERY_10D;
+    const priceMonthly = process.env.PRICE_49_MONTHLY;
+    
+    if (priceEvery10D && priceMonthly) {
       try {
-        const startAt = Math.floor(Date.now() / 1000) + 10 * 86400;
+        const startAt = Math.floor(Date.now() / 1000) + 10 * 86400; // +10 дней от сегодня
+        
         schedule = await stripe.subscriptionSchedules.create({
           customer: customer.id,
           start_date: startAt,
-          end_behavior: 'cancel',
+          end_behavior: 'release', // ✅ После окончания фаз подписка продолжается
           phases: [
             {
+              // ФАЗА 1: 3 списания по $49 каждые 10 дней (дни 10, 20, 30)
               iterations: 3,
               default_payment_method: si.payment_method,
               collection_method: 'charge_automatically',
               proration_behavior: 'none',
-              items: [{ price: priceId }]
+              items: [{ price: priceEvery10D }]
+            },
+            {
+              // ФАЗА 2: Бесконечная подписка $49/месяц (дни 60, 90, 120...)
+              // iterations не указываем → бесконечно
+              default_payment_method: si.payment_method,
+              collection_method: 'charge_automatically',
+              proration_behavior: 'none',
+              items: [{ price: priceMonthly }]
             }
           ]
         });
-        console.log('Subscription schedule created:', schedule.id);
+        console.log('[CHECKOUT] ✅ Subscription schedule created with 2 phases:', schedule.id);
+        console.log('[CHECKOUT] Phase 1: 3x $49 every 10 days | Phase 2: $49/month forever');
       } catch (scheduleError) {
-        console.error('Failed to create subscription schedule:', scheduleError.message);
+        console.error('[CHECKOUT] ❌ Failed to create subscription schedule:', scheduleError.message);
         // Продолжаем выполнение, даже если подписка не создалась
       }
     } else {
-      console.log('PRICE_49_EVERY_10D not set, skipping subscription schedule');
+      console.log('[CHECKOUT] ⚠️  Missing PRICE_49_EVERY_10D or PRICE_49_MONTHLY, skipping subscription schedule');
     }
 
     // Get VIN from request body, SetupIntent metadata, or customer metadata
@@ -122,9 +135,9 @@ export default async function handler(req, res) {
       console.log('Skipping ClearVin report - missing email or VIN');
     }
     
-    // Build success URL with VIN - redirect to confirmation page first
+    // Build success URL with VIN - redirect to email capture page after payment
     const baseUrl = process.env.APP_URL || process.env.RETURN_URL?.replace('/success.html', '').replace('/payment-success', '') || 'https://vintrusted.com';
-    let successUrl = `${baseUrl}/purchase-confirmation.html`;
+    let successUrl = `${baseUrl}/email-capture.html`;
     
     const params = new URLSearchParams();
     if (finalVin) {

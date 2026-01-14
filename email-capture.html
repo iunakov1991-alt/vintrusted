@@ -21,6 +21,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-17824079146');
+      gtag('config', 'G-CX3CT2K2FC');
     </script>
     
     <style>
@@ -32,105 +33,146 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: #f5f8fa;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
         
-        .email-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 500px;
-            width: 100%;
-            padding: 40px 30px;
-            text-align: center;
-        }
-        
         .logo {
-            width: 120px;
-            margin: 0 auto 20px;
-        }
-        
-        .checkmark {
-            width: 80px;
-            height: 80px;
-            background: #27ae60;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 40px;
-            color: white;
-        }
-        
-        h1 {
-            font-size: 28px;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-        }
-        
-        .vin-display {
-            font-size: 20px;
-            font-weight: 700;
-            color: #667eea;
-            background: #f0f0f0;
-            padding: 12px 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            letter-spacing: 1px;
-        }
-        
-        p {
-            color: #666;
-            font-size: 16px;
-            line-height: 1.6;
+            width: 140px;
             margin-bottom: 30px;
         }
         
-        .email-form {
+        .vin-found-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #27ae60;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 16px 40px;
+            border-radius: 50px;
             margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(39, 174, 96, 0.4);
+        }
+        
+        .vin-found-chip .checkmark {
+            font-size: 32px;
+        }
+        
+        .vin-display {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            padding: 16px 30px;
+            border-radius: 15px;
+            margin: 20px 0 30px;
+            letter-spacing: 2px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .subtitle {
+            color: #4b5563;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .email-form-wrapper {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .email-input-wrapper {
+            position: relative;
         }
         
         .email-input {
             width: 100%;
-            height: 60px;
+            height: 80px;
             padding: 0 20px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            margin-bottom: 15px;
+            padding-right: 70px;
+            font-size: 20px;
+            border: 4px solid #000;
+            border-radius: 15px;
+            background: white;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
         
         .email-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .email-input.valid {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .email-input.valid::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .email-suggestions {
+            display: flex;
+            flex-direction: row;
+            gap: 6px;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .email-chip {
+            background: rgba(102, 126, 234, 0.15);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        
+        .email-chip:hover {
+            background: rgba(102, 126, 234, 0.25);
+            transform: scale(1.05);
+        }
+        
+        .email-chip:active {
+            transform: scale(0.95);
         }
         
         .submit-btn {
             width: 100%;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-size: 18px;
+            height: 80px;
+            background: #FDB913;
+            color: #000;
+            font-size: 20px;
             font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            box-shadow: 0 4px 20px rgba(253, 185, 19, 0.4);
         }
         
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 6px 30px rgba(253, 185, 19, 0.6);
         }
         
         .submit-btn:active {
@@ -142,30 +184,65 @@
             cursor: not-allowed;
         }
         
-        .privacy-note {
-            font-size: 13px;
-            color: #999;
-            margin-top: 15px;
-        }
-        
-        .error-message {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 10px;
+        .checkmark-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            color: white;
             display: none;
         }
         
+        .email-input.valid ~ .checkmark-icon {
+            display: block;
+        }
+        
         @media (max-width: 768px) {
-            .email-container {
-                padding: 30px 20px;
+            .logo {
+                width: 120px;
+                margin-bottom: 20px;
             }
             
-            h1 {
-                font-size: 24px;
+            .vin-found-chip {
+                font-size: 22px;
+                padding: 12px 30px;
+            }
+            
+            .vin-found-chip .checkmark {
+                font-size: 26px;
             }
             
             .vin-display {
                 font-size: 18px;
+                padding: 12px 20px;
+                margin: 15px 0 20px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+                margin-bottom: 25px;
+            }
+            
+            .email-input {
+                height: 80px;
+                font-size: 18px;
+                padding-right: 60px;
+            }
+            
+            .submit-btn {
+                height: 80px;
+                font-size: 18px;
+            }
+            
+            .email-chip {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+            
+            .checkmark-icon {
+                right: 20px;
+                font-size: 24px;
             }
         }
     </style>
@@ -176,38 +253,46 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     
-    <div class="email-container">
-        <img src="/logo-vin-trust.png" alt="VIN Trust" class="logo">
-        
-        <div class="checkmark">✓</div>
-        
-        <h1>VIN Found!</h1>
-        
-        <div class="vin-display" id="vinDisplay">Loading...</div>
-        
-        <p>Enter your email to receive your vehicle history report</p>
-        
-        <form class="email-form" id="emailForm">
-            <input 
-                type="email" 
-                class="email-input" 
-                id="emailInput" 
-                placeholder="your@email.com" 
-                required
-                autocomplete="email"
-            >
+    <img src="/logo-vin-trust.png" alt="VIN Trust" class="logo">
+    
+    <div class="vin-found-chip">
+        <span class="checkmark">✓</span>
+        <span>VIN REPORT READY</span>
+    </div>
+    
+    <div class="vin-display" id="vinDisplay">Loading...</div>
+    
+    <p class="subtitle">Enter your email to receive your vehicle history report</p>
+    
+    <div class="email-form-wrapper">
+        <form id="emailForm">
+            <div class="email-input-wrapper">
+                <input 
+                    type="text" 
+                    class="email-input" 
+                    id="emailInput" 
+                    placeholder="your@email.com" 
+                    required
+                    autocomplete="off"
+                >
+                <div class="checkmark-icon">✓</div>
+            </div>
+            <div class="email-suggestions" id="emailSuggestions"></div>
             <button type="submit" class="submit-btn" id="submitBtn">
                 Get My Report
             </button>
-            <div class="error-message" id="errorMessage">Please enter a valid email address</div>
         </form>
-        
-        <div class="privacy-note">
-            🔒 Your information is secure and will never be shared
-        </div>
     </div>
     
     <script>
+        // Popular email domains
+        const popularDomains = [
+            '@gmail.com',
+            '@icloud.com',
+            '@outlook.com',
+            '@yahoo.com'
+        ];
+        
         // Get VIN from URL
         const urlParams = new URLSearchParams(window.location.search);
         const vin = urlParams.get('vin');
@@ -224,7 +309,53 @@
         const form = document.getElementById('emailForm');
         const emailInput = document.getElementById('emailInput');
         const submitBtn = document.getElementById('submitBtn');
-        const errorMessage = document.getElementById('errorMessage');
+        const suggestionsContainer = document.getElementById('emailSuggestions');
+        
+        // Render email domain suggestions
+        function renderSuggestions() {
+            suggestionsContainer.innerHTML = popularDomains
+                .map(domain => `<div class="email-chip" data-domain="${domain}">${domain}</div>`)
+                .join('');
+            
+            // Add click handlers to chips
+            document.querySelectorAll('.email-chip').forEach(chip => {
+                chip.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const domain = this.getAttribute('data-domain');
+                    const currentValue = emailInput.value.trim();
+                    
+                    // Extract username part (before @)
+                    let username = currentValue;
+                    if (currentValue.includes('@')) {
+                        username = currentValue.split('@')[0];
+                    }
+                    
+                    // Set new email value
+                    if (username) {
+                        emailInput.value = username + domain;
+                        validateEmail();
+                    }
+                });
+            });
+        }
+        
+        // Validate email
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (emailRegex.test(email)) {
+                emailInput.classList.add('valid');
+            } else {
+                emailInput.classList.remove('valid');
+            }
+        }
+        
+        // Initialize suggestions
+        renderSuggestions();
+        
+        // Real-time validation
+        emailInput.addEventListener('input', validateEmail);
         
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -234,22 +365,20 @@
             // Validate email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                errorMessage.style.display = 'block';
                 emailInput.focus();
                 return;
             }
             
-            errorMessage.style.display = 'none';
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
             
-            // 🎯 PRIMARY CONVERSION - Email Collected
+            // 📊 SECONDARY CONVERSION - Email Collected (after payment)
             // Using eventCallback to ensure conversion fires before redirect
             gtag('event', 'conversion', {
                 'send_to': 'AW-17824079146/C-ywCOm90-EbEKq6l7NC',
                 'transaction_id': vin + '_' + Date.now(),
                 'event_callback': function() {
-                    console.log('[EMAIL CAPTURE] ✅ Google Ads conversion sent');
+                    console.log('[EMAIL CAPTURE] ✅ Google Ads conversion sent (secondary)');
                 }
             });
             
@@ -267,17 +396,12 @@
             console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
             console.log('[EMAIL CAPTURE] Waiting 1000ms for tracking to complete...');
             
-            // Redirect to report page with VIN and email after delay
+            // Redirect to success page (full report) with VIN and email after delay
             // Increased to 1000ms to ensure GTM tags fire
             setTimeout(() => {
-                console.log('[EMAIL CAPTURE] Redirecting to report page...');
-                window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
+                console.log('[EMAIL CAPTURE] Redirecting to success page...');
+                window.location.href = `/success.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
             }, 1000);
-        });
-        
-        // Real-time email validation
-        emailInput.addEventListener('input', function() {
-            errorMessage.style.display = 'none';
         });
     </script>
 </body>
