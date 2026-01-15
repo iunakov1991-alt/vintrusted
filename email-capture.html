@@ -372,17 +372,7 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
             
-            // 📊 SECONDARY CONVERSION - Email Collected (after payment)
-            // Using eventCallback to ensure conversion fires before redirect
-            gtag('event', 'conversion', {
-                'send_to': 'AW-17824079146/C-ywCOm90-EbEKq6l7NC',
-                'transaction_id': vin + '_' + Date.now(),
-                'event_callback': function() {
-                    console.log('[EMAIL CAPTURE] ✅ Google Ads conversion sent (secondary)');
-                }
-            });
-            
-            // Also push to dataLayer for GTM and additional tracking
+            // 📊 Push GTM event FIRST (before gtag conversion)
             // Initialize dataLayer if not exists
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
@@ -394,14 +384,24 @@
             console.log('[EMAIL CAPTURE] 📊 dataLayer event pushed:', window.dataLayer[window.dataLayer.length - 1]);
             
             console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
-            console.log('[EMAIL CAPTURE] Waiting 1000ms for tracking to complete...');
+            console.log('[EMAIL CAPTURE] Waiting for tracking to complete before redirect...');
             
-            // Redirect to report page (payment) with VIN and email after delay
-            // Increased to 1000ms to ensure GTM tags fire
-            setTimeout(() => {
-                console.log('[EMAIL CAPTURE] Redirecting to report page...');
-                window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
-            }, 1000);
+            // 📊 SECONDARY CONVERSION - Email Collected
+            // Using eventCallback to ensure ALL tracking fires before redirect
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17824079146/C-ywCOm90-EbEKq6l7NC',
+                'transaction_id': vin + '_' + Date.now(),
+                'event_callback': function() {
+                    console.log('[EMAIL CAPTURE] ✅ Google Ads conversion sent (secondary)');
+                    // Redirect ONLY after conversion is confirmed sent
+                    // Additional 500ms delay to ensure GTM tags also fire
+                    setTimeout(() => {
+                        console.log('[EMAIL CAPTURE] Redirecting to report page...');
+                        window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
+                    }, 500);
+                },
+                'event_timeout': 2000  // Fallback: redirect after 2s even if callback doesn't fire
+            });
         });
     </script>
 </body>
