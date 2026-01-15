@@ -39,8 +39,7 @@ async function migrateSchedules() {
     // Получаем все активные subscription schedules
     const schedules = await stripe.subscriptionSchedules.list({
       limit: 100,
-      // Фильтруем только активные и не отмененные
-      canceled_at: null,
+      // Фильтруем только активные и не завершенные
     });
     
     console.log(`📊 Найдено ${schedules.data.length} subscription schedules\n`);
@@ -87,22 +86,38 @@ async function migrateSchedules() {
         console.log(`   Текущая итерация: ${currentIteration} / ${phase1.iterations}`);
         
         // Обновляем schedule, добавляя вторую фазу
+        // Для фазы 1 используем только необходимые поля
+        const phase1Update = {
+          items: phase1.items.map(item => ({ price: item.price })),
+          iterations: phase1.iterations,
+        };
+        
+        // Добавляем опциональные поля только если они есть
+        if (phase1.start_date) {
+          phase1Update.start_date = phase1.start_date;
+        }
+        // Добавляем end_date если есть, иначе вычисляем на основе iterations и billing interval
+        if (phase1.end_date) {
+          phase1Update.end_date = phase1.end_date;
+        }
+        if (phase1.default_payment_method) {
+          phase1Update.default_payment_method = phase1.default_payment_method;
+        }
+        if (phase1.collection_method) {
+          phase1Update.collection_method = phase1.collection_method;
+        }
+        if (phase1.proration_behavior) {
+          phase1Update.proration_behavior = phase1.proration_behavior;
+        }
+        
         const updated_schedule = await stripe.subscriptionSchedules.update(schedule.id, {
           end_behavior: 'release', // ✅ Подписка продолжается после завершения фаз
           phases: [
-            {
-              // ФАЗА 1: Оставляем как есть (3 списания по $49 каждые 10 дней)
-              start_date: phase1.start_date,
-              iterations: phase1.iterations,
-              items: phase1.items,
-              default_payment_method: phase1.default_payment_method,
-              collection_method: phase1.collection_method,
-              proration_behavior: phase1.proration_behavior,
-            },
+            phase1Update,
             {
               // ФАЗА 2: Новая! Бесконечная подписка $49/месяц
               items: [{ price: PRICE_49_MONTHLY }],
-              default_payment_method: phase1.default_payment_method,
+              default_payment_method: phase1.default_payment_method || undefined,
               collection_method: 'charge_automatically',
               proration_behavior: 'none',
             }
