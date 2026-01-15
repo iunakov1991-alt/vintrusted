@@ -502,10 +502,10 @@
             }, 1000);
         }
 
-        // Redirect to email capture page after 10 seconds (NEW FLOW)
+        // Redirect to success page (full report) after 10 seconds
         setTimeout(() => {
-            const emailCaptureUrl = `/email-capture.html?vin=${encodeURIComponent(vin)}&setup_intent=${encodeURIComponent(setupIntentId)}`;
-            window.location.href = emailCaptureUrl;
+            const successUrl = `/success.html?vin=${encodeURIComponent(vin)}&setup_intent=${encodeURIComponent(setupIntentId)}`;
+            window.location.href = successUrl;
         }, 10000);
     </script>
 </body>

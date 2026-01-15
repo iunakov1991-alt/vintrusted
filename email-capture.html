@@ -257,12 +257,12 @@
     
     <div class="vin-found-chip">
         <span class="checkmark">✓</span>
-        <span>VIN REPORT READY</span>
+        <span>VIN FOUND</span>
     </div>
     
     <div class="vin-display" id="vinDisplay">Loading...</div>
     
-    <p class="subtitle">Enter your email to view your full VIN report</p>
+    <p class="subtitle">Enter your email to continue</p>
     
     <div class="email-form-wrapper">
         <form id="emailForm">
@@ -396,11 +396,11 @@
             console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
             console.log('[EMAIL CAPTURE] Waiting 1000ms for tracking to complete...');
             
-            // Redirect to success page (full report) with VIN and email after delay
+            // Redirect to report page (payment) with VIN and email after delay
             // Increased to 1000ms to ensure GTM tags fire
             setTimeout(() => {
-                console.log('[EMAIL CAPTURE] Redirecting to success page...');
-                window.location.href = `/success.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
+                console.log('[EMAIL CAPTURE] Redirecting to report page...');
+                window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
             }, 1000);
         });
     </script>
