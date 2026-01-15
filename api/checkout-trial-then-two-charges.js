@@ -135,9 +135,9 @@ export default async function handler(req, res) {
       console.log('Skipping ClearVin report - missing email or VIN');
     }
     
-    // Build success URL with VIN - redirect to email capture page after payment
+    // Build success URL with VIN - redirect to purchase confirmation page first (for PRIMARY conversion)
     const baseUrl = process.env.APP_URL || process.env.RETURN_URL?.replace('/success.html', '').replace('/payment-success', '') || 'https://vintrusted.com';
-    let successUrl = `${baseUrl}/email-capture.html`;
+    let successUrl = `${baseUrl}/purchase-confirmation.html`;
     
     const params = new URLSearchParams();
     if (finalVin) {
