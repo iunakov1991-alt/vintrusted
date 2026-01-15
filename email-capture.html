@@ -372,11 +372,15 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
             
-            console.log('[EMAIL CAPTURE] ========================================');
-            console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
-            console.log('[EMAIL CAPTURE] ========================================');
+            // 📊 SECONDARY CONVERSION - Email Collected (BEFORE payment)
+            // Using simple approach that worked before
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17824079146/C-ywCOm90-EbEKq6l7NC',
+                'transaction_id': vin + '_' + Date.now()
+            });
             
-            // 📊 METHOD 1: Push to dataLayer for GTM
+            // Also push to dataLayer for GTM and additional tracking
+            // Initialize dataLayer if not exists
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'email_collected',
@@ -384,42 +388,17 @@
                 'email': email,
                 'timestamp': new Date().toISOString()
             });
-            console.log('[EMAIL CAPTURE] ✅ dataLayer.push sent:', {
-                event: 'email_collected',
-                vin: vin,
-                email: email
-            });
+            console.log('[EMAIL CAPTURE] 📊 dataLayer event pushed:', window.dataLayer[window.dataLayer.length - 1]);
             
-            // 📊 METHOD 2: Send as Google Analytics event (alternative tracking)
-            if (typeof gtag === 'function') {
-                gtag('event', 'email_collected', {
-                    'vin': vin,
-                    'email': email,
-                    'event_category': 'engagement',
-                    'event_label': 'Email Capture - Before Payment'
-                });
-                console.log('[EMAIL CAPTURE] ✅ gtag event sent: email_collected');
-            }
+            console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
+            console.log('[EMAIL CAPTURE] Waiting 1000ms for tracking to complete...');
             
-            console.log('[EMAIL CAPTURE] Waiting for tracking to complete before redirect...');
-            
-            // 📊 METHOD 3: Google Ads SECONDARY CONVERSION
-            // Using eventCallback to ensure ALL tracking fires before redirect
-            gtag('event', 'conversion', {
-                'send_to': 'AW-17824079146/C-ywCOm90-EbEKq6l7NC',
-                'transaction_id': vin + '_' + Date.now(),
-                'event_callback': function() {
-                    console.log('[EMAIL CAPTURE] ✅ Google Ads conversion callback fired');
-                    // Redirect ONLY after conversion is confirmed sent
-                    // Additional 800ms delay to ensure GTM tags also fire
-                    setTimeout(() => {
-                        console.log('[EMAIL CAPTURE] 🔄 Redirecting to report page...');
-                        window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
-                    }, 800);
-                },
-                'event_timeout': 2000  // Fallback: redirect after 2s even if callback doesn't fire
-            });
-            console.log('[EMAIL CAPTURE] ✅ Google Ads conversion request sent');
+            // Redirect to report page (payment) with VIN and email after delay
+            // Using simple setTimeout (same as before when it worked)
+            setTimeout(() => {
+                console.log('[EMAIL CAPTURE] Redirecting to report page...');
+                window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
+            }, 1000);
         });
     </script>
 </body>
