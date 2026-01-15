@@ -709,7 +709,7 @@
                             } else {
                                 console.warn('❌ Report loaded but validation failed, NOT showing email form');
                             }
-                        }, 1000); // Increased delay to ensure DOM is fully updated
+                        }, 5000); // Increased delay to 5s to ensure React renders inside iframe
                     })
                     .catch((error) => {
                         // If report fails to load, don't show email form
