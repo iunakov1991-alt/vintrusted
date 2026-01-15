@@ -764,10 +764,11 @@
                     return; // Don't show the email input form
                 }
                 
-                console.log('✅ Showing email form overlay');
+                // Email is now always collected BEFORE payment, so no need to show modal
+                console.log('✅ Email collection moved to pre-payment flow, hiding modal');
                 const emailFormOverlay = document.getElementById('emailFormOverlay');
-                emailFormOverlay.classList.add('show');
-                emailFormOverlay.classList.remove('hidden');
+                emailFormOverlay.classList.remove('show');
+                emailFormOverlay.classList.add('hidden');
                 
                 // Focus on email input
                 const emailInput = document.getElementById('emailInput');
