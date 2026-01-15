@@ -16,68 +16,6 @@ export default async function handler(req, res) {
     if (!si || !si.payment_method) throw new Error('SetupIntent has no payment_method');
     console.log('SetupIntent OK, payment_method:', si.payment_method);
 
-    // ═══════════════════════════════════════════════════════════════════
-    // 🛡️ ЗАЩИТА ОТ ДУБЛИКАТОВ: Одна карта = одна подписка
-    // ═══════════════════════════════════════════════════════════════════
-    console.log('[CHECKOUT] 🔍 Checking for duplicate payment method...');
-    
-    // Получаем payment_method для проверки fingerprint
-    const paymentMethod = await stripe.paymentMethods.retrieve(si.payment_method);
-    const cardFingerprint = paymentMethod.card?.fingerprint;
-    
-    if (cardFingerprint) {
-      console.log('[CHECKOUT] 🔍 Card fingerprint:', cardFingerprint.substring(0, 10) + '...');
-      
-      // Ищем существующих customers с этой картой
-      const existingCustomers = await stripe.customers.list({
-        limit: 100,
-      });
-      
-      // Проверяем каждого customer на наличие этой карты
-      for (const existingCustomer of existingCustomers.data) {
-        if (!existingCustomer.invoice_settings?.default_payment_method) continue;
-        
-        try {
-          const existingPM = await stripe.paymentMethods.retrieve(
-            existingCustomer.invoice_settings.default_payment_method
-          );
-          
-          if (existingPM.card?.fingerprint === cardFingerprint) {
-            console.log('[CHECKOUT] ❌ DUPLICATE DETECTED! Customer:', existingCustomer.id);
-            console.log('[CHECKOUT] ❌ This card already has an active subscription!');
-            
-            // Проверяем есть ли активная подписка
-            const subscriptions = await stripe.subscriptions.list({
-              customer: existingCustomer.id,
-              status: 'active',
-              limit: 1
-            });
-            
-            const schedules = await stripe.subscriptionSchedules.list({
-              customer: existingCustomer.id,
-              limit: 1
-            });
-            
-            if (subscriptions.data.length > 0 || schedules.data.length > 0) {
-              throw new Error('DUPLICATE_CARD: This card already has an active subscription. You can only purchase one report per card.');
-            }
-          }
-        } catch (err) {
-          // Игнорируем ошибки при получении payment_method (может быть удалён)
-          if (!err.message.includes('DUPLICATE_CARD')) {
-            console.log('[CHECKOUT] ⚠️  Error checking customer:', err.message);
-          } else {
-            throw err; // Пробрасываем нашу ошибку дубликата
-          }
-        }
-      }
-      
-      console.log('[CHECKOUT] ✅ No duplicates found, proceeding...');
-    } else {
-      console.log('[CHECKOUT] ⚠️  No card fingerprint, skipping duplicate check');
-    }
-    // ═══════════════════════════════════════════════════════════════════
-
     // 1) Customer с привязанным PM
     // Копируем metadata из SetupIntent в Customer для future charges
     const customer = await stripe.customers.create({

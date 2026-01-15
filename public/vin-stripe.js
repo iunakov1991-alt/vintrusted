@@ -384,18 +384,11 @@
     } catch (error) {
       console.error('Payment error:', error);
       
-      // Check for duplicate card error
-      let errorMessage = error.message || 'Payment failed. Please try again.';
-      
-      if (error.message && error.message.includes('DUPLICATE_CARD')) {
-        errorMessage = '⚠️ This card already has an active subscription. You can only purchase one report per card.';
-      }
-      
       // Show error to user
       const errorContainer = form.querySelector('.error-message') || document.createElement('div');
       errorContainer.className = 'error-message';
-      errorContainer.style.cssText = 'color: #ef4444; padding: 15px; margin-top: 10px; background: #fee; border-radius: 12px; font-size: 14px; line-height: 1.5;';
-      errorContainer.textContent = errorMessage;
+      errorContainer.style.cssText = 'color: #ef4444; padding: 10px; margin-top: 10px; background: #fee; border-radius: 20px;';
+      errorContainer.textContent = error.message || 'Payment failed. Please try again.';
       
       if (!form.querySelector('.error-message')) {
         form.appendChild(errorContainer);
