@@ -1,6 +1,20 @@
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+// ┌─────────────────────────────────────────────────────────────┐
+// │ БЛОКИРОВКА МОШЕННИКОВ ПО FINGERPRINT КАРТЫ И IP              │
+// └─────────────────────────────────────────────────────────────┘
+// Добавь сюда fingerprint заблокированных карт (из Stripe Dashboard)
+const BLOCKED_CARD_FINGERPRINTS = [
+  'fSld43eVZnTFqUDo', // Террорист с 8 покупками
+  'zwYHnaH0E2dRrT9B', // tomiboss@icloud.com - ban новые покупки (подписка активна, пусть платит)
+];
+
+// Заблокированные IP-адреса (добавляй IP мошенников сюда)
+const BLOCKED_IP_ADDRESSES = [
+  // IP будут добавляться автоматически при обнаружении
+];
+
 // ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_10D указывает на price с interval=day, interval_count=10
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -16,13 +30,77 @@ export default async function handler(req, res) {
     if (!si || !si.payment_method) throw new Error('SetupIntent has no payment_method');
     console.log('SetupIntent OK, payment_method:', si.payment_method);
 
+    // ┌─────────────────────────────────────────────────────────────┐
+    // │ ПРОВЕРКА БЛОКИРОВКИ КАРТЫ И IP                               │
+    // └─────────────────────────────────────────────────────────────┘
+    const pm = await stripe.paymentMethods.retrieve(si.payment_method);
+    const cardFingerprint = pm.card?.fingerprint;
+    
+    // Получаем IP из metadata SetupIntent (сохранен в create-setup-intent.js)
+    const ipAddress = si.metadata?.ip_address || 'unknown';
+    
+    console.log('[ANTI-FRAUD] Card fingerprint:', cardFingerprint);
+    console.log('[ANTI-FRAUD] IP address:', ipAddress);
+    
+    // 1. Проверка заблокированных IP
+    if (ipAddress && ipAddress !== 'unknown' && BLOCKED_IP_ADDRESSES.includes(ipAddress)) {
+      console.log('[ANTI-FRAUD] 🚫 BLOCKED IP DETECTED:', ipAddress);
+      return res.status(403).json({ 
+        error: 'Access denied',
+        message: 'This request has been blocked. Please contact support if you believe this is an error.'
+      });
+    }
+    
+    // 2. Проверка заблокированных карт
+    if (cardFingerprint && BLOCKED_CARD_FINGERPRINTS.includes(cardFingerprint)) {
+      console.log('[ANTI-FRAUD] 🚫 BLOCKED CARD DETECTED:', cardFingerprint);
+      return res.status(403).json({ 
+        error: 'Payment method blocked',
+        message: 'This payment method cannot be used. Please contact support.'
+      });
+    }
+    
+    // 3. Проверка "1 карта = 1 отчет" - ищем предыдущие успешные платежи с этой карты
+    if (cardFingerprint) {
+      console.log('[ANTI-FRAUD] Checking for previous purchases with this card...');
+      
+      // Ищем всех customers с этой картой
+      const existingCustomers = await stripe.customers.search({
+        query: `metadata['card_fingerprint']:'${cardFingerprint}'`,
+        limit: 10
+      });
+      
+      console.log('[ANTI-FRAUD] Found customers with this card:', existingCustomers.data.length);
+      
+      // Если нашли хотя бы одного - карта уже использовалась
+      if (existingCustomers.data.length > 0) {
+        console.log('[ANTI-FRAUD] 🚫 DUPLICATE PURCHASE ATTEMPT - Card already used');
+        console.log('[ANTI-FRAUD] Previous customers:', existingCustomers.data.map(c => c.id));
+        
+        return res.status(403).json({ 
+          error: 'Duplicate purchase',
+          message: 'This payment method has already been used to purchase a report. Each card can only be used once.'
+        });
+      }
+      
+      console.log('[ANTI-FRAUD] ✅ First purchase with this card');
+    }
+    
+    console.log('[ANTI-FRAUD] ✅ Card is not blocked');
+
     // 1) Customer с привязанным PM
     // Копируем metadata из SetupIntent в Customer для future charges
+    // + сохраняем card_fingerprint для защиты от повторных покупок
+    const customerMetadata = {
+      ...(si.metadata || {}), // ✅ Копируем metadata (gclid, utm_*, etc.)
+      card_fingerprint: cardFingerprint || 'unknown' // ✅ Сохраняем fingerprint для проверки дубликатов
+    };
+    
     const customer = await stripe.customers.create({
       email: email || undefined,
       payment_method: si.payment_method,
       invoice_settings: { default_payment_method: si.payment_method },
-      metadata: si.metadata || {} // ✅ Копируем metadata (gclid, utm_*, etc.)
+      metadata: customerMetadata
     });
     console.log('[CHECKOUT] Customer created with metadata:', customer.metadata);
 

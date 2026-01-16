@@ -30,8 +30,15 @@ export default async function handler(req, res) {
     const cookies = parseCookies(req);
     const gclid = cookies.gclid || '';
     
+    // Get IP address (для банов)
+    const ip_address = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
+                       req.headers['x-real-ip'] || 
+                       req.connection?.remoteAddress || 
+                       'unknown';
+    
     console.log('[CREATE-SETUP-INTENT] Cookies:', cookies);
     console.log('[CREATE-SETUP-INTENT] gclid:', gclid || 'NOT FOUND');
+    console.log('[CREATE-SETUP-INTENT] IP:', ip_address);
     
     // Build metadata
     const metadata = {};
@@ -59,6 +66,11 @@ export default async function handler(req, res) {
     // CRITICAL: Save gclid for Google Ads conversion tracking
     if (gclid) {
       metadata.gclid = gclid;
+    }
+    
+    // Save IP address for fraud prevention
+    if (ip_address && ip_address !== 'unknown') {
+      metadata.ip_address = ip_address;
     }
     
     console.log('Creating SetupIntent with metadata:', metadata);

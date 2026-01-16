@@ -372,33 +372,34 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
             
-            // 📊 SECONDARY CONVERSION - Email Collected (BEFORE payment)
-            // Using simple approach that worked before
-            gtag('event', 'conversion', {
-                'send_to': 'AW-17824079146/C-ywCOm90-EbEKq6l7NC',
-                'transaction_id': vin + '_' + Date.now()
-            });
+            console.log('[EMAIL CAPTURE] 📧 Email collected:', email, 'VIN:', vin);
             
-            // Also push to dataLayer for GTM and additional tracking
-            // Initialize dataLayer if not exists
-            window.dataLayer = window.dataLayer || [];
+            const transactionId = vin + '_' + Date.now();
+            
+            // 🎯 Отправляем событие email_collected для тега "ИМЕЙЛ тег"
             window.dataLayer.push({
                 'event': 'email_collected',
                 'vin': vin,
                 'email': email,
-                'timestamp': new Date().toISOString()
+                'timestamp': new Date().toISOString(),
+                'transaction_id': transactionId
             });
-            console.log('[EMAIL CAPTURE] 📊 dataLayer event pushed:', window.dataLayer[window.dataLayer.length - 1]);
+            console.log('[EMAIL CAPTURE] ✅ Pushed email_collected event');
             
-            console.log('[EMAIL CAPTURE] Email collected:', email, 'VIN:', vin);
-            console.log('[EMAIL CAPTURE] Waiting 1000ms for tracking to complete...');
+            // 🎯 Отправляем событие conversion для остальных тегов GTM
+            window.dataLayer.push({
+                'event': 'conversion',
+                'vin': vin,
+                'email': email,
+                'transaction_id': transactionId
+            });
+            console.log('[EMAIL CAPTURE] ✅ Pushed conversion event');
             
-            // Redirect to report page (payment) with VIN and email after delay
-            // Using simple setTimeout (same as before when it worked)
+            // Redirect to report page with VIN and email - увеличиваю задержку до 1500ms
             setTimeout(() => {
-                console.log('[EMAIL CAPTURE] Redirecting to report page...');
+                console.log('[EMAIL CAPTURE] 🔄 Redirecting to report page...');
                 window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
-            }, 1000);
+            }, 1500);
         });
     </script>
 </body>

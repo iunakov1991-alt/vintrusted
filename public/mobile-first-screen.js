@@ -95,21 +95,8 @@
       updateVinInput(pastedText);
     });
 
-    // Try to auto-fill from clipboard if available
-    if (navigator.clipboard && navigator.clipboard.readText) {
-      navigator.clipboard.readText()
-        .then(text => {
-          const cleanText = text.trim().toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g, '');
-          if (cleanText.length === 17 && input.value === '') {
-            console.log('[MOBILE FIRST SCREEN] Auto-filling VIN from clipboard');
-            updateVinInput(cleanText);
-          }
-        })
-        .catch(err => {
-          // Clipboard access denied or not available, that's OK
-          console.log('[MOBILE FIRST SCREEN] Clipboard access not available');
-        });
-    }
+    // Removed: Auto-fill from clipboard was causing unwanted auto-redirects
+    // Users should explicitly paste VIN if they want to use clipboard content
 
     // Handle button click
     button.addEventListener('click', function(e) {
