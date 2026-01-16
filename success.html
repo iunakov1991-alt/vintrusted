@@ -403,6 +403,9 @@
       console.log('✅ Google Analytics event sent: report_viewed');
     </script>
     
+    <!-- GCLID Storage for delayed conversions -->
+    <script src="/public/gclid-storage.js"></script>
+    
     <!-- Google Ads Global Site Tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17824079146"></script>
     <script>
@@ -413,18 +416,11 @@
       gtag('config', 'G-CX3CT2K2FC');
     </script>
     
-    <!-- Event snippet for Purchase conversion page -->
+    <!-- NOTE: Conversion event removed from success.html -->
+    <!-- Conversions are now tracked on purchase-confirmation.html with tier-based validation -->
+    <!-- This page is for viewing the report AFTER payment -->
     <script>
-      // Get setup_intent_id from URL for transaction_id (deduplication)
-      const urlParams = new URLSearchParams(window.location.search);
-      const transactionId = urlParams.get('setup_intent') || '';
-      
-      gtag('event', 'conversion', {
-          'send_to': 'AW-17824079146/I62hCKPTndgbEKq6l7NC',
-          'transaction_id': transactionId
-      });
-      
-      console.log('[CONVERSION] Event sent with transaction_id:', transactionId.substring(0, 20) + '...');
+      console.log('[SUCCESS] Report page loaded - conversions tracked on purchase-confirmation.html');
     </script>
 </head>
 <body>

@@ -212,6 +212,9 @@
         }
     </style>
     
+    <!-- GCLID Storage for delayed conversions -->
+    <script src="/public/gclid-storage.js"></script>
+    
     <!-- Google Ads Global Site Tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17824079146"></script>
     <script>
@@ -291,31 +294,90 @@
         }
 
         // ┌─────────────────────────────────────────────────────────────┐
-        // │ ФУНКЦИЯ: ОТПРАВИТЬ ВСЕ КОНВЕРСИИ (GTM + FALLBACK)           │
+        // │ ФУНКЦИЯ: ОТПРАВИТЬ ВСЕ КОНВЕРСИИ (GTM + TIER-BASED)         │
         // └─────────────────────────────────────────────────────────────┘
-        function fireConversionEvents(verifyData = null) {
+        async function fireConversionEvents(verifyData = null) {
             // Push events to dataLayer (GTM will handle them)
             window.dataLayer = window.dataLayer || [];
             
             // ════════════════════════════════════════════════════════════
-            // ОСНОВНОЙ МЕТОД: Серверный webhook отправит конверсию
-            // Stripe webhook → Google Ads напрямую
+            // 🎯 TIER-BASED CONVERSION TRACKING
+            // Валидация карты → Premium/Medium/Fraud → Google Ads
             // ════════════════════════════════════════════════════════════
-            console.log('[CONFIRMATION] ℹ️  Primary conversion tracking: Server-side webhook');
-            console.log('[CONFIRMATION] ℹ️  Fallback: Client-side gtag event (below)');
+            console.log('[CONFIRMATION] 🎯 Starting tier-based conversion tracking...');
             
-            // ════════════════════════════════════════════════════════════
-            // РЕЗЕРВНЫЙ МЕТОД: Client-side Google Ads conversion
-            // На случай если webhook временно недоступен
-            // ════════════════════════════════════════════════════════════
-            if (window.gtag) {
-                window.gtag('event', 'conversion', {
-                'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
-                    'transaction_id': setupIntentId || ''
-            });
-                console.log('[CONFIRMATION] ✅ FALLBACK: Client-side Google Ads conversion fired');
+            // Restore gclid from localStorage (if missing in URL)
+            let gclid = getCookie('gclid') || '';
+            if (!gclid && window.GclidStorage) {
+                gclid = window.GclidStorage.get() || '';
+                console.log('[CONFIRMATION] 📦 Restored gclid from localStorage:', gclid ? gclid.substring(0, 10) + '...' : 'none');
+            }
+            
+            // Get payment_intent_id from verifyData
+            const paymentIntentId = verifyData?.payment_intent_id || verifyData?.latest_payment_intent;
+            
+            if (!paymentIntentId) {
+                console.error('[CONFIRMATION] ❌ No payment_intent_id found - using fallback conversion');
+                if (window.gtag) {
+                    window.gtag('event', 'conversion', {
+                        'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
+                        'transaction_id': setupIntentId || '',
+                        'value': 1.00,
+                        'currency': 'USD'
+                    });
+                    console.log('[CONFIRMATION] ✅ FALLBACK: Simple conversion fired (no tier validation)');
+                }
             } else {
-                console.log('[CONFIRMATION] ⚠️  gtag not available - fallback skipped');
+                // ════════════════════════════════════════════════════════════
+                // Tier Validation: Premium ($25) / Medium ($5) / Fraud ($0)
+                // ════════════════════════════════════════════════════════════
+                try {
+                    console.log('[CONFIRMATION] 🔍 Validating PaymentIntent:', paymentIntentId);
+                    
+                    const validateResponse = await fetch(`/api/validate?pi=${paymentIntentId}`);
+                    const validateData = await validateResponse.json();
+                    
+                    console.log('[CONFIRMATION] 📊 Validation result:', validateData);
+                    
+                    const tier = validateData.tier; // 'premium' | 'medium' | 'fraud'
+                    const value = validateData.value; // 25.00 | 5.00 | 0.00
+                    
+                    // ════════════════════════════════════════════════════════════
+                    // Send tier-based conversion to Google Ads
+                    // ════════════════════════════════════════════════════════════
+                    if (tier === 'fraud') {
+                        console.log('[CONFIRMATION] 🔴 FRAUD detected - NOT sending conversion to Google Ads');
+                    } else if (window.gtag) {
+                        window.gtag('event', 'conversion', {
+                            'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
+                            'transaction_id': setupIntentId || paymentIntentId,
+                            'value': value,
+                            'currency': 'USD'
+                        });
+                        
+                        if (tier === 'premium') {
+                            console.log('[CONFIRMATION] 🟢 PREMIUM conversion fired: $' + value);
+                        } else if (tier === 'medium') {
+                            console.log('[CONFIRMATION] 🟡 MEDIUM conversion fired: $' + value);
+                        }
+                    } else {
+                        console.log('[CONFIRMATION] ⚠️  gtag not available - conversion skipped');
+                    }
+                } catch (error) {
+                    console.error('[CONFIRMATION] ❌ Error validating tier:', error);
+                    console.log('[CONFIRMATION] ⚠️  Using fallback conversion (no tier)');
+                    
+                    // Fallback: send conversion without tier validation
+                    if (window.gtag) {
+                        window.gtag('event', 'conversion', {
+                            'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
+                            'transaction_id': setupIntentId || '',
+                            'value': 1.00,
+                            'currency': 'USD'
+                        });
+                        console.log('[CONFIRMATION] ✅ FALLBACK: Simple conversion fired');
+                    }
+                }
             }
             
             // Google Analytics Purchase Event
@@ -362,7 +424,7 @@
             // ┌─────────────────────────────────────────────────────────────┐
             // │ LOG CONVERSION TO INTERNAL TRACKING SYSTEM                   │
             // └─────────────────────────────────────────────────────────────┘
-            logConversion();
+            await logConversion();
         }
         
         // ┌─────────────────────────────────────────────────────────────┐
@@ -417,6 +479,7 @@
         // │ ШАГ 1: ПРОВЕРИТЬ ЧТО ОПЛАТА РЕАЛЬНО ПРОШЛА                  │
         // │ Дергаем /api/verify-payment для валидации в Stripe          │
         // │ ⚠️  ТЕСТОВЫЙ РЕЖИМ: si_test* → пропускаем проверку           │
+        // │ 📊 TIME-TO-CONVERSION: Логируем время с landing до payment   │
         // └─────────────────────────────────────────────────────────────┘
         async function verifyAndTrackPayment() {
             if (!setupIntentId) {
@@ -425,13 +488,42 @@
                 return;
             }
 
+            // ════════════════════════════════════════════════════════════
+            // TIME-TO-CONVERSION TRACKING
+            // Measure time from first landing to payment
+            // ════════════════════════════════════════════════════════════
+            const landingTimestamp = sessionStorage.getItem('landing_timestamp');
+            if (landingTimestamp) {
+                const timeToConversion = Date.now() - parseInt(landingTimestamp, 10);
+                const timeToConversionSeconds = Math.round(timeToConversion / 1000);
+                console.log('[CONFIRMATION] ⏱️  Time-to-Conversion:', timeToConversionSeconds, 'seconds');
+                
+                // Send to Google Analytics as custom metric
+                window.dataLayer.push({
+                    'event': 'time_to_conversion',
+                    'time_seconds': timeToConversionSeconds,
+                    'time_minutes': Math.round(timeToConversionSeconds / 60)
+                });
+                
+                // If conversion is very fast (< 60 seconds), it's a "Super Premium" signal
+                if (timeToConversionSeconds < 60) {
+                    console.log('[CONFIRMATION] 🚀 SUPER FAST conversion (<60s) - premium signal!');
+                    window.dataLayer.push({
+                        'event': 'super_fast_conversion',
+                        'time_seconds': timeToConversionSeconds
+                    });
+                }
+            } else {
+                console.log('[CONFIRMATION] ⚠️  No landing timestamp found - time-to-conversion not tracked');
+            }
+
             // 🧪 ТЕСТОВЫЙ РЕЖИМ: пропускаем проверку оплаты
             const isTestMode = setupIntentId.startsWith('si_test');
             
             if (isTestMode) {
                 console.log('[CONFIRMATION] 🧪 TEST MODE: Skipping payment verification');
                 console.log('[CONFIRMATION] 🧪 Firing conversion events WITHOUT Stripe check...');
-                fireConversionEvents();
+                await fireConversionEvents();
                 return;
             }
 
@@ -472,7 +564,7 @@
                 // └─────────────────────────────────────────────────────────┘
                 console.log('[CONFIRMATION] ✅ Payment CONFIRMED in Stripe!');
                 console.log('[CONFIRMATION] ✅ Firing conversion events...');
-                fireConversionEvents(verifyData);
+                await fireConversionEvents(verifyData);
 
             } catch (error) {
                 console.error('[CONFIRMATION] ❌ Error verifying payment:', error);

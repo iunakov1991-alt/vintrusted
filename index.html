@@ -63,6 +63,18 @@
       gtag('config', 'G-CX3CT2K2FC');
     </script>
     
+    <!-- ⏱️  TIME-TO-CONVERSION: Save landing timestamp -->
+    <script>
+      (function() {
+        if (!sessionStorage.getItem('landing_timestamp')) {
+          sessionStorage.setItem('landing_timestamp', Date.now().toString());
+          console.log('[TIME-TO-CONVERSION] 📍 Landing timestamp saved');
+        } else {
+          console.log('[TIME-TO-CONVERSION] ✅ Returning visitor (timestamp exists)');
+        }
+      })();
+    </script>
+    
     <!-- GCLID Cookie - Save gclid for Google Ads conversion tracking -->
     <script src="/public/gclid-cookie.js" defer></script>
     
