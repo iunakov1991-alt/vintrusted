@@ -122,6 +122,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/stripe-test.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -498,6 +502,10 @@
     {
       "source": "/api/verify-payment",
       "destination": "/api/verify-payment.js"
+    },
+    {
+      "source": "/api/stripe-test",
+      "destination": "/api/stripe-test.js"
     },
     {
       "source": "/semantic-pages/en",
