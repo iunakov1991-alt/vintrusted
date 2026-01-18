@@ -24,13 +24,43 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 /**
  * Определяет tier карты на основе Stripe PaymentIntent и PaymentMethod
+ * Обрабатывает: card, link, us_bank_account, apple_pay, google_pay
  */
 function getCardTier(paymentIntent, paymentMethod) {
-  const card = paymentMethod.card;
   const outcome = paymentIntent.charges?.data[0]?.outcome;
+  
+  // ════════════════════════════════════════════════════════════
+  // STRIPE LINK: Treat as Premium (verified by Stripe)
+  // ════════════════════════════════════════════════════════════
+  if (paymentMethod.type === 'link') {
+    console.log('[VALIDATE] 🔗 Stripe Link payment detected → PREMIUM');
+    return {
+      tier: 'premium',
+      value: 25.00,
+      details: {
+        payment_type: 'link',
+        email: paymentMethod.link?.email || 'N/A',
+        risk_level: outcome?.risk_level || 'normal'
+      }
+    };
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // CARD PAYMENTS: Standard tier logic
+  // ════════════════════════════════════════════════════════════
+  const card = paymentMethod.card;
 
   if (!card) {
-    return { tier: 'medium', value: 5.00 };
+    // US Bank Account, other payment methods → Medium tier
+    console.log('[VALIDATE] ⚠️ No card data, payment type:', paymentMethod.type);
+    return { 
+      tier: 'medium', 
+      value: 5.00,
+      details: {
+        payment_type: paymentMethod.type,
+        risk_level: outcome?.risk_level || 'N/A'
+      }
+    };
   }
 
   // Tier 3 (Fraud): блокируем

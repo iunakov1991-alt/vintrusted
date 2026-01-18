@@ -314,7 +314,7 @@
             }
             
             // Get payment_intent_id from verifyData
-            const paymentIntentId = verifyData?.payment_intent_id || verifyData?.latest_payment_intent;
+            const paymentIntentId = verifyData?.payment_intent?.id;
             
             if (!paymentIntentId) {
                 console.error('[CONFIRMATION] ❌ No payment_intent_id found - using fallback conversion');
@@ -365,17 +365,17 @@
                     }
                 } catch (error) {
                     console.error('[CONFIRMATION] ❌ Error validating tier:', error);
-                    console.log('[CONFIRMATION] ⚠️  Using fallback conversion (no tier)');
+                    console.log('[CONFIRMATION] ⚠️  Using fallback conversion ($25 Premium default)');
                     
-                    // Fallback: send conversion without tier validation
+                    // Fallback: send conversion with Premium tier ($25) by default
                     if (window.gtag) {
                         window.gtag('event', 'conversion', {
-                            'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
-                            'transaction_id': setupIntentId || '',
-                            'value': 1.00,
+                            'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
+                            'transaction_id': setupIntentId || paymentIntentId,
+                            'value': 25.00,
                             'currency': 'USD'
                         });
-                        console.log('[CONFIRMATION] ✅ FALLBACK: Simple conversion fired');
+                        console.log('[CONFIRMATION] ✅ FALLBACK: Premium conversion fired ($25)');
                     }
                 }
             }
