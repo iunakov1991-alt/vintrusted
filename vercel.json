@@ -114,6 +114,14 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/validate.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/verify-payment.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -482,6 +490,14 @@
     {
       "source": "/api/monster/stop",
       "destination": "/api/monster-stop.js"
+    },
+    {
+      "source": "/api/validate",
+      "destination": "/api/validate.js"
+    },
+    {
+      "source": "/api/verify-payment",
+      "destination": "/api/verify-payment.js"
     },
     {
       "source": "/semantic-pages/en",
