@@ -538,8 +538,10 @@
                     return;
                 }
 
-                // Redirect to report page
-                window.location.href = `/report.html?vin=${vin}&email=${encodeURIComponent(email)}&from_quota=1`;
+                // ИСПРАВЛЕНО: Redirect на success.html (показ отчета), а НЕ на report.html (оплата)
+                // use-quota уже декрементировал quota и запросил отчет
+                console.log('[MY-REPORTS] ✅ Quota used - redirecting to report view');
+                window.location.href = `/success.html?vin=${vin}&email=${encodeURIComponent(email)}`;
             } catch (error) {
                 console.error('Error using quota:', error);
                 alert('Error checking VIN. Please try again.');

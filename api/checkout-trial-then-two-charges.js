@@ -114,20 +114,17 @@ export default async function handler(req, res) {
           });
         }
         
-        // Блокируем если подписка активна/trialing И есть квота
-        const subStatus = existingCustomer.subscription?.status;
-        const hasQuota = existingCustomer.quota?.remaining > 0;
+        // КРИТИЧНО: $2.99 Trial checkout ТОЛЬКО для НОВЫХ customers
+        // Существующие customers НЕ могут получить повторный $2.99 trial
+        // Они должны использовать renewal endpoint ($49 direct subscription)
+        console.log('[ANTI-FRAUD] 🚫 EXISTING CUSTOMER BLOCKED FROM TRIAL');
+        console.log('[ANTI-FRAUD] Customer must use renewal flow from /my-reports.html');
         
-        if ((subStatus === 'active' || subStatus === 'trialing') && hasQuota) {
-          console.log('[ANTI-FRAUD] 🚫 ACTIVE/TRIALING SUBSCRIPTION WITH QUOTA - No renewal needed');
-          return res.status(403).json({ 
-            error: 'Active subscription exists',
-            message: 'You already have an active subscription with available reports. Please use your account page.'
-          });
-        }
-        
-        // Если подписка отменена ИЛИ квота исчерпана - позволяем renewal
-        console.log('[ANTI-FRAUD] ℹ️  Allowing renewal (status:', subStatus, 'quota:', hasQuota, ')');
+        return res.status(403).json({ 
+          error: 'Trial not available for existing customers',
+          message: 'The $2.99 trial is only for new customers. Please renew your subscription from your account page for $49.',
+          redirect_to: `/my-reports.html?email=${encodeURIComponent(normalizedEmail)}`
+        });
       }
     }
     
@@ -249,7 +246,7 @@ export default async function handler(req, res) {
             remaining: finalVin ? 1 : 2
           },
           reports: finalVin ? [{
-            vin: finalVin.toUpperCase(),
+            vin: finalVin.toUpperCase().replace(/[^A-Z0-9]/g, ''), // ✅ Полная normalization
             purchased_at: new Date().toISOString(),
             vehicle_name: '',
             period: 'trial'

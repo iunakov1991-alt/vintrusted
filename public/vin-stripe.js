@@ -344,7 +344,15 @@
       if (!checkoutResponse.ok) {
         const error = await checkoutResponse.json();
         console.error('[PAY] ❌ Backend checkout failed:', error);
-        throw new Error(error.error || 'Checkout failed');
+        
+        // Обрабатываем редирект для существующих customers
+        if (error.redirect_to) {
+          console.log('[PAY] ℹ️  Existing customer detected - redirecting to:', error.redirect_to);
+          window.location.href = error.redirect_to;
+          return;
+        }
+        
+        throw new Error(error.message || error.error || 'Checkout failed');
       }
 
       const result = await checkoutResponse.json();

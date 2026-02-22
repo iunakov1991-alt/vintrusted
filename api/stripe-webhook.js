@@ -210,17 +210,48 @@ export default async function handler(req, res) {
         const customerData = await kv.get(customerKey);
         
         if (customerData) {
+          const oldStatus = customerData.subscription?.status;
+          const newStatus = subscription.status;
+          
           customerData.subscription = {
             subscription_id: subscription.id,
             subscription_schedule_id: customerData.subscription?.subscription_schedule_id || null,
-            status: subscription.status,
+            status: newStatus,
             start_date: new Date(subscription.current_period_start * 1000).toISOString(),
             end_date: new Date(subscription.current_period_end * 1000).toISOString(),
             cancel_at_period_end: subscription.cancel_at_period_end
           };
           
+          // КРИТИЧНО: Управление quota при изменении статуса
+          if (oldStatus === 'active' && (newStatus === 'past_due' || newStatus === 'unpaid')) {
+            console.log('[WEBHOOK] ⚠️  Subscription went past_due - blocking remaining quota');
+            // Сохраняем старое значение для возможного восстановления
+            customerData.quota_before_past_due = customerData.quota?.remaining || 0;
+            customerData.quota.remaining = 0;
+          }
+          
+          // Восстановление после past_due (когда пользователь обновил payment method)
+          if ((oldStatus === 'past_due' || oldStatus === 'unpaid') && newStatus === 'active') {
+            console.log('[WEBHOOK] ✅ Subscription recovered from past_due');
+            
+            // Проверяем - был ли уже quota reset через invoice.payment_succeeded
+            const currentQuota = customerData.quota?.remaining || 0;
+            
+            if (currentQuota === 2) {
+              // invoice.payment_succeeded уже сработал и reset quota - не трогаем
+              console.log('[WEBHOOK] ℹ️  Quota already reset by invoice.payment_succeeded');
+            } else {
+              // Восстанавливаем сохраненное значение (если есть)
+              const restoredQuota = customerData.quota_before_past_due || 0;
+              customerData.quota.remaining = restoredQuota;
+              console.log('[WEBHOOK] ℹ️  Quota restored:', restoredQuota);
+            }
+            
+            delete customerData.quota_before_past_due; // Очищаем временное поле
+          }
+          
           await kv.set(customerKey, customerData);
-          console.log('[WEBHOOK] ✅ Customer subscription status synced to KV');
+          console.log('[WEBHOOK] ✅ Customer subscription status synced:', oldStatus, '→', newStatus);
         }
       }
     } catch (err) {
@@ -267,8 +298,11 @@ export default async function handler(req, res) {
     const invoice = event.data.object;
     console.log('[WEBHOOK] Invoice paid:', invoice.id, 'Subscription:', invoice.subscription, 'Billing reason:', invoice.billing_reason);
     
-    // Обрабатываем recurring payment (subscription_cycle) И первый payment через renewal (subscription_create)
-    if (invoice.subscription && (invoice.billing_reason === 'subscription_cycle' || invoice.billing_reason === 'subscription_create')) {
+    // Обрабатываем все успешные subscription invoices (кроме manual)
+    // subscription_cycle = recurring charge, subscription_create = first charge, subscription_update = recovery from past_due
+    const relevantReasons = ['subscription_cycle', 'subscription_create', 'subscription_update'];
+    
+    if (invoice.subscription && relevantReasons.includes(invoice.billing_reason)) {
       try {
         const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
         const customer = await stripe.customers.retrieve(subscription.customer);
@@ -364,17 +398,26 @@ export default async function handler(req, res) {
           const customerData = await kv.get(customerKey);
           
           if (customerData) {
-            console.log('[WEBHOOK] ⚠️  Payment failed - marking subscription as past_due');
+            const oldQuota = customerData.quota?.remaining || 0;
+            console.log('[WEBHOOK] ⚠️  Payment failed - blocking quota');
             
             // Обновляем статус (Stripe автоматически меняет на past_due)
             customerData.subscription.status = subscription.status; // past_due или unpaid
             customerData.last_payment_failed_at = new Date().toISOString();
             
-            // НЕ обнуляем квоту сразу - даем время исправить payment method
-            // Stripe автоматически отменит подписку после retry period
+            // ВАЖНО: Обнуляем remaining quota - пользователь не может использовать сервис
+            // пока не обновит payment method и invoice не будет оплачен
+            if (customerData.quota) {
+              customerData.quota.remaining = 0;
+            } else {
+              // Если quota еще не была создана (очень редкий edge case)
+              customerData.quota = { total: 0, used: 0, remaining: 0 };
+            }
             
             await kv.set(customerKey, customerData);
-            console.log('[WEBHOOK] ✅ Subscription marked as', subscription.status);
+            console.log('[WEBHOOK] ✅ Subscription marked as', subscription.status, '- quota:', oldQuota, '→ 0');
+          } else {
+            console.log('[WEBHOOK] ⚠️  Customer not found in KV for failed payment (may be created later by subscription.created)');
           }
         }
       } catch (err) {

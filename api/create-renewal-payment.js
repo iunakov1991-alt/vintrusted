@@ -48,8 +48,13 @@ export default async function handler(req, res) {
       }
       
       // Проверяем - не пытается ли пользователь создать дубликат подписки
-      if (customerData.subscription?.status === 'active' && customerData.quota?.remaining > 0 && !customerData.subscription?.cancel_at_period_end) {
-        console.log('[RENEWAL-PAYMENT] ❌ Active subscription with quota exists');
+      // Блокируем для 'active' И 'trialing' с остатком квоты
+      const subStatus = customerData.subscription?.status;
+      const hasQuota = customerData.quota?.remaining > 0;
+      const isCanceling = customerData.subscription?.cancel_at_period_end;
+      
+      if ((subStatus === 'active' || subStatus === 'trialing') && hasQuota && !isCanceling) {
+        console.log('[RENEWAL-PAYMENT] ❌ Active/trialing subscription with quota exists');
         return res.status(403).json({ 
           error: 'Active subscription exists',
           message: 'You already have an active subscription with available reports.'
