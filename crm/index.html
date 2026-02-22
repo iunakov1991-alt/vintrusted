@@ -619,7 +619,7 @@
         autocomplete="current-password"
       />
       <div class="error-message" id="errorMessage">Неверный пароль</div>
-      <button onclick="login()">Войти</button>
+      <button onclick="handleLogin()" id="loginButton">Войти</button>
     </div>
   </div>
 
@@ -809,30 +809,58 @@
 
     // Enter key to login
     document.getElementById('passwordInput')?.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') login();
+      if (e.key === 'Enter') handleLogin();
     });
 
-    function login() {
-      const password = document.getElementById('passwordInput').value;
+    function handleLogin() {
+      console.log('handleLogin called');
+      const passwordInput = document.getElementById('passwordInput');
+      const password = passwordInput ? passwordInput.value : '';
+      
+      console.log('Password length:', password.length);
       
       if (!password) {
         showError('Введите пароль');
         return;
       }
 
+      // Disable button
+      const loginBtn = document.getElementById('loginButton');
+      if (loginBtn) {
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Вход...';
+      }
+
       // Set token
       authToken = password;
-      localStorage.setItem('crm_token', password);
+      try {
+        localStorage.setItem('crm_token', password);
+      } catch (e) {
+        console.warn('localStorage error:', e);
+      }
+      
+      console.log('Switching to dashboard...');
       
       // Show dashboard immediately
       const loginScreen = document.getElementById('loginScreen');
       const dashboard = document.getElementById('dashboard');
       
-      if (loginScreen) loginScreen.style.display = 'none';
-      if (dashboard) dashboard.style.display = 'block';
+      console.log('loginScreen element:', loginScreen ? 'found' : 'NOT FOUND');
+      console.log('dashboard element:', dashboard ? 'found' : 'NOT FOUND');
+      
+      if (loginScreen) {
+        loginScreen.style.display = 'none';
+        console.log('Login screen hidden');
+      }
+      if (dashboard) {
+        dashboard.style.display = 'block';
+        console.log('Dashboard shown');
+      }
       
       // Load data (async, don't wait)
+      console.log('Calling updateData...');
       updateData().then(success => {
+        console.log('updateData result:', success);
         if (!success) {
           // Invalid password - go back
           showError('Неверный пароль');
@@ -840,10 +868,18 @@
           authToken = '';
           if (loginScreen) loginScreen.style.display = 'flex';
           if (dashboard) dashboard.style.display = 'none';
+          if (loginBtn) {
+            loginBtn.disabled = false;
+            loginBtn.textContent = 'Войти';
+          }
         }
       }).catch(err => {
         console.error('Login error:', err);
-        showError('Ошибка загрузки данных');
+        showError('Ошибка загрузки данных: ' + err.message);
+        if (loginBtn) {
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Войти';
+        }
       });
     }
 
