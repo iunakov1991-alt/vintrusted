@@ -265,10 +265,10 @@ export default async function handler(req, res) {
   // КРИТИЧНО: Обработка повторных платежей (каждые 33 дня)
   if (event.type === 'invoice.payment_succeeded') {
     const invoice = event.data.object;
-    console.log('[WEBHOOK] Invoice paid:', invoice.id, 'Subscription:', invoice.subscription);
+    console.log('[WEBHOOK] Invoice paid:', invoice.id, 'Subscription:', invoice.subscription, 'Billing reason:', invoice.billing_reason);
     
-    // Проверяем что это recurring payment (не первый)
-    if (invoice.subscription && invoice.billing_reason === 'subscription_cycle') {
+    // Обрабатываем recurring payment (subscription_cycle) И первый payment через renewal (subscription_create)
+    if (invoice.subscription && (invoice.billing_reason === 'subscription_cycle' || invoice.billing_reason === 'subscription_create')) {
       try {
         const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
         const customer = await stripe.customers.retrieve(subscription.customer);
@@ -279,9 +279,10 @@ export default async function handler(req, res) {
           const customerData = await kv.get(customerKey);
           
           if (customerData) {
-            console.log('[WEBHOOK] 🔄 Recurring payment - resetting quota');
+            const isRecurring = invoice.billing_reason === 'subscription_cycle';
+            console.log('[WEBHOOK]', isRecurring ? '🔄 Recurring payment' : '💳 First subscription payment', '- resetting quota');
             
-            // RESET QUOTA на новый цикл
+            // RESET QUOTA на новый цикл (для renewal или recurring)
             customerData.quota = {
               total: 2,
               used: 0,
@@ -295,7 +296,9 @@ export default async function handler(req, res) {
             customerData.last_payment_at = new Date().toISOString();
             
             await kv.set(customerKey, customerData);
-            console.log('[WEBHOOK] ✅ Quota reset for recurring payment');
+            console.log('[WEBHOOK] ✅ Quota reset after payment');
+          } else {
+            console.log('[WEBHOOK] ⚠️  Customer not found in KV for invoice payment (will be created by subscription.created)');
           }
         }
       } catch (err) {
@@ -308,6 +311,41 @@ export default async function handler(req, res) {
   if (event.type === 'customer.subscription.created' && event.data.object.schedule) {
     console.log('[WEBHOOK] Subscription created from schedule:', event.data.object.schedule);
     // Обрабатывается выше в customer.subscription.created
+  }
+
+  // КРИТИЧНО: Обработка отмены subscription schedule (в период 'trialing')
+  if (event.type === 'subscription_schedule.canceled') {
+    const schedule = event.data.object;
+    console.log('[WEBHOOK] Subscription schedule canceled:', schedule.id);
+    
+    try {
+      const customer = await stripe.customers.retrieve(schedule.customer);
+      if (customer.email) {
+        const normalizedEmail = customer.email.toLowerCase().trim();
+        const customerKey = `customer:email:${normalizedEmail}`;
+        const customerData = await kv.get(customerKey);
+        
+        if (customerData && customerData.subscription?.subscription_schedule_id === schedule.id) {
+          console.log('[WEBHOOK] ℹ️  Canceling trialing subscription in KV');
+          
+          // Обновляем статус на canceled
+          customerData.subscription.status = 'canceled';
+          customerData.subscription.canceled_at = new Date().toISOString();
+          
+          // ВАЖНО: НЕ обнуляем оставшуюся квоту сразу
+          // Пользователь заплатил $2.99 и должен иметь доступ к купленным отчетам
+          // Но блокируем создание НОВЫХ отчетов через remaining=0
+          if (customerData.quota) {
+            customerData.quota.remaining = 0;
+          }
+          
+          await kv.set(customerKey, customerData);
+          console.log('[WEBHOOK] ✅ Trialing subscription canceled, remaining quota set to 0');
+        }
+      }
+    } catch (err) {
+      console.error('[WEBHOOK] Error handling schedule cancellation:', err.message);
+    }
   }
 
   // КРИТИЧНО: Обработка неудачных платежей
@@ -342,6 +380,56 @@ export default async function handler(req, res) {
       } catch (err) {
         console.error('[WEBHOOK] Error handling payment failure:', err.message);
       }
+    }
+  }
+
+  // КРИТИЧНО: Обработка dispute/chargeback
+  if (event.type === 'charge.dispute.created') {
+    const dispute = event.data.object;
+    console.log('[WEBHOOK] 🚨 DISPUTE CREATED:', dispute.id, 'Charge:', dispute.charge);
+    
+    try {
+      const charge = await stripe.charges.retrieve(dispute.charge);
+      const customer = charge.customer ? await stripe.customers.retrieve(charge.customer) : null;
+      
+      if (customer && customer.email) {
+        const normalizedEmail = customer.email.toLowerCase().trim();
+        const customerKey = `customer:email:${normalizedEmail}`;
+        const customerData = await kv.get(customerKey);
+        
+        if (customerData) {
+          console.log('[WEBHOOK] ⚠️  DISPUTE - Marking customer and blocking future purchases');
+          
+          // Помечаем customer как disputed
+          customerData.disputed = true;
+          customerData.dispute_created_at = new Date().toISOString();
+          customerData.dispute_id = dispute.id;
+          
+          // Обнуляем квоту
+          customerData.quota = {
+            total: 0,
+            used: customerData.quota?.used || 0,
+            remaining: 0
+          };
+          
+          // Отменяем подписку если активна
+          if (customerData.subscription?.status === 'active' || customerData.subscription?.status === 'trialing') {
+            customerData.subscription.status = 'disputed';
+          }
+          
+          await kv.set(customerKey, customerData);
+          
+          // Добавляем card fingerprint в blacklist если есть
+          if (customer.metadata?.card_fingerprint) {
+            console.log('[WEBHOOK] 🚫 Adding card to blacklist:', customer.metadata.card_fingerprint);
+            // TODO: Автоматически добавлять в BLOCKED_CARD_FINGERPRINTS
+          }
+          
+          console.log('[WEBHOOK] ✅ Dispute handled - customer blocked');
+        }
+      }
+    } catch (err) {
+      console.error('[WEBHOOK] Error handling dispute:', err.message);
     }
   }
 

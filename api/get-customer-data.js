@@ -40,7 +40,9 @@ export default async function handler(req, res) {
       created_at: customerData.created_at,
       subscription: subscription,
       quota: customerData.quota || { total: 0, used: 0, remaining: 0 },
-      reports: customerData.reports || []
+      reports: customerData.reports || [],
+      disputed: customerData.disputed || false,
+      dispute_id: customerData.dispute_id || null
     });
 
   } catch (error) {

@@ -61,12 +61,21 @@ export default async function handler(req, res) {
     // Обновляем в KV
     customerData.subscription.cancel_at_period_end = true;
     customerData.subscription.canceled_at = new Date().toISOString();
+    
+    // Если отменяем schedule (trialing period) - сразу меняем status на canceled
+    // Webhook subscription_schedule.canceled тоже обновит, но делаем сразу для клиента
+    if (scheduleId && !subscriptionId) {
+      customerData.subscription.status = 'canceled';
+      customerData.quota.remaining = 0; // Блокируем новые VIN checks
+    }
+    
     await kv.set(customerKey, customerData);
 
     return res.status(200).json({
       success: true,
-      canceled_at_period_end: subscription.cancel_at_period_end,
-      current_period_end: subscription.current_period_end
+      canceled_at_period_end: subscription?.cancel_at_period_end || true,
+      current_period_end: subscription?.current_period_end || null,
+      status: customerData.subscription.status
     });
 
   } catch (error) {

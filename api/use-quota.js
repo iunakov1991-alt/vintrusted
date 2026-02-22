@@ -33,9 +33,20 @@ export default async function handler(req, res) {
       return res.status(403).json({ error: 'Customer not found' });
     }
 
-    // 2. Проверяем статус подписки
+    // 2. Проверяем dispute status
+    if (customerData.disputed) {
+      console.log('[USE-QUOTA] 🚨 DISPUTED CUSTOMER blocked');
+      return res.status(403).json({ 
+        error: 'Account suspended',
+        message: 'Your account has been suspended. Please contact support.'
+      });
+    }
+
+    // 3. Проверяем статус подписки
     const subStatus = customerData.subscription?.status;
-    if (subStatus !== 'active') {
+    
+    // Разрешаем использование quota для 'active' и 'trialing' (trial period после $2.99)
+    if (subStatus !== 'active' && subStatus !== 'trialing') {
       console.log('[USE-QUOTA] ❌ Subscription not active:', subStatus);
       
       let message = 'You need an active subscription to check VINs';

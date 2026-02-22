@@ -38,6 +38,15 @@ export default async function handler(req, res) {
     let stripeCustomerId = null;
 
     if (customerData) {
+      // Блокируем disputed customers
+      if (customerData.disputed) {
+        console.log('[RENEWAL-PAYMENT] 🚨 DISPUTED CUSTOMER blocked');
+        return res.status(403).json({ 
+          error: 'Account suspended',
+          message: 'Your account has been suspended. Please contact support.'
+        });
+      }
+      
       // Проверяем - не пытается ли пользователь создать дубликат подписки
       if (customerData.subscription?.status === 'active' && customerData.quota?.remaining > 0 && !customerData.subscription?.cancel_at_period_end) {
         console.log('[RENEWAL-PAYMENT] ❌ Active subscription with quota exists');

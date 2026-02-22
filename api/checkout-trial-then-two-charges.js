@@ -73,10 +73,16 @@ export default async function handler(req, res) {
       
       console.log('[ANTI-FRAUD] Found customers with this card:', existingCustomers.data.length);
       
-      // Если нашли хотя бы одного - карта уже использовалась
-      if (existingCustomers.data.length > 0) {
-        console.log('[ANTI-FRAUD] 🚫 DUPLICATE PURCHASE ATTEMPT - Card already used');
-        console.log('[ANTI-FRAUD] Previous customers:', existingCustomers.data.map(c => c.id));
+      // Фильтруем - исключаем customers с тем же email (renewal разрешен)
+      const normalizedEmail = email ? email.toLowerCase().trim() : null;
+      const otherCustomersWithCard = existingCustomers.data.filter(c => {
+        return c.email && c.email.toLowerCase().trim() !== normalizedEmail;
+      });
+      
+      // Если нашли customers с ДРУГИМ email - блокируем
+      if (otherCustomersWithCard.length > 0) {
+        console.log('[ANTI-FRAUD] 🚫 DUPLICATE PURCHASE - Card used by different email');
+        console.log('[ANTI-FRAUD] Other customers:', otherCustomersWithCard.map(c => `${c.id} (${c.email})`));
         
         return res.status(403).json({ 
           error: 'Duplicate purchase',
@@ -84,7 +90,7 @@ export default async function handler(req, res) {
         });
       }
       
-      console.log('[ANTI-FRAUD] ✅ First purchase with this card');
+      console.log('[ANTI-FRAUD] ✅ Card OK (same user renewal or first purchase)');
     }
     
     // 4. Проверка существующего customer по email (защита от повторного trial)
@@ -99,9 +105,21 @@ export default async function handler(req, res) {
         console.log('[ANTI-FRAUD] Previous subscription status:', existingCustomer.subscription?.status);
         console.log('[ANTI-FRAUD] Quota remaining:', existingCustomer.quota?.remaining);
         
-        // Если подписка активна И есть квота - блокируем (не нужен renewal)
-        if (existingCustomer.subscription?.status === 'active' && existingCustomer.quota?.remaining > 0) {
-          console.log('[ANTI-FRAUD] 🚫 ACTIVE SUBSCRIPTION WITH QUOTA - No renewal needed');
+        // Блокируем disputed customers
+        if (existingCustomer.disputed) {
+          console.log('[ANTI-FRAUD] 🚨 DISPUTED CUSTOMER - Blocking purchase');
+          return res.status(403).json({ 
+            error: 'Account suspended',
+            message: 'Your account has been suspended due to a payment dispute. Please contact support.'
+          });
+        }
+        
+        // Блокируем если подписка активна/trialing И есть квота
+        const subStatus = existingCustomer.subscription?.status;
+        const hasQuota = existingCustomer.quota?.remaining > 0;
+        
+        if ((subStatus === 'active' || subStatus === 'trialing') && hasQuota) {
+          console.log('[ANTI-FRAUD] 🚫 ACTIVE/TRIALING SUBSCRIPTION WITH QUOTA - No renewal needed');
           return res.status(403).json({ 
             error: 'Active subscription exists',
             message: 'You already have an active subscription with available reports. Please use your account page.'
@@ -109,7 +127,7 @@ export default async function handler(req, res) {
         }
         
         // Если подписка отменена ИЛИ квота исчерпана - позволяем renewal
-        console.log('[ANTI-FRAUD] ℹ️  Allowing renewal (canceled subscription or quota exhausted)');
+        console.log('[ANTI-FRAUD] ℹ️  Allowing renewal (status:', subStatus, 'quota:', hasQuota, ')');
       }
     }
     
@@ -221,7 +239,7 @@ export default async function handler(req, res) {
           subscription: {
             subscription_schedule_id: schedule?.id || null,
             subscription_id: null,
-            status: 'active',
+            status: 'trialing', // ✅ ИСПРАВЛЕНИЕ: 'trialing' вместо 'active' до активации schedule
             start_date: schedule ? new Date(startTimestamp * 1000).toISOString() : null,
             end_date: schedule ? new Date(endTimestamp * 1000).toISOString() : null
           },
