@@ -162,6 +162,14 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/crm/analytics.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/mark-report-viewed.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -578,6 +586,22 @@
     {
       "source": "/api/create-renewal-payment",
       "destination": "/api/create-renewal-payment.js"
+    },
+    {
+      "source": "/api/crm/analytics",
+      "destination": "/api/crm/analytics.js"
+    },
+    {
+      "source": "/api/mark-report-viewed",
+      "destination": "/api/mark-report-viewed.js"
+    },
+    {
+      "source": "/crm",
+      "destination": "/crm/index.html"
+    },
+    {
+      "source": "/crm/",
+      "destination": "/crm/index.html"
     },
     {
       "source": "/semantic-pages/en",
