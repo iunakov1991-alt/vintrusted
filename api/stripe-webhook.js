@@ -55,7 +55,10 @@ export default async function handler(req, res) {
         return res.status(200).json({ received: true, note: 'Subscription handled by subscription.created webhook' });
       }
 
-      // Старая логика для payment mode (legacy flow)
+      // Старая логика для payment mode (legacy flow - больше не используется)
+      // ВАЖНО: Этот код оставлен для backward compatibility но не должен выполняться
+      console.log('[WEBHOOK] ⚠️  Legacy checkout.session.completed - should not happen with new flow');
+      
       // Получаем PM для подписки
       let pmId;
       if (cs.payment_intent) {
@@ -63,7 +66,8 @@ export default async function handler(req, res) {
         pmId = pi.payment_method;
       }
 
-      // Создаём подписку $49 с trial=7 и авто-стопом после 2 циклов
+      // ⚠️  DEPRECATED: Старая логика с MONTHLY price
+      // Новый флоу использует subscription schedules с PRICE_49_EVERY_33D
       const PRICE_ID = process.env.STRIPE_PRICE_49_MONTHLY || 'price_1SLgSWIyzEAMYCDXa8g7uV6W';
       
       const sub = await stripe.subscriptions.create({
@@ -255,6 +259,89 @@ export default async function handler(req, res) {
       }
     } catch (err) {
       console.error('[WEBHOOK] Error handling subscription deletion:', err.message);
+    }
+  }
+
+  // КРИТИЧНО: Обработка повторных платежей (каждые 33 дня)
+  if (event.type === 'invoice.payment_succeeded') {
+    const invoice = event.data.object;
+    console.log('[WEBHOOK] Invoice paid:', invoice.id, 'Subscription:', invoice.subscription);
+    
+    // Проверяем что это recurring payment (не первый)
+    if (invoice.subscription && invoice.billing_reason === 'subscription_cycle') {
+      try {
+        const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
+        const customer = await stripe.customers.retrieve(subscription.customer);
+        
+        if (customer.email) {
+          const normalizedEmail = customer.email.toLowerCase().trim();
+          const customerKey = `customer:email:${normalizedEmail}`;
+          const customerData = await kv.get(customerKey);
+          
+          if (customerData) {
+            console.log('[WEBHOOK] 🔄 Recurring payment - resetting quota');
+            
+            // RESET QUOTA на новый цикл
+            customerData.quota = {
+              total: 2,
+              used: 0,
+              remaining: 2
+            };
+            
+            // Обновляем даты подписки
+            customerData.subscription.current_period_start = new Date(subscription.current_period_start * 1000).toISOString();
+            customerData.subscription.current_period_end = new Date(subscription.current_period_end * 1000).toISOString();
+            customerData.subscription.end_date = new Date(subscription.current_period_end * 1000).toISOString();
+            customerData.last_payment_at = new Date().toISOString();
+            
+            await kv.set(customerKey, customerData);
+            console.log('[WEBHOOK] ✅ Quota reset for recurring payment');
+          }
+        }
+      } catch (err) {
+        console.error('[WEBHOOK] Error handling invoice payment:', err.message);
+      }
+    }
+  }
+
+  // Обработка активации subscription schedule (на 3 день после trial)
+  if (event.type === 'customer.subscription.created' && event.data.object.schedule) {
+    console.log('[WEBHOOK] Subscription created from schedule:', event.data.object.schedule);
+    // Обрабатывается выше в customer.subscription.created
+  }
+
+  // КРИТИЧНО: Обработка неудачных платежей
+  if (event.type === 'invoice.payment_failed') {
+    const invoice = event.data.object;
+    console.log('[WEBHOOK] ❌ Payment failed:', invoice.id, 'Subscription:', invoice.subscription);
+    
+    if (invoice.subscription) {
+      try {
+        const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
+        const customer = await stripe.customers.retrieve(subscription.customer);
+        
+        if (customer.email) {
+          const normalizedEmail = customer.email.toLowerCase().trim();
+          const customerKey = `customer:email:${normalizedEmail}`;
+          const customerData = await kv.get(customerKey);
+          
+          if (customerData) {
+            console.log('[WEBHOOK] ⚠️  Payment failed - marking subscription as past_due');
+            
+            // Обновляем статус (Stripe автоматически меняет на past_due)
+            customerData.subscription.status = subscription.status; // past_due или unpaid
+            customerData.last_payment_failed_at = new Date().toISOString();
+            
+            // НЕ обнуляем квоту сразу - даем время исправить payment method
+            // Stripe автоматически отменит подписку после retry period
+            
+            await kv.set(customerKey, customerData);
+            console.log('[WEBHOOK] ✅ Subscription marked as', subscription.status);
+          }
+        }
+      } catch (err) {
+        console.error('[WEBHOOK] Error handling payment failure:', err.message);
+      }
     }
   }
 

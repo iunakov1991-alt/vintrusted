@@ -171,6 +171,7 @@ export default async function handler(req, res) {
           customer: customer.id,
           start_date: startAt,
           end_behavior: 'release', // ✅ Подписка продолжается бесконечно
+          metadata: si.metadata || {}, // ✅ Копируем metadata (gclid, utm_*, etc.)
           phases: [
             {
               // ФАЗА 1: $49 каждые 33 дня бесконечно (дни 3, 36, 69, 102...)
@@ -178,7 +179,8 @@ export default async function handler(req, res) {
               default_payment_method: si.payment_method,
               collection_method: 'charge_automatically',
               proration_behavior: 'none',
-              items: [{ price: priceEvery33D }]
+              items: [{ price: priceEvery33D }],
+              metadata: si.metadata || {} // ✅ Metadata для подписки
             }
           ]
         });

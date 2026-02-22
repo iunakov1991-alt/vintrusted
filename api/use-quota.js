@@ -34,11 +34,21 @@ export default async function handler(req, res) {
     }
 
     // 2. Проверяем статус подписки
-    if (customerData.subscription?.status !== 'active') {
-      console.log('[USE-QUOTA] ❌ Subscription not active:', customerData.subscription?.status);
+    const subStatus = customerData.subscription?.status;
+    if (subStatus !== 'active') {
+      console.log('[USE-QUOTA] ❌ Subscription not active:', subStatus);
+      
+      let message = 'You need an active subscription to check VINs';
+      if (subStatus === 'past_due') {
+        message = 'Your subscription payment failed. Please update your payment method.';
+      } else if (subStatus === 'canceled') {
+        message = 'Your subscription has been canceled. Please renew to continue.';
+      }
+      
       return res.status(403).json({ 
         error: 'Subscription not active',
-        message: 'You need an active subscription to check VINs'
+        message: message,
+        status: subStatus
       });
     }
 

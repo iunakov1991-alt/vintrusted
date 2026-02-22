@@ -31,15 +31,32 @@ export default async function handler(req, res) {
     }
 
     const subscriptionId = customerData.subscription?.subscription_id;
+    const scheduleId = customerData.subscription?.subscription_schedule_id;
 
-    if (!subscriptionId) {
+    if (!subscriptionId && !scheduleId) {
       return res.status(404).json({ error: 'No active subscription found' });
     }
 
-    // Cancel at period end (не сразу)
-    const subscription = await stripe.subscriptions.update(subscriptionId, {
-      cancel_at_period_end: true
-    });
+    let subscription = null;
+
+    // Отменяем активную подписку (если есть)
+    if (subscriptionId) {
+      subscription = await stripe.subscriptions.update(subscriptionId, {
+        cancel_at_period_end: true
+      });
+      console.log('[CANCEL-SUBSCRIPTION] Subscription canceled:', subscriptionId);
+    }
+
+    // Отменяем subscription schedule (если еще не активирован)
+    if (scheduleId) {
+      try {
+        await stripe.subscriptionSchedules.cancel(scheduleId);
+        console.log('[CANCEL-SUBSCRIPTION] Subscription schedule canceled:', scheduleId);
+      } catch (scheduleError) {
+        // Schedule может быть уже released (превратился в подписку)
+        console.log('[CANCEL-SUBSCRIPTION] Could not cancel schedule (may be released):', scheduleError.message);
+      }
+    }
 
     // Обновляем в KV
     customerData.subscription.cancel_at_period_end = true;

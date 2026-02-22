@@ -39,12 +39,19 @@ export default async function handler(req, res) {
 
     if (customerData) {
       // Проверяем - не пытается ли пользователь создать дубликат подписки
-      if (customerData.subscription?.status === 'active' && customerData.quota?.remaining > 0) {
+      if (customerData.subscription?.status === 'active' && customerData.quota?.remaining > 0 && !customerData.subscription?.cancel_at_period_end) {
         console.log('[RENEWAL-PAYMENT] ❌ Active subscription with quota exists');
         return res.status(403).json({ 
           error: 'Active subscription exists',
           message: 'You already have an active subscription with available reports.'
         });
+      }
+      
+      // Если подписка отменена но еще активна - позволяем renewal (по сути reactivation)
+      if (customerData.subscription?.status === 'active' && customerData.subscription?.cancel_at_period_end) {
+        console.log('[RENEWAL-PAYMENT] ℹ️  Reactivating canceled subscription');
+        // Можно попробовать возобновить через Stripe API вместо создания новой
+        // Но для простоты создадим новую подписку
       }
       
       // Используем существующего customer из Stripe
