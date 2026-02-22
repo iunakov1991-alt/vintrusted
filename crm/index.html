@@ -237,6 +237,168 @@
       font-size: 20px;
     }
 
+    .calculator-section {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-top: 30px;
+    }
+
+    .calculator-section h2 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 20px;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 968px) {
+      .calculator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calculator-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .slider-control {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .slider-value {
+      color: #667eea;
+      font-size: 18px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: #e0e0e0;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s;
+    }
+
+    input[type="range"]::-moz-range-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .slider-hint {
+      font-size: 12px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .calculator-results {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 30px;
+      border-radius: 12px;
+      color: white;
+    }
+
+    .calculator-results h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .calc-metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .calc-metric:last-child {
+      border-bottom: none;
+    }
+
+    .calc-metric-label {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .calc-metric-value {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .calc-metric-change {
+      font-size: 12px;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .calc-metric-change.positive {
+      background: rgba(39, 174, 96, 0.3);
+    }
+
+    .calc-metric-change.negative {
+      background: rgba(231, 76, 60, 0.3);
+    }
+
+    .reset-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: white;
+      color: #667eea;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .reset-btn:hover {
+      transform: translateY(-2px);
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -406,6 +568,106 @@
           </thead>
           <tbody id="sourcesTableBody"></tbody>
         </table>
+      </div>
+
+      <!-- What-If Calculator -->
+      <div class="calculator-section">
+        <h2>🧮 Калькулятор "Что если?"</h2>
+        <p style="color: #666; margin-bottom: 20px;">Измените параметры ниже, чтобы увидеть как изменятся ключевые метрики</p>
+        
+        <div class="calculator-grid">
+          <div class="calculator-controls">
+            <div class="slider-control">
+              <div class="slider-label">
+                <span>Retention Rate</span>
+                <span class="slider-value" id="retentionSliderValue">0%</span>
+              </div>
+              <input type="range" id="retentionSlider" min="0" max="100" value="0" step="1">
+              <div class="slider-hint">Trial → $49 конверсия</div>
+            </div>
+
+            <div class="slider-control">
+              <div class="slider-label">
+                <span>Бюджет на трафик</span>
+                <span class="slider-value" id="budgetSliderValue">$0</span>
+              </div>
+              <input type="range" id="budgetSlider" min="0" max="3000" value="0" step="50">
+              <div class="slider-hint">Траты на рекламу</div>
+            </div>
+
+            <div class="slider-control">
+              <div class="slider-label">
+                <span>Количество клиентов</span>
+                <span class="slider-value" id="customersSliderValue">0</span>
+              </div>
+              <input type="range" id="customersSlider" min="0" max="100" value="0" step="1">
+              <div class="slider-hint">Всего клиентов за период</div>
+            </div>
+
+            <div class="slider-control">
+              <div class="slider-label">
+                <span>Dispute Rate</span>
+                <span class="slider-value" id="disputeSliderValue">0%</span>
+              </div>
+              <input type="range" id="disputeSlider" min="0" max="30" value="0" step="1">
+              <div class="slider-hint">Процент диспутов</div>
+            </div>
+
+            <button class="reset-btn" onclick="resetCalculator()">↻ Сбросить к текущим значениям</button>
+          </div>
+
+          <div class="calculator-results">
+            <h3>📊 Прогнозируемые метрики:</h3>
+            
+            <div class="calc-metric">
+              <span class="calc-metric-label">Выручка</span>
+              <div>
+                <span class="calc-metric-value" id="calcRevenue">$0</span>
+                <span class="calc-metric-change" id="calcRevenueChange"></span>
+              </div>
+            </div>
+
+            <div class="calc-metric">
+              <span class="calc-metric-label">Чистая прибыль</span>
+              <div>
+                <span class="calc-metric-value" id="calcProfit">$0</span>
+                <span class="calc-metric-change" id="calcProfitChange"></span>
+              </div>
+            </div>
+
+            <div class="calc-metric">
+              <span class="calc-metric-label">ROI</span>
+              <div>
+                <span class="calc-metric-value" id="calcROI">0%</span>
+                <span class="calc-metric-change" id="calcROIChange"></span>
+              </div>
+            </div>
+
+            <div class="calc-metric">
+              <span class="calc-metric-label">Заработок в день</span>
+              <div>
+                <span class="calc-metric-value" id="calcDailyProfit">$0</span>
+                <span class="calc-metric-change" id="calcDailyProfitChange"></span>
+              </div>
+            </div>
+
+            <div class="calc-metric">
+              <span class="calc-metric-label">CPA (цена лида)</span>
+              <div>
+                <span class="calc-metric-value" id="calcCPA">$0</span>
+                <span class="calc-metric-change" id="calcCPAChange"></span>
+              </div>
+            </div>
+
+            <div class="calc-metric">
+              <span class="calc-metric-label">Churn Rate</span>
+              <div>
+                <span class="calc-metric-value" id="calcChurn">0%</span>
+                <span class="calc-metric-change" id="calcChurnChange"></span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
