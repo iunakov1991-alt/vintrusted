@@ -85,11 +85,13 @@ export default async function handler(req, res) {
     }
 
     // Создаем Checkout Session для $49 (полная цена, без trial)
-    const priceEvery33D = process.env.PRICE_49_EVERY_33D;
+    const priceEvery33D = process.env.PRICE_49_EVERY_33D?.trim();
     
     if (!priceEvery33D) {
       throw new Error('PRICE_49_EVERY_33D not configured');
     }
+    
+    console.log('[RENEWAL-PAYMENT] Using Price ID:', priceEvery33D);
 
     const sessionConfig = {
       payment_method_types: ['card'],

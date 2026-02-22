@@ -176,7 +176,9 @@ export default async function handler(req, res) {
 
     // 3) План: $49 каждые 33 дня бесконечно (начинается на день 3)
     let schedule = null;
-    const priceEvery33D = process.env.PRICE_49_EVERY_33D;
+    const priceEvery33D = process.env.PRICE_49_EVERY_33D?.trim();
+    
+    console.log('[CHECKOUT] Price ID for subscription:', priceEvery33D);
     
     if (priceEvery33D) {
       try {
