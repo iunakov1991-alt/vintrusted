@@ -38,7 +38,7 @@ export default async function handler(req, res) {
     
     // Сценарий 2: Customer с активной подпиской, 1 отчет куплен, 1 квота осталась
     if (scenario === 'active_one_report') {
-      const email = 'oneReport@test.com';
+      const email = 'onereport@test.com'; // lowercase!
       const customerData = {
         customer_id: 'cus_test_active_002',
         email: email,
