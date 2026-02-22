@@ -1,3 +1,5 @@
+import { kv } from '@vercel/kv';
+
 export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -74,6 +76,24 @@ export default async function handler(req, res) {
     // You'll need to integrate with your email service provider
     
     console.log('Report PDF generated successfully. Email:', email, 'VIN:', cleanVin, 'Size:', pdfBuffer.byteLength, 'bytes');
+
+    // Сохраняем в KV cache что отчет получен
+    try {
+      const reportKey = `report:cache:${cleanVin}`;
+      await kv.set(reportKey, {
+        vin: cleanVin,
+        cached_at: new Date().toISOString(),
+        report_data: {
+          status: 'available',
+          pdf_size: pdfBuffer.byteLength,
+          message: 'Report available via ClearVin API'
+        },
+        vehicle: null // Можно дополнить через VIN decode API
+      }, { ex: 60 * 60 * 24 * 90 }); // 90 дней
+      console.log('[SEND-REPORT] ✅ Report cached in KV');
+    } catch (kvError) {
+      console.error('[SEND-REPORT] ⚠️  Failed to cache report:', kvError.message);
+    }
 
     return res.status(200).json({
       success: true,

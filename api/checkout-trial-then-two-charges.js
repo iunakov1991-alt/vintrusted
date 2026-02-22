@@ -209,6 +209,9 @@ export default async function handler(req, res) {
         const customerKey = `customer:email:${normalizedEmail}`;
         
         // Создаем или обновляем customer record
+        const startTimestamp = Math.floor(Date.now() / 1000) + 3 * 86400; // День 3
+        const endTimestamp = startTimestamp + 33 * 86400; // + 33 дня
+        
         const customerRecord = {
           customer_id: customer.id,
           email: normalizedEmail,
@@ -217,12 +220,13 @@ export default async function handler(req, res) {
             subscription_schedule_id: schedule?.id || null,
             subscription_id: null,
             status: 'active',
-            start_date: schedule ? new Date((Math.floor(Date.now() / 1000) + 3 * 86400) * 1000).toISOString() : null
+            start_date: schedule ? new Date(startTimestamp * 1000).toISOString() : null,
+            end_date: schedule ? new Date(endTimestamp * 1000).toISOString() : null
           },
           quota: {
             total: 2,
-            used: 1,
-            remaining: 1
+            used: finalVin ? 1 : 0, // Используем квоту только если VIN передан
+            remaining: finalVin ? 1 : 2
           },
           reports: finalVin ? [{
             vin: finalVin.toUpperCase(),
@@ -235,17 +239,8 @@ export default async function handler(req, res) {
         await kv.set(customerKey, customerRecord);
         console.log('[CHECKOUT] ✅ Customer saved to KV:', customerKey);
         
-        // Cache VIN report if available
-        if (finalVin) {
-          const reportKey = `report:cache:${finalVin.toUpperCase()}`;
-          await kv.set(reportKey, {
-            vin: finalVin.toUpperCase(),
-            cached_at: new Date().toISOString(),
-            report_data: null,
-            vehicle: null
-          }, { ex: 60 * 60 * 24 * 90 });
-          console.log('[CHECKOUT] ✅ VIN cached:', reportKey);
-        }
+        // Примечание: Report cache будет создан после получения реальных данных из ClearVin API
+        // Не создаем placeholder cache с null данными
       } catch (kvError) {
         console.error('[CHECKOUT] ⚠️  Failed to save to KV:', kvError.message);
       }
