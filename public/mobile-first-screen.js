@@ -21,6 +21,9 @@
     }
 
     console.log('[MOBILE FIRST SCREEN] Form found, attaching handlers');
+    
+    // Принудительно очищаем поле при загрузке (предотвращаем автозаполнение браузера)
+    input.value = '';
 
     let vinFoundState = false;
     let savedVin = '';

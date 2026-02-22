@@ -47,17 +47,25 @@ export default async function handler(req, res) {
         });
       }
       
-      // Проверяем - не пытается ли пользователь создать дубликат подписки
-      // Блокируем для 'active' И 'trialing' с остатком квоты
+      // Блокируем мошенников у которых failed первый $49 платеж
+      if (customerData.failed_first_payment) {
+        console.log('[RENEWAL-PAYMENT] 🚨 FRAUDSTER blocked - failed first payment');
+        return res.status(403).json({ 
+          error: 'Payment method declined',
+          message: 'Your previous payment failed. Please update your payment method or contact support.'
+        });
+      }
+      
+      // ✅ ИСПРАВЛЕНО: Блокируем renewal для ЛЮБОЙ активной подписки
+      // (независимо от квоты - пользователь должен ждать автоматического reset)
       const subStatus = customerData.subscription?.status;
-      const hasQuota = customerData.quota?.remaining > 0;
       const isCanceling = customerData.subscription?.cancel_at_period_end;
       
-      if ((subStatus === 'active' || subStatus === 'trialing') && hasQuota && !isCanceling) {
-        console.log('[RENEWAL-PAYMENT] ❌ Active/trialing subscription with quota exists');
+      if ((subStatus === 'active' || subStatus === 'trialing') && !isCanceling) {
+        console.log('[RENEWAL-PAYMENT] ❌ Active/trialing subscription exists - renewal not allowed');
         return res.status(403).json({ 
           error: 'Active subscription exists',
-          message: 'You already have an active subscription with available reports.'
+          message: 'You already have an active subscription. Your quota will reset automatically on the next billing cycle.'
         });
       }
       

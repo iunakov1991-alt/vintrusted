@@ -1,5 +1,7 @@
 import Stripe from 'stripe';
 import { kv } from '@vercel/kv';
+import { checkRateLimit, sendRateLimitError } from './_lib/rate-limit.js';
+import { isDisposableEmailWithWhitelist } from './_lib/disposable-emails.js';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // ┌─────────────────────────────────────────────────────────────┐
@@ -19,6 +21,12 @@ const BLOCKED_IP_ADDRESSES = [
 // ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_33D указывает на price с interval=day, interval_count=33
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  
+  // ✅ P0: Rate limiting (защита от card testing/carding)
+  const rateLimitCheck = await checkRateLimit(req, 'checkout');
+  if (!rateLimitCheck.success) {
+    return sendRateLimitError(res, rateLimitCheck);
+  }
   
   console.log('Checkout request:', req.body);
   
@@ -45,12 +53,28 @@ export default async function handler(req, res) {
     }
 
     // ┌─────────────────────────────────────────────────────────────┐
-    // │ ПЕРВИЧНАЯ ПРОВЕРКА: Существующий customer по email          │
+    // │ ПЕРВИЧНАЯ ПРОВЕРКА: Disposable email & существующий customer│
     // │ КРИТИЧНО: Блокируем ДО всех Stripe API calls               │
     // └─────────────────────────────────────────────────────────────┘
     if (email) {
-      console.log('[ANTI-FRAUD] 🔍 Checking for existing customer by email (BEFORE Stripe calls)...');
       const normalizedEmail = email.toLowerCase().trim();
+      
+      // ✅ P2: Block disposable emails
+      const disposableCheck = isDisposableEmailWithWhitelist(normalizedEmail);
+      if (disposableCheck.isDisposable) {
+        console.log('[ANTI-FRAUD] 🚫 DISPOSABLE EMAIL BLOCKED:', {
+          email: normalizedEmail.substring(0, 20) + '...',
+          reason: disposableCheck.reason,
+          domain: disposableCheck.domain,
+        });
+        
+        return res.status(403).json({ 
+          error: 'Invalid email address',
+          message: 'Temporary or disposable email addresses are not allowed. Please use a permanent email address.',
+        });
+      }
+      
+      console.log('[ANTI-FRAUD] 🔍 Checking for existing customer by email (BEFORE Stripe calls)...');
       const customerKey = `customer:email:${normalizedEmail}`;
       const existingCustomer = await kv.get(customerKey);
       

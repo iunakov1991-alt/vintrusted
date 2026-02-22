@@ -1,5 +1,6 @@
 import { kv } from '@vercel/kv';
 import Stripe from 'stripe';
+import { checkRateLimit, sendRateLimitError } from './_lib/rate-limit.js';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
@@ -13,6 +14,12 @@ export default async function handler(req, res) {
 
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // ✅ P0: Rate limiting (защита от enumeration)
+  const rateLimitCheck = await checkRateLimit(req, 'read');
+  if (!rateLimitCheck.success) {
+    return sendRateLimitError(res, rateLimitCheck);
   }
 
   try {

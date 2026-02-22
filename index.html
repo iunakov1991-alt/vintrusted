@@ -63,6 +63,54 @@
       gtag('config', 'G-CX3CT2K2FC');
     </script>
     
+    <!-- ✅ GCLID Storage - сохранение GCLID в localStorage (90 дней) -->
+    <script>
+      window.GclidStorage = {
+        save: function(gclid) {
+          if (gclid) {
+            try {
+              localStorage.setItem('_gclid', gclid);
+              localStorage.setItem('_gclid_time', Date.now().toString());
+              console.log('[GCLID] Saved:', gclid.substring(0, 20) + '...');
+            } catch (error) {
+              console.warn('[GCLID] Cannot save to localStorage:', error);
+            }
+          }
+        },
+        get: function() {
+          try {
+            const gclid = localStorage.getItem('_gclid');
+            const time = localStorage.getItem('_gclid_time');
+            
+            if (gclid && time) {
+              const age = Date.now() - parseInt(time);
+              const maxAge = 90 * 24 * 60 * 60 * 1000; // 90 дней
+              
+              if (age < maxAge) {
+                return gclid;
+              } else {
+                // Expired - удаляем
+                localStorage.removeItem('_gclid');
+                localStorage.removeItem('_gclid_time');
+              }
+            }
+          } catch (error) {
+            console.warn('[GCLID] Cannot read from localStorage:', error);
+          }
+          return null;
+        }
+      };
+      
+      // Сохраняем GCLID из URL если есть
+      (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const gclid = urlParams.get('gclid');
+        if (gclid) {
+          window.GclidStorage.save(gclid);
+        }
+      })();
+    </script>
+    
     <!-- ⏱️  TIME-TO-CONVERSION: Save landing timestamp -->
     <script>
       (function() {
@@ -3205,6 +3253,24 @@
 
     // Clear cache immediately on page load
     clearCachedVinData();
+    
+    // Дополнительная очистка всех VIN input полей при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+        // Очищаем ВСЕ VIN поля на странице
+        const allVinInputs = document.querySelectorAll('.vin-input, .mobile-vin-input, #vinInput, #mobileVinInput');
+        allVinInputs.forEach(input => {
+            if (input.value && input.value.trim().length > 0) {
+                console.log('[VIN] Clearing pre-filled value from:', input.id || input.className);
+                input.value = '';
+            }
+        });
+        
+        // Очищаем все formы
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => form.reset());
+        
+        console.log('[VIN] ✅ All VIN inputs cleared on page load');
+    });
 
     // Auto-fill VIN from clipboard when input is focused (mobile only)
     document.addEventListener('DOMContentLoaded', function() {
@@ -3707,7 +3773,7 @@
         <div class="mobile-content">
             <!-- VIN Input Form -->
             <div class="mobile-vin-form-wrapper">
-                <input type="text" class="mobile-vin-input" placeholder="ENTER VIN NUMBER" maxlength="17" id="mobileVinInput">
+                <input type="text" class="mobile-vin-input" placeholder="ENTER VIN NUMBER" maxlength="17" id="mobileVinInput" autocomplete="off">
                 <button class="mobile-vin-button" id="mobileVinButton">CHECK VIN</button>
             </div>
             
@@ -3905,6 +3971,7 @@
                 placeholder="Enter VIN (17 characters)"
                 maxlength="17"
                 pattern="[A-HJ-NPR-Z0-9]{17}"
+                autocomplete="off"
                 required
               />
               <span class="vin-input-counter">0/17</span>

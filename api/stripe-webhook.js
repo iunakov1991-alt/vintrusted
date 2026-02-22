@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { kv } from '@vercel/kv';
+import { logWebhookError, logBusinessEvent, SEVERITY, EVENT_TYPE } from './_lib/monitoring.js';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const { createOrGetReport } = require('./_lib/vinaudit');
@@ -65,7 +66,79 @@ export default async function handler(req, res) {
     );
   } catch (err) {
     console.error('Webhook signature verification failed:', err.message);
+    await logWebhookError('signature_verification', err);
     return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // ✅ P1 & P2: WEBHOOK IDEMPOTENCY & ORDERING
+  // ═══════════════════════════════════════════════════════════════════════
+  // Защита от duplicate webhook processing и race conditions
+  
+  try {
+    // 1. Проверяем idempotency (уже обработали этот webhook?)
+    const webhookIdKey = `webhook:processed:${event.id}`;
+    const alreadyProcessed = await kv.exists(webhookIdKey);
+    
+    if (alreadyProcessed) {
+      console.log(`[WEBHOOK] ⚠️  Duplicate webhook detected: ${event.id} - SKIPPING`);
+      return res.status(200).json({ 
+        received: true, 
+        duplicate: true,
+        event_id: event.id 
+      });
+    }
+    
+    // 2. Проверяем timestamp (игнорируем старые webhooks если есть новые)
+    // Это защищает от out-of-order delivery
+    const eventTimestamp = event.created; // Unix timestamp в секундах
+    
+    // Для customer-specific webhooks - проверяем последний обработанный timestamp
+    let customerEmail = null;
+    try {
+      if (event.type.includes('subscription') || event.type.includes('invoice')) {
+        const obj = event.data.object;
+        if (obj.customer) {
+          const customer = await stripe.customers.retrieve(obj.customer);
+          customerEmail = customer.email?.toLowerCase().trim();
+          
+          if (customerEmail) {
+            const lastWebhookKey = `webhook:last:${customerEmail}`;
+            const lastProcessedTimestamp = await kv.get(lastWebhookKey);
+            
+            if (lastProcessedTimestamp && eventTimestamp < lastProcessedTimestamp) {
+              console.log(`[WEBHOOK] ⚠️  Out-of-order webhook for ${customerEmail}: ${event.type} (event: ${eventTimestamp}, last: ${lastProcessedTimestamp}) - PROCESSING ANYWAY WITH CAUTION`);
+              // Обрабатываем anyway, но логируем warning
+              // Не skip, потому что могут быть legitimate cases (например, 2 subscriptions)
+            }
+          }
+        }
+      }
+    } catch (timestampError) {
+      console.error('[WEBHOOK] Error checking timestamp ordering:', timestampError.message);
+      // Продолжаем обработку - это не критично
+    }
+    
+    // 3. Помечаем webhook как processed ДО обработки (для idempotency)
+    // TTL = 7 days (Stripe не отправляет старые webhooks)
+    await kv.set(webhookIdKey, {
+      event_type: event.type,
+      processed_at: new Date().toISOString(),
+      event_created: eventTimestamp,
+    }, { ex: 60 * 60 * 24 * 7 });
+    
+    // 4. Обновляем last processed timestamp для customer (для ordering)
+    if (customerEmail) {
+      const lastWebhookKey = `webhook:last:${customerEmail}`;
+      await kv.set(lastWebhookKey, eventTimestamp, { ex: 60 * 60 * 24 * 7 });
+    }
+    
+    console.log(`[WEBHOOK] ✅ Idempotency check passed: ${event.id} (${event.type})`);
+    
+  } catch (idempotencyError) {
+    console.error('[WEBHOOK] Error in idempotency check:', idempotencyError.message);
+    // Fail open: если idempotency check сломался - обрабатываем webhook
+    // Альтернатива: fail closed (return error)
   }
 
   if (event.type === 'checkout.session.completed') {
@@ -612,6 +685,15 @@ export default async function handler(req, res) {
         
         if (customerData) {
           console.log('[WEBHOOK] ⚠️  DISPUTE - Marking customer and blocking future purchases');
+          
+          // ✅ P0: Monitor critical business event
+          await logBusinessEvent(EVENT_TYPE.DISPUTE_CREATED, SEVERITY.CRITICAL, {
+            email: normalizedEmail,
+            customer_id: customer.id,
+            dispute_id: dispute.id,
+            amount: dispute.amount / 100,
+            reason: dispute.reason,
+          });
           
           // Помечаем customer как disputed
           customerData.disputed = true;

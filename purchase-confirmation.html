@@ -284,8 +284,9 @@
         const urlParams = new URLSearchParams(window.location.search);
         const vin = urlParams.get('vin') || '';
         const setupIntentId = urlParams.get('setup_intent') || '';
+        const emailFromUrl = urlParams.get('email') || ''; // ✅ Email из URL параметров
         
-        console.log('[CONFIRMATION] 🔄 Page loaded with:', { vin, setupIntentId, abVariant, hasGclid: !!gclid });
+        console.log('[CONFIRMATION] 🔄 Page loaded with:', { vin, setupIntentId, email: emailFromUrl, abVariant, hasGclid: !!gclid });
         
         // Display VIN
         const vinDisplayElement = document.getElementById('vinDisplay');
@@ -313,72 +314,19 @@
                 console.log('[CONFIRMATION] 📦 Restored gclid from localStorage:', gclid ? gclid.substring(0, 10) + '...' : 'none');
             }
             
-            // Get payment_intent_id from verifyData
-            const paymentIntentId = verifyData?.payment_intent?.id;
+            // ════════════════════════════════════════════════════════════
+            // TIER-BASED КОНВЕРСИЯ ОТКЛЮЧЕНА
+            // ════════════════════════════════════════════════════════════
+            // Конверсия теперь отправляется при клике на кнопку "View/Download Report"
+            // в my-reports.html с сохраненным tier value из KV
+            // 
+            // Причина: кнопка = более надежный способ отправки (не блокируется adblockers)
+            // Tier-based логика сохранена - tier определяется при checkout и сохраняется в KV
+            // ════════════════════════════════════════════════════════════
             
-            if (!paymentIntentId) {
-                console.error('[CONFIRMATION] ❌ No payment_intent_id found - using fallback conversion');
-                if (window.gtag) {
-                    window.gtag('event', 'conversion', {
-                        'send_to': 'AW-17824079146/l62hCKPTndgbEKq6I7NC',
-                        'transaction_id': setupIntentId || '',
-                        'value': 1.00,
-                        'currency': 'USD'
-                    });
-                    console.log('[CONFIRMATION] ✅ FALLBACK: Simple conversion fired (no tier validation)');
-                }
-            } else {
-                // ════════════════════════════════════════════════════════════
-                // Tier Validation: Premium ($25) / Medium ($5) / Fraud ($0)
-                // ════════════════════════════════════════════════════════════
-                try {
-                    console.log('[CONFIRMATION] 🔍 Validating PaymentIntent:', paymentIntentId);
-                    
-                    const validateResponse = await fetch(`/api/validate?pi=${paymentIntentId}`);
-                    const validateData = await validateResponse.json();
-                    
-                    console.log('[CONFIRMATION] 📊 Validation result:', validateData);
-                    
-                    const tier = validateData.tier; // 'premium' | 'medium' | 'fraud'
-                    const value = validateData.value; // 25.00 | 5.00 | 0.00
-                    
-                    // ════════════════════════════════════════════════════════════
-                    // Send tier-based conversion to Google Ads
-                    // ════════════════════════════════════════════════════════════
-                    if (tier === 'fraud') {
-                        console.log('[CONFIRMATION] 🔴 FRAUD detected - NOT sending conversion to Google Ads');
-                    } else if (window.gtag) {
-                        window.gtag('event', 'conversion', {
-                            'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
-                            'transaction_id': setupIntentId || paymentIntentId,
-                            'value': value,
-                            'currency': 'USD'
-                        });
-                        
-                        if (tier === 'premium') {
-                            console.log('[CONFIRMATION] 🟢 PREMIUM conversion fired: $' + value);
-                        } else if (tier === 'medium') {
-                            console.log('[CONFIRMATION] 🟡 MEDIUM conversion fired: $' + value);
-                        }
-                    } else {
-                        console.log('[CONFIRMATION] ⚠️  gtag not available - conversion skipped');
-                    }
-                } catch (error) {
-                    console.error('[CONFIRMATION] ❌ Error validating tier:', error);
-                    console.log('[CONFIRMATION] ⚠️  Using fallback conversion ($25 Premium default)');
-                    
-                    // Fallback: send conversion with Premium tier ($25) by default
-                    if (window.gtag) {
-                        window.gtag('event', 'conversion', {
-                            'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
-                            'transaction_id': setupIntentId || paymentIntentId,
-                            'value': 25.00,
-                            'currency': 'USD'
-                        });
-                        console.log('[CONFIRMATION] ✅ FALLBACK: Premium conversion fired ($25)');
-                    }
-                }
-            }
+            console.log('[CONFIRMATION] ℹ️  Tier-based conversion disabled in purchase-confirmation.html');
+            console.log('[CONFIRMATION] ℹ️  Conversion will be sent when user clicks View/Download Report button');
+            console.log('[CONFIRMATION] ℹ️  Tier was determined at checkout and saved to KV for later use');
             
             // Google Analytics Purchase Event
             window.dataLayer.push({
@@ -594,11 +542,25 @@
             }, 1000);
         }
 
-        // Redirect to success page (full report) after 10 seconds
+        // ✅ ИСПРАВЛЕНО: Redirect to my-reports page (personal cabinet) after 2 seconds (было 10)
+        // Быстрее redirect = меньше риск что пользователь закроет страницу ДО redirect
+        // User will click "View Report" button there, which triggers tier-based conversion
         setTimeout(() => {
-            const successUrl = `/success.html?vin=${encodeURIComponent(vin)}&setup_intent=${encodeURIComponent(setupIntentId)}`;
-            window.location.href = successUrl;
-        }, 10000);
+            // Get email from URL first (passed from checkout API)
+            let userEmail = emailFromUrl;
+            
+            if (userEmail) {
+                const myReportsUrl = `/my-reports.html?email=${encodeURIComponent(userEmail)}`;
+                console.log('[CONFIRMATION] 🔄 Redirecting to My Reports:', myReportsUrl);
+                window.location.href = myReportsUrl;
+            } else {
+                console.error('[CONFIRMATION] ❌ No email in URL - using fallback redirect to success.html');
+                // Fallback: redirect to success with VIN only
+                const successUrl = `/success.html?vin=${encodeURIComponent(vin)}&setup_intent=${encodeURIComponent(setupIntentId)}`;
+                console.log('[CONFIRMATION] 🔄 Fallback redirect:', successUrl);
+                window.location.href = successUrl;
+            }
+        }, 2000); // 2 секунды вместо 10
     </script>
 </body>
 </html>

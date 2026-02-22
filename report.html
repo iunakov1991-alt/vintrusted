@@ -66,7 +66,12 @@
     <link rel="stylesheet" href="/css/mobile-adaptive.css?v=7">
     
     <link rel="stylesheet" href="/css/stripe-fixes.css?v=2" />
-    <script src="/public/vin-stripe.js?v=26"></script>
+    
+    <!-- КРИТИЧНО: GCLID Storage должен загружаться ДО vin-stripe.js -->
+    <script src="/public/gclid-storage.js"></script>
+    <script src="/public/gclid-cookie.js"></script>
+    
+    <script src="/public/vin-stripe.js?v=27"></script>
     
     <!-- MOBILE-ONLY STYLES: Loaded in head for mobile devices -->
     <link rel="stylesheet" href="/css/mobile-report.css?v=7" media="(max-width: 1023px)">

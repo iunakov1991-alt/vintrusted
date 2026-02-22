@@ -1,5 +1,6 @@
 import { kv } from '@vercel/kv';
 import Stripe from 'stripe';
+import { checkRateLimit, sendRateLimitError } from './_lib/rate-limit.js';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
@@ -14,6 +15,12 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // ✅ P0: Rate limiting (защита от email enumeration)
+  const rateLimitCheck = await checkRateLimit(req, 'read');
+  if (!rateLimitCheck.success) {
+    return sendRateLimitError(res, rateLimitCheck);
   }
 
   try {
@@ -41,6 +48,12 @@ export default async function handler(req, res) {
 
     if (!customerData) {
       console.log('[CHECK-CUSTOMER] ❌ Customer not found');
+      
+      // ✅ P2: Защита от email enumeration (timing attack)
+      // Добавляем искусственную задержку чтобы response time был одинаковый
+      // независимо от того существует customer или нет
+      await new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 50)); // 50-100ms
+      
       return res.status(200).json({ 
         exists: false,
         new_customer: true
@@ -48,6 +61,9 @@ export default async function handler(req, res) {
     }
 
     console.log('[CHECK-CUSTOMER] ✅ Customer found:', customerData.customer_id);
+    
+    // ✅ P2: Timing attack mitigation - для consistency
+    await new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 50));
 
     // Проверяем, купил ли уже этот VIN (с нормализацией)
     const normalizedVin = vin ? vin.toUpperCase().replace(/[^A-Z0-9]/g, '') : null;

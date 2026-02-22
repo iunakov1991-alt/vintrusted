@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Settings - VIN TRUST</title>
+    <meta name="description" content="Manage your VIN TRUST subscription">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 30px;
+        }
+        .logo a {
+            color: #6b00b8;
+            text-decoration: none;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
+        .subtitle {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .btn-keep {
+            background: #ef4444;
+            color: white;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+        }
+        .btn-keep:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+        }
+        .btn-keep:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-cancel {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+        }
+        .btn-cancel:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+        .btn-cancel:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .info-box {
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .info-box p {
+            color: #4b5563;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .info-box strong {
+            color: #1f2937;
+        }
+        
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: #374151;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <a href="/">VIN TRUST</a>
+        </div>
+        
+        <div id="content">
+            <div class="loading">Loading your subscription...</div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+
+        if (!email) {
+            document.getElementById('content').innerHTML = `
+                <div class="error-message">
+                    No email provided. Please access this page from your account.
+                </div>
+                <a href="/" class="back-link">← Back to Home</a>
+            `;
+        } else {
+            loadSubscriptionSettings();
+        }
+
+        async function loadSubscriptionSettings() {
+            try {
+                const response = await fetch(\`/api/get-customer-data?email=\${encodeURIComponent(email)}\`);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load subscription data');
+                }
+                
+                const data = await response.json();
+                renderSettings(data);
+            } catch (error) {
+                console.error('Error loading subscription:', error);
+                document.getElementById('content').innerHTML = \`
+                    <div class="error-message">
+                        Error loading subscription data. Please try again.
+                    </div>
+                    <a href="/" class="back-link">← Back to Home</a>
+                \`;
+            }
+        }
+
+        function renderSettings(data) {
+            const subscription = data.subscription || {};
+            const quota = data.quota || { total: 0, remaining: 0 };
+            
+            const isActiveOrTrialing = subscription.status === 'active' || subscription.status === 'trialing';
+            const canCancel = isActiveOrTrialing && !subscription.cancel_at_period_end;
+            
+            const endDate = subscription.end_date || subscription.current_period_end;
+            const endDateFormatted = endDate ? new Date(endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+            
+            let html = '<h1>Subscription Settings</h1>';
+            html += '<p class="subtitle">Manage your VIN TRUST subscription</p>';
+            
+            html += '<div class="info-box">';
+            html += \`<p><strong>Email:</strong> \${data.email}</p>\`;
+            html += \`<p><strong>Status:</strong> \${subscription.status || 'No subscription'}</p>\`;
+            
+            if (isActiveOrTrialing) {
+                html += \`<p><strong>Reports Remaining:</strong> \${quota.remaining}/\${quota.total}</p>\`;
+                const paymentLabel = subscription.status === 'trialing' ? 'First Payment' : 'Next Payment';
+                html += \`<p><strong>\${paymentLabel}:</strong> $49 on \${endDateFormatted}</p>\`;
+            }
+            
+            html += '</div>';
+            
+            if (!canCancel) {
+                html += '<div class="info-box" style="background: #fef3c7; border-left: 4px solid #f59e0b;">';
+                if (subscription.status === 'canceled') {
+                    html += '<p style="color: #92400e;"><strong>Your subscription is already canceled.</strong></p>';
+                } else if (subscription.cancel_at_period_end) {
+                    html += '<p style="color: #92400e;"><strong>Your subscription is set to cancel at the end of the current period.</strong></p>';
+                } else {
+                    html += '<p style="color: #92400e;"><strong>No active subscription found.</strong></p>';
+                }
+                html += '</div>';
+            }
+            
+            html += '<div class="buttons-container">';
+            
+            if (canCancel) {
+                html += \`
+                    <button class="btn btn-keep" onclick="keepSubscription()">
+                        Keep Subscription
+                    </button>
+                    <button class="btn btn-cancel" onclick="confirmCancel()">
+                        Cancel Subscription
+                    </button>
+                \`;
+            } else {
+                html += \`
+                    <a href="/my-reports.html?email=\${encodeURIComponent(email)}" class="btn btn-keep">
+                        Back to My Reports
+                    </a>
+                \`;
+            }
+            
+            html += '</div>';
+            html += '<a href="/refund-policy.html" class="back-link">← Back to Refund Policy</a>';
+            
+            document.getElementById('content').innerHTML = html;
+        }
+
+        function keepSubscription() {
+            window.location.href = \`/my-reports.html?email=\${encodeURIComponent(email)}\`;
+        }
+
+        async function confirmCancel(event) {
+            if (!confirm('Are you sure you want to cancel your subscription?\\n\\nYou will keep access to all purchased reports, but won\'t be able to check new VINs after your current period ends.')) {
+                return;
+            }
+            
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = 'Canceling...';
+            
+            try {
+                const response = await fetch('/api/cancel-subscription', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to cancel subscription');
+                }
+                
+                alert('Subscription canceled successfully. You will not be charged again, but can continue using your reports until the end of the current period.');
+                window.location.reload();
+            } catch (error) {
+                alert(error.message || 'Error canceling subscription. Please try again.');
+                btn.disabled = false;
+                btn.textContent = 'Cancel Subscription';
+            }
+        }
+    </script>
+</body>
+</html>

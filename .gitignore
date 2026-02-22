@@ -19,3 +19,5 @@ public/sitemap-seo.xml
 *.original
 postcss.config.js
 .DS_Store
+.vercel
+.env.production

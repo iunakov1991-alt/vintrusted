@@ -121,7 +121,28 @@
       const utm_medium = urlParams.get('utm_medium') || sessionStorage.getItem('utm_medium') || '';
       const utm_campaign = urlParams.get('utm_campaign') || sessionStorage.getItem('utm_campaign') || '';
       
+      // КРИТИЧНО: Получаем gclid для Google Ads конверсий
+      let gclid = urlParams.get('gclid') || '';
+      
+      // Fallback: пытаемся восстановить из localStorage/cookies
+      if (!gclid && window.GclidStorage) {
+        gclid = window.GclidStorage.get() || '';
+      }
+      
+      // Еще один fallback: пытаемся прочитать из cookies
+      if (!gclid) {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+          const [name, value] = cookie.trim().split('=');
+          if (name === 'gclid') {
+            gclid = decodeURIComponent(value);
+            break;
+          }
+        }
+      }
+      
       console.log('[VIN-STRIPE] UTM params:', { utm_source, utm_medium, utm_campaign });
+      console.log('[VIN-STRIPE] GCLID:', gclid ? gclid.substring(0, 10) + '...' : 'NOT FOUND ❌');
       
       // Create SetupIntent with metadata
       const setupIntentResponse = await fetch('/api/create-setup-intent', {
@@ -134,7 +155,8 @@
           ab_variant,
           utm_source,
           utm_medium,
-          utm_campaign
+          utm_campaign,
+          gclid // ✅ КРИТИЧНО: Передаем gclid
         })
       });
 

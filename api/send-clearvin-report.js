@@ -1,4 +1,5 @@
 import { kv } from '@vercel/kv';
+import { checkRateLimit, sendRateLimitError } from './_lib/rate-limit.js';
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -12,6 +13,12 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // ✅ P0: Rate limiting (защита от ClearVin API quota exhaustion)
+  const rateLimitCheck = await checkRateLimit(req, 'clearvin');
+  if (!rateLimitCheck.success) {
+    return sendRateLimitError(res, rateLimitCheck);
   }
 
   try {
@@ -47,27 +54,69 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid VIN format. VIN must contain only valid characters (A-Z, 0-9, excluding I, O, Q)' });
     }
 
-    // Get token from ClearVin API
-    let token;
-    try {
-      // Call our own API endpoint to get token (it handles caching)
-      const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://vintrusted.com';
-      const tokenResponse = await fetch(`${baseUrl}/api/get-clearvin-report?vin=${cleanVin}&format=pdf`);
-      
-      if (!tokenResponse.ok) {
-        throw new Error('Failed to get ClearVin token');
-    }
-
-      // The get-clearvin-report API will return the PDF directly
-      // So we can just return its response
-      const pdfBuffer = await tokenResponse.arrayBuffer();
+    // ═══════════════════════════════════════════════════════════════════════
+    // ✅ P1: RETRY LOGIC ДЛЯ CLEARVIN API
+    // ═══════════════════════════════════════════════════════════════════════
+    // Защита от temporary ClearVin API failures
     
-    // Check if PDF is empty or too small
-    if (!pdfBuffer || pdfBuffer.byteLength < 100) {
-      console.error('PDF is too small:', pdfBuffer?.byteLength || 0);
-      return res.status(500).json({ 
-        error: 'Invalid PDF report received from ClearVin',
-        details: 'PDF file is empty or corrupted'
+    let pdfBuffer;
+    let lastError;
+    const maxRetries = 3;
+    
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        console.log(`[SEND-REPORT] Attempt ${attempt}/${maxRetries} to get report for VIN: ${cleanVin}`);
+        
+        const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://vintrusted.com';
+        const tokenResponse = await fetch(`${baseUrl}/api/get-clearvin-report?vin=${cleanVin}&format=pdf`, {
+          signal: AbortSignal.timeout(30000), // 30s timeout
+        });
+        
+        if (!tokenResponse.ok) {
+          throw new Error(`ClearVin API returned ${tokenResponse.status}: ${await tokenResponse.text()}`);
+        }
+
+        // The get-clearvin-report API will return the PDF directly
+        pdfBuffer = await tokenResponse.arrayBuffer();
+        
+        // Check if PDF is valid
+        if (!pdfBuffer || pdfBuffer.byteLength < 100) {
+          throw new Error(`Invalid PDF received (size: ${pdfBuffer?.byteLength || 0} bytes)`);
+        }
+        
+        console.log(`[SEND-REPORT] ✅ Report retrieved successfully (attempt ${attempt})`);
+        break; // Success - exit retry loop
+        
+      } catch (error) {
+        lastError = error;
+        console.error(`[SEND-REPORT] ❌ Attempt ${attempt} failed:`, error.message);
+        
+        if (attempt < maxRetries) {
+          // Exponential backoff: 2s, 4s, 8s
+          const delayMs = 2000 * Math.pow(2, attempt - 1);
+          console.log(`[SEND-REPORT] ⏳ Retrying in ${delayMs}ms...`);
+          await new Promise(resolve => setTimeout(resolve, delayMs));
+        }
+      }
+    }
+    
+    // Если все retry failed
+    if (!pdfBuffer) {
+      console.error('[SEND-REPORT] ❌ All retry attempts failed:', lastError);
+      
+      // ✅ P0: Monitor ClearVin API failure
+      const { logBusinessEvent, SEVERITY, EVENT_TYPE } = await import('./_lib/monitoring.js');
+      await logBusinessEvent(EVENT_TYPE.CLEARVIN_ERROR, SEVERITY.CRITICAL, {
+        email,
+        vin: cleanVin,
+        error: lastError.message,
+        attempts: maxRetries,
+      });
+      
+      return res.status(503).json({ 
+        error: 'Report service temporarily unavailable',
+        message: 'We are having trouble generating your report. Please try again in a few minutes or contact support.',
+        retry: true,
       });
     }
 

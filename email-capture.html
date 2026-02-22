@@ -425,11 +425,11 @@
                 console.error('[EMAIL CAPTURE] ⚠️  Customer check failed, proceeding to payment:', checkError.message);
             }
             
-            // Redirect to report page with VIN and email
+            // ✅ УЛУЧШЕНО: Redirect to report page with VIN and email (1000ms вместо 1500ms)
             setTimeout(() => {
                 console.log('[EMAIL CAPTURE] 🔄 Redirecting to report page...');
                 window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
-            }, 1500);
+            }, 1000); // Уменьшено с 1500ms до 1000ms для лучшего UX
         });
     </script>
 </body>
