@@ -26,6 +26,39 @@ export default async function handler(req, res) {
     const { setup_intent_id, email, vin } = req.body || {};
     if (!setup_intent_id) throw new Error('setup_intent_id is required');
 
+    // ┌─────────────────────────────────────────────────────────────┐
+    // │ ПЕРВИЧНАЯ ПРОВЕРКА: Существующий customer по email          │
+    // │ КРИТИЧНО: Блокируем ДО всех Stripe API calls               │
+    // └─────────────────────────────────────────────────────────────┘
+    if (email) {
+      console.log('[ANTI-FRAUD] 🔍 Checking for existing customer by email (BEFORE Stripe calls)...');
+      const normalizedEmail = email.toLowerCase().trim();
+      const customerKey = `customer:email:${normalizedEmail}`;
+      const existingCustomer = await kv.get(customerKey);
+      
+      if (existingCustomer) {
+        console.log('[ANTI-FRAUD] 🚫 EXISTING CUSTOMER BLOCKED FROM TRIAL');
+        console.log('[ANTI-FRAUD] Customer:', existingCustomer.customer_id, 'Status:', existingCustomer.subscription?.status);
+        
+        // Блокируем disputed customers
+        if (existingCustomer.disputed) {
+          return res.status(403).json({ 
+            error: 'Account suspended',
+            message: 'Your account has been suspended due to a payment dispute. Please contact support.'
+          });
+        }
+        
+        // Блокируем ЛЮБОГО existing customer от $2.99 trial (даже canceled)
+        return res.status(403).json({ 
+          error: 'Trial not available for existing customers',
+          message: 'The $2.99 trial is only for new customers. Please renew your subscription from your account page for $49.',
+          redirect_to: `/my-reports.html?email=${encodeURIComponent(normalizedEmail)}`
+        });
+      }
+      
+      console.log('[ANTI-FRAUD] ✅ New customer - proceeding with Stripe checks');
+    }
+
     console.log('Retrieving SetupIntent:', setup_intent_id);
     const si = await stripe.setupIntents.retrieve(setup_intent_id);
     if (!si || !si.payment_method) throw new Error('SetupIntent has no payment_method');
@@ -93,40 +126,7 @@ export default async function handler(req, res) {
       console.log('[ANTI-FRAUD] ✅ Card OK (same user renewal or first purchase)');
     }
     
-    // 4. Проверка существующего customer по email (защита от повторного trial)
-    if (email) {
-      console.log('[ANTI-FRAUD] Checking for existing customer by email...');
-      const normalizedEmail = email.toLowerCase().trim();
-      const customerKey = `customer:email:${normalizedEmail}`;
-      const existingCustomer = await kv.get(customerKey);
-      
-      if (existingCustomer) {
-        console.log('[ANTI-FRAUD] ⚠️  Customer exists in KV:', existingCustomer.customer_id);
-        console.log('[ANTI-FRAUD] Previous subscription status:', existingCustomer.subscription?.status);
-        console.log('[ANTI-FRAUD] Quota remaining:', existingCustomer.quota?.remaining);
-        
-        // Блокируем disputed customers
-        if (existingCustomer.disputed) {
-          console.log('[ANTI-FRAUD] 🚨 DISPUTED CUSTOMER - Blocking purchase');
-          return res.status(403).json({ 
-            error: 'Account suspended',
-            message: 'Your account has been suspended due to a payment dispute. Please contact support.'
-          });
-        }
-        
-        // КРИТИЧНО: $2.99 Trial checkout ТОЛЬКО для НОВЫХ customers
-        // Существующие customers НЕ могут получить повторный $2.99 trial
-        // Они должны использовать renewal endpoint ($49 direct subscription)
-        console.log('[ANTI-FRAUD] 🚫 EXISTING CUSTOMER BLOCKED FROM TRIAL');
-        console.log('[ANTI-FRAUD] Customer must use renewal flow from /my-reports.html');
-        
-        return res.status(403).json({ 
-          error: 'Trial not available for existing customers',
-          message: 'The $2.99 trial is only for new customers. Please renew your subscription from your account page for $49.',
-          redirect_to: `/my-reports.html?email=${encodeURIComponent(normalizedEmail)}`
-        });
-      }
-    }
+    // Email check уже выполнен в начале функции (до Stripe API calls)
     
     console.log('[ANTI-FRAUD] ✅ Card is not blocked');
 
