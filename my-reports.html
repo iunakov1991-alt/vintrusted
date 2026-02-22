@@ -428,7 +428,7 @@
                             <div>✓ Valid for 33 days</div>
                             <div>✓ Then $49 every 33 days</div>
                         </div>
-                        <button class="btn-buy" onclick="renewSubscription()">Renew Subscription</button>
+                        <button class="btn-buy" onclick="renewSubscription(event)">Renew Subscription ($49 for 33 days)</button>
                     </div>
                 `;
             }
@@ -448,7 +448,7 @@
                             <div class="report-vehicle">${report.vehicle_name || 'Loading...'}</div>
                             <div class="report-date">${date}</div>
                             <div class="report-actions">
-                                <a href="/report.html?vin=${report.vin}&email=${encodeURIComponent(email)}&cached=1" class="btn-view">View Report</a>
+                                <button class="btn-view" onclick="viewReport('${report.vin}')">View Report</button>
                                 <button class="btn-download" onclick="downloadReport('${report.vin}')">Download</button>
                             </div>
                         </div>
@@ -522,9 +522,31 @@
         }
 
         async function renewSubscription() {
-            // Редирект напрямую на payment page для продления
-            // Используем специальный VIN для пропуска проверки customer
-            window.location.href = `/report.html?vin=RENEW&email=${encodeURIComponent(email)}&renewal=1`;
+            try {
+                console.log('[RENEWAL] Requesting checkout session...');
+                
+                const response = await fetch('/api/create-renewal-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to create checkout');
+                }
+                
+                const data = await response.json();
+                
+                if (data.checkout_url) {
+                    console.log('[RENEWAL] ✅ Redirecting to Stripe Checkout');
+                    window.location.href = data.checkout_url;
+                } else {
+                    alert('Error creating checkout. Please try again.');
+                }
+            } catch (error) {
+                console.error('[RENEWAL] Error:', error);
+                alert('Error processing renewal. Please try again.');
+            }
         }
 
         async function cancelSubscription() {
@@ -534,21 +556,66 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email })
                 });
-
-                const result = await response.json();
-
+                
                 if (!response.ok) {
-                    alert(result.message || 'Error canceling subscription');
-                    return;
+                    throw new Error('Cancel failed');
                 }
 
-                alert('✅ Subscription canceled. You can continue using reports until the end of your billing period.');
+                const data = await response.json();
+                
+                alert('✅ Subscription will be canceled at the end of your billing period. You can continue using reports until then.');
                 
                 // Reload dashboard to show updated status
                 loadCustomerData();
             } catch (error) {
                 console.error('Error canceling subscription:', error);
                 alert('Error canceling subscription. Please try again.');
+            }
+        }
+
+        async function viewReport(vin) {
+            try {
+                const response = await fetch(`/api/get-cached-report?email=${encodeURIComponent(email)}&vin=${encodeURIComponent(vin)}`);
+                
+                if (!response.ok) {
+                    throw new Error('Report not found');
+                }
+
+                const reportData = await response.json();
+                
+                // Open report in new window
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>VIN Report - ${vin}</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+                            h1 { color: #333; }
+                            .section { margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 8px; }
+                            .label { font-weight: bold; }
+                            pre { background: #fff; padding: 10px; border-radius: 4px; overflow-x: auto; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Vehicle History Report</h1>
+                        <div class="section">
+                            <p><span class="label">VIN:</span> ${vin}</p>
+                            <p><span class="label">Vehicle:</span> ${reportData.vehicle || 'N/A'}</p>
+                            <p><span class="label">Report Generated:</span> ${reportData.cached_at ? new Date(reportData.cached_at).toLocaleDateString() : new Date().toLocaleDateString()}</p>
+                        </div>
+                        <div class="section">
+                            <h2>Full Report Data</h2>
+                            <pre>${JSON.stringify(reportData.report, null, 2)}</pre>
+                        </div>
+                    </body>
+                    </html>
+                `);
+                newWindow.document.close();
+                
+            } catch (error) {
+                console.error('Error viewing report:', error);
+                alert('Error loading report. Please try again.');
             }
         }
 

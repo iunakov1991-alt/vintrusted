@@ -141,27 +141,37 @@ export default async function handler(req, res) {
       if (customer.email) {
         const normalizedEmail = customer.email.toLowerCase().trim();
         const customerKey = `customer:email:${normalizedEmail}`;
-        const customerData = await kv.get(customerKey);
+        let customerData = await kv.get(customerKey);
         
-        if (customerData) {
-          customerData.subscription = {
-            subscription_id: subscription.id,
-            subscription_schedule_id: customerData.subscription?.subscription_schedule_id || null,
-            status: subscription.status,
-            start_date: new Date(subscription.current_period_start * 1000).toISOString(),
-            end_date: new Date(subscription.current_period_end * 1000).toISOString()
+        // Если customer не существует в KV - создаем новую запись (renewal case)
+        if (!customerData) {
+          console.log('[WEBHOOK] ℹ️  Creating new KV record for renewal customer');
+          customerData = {
+            customer_id: subscription.customer,
+            email: normalizedEmail,
+            created_at: new Date().toISOString(),
+            reports: [] // Старые отчеты недоступны (новый customer ID)
           };
-          
-          // Reset quota на новый цикл (2 reports на 33 дня)
-          customerData.quota = {
-            total: 2,
-            used: 0,
-            remaining: 2
-          };
-          
-          await kv.set(customerKey, customerData);
-          console.log('[WEBHOOK] ✅ Customer subscription updated in KV');
         }
+        
+        // Обновляем subscription данные
+        customerData.subscription = {
+          subscription_id: subscription.id,
+          subscription_schedule_id: customerData.subscription?.subscription_schedule_id || null,
+          status: subscription.status,
+          start_date: new Date(subscription.current_period_start * 1000).toISOString(),
+          end_date: new Date(subscription.current_period_end * 1000).toISOString()
+        };
+        
+        // Reset quota на новый цикл (2 reports на 33 дня)
+        customerData.quota = {
+          total: 2,
+          used: 0,
+          remaining: 2
+        };
+        
+        await kv.set(customerKey, customerData);
+        console.log('[WEBHOOK] ✅ Customer subscription updated in KV');
       }
     } catch (err) {
       console.error('[WEBHOOK] Error updating subscription in KV:', err.message);

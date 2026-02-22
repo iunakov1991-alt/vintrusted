@@ -150,7 +150,15 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/create-renewal-checkout.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/cancel-subscription.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/create-renewal-payment.js",
       "use": "@vercel/node"
     },
     {
@@ -560,8 +568,16 @@
       "destination": "/api/test-create-customer.js"
     },
     {
+      "source": "/api/create-renewal-checkout",
+      "destination": "/api/create-renewal-checkout.js"
+    },
+    {
       "source": "/api/cancel-subscription",
       "destination": "/api/cancel-subscription.js"
+    },
+    {
+      "source": "/api/create-renewal-payment",
+      "destination": "/api/create-renewal-payment.js"
     },
     {
       "source": "/semantic-pages/en",

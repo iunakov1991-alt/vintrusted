@@ -97,18 +97,19 @@ export default async function handler(req, res) {
       if (existingCustomer) {
         console.log('[ANTI-FRAUD] ⚠️  Customer exists in KV:', existingCustomer.customer_id);
         console.log('[ANTI-FRAUD] Previous subscription status:', existingCustomer.subscription?.status);
+        console.log('[ANTI-FRAUD] Quota remaining:', existingCustomer.quota?.remaining);
         
-        // Если подписка активна - блокируем
-        if (existingCustomer.subscription?.status === 'active') {
-          console.log('[ANTI-FRAUD] 🚫 ACTIVE SUBSCRIPTION - Renewal required');
+        // Если подписка активна И есть квота - блокируем (не нужен renewal)
+        if (existingCustomer.subscription?.status === 'active' && existingCustomer.quota?.remaining > 0) {
+          console.log('[ANTI-FRAUD] 🚫 ACTIVE SUBSCRIPTION WITH QUOTA - No renewal needed');
           return res.status(403).json({ 
             error: 'Active subscription exists',
-            message: 'You already have an active subscription. Please manage it from your account page.'
+            message: 'You already have an active subscription with available reports. Please use your account page.'
           });
         }
         
-        // Если подписка отменена - позволяем, но логируем
-        console.log('[ANTI-FRAUD] ℹ️  Allowing renewal for canceled/inactive subscription');
+        // Если подписка отменена ИЛИ квота исчерпана - позволяем renewal
+        console.log('[ANTI-FRAUD] ℹ️  Allowing renewal (canceled subscription or quota exhausted)');
       }
     }
     

@@ -1,0 +1,103 @@
+import Stripe from 'stripe';
+import { kv } from '@vercel/kv';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+/**
+ * Создает Stripe Checkout Session для renewal подписки
+ * Берет $49 сразу (без trial) и создает новую subscription на 33 дня
+ */
+export default async function handler(req, res) {
+  // CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const { email } = req.body;
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: 'Valid email is required' });
+    }
+
+    console.log('[RENEWAL-PAYMENT] Creating renewal checkout for:', email);
+
+    const normalizedEmail = email.toLowerCase().trim();
+    const customerKey = `customer:email:${normalizedEmail}`;
+    
+    // Проверяем существующего customer в KV
+    const customerData = await kv.get(customerKey);
+    let stripeCustomerId = null;
+
+    if (customerData && customerData.customer_id) {
+      // Используем существующего customer из Stripe
+      stripeCustomerId = customerData.customer_id;
+      console.log('[RENEWAL-PAYMENT] Using existing Stripe customer:', stripeCustomerId);
+    } else {
+      console.log('[RENEWAL-PAYMENT] ⚠️  No existing customer found in KV');
+    }
+
+    // Создаем Checkout Session для $49 (полная цена, без trial)
+    const priceEvery33D = process.env.PRICE_49_EVERY_33D;
+    
+    if (!priceEvery33D) {
+      throw new Error('PRICE_49_EVERY_33D not configured');
+    }
+
+    const sessionConfig = {
+      payment_method_types: ['card'],
+      mode: 'subscription',
+      line_items: [
+        {
+          price: priceEvery33D,
+          quantity: 1,
+        },
+      ],
+      subscription_data: {
+        // Сразу активная подписка, без trial
+        trial_period_days: 0,
+        metadata: {
+          renewal: 'true',
+          original_email: email
+        }
+      },
+      success_url: `${req.headers.origin || 'https://vintrusted.com'}/my-reports.html?email=${encodeURIComponent(email)}&renewal_success=1`,
+      cancel_url: `${req.headers.origin || 'https://vintrusted.com'}/my-reports.html?email=${encodeURIComponent(email)}`,
+      customer_email: email,
+      metadata: {
+        renewal: 'true',
+        original_email: email
+      }
+    };
+
+    // Если есть существующий customer - привязываем к нему
+    if (stripeCustomerId) {
+      sessionConfig.customer = stripeCustomerId;
+      delete sessionConfig.customer_email; // Нельзя использовать оба параметра одновременно
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
+
+    console.log('[RENEWAL-PAYMENT] ✅ Checkout session created:', session.id);
+
+    return res.status(200).json({
+      session_id: session.id,
+      checkout_url: session.url
+    });
+
+  } catch (error) {
+    console.error('[RENEWAL-PAYMENT] Error:', error.message);
+    return res.status(500).json({ 
+      error: 'Internal server error',
+      message: error.message 
+    });
+  }
+}
