@@ -812,7 +812,7 @@
       if (e.key === 'Enter') login();
     });
 
-    async function login() {
+    function login() {
       const password = document.getElementById('passwordInput').value;
       
       if (!password) {
@@ -820,75 +820,106 @@
         return;
       }
 
+      // Set token
       authToken = password;
       localStorage.setItem('crm_token', password);
       
-      // Show dashboard immediately and try to load data
-      showDashboard();
+      // Show dashboard immediately
+      const loginScreen = document.getElementById('loginScreen');
+      const dashboard = document.getElementById('dashboard');
       
-      // Try to fetch data to verify password
-      const success = await updateData();
-      if (!success) {
-        showError('Неверный пароль');
-        localStorage.removeItem('crm_token');
-        authToken = '';
-        // Go back to login screen
-        document.getElementById('loginScreen').style.display = 'flex';
-        document.getElementById('dashboard').style.display = 'none';
-      }
+      if (loginScreen) loginScreen.style.display = 'none';
+      if (dashboard) dashboard.style.display = 'block';
+      
+      // Load data (async, don't wait)
+      updateData().then(success => {
+        if (!success) {
+          // Invalid password - go back
+          showError('Неверный пароль');
+          localStorage.removeItem('crm_token');
+          authToken = '';
+          if (loginScreen) loginScreen.style.display = 'flex';
+          if (dashboard) dashboard.style.display = 'none';
+        }
+      }).catch(err => {
+        console.error('Login error:', err);
+        showError('Ошибка загрузки данных');
+      });
     }
 
     function logout() {
       localStorage.removeItem('crm_token');
+      localStorage.removeItem('crm_budget');
       authToken = '';
       location.reload();
     }
 
     function showError(message) {
       const errorEl = document.getElementById('errorMessage');
-      errorEl.textContent = message;
-      errorEl.style.display = 'block';
-      setTimeout(() => {
-        errorEl.style.display = 'none';
-      }, 3000);
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+        setTimeout(() => {
+          errorEl.style.display = 'none';
+        }, 3000);
+      }
     }
 
     function showDashboard() {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('dashboard').style.display = 'block';
+      const loginScreen = document.getElementById('loginScreen');
+      const dashboard = document.getElementById('dashboard');
+      if (loginScreen) loginScreen.style.display = 'none';
+      if (dashboard) dashboard.style.display = 'block';
     }
 
     async function updateData() {
-      const startDate = document.getElementById('startDate').value;
-      const endDate = document.getElementById('endDate').value;
-      const budget = parseFloat(document.getElementById('budget').value) || 0;
+      const startDate = document.getElementById('startDate')?.value || '2026-01-01';
+      const endDate = document.getElementById('endDate')?.value || new Date().toISOString().split('T')[0];
+      const budget = parseFloat(document.getElementById('budget')?.value || 0);
 
       // Save budget to localStorage
-      localStorage.setItem('crm_budget', budget);
+      try {
+        localStorage.setItem('crm_budget', budget);
+      } catch (e) {
+        console.warn('localStorage not available');
+      }
 
       const updateBtn = document.getElementById('updateBtn');
-      updateBtn.disabled = true;
-      updateBtn.textContent = 'Загрузка...';
+      const loadingIndicator = document.getElementById('loadingIndicator');
+      const metricsContainer = document.getElementById('metricsContainer');
 
-      document.getElementById('loadingIndicator').style.display = 'block';
-      document.getElementById('metricsContainer').style.display = 'none';
+      if (updateBtn) {
+        updateBtn.disabled = true;
+        updateBtn.textContent = 'Загрузка...';
+      }
+
+      if (loadingIndicator) loadingIndicator.style.display = 'block';
+      if (metricsContainer) metricsContainer.style.display = 'none';
 
       try {
         const url = `/api/crm/analytics?start=${startDate}&end=${endDate}&budget=${budget}`;
+        console.log('Fetching:', url);
+        
         const response = await fetch(url, {
           headers: {
             'Authorization': `Bearer ${authToken}`
           }
         });
 
+        console.log('Response status:', response.status);
+
         if (!response.ok) {
           if (response.status === 401) {
-            throw new Error('Unauthorized');
+            console.error('Unauthorized - invalid password');
+            return false;
           }
-          throw new Error('Failed to fetch data');
+          const errorText = await response.text();
+          console.error('API error:', errorText);
+          throw new Error('API error: ' + response.status);
         }
 
         const data = await response.json();
+        console.log('Data received:', data);
         currentData = data;
         
         renderMetrics(data);
@@ -896,7 +927,7 @@
         renderSourcesTable(data);
         initCalculator();
 
-        document.getElementById('metricsContainer').style.display = 'block';
+        if (metricsContainer) metricsContainer.style.display = 'block';
         
         return true;
       } catch (error) {
@@ -904,9 +935,11 @@
         alert('Ошибка загрузки данных: ' + error.message);
         return false;
       } finally {
-        document.getElementById('loadingIndicator').style.display = 'none';
-        updateBtn.disabled = false;
-        updateBtn.textContent = 'Обновить данные';
+        if (loadingIndicator) loadingIndicator.style.display = 'none';
+        if (updateBtn) {
+          updateBtn.disabled = false;
+          updateBtn.textContent = 'Обновить данные';
+        }
       }
     }
 
