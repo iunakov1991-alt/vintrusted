@@ -480,6 +480,12 @@
   line-height: 1;
 }
 
+.mobile-device .mobile-only .mobile-price-badge-report .mobile-price-cents {
+  font-size: 16px;
+  font-weight: 700;
+  vertical-align: super;
+}
+
 .mobile-device .mobile-only .mobile-price-badge-report .mobile-price-badge-subtext {
   font-size: 9px;
   font-weight: 600;
