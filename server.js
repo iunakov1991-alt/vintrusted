@@ -95,7 +95,7 @@ app.post('/api/checkout-trial-then-two-charges', async (req, res) => {
 
     // $3 сейчас — с return_url на случай 3DS
     const trialPi = await stripe.paymentIntents.create({
-      amount: 100,
+      amount: 299,
       currency: 'usd',
       customer: customer.id,
       payment_method: pm,

@@ -15,7 +15,7 @@ const BLOCKED_IP_ADDRESSES = [
   // IP будут добавляться автоматически при обнаружении
 ];
 
-// ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_10D указывает на price с interval=day, interval_count=10
+// ВНИМАНИЕ: предполагается, что PRICE_49_EVERY_33D указывает на price с interval=day, interval_count=33
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   
@@ -107,71 +107,62 @@ export default async function handler(req, res) {
     // ВАЖНО: Обновляем SetupIntent с customer ID для verify-payment
     // Обернуто в try-catch, так как SetupIntent может быть уже succeeded
     try {
-      await stripe.setupIntents.update(setup_intent_id, {
-        customer: customer.id
-      });
-      console.log('[CHECKOUT] SetupIntent updated with customer:', customer.id);
+    await stripe.setupIntents.update(setup_intent_id, {
+      customer: customer.id
+    });
+    console.log('[CHECKOUT] SetupIntent updated with customer:', customer.id);
     } catch (updateError) {
       console.log('[CHECKOUT] ⚠️  Could not update SetupIntent (already succeeded):', updateError.message);
       // Это не критично - customer уже создан
     }
 
-    // 2) Снимаем $1 сразу
+    // 2) Снимаем $2.99 сразу
     // КРИТИЧНО: копируем metadata из SetupIntent (включая gclid для Google Ads конверсий)
     console.log('[CHECKOUT] SetupIntent metadata:', si.metadata);
     const pi = await stripe.paymentIntents.create({
-      amount: 100,
+      amount: 299,
       currency: 'usd',
       customer: customer.id,
       payment_method: si.payment_method,
       confirm: true,
       off_session: true,
       statement_descriptor_suffix: 'VIN Report',
-      description: 'VIN Report $1',
+      description: 'VIN Report $2.99',
       metadata: si.metadata || {} // ✅ Копируем все metadata (gclid, utm_*, ab_variant, vin)
     });
     console.log('[CHECKOUT] PaymentIntent created with metadata:', pi.metadata);
 
-    // 3) План: три списания $49 каждые 10 дней, потом $49/месяц навсегда
+    // 3) План: $49 каждые 33 дня бесконечно (начинается на день 3)
     let schedule = null;
-    const priceEvery10D = process.env.PRICE_49_EVERY_10D;
-    const priceMonthly = process.env.PRICE_49_MONTHLY;
+    const priceEvery33D = process.env.PRICE_49_EVERY_33D;
     
-    if (priceEvery10D && priceMonthly) {
+    if (priceEvery33D) {
       try {
-        const startAt = Math.floor(Date.now() / 1000) + 10 * 86400; // +10 дней от сегодня
+        const startAt = Math.floor(Date.now() / 1000) + 3 * 86400; // +3 дня от сегодня
         
         schedule = await stripe.subscriptionSchedules.create({
           customer: customer.id,
           start_date: startAt,
-          end_behavior: 'release', // ✅ После окончания фаз подписка продолжается
+          end_behavior: 'release', // ✅ Подписка продолжается бесконечно
           phases: [
             {
-              // ФАЗА 1: 3 списания по $49 каждые 10 дней (дни 10, 20, 30)
-              iterations: 3,
-              default_payment_method: si.payment_method,
-              collection_method: 'charge_automatically',
-              proration_behavior: 'none',
-              items: [{ price: priceEvery10D }]
-            },
-            {
-              // ФАЗА 2: Бесконечная подписка $49/месяц (дни 60, 90, 120...)
+              // ФАЗА 1: $49 каждые 33 дня бесконечно (дни 3, 36, 69, 102...)
               // iterations не указываем → бесконечно
               default_payment_method: si.payment_method,
               collection_method: 'charge_automatically',
               proration_behavior: 'none',
-              items: [{ price: priceMonthly }]
+              items: [{ price: priceEvery33D }]
             }
           ]
         });
-        console.log('[CHECKOUT] ✅ Subscription schedule created with 2 phases:', schedule.id);
-        console.log('[CHECKOUT] Phase 1: 3x $49 every 10 days | Phase 2: $49/month forever');
+        console.log('[CHECKOUT] ✅ Subscription schedule created:', schedule.id);
+        console.log('[CHECKOUT] $49 every 33 days starting on day 3');
       } catch (scheduleError) {
         console.error('[CHECKOUT] ❌ Failed to create subscription schedule:', scheduleError.message);
         // Продолжаем выполнение, даже если подписка не создалась
       }
     } else {
-      console.log('[CHECKOUT] ⚠️  Missing PRICE_49_EVERY_10D or PRICE_49_MONTHLY, skipping subscription schedule');
+      console.log('[CHECKOUT] ⚠️  Missing PRICE_49_EVERY_33D, skipping subscription schedule');
     }
 
     // Get VIN from request body, SetupIntent metadata, or customer metadata

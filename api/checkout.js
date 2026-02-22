@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
       line_items: [{
         price_data: {
           currency: 'usd',
-          unit_amount: 100,  // $1.00
+          unit_amount: 299,  // $2.99
           product_data: { name: 'VIN Report (instant)' }
         },
         quantity: 1

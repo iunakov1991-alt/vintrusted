@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       utm_source,
       utm_medium,
       utm_campaign,
-      amount = 100 // Default $1.00 in cents
+      amount = 299 // Default $2.99 in cents
     } = req.body || {};
 
     // Get gclid from cookies (saved by gclid-cookie.js on first visit)

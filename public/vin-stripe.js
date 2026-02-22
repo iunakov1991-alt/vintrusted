@@ -502,7 +502,7 @@
       const submitButton = document.createElement('button');
       submitButton.type = 'submit';
       submitButton.id = 'vin-submit';
-      submitButton.textContent = 'Pay $1.00';
+      submitButton.textContent = 'Pay $2.99';
       submitButton.disabled = true; // Disabled until terms accepted
       submitButton.style.cssText = `
         padding: 12px 24px;
@@ -695,8 +695,8 @@
       border-top: 1px solid #e5e7eb;
     `;
     planDetails.innerHTML = `
-      <strong style="color: #111827;">Membership Details:</strong> The trial costs $3 and activates temporary access to the service. After 10 days, a charge of $49 will be applied for the next access period. The $49 charge then repeats every 10 days, for a maximum of three billing cycles, after which the subscription is automatically canceled.<br><br>
-      Payment is for service access with a limit of up to 2 reports per day; charges are applied once every 10 days, not daily.
+      <strong style="color: #111827;">Membership Details:</strong> The trial costs $2.99 and activates immediate access to the service. After 3 days, a charge of $49 will be applied for the next access period. The $49 charge then repeats every 33 days indefinitely until you cancel.<br><br>
+      Payment is for service access with a limit of up to 2 reports per day; charges are applied once every 33 days, not daily.
     `;
 
     termsContainer.appendChild(checkboxRow);
@@ -708,7 +708,7 @@
     checkbox.addEventListener('change', function() {
       if (this.checked) {
         submitButton.disabled = false;
-        submitButton.textContent = 'Pay $1.00';
+        submitButton.textContent = 'Pay $2.99';
         submitButton.style.setProperty('background', '#fbbf24', 'important');
         submitButton.style.setProperty('color', '#111827', 'important');
         submitButton.style.setProperty('cursor', 'pointer', 'important');
@@ -734,7 +734,7 @@
         }).catch(err => console.log('Consent logging failed (non-critical):', err));
       } else {
         submitButton.disabled = true;
-        submitButton.textContent = 'Pay $1.00';
+        submitButton.textContent = 'Pay $2.99';
         submitButton.style.setProperty('background', '#9ca3af', 'important');
         submitButton.style.setProperty('color', 'white', 'important');
         submitButton.style.setProperty('cursor', 'not-allowed', 'important');
