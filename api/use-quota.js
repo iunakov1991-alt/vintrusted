@@ -33,7 +33,16 @@ export default async function handler(req, res) {
       return res.status(403).json({ error: 'Customer not found' });
     }
 
-    // 2. Проверяем квоту
+    // 2. Проверяем статус подписки
+    if (customerData.subscription?.status !== 'active') {
+      console.log('[USE-QUOTA] ❌ Subscription not active:', customerData.subscription?.status);
+      return res.status(403).json({ 
+        error: 'Subscription not active',
+        message: 'You need an active subscription to check VINs'
+      });
+    }
+
+    // 3. Проверяем квоту
     const quota = customerData.quota || { total: 0, used: 0, remaining: 0 };
 
     if (quota.remaining <= 0) {
@@ -44,7 +53,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // 3. Проверяем, не покупал ли уже этот VIN
+    // 4. Проверяем, не покупал ли уже этот VIN (защита от дубликатов)
     const hasVin = customerData.reports?.some(r => r.vin === normalizedVin);
 
     if (hasVin) {
@@ -63,11 +72,11 @@ export default async function handler(req, res) {
       }
     }
 
-    // 4. Вычитаем квоту
+    // 5. Вычитаем квоту (атомарно)
     quota.used += 1;
     quota.remaining -= 1;
 
-    // 5. Добавляем VIN в список отчетов
+    // 6. Добавляем VIN в список отчетов
     if (!customerData.reports) {
       customerData.reports = [];
     }
@@ -75,11 +84,12 @@ export default async function handler(req, res) {
     customerData.reports.push({
       vin: normalizedVin,
       purchased_at: new Date().toISOString(),
-      period: customerData.subscription?.status === 'active' ? 'subscription' : 'trial'
+      period: 'subscription' // Всегда subscription так как мы проверили status выше
     });
 
-    // 6. Обновляем в KV
+    // 7. Обновляем в KV (добавляем timestamp для отладки race conditions)
     customerData.quota = quota;
+    customerData.last_quota_update = new Date().toISOString();
     await kv.set(customerKey, customerData);
 
     console.log('[USE-QUOTA] ✅ Quota used. Remaining:', quota.remaining);

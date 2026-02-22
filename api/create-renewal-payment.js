@@ -37,7 +37,16 @@ export default async function handler(req, res) {
     const customerData = await kv.get(customerKey);
     let stripeCustomerId = null;
 
-    if (customerData && customerData.customer_id) {
+    if (customerData) {
+      // Проверяем - не пытается ли пользователь создать дубликат подписки
+      if (customerData.subscription?.status === 'active' && customerData.quota?.remaining > 0) {
+        console.log('[RENEWAL-PAYMENT] ❌ Active subscription with quota exists');
+        return res.status(403).json({ 
+          error: 'Active subscription exists',
+          message: 'You already have an active subscription with available reports.'
+        });
+      }
+      
       // Используем существующего customer из Stripe
       stripeCustomerId = customerData.customer_id;
       console.log('[RENEWAL-PAYMENT] Using existing Stripe customer:', stripeCustomerId);

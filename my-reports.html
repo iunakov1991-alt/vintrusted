@@ -526,6 +526,12 @@
         }
 
         async function renewSubscription() {
+            // Защита от double-click
+            const btn = event.target;
+            if (btn.disabled) return;
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+            
             try {
                 console.log('[RENEWAL] Requesting checkout session...');
                 
@@ -536,7 +542,8 @@
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Failed to create checkout');
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to create checkout');
                 }
                 
                 const data = await response.json();
@@ -545,11 +552,13 @@
                     console.log('[RENEWAL] ✅ Redirecting to Stripe Checkout');
                     window.location.href = data.checkout_url;
                 } else {
-                    alert('Error creating checkout. Please try again.');
+                    throw new Error('No checkout URL received');
                 }
             } catch (error) {
                 console.error('[RENEWAL] Error:', error);
-                alert('Error processing renewal. Please try again.');
+                alert(error.message || 'Error processing renewal. Please try again.');
+                btn.disabled = false;
+                btn.textContent = 'Renew Subscription ($49 for 33 days)';
             }
         }
 

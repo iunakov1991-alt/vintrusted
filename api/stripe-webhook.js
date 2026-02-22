@@ -47,6 +47,15 @@ export default async function handler(req, res) {
     const cs = event.data.object;
 
     try {
+      // Проверяем mode - для subscription mode подписка уже создана Stripe автоматически
+      if (cs.mode === 'subscription') {
+        console.log('[WEBHOOK] Checkout Session for subscription mode - subscription already created by Stripe');
+        // Для renewal через create-renewal-payment.js подписка уже создана
+        // Webhook customer.subscription.created обработает ее
+        return res.status(200).json({ received: true, note: 'Subscription handled by subscription.created webhook' });
+      }
+
+      // Старая логика для payment mode (legacy flow)
       // Получаем PM для подписки
       let pmId;
       if (cs.payment_intent) {
@@ -150,8 +159,15 @@ export default async function handler(req, res) {
             customer_id: subscription.customer,
             email: normalizedEmail,
             created_at: new Date().toISOString(),
-            reports: [] // Старые отчеты недоступны (новый customer ID)
+            reports: [] // Новая подписка, старые reports недоступны
           };
+        } else {
+          // Обновляем customer_id если он изменился (renewal с новым customer)
+          if (customerData.customer_id !== subscription.customer) {
+            console.log('[WEBHOOK] ⚠️  Customer ID changed from', customerData.customer_id, 'to', subscription.customer);
+            customerData.customer_id = subscription.customer;
+            // Сохраняем старые reports при renewal
+          }
         }
         
         // Обновляем subscription данные

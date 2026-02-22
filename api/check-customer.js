@@ -49,8 +49,9 @@ export default async function handler(req, res) {
 
     console.log('[CHECK-CUSTOMER] ✅ Customer found:', customerData.customer_id);
 
-    // Проверяем, купил ли уже этот VIN
-    const hasVin = customerData.reports?.some(r => r.vin === vin);
+    // Проверяем, купил ли уже этот VIN (с нормализацией)
+    const normalizedVin = vin ? vin.toUpperCase().replace(/[^A-Z0-9]/g, '') : null;
+    const hasVin = normalizedVin && customerData.reports?.some(r => r.vin === normalizedVin);
 
     // Используем данные из KV (синхронизированные через webhook)
     const subscription = customerData.subscription || {};
