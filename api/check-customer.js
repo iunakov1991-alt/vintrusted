@@ -28,7 +28,16 @@ export default async function handler(req, res) {
 
     // Проверяем в KV
     const customerKey = `customer:email:${normalizedEmail}`;
-    const customerData = await kv.get(customerKey);
+    console.log('[CHECK-CUSTOMER] KV key:', customerKey);
+    
+    let customerData = null;
+    try {
+      customerData = await kv.get(customerKey);
+      console.log('[CHECK-CUSTOMER] KV result:', customerData ? 'found' : 'null');
+    } catch (kvError) {
+      console.error('[CHECK-CUSTOMER] KV error:', kvError.message);
+      throw kvError;
+    }
 
     if (!customerData) {
       console.log('[CHECK-CUSTOMER] ❌ Customer not found');
@@ -50,7 +59,7 @@ export default async function handler(req, res) {
     if (customerData.subscription?.subscription_id) {
       try {
         const sub = await stripe.subscriptions.retrieve(customerData.subscription.subscription_id);
-        subscriptionStatus = sub.status; // active, canceled, past_due, etc.
+        subscriptionStatus = sub.status;
         
         if (sub.status === 'active') {
           nextBilling = new Date(sub.current_period_end * 1000).toISOString();
@@ -74,7 +83,11 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('[CHECK-CUSTOMER] Error:', error);
-    return res.status(500).json({ error: error.message });
+    console.error('[CHECK-CUSTOMER] Error:', error.message, error.stack);
+    return res.status(500).json({ 
+      error: 'Internal server error',
+      message: error.message,
+      stack: error.stack?.substring(0, 200)
+    });
   }
 }
