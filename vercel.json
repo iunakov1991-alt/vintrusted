@@ -142,6 +142,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/test-kv.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -538,6 +542,10 @@
     {
       "source": "/api/use-quota",
       "destination": "/api/use-quota.js"
+    },
+    {
+      "source": "/api/test-kv",
+      "destination": "/api/test-kv.js"
     },
     {
       "source": "/semantic-pages/en",
