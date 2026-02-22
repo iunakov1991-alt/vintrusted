@@ -812,7 +812,7 @@
       if (e.key === 'Enter') login();
     });
 
-    function login() {
+    async function login() {
       const password = document.getElementById('passwordInput').value;
       
       if (!password) {
@@ -823,16 +823,19 @@
       authToken = password;
       localStorage.setItem('crm_token', password);
       
+      // Show dashboard immediately and try to load data
+      showDashboard();
+      
       // Try to fetch data to verify password
-      updateData().then(success => {
-        if (success) {
-          showDashboard();
-        } else {
-          showError('Неверный пароль');
-          localStorage.removeItem('crm_token');
-          authToken = '';
-        }
-      });
+      const success = await updateData();
+      if (!success) {
+        showError('Неверный пароль');
+        localStorage.removeItem('crm_token');
+        authToken = '';
+        // Go back to login screen
+        document.getElementById('loginScreen').style.display = 'flex';
+        document.getElementById('dashboard').style.display = 'none';
+      }
     }
 
     function logout() {
