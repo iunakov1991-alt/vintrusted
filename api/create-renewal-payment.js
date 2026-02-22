@@ -1,7 +1,21 @@
 import Stripe from 'stripe';
 import { kv } from '@vercel/kv';
+import { checkRateLimit, sendRateLimitError } from './_lib/rate-limit.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+// ✅ FINAL: KV retry logic
+async function kvGetWithRetry(key, maxRetries = 3) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await kv.get(key);
+    } catch (error) {
+      console.error(`[KV-RETRY] get(${key}) attempt ${attempt + 1} failed:`, error.message);
+      if (attempt === maxRetries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, 200 * (attempt + 1)));
+    }
+  }
+}
 
 /**
  * Создает Stripe Checkout Session для renewal подписки
@@ -21,6 +35,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // ✅ FINAL: Rate limiting (защита от abuse на renewal)
+  const rateLimitCheck = await checkRateLimit(req, 'checkout');
+  if (!rateLimitCheck.success) {
+    return sendRateLimitError(res, rateLimitCheck);
+  }
+
   try {
     const { email } = req.body;
 
@@ -34,7 +54,7 @@ export default async function handler(req, res) {
     const customerKey = `customer:email:${normalizedEmail}`;
     
     // Проверяем существующего customer в KV
-    const customerData = await kv.get(customerKey);
+    const customerData = await kvGetWithRetry(customerKey);
     let stripeCustomerId = null;
 
     if (customerData) {

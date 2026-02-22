@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { checkRateLimit, sendRateLimitError } from './_lib/rate-limit.js';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Parse cookies from request headers
@@ -17,6 +18,13 @@ function parseCookies(req) {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  
+  // ✅ FINAL: Rate limiting (защита от card testing)
+  const rateLimitCheck = await checkRateLimit(req, 'checkout');
+  if (!rateLimitCheck.success) {
+    return sendRateLimitError(res, rateLimitCheck);
+  }
+  
   try {
     const { 
       vin,
