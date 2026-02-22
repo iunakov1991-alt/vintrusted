@@ -68,9 +68,18 @@ export default async function handler(req, res) {
         // Но для простоты создадим новую подписку
       }
       
-      // Используем существующего customer из Stripe
+      // Используем существующего customer из Stripe (если он существует)
       stripeCustomerId = customerData.customer_id;
-      console.log('[RENEWAL-PAYMENT] Using existing Stripe customer:', stripeCustomerId);
+      console.log('[RENEWAL-PAYMENT] Attempting to use existing Stripe customer:', stripeCustomerId);
+      
+      // Проверяем что customer существует в Stripe
+      try {
+        await stripe.customers.retrieve(stripeCustomerId);
+        console.log('[RENEWAL-PAYMENT] ✅ Stripe customer exists');
+      } catch (customerError) {
+        console.log('[RENEWAL-PAYMENT] ⚠️  Stripe customer not found (test data or deleted) - will create new via Checkout');
+        stripeCustomerId = null; // Checkout создаст нового
+      }
     } else {
       console.log('[RENEWAL-PAYMENT] ⚠️  No existing customer found in KV');
     }
