@@ -35,7 +35,7 @@ async function analyzeCardsAndPredict() {
     const payments = await stripe.paymentIntents.list(listParams);
 
     for (const pi of payments.data) {
-      // Интересуют только успешные $1 платежи
+      // Интересуют только успешные $2.99 платежи
       if (pi.amount === 100 && pi.status === 'succeeded' && pi.customer) {
         cards.push({
           payment_intent_id: pi.id,

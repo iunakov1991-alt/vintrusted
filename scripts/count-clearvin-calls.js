@@ -37,7 +37,7 @@ async function countClearVinCalls() {
     const paymentIntents = await stripe.paymentIntents.list(params);
 
     for (const pi of paymentIntents.data) {
-      // Count only succeeded $1 payments (initial payment)
+      // Count only succeeded $2.99 payments (initial payment)
       if (pi.status === 'succeeded' && pi.amount === 100) {
         successfulPayments++;
         const date = new Date(pi.created * 1000).toISOString();

@@ -77,7 +77,7 @@ export default async function handler(req, res) {
         limit: 5,
       });
       
-      // Ищем PaymentIntent на $1.00 (100 cents)
+      // Ищем PaymentIntent на $2.99 (299 cents)
       paymentIntent = customerPaymentIntents.data.find(pi => 
         pi.amount === 100 && pi.currency === 'usd'
       );
@@ -87,7 +87,7 @@ export default async function handler(req, res) {
     console.log('[VERIFY] PaymentIntent status:', paymentIntent?.status);
 
     // ┌─────────────────────────────────────────────────────────────┐
-    // │ ШАГ 4: Проверить что $1 списался                            │
+    // │ ШАГ 4: Проверить что $2.99 списался                         │
     // └─────────────────────────────────────────────────────────────┘
     const paymentSucceeded = paymentIntent && paymentIntent.status === 'succeeded';
     

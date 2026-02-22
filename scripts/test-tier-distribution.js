@@ -97,7 +97,7 @@ async function testTierDistribution() {
       }
     }
 
-    // Фильтруем только успешные $1 платежи
+    // Фильтруем только успешные $2.99 платежи
     const trialPayments = allPaymentIntents.filter(pi => 
       pi.amount === 100 && pi.status === 'succeeded'
     );
