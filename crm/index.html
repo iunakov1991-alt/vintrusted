@@ -690,100 +690,98 @@
       </div>
 
       <!-- What-If Calculator -->
-      <div class="calculator-section">
-        <h2>🧮 Калькулятор "Что если?"</h2>
-        <p style="color: #666; margin-bottom: 20px;">Измените параметры ниже, чтобы увидеть как изменятся ключевые метрики</p>
+      <div class="chart-container" style="margin-top: 30px;">
+        <h2>🎯 What-If Калькулятор</h2>
+        <p style="color: #666; margin-bottom: 20px;">Измените параметры и посмотрите как изменятся остальные метрики</p>
         
         <div class="calculator-grid">
           <div class="calculator-controls">
-            <div class="slider-control">
-              <div class="slider-label">
-                <span>Retention Rate</span>
-                <span class="slider-value" id="retentionSliderValue">0%</span>
-              </div>
-              <input type="range" id="retentionSlider" min="0" max="100" value="0" step="1">
-              <div class="slider-hint">Trial → $49 конверсия</div>
+            <h3>Входные параметры</h3>
+            
+            <div class="slider-group">
+              <label>
+                Клиенты: <span id="calcCustomers">24</span>
+              </label>
+              <input type="range" id="sliderCustomers" min="10" max="200" value="24" step="1">
             </div>
 
-            <div class="slider-control">
-              <div class="slider-label">
-                <span>Бюджет на трафик</span>
-                <span class="slider-value" id="budgetSliderValue">$0</span>
-              </div>
-              <input type="range" id="budgetSlider" min="0" max="3000" value="0" step="50">
-              <div class="slider-hint">Траты на рекламу</div>
+            <div class="slider-group">
+              <label>
+                Retention Rate: <span id="calcRetention">17</span>%
+              </label>
+              <input type="range" id="sliderRetention" min="0" max="100" value="17" step="1">
             </div>
 
-            <div class="slider-control">
-              <div class="slider-label">
-                <span>Количество клиентов</span>
-                <span class="slider-value" id="customersSliderValue">0</span>
-              </div>
-              <input type="range" id="customersSlider" min="0" max="100" value="0" step="1">
-              <div class="slider-hint">Всего клиентов за период</div>
+            <div class="slider-group">
+              <label>
+                Бюджет на трафик: $<span id="calcBudget">800</span>
+              </label>
+              <input type="range" id="sliderBudget" min="100" max="5000" value="800" step="50">
             </div>
 
-            <div class="slider-control">
-              <div class="slider-label">
-                <span>Dispute Rate</span>
-                <span class="slider-value" id="disputeSliderValue">0%</span>
-              </div>
-              <input type="range" id="disputeSlider" min="0" max="30" value="0" step="1">
-              <div class="slider-hint">Процент диспутов</div>
+            <div class="slider-group">
+              <label>
+                Dispute Rate: <span id="calcDisputeRate">8</span>%
+              </label>
+              <input type="range" id="sliderDisputeRate" min="0" max="30" value="8" step="1">
             </div>
 
-            <button class="reset-btn" onclick="resetCalculator()">↻ Сбросить к текущим значениям</button>
+            <div class="slider-group">
+              <label>
+                Средний чек Trial: $<span id="calcTrialPrice">2.99</span>
+              </label>
+              <input type="range" id="sliderTrialPrice" min="1" max="10" value="2.99" step="0.5">
+            </div>
+
+            <div class="slider-group">
+              <label>
+                Средний чек Recurring: $<span id="calcRecurringPrice">49</span>
+              </label>
+              <input type="range" id="sliderRecurringPrice" min="20" max="200" value="49" step="5">
+            </div>
+
+            <button onclick="resetCalculator()" class="btn-update" style="margin-top: 20px; width: 100%;">
+              Сбросить к текущим данным
+            </button>
           </div>
 
           <div class="calculator-results">
-            <h3>📊 Прогнозируемые метрики:</h3>
+            <h3>Прогнозируемые результаты</h3>
             
-            <div class="calc-metric">
-              <span class="calc-metric-label">Выручка</span>
-              <div>
-                <span class="calc-metric-value" id="calcRevenue">$0</span>
-                <span class="calc-metric-change" id="calcRevenueChange"></span>
-              </div>
+            <div class="calc-result-card">
+              <div class="calc-result-label">Выручка</div>
+              <div class="calc-result-value" id="calcRevenue">$0</div>
+              <div class="calc-result-change" id="calcRevenueChange"></div>
             </div>
 
-            <div class="calc-metric">
-              <span class="calc-metric-label">Чистая прибыль</span>
-              <div>
-                <span class="calc-metric-value" id="calcProfit">$0</span>
-                <span class="calc-metric-change" id="calcProfitChange"></span>
-              </div>
+            <div class="calc-result-card">
+              <div class="calc-result-label">Чистая прибыль</div>
+              <div class="calc-result-value" id="calcNetProfit">$0</div>
+              <div class="calc-result-change" id="calcNetProfitChange"></div>
             </div>
 
-            <div class="calc-metric">
-              <span class="calc-metric-label">ROI</span>
-              <div>
-                <span class="calc-metric-value" id="calcROI">0%</span>
-                <span class="calc-metric-change" id="calcROIChange"></span>
-              </div>
+            <div class="calc-result-card">
+              <div class="calc-result-label">ROI</div>
+              <div class="calc-result-value" id="calcROI">0%</div>
+              <div class="calc-result-change" id="calcROIChange"></div>
             </div>
 
-            <div class="calc-metric">
-              <span class="calc-metric-label">Заработок в день</span>
-              <div>
-                <span class="calc-metric-value" id="calcDailyProfit">$0</span>
-                <span class="calc-metric-change" id="calcDailyProfitChange"></span>
-              </div>
+            <div class="calc-result-card">
+              <div class="calc-result-label">CPA</div>
+              <div class="calc-result-value" id="calcCPA">$0</div>
+              <div class="calc-result-change" id="calcCPAChange"></div>
             </div>
 
-            <div class="calc-metric">
-              <span class="calc-metric-label">CPA (цена лида)</span>
-              <div>
-                <span class="calc-metric-value" id="calcCPA">$0</span>
-                <span class="calc-metric-change" id="calcCPAChange"></span>
-              </div>
+            <div class="calc-result-card">
+              <div class="calc-result-label">Заработок в день</div>
+              <div class="calc-result-value" id="calcDailyProfit">$0</div>
+              <div class="calc-result-change" id="calcDailyProfitChange"></div>
             </div>
 
-            <div class="calc-metric">
-              <span class="calc-metric-label">Churn Rate</span>
-              <div>
-                <span class="calc-metric-value" id="calcChurn">0%</span>
-                <span class="calc-metric-change" id="calcChurnChange"></span>
-              </div>
+            <div class="calc-result-card">
+              <div class="calc-result-label">Churn Rate</div>
+              <div class="calc-result-value" id="calcChurn">0%</div>
+              <div class="calc-result-change" id="calcChurnChange"></div>
             </div>
           </div>
         </div>

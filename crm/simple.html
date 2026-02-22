@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VinTrusted CRM (Simple)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+    }
+    button {
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover { background: #5568d3; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+    .metric { background: #f8f9fa; padding: 15px; border-radius: 6px; border-left: 4px solid #667eea; }
+    .metric-value { font-size: 24px; font-weight: bold; color: #333; }
+    .metric-label { font-size: 14px; color: #666; margin-bottom: 5px; }
+    .positive { color: #27ae60; }
+    .negative { color: #e74c3c; }
+    pre { background: #f8f9fa; padding: 15px; overflow-x: auto; font-size: 12px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div id="loginCard" class="card">
+    <h1>🚗 VinTrusted CRM</h1>
+    <input type="password" id="pass" placeholder="Пароль" value="vintrusted2026">
+    <button onclick="doLogin()">Войти</button>
+    <p id="loginError" class="negative"></p>
+  </div>
+
+  <div id="dashboard" class="hidden">
+    <div class="card">
+      <h1>📊 VinTrusted Analytics</h1>
+      <div>
+        <label>Начало: <input type="date" id="start" value="2026-01-01"></label>
+        <label>Конец: <input type="date" id="end"></label>
+        <label>Бюджет ($): <input type="number" id="budget" value="800"></label>
+        <button onclick="loadData()" id="loadBtn">Загрузить</button>
+        <button onclick="doLogout()">Выйти</button>
+      </div>
+    </div>
+
+    <div id="loadingCard" class="card hidden">
+      <h3>⏳ Загрузка данных из Stripe...</h3>
+      <p>Это может занять 10-15 секунд</p>
+    </div>
+
+    <div id="metricsCard" class="card hidden">
+      <h2>Основные метрики</h2>
+      <div class="metrics" id="metricsGrid"></div>
+    </div>
+
+    <div id="sourcesCard" class="card hidden">
+      <h2>Источники трафика</h2>
+      <div id="sourcesDiv"></div>
+    </div>
+
+    <div id="rawCard" class="card hidden">
+      <h2>Raw JSON (для отладки)</h2>
+      <pre id="rawJSON"></pre>
+    </div>
+  </div>
+
+  <script>
+    let token = '';
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('end').value = today;
+
+    function doLogin() {
+      const pass = document.getElementById('pass').value;
+      if (!pass) {
+        document.getElementById('loginError').textContent = 'Введите пароль!';
+        return;
+      }
+      token = pass;
+      localStorage.setItem('crm_token', pass);
+      document.getElementById('loginCard').style.display = 'none';
+      document.getElementById('dashboard').classList.remove('hidden');
+      loadData();
+    }
+
+    function doLogout() {
+      localStorage.removeItem('crm_token');
+      location.reload();
+    }
+
+    async function loadData() {
+      const start = document.getElementById('start').value;
+      const end = document.getElementById('end').value;
+      const budget = document.getElementById('budget').value;
+
+      document.getElementById('loadBtn').disabled = true;
+      document.getElementById('loadingCard').classList.remove('hidden');
+      document.getElementById('metricsCard').classList.add('hidden');
+      document.getElementById('sourcesCard').classList.add('hidden');
+      document.getElementById('rawCard').classList.add('hidden');
+
+      try {
+        console.log('Fetching API...');
+        const url = `/api/crm/analytics?start=${start}&end=${end}&budget=${budget}`;
+        const response = await fetch(url, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        console.log('Status:', response.status);
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Data received:', data);
+
+        // Render metrics
+        const metrics = [
+          { label: 'Клиенты', value: data.summary.customers },
+          { label: 'Выручка', value: '$' + data.summary.revenue.toFixed(2), positive: true },
+          { label: 'Чистая прибыль', value: '$' + data.summary.netProfit.toFixed(2), class: data.summary.netProfit >= 0 ? 'positive' : 'negative' },
+          { label: 'ROI', value: data.summary.roi.toFixed(1) + '%', class: data.summary.roi >= 100 ? 'positive' : 'negative' },
+          { label: 'CPA', value: '$' + data.summary.leadCost.toFixed(2) },
+          { label: 'Цена платящего лида', value: '$' + data.summary.payingLeadCost.toFixed(2) },
+          { label: 'Retention', value: data.summary.retentionRate.toFixed(1) + '%' },
+          { label: 'Churn Rate', value: data.summary.churnRate.toFixed(1) + '%' },
+          { label: 'Churn (без disputes)', value: data.summary.churnRateNoDisputes.toFixed(1) + '%' },
+          { label: 'Заработок в день', value: '$' + data.summary.dailyProfit.toFixed(2), class: data.summary.dailyProfit >= 0 ? 'positive' : 'negative' },
+          { label: 'Выручка в день', value: '$' + data.summary.dailyRevenue.toFixed(2) },
+          { label: 'Диспуты', value: data.disputes.total + ' (' + data.disputes.needsResponse + ' needs response)' },
+        ];
+
+        const grid = document.getElementById('metricsGrid');
+        grid.innerHTML = metrics.map(m => `
+          <div class="metric">
+            <div class="metric-label">${m.label}</div>
+            <div class="metric-value ${m.class || ''}">${m.value}</div>
+          </div>
+        `).join('');
+
+        // Render sources
+        const sourcesDiv = document.getElementById('sourcesDiv');
+        let sourcesHTML = '<table style="width:100%; border-collapse: collapse;"><thead><tr style="background:#f0f0f0;"><th style="padding:10px; text-align:left;">Источник</th><th>Клиенты</th><th>Выручка</th><th>ROI</th></tr></thead><tbody>';
+        
+        for (const [source, stats] of Object.entries(data.sources)) {
+          const sourceCPA = (data.summary.trafficCost * stats.customers / data.summary.customers).toFixed(2);
+          const sourceROI = sourceCPA > 0 ? (((stats.revenue - sourceCPA) / sourceCPA) * 100).toFixed(1) : 'N/A';
+          sourcesHTML += `<tr style="border-bottom:1px solid #eee;"><td style="padding:10px;"><strong>${source.toUpperCase()}</strong></td><td style="padding:10px;">${stats.customers}</td><td style="padding:10px;">$${stats.revenue.toFixed(2)}</td><td style="padding:10px;">${sourceROI}%</td></tr>`;
+        }
+        
+        sourcesHTML += '</tbody></table>';
+        sourcesDiv.innerHTML = sourcesHTML;
+
+        // Show raw JSON
+        document.getElementById('rawJSON').textContent = JSON.stringify(data, null, 2);
+
+        // Show all cards
+        document.getElementById('loadingCard').classList.add('hidden');
+        document.getElementById('metricsCard').classList.remove('hidden');
+        document.getElementById('sourcesCard').classList.remove('hidden');
+        document.getElementById('rawCard').classList.remove('hidden');
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Ошибка: ' + error.message);
+      } finally {
+        document.getElementById('loadBtn').disabled = false;
+        document.getElementById('loadingCard').classList.add('hidden');
+      }
+    }
+
+    // Auto-login if token exists
+    const savedToken = localStorage.getItem('crm_token');
+    if (savedToken) {
+      document.getElementById('pass').value = savedToken;
+    }
+  </script>
+</body>
+</html>
