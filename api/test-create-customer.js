@@ -3,12 +3,12 @@ import { kv } from '@vercel/kv';
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   
-  if (req.method !== 'POST') {
+  if (req.method !== 'POST' && req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { scenario } = req.body;
+    const { scenario } = req.method === 'GET' ? req.query : req.body;
     
     // Сценарий 1: Customer с активной подпиской и квотой
     if (scenario === 'active_with_quota') {
@@ -156,9 +156,83 @@ export default async function handler(req, res) {
       return res.json({ success: true, scenario: 'cleanup' });
     }
     
-    return res.status(400).json({ 
+    // Сценарий 6: Customer с dispute (chargeback)
+    if (scenario === 'disputed') {
+      const email = 'disputed@test.com';
+      const customerData = {
+        customer_id: 'cus_test_disputed_001',
+        email: email,
+        created_at: new Date().toISOString(),
+        disputed: true,
+        dispute_id: 'dp_test_001',
+        dispute_created_at: new Date().toISOString(),
+        subscription: {
+          subscription_schedule_id: null,
+          subscription_id: 'sub_test_005',
+          status: 'disputed',
+          start_date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+          end_date: new Date(Date.now() + 23 * 24 * 60 * 60 * 1000).toISOString()
+        },
+        quota: {
+          total: 0,
+          used: 1,
+          remaining: 0
+        },
+        reports: [{
+          vin: 'JM1BL1S55A1234567',
+          purchased_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+          vehicle_name: '2010 MAZDA MAZDA3',
+          period: 'trial'
+        }]
+      };
+      
+      await kv.set(`customer:email:${email}`, customerData);
+      return res.json({ success: true, scenario: 'disputed', email });
+    }
+
+    // Сценарий 7: Customer в trialing периоде (первые 3 дня после $2.99)
+    if (scenario === 'trialing') {
+      const email = 'trialing@test.com';
+      const customerData = {
+        customer_id: 'cus_test_trialing_001',
+        email: email,
+        created_at: new Date().toISOString(),
+        subscription: {
+          subscription_schedule_id: 'sub_sched_test_005',
+          subscription_id: null,
+          status: 'trialing',
+          start_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(), // Start in 3 days
+          end_date: new Date(Date.now() + 36 * 24 * 60 * 60 * 1000).toISOString()
+        },
+        quota: {
+          total: 2,
+          used: 1,
+          remaining: 1
+        },
+        reports: [{
+          vin: '5UXWX7C5XBA123456',
+          purchased_at: new Date().toISOString(),
+          vehicle_name: '2011 BMW X3',
+          period: 'trial'
+        }]
+      };
+      
+      await kv.set(`customer:email:${email}`, customerData);
+      
+      // Кешируем отчет
+      await kv.set('report:cache:5UXWX7C5XBA123456', {
+        vin: '5UXWX7C5XBA123456',
+        cached_at: new Date().toISOString(),
+        report_data: { sample: 'data' },
+        vehicle: { year: 2011, make: 'BMW', model: 'X3' }
+      }, { ex: 60 * 60 * 24 * 90 });
+      
+      return res.json({ success: true, scenario: 'trialing', email });
+    }
+
+    return res.status(400).json({
       error: 'Unknown scenario',
-      available: ['active_with_quota', 'active_one_report', 'quota_exhausted', 'canceled_subscription', 'cleanup']
+      available: ['active_with_quota', 'active_one_report', 'quota_exhausted', 'canceled_subscription', 'disputed', 'trialing', 'cleanup']
     });
 
   } catch (error) {
