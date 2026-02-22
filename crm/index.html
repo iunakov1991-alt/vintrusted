@@ -935,27 +935,39 @@
       try {
         const url = `/api/crm/analytics?start=${startDate}&end=${endDate}&budget=${budget}`;
         console.log('Fetching:', url);
+        console.log('Auth token:', authToken ? authToken.substring(0,5) + '...' : 'MISSING');
+        
+        // Create abort controller for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
         
         const response = await fetch(url, {
           headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/json'
+          },
+          signal: controller.signal
         });
 
+        clearTimeout(timeoutId);
         console.log('Response status:', response.status);
+        console.log('Response headers:', Object.fromEntries(response.headers.entries()));
 
         if (!response.ok) {
           if (response.status === 401) {
             console.error('Unauthorized - invalid password');
+            alert('Неверный пароль! Проверьте что CRM_PASSWORD установлен в Vercel.');
             return false;
           }
           const errorText = await response.text();
-          console.error('API error:', errorText);
+          console.error('API error response:', errorText);
+          alert('Ошибка API (' + response.status + '): ' + errorText.substring(0, 200));
           throw new Error('API error: ' + response.status);
         }
 
         const data = await response.json();
-        console.log('Data received:', data);
+        console.log('Data received successfully:', Object.keys(data));
+        console.log('Summary:', data.summary);
         currentData = data;
         
         renderMetrics(data);
@@ -968,7 +980,14 @@
         return true;
       } catch (error) {
         console.error('Error fetching data:', error);
-        alert('Ошибка загрузки данных: ' + error.message);
+        console.error('Error name:', error.name);
+        console.error('Error stack:', error.stack);
+        
+        if (error.name === 'AbortError') {
+          alert('Timeout: API не ответил за 30 секунд. Попробуйте еще раз.');
+        } else {
+          alert('Ошибка загрузки данных: ' + error.message + '\n\nПроверьте console для деталей.');
+        }
         return false;
       } finally {
         if (loadingIndicator) loadingIndicator.style.display = 'none';
