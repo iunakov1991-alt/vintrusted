@@ -521,19 +521,77 @@
             }
         }
 
-        function renewSubscription() {
-            // TODO: Implement renewal flow
-            alert('Renewal coming soon! Please contact support.');
+        async function renewSubscription() {
+            // Редирект напрямую на payment page для продления
+            // Используем специальный VIN для пропуска проверки customer
+            window.location.href = `/report.html?vin=RENEW&email=${encodeURIComponent(email)}&renewal=1`;
         }
 
-        function cancelSubscription() {
-            // TODO: Implement cancellation
-            alert('Cancellation coming soon! Please contact support.');
+        async function cancelSubscription() {
+            try {
+                const response = await fetch('/api/cancel-subscription', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    alert(result.message || 'Error canceling subscription');
+                    return;
+                }
+
+                alert('✅ Subscription canceled. You can continue using reports until the end of your billing period.');
+                
+                // Reload dashboard to show updated status
+                loadCustomerData();
+            } catch (error) {
+                console.error('Error canceling subscription:', error);
+                alert('Error canceling subscription. Please try again.');
+            }
         }
 
-        function downloadReport(vin) {
-            // TODO: Implement PDF download
-            alert(`Download for ${vin} coming soon!`);
+        async function downloadReport(vin) {
+            try {
+                // Fetch cached report data
+                const response = await fetch(`/api/get-cached-report?email=${encodeURIComponent(email)}&vin=${encodeURIComponent(vin)}`);
+                
+                if (!response.ok) {
+                    throw new Error('Report not found');
+                }
+
+                const reportData = await response.json();
+                
+                // Simple text download (можно позже улучшить до PDF)
+                const reportText = `
+VIN REPORT
+==========
+
+VIN: ${vin}
+Vehicle: ${reportData.report?.vehicle || 'Unknown'}
+Generated: ${new Date().toLocaleDateString()}
+
+--- Report Details ---
+${JSON.stringify(reportData.report, null, 2)}
+
+--- End of Report ---
+                `;
+
+                const blob = new Blob([reportText], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `report-${vin}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+            } catch (error) {
+                console.error('Error downloading report:', error);
+                alert('Error downloading report. Please try again.');
+            }
         }
 
         // Load data on page load

@@ -87,6 +87,31 @@ export default async function handler(req, res) {
       console.log('[ANTI-FRAUD] ✅ First purchase with this card');
     }
     
+    // 4. Проверка существующего customer по email (защита от повторного trial)
+    if (email) {
+      console.log('[ANTI-FRAUD] Checking for existing customer by email...');
+      const normalizedEmail = email.toLowerCase().trim();
+      const customerKey = `customer:email:${normalizedEmail}`;
+      const existingCustomer = await kv.get(customerKey);
+      
+      if (existingCustomer) {
+        console.log('[ANTI-FRAUD] ⚠️  Customer exists in KV:', existingCustomer.customer_id);
+        console.log('[ANTI-FRAUD] Previous subscription status:', existingCustomer.subscription?.status);
+        
+        // Если подписка активна - блокируем
+        if (existingCustomer.subscription?.status === 'active') {
+          console.log('[ANTI-FRAUD] 🚫 ACTIVE SUBSCRIPTION - Renewal required');
+          return res.status(403).json({ 
+            error: 'Active subscription exists',
+            message: 'You already have an active subscription. Please manage it from your account page.'
+          });
+        }
+        
+        // Если подписка отменена - позволяем, но логируем
+        console.log('[ANTI-FRAUD] ℹ️  Allowing renewal for canceled/inactive subscription');
+      }
+    }
+    
     console.log('[ANTI-FRAUD] ✅ Card is not blocked');
 
     // 1) Customer с привязанным PM

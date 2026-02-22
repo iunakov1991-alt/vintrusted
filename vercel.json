@@ -150,6 +150,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/cancel-subscription.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -554,6 +558,10 @@
     {
       "source": "/api/test-create-customer",
       "destination": "/api/test-create-customer.js"
+    },
+    {
+      "source": "/api/cancel-subscription",
+      "destination": "/api/cancel-subscription.js"
     },
     {
       "source": "/semantic-pages/en",
