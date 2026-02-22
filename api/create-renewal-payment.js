@@ -103,8 +103,7 @@ export default async function handler(req, res) {
         },
       ],
       subscription_data: {
-        // Сразу активная подписка, без trial
-        trial_period_days: 0,
+        // Без trial period (по умолчанию начинается сразу)
         metadata: {
           renewal: 'true',
           original_email: email
