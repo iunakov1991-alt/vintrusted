@@ -1,15 +1,7 @@
-// Объединённая функция: stripe-config + stripe-webhook
-// Эндпоинт /api/stripe-config теперь обрабатывается здесь
+import Stripe from 'stripe';
+import { kv } from '@vercel/kv';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req, res) {
-  // Если это GET запрос на /api/stripe-config
-  if (req.method === 'GET' && req.url === '/api/stripe-config') {
-    return res.status(200).json({
-      publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLISHABLE_KEY || '',
-    });
-  }
-  
-  // Остальной код stripe-webhook...
 const { createOrGetReport } = require('./_lib/vinaudit');
 const { store } = require('./_lib/store');
 
@@ -22,7 +14,14 @@ function buffer(req) {
   });
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
+  // Handle stripe-config endpoint
+  if (req.method === 'GET' && req.url === '/api/stripe-config') {
+    return res.status(200).json({
+      publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLISHABLE_KEY || '',
+    });
+  }
+  
   // Disable body parsing for raw body access
   req.rawBody = true;
   if (req.method !== 'POST') {
@@ -131,6 +130,108 @@ module.exports = async (req, res) => {
     }
   }
 
+  // Handle subscription events
+  if (event.type === 'customer.subscription.created') {
+    const subscription = event.data.object;
+    console.log('[WEBHOOK] Subscription created:', subscription.id);
+    
+    try {
+      // Обновляем customer record в KV
+      const customer = await stripe.customers.retrieve(subscription.customer);
+      if (customer.email) {
+        const normalizedEmail = customer.email.toLowerCase().trim();
+        const customerKey = `customer:email:${normalizedEmail}`;
+        const customerData = await kv.get(customerKey);
+        
+        if (customerData) {
+          customerData.subscription = {
+            subscription_id: subscription.id,
+            subscription_schedule_id: customerData.subscription?.subscription_schedule_id || null,
+            status: subscription.status,
+            start_date: new Date(subscription.current_period_start * 1000).toISOString(),
+            end_date: new Date(subscription.current_period_end * 1000).toISOString()
+          };
+          
+          // Reset quota на новый цикл (2 reports на 33 дня)
+          customerData.quota = {
+            total: 2,
+            used: 0,
+            remaining: 2
+          };
+          
+          await kv.set(customerKey, customerData);
+          console.log('[WEBHOOK] ✅ Customer subscription updated in KV');
+        }
+      }
+    } catch (err) {
+      console.error('[WEBHOOK] Error updating subscription in KV:', err.message);
+    }
+  }
+
+  if (event.type === 'customer.subscription.updated') {
+    const subscription = event.data.object;
+    console.log('[WEBHOOK] Subscription updated:', subscription.id, 'Status:', subscription.status);
+    
+    try {
+      const customer = await stripe.customers.retrieve(subscription.customer);
+      if (customer.email) {
+        const normalizedEmail = customer.email.toLowerCase().trim();
+        const customerKey = `customer:email:${normalizedEmail}`;
+        const customerData = await kv.get(customerKey);
+        
+        if (customerData) {
+          customerData.subscription = {
+            subscription_id: subscription.id,
+            subscription_schedule_id: customerData.subscription?.subscription_schedule_id || null,
+            status: subscription.status,
+            start_date: new Date(subscription.current_period_start * 1000).toISOString(),
+            end_date: new Date(subscription.current_period_end * 1000).toISOString(),
+            cancel_at_period_end: subscription.cancel_at_period_end
+          };
+          
+          await kv.set(customerKey, customerData);
+          console.log('[WEBHOOK] ✅ Customer subscription status synced to KV');
+        }
+      }
+    } catch (err) {
+      console.error('[WEBHOOK] Error syncing subscription update:', err.message);
+    }
+  }
+
+  if (event.type === 'customer.subscription.deleted') {
+    const subscription = event.data.object;
+    console.log('[WEBHOOK] Subscription deleted/canceled:', subscription.id);
+    
+    try {
+      const customer = await stripe.customers.retrieve(subscription.customer);
+      if (customer.email) {
+        const normalizedEmail = customer.email.toLowerCase().trim();
+        const customerKey = `customer:email:${normalizedEmail}`;
+        const customerData = await kv.get(customerKey);
+        
+        if (customerData) {
+          customerData.subscription = {
+            ...customerData.subscription,
+            status: 'canceled',
+            canceled_at: new Date().toISOString()
+          };
+          
+          // Обнуляем квоту при отмене
+          customerData.quota = {
+            total: 0,
+            used: customerData.quota?.used || 0,
+            remaining: 0
+          };
+          
+          await kv.set(customerKey, customerData);
+          console.log('[WEBHOOK] ✅ Subscription canceled in KV');
+        }
+      }
+    } catch (err) {
+      console.error('[WEBHOOK] Error handling subscription deletion:', err.message);
+    }
+  }
+
   return res.status(200).json({ received: true });
-};
+}
 

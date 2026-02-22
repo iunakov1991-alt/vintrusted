@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { kv } from '@vercel/kv';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // ┌─────────────────────────────────────────────────────────────┐
@@ -173,7 +174,58 @@ export default async function handler(req, res) {
       finalVin = customer.metadata?.vin || '';
     }
     
-    // 4) Отправить отчет ClearVin на email (если есть email и VIN)
+    // 4) SAVE TO VERCEL KV
+    if (email && customer.id) {
+      try {
+        console.log('[CHECKOUT] 💾 Saving customer to KV...');
+        
+        const normalizedEmail = email.toLowerCase().trim();
+        const customerKey = `customer:email:${normalizedEmail}`;
+        
+        // Создаем или обновляем customer record
+        const customerRecord = {
+          customer_id: customer.id,
+          email: normalizedEmail,
+          created_at: new Date().toISOString(),
+          subscription: {
+            subscription_schedule_id: schedule?.id || null,
+            subscription_id: null,
+            status: 'active',
+            start_date: schedule ? new Date((Math.floor(Date.now() / 1000) + 3 * 86400) * 1000).toISOString() : null
+          },
+          quota: {
+            total: 2,
+            used: 1,
+            remaining: 1
+          },
+          reports: finalVin ? [{
+            vin: finalVin.toUpperCase(),
+            purchased_at: new Date().toISOString(),
+            vehicle_name: '',
+            period: 'trial'
+          }] : []
+        };
+        
+        await kv.set(customerKey, customerRecord);
+        console.log('[CHECKOUT] ✅ Customer saved to KV:', customerKey);
+        
+        // Cache VIN report if available
+        if (finalVin) {
+          const reportKey = `report:cache:${finalVin.toUpperCase()}`;
+          await kv.set(reportKey, {
+            vin: finalVin.toUpperCase(),
+            cached_at: new Date().toISOString(),
+            report_data: null,
+            vehicle: null
+          }, { ex: 60 * 60 * 24 * 90 });
+          console.log('[CHECKOUT] ✅ VIN cached:', reportKey);
+        }
+      } catch (kvError) {
+        console.error('[CHECKOUT] ⚠️  Failed to save to KV:', kvError.message);
+      }
+    }
+    
+    // 5) Отправить отчет ClearVin на email (если есть email и VIN)
     if (email && finalVin) {
       try {
         console.log('Sending ClearVin report to:', email, 'for VIN:', finalVin);
@@ -220,7 +272,7 @@ export default async function handler(req, res) {
       successUrl += '?' + params.toString();
     }
     
-    // Если $1 потребовал доп. действия (редко), вернём клиентский secret для confirmCardPayment
+    // Если $2.99 потребовал доп. действия (редко), вернём клиентский secret для confirmCardPayment
     const payload = { success: true, success_url: successUrl };
     if (pi.status === 'requires_action' || pi.status === 'requires_confirmation') {
       payload.next_action = true;

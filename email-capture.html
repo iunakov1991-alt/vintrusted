@@ -357,7 +357,7 @@
         // Real-time validation
         emailInput.addEventListener('input', validateEmail);
         
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const email = emailInput.value.trim();
@@ -370,7 +370,7 @@
             }
             
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Processing...';
+            submitBtn.textContent = 'Checking...';
             
             console.log('[EMAIL CAPTURE] 📧 Email collected:', email, 'VIN:', vin);
             
@@ -395,7 +395,37 @@
             });
             console.log('[EMAIL CAPTURE] ✅ Pushed conversion event');
             
-            // Redirect to report page with VIN and email - увеличиваю задержку до 1500ms
+            // ===== NEW: REPEAT BUYER DETECTION =====
+            try {
+                console.log('[EMAIL CAPTURE] 🔍 Checking if customer exists...');
+                
+                const checkResponse = await fetch('/api/check-customer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, vin })
+                });
+                
+                const customerData = await checkResponse.json();
+                
+                if (customerData.exists) {
+                    console.log('[EMAIL CAPTURE] ✅ Existing customer detected!');
+                    console.log('[EMAIL CAPTURE] Customer has:', customerData.reports_count, 'reports');
+                    console.log('[EMAIL CAPTURE] Quota remaining:', customerData.quota_remaining);
+                    
+                    // Redirect to personal cabinet
+                    setTimeout(() => {
+                        console.log('[EMAIL CAPTURE] 🔄 Redirecting to personal cabinet...');
+                        window.location.href = `/my-reports.html?email=${encodeURIComponent(email)}`;
+                    }, 800);
+                    return;
+                }
+                
+                console.log('[EMAIL CAPTURE] ℹ️  New customer - proceeding to payment');
+            } catch (checkError) {
+                console.error('[EMAIL CAPTURE] ⚠️  Customer check failed, proceeding to payment:', checkError.message);
+            }
+            
+            // Redirect to report page with VIN and email
             setTimeout(() => {
                 console.log('[EMAIL CAPTURE] 🔄 Redirecting to report page...');
                 window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;

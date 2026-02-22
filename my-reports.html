@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reports - VIN Trust</title>
+    <link rel="icon" type="image/png" href="/favicon 2.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            min-height: 100vh;
+            padding: 20px;
+            color: #1a1a1a;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+        
+        /* User Card */
+        .user-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .user-email {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-canceled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        /* Quota Card */
+        .quota-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .quota-title {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .quota-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .quota-subtext {
+            font-size: 13px;
+            color: #6b7280;
+        }
+        
+        /* Reports List */
+        .reports-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+        
+        .report-item {
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .report-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .report-vin {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        
+        .report-vehicle {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+        
+        .report-date {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        
+        .report-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .btn-view, .btn-download {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-view {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-view:hover {
+            background: #2563eb;
+        }
+        
+        .btn-download {
+            background: #f3f4f6;
+            color: #1a1a1a;
+        }
+        
+        .btn-download:hover {
+            background: #e5e7eb;
+        }
+        
+        /* New VIN Check */
+        .check-vin-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .vin-input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        
+        .vin-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .vin-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        
+        .btn-check {
+            padding: 12px 24px;
+            background: #fbbf24;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-check:hover {
+            background: #f59e0b;
+        }
+        
+        .btn-check:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+        
+        /* Offer Card */
+        .offer-card {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+            text-align: center;
+        }
+        
+        .offer-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
+        
+        .offer-price {
+            font-size: 48px;
+            font-weight: 900;
+            color: #1a1a1a;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .offer-features {
+            text-align: left;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #1a1a1a;
+        }
+        
+        .offer-features div {
+            margin-bottom: 8px;
+        }
+        
+        .btn-buy {
+            width: 100%;
+            padding: 16px;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        
+        .btn-buy:hover {
+            background: #000;
+            transform: translateY(-2px);
+        }
+        
+        /* Cancel Button */
+        .cancel-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .btn-cancel {
+            padding: 12px 24px;
+            background: #fee;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-cancel:hover {
+            background: #fecaca;
+        }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/logo-vin-trust.png" alt="VIN Trust" class="logo">
+        </div>
+
+        <div id="content" class="loading">
+            <div class="spinner"></div>
+            <div>Loading your account...</div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        const newVin = urlParams.get('new_vin');
+        const offerType = urlParams.get('offer');
+
+        if (!email) {
+            window.location.href = '/';
+        }
+
+        // Load customer data
+        async function loadCustomerData() {
+            try {
+                const response = await fetch(`/api/get-customer-data?email=${encodeURIComponent(email)}`);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load customer data');
+                }
+
+                const data = await response.json();
+                renderDashboard(data);
+            } catch (error) {
+                console.error('Error loading customer data:', error);
+                document.getElementById('content').innerHTML = `
+                    <div class="empty-state">
+                        <h3>Error loading account</h3>
+                        <p>${error.message}</p>
+                        <button onclick="window.location.href='/'" style="margin-top: 20px; padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer;">Go Home</button>
+                    </div>
+                `;
+            }
+        }
+
+        function renderDashboard(data) {
+            const container = document.getElementById('content');
+            const subscription = data.subscription || {};
+            const quota = data.quota || { total: 0, used: 0, remaining: 0 };
+            const reports = data.reports || [];
+
+            let html = '';
+
+            // User Card
+            html += `
+                <div class="user-card">
+                    <div class="user-email">${data.email}</div>
+                    <span class="status-badge status-${subscription.status === 'active' ? 'active' : 'canceled'}">
+                        ${subscription.status === 'active' ? '✓ Active Subscription' : '❌ No Active Subscription'}
+                    </span>
+                </div>
+            `;
+
+            // Quota Card
+            if (subscription.status === 'active') {
+                html += `
+                    <div class="quota-card">
+                        <div class="quota-title">Reports Remaining</div>
+                        <div class="quota-value">${quota.remaining}/${quota.total}</div>
+                        <div class="quota-subtext">Resets: ${new Date(subscription.current_period_end).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+                        <div class="quota-subtext">Next charge: $49 on ${new Date(subscription.current_period_end).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>
+                    </div>
+                `;
+            }
+
+            // Offer Card (если квота 0 или подписка отменена)
+            if (subscription.status !== 'active' || quota.remaining === 0) {
+                html += `
+                    <div class="offer-card">
+                        <div class="offer-title">${subscription.status === 'active' ? 'No Reports Remaining' : 'Want to Check More Vehicles?'}</div>
+                        <div class="offer-price">$49</div>
+                        <div class="offer-features">
+                            <div>✓ 2 VIN checks</div>
+                            <div>✓ Valid for 33 days</div>
+                            <div>✓ Then $49 every 33 days</div>
+                        </div>
+                        <button class="btn-buy" onclick="renewSubscription()">Renew Subscription</button>
+                    </div>
+                `;
+            }
+
+            // Reports List
+            if (reports.length > 0) {
+                html += `
+                    <div class="reports-card">
+                        <div class="section-title">Your Reports (${reports.length})</div>
+                `;
+
+                reports.forEach(report => {
+                    const date = new Date(report.purchased_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    html += `
+                        <div class="report-item">
+                            <div class="report-vin">${report.vin}</div>
+                            <div class="report-vehicle">${report.vehicle_name || 'Loading...'}</div>
+                            <div class="report-date">${date}</div>
+                            <div class="report-actions">
+                                <a href="/report.html?vin=${report.vin}&email=${encodeURIComponent(email)}&cached=1" class="btn-view">View Report</a>
+                                <button class="btn-download" onclick="downloadReport('${report.vin}')">Download</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+            }
+
+            // Check New VIN (только если есть квота)
+            if (subscription.status === 'active' && quota.remaining > 0) {
+                html += `
+                    <div class="check-vin-card">
+                        <div class="section-title">Check New VIN (${quota.remaining} remaining)</div>
+                        <form id="checkVinForm" class="vin-input-group">
+                            <input type="text" class="vin-input" id="newVinInput" placeholder="Enter VIN" maxlength="17" required>
+                            <button type="submit" class="btn-check">Check</button>
+                        </form>
+                    </div>
+                `;
+            }
+
+            // Cancel Subscription
+            if (subscription.status === 'active' && !subscription.cancel_at_period_end) {
+                html += `
+                    <div class="cancel-card">
+                        <button class="btn-cancel" onclick="if(confirm('Are you sure you want to cancel?')) cancelSubscription()">Cancel Subscription</button>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+
+            // Add form handler if quota available
+            if (subscription.status === 'active' && quota.remaining > 0) {
+                document.getElementById('checkVinForm').addEventListener('submit', handleNewVinCheck);
+            }
+        }
+
+        async function handleNewVinCheck(e) {
+            e.preventDefault();
+            const vinInput = document.getElementById('newVinInput');
+            const vin = vinInput.value.trim().toUpperCase();
+
+            if (vin.length !== 17) {
+                alert('Please enter a valid 17-character VIN');
+                return;
+            }
+
+            // Use quota and redirect to report
+            try {
+                const response = await fetch('/api/use-quota', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, vin })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    alert(result.message || 'Error checking VIN');
+                    return;
+                }
+
+                // Redirect to report page
+                window.location.href = `/report.html?vin=${vin}&email=${encodeURIComponent(email)}&from_quota=1`;
+            } catch (error) {
+                console.error('Error using quota:', error);
+                alert('Error checking VIN. Please try again.');
+            }
+        }
+
+        function renewSubscription() {
+            // TODO: Implement renewal flow
+            alert('Renewal coming soon! Please contact support.');
+        }
+
+        function cancelSubscription() {
+            // TODO: Implement cancellation
+            alert('Cancellation coming soon! Please contact support.');
+        }
+
+        function downloadReport(vin) {
+            // TODO: Implement PDF download
+            alert(`Download for ${vin} coming soon!`);
+        }
+
+        // Load data on page load
+        loadCustomerData();
+    </script>
+</body>
+</html>
