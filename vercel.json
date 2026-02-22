@@ -146,6 +146,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/test-create-customer.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -546,6 +550,10 @@
     {
       "source": "/api/test-kv",
       "destination": "/api/test-kv.js"
+    },
+    {
+      "source": "/api/test-create-customer",
+      "destination": "/api/test-create-customer.js"
     },
     {
       "source": "/semantic-pages/en",
