@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM Debug - Calculator Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      padding: 40px;
+      background: #f5f7fa;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .debug-info {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .slider-group {
+      margin-bottom: 25px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .slider-group label {
+      display: block;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .slider-group label span {
+      float: right;
+      color: #667eea;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .slider-group input[type="range"] {
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: #e0e0e0;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    .slider-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #e8f5e9;
+      border-radius: 8px;
+    }
+
+    .result-item {
+      padding: 10px;
+      margin: 5px 0;
+      background: white;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .error {
+      color: red;
+      padding: 10px;
+      background: #ffebee;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧮 CRM Debug - Тест калькулятора</h1>
+    
+    <div class="debug-info" id="debugInfo">
+      <div>Status: Initializing...</div>
+    </div>
+
+    <div id="loginSection">
+      <input type="password" id="password" placeholder="Пароль">
+      <button onclick="testLogin()">Войти и загрузить данные</button>
+    </div>
+
+    <div id="calculatorSection" style="display: none;">
+      <h2>Калькулятор</h2>
+      
+      <div class="slider-group">
+        <label>
+          Клиенты: <span id="calcCustomers">0</span>
+        </label>
+        <input type="range" id="sliderCustomers" min="10" max="200" value="24" step="1">
+      </div>
+
+      <div class="slider-group">
+        <label>
+          Retention Rate: <span id="calcRetention">0</span>%
+        </label>
+        <input type="range" id="sliderRetention" min="0" max="100" value="17" step="1">
+      </div>
+
+      <div class="slider-group">
+        <label>
+          Бюджет: $<span id="calcBudget">0</span>
+        </label>
+        <input type="range" id="sliderBudget" min="100" max="5000" value="800" step="50">
+      </div>
+
+      <div class="slider-group">
+        <label>
+          Dispute Rate: <span id="calcDisputeRate">0</span>%
+        </label>
+        <input type="range" id="sliderDisputeRate" min="0" max="30" value="8" step="1">
+      </div>
+
+      <div class="slider-group">
+        <label>
+          Trial Price: $<span id="calcTrialPrice">0</span>
+        </label>
+        <input type="range" id="sliderTrialPrice" min="1" max="10" value="2.99" step="0.5">
+      </div>
+
+      <div class="slider-group">
+        <label>
+          Recurring Price: $<span id="calcRecurringPrice">0</span>
+        </label>
+        <input type="range" id="sliderRecurringPrice" min="20" max="200" value="49" step="5">
+      </div>
+
+      <button onclick="resetCalc()">Сбросить</button>
+
+      <div class="results">
+        <h3>Результаты:</h3>
+        <div class="result-item">
+          <span>Выручка:</span>
+          <span id="calcRevenue">$0</span>
+        </div>
+        <div class="result-item">
+          <span>Чистая прибыль:</span>
+          <span id="calcNetProfit">$0</span>
+        </div>
+        <div class="result-item">
+          <span>ROI:</span>
+          <span id="calcROI">0%</span>
+        </div>
+        <div class="result-item">
+          <span>CPA:</span>
+          <span id="calcCPA">$0</span>
+        </div>
+        <div class="result-item">
+          <span>Заработок в день:</span>
+          <span id="calcDailyProfit">$0</span>
+        </div>
+        <div class="result-item">
+          <span>Churn Rate:</span>
+          <span id="calcChurn">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let baselineData = null;
+    let authToken = '';
+
+    function log(msg) {
+      const debugDiv = document.getElementById('debugInfo');
+      const timestamp = new Date().toLocaleTimeString();
+      debugDiv.innerHTML += `<div>[${timestamp}] ${msg}</div>`;
+      console.log(msg);
+    }
+
+    async function testLogin() {
+      const password = document.getElementById('password').value;
+      log('Attempting login...');
+
+      try {
+        const response = await fetch('/api/crm/analytics?start=2026-01-01&end=2026-02-22&budget=800', {
+          headers: {
+            'Authorization': `Bearer ${password}`
+          }
+        });
+
+        log(`Response status: ${response.status}`);
+
+        if (!response.ok) {
+          log(`ERROR: ${response.status} ${response.statusText}`);
+          return;
+        }
+
+        const data = await response.json();
+        log(`Data received: ${JSON.stringify(data.summary).substring(0, 100)}...`);
+        
+        authToken = password;
+        localStorage.setItem('crm_token', password);
+        
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('calculatorSection').style.display = 'block';
+        
+        initCalculator(data);
+        log('Calculator initialized successfully!');
+        
+      } catch (error) {
+        log(`ERROR: ${error.message}`);
+        log(`Stack: ${error.stack}`);
+      }
+    }
+
+    function initCalculator(data) {
+      log('initCalculator called');
+      
+      const { summary } = data;
+      
+      baselineData = {
+        customers: summary.customers || 24,
+        retention: summary.retentionRate || 17,
+        budget: summary.trafficCost || 800,
+        disputeRate: ((data.disputes.total / summary.charges) * 100) || 8,
+        trialPrice: 2.99,
+        recurringPrice: 49,
+        days: data.period.days || 53,
+        revenue: summary.revenue || 0,
+        netProfit: summary.netProfit || 0,
+        roi: summary.roi || 0,
+        cpa: summary.leadCost || 0,
+        dailyProfit: summary.dailyProfit || 0,
+        churnRate: summary.churnRate || 0
+      };
+
+      log(`Baseline data: customers=${baselineData.customers}, retention=${baselineData.retention}%`);
+
+      // Set slider values
+      document.getElementById('sliderCustomers').value = baselineData.customers;
+      document.getElementById('sliderRetention').value = Math.round(baselineData.retention);
+      document.getElementById('sliderBudget').value = baselineData.budget;
+      document.getElementById('sliderDisputeRate').value = Math.round(baselineData.disputeRate);
+      document.getElementById('sliderTrialPrice').value = baselineData.trialPrice;
+      document.getElementById('sliderRecurringPrice').value = baselineData.recurringPrice;
+
+      log('Sliders values set');
+
+      // Update displays and calculate
+      updateDisplays();
+      calculate();
+      
+      // Attach event listeners
+      const sliders = ['sliderCustomers', 'sliderRetention', 'sliderBudget', 'sliderDisputeRate', 'sliderTrialPrice', 'sliderRecurringPrice'];
+      sliders.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.addEventListener('input', () => {
+            log(`Slider ${id} changed to: ${element.value}`);
+            updateDisplays();
+            calculate();
+          });
+          log(`Event listener attached to ${id}`);
+        } else {
+          log(`ERROR: Element ${id} not found!`);
+        }
+      });
+    }
+
+    function updateDisplays() {
+      document.getElementById('calcCustomers').textContent = document.getElementById('sliderCustomers').value;
+      document.getElementById('calcRetention').textContent = document.getElementById('sliderRetention').value;
+      document.getElementById('calcBudget').textContent = document.getElementById('sliderBudget').value;
+      document.getElementById('calcDisputeRate').textContent = document.getElementById('sliderDisputeRate').value;
+      document.getElementById('calcTrialPrice').textContent = parseFloat(document.getElementById('sliderTrialPrice').value).toFixed(2);
+      document.getElementById('calcRecurringPrice').textContent = document.getElementById('sliderRecurringPrice').value;
+    }
+
+    function calculate() {
+      const customers = parseInt(document.getElementById('sliderCustomers').value);
+      const retention = parseFloat(document.getElementById('sliderRetention').value);
+      const budget = parseFloat(document.getElementById('sliderBudget').value);
+      const disputeRate = parseFloat(document.getElementById('sliderDisputeRate').value) / 100;
+      const trialPrice = parseFloat(document.getElementById('sliderTrialPrice').value);
+      const recurringPrice = parseFloat(document.getElementById('sliderRecurringPrice').value);
+
+      const trialRevenue = customers * trialPrice;
+      const recurringCustomers = Math.round(customers * (retention / 100));
+      const recurringRevenue = recurringCustomers * recurringPrice;
+      const totalRevenue = trialRevenue + recurringRevenue;
+      
+      const disputeLoss = totalRevenue * disputeRate;
+      const netProfit = totalRevenue - disputeLoss - budget;
+      const roi = budget > 0 ? ((netProfit / budget) * 100) : 0;
+      const cpa = budget > 0 && customers > 0 ? (budget / customers) : 0;
+      const dailyProfit = baselineData.days > 0 ? (netProfit / baselineData.days) : 0;
+      const churnRate = 100 - retention;
+
+      document.getElementById('calcRevenue').textContent = '$' + totalRevenue.toFixed(2);
+      document.getElementById('calcNetProfit').textContent = '$' + netProfit.toFixed(2);
+      document.getElementById('calcROI').textContent = roi.toFixed(1) + '%';
+      document.getElementById('calcCPA').textContent = '$' + cpa.toFixed(2);
+      document.getElementById('calcDailyProfit').textContent = '$' + dailyProfit.toFixed(2);
+      document.getElementById('calcChurn').textContent = churnRate.toFixed(1) + '%';
+
+      log(`Calculated: Revenue=$${totalRevenue.toFixed(2)}, Profit=$${netProfit.toFixed(2)}, ROI=${roi.toFixed(1)}%`);
+    }
+
+    function resetCalc() {
+      if (!baselineData) return;
+      log('Resetting calculator...');
+      initCalculator({ summary: baselineData, disputes: { total: 0 }, period: { days: baselineData.days } });
+    }
+
+    log('Script loaded');
+
+    // Check for saved token
+    const savedToken = localStorage.getItem('crm_token');
+    if (savedToken) {
+      log('Found saved token, auto-logging in...');
+      document.getElementById('password').value = savedToken;
+    }
+  </script>
+</body>
+</html>

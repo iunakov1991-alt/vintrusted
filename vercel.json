@@ -604,6 +604,10 @@
       "destination": "/crm/index.html"
     },
     {
+      "source": "/crm/debug",
+      "destination": "/crm/debug.html"
+    },
+    {
       "source": "/semantic-pages/en",
       "destination": "/"
     },
