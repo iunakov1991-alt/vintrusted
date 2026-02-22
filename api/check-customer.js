@@ -52,22 +52,9 @@ export default async function handler(req, res) {
     // Проверяем, купил ли уже этот VIN
     const hasVin = customerData.reports?.some(r => r.vin === vin);
 
-    // Получаем актуальную подписку из Stripe
-    let subscriptionStatus = 'none';
-    let nextBilling = null;
-    
-    if (customerData.subscription?.subscription_id) {
-      try {
-        const sub = await stripe.subscriptions.retrieve(customerData.subscription.subscription_id);
-        subscriptionStatus = sub.status;
-        
-        if (sub.status === 'active') {
-          nextBilling = new Date(sub.current_period_end * 1000).toISOString();
-        }
-      } catch (err) {
-        console.error('[CHECK-CUSTOMER] Error fetching subscription:', err.message);
-      }
-    }
+    // Используем данные из KV (синхронизированные через webhook)
+    const subscription = customerData.subscription || {};
+    const subscriptionStatus = subscription.status || 'none';
 
     return res.status(200).json({
       exists: true,
@@ -78,8 +65,7 @@ export default async function handler(req, res) {
       quota_used: customerData.quota?.used || 0,
       quota_total: customerData.quota?.total || 0,
       reports_count: customerData.reports?.length || 0,
-      has_vin: hasVin,
-      next_billing: nextBilling
+      has_vin: hasVin
     });
 
   } catch (error) {

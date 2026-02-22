@@ -31,23 +31,8 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Customer not found' });
     }
 
-    // Получаем актуальную подписку из Stripe
-    let subscription = null;
-    
-    if (customerData.subscription?.subscription_id) {
-      try {
-        const sub = await stripe.subscriptions.retrieve(customerData.subscription.subscription_id);
-        subscription = {
-          status: sub.status,
-          current_period_start: new Date(sub.current_period_start * 1000).toISOString(),
-          current_period_end: new Date(sub.current_period_end * 1000).toISOString(),
-          cancel_at_period_end: sub.cancel_at_period_end,
-          canceled_at: sub.canceled_at ? new Date(sub.canceled_at * 1000).toISOString() : null
-        };
-      } catch (err) {
-        console.error('[GET-CUSTOMER-DATA] Error fetching subscription:', err.message);
-      }
-    }
+    // Используем данные из KV (синхронизированные через webhook)
+    const subscription = customerData.subscription || null;
 
     return res.status(200).json({
       email: customerData.email,
