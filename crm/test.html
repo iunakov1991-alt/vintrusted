@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CRM API Test</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #f5f5f5; }
+    .test { margin: 20px 0; padding: 15px; background: white; border-radius: 8px; }
+    .success { color: green; }
+    .error { color: red; }
+    .loading { color: orange; }
+    button { padding: 10px 20px; margin: 10px 5px; cursor: pointer; }
+    pre { background: #eee; padding: 10px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>🧪 CRM API Test Page</h1>
+  
+  <div class="test">
+    <h3>Test 1: Fetch API Data</h3>
+    <button onclick="testAPI()">Test API</button>
+    <div id="apiResult"></div>
+  </div>
+
+  <div class="test">
+    <h3>Test 2: Check Chart.js CDN</h3>
+    <button onclick="testChartJS()">Test Chart.js</button>
+    <div id="chartResult"></div>
+  </div>
+
+  <div class="test">
+    <h3>Test 3: Console Logs</h3>
+    <button onclick="window.location.href='/crm'">Go to CRM (open console first!)</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script>
+    async function testAPI() {
+      const resultDiv = document.getElementById('apiResult');
+      resultDiv.innerHTML = '<p class="loading">Loading...</p>';
+      
+      try {
+        const start = Date.now();
+        const response = await fetch('/api/crm/analytics?start=2026-01-01&end=2026-02-22&budget=800', {
+          headers: {
+            'Authorization': 'Bearer vintrusted2026'
+          }
+        });
+        
+        const elapsed = Date.now() - start;
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${await response.text()}`);
+        }
+        
+        const data = await response.json();
+        
+        resultDiv.innerHTML = `
+          <p class="success">✅ API Works!</p>
+          <p>Response time: ${elapsed}ms</p>
+          <p>Customers: ${data.summary.customers}</p>
+          <p>Revenue: $${data.summary.revenue}</p>
+          <p>ROI: ${data.summary.roi}%</p>
+          <details>
+            <summary>Full JSON</summary>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          </details>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+      }
+    }
+
+    function testChartJS() {
+      const resultDiv = document.getElementById('chartResult');
+      
+      if (typeof Chart !== 'undefined') {
+        resultDiv.innerHTML = `
+          <p class="success">✅ Chart.js Loaded</p>
+          <p>Version: ${Chart.version || 'Unknown'}</p>
+        `;
+      } else {
+        resultDiv.innerHTML = `<p class="error">❌ Chart.js NOT loaded</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
