@@ -25,10 +25,30 @@ export default async function handler(req, res) {
     const normalizedEmail = email.toLowerCase().trim();
     const customerKey = `customer:email:${normalizedEmail}`;
     
-    const customerData = await kv.get(customerKey);
+    // ✅ ЗАЩИТА: KV может быть временно недоступен
+    let customerData;
+    try {
+      customerData = await kv.get(customerKey);
+    } catch (kvError) {
+      console.error('[GET-CUSTOMER-DATA] KV error:', kvError);
+      return res.status(503).json({ 
+        error: 'Service temporarily unavailable',
+        message: 'Database is temporarily unavailable. Please try again in a moment.',
+        retry: true
+      });
+    }
 
     if (!customerData) {
       return res.status(404).json({ error: 'Customer not found' });
+    }
+
+    // ✅ ЗАЩИТА: Проверяем базовую структуру данных
+    if (!customerData.email || !customerData.customer_id) {
+      console.error('[GET-CUSTOMER-DATA] Invalid customer data structure:', customerData);
+      return res.status(500).json({ 
+        error: 'Invalid customer data',
+        message: 'Customer data is corrupted. Please contact support.'
+      });
     }
 
     // Используем данные из KV (синхронизированные через webhook)
@@ -42,11 +62,23 @@ export default async function handler(req, res) {
       quota: customerData.quota || { total: 0, used: 0, remaining: 0 },
       reports: customerData.reports || [],
       disputed: customerData.disputed || false,
-      dispute_id: customerData.dispute_id || null
+      dispute_id: customerData.dispute_id || null,
+      failed_first_payment: customerData.failed_first_payment || false,
+      failed_first_payment_at: customerData.failed_first_payment_at || null,
+      // ✅ Tier data для Google Ads конверсии (определяется при checkout)
+      tier: customerData.tier || null, // 'premium', 'medium', 'fraud'
+      tier_value: customerData.tier_value !== undefined ? customerData.tier_value : null, // Может быть 0 для fraud
+      tier_determined_at: customerData.tier_determined_at || null,
+      // ✅ Флаг для определения первого визита (защита от дублей конверсий)
+      first_report_viewed: customerData.first_report_viewed || false,
+      first_report_viewed_at: customerData.first_report_viewed_at || null
     });
 
   } catch (error) {
     console.error('[GET-CUSTOMER-DATA] Error:', error);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ 
+      error: 'Internal server error',
+      message: error.message
+    });
   }
 }

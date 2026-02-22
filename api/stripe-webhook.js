@@ -14,6 +14,31 @@ function buffer(req) {
   });
 }
 
+// ✅ ЗАЩИТА: KV operations с retry logic
+async function kvGetWithRetry(key, maxRetries = 3) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await kv.get(key);
+    } catch (error) {
+      console.error(`[KV-RETRY] get(${key}) attempt ${attempt + 1} failed:`, error.message);
+      if (attempt === maxRetries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, 200 * (attempt + 1)));
+    }
+  }
+}
+
+async function kvSetWithRetry(key, value, maxRetries = 3) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await kv.set(key, value);
+    } catch (error) {
+      console.error(`[KV-RETRY] set(${key}) attempt ${attempt + 1} failed:`, error.message);
+      if (attempt === maxRetries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, 200 * (attempt + 1)));
+    }
+  }
+}
+
 export default async function handler(req, res) {
   // Handle stripe-config endpoint
   if (req.method === 'GET' && req.url === '/api/stripe-config') {
@@ -154,7 +179,7 @@ export default async function handler(req, res) {
       if (customer.email) {
         const normalizedEmail = customer.email.toLowerCase().trim();
         const customerKey = `customer:email:${normalizedEmail}`;
-        let customerData = await kv.get(customerKey);
+        let customerData = await kvGetWithRetry(customerKey);
         
         // Если customer не существует в KV - создаем новую запись (renewal case)
         if (!customerData) {
@@ -183,14 +208,45 @@ export default async function handler(req, res) {
           end_date: new Date(subscription.current_period_end * 1000).toISOString()
         };
         
-        // Reset quota на новый цикл (2 reports на 33 дня)
-        customerData.quota = {
-          total: 2,
-          used: 0,
-          remaining: 2
-        };
+        // ✅ ИСПРАВЛЕНО: Проверяем metadata для renewal
+        const isRenewal = subscription.metadata?.renewal === 'true';
         
-        await kv.set(customerKey, customerData);
+        if (isRenewal) {
+          // ═══════════════════════════════════════════════════════════
+          // MANUAL RENEWAL (пользователь кликнул "Renew Subscription")
+          // ═══════════════════════════════════════════════════════════
+          console.log('[WEBHOOK] 🔄 Processing manual renewal');
+          
+          // ВСЕГДА сбрасываем квоту для renewal (даже если она существует)
+          customerData.quota = {
+            total: 2,
+            used: 0,
+            remaining: 2
+          };
+          console.log('[WEBHOOK] ✅ Quota reset for renewal: 2/2');
+          
+          // Сохраняем старые reports (они уже в customerData.reports)
+          
+        } else {
+          // ═══════════════════════════════════════════════════════════
+          // ОБЫЧНАЯ ПЕРВАЯ ПОДПИСКА (через checkout $2.99 → $49)
+          // ═══════════════════════════════════════════════════════════
+          
+          // Если quota еще не существует (новый customer) - создаем с 2/2
+          if (!customerData.quota) {
+            console.log('[WEBHOOK] ℹ️  Creating initial quota for new customer');
+            customerData.quota = {
+              total: 2,
+              used: 0,
+              remaining: 2
+            };
+          } else {
+            // Quota существует (из trial периода) - сохраняем
+            console.log('[WEBHOOK] ℹ️  Preserving existing quota from trial period:', customerData.quota);
+          }
+        }
+        
+        await kvSetWithRetry(customerKey, customerData);
         console.log('[WEBHOOK] ✅ Customer subscription updated in KV');
       }
     } catch (err) {
@@ -207,7 +263,7 @@ export default async function handler(req, res) {
       if (customer.email) {
         const normalizedEmail = customer.email.toLowerCase().trim();
         const customerKey = `customer:email:${normalizedEmail}`;
-        const customerData = await kv.get(customerKey);
+        const customerData = await kvGetWithRetry(customerKey);
         
         if (customerData) {
           const oldStatus = customerData.subscription?.status;
@@ -221,6 +277,11 @@ export default async function handler(req, res) {
             end_date: new Date(subscription.current_period_end * 1000).toISOString(),
             cancel_at_period_end: subscription.cancel_at_period_end
           };
+          
+          // ✅ Логирование для cancel_at_period_end
+          if (subscription.cancel_at_period_end) {
+            console.log('[WEBHOOK] ℹ️  Subscription set to cancel at period end - quota remains active until', customerData.subscription.end_date);
+          }
           
           // КРИТИЧНО: Управление quota при изменении статуса
           if (oldStatus === 'active' && (newStatus === 'past_due' || newStatus === 'unpaid')) {
@@ -250,7 +311,7 @@ export default async function handler(req, res) {
             delete customerData.quota_before_past_due; // Очищаем временное поле
           }
           
-          await kv.set(customerKey, customerData);
+          await kvSetWithRetry(customerKey, customerData);
           console.log('[WEBHOOK] ✅ Customer subscription status synced:', oldStatus, '→', newStatus);
         }
       }
@@ -268,7 +329,7 @@ export default async function handler(req, res) {
       if (customer.email) {
         const normalizedEmail = customer.email.toLowerCase().trim();
         const customerKey = `customer:email:${normalizedEmail}`;
-        const customerData = await kv.get(customerKey);
+        const customerData = await kvGetWithRetry(customerKey);
         
         if (customerData) {
           customerData.subscription = {
@@ -284,7 +345,7 @@ export default async function handler(req, res) {
             remaining: 0
           };
           
-          await kv.set(customerKey, customerData);
+          await kvSetWithRetry(customerKey, customerData);
           console.log('[WEBHOOK] ✅ Subscription canceled in KV');
         }
       }
@@ -298,11 +359,12 @@ export default async function handler(req, res) {
     const invoice = event.data.object;
     console.log('[WEBHOOK] Invoice paid:', invoice.id, 'Subscription:', invoice.subscription, 'Billing reason:', invoice.billing_reason);
     
-    // Обрабатываем все успешные subscription invoices (кроме manual)
-    // subscription_cycle = recurring charge, subscription_create = first charge, subscription_update = recovery from past_due
-    const relevantReasons = ['subscription_cycle', 'subscription_create', 'subscription_update'];
+    // Обрабатываем успешные subscription invoices
+    // subscription_cycle = recurring charge (RESET quota)
+    // subscription_create = first charge after trial (НЕ СБРАСЫВАЕМ quota - она уже установлена в trial)
+    // subscription_update = recovery from past_due (RESET quota)
     
-    if (invoice.subscription && relevantReasons.includes(invoice.billing_reason)) {
+    if (invoice.subscription) {
       try {
         const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
         const customer = await stripe.customers.retrieve(subscription.customer);
@@ -310,18 +372,38 @@ export default async function handler(req, res) {
         if (customer.email) {
           const normalizedEmail = customer.email.toLowerCase().trim();
           const customerKey = `customer:email:${normalizedEmail}`;
-          const customerData = await kv.get(customerKey);
+          const customerData = await kvGetWithRetry(customerKey);
           
           if (customerData) {
-            const isRecurring = invoice.billing_reason === 'subscription_cycle';
-            console.log('[WEBHOOK]', isRecurring ? '🔄 Recurring payment' : '💳 First subscription payment', '- resetting quota');
+            const billingReason = invoice.billing_reason;
             
-            // RESET QUOTA на новый цикл (для renewal или recurring)
-            customerData.quota = {
-              total: 2,
-              used: 0,
-              remaining: 2
-            };
+            // ✅ ИСПРАВЛЕНО: Проверяем metadata renewal
+            const isRenewal = subscription.metadata?.renewal === 'true';
+            
+            // ✅ ИСПРАВЛЕНО: Сбрасываем quota для ВСЕХ subscription_create (не только renewal)
+            // КРИТИЧНО: Первый $49 платеж ДОЛЖЕН reset quota с 0 (после trial) на 2
+            // Иначе если у пользователя осталась квота 1 (не использовал) → получит 3 отчета вместо 2
+            const shouldResetQuota = 
+              billingReason === 'subscription_cycle' || 
+              billingReason === 'subscription_update' ||
+              billingReason === 'subscription_create'; // ← Убрали проверку isRenewal
+            
+            if (shouldResetQuota) {
+              let resetReason = 'Unknown';
+              if (billingReason === 'subscription_cycle') resetReason = '🔄 Recurring payment';
+              if (billingReason === 'subscription_update') resetReason = '🔧 Payment recovery';
+              if (billingReason === 'subscription_create' && isRenewal) resetReason = '🔄 Manual renewal';
+              if (billingReason === 'subscription_create' && !isRenewal) resetReason = '💳 First $49 payment';
+              
+              console.log('[WEBHOOK]', resetReason, '- resetting quota to 2/2');
+              
+              // RESET QUOTA на новый цикл
+              customerData.quota = {
+                total: 2,
+                used: 0,
+                remaining: 2
+              };
+            }
             
             // Обновляем даты подписки
             customerData.subscription.current_period_start = new Date(subscription.current_period_start * 1000).toISOString();
@@ -329,7 +411,7 @@ export default async function handler(req, res) {
             customerData.subscription.end_date = new Date(subscription.current_period_end * 1000).toISOString();
             customerData.last_payment_at = new Date().toISOString();
             
-            await kv.set(customerKey, customerData);
+            await kvSetWithRetry(customerKey, customerData);
             console.log('[WEBHOOK] ✅ Quota reset after payment');
           } else {
             console.log('[WEBHOOK] ⚠️  Customer not found in KV for invoice payment (will be created by subscription.created)');
@@ -337,6 +419,27 @@ export default async function handler(req, res) {
         }
       } catch (err) {
         console.error('[WEBHOOK] Error handling invoice payment:', err.message);
+      }
+    } else {
+      // ✅ НОВАЯ ЛОГИКА: Trial payment БЕЗ subscription (edge case)
+      console.log('[WEBHOOK] 💳 Trial payment succeeded (no subscription):', invoice.id);
+      
+      try {
+        const customer = await stripe.customers.retrieve(invoice.customer);
+        if (customer.email) {
+          const normalizedEmail = customer.email.toLowerCase().trim();
+          const customerKey = `customer:email:${normalizedEmail}`;
+          const customerData = await kvGetWithRetry(customerKey);
+          
+          if (customerData) {
+            customerData.trial_payment_at = new Date().toISOString();
+            customerData.trial_payment_invoice = invoice.id;
+            await kvSetWithRetry(customerKey, customerData);
+            console.log('[WEBHOOK] ✅ Trial payment recorded');
+          }
+        }
+      } catch (err) {
+        console.error('[WEBHOOK] Error handling trial payment:', err.message);
       }
     }
   }
@@ -357,7 +460,7 @@ export default async function handler(req, res) {
       if (customer.email) {
         const normalizedEmail = customer.email.toLowerCase().trim();
         const customerKey = `customer:email:${normalizedEmail}`;
-        const customerData = await kv.get(customerKey);
+        const customerData = await kvGetWithRetry(customerKey);
         
         if (customerData && customerData.subscription?.subscription_schedule_id === schedule.id) {
           console.log('[WEBHOOK] ℹ️  Canceling trialing subscription in KV');
@@ -373,7 +476,7 @@ export default async function handler(req, res) {
             customerData.quota.remaining = 0;
           }
           
-          await kv.set(customerKey, customerData);
+          await kvSetWithRetry(customerKey, customerData);
           console.log('[WEBHOOK] ✅ Trialing subscription canceled, remaining quota set to 0');
         }
       }
@@ -385,7 +488,7 @@ export default async function handler(req, res) {
   // КРИТИЧНО: Обработка неудачных платежей
   if (event.type === 'invoice.payment_failed') {
     const invoice = event.data.object;
-    console.log('[WEBHOOK] ❌ Payment failed:', invoice.id, 'Subscription:', invoice.subscription);
+    console.log('[WEBHOOK] ❌ Payment failed:', invoice.id, 'Subscription:', invoice.subscription, 'Billing reason:', invoice.billing_reason);
     
     if (invoice.subscription) {
       try {
@@ -395,7 +498,7 @@ export default async function handler(req, res) {
         if (customer.email) {
           const normalizedEmail = customer.email.toLowerCase().trim();
           const customerKey = `customer:email:${normalizedEmail}`;
-          const customerData = await kv.get(customerKey);
+          const customerData = await kvGetWithRetry(customerKey);
           
           if (customerData) {
             const oldQuota = customerData.quota?.remaining || 0;
@@ -414,8 +517,75 @@ export default async function handler(req, res) {
               customerData.quota = { total: 0, used: 0, remaining: 0 };
             }
             
-            await kv.set(customerKey, customerData);
+            await kvSetWithRetry(customerKey, customerData);
             console.log('[WEBHOOK] ✅ Subscription marked as', subscription.status, '- quota:', oldQuota, '→ 0');
+            
+            // ┌─────────────────────────────────────────────────────────────┐
+            // │ АВТОМАТИЧЕСКАЯ БЛОКИРОВКА МОШЕННИКОВ                         │
+            // │ Если failed первый $49 платеж - добавляем в blacklist       │
+            // └─────────────────────────────────────────────────────────────┘
+            const isFirstSubscriptionPayment = invoice.billing_reason === 'subscription_create';
+            
+            if (isFirstSubscriptionPayment) {
+              console.log('[WEBHOOK] 🚨 FIRST $49 PAYMENT FAILED - Adding to blacklist');
+              
+              // 1. Блокируем card fingerprint (с fallback если нет в metadata)
+              let cardFingerprint = customer.metadata?.card_fingerprint;
+              
+              if (!cardFingerprint) {
+                console.log('[WEBHOOK] ⚠️  Card fingerprint not in metadata - attempting to fetch from payment method');
+                
+                try {
+                  const paymentMethods = await stripe.paymentMethods.list({
+                    customer: customer.id,
+                    type: 'card'
+                  });
+                  
+                  if (paymentMethods.data.length > 0) {
+                    cardFingerprint = paymentMethods.data[0].card?.fingerprint;
+                    console.log('[WEBHOOK] ✅ Card fingerprint retrieved from payment method:', cardFingerprint);
+                  }
+                } catch (pmError) {
+                  console.error('[WEBHOOK] Error fetching payment methods:', pmError.message);
+                }
+              }
+              
+              if (cardFingerprint) {
+                const blockedCardKey = `blocked:card:${cardFingerprint}`;
+                await kvSetWithRetry(blockedCardKey, {
+                  fingerprint: cardFingerprint,
+                  email: normalizedEmail,
+                  customer_id: customer.id,
+                  reason: 'First $49 payment failed',
+                  blocked_at: new Date().toISOString(),
+                  invoice_id: invoice.id
+                });
+                console.log('[WEBHOOK] 🚫 Card fingerprint blocked:', cardFingerprint);
+              } else {
+                console.log('[WEBHOOK] ⚠️  CANNOT BLOCK BY CARD - fingerprint unavailable');
+              }
+              
+              // 2. Помечаем email как "failed_first_payment" (не полная блокировка, но флаг)
+              customerData.failed_first_payment = true;
+              customerData.failed_first_payment_at = new Date().toISOString();
+              await kvSetWithRetry(customerKey, customerData);
+              
+              // 3. Блокируем IP если есть в metadata
+              const ipAddress = customer.metadata?.ip_address;
+              if (ipAddress && ipAddress !== 'unknown') {
+                const blockedIpKey = `blocked:ip:${ipAddress}`;
+                await kvSetWithRetry(blockedIpKey, {
+                  ip: ipAddress,
+                  email: normalizedEmail,
+                  customer_id: customer.id,
+                  reason: 'First $49 payment failed',
+                  blocked_at: new Date().toISOString()
+                });
+                console.log('[WEBHOOK] 🚫 IP address blocked:', ipAddress);
+              }
+              
+              console.log('[WEBHOOK] ✅ Fraudster blacklisted - card, email marked, IP blocked');
+            }
           } else {
             console.log('[WEBHOOK] ⚠️  Customer not found in KV for failed payment (may be created later by subscription.created)');
           }
@@ -438,7 +608,7 @@ export default async function handler(req, res) {
       if (customer && customer.email) {
         const normalizedEmail = customer.email.toLowerCase().trim();
         const customerKey = `customer:email:${normalizedEmail}`;
-        const customerData = await kv.get(customerKey);
+        const customerData = await kvGetWithRetry(customerKey);
         
         if (customerData) {
           console.log('[WEBHOOK] ⚠️  DISPUTE - Marking customer and blocking future purchases');
@@ -460,7 +630,7 @@ export default async function handler(req, res) {
             customerData.subscription.status = 'disputed';
           }
           
-          await kv.set(customerKey, customerData);
+          await kvSetWithRetry(customerKey, customerData);
           
           // Добавляем card fingerprint в blacklist если есть
           if (customer.metadata?.card_fingerprint) {
@@ -473,6 +643,52 @@ export default async function handler(req, res) {
       }
     } catch (err) {
       console.error('[WEBHOOK] Error handling dispute:', err.message);
+    }
+  }
+
+  // ✅ НОВАЯ ЛОГИКА: Обработка dispute.closed (разблокировка если выиграли)
+  if (event.type === 'charge.dispute.closed') {
+    const dispute = event.data.object;
+    console.log('[WEBHOOK] 🏁 DISPUTE CLOSED:', dispute.id, 'Status:', dispute.status);
+    
+    try {
+      const charge = await stripe.charges.retrieve(dispute.charge);
+      const customer = charge.customer ? await stripe.customers.retrieve(charge.customer) : null;
+      
+      if (customer && customer.email) {
+        const normalizedEmail = customer.email.toLowerCase().trim();
+        const customerKey = `customer:email:${normalizedEmail}`;
+        const customerData = await kvGetWithRetry(customerKey);
+        
+        if (customerData && customerData.disputed) {
+          if (dispute.status === 'won') {
+            console.log('[WEBHOOK] ✅ DISPUTE WON - Unblocking customer');
+            
+            customerData.disputed = false;
+            customerData.dispute_won_at = new Date().toISOString();
+            
+            // Восстанавливаем quota если подписка активна
+            if (customerData.subscription?.status === 'active') {
+              customerData.quota = {
+                total: 2,
+                used: 0,
+                remaining: 2
+              };
+              console.log('[WEBHOOK] ✅ Quota restored to 2/2');
+            }
+            
+            await kvSetWithRetry(customerKey, customerData);
+            console.log('[WEBHOOK] ✅ Customer unblocked after winning dispute');
+            
+          } else if (dispute.status === 'lost') {
+            console.log('[WEBHOOK] ❌ DISPUTE LOST - Customer remains blocked');
+            customerData.dispute_lost_at = new Date().toISOString();
+            await kvSetWithRetry(customerKey, customerData);
+          }
+        }
+      }
+    } catch (err) {
+      console.error('[WEBHOOK] Error handling dispute closure:', err.message);
     }
   }
 

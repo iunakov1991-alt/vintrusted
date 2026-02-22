@@ -25,6 +25,24 @@ export default async function handler(req, res) {
   try {
     const { setup_intent_id, email, vin } = req.body || {};
     if (!setup_intent_id) throw new Error('setup_intent_id is required');
+    
+    // ✅ КРИТИЧНО: Проверяем env variables ДО создания customer
+    const priceEvery33D = process.env.PRICE_49_EVERY_33D?.trim();
+    if (!priceEvery33D) {
+      console.error('[CHECKOUT] ❌ PRICE_49_EVERY_33D not configured');
+      return res.status(500).json({ 
+        error: 'Server configuration error',
+        message: 'Subscription price not configured. Please contact support.'
+      });
+    }
+    
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('[CHECKOUT] ❌ STRIPE_SECRET_KEY not configured');
+      return res.status(500).json({ 
+        error: 'Server configuration error',
+        message: 'Payment system not configured. Please contact support.'
+      });
+    }
 
     // ┌─────────────────────────────────────────────────────────────┐
     // │ ПЕРВИЧНАЯ ПРОВЕРКА: Существующий customer по email          │
@@ -45,6 +63,16 @@ export default async function handler(req, res) {
           return res.status(403).json({ 
             error: 'Account suspended',
             message: 'Your account has been suspended due to a payment dispute. Please contact support.'
+          });
+        }
+        
+        // КРИТИЧНО: Блокируем мошенников у которых failed первый $49 платеж
+        if (existingCustomer.failed_first_payment) {
+          console.log('[ANTI-FRAUD] 🚨 FRAUDSTER DETECTED - Failed first $49 payment');
+          return res.status(403).json({ 
+            error: 'Payment method declined',
+            message: 'Your previous payment failed. Please update your payment method or contact support.',
+            redirect_to: `/my-reports.html?email=${encodeURIComponent(normalizedEmail)}`
           });
         }
         
@@ -76,22 +104,48 @@ export default async function handler(req, res) {
     console.log('[ANTI-FRAUD] Card fingerprint:', cardFingerprint);
     console.log('[ANTI-FRAUD] IP address:', ipAddress);
     
-    // 1. Проверка заблокированных IP
+    // 1. Проверка заблокированных IP (статический список)
     if (ipAddress && ipAddress !== 'unknown' && BLOCKED_IP_ADDRESSES.includes(ipAddress)) {
-      console.log('[ANTI-FRAUD] 🚫 BLOCKED IP DETECTED:', ipAddress);
+      console.log('[ANTI-FRAUD] 🚫 BLOCKED IP DETECTED (static list):', ipAddress);
       return res.status(403).json({ 
         error: 'Access denied',
         message: 'This request has been blocked. Please contact support if you believe this is an error.'
       });
     }
     
-    // 2. Проверка заблокированных карт
+    // 2. Проверка заблокированных IP (динамический KV blacklist)
+    if (ipAddress && ipAddress !== 'unknown') {
+      const blockedIpKey = `blocked:ip:${ipAddress}`;
+      const blockedIpData = await kv.get(blockedIpKey);
+      if (blockedIpData) {
+        console.log('[ANTI-FRAUD] 🚫 BLOCKED IP DETECTED (KV blacklist):', ipAddress, 'Reason:', blockedIpData.reason);
+        return res.status(403).json({ 
+          error: 'Access denied',
+          message: 'This request has been blocked. Please contact support if you believe this is an error.'
+        });
+      }
+    }
+    
+    // 3. Проверка заблокированных карт (статический список)
     if (cardFingerprint && BLOCKED_CARD_FINGERPRINTS.includes(cardFingerprint)) {
-      console.log('[ANTI-FRAUD] 🚫 BLOCKED CARD DETECTED:', cardFingerprint);
+      console.log('[ANTI-FRAUD] 🚫 BLOCKED CARD DETECTED (static list):', cardFingerprint);
       return res.status(403).json({ 
         error: 'Payment method blocked',
         message: 'This payment method cannot be used. Please contact support.'
       });
+    }
+    
+    // 4. Проверка заблокированных карт (динамический KV blacklist)
+    if (cardFingerprint) {
+      const blockedCardKey = `blocked:card:${cardFingerprint}`;
+      const blockedCardData = await kv.get(blockedCardKey);
+      if (blockedCardData) {
+        console.log('[ANTI-FRAUD] 🚫 BLOCKED CARD DETECTED (KV blacklist):', cardFingerprint, 'Reason:', blockedCardData.reason);
+        return res.status(403).json({ 
+          error: 'Payment method blocked',
+          message: 'This payment method cannot be used. Please contact support.'
+        });
+      }
     }
     
     // 3. Проверка "1 карта = 1 отчет" - ищем предыдущие успешные платежи с этой карты
@@ -173,15 +227,46 @@ export default async function handler(req, res) {
       metadata: si.metadata || {} // ✅ Копируем все metadata (gclid, utm_*, ab_variant, vin)
     });
     console.log('[CHECKOUT] PaymentIntent created with metadata:', pi.metadata);
+    
+    // 2.5) Определяем tier для Google Ads конверсии (сохраним в KV для отправки при клике на кнопку)
+    let tierData = { tier: 'medium', value: 5.00 }; // Default
+    try {
+      const outcome = pi.charges?.data[0]?.outcome;
+      const card = pm.card;
+      
+      if (pm.type === 'link') {
+        tierData = { tier: 'premium', value: 25.00 };
+        console.log('[CHECKOUT] 🔗 Stripe Link payment → PREMIUM tier');
+      } else if (card) {
+        // Fraud tier
+        if (outcome?.risk_level === 'highest' || card.checks?.cvc_check === 'fail') {
+          tierData = { tier: 'fraud', value: 0.00 };
+          console.log('[CHECKOUT] 🚨 Fraud detected → FRAUD tier');
+        }
+        // Premium tier
+        else if ((card.funding === 'credit' || card.funding === 'debit') && card.checks?.cvc_check === 'pass') {
+          tierData = { tier: 'premium', value: 25.00 };
+          console.log('[CHECKOUT] 🟢 Credit/Debit + CVC pass → PREMIUM tier');
+        }
+        // Medium tier (default)
+        else {
+          tierData = { tier: 'medium', value: 5.00 };
+          console.log('[CHECKOUT] 🟡 Prepaid or no CVC → MEDIUM tier');
+        }
+      }
+    } catch (tierError) {
+      console.error('[CHECKOUT] ⚠️  Error determining tier:', tierError.message);
+      // Keep default medium tier
+    }
+    console.log('[CHECKOUT] ✅ Tier determined:', tierData);
 
     // 3) План: $49 каждые 33 дня бесконечно (начинается на день 3)
     let schedule = null;
-    const priceEvery33D = process.env.PRICE_49_EVERY_33D?.trim();
+    // ✅ priceEvery33D уже проверен в начале функции
     
     console.log('[CHECKOUT] Price ID for subscription:', priceEvery33D);
     
-    if (priceEvery33D) {
-      try {
+    try {
         const startAt = Math.floor(Date.now() / 1000) + 3 * 86400; // +3 дня от сегодня
         
         schedule = await stripe.subscriptionSchedules.create({
@@ -205,11 +290,10 @@ export default async function handler(req, res) {
         console.log('[CHECKOUT] $49 every 33 days starting on day 3');
       } catch (scheduleError) {
         console.error('[CHECKOUT] ❌ Failed to create subscription schedule:', scheduleError.message);
-        // Продолжаем выполнение, даже если подписка не создалась
+        // ✅ КРИТИЧНО: Если subscription НЕ создался - это серьезная ошибка
+        // Пользователь заплатил $2.99 но НЕ получит recurring subscription
+        throw new Error('Failed to create subscription: ' + scheduleError.message);
       }
-    } else {
-      console.log('[CHECKOUT] ⚠️  Missing PRICE_49_EVERY_33D, skipping subscription schedule');
-    }
 
     // Get VIN from request body, SetupIntent metadata, or customer metadata
     let finalVin = vin || si.metadata?.vin || '';
@@ -243,25 +327,54 @@ export default async function handler(req, res) {
             end_date: schedule ? new Date(endTimestamp * 1000).toISOString() : null
           },
           quota: {
-            total: 2,
+            total: 1,  // ✅ ИСПРАВЛЕНО: Trial period = только 1 отчет за $2.99
             used: finalVin ? 1 : 0, // Используем квоту только если VIN передан
-            remaining: finalVin ? 1 : 2
+            remaining: finalVin ? 0 : 1  // ✅ ИСПРАВЛЕНО: 0 если VIN использован
           },
           reports: finalVin ? [{
             vin: finalVin.toUpperCase().replace(/[^A-Z0-9]/g, ''), // ✅ Полная normalization
             purchased_at: new Date().toISOString(),
             vehicle_name: '',
             period: 'trial'
-          }] : []
+          }] : [],
+          // ✅ Сохраняем tier для отправки Google Ads конверсии при клике на кнопку
+          tier: tierData.tier, // 'premium', 'medium', или 'fraud'
+          tier_value: tierData.value, // 25.00, 5.00, или 0.00
+          tier_determined_at: new Date().toISOString(),
+          // ✅ Флаг для определения первого визита (защита от дублей конверсий)
+          first_report_viewed: false,
+          first_report_viewed_at: null
         };
         
-        await kv.set(customerKey, customerRecord);
-        console.log('[CHECKOUT] ✅ Customer saved to KV:', customerKey);
+        // ✅ КРИТИЧНО: KV save с retry logic (3 попытки)
+        let kvSaved = false;
+        for (let attempt = 0; attempt < 3; attempt++) {
+          try {
+            await kv.set(customerKey, customerRecord);
+            console.log('[CHECKOUT] ✅ Customer saved to KV:', customerKey, `(attempt ${attempt + 1})`);
+            kvSaved = true;
+            break;
+          } catch (kvRetryError) {
+            console.error(`[CHECKOUT] ⚠️  KV save attempt ${attempt + 1} failed:`, kvRetryError.message);
+            if (attempt < 2) {
+              // Wait before retry: 200ms, 500ms
+              await new Promise(resolve => setTimeout(resolve, 200 * (attempt + 1)));
+            }
+          }
+        }
+        
+        if (!kvSaved) {
+          console.error('[CHECKOUT] ❌ CRITICAL: Could not save customer record to KV after 3 attempts');
+          console.error('[CHECKOUT] ⚠️  Webhook will create KV record on first payment, but tier data may be lost');
+          // Продолжаем - PaymentIntent создан, webhook восстановит базовые данные
+          // НО: tier_value может быть потерян (webhook не знает tier)
+        }
         
         // Примечание: Report cache будет создан после получения реальных данных из ClearVin API
         // Не создаем placeholder cache с null данными
       } catch (kvError) {
         console.error('[CHECKOUT] ⚠️  Failed to save to KV:', kvError.message);
+        // Webhook создаст запись
       }
     }
     
@@ -306,6 +419,9 @@ export default async function handler(req, res) {
     }
     if (si.id) {
       params.append('setup_intent', si.id);
+    }
+    if (email) {
+      params.append('email', email); // ✅ Передаем email для редиректа на my-reports.html
     }
     
     if (params.toString()) {

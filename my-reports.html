@@ -6,6 +6,27 @@
     <title>My Reports - VIN Trust</title>
     <link rel="icon" type="image/png" href="/favicon 2.png">
     
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KR67NRNW');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google Ads Conversion Tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17824079146"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-17824079146');
+    </script>
+    
+    <!-- GCLID Storage -->
+    <script src="/public/gclid-storage.js"></script>
+    <script src="/public/gclid-cookie.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -289,31 +310,6 @@
             transform: translateY(-2px);
         }
         
-        /* Cancel Button */
-        .cancel-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-        
-        .btn-cancel {
-            padding: 12px 24px;
-            background: #fee;
-            color: #dc2626;
-            border: 1px solid #fecaca;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .btn-cancel:hover {
-            background: #fecaca;
-        }
-        
         /* Loading */
         .loading {
             text-align: center;
@@ -343,7 +339,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="mainContainer">
         <div class="header">
             <img src="/logo-vin-trust.png" alt="VIN Trust" class="logo">
         </div>
@@ -364,24 +360,163 @@
             window.location.href = '/';
         }
 
-        // Load customer data
-        async function loadCustomerData() {
+        // 🎯 Send Google Ads Conversion (Tier-Based)
+        // ВАЖНО: Использует tier_value из customerData (определяется при оплате на основе качества карты)
+        // ✅ УЛУЧШЕНО: Защита от дублей через localStorage + session storage
+        function sendDownloadConversion(action, vin, customerData) {
+            try {
+                // ═══════════════════════════════════════════════════════════
+                // ЗАЩИТА ОТ ДУБЛЕЙ КОНВЕРСИЙ
+                // ═══════════════════════════════════════════════════════════
+                const conversionKey = `conversion_sent_${vin}`;
+                
+                // ✅ ЗАЩИТА: localStorage/sessionStorage могут быть недоступны в приватном режиме
+                let alreadySentLocal = false;
+                let alreadySentSession = false;
+                
+                try {
+                    alreadySentLocal = localStorage.getItem(conversionKey) !== null;
+                } catch (error) {
+                    console.warn('[DOWNLOAD-CONVERSION] localStorage unavailable:', error);
+                }
+                
+                try {
+                    alreadySentSession = sessionStorage.getItem(conversionKey) !== null;
+                } catch (error) {
+                    console.warn('[DOWNLOAD-CONVERSION] sessionStorage unavailable:', error);
+                }
+                
+                // Проверяем оба хранилища
+                if (alreadySentLocal || alreadySentSession) {
+                    console.log('[DOWNLOAD-CONVERSION] ⚠️  Conversion already sent for VIN:', vin, '- SKIPPING');
+                    return;
+                }
+                
+                // ✅ КРИТИЧНО: Устанавливаем флаги ДО отправки (защита от race condition)
+                // Если второй вызов произойдет пока первый еще работает - он увидит флаг
+                try {
+                    localStorage.setItem(conversionKey, 'true');
+                } catch (error) {
+                    console.warn('[DOWNLOAD-CONVERSION] Cannot set localStorage flag:', error);
+                }
+                
+                try {
+                    sessionStorage.setItem(conversionKey, 'true');
+                } catch (error) {
+                    console.warn('[DOWNLOAD-CONVERSION] Cannot set sessionStorage flag:', error);
+                }
+                
+                // ✅ ЗАЩИТА: Получаем tier value из customerData (сохранен при checkout)
+                // Если customerData не передан или null → используем безопасный fallback
+                let tierValue = customerData?.tier_value ?? 25.00; // Default к Premium если нет данных
+                const tier = customerData?.tier ?? 'unknown';
+                
+                // ✅ КРИТИЧНО: Проверяем что tierValue валидный
+                if (typeof tierValue !== 'number' || tierValue < 0 || isNaN(tierValue)) {
+                    console.error('[DOWNLOAD-CONVERSION] ❌ Invalid tier_value:', tierValue, '- using default 25.00');
+                    tierValue = 25.00;
+                }
+                
+                console.log(`[DOWNLOAD-CONVERSION] 📊 Using tier-based value: ${tier} = $${tierValue}`);
+                
+                // Получаем GCLID из URL, localStorage или cookie
+                const urlParams = new URLSearchParams(window.location.search);
+                let gclid = urlParams.get('gclid');
+                
+                if (!gclid && window.GclidStorage) {
+                    gclid = window.GclidStorage.get();
+                }
+                
+                if (!gclid) {
+                    const gclidCookie = document.cookie.split('; ').find(row => row.startsWith('gclid='));
+                    if (gclidCookie) {
+                        gclid = gclidCookie.split('=')[1];
+                    }
+                }
+                
+                // Параметры конверсии с tier-based value
+                const conversionParams = {
+                    'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC', // ✅ $1 Trial - Premium/Medium
+                    'value': tierValue, // ✅ Tier-based: $25 (Premium) или $5 (Medium)
+                    'currency': 'USD',
+                    'transaction_id': `${action}_${vin}_${Date.now()}`
+                };
+                
+                // Добавляем gclid если есть
+                if (gclid) {
+                    conversionParams.gclid = gclid;
+                    console.log('[DOWNLOAD-CONVERSION] ✅ GCLID found:', gclid.substring(0, 20) + '...');
+                } else {
+                    console.log('[DOWNLOAD-CONVERSION] ⚠️  No GCLID found - conversion will be attributed to direct traffic');
+                }
+                
+                // Отправляем конверсию
+                if (window.gtag) {
+                    window.gtag('event', 'conversion', conversionParams);
+                    
+                    const tierEmoji = tier === 'premium' ? '🟢' : tier === 'medium' ? '🟡' : '⚪';
+                    console.log(`[DOWNLOAD-CONVERSION] 🎯 "${action}" conversion sent:`, {
+                        vin,
+                        tier: `${tierEmoji} ${tier.toUpperCase()}`,
+                        value: `$${tierValue}`,
+                        gclid: gclid ? 'YES' : 'NO',
+                        duplicate_protection: 'ENABLED'
+                    });
+                } else {
+                    console.error('[DOWNLOAD-CONVERSION] ❌ gtag not loaded');
+                }
+                
+            } catch (error) {
+                console.error('[DOWNLOAD-CONVERSION] Error:', error);
+            }
+        }
+
+        // Load customer data with retry logic
+        async function loadCustomerData(retryCount = 0) {
+            const maxRetries = 3;
+            
             try {
                 const response = await fetch(`/api/get-customer-data?email=${encodeURIComponent(email)}`);
                 
                 if (!response.ok) {
-                    throw new Error('Failed to load customer data');
+                    throw new Error(`Failed to load customer data (status: ${response.status})`);
                 }
 
                 const data = await response.json();
+                
+                // ✅ ЗАЩИТА: Проверяем что data корректен
+                if (!data || !data.email) {
+                    throw new Error('Invalid customer data received');
+                }
+                
+                // Сохраняем customerData глобально для использования в конверсиях
+                window.currentCustomerData = data;
+                console.log('[MY-REPORTS] ✅ Customer data loaded:', {
+                    email: data.email,
+                    tier: data.tier || 'N/A',
+                    tier_value: data.tier_value || 'N/A'
+                });
+                
                 renderDashboard(data);
             } catch (error) {
                 console.error('Error loading customer data:', error);
+                
+                // ✅ ЗАЩИТА: Retry logic для временных сбоев
+                if (retryCount < maxRetries) {
+                    console.log(`[MY-REPORTS] ⚠️  Retrying... (${retryCount + 1}/${maxRetries})`);
+                    setTimeout(() => {
+                        loadCustomerData(retryCount + 1);
+                    }, 1000 * (retryCount + 1)); // Exponential backoff: 1s, 2s, 3s
+                    return;
+                }
+                
+                // После всех retry показываем error с кнопкой retry
                 document.getElementById('content').innerHTML = `
                     <div class="empty-state">
                         <h3>Error loading account</h3>
                         <p>${error.message}</p>
-                        <button onclick="window.location.href='/'" style="margin-top: 20px; padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer;">Go Home</button>
+                        <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer;">Try Again</button>
+                        <button onclick="window.location.href='/'" style="margin-top: 10px; padding: 10px 20px; background: #6b7280; color: white; border: none; border-radius: 8px; cursor: pointer;">Go Home</button>
                     </div>
                 `;
             }
@@ -408,6 +543,195 @@
                 container.innerHTML = html;
                 return;
             }
+            
+            // Проверка failed first payment (мошенники с одноразовыми картами)
+            if (data.failed_first_payment) {
+                html = `
+                    <div class="empty-state" style="background: #fef3c7; border: 2px solid #f59e0b; padding: 30px; border-radius: 16px;">
+                        <h3 style="color: #92400e;">⚠️ Payment Failed</h3>
+                        <p>Your first subscription payment of $49 could not be processed.</p>
+                        <p style="margin-top: 15px;">Please update your payment method to continue using the service.</p>
+                        <a href="mailto:support@vintrusted.com" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: #3b82f6; color: white; text-decoration: none; border-radius: 8px;">Contact Support</a>
+                    </div>
+                `;
+                container.innerHTML = html;
+                return;
+            }
+
+            // ════════════════════════════════════════════════════════════
+            // ПЕРВЫЙ ВИЗИТ НА MY-REPORTS - УПРОЩЕННЫЙ ИНТЕРФЕЙС
+            // ════════════════════════════════════════════════════════════
+            // ✅ УЛУЧШЕНО: Используем KV флаг (primary) с fallback на localStorage
+            const isFirstVisitKV = !data.first_report_viewed; // Из KV (надежно)
+            
+            // ✅ ЗАЩИТА: localStorage может быть недоступен в приватном режиме Safari
+            let isFirstVisitLocal = true;
+            try {
+                isFirstVisitLocal = !localStorage.getItem('vintrusted_visited_my_reports');
+            } catch (error) {
+                console.warn('[FIRST-VISIT] localStorage unavailable (private mode?):', error);
+                isFirstVisitLocal = false; // Если localStorage недоступен - считаем что УЖЕ посетил (безопаснее)
+            }
+            
+            const isFirstVisit = isFirstVisitKV && isFirstVisitLocal; // Оба должны быть true
+            
+            if (isFirstVisit && reports.length > 0) {
+                const firstReport = reports[0];
+                
+                // Сохраняем customerData для использования в конверсии
+                const savedCustomerData = data;
+                
+                html = `
+                    <div id="mainContainer" style="max-width: 500px; margin: 60px auto; text-align: center;">
+                        <h2 style="font-size: 28px; font-weight: 700; color: #1f2937; margin-bottom: 40px;">
+                            🎉 Your Report is Ready!
+                        </h2>
+                        
+                        <div style="background: white; border-radius: 16px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 30px;">
+                            <div style="font-size: 18px; color: #6b7280; margin-bottom: 10px;">VIN</div>
+                            <div style="font-size: 24px; font-weight: 700; color: #1f2937; margin-bottom: 15px;">${firstReport.vin}</div>
+                            <div style="font-size: 16px; color: #3b82f6;">${firstReport.vehicle_name || 'Loading...'}</div>
+                        </div>
+
+                        <div style="background: #f3f4f6; border-radius: 12px; padding: 20px; margin-bottom: 30px; text-align: left;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input 
+                                    type="checkbox" 
+                                    id="downloadCheckbox" 
+                                    style="width: 20px; height: 20px; margin-right: 12px; cursor: pointer;"
+                                >
+                                <span style="font-size: 15px; color: #4b5563;">
+                                    Also download the report as PDF file
+                                </span>
+                            </label>
+                        </div>
+
+                        <button 
+                            id="viewReportBtn"
+                            style="
+                                width: 100%;
+                                padding: 20px 40px;
+                                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                                color: white;
+                                border: none;
+                                border-radius: 16px;
+                                font-size: 20px;
+                                font-weight: 700;
+                                cursor: pointer;
+                                box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+                                transition: all 0.3s;
+                                text-transform: uppercase;
+                            "
+                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 28px rgba(16, 185, 129, 0.5)';"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.4)';"
+                        >
+                            📄 View Your Report
+                        </button>
+                        
+                        <div style="margin-top: 20px; font-size: 13px; color: #9ca3af;">
+                            Your report will open below
+                        </div>
+                    </div>
+                    
+                    <!-- Полноэкранный контейнер для отчета (без кнопки Close) -->
+                    <div id="fullscreenReport" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 9999;">
+                        <div id="reportSpinner" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                            <div class="spinner"></div>
+                            <div style="margin-top: 20px; color: #6b7280;">Loading report...</div>
+                        </div>
+                        <iframe id="reportIframe" style="width: 100%; height: 100%; border: none; display: none;"></iframe>
+                    </div>
+                `;
+                container.innerHTML = html;
+
+                // Обработчик клика на кнопку
+                const viewReportBtn = document.getElementById('viewReportBtn');
+                const downloadCheckbox = document.getElementById('downloadCheckbox');
+                
+                viewReportBtn.addEventListener('click', async function() {
+                    // ✅ ЗАЩИТА: Отключаем кнопку сразу после клика (защита от double-click)
+                    if (viewReportBtn.disabled) {
+                        console.log('[FIRST-VISIT] ⚠️  Button already clicked - IGNORING');
+                        return;
+                    }
+                    viewReportBtn.disabled = true;
+                    viewReportBtn.style.opacity = '0.6';
+                    viewReportBtn.style.cursor = 'not-allowed';
+                    
+                    console.log('[FIRST-VISIT] 🎯 Opening report for first time');
+                    
+                    // 1. Отправляем Google Ads конверсию (tier-based, БЕЗ дублей)
+                    sendDownloadConversion('view', firstReport.vin, savedCustomerData);
+                    
+                    // 2. Показываем отчет в fullscreen режиме (БЕЗ кнопки Close)
+                    const fullscreenReport = document.getElementById('fullscreenReport');
+                    const reportIframe = document.getElementById('reportIframe');
+                    const reportSpinner = document.getElementById('reportSpinner');
+                    const reportUrl = `/success.html?vin=${encodeURIComponent(firstReport.vin)}&email=${encodeURIComponent(email)}&cached=1`;
+                    
+                    // Показываем fullscreen и прячем main container
+                    fullscreenReport.style.display = 'block';
+                    document.getElementById('mainContainer').style.display = 'none';
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Загружаем отчет
+                    reportIframe.src = reportUrl;
+                    
+                    // Обработчик загрузки
+                    reportIframe.onload = function() {
+                        reportSpinner.style.display = 'none';
+                        reportIframe.style.display = 'block';
+                    };
+                    
+                    // 3. Если чекбокс нажат - скачиваем PDF
+                    if (downloadCheckbox.checked) {
+                        console.log('[FIRST-VISIT] 📥 Also downloading PDF');
+                        setTimeout(() => {
+                            const pdfUrl = `/api/get-clearvin-report?vin=${encodeURIComponent(firstReport.vin)}&format=pdf`;
+                            const a = document.createElement('a');
+                            a.href = pdfUrl;
+                            a.download = `VIN-Report-${firstReport.vin}.pdf`;
+                            a.target = '_blank';
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                        }, 1000);
+                    }
+                    
+                    // 4. Сохраняем флаг "уже посетил" в KV И localStorage
+                    // ✅ УЛУЧШЕНО: Двойная защита (KV primary, localStorage fallback)
+                    try {
+                        localStorage.setItem('vintrusted_visited_my_reports', 'true');
+                        console.log('[FIRST-VISIT] ✅ localStorage flag set');
+                    } catch (error) {
+                        console.warn('[FIRST-VISIT] ⚠️  localStorage unavailable (private mode?):', error);
+                    }
+                    
+                    // Сохраняем в KV через API (асинхронно, не блокируем UI)
+                    try {
+                        const response = await fetch('/api/mark-report-viewed', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email: email })
+                        });
+                        
+                        if (response.ok) {
+                            console.log('[FIRST-VISIT] ✅ KV flag set - next visit will show full cabinet');
+                        } else {
+                            console.warn('[FIRST-VISIT] ⚠️  KV flag failed - using localStorage fallback');
+                        }
+                    } catch (error) {
+                        console.warn('[FIRST-VISIT] ⚠️  KV API error - using localStorage fallback:', error);
+                    }
+                });
+
+
+                return;
+            }
+
+            // ════════════════════════════════════════════════════════════
+            // ПОВТОРНАЯ ПОПЫТКА - ПОЛНЫЙ КАБИНЕТ
+            // ════════════════════════════════════════════════════════════
 
             // User Card
             const isActiveOrTrialing = subscription.status === 'active' || subscription.status === 'trialing';
@@ -417,64 +741,112 @@
             if (subscription.status === 'past_due') statusText = '⚠️ Payment Failed';
             if (subscription.status === 'disputed') statusText = '🚨 Disputed';
             
+            // ✅ Объединенная User Card + Quota
             html += `
                 <div class="user-card">
-                    <div class="user-email">${data.email}</div>
-                    <span class="status-badge status-${isActiveOrTrialing ? 'active' : 'canceled'}">
-                        ${statusText}
-                    </span>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                        <div class="user-email">${data.email}</div>
+                        <span class="status-badge status-${isActiveOrTrialing ? 'active' : 'canceled'}">
+                            ${statusText}
+                        </span>
+                    </div>
+                    ${isActiveOrTrialing ? `
+                        <div style="padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-size: 14px; color: #6b7280; font-weight: 500;">Reports Remaining</div>
+                                <div style="font-size: 24px; font-weight: 700; color: #10b981;">${quota.remaining}/${quota.total}</div>
+                            </div>
+                        </div>
+                    ` : ''}
                 </div>
             `;
 
-            // Quota Card
-            if (isActiveOrTrialing) {
-                const endDate = subscription.end_date || subscription.current_period_end;
-                const endDateFormatted = endDate ? new Date(endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
-                const nextChargeFormatted = endDate ? new Date(endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'N/A';
-                
-                html += `
-                    <div class="quota-card">
-                        <div class="quota-title">Reports Remaining</div>
-                        <div class="quota-value">${quota.remaining}/${quota.total}</div>
-                        <div class="quota-subtext">Resets: ${endDateFormatted}</div>
-                        <div class="quota-subtext">Next charge: $49 on ${nextChargeFormatted}</div>
-                    </div>
-                `;
-            }
+            // ✅ УДАЛЕНО: Главная CTA кнопка больше НЕ показывается в полном кабинете
+            // Она показывается ТОЛЬКО при первом визите (упрощенный UI, строки 529-661)
+            // Для возвращающихся пользователей есть кнопки View/Download в Purchase History
 
-            // Offer Card (если квота 0 или подписка отменена)
-            if (!isActiveOrTrialing || quota.remaining === 0) {
+            // Info Card / Offer Card - зависит от статуса подписки
+            if (isActiveOrTrialing && quota.remaining === 0) {
+                // ✅ АКТИВНАЯ ПОДПИСКА, но квота закончилась
+                // Показываем когда будет reset (НЕ предлагаем купить)
+                const nextResetDate = subscription.end_date ? new Date(subscription.end_date) : null;
+                
+                if (nextResetDate) {
+                    // ✅ Есть дата - показываем с конкретной датой
+                    const daysUntilReset = Math.ceil((nextResetDate - new Date()) / (1000 * 60 * 60 * 24));
+                    const resetDateFormatted = nextResetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    
+                    html += `
+                        <div class="info-card" style="background: #f0f9ff; border: 2px solid #3b82f6; border-radius: 16px; padding: 24px; margin-bottom: 15px; text-align: center;">
+                            <div style="font-size: 18px; font-weight: 700; color: #1e40af; margin-bottom: 12px;">
+                                ✅ Your Subscription is Active
+                            </div>
+                            <div style="font-size: 14px; color: #6b7280; margin-bottom: 8px;">
+                                You've used all reports for this billing cycle
+                            </div>
+                            <div style="font-size: 16px; font-weight: 600; color: #059669; margin-top: 16px;">
+                                📅 Quota resets ${daysUntilReset === 0 ? 'today' : daysUntilReset === 1 ? 'tomorrow' : 'in ' + daysUntilReset + ' days'}
+                            </div>
+                            <div style="font-size: 13px; color: #9ca3af; margin-top: 8px;">
+                                You'll get 2 new reports on ${resetDateFormatted}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // ✅ FALLBACK: Нет даты - показываем общую информацию
+                    html += `
+                        <div class="info-card" style="background: #f0f9ff; border: 2px solid #3b82f6; border-radius: 16px; padding: 24px; margin-bottom: 15px; text-align: center;">
+                            <div style="font-size: 18px; font-weight: 700; color: #1e40af; margin-bottom: 12px;">
+                                ✅ Your Subscription is Active
+                            </div>
+                            <div style="font-size: 14px; color: #6b7280; margin-bottom: 8px;">
+                                You've used all reports for this billing cycle
+                            </div>
+                            <div style="font-size: 16px; font-weight: 600; color: #059669; margin-top: 16px;">
+                                📅 Quota will reset on next billing cycle
+                            </div>
+                            <div style="font-size: 13px; color: #9ca3af; margin-top: 8px;">
+                                You'll receive 2 new reports automatically
+                            </div>
+                        </div>
+                    `;
+                }
+            } else if (!isActiveOrTrialing) {
+                // ❌ ПОДПИСКА ОТМЕНЕНА / EXPIRED
+                // Показываем Offer Card для renewal
                 html += `
                     <div class="offer-card">
-                        <div class="offer-title">${isActiveOrTrialing ? 'No Reports Remaining' : 'Want to Check More Vehicles?'}</div>
+                        <div class="offer-title">Want to Check More Vehicles?</div>
                         <div class="offer-price">$49</div>
                         <div class="offer-features">
-                            <div>✓ 2 VIN checks</div>
-                            <div>✓ Valid for 33 days</div>
-                            <div>✓ Then $49 every 33 days</div>
+                            <div>✓ 2 new VIN reports</div>
+                            <div>✓ Full vehicle history</div>
+                            <div>✓ Instant access</div>
                         </div>
-                        <button class="btn-buy" onclick="renewSubscription(event)">Renew Subscription ($49 for 33 days)</button>
+                        <button class="btn-buy" onclick="renewSubscription(event)">Renew Subscription - $49</button>
                     </div>
                 `;
             }
 
-            // Reports List
+            // Reports List (история с кнопками)
             if (reports.length > 0) {
                 html += `
                     <div class="reports-card">
-                        <div class="section-title">Your Reports (${reports.length})</div>
+                        <div class="section-title">Purchase History (${reports.length})</div>
                 `;
 
                 reports.forEach(report => {
                     const date = new Date(report.purchased_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
                     html += `
-                        <div class="report-item">
-                            <div class="report-vin">${report.vin}</div>
-                            <div class="report-vehicle">${report.vehicle_name || 'Loading...'}</div>
-                            <div class="report-date">${date}</div>
-                            <div class="report-actions">
-                                <button class="btn-view" onclick="viewReport('${report.vin}')">View Report</button>
-                                <button class="btn-download" onclick="downloadReport('${report.vin}')">Download</button>
+                        <div class="report-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f9fafb; border-radius: 12px; margin-bottom: 10px;">
+                            <div style="flex: 1;">
+                                <div class="report-vin" style="font-weight: 600; color: #1a1a1a; margin-bottom: 4px;">${report.vin}</div>
+                                <div class="report-vehicle" style="font-size: 13px; color: #6b7280; margin-bottom: 4px;">${report.vehicle_name || 'Loading...'}</div>
+                                <div class="report-date" style="font-size: 12px; color: #9ca3af;">${date}</div>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button onclick="viewReport('${report.vin}')" style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: background 0.2s;" onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#3b82f6'">View</button>
+                                <button onclick="downloadReportPdf('${report.vin}')" style="padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: background 0.2s;" onmouseover="this.style.background='#059669'" onmouseout="this.style.background='#10b981'">Download</button>
                             </div>
                         </div>
                     `;
@@ -496,15 +868,6 @@
                 `;
             }
 
-            // Cancel Subscription
-            if (isActiveOrTrialing && !subscription.cancel_at_period_end) {
-                html += `
-                    <div class="cancel-card">
-                        <button class="btn-cancel" onclick="if(confirm('Are you sure you want to cancel?')) cancelSubscription()">Cancel Subscription</button>
-                    </div>
-                `;
-            }
-
             container.innerHTML = html;
 
             // Add form handler if quota available
@@ -516,11 +879,18 @@
         async function handleNewVinCheck(e) {
             e.preventDefault();
             const vinInput = document.getElementById('newVinInput');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
             const vin = vinInput.value.trim().toUpperCase();
 
             if (vin.length !== 17) {
                 alert('Please enter a valid 17-character VIN');
                 return;
+            }
+
+            // ✅ ЗАЩИТА: Отключаем кнопку во время запроса
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Checking...';
             }
 
             // Use quota and redirect to report
@@ -535,6 +905,11 @@
 
                 if (!response.ok) {
                     alert(result.message || 'Error checking VIN');
+                    // ✅ ЗАЩИТА: Восстанавливаем кнопку после ошибки
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Check';
+                    }
                     return;
                 }
 
@@ -545,6 +920,12 @@
             } catch (error) {
                 console.error('Error using quota:', error);
                 alert('Error checking VIN. Please try again.');
+                // ✅ ЗАЩИТА: Восстанавливаем кнопку и очищаем форму после ошибки
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Check';
+                }
+                vinInput.value = '';
             }
         }
 
@@ -585,37 +966,77 @@
             }
         }
 
-        async function cancelSubscription() {
-            try {
-                const response = await fetch('/api/cancel-subscription', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Cancel failed');
-                }
-
-                const data = await response.json();
-                
-                alert('✅ Subscription will be canceled at the end of your billing period. You can continue using reports until then.');
-                
-                // Reload dashboard to show updated status
-                loadCustomerData();
-            } catch (error) {
-                console.error('Error canceling subscription:', error);
-                alert('Error canceling subscription. Please try again.');
-            }
-        }
-
         async function viewReport(vin) {
-            // Redirect to full report page (ClearVin embeded)
-            // Используем существующую страницу success.html или report.html
-            window.open(`/success.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}&cached=1`, '_blank');
+            console.log('[VIEW-REPORT] 👀 User viewing report:', vin);
+            
+            // ✅ НЕ отправляем конверсию здесь - она отправляется только при первом визите
+            // Конверсия уже отправлена в addEventListener для первого визита (строка 600)
+            // Для возвращающихся пользователей конверсия НЕ нужна
+            
+            // Открываем отчет в fullscreen iframe (на весь экран)
+            showFullscreenReport(vin);
+        }
+        
+        function showFullscreenReport(vin) {
+            // Создаем fullscreen контейнер если его еще нет
+            let fullscreenReport = document.getElementById('fullscreenReportCabinet');
+            
+            if (!fullscreenReport) {
+                fullscreenReport = document.createElement('div');
+                fullscreenReport.id = 'fullscreenReportCabinet';
+                fullscreenReport.style.cssText = 'display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 9999;';
+                
+                fullscreenReport.innerHTML = `
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 50px; background: #f9fafb; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 10000;">
+                        <div id="cabinetReportVinTitle" style="font-size: 14px; font-weight: 600; color: #6b7280;"></div>
+                        <button id="closeCabinetReportBtn" style="padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600;">✕ Close</button>
+                    </div>
+                    <div id="cabinetReportSpinner" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                        <div class="spinner"></div>
+                        <div style="margin-top: 20px; color: #6b7280;">Loading report...</div>
+                    </div>
+                    <iframe id="cabinetReportIframe" style="width: 100%; height: 100%; border: none; margin-top: 50px; display: none;"></iframe>
+                `;
+                
+                document.body.appendChild(fullscreenReport);
+            }
+            
+            const reportIframe = document.getElementById('cabinetReportIframe');
+            const reportSpinner = document.getElementById('cabinetReportSpinner');
+            const reportVinTitle = document.getElementById('cabinetReportVinTitle');
+            const closeBtn = document.getElementById('closeCabinetReportBtn');
+            const reportUrl = `/success.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}&cached=1`;
+            
+            // Показываем fullscreen
+            fullscreenReport.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            reportVinTitle.textContent = `VIN Report: ${vin}`;
+            reportSpinner.style.display = 'block';
+            reportIframe.style.display = 'none';
+            
+            // Загружаем отчет
+            reportIframe.src = reportUrl;
+            
+            // Обработчик загрузки
+            reportIframe.onload = function() {
+                reportSpinner.style.display = 'none';
+                reportIframe.style.display = 'block';
+            };
+            
+            // Кнопка закрытия
+            closeBtn.onclick = function() {
+                fullscreenReport.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                reportIframe.src = ''; // Очищаем iframe
+            };
         }
 
         async function downloadReport(vin) {
+            console.log('[DOWNLOAD-REPORT] 📥 User downloading report:', vin);
+            
+            // ✅ НЕ отправляем конверсию здесь - она отправляется только при первом визите
+            // Эта функция используется для повторных загрузок из кабинета
+            
             try {
                 // Fetch PDF report from ClearVin API
                 const pdfUrl = `/api/get-clearvin-report?vin=${encodeURIComponent(vin)}&format=pdf`;
@@ -634,9 +1055,44 @@
                 alert('Error downloading report. Please try again.');
             }
         }
+        
+        // Скачивание PDF из Purchase History (без конверсии)
+        function downloadReportPdf(vin) {
+            console.log('[PURCHASE-HISTORY] 📥 Downloading PDF for:', vin);
+            
+            try {
+                const pdfUrl = `/api/get-clearvin-report?vin=${encodeURIComponent(vin)}&format=pdf`;
+                
+                const a = document.createElement('a');
+                a.href = pdfUrl;
+                a.download = `VIN-Report-${vin}.pdf`;
+                a.target = '_blank';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+            } catch (error) {
+                console.error('[PURCHASE-HISTORY] Error downloading PDF:', error);
+                alert('Error downloading report. Please try again.');
+            }
+        }
 
         // Load data on page load
         loadCustomerData();
     </script>
+    
+    <!-- Footer -->
+    <footer style="background: #f9fafb; border-top: 1px solid #e5e7eb; padding: 30px 20px; text-align: center; margin-top: 60px;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; font-size: 14px; color: #6b7280;">
+                <a href="/privacy-policy.html" style="color: #6b7280; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#374151'" onmouseout="this.style.color='#6b7280'">Privacy Policy</a>
+                <a href="/terms-of-service.html" style="color: #6b7280; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#374151'" onmouseout="this.style.color='#6b7280'">Terms of Service</a>
+                <a href="/refund-policy.html" style="color: #6b7280; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#374151'" onmouseout="this.style.color='#6b7280'">Refund Policy</a>
+            </div>
+            <div style="margin-top: 20px; font-size: 12px; color: #9ca3af;">
+                © 2026 VIN TRUST. All rights reserved.
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
