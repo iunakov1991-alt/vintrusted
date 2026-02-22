@@ -1279,6 +1279,18 @@
       // Update displays
       updateCalculatorDisplays();
       calculateWhatIf();
+
+      // Attach event listeners to sliders (must be done after elements are visible)
+      const sliderIds = ['sliderCustomers', 'sliderRetention', 'sliderBudget', 'sliderDisputeRate', 'sliderTrialPrice', 'sliderRecurringPrice'];
+      sliderIds.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.addEventListener('input', () => {
+            updateCalculatorDisplays();
+            calculateWhatIf();
+          });
+        }
+      });
     }
 
     function updateCalculatorDisplays() {
@@ -1369,32 +1381,6 @@
       if (!currentData) return;
       initCalculator();
     }
-
-    // Attach event listeners to sliders
-    document.getElementById('sliderCustomers')?.addEventListener('input', () => {
-      updateCalculatorDisplays();
-      calculateWhatIf();
-    });
-    document.getElementById('sliderRetention')?.addEventListener('input', () => {
-      updateCalculatorDisplays();
-      calculateWhatIf();
-    });
-    document.getElementById('sliderBudget')?.addEventListener('input', () => {
-      updateCalculatorDisplays();
-      calculateWhatIf();
-    });
-    document.getElementById('sliderDisputeRate')?.addEventListener('input', () => {
-      updateCalculatorDisplays();
-      calculateWhatIf();
-    });
-    document.getElementById('sliderTrialPrice')?.addEventListener('input', () => {
-      updateCalculatorDisplays();
-      calculateWhatIf();
-    });
-    document.getElementById('sliderRecurringPrice')?.addEventListener('input', () => {
-      updateCalculatorDisplays();
-      calculateWhatIf();
-    });
   </script>
 </body>
 </html>
