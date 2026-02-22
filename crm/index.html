@@ -486,6 +486,125 @@
     .logout-btn:hover {
       background: #f8f9fa;
     }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 968px) {
+      .calculator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calculator-controls h3,
+    .calculator-results h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .slider-group {
+      margin-bottom: 25px;
+    }
+
+    .slider-group label {
+      display: block;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .slider-group label span {
+      float: right;
+      color: #667eea;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .slider-group input[type="range"] {
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: #e0e0e0;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    .slider-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+
+    .slider-group input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+
+    .calculator-results {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      align-content: start;
+    }
+
+    .calculator-results h3 {
+      grid-column: 1 / -1;
+    }
+
+    .calc-result-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 4px solid #667eea;
+    }
+
+    .calc-result-label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .calc-result-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .calc-result-change {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .calc-result-change.positive {
+      color: #27ae60;
+    }
+
+    .calc-result-change.negative {
+      color: #e74c3c;
+    }
+
+    .calc-result-change.neutral {
+      color: #999;
+    }
   </style>
 </head>
 <body>
@@ -772,6 +891,7 @@
         renderMetrics(data);
         renderChart(data);
         renderSourcesTable(data);
+        initCalculator();
 
         document.getElementById('metricsContainer').style.display = 'block';
         
@@ -987,6 +1107,174 @@
     if (savedBudget) {
       document.getElementById('budget').value = savedBudget;
     }
+
+    // ===================================================================
+    // WHAT-IF CALCULATOR
+    // ===================================================================
+    let baselineData = {
+      customers: 24,
+      retention: 16.67,
+      budget: 800,
+      disputeRate: 8.41,
+      trialPrice: 2.99,
+      recurringPrice: 49,
+      days: 53,
+      revenue: 2298.92,
+      netProfit: 1449.92,
+      roi: 181.24,
+      cpa: 33.33,
+      dailyProfit: 27.36,
+      churnRate: 75
+    };
+
+    function initCalculator() {
+      if (!currentData) return;
+
+      const { summary, period } = currentData;
+
+      baselineData = {
+        customers: summary.customers,
+        retention: summary.retentionRate,
+        budget: summary.trafficCost,
+        disputeRate: ((currentData.disputes.total / summary.charges) * 100),
+        trialPrice: 2.99,
+        recurringPrice: 49,
+        days: period.days,
+        revenue: summary.revenue,
+        netProfit: summary.netProfit,
+        roi: summary.roi,
+        cpa: summary.leadCost,
+        dailyProfit: summary.dailyProfit,
+        churnRate: summary.churnRate
+      };
+
+      // Set slider values
+      document.getElementById('sliderCustomers').value = baselineData.customers;
+      document.getElementById('sliderRetention').value = Math.round(baselineData.retention);
+      document.getElementById('sliderBudget').value = baselineData.budget;
+      document.getElementById('sliderDisputeRate').value = Math.round(baselineData.disputeRate);
+      document.getElementById('sliderTrialPrice').value = baselineData.trialPrice;
+      document.getElementById('sliderRecurringPrice').value = baselineData.recurringPrice;
+
+      // Update displays
+      updateCalculatorDisplays();
+      calculateWhatIf();
+    }
+
+    function updateCalculatorDisplays() {
+      document.getElementById('calcCustomers').textContent = document.getElementById('sliderCustomers').value;
+      document.getElementById('calcRetention').textContent = document.getElementById('sliderRetention').value;
+      document.getElementById('calcBudget').textContent = document.getElementById('sliderBudget').value;
+      document.getElementById('calcDisputeRate').textContent = document.getElementById('sliderDisputeRate').value;
+      document.getElementById('calcTrialPrice').textContent = parseFloat(document.getElementById('sliderTrialPrice').value).toFixed(2);
+      document.getElementById('calcRecurringPrice').textContent = document.getElementById('sliderRecurringPrice').value;
+    }
+
+    function calculateWhatIf() {
+      const customers = parseInt(document.getElementById('sliderCustomers').value);
+      const retention = parseFloat(document.getElementById('sliderRetention').value);
+      const budget = parseFloat(document.getElementById('sliderBudget').value);
+      const disputeRate = parseFloat(document.getElementById('sliderDisputeRate').value) / 100;
+      const trialPrice = parseFloat(document.getElementById('sliderTrialPrice').value);
+      const recurringPrice = parseFloat(document.getElementById('sliderRecurringPrice').value);
+
+      // Calculate metrics
+      const trialRevenue = customers * trialPrice;
+      const recurringCustomers = Math.round(customers * (retention / 100));
+      const recurringRevenue = recurringCustomers * recurringPrice;
+      const totalRevenue = trialRevenue + recurringRevenue;
+      
+      const disputeLoss = totalRevenue * disputeRate;
+      const netProfit = totalRevenue - disputeLoss - budget;
+      const roi = budget > 0 ? ((netProfit / budget) * 100) : 0;
+      const cpa = budget > 0 && customers > 0 ? (budget / customers) : 0;
+      const dailyProfit = baselineData.days > 0 ? (netProfit / baselineData.days) : 0;
+      const churnRate = 100 - retention;
+
+      // Display results
+      displayCalcResult('calcRevenue', totalRevenue, baselineData.revenue, '$');
+      displayCalcResult('calcNetProfit', netProfit, baselineData.netProfit, '$');
+      displayCalcResult('calcROI', roi, baselineData.roi, '%');
+      displayCalcResult('calcCPA', cpa, baselineData.cpa, '$');
+      displayCalcResult('calcDailyProfit', dailyProfit, baselineData.dailyProfit, '$');
+      displayCalcResult('calcChurn', churnRate, baselineData.churnRate, '%');
+    }
+
+    function displayCalcResult(elementId, value, baseline, prefix) {
+      const valueEl = document.getElementById(elementId);
+      const changeEl = document.getElementById(elementId + 'Change');
+
+      if (prefix === '$') {
+        valueEl.textContent = '$' + value.toFixed(2);
+      } else if (prefix === '%') {
+        valueEl.textContent = value.toFixed(1) + '%';
+      } else {
+        valueEl.textContent = value.toFixed(2);
+      }
+
+      const diff = value - baseline;
+      const diffPercent = baseline !== 0 ? ((diff / Math.abs(baseline)) * 100) : 0;
+
+      let changeText = '';
+      let changeClass = 'neutral';
+
+      if (Math.abs(diff) < 0.01) {
+        changeText = 'без изменений';
+        changeClass = 'neutral';
+      } else if (diff > 0) {
+        // For churn, higher is bad
+        if (elementId === 'calcChurn') {
+          changeClass = 'negative';
+          changeText = '▲ +' + Math.abs(diff).toFixed(1) + (prefix === '%' ? 'pp' : prefix) + ' (хуже)';
+        } else {
+          changeClass = 'positive';
+          changeText = '▲ +' + diff.toFixed(1) + (prefix === '%' ? 'pp' : prefix) + ' (' + (diffPercent > 0 ? '+' : '') + diffPercent.toFixed(0) + '%)';
+        }
+      } else {
+        // For churn, lower is good
+        if (elementId === 'calcChurn') {
+          changeClass = 'positive';
+          changeText = '▼ ' + Math.abs(diff).toFixed(1) + (prefix === '%' ? 'pp' : prefix) + ' (лучше)';
+        } else {
+          changeClass = 'negative';
+          changeText = '▼ ' + diff.toFixed(1) + (prefix === '%' ? 'pp' : prefix) + ' (' + diffPercent.toFixed(0) + '%)';
+        }
+      }
+
+      changeEl.textContent = changeText;
+      changeEl.className = 'calc-result-change ' + changeClass;
+    }
+
+    function resetCalculator() {
+      if (!currentData) return;
+      initCalculator();
+    }
+
+    // Attach event listeners to sliders
+    document.getElementById('sliderCustomers')?.addEventListener('input', () => {
+      updateCalculatorDisplays();
+      calculateWhatIf();
+    });
+    document.getElementById('sliderRetention')?.addEventListener('input', () => {
+      updateCalculatorDisplays();
+      calculateWhatIf();
+    });
+    document.getElementById('sliderBudget')?.addEventListener('input', () => {
+      updateCalculatorDisplays();
+      calculateWhatIf();
+    });
+    document.getElementById('sliderDisputeRate')?.addEventListener('input', () => {
+      updateCalculatorDisplays();
+      calculateWhatIf();
+    });
+    document.getElementById('sliderTrialPrice')?.addEventListener('input', () => {
+      updateCalculatorDisplays();
+      calculateWhatIf();
+    });
+    document.getElementById('sliderRecurringPrice')?.addEventListener('input', () => {
+      updateCalculatorDisplays();
+      calculateWhatIf();
+    });
   </script>
 </body>
 </html>
