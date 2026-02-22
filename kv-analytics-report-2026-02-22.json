@@ -1,0 +1,29 @@
+{
+  "period": {
+    "start": "2026-01-01T00:00:00.000Z",
+    "end": "2026-02-22T23:59:59.000Z"
+  },
+  "summary": {
+    "customers": 12,
+    "trialCount": 12,
+    "recurringCount": 2,
+    "trialRevenue": 35.88,
+    "recurringRevenue": 98,
+    "totalRevenue": 133.88,
+    "disputedCustomers": 1,
+    "failedFirstPayment": 0,
+    "activeSubscriptions": 10,
+    "retentionRate": 16.67,
+    "disputeRate": 8.33,
+    "failedPaymentRate": 0,
+    "netProfit": -666.12,
+    "roi": -83.27
+  },
+  "tierStats": {
+    "premium": 6,
+    "medium": 0,
+    "fraud": 1,
+    "unknown": 5
+  },
+  "note": "Source breakdown unavailable - KV does not store utm_source data"
+}

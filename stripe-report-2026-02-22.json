@@ -1,0 +1,43 @@
+{
+  "period": {
+    "start": "2026-01-01T00:00:00.000Z",
+    "end": "2026-02-22T23:59:59.000Z"
+  },
+  "summary": {
+    "customers": 24,
+    "charges": 107,
+    "revenue": 2298.92,
+    "disputes": 9,
+    "disputedAmount": 443.66,
+    "lostDisputeAmount": 49,
+    "retentionRate": 0,
+    "netProfit": 1449.92,
+    "roi": 181.24
+  },
+  "bySource": {
+    "direct": {
+      "customers": 14,
+      "revenue": 754.97,
+      "trial_paid": 3,
+      "recurring_paid": 9
+    },
+    "chatgpt.com": {
+      "customers": 7,
+      "revenue": 595,
+      "trial_paid": 0,
+      "recurring_paid": 5
+    },
+    "google": {
+      "customers": 3,
+      "revenue": 444,
+      "trial_paid": 0,
+      "recurring_paid": 3
+    }
+  },
+  "retentionBySource": {
+    "direct": {
+      "total": 3,
+      "retained": 0
+    }
+  }
+}
