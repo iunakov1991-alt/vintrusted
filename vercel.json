@@ -126,6 +126,22 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/check-customer.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/get-customer-data.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/get-cached-report.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/use-quota.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "*.html",
       "use": "@vercel/static"
     },
@@ -506,6 +522,22 @@
     {
       "source": "/api/stripe-test",
       "destination": "/api/stripe-test.js"
+    },
+    {
+      "source": "/api/check-customer",
+      "destination": "/api/check-customer.js"
+    },
+    {
+      "source": "/api/get-customer-data",
+      "destination": "/api/get-customer-data.js"
+    },
+    {
+      "source": "/api/get-cached-report",
+      "destination": "/api/get-cached-report.js"
+    },
+    {
+      "source": "/api/use-quota",
+      "destination": "/api/use-quota.js"
     },
     {
       "source": "/semantic-pages/en",
