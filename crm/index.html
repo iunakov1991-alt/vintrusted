@@ -970,12 +970,43 @@
         console.log('Summary:', data.summary);
         currentData = data;
         
-        renderMetrics(data);
-        renderChart(data);
-        renderSourcesTable(data);
-        initCalculator();
+        // Render components with individual try/catch
+        try {
+          console.log('Rendering metrics...');
+          renderMetrics(data);
+          console.log('✓ Metrics rendered');
+        } catch (err) {
+          console.error('Error rendering metrics:', err);
+          alert('Ошибка отображения метрик: ' + err.message);
+        }
+
+        try {
+          console.log('Rendering chart...');
+          renderChart(data);
+          console.log('✓ Chart rendered');
+        } catch (err) {
+          console.error('Error rendering chart:', err);
+          // Non-critical, continue
+        }
+
+        try {
+          console.log('Rendering sources table...');
+          renderSourcesTable(data);
+          console.log('✓ Sources table rendered');
+        } catch (err) {
+          console.error('Error rendering sources:', err);
+        }
+
+        try {
+          console.log('Initializing calculator...');
+          initCalculator();
+          console.log('✓ Calculator initialized');
+        } catch (err) {
+          console.error('Error initializing calculator:', err);
+        }
 
         if (metricsContainer) metricsContainer.style.display = 'block';
+        console.log('✓ All rendering complete!');
         
         return true;
       } catch (error) {
