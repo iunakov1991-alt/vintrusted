@@ -173,6 +173,36 @@ export default async function handler(req, res) {
       ? trafficCost / payingCustomers
       : 0;
 
+    // Churn rate (процент отвала)
+    // Клиенты которые не оплатили $49 после trial
+    const churnedCustomers = customersWithTrial.length - retainedCustomers.length;
+    const churnRate = customersWithTrial.length > 0 
+      ? (churnedCustomers / customersWithTrial.length * 100)
+      : 0;
+
+    // Churn rate без учета disputed customers
+    const disputedCustomerIds = disputes.map(d => d.charge ? successfulCharges.find(c => c.id === d.charge)?.customer : null).filter(Boolean);
+    const churnedNonDisputed = customers.filter(c => {
+      const charges = successfulCharges.filter(ch => ch.customer === c.id);
+      const hasTrial = charges.some(ch => ch.amount === 299);
+      const hasRecurring = charges.some(ch => ch.amount === 4900);
+      const isDisputed = disputedCustomerIds.includes(c.id);
+      return hasTrial && !hasRecurring && !isDisputed;
+    }).length;
+    
+    const trialCustomersNonDisputed = customersWithTrial.length - disputedCustomerIds.filter(id => 
+      customersWithTrial.some(c => c.id === id)
+    ).length;
+    
+    const churnRateNoDisputes = trialCustomersNonDisputed > 0
+      ? (churnedNonDisputed / trialCustomersNonDisputed * 100)
+      : 0;
+
+    // Заработок в день
+    const periodDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+    const dailyRevenue = periodDays > 0 ? totalRevenue / periodDays : 0;
+    const dailyProfit = periodDays > 0 ? netProfit / periodDays : 0;
+
     // Timeline данные (по дням)
     const dailyStats = {};
     for (const charge of successfulCharges) {
@@ -189,7 +219,7 @@ export default async function handler(req, res) {
       period: {
         start: start.toISOString(),
         end: end.toISOString(),
-        days: Math.ceil((end - start) / (1000 * 60 * 60 * 24)),
+        days: periodDays,
       },
       summary: {
         customers: customers.length,
@@ -202,11 +232,15 @@ export default async function handler(req, res) {
         disputedAmount,
         lostDisputeAmount,
         retentionRate: parseFloat(retentionRate.toFixed(2)),
+        churnRate: parseFloat(churnRate.toFixed(2)),
+        churnRateNoDisputes: parseFloat(churnRateNoDisputes.toFixed(2)),
         netProfit,
         roi: parseFloat(roi.toFixed(2)),
         trafficCost,
         leadCost: parseFloat(leadCost.toFixed(2)),
         payingLeadCost: parseFloat(payingLeadCost.toFixed(2)),
+        dailyRevenue: parseFloat(dailyRevenue.toFixed(2)),
+        dailyProfit: parseFloat(dailyProfit.toFixed(2)),
       },
       breakdown: {
         trialPayments: trialPayments.length,

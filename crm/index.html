@@ -548,9 +548,22 @@
         {
           label: 'Чистая прибыль',
           value: `$${summary.netProfit.toFixed(2)}`,
-          subtitle: `Бюджет: $${summary.trafficCost}`,
+          subtitle: `После вычета бюджета и disputes`,
           positive: summary.netProfit >= 0,
           negative: summary.netProfit < 0
+        },
+        {
+          label: 'Заработок в день',
+          value: `$${summary.dailyProfit.toFixed(2)}`,
+          subtitle: `Чистая прибыль / ${period.days} дней`,
+          positive: summary.dailyProfit >= 0,
+          negative: summary.dailyProfit < 0
+        },
+        {
+          label: 'Выручка в день',
+          value: `$${summary.dailyRevenue.toFixed(2)}`,
+          subtitle: `Средняя за период`,
+          positive: true
         },
         {
           label: 'ROI',
@@ -562,12 +575,12 @@
         {
           label: 'Цена лида (CPA)',
           value: `$${summary.leadCost.toFixed(2)}`,
-          subtitle: `На всех клиентов`
+          subtitle: `Бюджет / всех клиентов`
         },
         {
           label: 'Цена платящего лида',
           value: `$${summary.payingLeadCost.toFixed(2)}`,
-          subtitle: `На платящих клиентов`
+          subtitle: `Бюджет / платящих клиентов`
         },
         {
           label: 'LTV / CPA',
@@ -577,9 +590,23 @@
         {
           label: 'Retention Rate',
           value: `${summary.retentionRate}%`,
-          subtitle: 'Trial → $49',
+          subtitle: 'Trial → $49 конверсия',
           positive: summary.retentionRate >= 30,
           negative: summary.retentionRate < 20
+        },
+        {
+          label: 'Процент отвала',
+          value: `${summary.churnRate.toFixed(1)}%`,
+          subtitle: 'Trial → не оплатили $49',
+          positive: summary.churnRate < 50,
+          negative: summary.churnRate > 70
+        },
+        {
+          label: 'Отвал (без disputes)',
+          value: `${summary.churnRateNoDisputes.toFixed(1)}%`,
+          subtitle: 'Реальный churn без диспутов',
+          positive: summary.churnRateNoDisputes < 50,
+          negative: summary.churnRateNoDisputes > 70
         },
         {
           label: 'Диспуты',
