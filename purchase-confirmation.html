@@ -567,9 +567,17 @@
                     console.log('[CONFIRMATION] 📤 Sending Google Ads conversion immediately...');
                     
                     if (window.gtag) {
+                        // ✅ LTV CALCULATION:
+                        // Trial: $3
+                        // 50% convert to recurring: $49/month
+                        // Conservative estimate: 3 recurring payments avg
+                        // LTV = $3 + (0.5 × 3 × $49) = $3 + $73.50 ≈ $77
+                        // Using $80 for safety margin
+                        const CUSTOMER_LTV = 80;
+                        
                         window.gtag('event', 'conversion', {
                             'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
-                            'value': 1.0,
+                            'value': CUSTOMER_LTV,
                             'currency': 'USD',
                             'transaction_id': setupIntentId,
                             'gclid': gclid || undefined
