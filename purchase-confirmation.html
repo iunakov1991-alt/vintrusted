@@ -599,6 +599,18 @@
                 
                 console.log('[CONFIRMATION] ✅ Firing other analytics events...');
                 await fireConversionEvents(verifyData);
+                
+                // ════════════════════════════════════════════════════════════
+                // 🎯 КРИТИЧНО: Даем gtag() время отправить конверсию
+                // ════════════════════════════════════════════════════════════
+                // gtag() отправляет асинхронно, нужна небольшая задержка
+                await new Promise(resolve => setTimeout(resolve, 500));
+                console.log('[CONFIRMATION] ✅ Conversion transmission buffer completed');
+                
+                // ════════════════════════════════════════════════════════════
+                // 🎯 REDIRECT ПОСЛЕ успешной отправки конверсии
+                // ════════════════════════════════════════════════════════════
+                performRedirect();
 
             } catch (error) {
                 console.error('[CONFIRMATION] ❌ Error verifying payment:', error);
@@ -607,6 +619,28 @@
                 // Показать ошибку
                 document.querySelector('.progress-text').textContent = 
                     'Error verifying payment. Please contact support.';
+                    
+                // Redirect даже при ошибке (через 5 секунд)
+                setTimeout(performRedirect, 5000);
+            }
+        }
+        
+        // ┌─────────────────────────────────────────────────────────────┐
+        // │ ФУНКЦИЯ: REDIRECT на my-reports                              │
+        // └─────────────────────────────────────────────────────────────┘
+        function performRedirect() {
+            let userEmail = emailFromUrl;
+            
+            if (userEmail) {
+                const myReportsUrl = `/my-reports.html?email=${encodeURIComponent(userEmail)}`;
+                console.log('[CONFIRMATION] 🔄 Redirecting to My Reports:', myReportsUrl);
+                window.location.href = myReportsUrl;
+            } else {
+                console.error('[CONFIRMATION] ❌ No email in URL - using fallback redirect to success.html');
+                // Fallback: redirect to success with VIN only
+                const successUrl = `/success.html?vin=${encodeURIComponent(vin)}&setup_intent=${encodeURIComponent(setupIntentId)}`;
+                console.log('[CONFIRMATION] 🔄 Fallback redirect:', successUrl);
+                window.location.href = successUrl;
             }
         }
 
@@ -627,26 +661,6 @@
                 }
             }, 1000);
         }
-
-        // ✅ ИСПРАВЛЕНО: Redirect to my-reports page (personal cabinet) after 2 seconds (было 10)
-        // Быстрее redirect = меньше риск что пользователь закроет страницу ДО redirect
-        // User will click "View Report" button there, which triggers tier-based conversion
-        setTimeout(() => {
-            // Get email from URL first (passed from checkout API)
-            let userEmail = emailFromUrl;
-            
-            if (userEmail) {
-                const myReportsUrl = `/my-reports.html?email=${encodeURIComponent(userEmail)}`;
-                console.log('[CONFIRMATION] 🔄 Redirecting to My Reports:', myReportsUrl);
-                window.location.href = myReportsUrl;
-            } else {
-                console.error('[CONFIRMATION] ❌ No email in URL - using fallback redirect to success.html');
-                // Fallback: redirect to success with VIN only
-                const successUrl = `/success.html?vin=${encodeURIComponent(vin)}&setup_intent=${encodeURIComponent(setupIntentId)}`;
-                console.log('[CONFIRMATION] 🔄 Fallback redirect:', successUrl);
-                window.location.href = successUrl;
-            }
-        }, 2000); // 2 секунды вместо 10
     </script>
 </body>
 </html>
