@@ -30,6 +30,14 @@
     return urlParams.get('email') || '';
   }
 
+  // Get cookie value by name
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
   // Load Stripe.js dynamically
   let stripeLoadingPromise = null;
   
@@ -112,8 +120,8 @@
       // Get VIN
       const vin = getVIN();
       
-      // Get A/B variant from localStorage
-      const ab_variant = localStorage.getItem('ab_variant') || 'unknown';
+      // Get A/B variant from cookie (not localStorage!)
+      const ab_variant = getCookie('ab_variant') || 'unknown';
       
       // Get UTM parameters from URL or sessionStorage
       const urlParams = new URLSearchParams(window.location.search);
