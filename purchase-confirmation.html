@@ -315,18 +315,39 @@
             }
             
             // ════════════════════════════════════════════════════════════
-            // TIER-BASED КОНВЕРСИЯ ОТКЛЮЧЕНА
+            // ОТПРАВКА КОНВЕРСИИ СРАЗУ ПОСЛЕ ОПЛАТЫ
             // ════════════════════════════════════════════════════════════
-            // Конверсия теперь отправляется при клике на кнопку "View/Download Report"
-            // в my-reports.html с сохраненным tier value из KV
-            // 
-            // Причина: кнопка = более надежный способ отправки (не блокируется adblockers)
-            // Tier-based логика сохранена - tier определяется при checkout и сохраняется в KV
+            // FIX: Отправляем конверсию СРАЗУ, не ждем кнопку "View Report"
+            // Проблема была: только 22% пользователей кликали кнопку (2 из 9 в январе)
+            // Решение: отправлять для 100% успешных оплат
             // ════════════════════════════════════════════════════════════
             
-            console.log('[CONFIRMATION] ℹ️  Tier-based conversion disabled in purchase-confirmation.html');
-            console.log('[CONFIRMATION] ℹ️  Conversion will be sent when user clicks View/Download Report button');
-            console.log('[CONFIRMATION] ℹ️  Tier was determined at checkout and saved to KV for later use');
+            console.log('[CONFIRMATION] 🎯 Sending conversion immediately after payment verification');
+            
+            // Защита от дублей
+            const conversionKey = `conversion_sent_${setupIntentId}`;
+            
+            if (!localStorage.getItem(conversionKey)) {
+                console.log('[CONFIRMATION] 📤 Sending Google Ads conversion...');
+                
+                // Отправить конверсию в Google Ads
+                if (window.gtag) {
+                    window.gtag('event', 'conversion', {
+                        'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
+                        'value': 1.0,
+                        'currency': 'USD',
+                        'transaction_id': setupIntentId,
+                        'gclid': gclid || undefined
+                    });
+                    
+                    localStorage.setItem(conversionKey, 'true');
+                    console.log('[CONFIRMATION] ✅ Google Ads conversion sent! (gclid:', gclid ? 'YES' : 'NO', ')');
+                } else {
+                    console.error('[CONFIRMATION] ❌ gtag not available');
+                }
+            } else {
+                console.log('[CONFIRMATION] ℹ️  Conversion already sent (duplicate protection)');
+            }
             
             // Google Analytics Purchase Event
             window.dataLayer.push({
@@ -511,7 +532,36 @@
                 // │ ШАГ 3: ОПЛАТА ПОДТВЕРЖДЕНА → ОТСТУКИВАЕМ GA4            │
                 // └─────────────────────────────────────────────────────────┘
                 console.log('[CONFIRMATION] ✅ Payment CONFIRMED in Stripe!');
-                console.log('[CONFIRMATION] ✅ Firing conversion events...');
+                
+                // ════════════════════════════════════════════════════════════
+                // 🎯 ОТПРАВИТЬ КОНВЕРСИЮ В GOOGLE ADS СРАЗУ
+                // ════════════════════════════════════════════════════════════
+                const conversionKey = `conversion_sent_${setupIntentId}`;
+                
+                if (!localStorage.getItem(conversionKey)) {
+                    console.log('[CONFIRMATION] 📤 Sending Google Ads conversion immediately...');
+                    
+                    if (window.gtag) {
+                        window.gtag('event', 'conversion', {
+                            'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
+                            'value': 1.0,
+                            'currency': 'USD',
+                            'transaction_id': setupIntentId,
+                            'gclid': gclid || undefined
+                        });
+                        
+                        localStorage.setItem(conversionKey, 'true');
+                        
+                        const gclidStatus = gclid ? '✅ WITH gclid (will attribute to campaign)' : '⚠️ NO gclid (will show as direct)';
+                        console.log('[CONFIRMATION] ✅ Google Ads conversion sent!', gclidStatus);
+                    } else {
+                        console.error('[CONFIRMATION] ❌ gtag not available - conversion not sent');
+                    }
+                } else {
+                    console.log('[CONFIRMATION] ℹ️  Conversion already sent (duplicate protection)');
+                }
+                
+                console.log('[CONFIRMATION] ✅ Firing other analytics events...');
                 await fireConversionEvents(verifyData);
 
             } catch (error) {
