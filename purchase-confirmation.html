@@ -324,8 +324,8 @@
             
             console.log('[CONFIRMATION] 🎯 Sending conversion immediately after payment verification');
             
-            // Защита от дублей
-            const conversionKey = `conversion_sent_${setupIntentId}`;
+            // ✅ Защита от дублей: используем VIN (тот же ключ что и в my-reports.html)
+            const conversionKey = `conversion_sent_${vin}`;
             
             if (!localStorage.getItem(conversionKey)) {
                 console.log('[CONFIRMATION] 📤 Sending Google Ads conversion...');
@@ -340,13 +340,25 @@
                         'gclid': gclid || undefined
                     });
                     
-                    localStorage.setItem(conversionKey, 'true');
-                    console.log('[CONFIRMATION] ✅ Google Ads conversion sent! (gclid:', gclid ? 'YES' : 'NO', ')');
+                    // Сохраняем в оба хранилища (как в my-reports.html)
+                    try {
+                        localStorage.setItem(conversionKey, 'true');
+                    } catch (e) {
+                        console.warn('[CONFIRMATION] localStorage unavailable:', e);
+                    }
+                    
+                    try {
+                        sessionStorage.setItem(conversionKey, 'true');
+                    } catch (e) {
+                        console.warn('[CONFIRMATION] sessionStorage unavailable:', e);
+                    }
+                    
+                    console.log('[CONFIRMATION] ✅ Google Ads conversion sent! (VIN:', vin, 'gclid:', gclid ? 'YES' : 'NO', ')');
                 } else {
                     console.error('[CONFIRMATION] ❌ gtag not available');
                 }
             } else {
-                console.log('[CONFIRMATION] ℹ️  Conversion already sent (duplicate protection)');
+                console.log('[CONFIRMATION] ℹ️  Conversion already sent for VIN:', vin, '- SKIPPING (duplicate protection)');
             }
             
             // Google Analytics Purchase Event
@@ -536,9 +548,22 @@
                 // ════════════════════════════════════════════════════════════
                 // 🎯 ОТПРАВИТЬ КОНВЕРСИЮ В GOOGLE ADS СРАЗУ
                 // ════════════════════════════════════════════════════════════
-                const conversionKey = `conversion_sent_${setupIntentId}`;
+                // ✅ Используем VIN как ключ (тот же что в my-reports.html)
+                const conversionKey = `conversion_sent_${vin}`;
                 
-                if (!localStorage.getItem(conversionKey)) {
+                // Проверяем оба хранилища (как в my-reports.html)
+                let alreadySent = false;
+                try {
+                    alreadySent = localStorage.getItem(conversionKey) !== null;
+                } catch (e) {}
+                
+                if (!alreadySent) {
+                    try {
+                        alreadySent = sessionStorage.getItem(conversionKey) !== null;
+                    } catch (e) {}
+                }
+                
+                if (!alreadySent) {
                     console.log('[CONFIRMATION] 📤 Sending Google Ads conversion immediately...');
                     
                     if (window.gtag) {
@@ -550,15 +575,26 @@
                             'gclid': gclid || undefined
                         });
                         
-                        localStorage.setItem(conversionKey, 'true');
+                        // Сохраняем в оба хранилища
+                        try {
+                            localStorage.setItem(conversionKey, 'true');
+                        } catch (e) {
+                            console.warn('[CONFIRMATION] localStorage unavailable:', e);
+                        }
+                        
+                        try {
+                            sessionStorage.setItem(conversionKey, 'true');
+                        } catch (e) {
+                            console.warn('[CONFIRMATION] sessionStorage unavailable:', e);
+                        }
                         
                         const gclidStatus = gclid ? '✅ WITH gclid (will attribute to campaign)' : '⚠️ NO gclid (will show as direct)';
-                        console.log('[CONFIRMATION] ✅ Google Ads conversion sent!', gclidStatus);
+                        console.log('[CONFIRMATION] ✅ Google Ads conversion sent! VIN:', vin, gclidStatus);
                     } else {
                         console.error('[CONFIRMATION] ❌ gtag not available - conversion not sent');
                     }
                 } else {
-                    console.log('[CONFIRMATION] ℹ️  Conversion already sent (duplicate protection)');
+                    console.log('[CONFIRMATION] ℹ️  Conversion already sent for VIN:', vin, '- SKIPPING (duplicate protection)');
                 }
                 
                 console.log('[CONFIRMATION] ✅ Firing other analytics events...');
