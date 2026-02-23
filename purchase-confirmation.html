@@ -332,9 +332,12 @@
                 
                 // Отправить конверсию в Google Ads
                 if (window.gtag) {
+                    // ✅ LTV-based conversion value (updated 2026-02-23)
+                    const CUSTOMER_LTV = 80;
+                    
                     window.gtag('event', 'conversion', {
                         'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
-                        'value': 1.0,
+                        'value': CUSTOMER_LTV,
                         'currency': 'USD',
                         'transaction_id': setupIntentId,
                         'gclid': gclid || undefined
@@ -362,17 +365,18 @@
             }
             
             // Google Analytics Purchase Event
+            // Note: GA4 uses actual transaction value, not LTV
             window.dataLayer.push({
                 'event': 'purchase',
                 'transaction_id': setupIntentId || '',
-                'value': 1.0,
+                'value': 3.0,  // Trial price ($3)
                 'currency': 'USD',
                 'vin': vin || '',
                 'ab_variant': abVariant,
                 'items': [{
                     'item_id': 'vin_report',
                     'item_name': 'VIN Report',
-                    'price': 1.0,
+                    'price': 3.0,  // Trial price
                     'quantity': 1
                 }]
             });
@@ -382,7 +386,7 @@
             window.dataLayer.push({
                 'event': 'POKUPKA',
                 'transaction_id': setupIntentId || '',
-                'value': 1.0,
+                'value': 3.0,  // Trial price ($3)
                 'currency': 'USD',
                 'vin': vin || '',
                 'ab_variant': abVariant,
@@ -395,7 +399,8 @@
             console.log('[CONFIRMATION] 📊 Payment details:', {
                 vin: vin,
                 setup_intent: setupIntentId,
-                value: 1.0,
+                value: 3.0,  // Trial price
+                ltv: 80,  // Expected LTV for Ads conversion
                 events: ['conversion (server+fallback)', 'purchase', 'POKUPKA'],
                 verified: verifyData ? true : false,
                 stripe_status: verifyData?.setup_intent?.status,
