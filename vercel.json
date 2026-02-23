@@ -98,6 +98,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/conversion-report.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/batch-status-update.js",
       "use": "@vercel/node"
     },
