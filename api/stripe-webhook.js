@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { kv } from '@vercel/kv';
 import { logWebhookError, logBusinessEvent, SEVERITY, EVENT_TYPE } from './_lib/monitoring.js';
+import { uploadClickConversion } from './_lib/google-ads-conversions.js';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const { createOrGetReport } = require('./_lib/vinaudit');
@@ -476,6 +477,57 @@ export default async function handler(req, res) {
                 used: 0,
                 remaining: 2
               };
+              
+              // ══════════════════════════════════════════════════════════════
+              // 🎯 GOOGLE ADS: Upload $49 recurring conversion
+              // We send every paid $49 invoice so Google Ads can:
+              //   • See real LTV per click
+              //   • Optimize bidding with Target ROAS
+              //   • Report accurate revenue attribution
+              //
+              // Conversion action IDs (set in .env.local):
+              //   GOOGLE_ADS_CONVERSION_ACTION_FIRST     — first $49 after trial
+              //   GOOGLE_ADS_CONVERSION_ACTION_RECURRING — all subsequent $49
+              // ══════════════════════════════════════════════════════════════
+              try {
+                // Get GCLID from customer metadata (saved at trial checkout)
+                const gclid = customer.metadata?.gclid || '';
+                
+                if (gclid) {
+                  const isFirstPayment = billingReason === 'subscription_create' && !isRenewal;
+                  
+                  const conversionActionId = isFirstPayment
+                    ? process.env.GOOGLE_ADS_CONVERSION_ACTION_FIRST
+                    : process.env.GOOGLE_ADS_CONVERSION_ACTION_RECURRING;
+                  
+                  if (conversionActionId) {
+                    const invoiceAmountDollars = (invoice.amount_paid || 4900) / 100;
+                    
+                    const gadsResult = await uploadClickConversion({
+                      gclid,
+                      conversionActionId,
+                      value: invoiceAmountDollars,
+                      currency: (invoice.currency || 'usd').toUpperCase(),
+                      conversionTime: invoice.status_transitions?.paid_at
+                        ? invoice.status_transitions.paid_at * 1000
+                        : Date.now(),
+                      orderId: invoice.id, // dedup: same invoice_id → ignored on retry
+                    });
+                    
+                    console.log(
+                      `[WEBHOOK] 🎯 Google Ads conversion upload (${isFirstPayment ? 'first $49' : 'recurring $49'}):`,
+                      gadsResult.success ? '✅ OK' : `❌ ${gadsResult.reason}`
+                    );
+                  } else {
+                    console.log('[WEBHOOK] ℹ️  GOOGLE_ADS_CONVERSION_ACTION not set yet — skipping upload');
+                  }
+                } else {
+                  console.log('[WEBHOOK] ℹ️  No GCLID on customer — Google Ads upload skipped (organic/unknown source)');
+                }
+              } catch (gadsErr) {
+                // Non-critical: never block quota reset or KV save because of Ads upload failure
+                console.error('[WEBHOOK] ⚠️  Google Ads upload error (non-critical):', gadsErr.message);
+              }
             }
             
             // Обновляем даты подписки
