@@ -332,8 +332,11 @@
                 
                 // Отправить конверсию в Google Ads
                 if (window.gtag) {
-                    // ✅ LTV-based conversion value (updated 2026-02-23)
-                    const CUSTOMER_LTV = 80;
+                    // Expected revenue per trial start (realistic, not inflated LTV):
+                    // $2.99 trial + 50% convert to $49 × avg 3 months recurring
+                    // = $2.99 + (0.5 × $49 × 3) = $2.99 + $73.50 ≈ $37
+                    // Using $37 so Google bidding stays calibrated to real revenue
+                    const CUSTOMER_LTV = 37;
                     
                     window.gtag('event', 'conversion', {
                         'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
@@ -400,7 +403,7 @@
                 vin: vin,
                 setup_intent: setupIntentId,
                 value: 3.0,  // Trial price
-                ltv: 80,  // Expected LTV for Ads conversion
+                ltv: 37,  // Expected revenue per trial start ($2.99 + 50% × $49 × 3 months)
                 events: ['conversion (server+fallback)', 'purchase', 'POKUPKA'],
                 verified: verifyData ? true : false,
                 stripe_status: verifyData?.setup_intent?.status,
@@ -572,13 +575,10 @@
                     console.log('[CONFIRMATION] 📤 Sending Google Ads conversion immediately...');
                     
                     if (window.gtag) {
-                        // ✅ LTV CALCULATION:
-                        // Trial: $3
-                        // 50% convert to recurring: $49/month
-                        // Conservative estimate: 3 recurring payments avg
-                        // LTV = $3 + (0.5 × 3 × $49) = $3 + $73.50 ≈ $77
-                        // Using $80 for safety margin
-                        const CUSTOMER_LTV = 80;
+                        // Expected revenue per trial start (realistic):
+                        // $2.99 + (50% × $49 × avg 3 months) = $2.99 + $73.50 ≈ $37
+                        // Using $37 so Google bidding stays calibrated to real revenue
+                        const CUSTOMER_LTV = 37;
                         
                         window.gtag('event', 'conversion', {
                             'send_to': 'AW-17824079146/MpIjCLKgpuYbEKq6l7NC',
