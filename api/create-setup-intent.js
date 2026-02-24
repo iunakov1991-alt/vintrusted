@@ -31,12 +31,26 @@ export default async function handler(req, res) {
       ab_variant,
       utm_source,
       utm_medium,
-      utm_campaign
+      utm_campaign,
+      gclid: gclidFromBody,
+      gclid_source,
+      is_google_ads
     } = req.body || {};
     
-    // Get gclid from cookies (saved by gclid-cookie.js on first visit)
+    // Get gclid from multiple sources (ENHANCED)
     const cookies = parseCookies(req);
-    const gclid = cookies.gclid || '';
+    let gclid = gclidFromBody || cookies.gclid || '';
+    let finalGclidSource = gclid_source || 'cookie';
+    
+    // Fallback: Try to extract from Google's _gcl_aw cookie
+    if (!gclid && cookies._gcl_aw) {
+      const parts = cookies._gcl_aw.split('.');
+      if (parts.length >= 3) {
+        gclid = parts.slice(2).join('.');
+        finalGclidSource = '_gcl_aw_cookie';
+        console.log('[CREATE-SETUP-INTENT] 🎯 GCLID extracted from _gcl_aw cookie');
+      }
+    }
     
     // Get IP address (для банов)
     const ip_address = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
@@ -44,9 +58,12 @@ export default async function handler(req, res) {
                        req.connection?.remoteAddress || 
                        'unknown';
     
-    console.log('[CREATE-SETUP-INTENT] Cookies:', cookies);
-    console.log('[CREATE-SETUP-INTENT] gclid:', gclid || 'NOT FOUND');
-    console.log('[CREATE-SETUP-INTENT] IP:', ip_address);
+    console.log('[CREATE-SETUP-INTENT] 📊 Request tracking:');
+    console.log('[CREATE-SETUP-INTENT]    GCLID:', gclid ? `✅ ${gclid.substring(0, 15)}...` : '❌ NOT FOUND');
+    console.log('[CREATE-SETUP-INTENT]    GCLID Source:', finalGclidSource);
+    console.log('[CREATE-SETUP-INTENT]    Is Google Ads:', is_google_ads ? '✅ YES' : '🌐 NO');
+    console.log('[CREATE-SETUP-INTENT]    UTM Source:', utm_source || 'none');
+    console.log('[CREATE-SETUP-INTENT]    IP:', ip_address);
     
     // Build metadata
     const metadata = {};
@@ -69,6 +86,20 @@ export default async function handler(req, res) {
     
     if (utm_campaign) {
       metadata.utm_campaign = utm_campaign;
+    }
+    
+    // Save gclid_source for debugging
+    if (gclid && finalGclidSource) {
+      metadata.gclid_source = finalGclidSource;
+    }
+    
+    // Mark if this is Google Ads traffic (even without GCLID)
+    if (is_google_ads || gclid || (utm_source === 'google' && utm_medium === 'cpc')) {
+      metadata.traffic_type = 'google_ads';
+    } else if (utm_source) {
+      metadata.traffic_type = utm_source;
+    } else {
+      metadata.traffic_type = 'organic_or_direct';
     }
     
     // CRITICAL: Save gclid for Google Ads conversion tracking

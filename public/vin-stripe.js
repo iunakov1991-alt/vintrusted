@@ -129,28 +129,87 @@
       const utm_medium = urlParams.get('utm_medium') || sessionStorage.getItem('utm_medium') || '';
       const utm_campaign = urlParams.get('utm_campaign') || sessionStorage.getItem('utm_campaign') || '';
       
-      // КРИТИЧНО: Получаем gclid для Google Ads конверсий
-      let gclid = urlParams.get('gclid') || '';
+      // КРИТИЧНО: Получаем gclid для Google Ads конверсий (5-уровневая система)
+      let gclid = '';
+      let gclidSource = 'none';
       
-      // Fallback: пытаемся восстановить из localStorage/cookies
-      if (!gclid && window.GclidStorage) {
-        gclid = window.GclidStorage.get() || '';
+      // Level 1: URL parameter (primary)
+      gclid = urlParams.get('gclid') || '';
+      if (gclid) gclidSource = 'url_param';
+      
+      // Level 2: SessionStorage (saved on landing)
+      if (!gclid) {
+        gclid = sessionStorage.getItem('gclid') || '';
+        if (gclid) gclidSource = 'session_storage';
       }
       
-      // Еще один fallback: пытаемся прочитать из cookies
+      // Level 3: GclidStorage helper (if exists)
+      if (!gclid && window.GclidStorage) {
+        gclid = window.GclidStorage.get() || '';
+        if (gclid) gclidSource = 'gclid_storage';
+      }
+      
+      // Level 4: Direct cookie (our own)
       if (!gclid) {
-        const cookies = document.cookie.split(';');
-        for (let cookie of cookies) {
-          const [name, value] = cookie.trim().split('=');
-          if (name === 'gclid') {
-            gclid = decodeURIComponent(value);
-            break;
+        const gclidCookie = getCookie('gclid');
+        if (gclidCookie) {
+          gclid = gclidCookie;
+          gclidSource = 'gclid_cookie';
+        }
+      }
+      
+      // Level 5: Google's _gcl_aw cookie (CRITICAL FALLBACK!)
+      if (!gclid) {
+        const gclAwCookie = getCookie('_gcl_aw');
+        if (gclAwCookie) {
+          // Format: GCL.1234567890.CjwKCAiA...
+          const parts = gclAwCookie.split('.');
+          if (parts.length >= 3) {
+            gclid = parts.slice(2).join('.');
+            gclidSource = '_gcl_aw_cookie';
+            console.log('[VIN-STRIPE] 🎯 GCLID extracted from Google _gcl_aw cookie!');
           }
         }
       }
       
-      console.log('[VIN-STRIPE] UTM params:', { utm_source, utm_medium, utm_campaign });
-      console.log('[VIN-STRIPE] GCLID:', gclid ? gclid.substring(0, 10) + '...' : 'NOT FOUND ❌');
+      // Enhanced logging
+      console.log('[VIN-STRIPE] 📊 Tracking Detection:');
+      console.log('[VIN-STRIPE]    UTM params:', { utm_source, utm_medium, utm_campaign });
+      console.log('[VIN-STRIPE]    🎯 GCLID:', gclid ? `✅ ${gclid.substring(0, 15)}... (source: ${gclidSource})` : '❌ NOT FOUND');
+      console.log('[VIN-STRIPE]    🎨 A/B Variant:', ab_variant);
+      
+      // Mark as Google Ads if we have GCLID
+      let isGoogleAds = !!gclid;
+      
+      // Fallback: If no GCLID but utm_source=google and utm_medium=cpc
+      if (!isGoogleAds && utm_source === 'google' && utm_medium === 'cpc') {
+        isGoogleAds = true;
+        console.log('[VIN-STRIPE] 🎯 Marked as Google Ads (utm_source=google + utm_medium=cpc)');
+      }
+      
+      console.log('[VIN-STRIPE] 📍 Traffic Source:', isGoogleAds ? '✅ GOOGLE ADS' : '🌐 ORGANIC/OTHER');
+      
+      // Pre-log lead source (backup attribution)
+      try {
+        await fetch('/api/log-lead-source', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            vin,
+            gclid,
+            gclid_source: gclidSource,
+            utm_source,
+            utm_medium,
+            utm_campaign,
+            ab_variant,
+            is_google_ads: isGoogleAds,
+            timestamp: Date.now()
+          })
+        });
+        console.log('[VIN-STRIPE] ✅ Lead source pre-logged for backup attribution');
+      } catch (e) {
+        console.warn('[VIN-STRIPE] ⚠️ Failed to pre-log lead source:', e.message);
+      }
       
       // Create SetupIntent with metadata
       const setupIntentResponse = await fetch('/api/create-setup-intent', {
@@ -164,7 +223,9 @@
           utm_source,
           utm_medium,
           utm_campaign,
-          gclid // ✅ КРИТИЧНО: Передаем gclid
+          gclid, // ✅ КРИТИЧНО: Передаем gclid
+          gclid_source: gclidSource, // Откуда взяли GCLID
+          is_google_ads: isGoogleAds // Флаг для точной атрибуции
         })
       });
 

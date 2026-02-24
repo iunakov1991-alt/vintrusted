@@ -102,6 +102,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/log-lead-source.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/batch-status-update.js",
       "use": "@vercel/node"
     },
