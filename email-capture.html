@@ -198,6 +198,100 @@
             display: block;
         }
         
+        /* ── Loading Screen ── */
+        .loading-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .loading-screen.visible {
+            display: flex;
+        }
+
+        .loading-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .loading-subtitle {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 32px;
+            min-height: 22px;
+            transition: opacity 0.4s ease;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 99px;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            border-radius: 99px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-pct {
+            font-size: 14px;
+            font-weight: 700;
+            color: #27ae60;
+        }
+
+        .loading-checks {
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .loading-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #9ca3af;
+            font-weight: 500;
+            transition: color 0.4s ease;
+        }
+
+        .loading-check.done {
+            color: #1a1a1a;
+        }
+
+        .check-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+            transition: all 0.4s ease;
+        }
+
+        .loading-check.done .check-icon {
+            background: #27ae60;
+            border-color: #27ae60;
+            color: white;
+        }
+
         @media (max-width: 768px) {
             .logo {
                 width: 120px;
@@ -264,7 +358,7 @@
     
     <p class="subtitle">Enter your email to receive your vehicle history report</p>
     
-    <div class="email-form-wrapper">
+    <div class="email-form-wrapper" id="emailFormWrapper">
         <form id="emailForm">
             <div class="email-input-wrapper">
                 <input 
@@ -282,6 +376,34 @@
                 Get My Report
             </button>
         </form>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-title">Preparing Your Report...</div>
+        <div class="loading-subtitle" id="loadingStatus">Searching vehicle databases...</div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-pct" id="progressPct">0%</div>
+        <div class="loading-checks">
+            <div class="loading-check" id="check1">
+                <div class="check-icon" id="checkIcon1"></div>
+                <span>VIN verification</span>
+            </div>
+            <div class="loading-check" id="check2">
+                <div class="check-icon" id="checkIcon2"></div>
+                <span>Accident &amp; damage records</span>
+            </div>
+            <div class="loading-check" id="check3">
+                <div class="check-icon" id="checkIcon3"></div>
+                <span>Ownership &amp; title history</span>
+            </div>
+            <div class="loading-check" id="check4">
+                <div class="check-icon" id="checkIcon4"></div>
+                <span>Odometer &amp; recall data</span>
+            </div>
+        </div>
     </div>
     
     <script>
@@ -372,6 +494,9 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Checking...';
             
+            // Show loading screen after brief delay
+            setTimeout(() => showLoadingScreen(vin, email), 300);
+            
             console.log('[EMAIL CAPTURE] 📧 Email collected:', email, 'VIN:', vin);
             
             const transactionId = vin + '_' + Date.now();
@@ -425,12 +550,52 @@
                 console.error('[EMAIL CAPTURE] ⚠️  Customer check failed, proceeding to payment:', checkError.message);
             }
             
-            // ✅ УЛУЧШЕНО: Redirect to report page with VIN and email (1000ms вместо 1500ms)
+            // Redirect happens inside showLoadingScreen after 15s
+        });
+
+        function showLoadingScreen(vin, email) {
+            // Swap form → loading screen
+            document.getElementById('emailFormWrapper').style.display = 'none';
+            document.querySelector('.subtitle').style.display = 'none';
+            const screen = document.getElementById('loadingScreen');
+            screen.classList.add('visible');
+
+            const DURATION = 15000; // 15 seconds
+            const steps = [
+                { at: 0,     pct: 0,   status: 'Searching vehicle databases...',   check: null },
+                { at: 1500,  pct: 18,  status: 'VIN verified successfully',         check: 1 },
+                { at: 4000,  pct: 38,  status: 'Checking accident records...',      check: null },
+                { at: 6500,  pct: 55,  status: 'Accident & damage data retrieved',  check: 2 },
+                { at: 9000,  pct: 70,  status: 'Verifying ownership history...',    check: null },
+                { at: 11000, pct: 82,  status: 'Title history confirmed',           check: 3 },
+                { at: 13000, pct: 93,  status: 'Compiling odometer & recall data...', check: null },
+                { at: 14200, pct: 100, status: 'Report ready!',                     check: 4 },
+            ];
+
+            const fill    = document.getElementById('progressFill');
+            const pctEl   = document.getElementById('progressPct');
+            const statusEl = document.getElementById('loadingStatus');
+
+            steps.forEach(({ at, pct, status, check }) => {
+                setTimeout(() => {
+                    fill.style.width = pct + '%';
+                    pctEl.textContent = pct + '%';
+                    statusEl.textContent = status;
+                    if (check) {
+                        const row  = document.getElementById('check' + check);
+                        const icon = document.getElementById('checkIcon' + check);
+                        row.classList.add('done');
+                        icon.textContent = '✓';
+                    }
+                }, at);
+            });
+
+            // Redirect after 15 seconds
             setTimeout(() => {
                 console.log('[EMAIL CAPTURE] 🔄 Redirecting to report page...');
                 window.location.href = `/report.html?vin=${encodeURIComponent(vin)}&email=${encodeURIComponent(email)}`;
-            }, 1000); // Уменьшено с 1500ms до 1000ms для лучшего UX
-        });
+            }, DURATION);
+        }
     </script>
 </body>
 </html>
